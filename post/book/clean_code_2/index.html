@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Code Quality Dilema Of Start Up Company | Pink Spider
+    Clean_code_2 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,22 +27,20 @@
   
   <meta
   name="description"
-  content="@Component 내에 static method 에서 쓰는 member가 null 일떄 @Component 내에 static method에서 사용하는 static member @Component @RequiredArgsConstructor public class SomeComponentClass { private final ObjectMapper objectMapper; private static void staticMethod() { objectMapper.convertValue() // objectMapper NullPointerException 발생 } } -&gt; 이렇게 바꾸세요.
-@Component @RequiredArgsConstructor public class SomeComponentClass { private static ObjectMapper objectMapper; // Autowired로 constructor 생성 @Autowired public SomeComponentClass(ObjectMapper objectMapper) { SomeComponentClass.objectMapper = objectMapper; } private static void staticMethod() { objectMapper ~~~ } } "
+  content="Clean Code 1장 클린 코드의 조건 - 내 나름의 정리 SARAM S : Simple A : Atomic R : Readability A : Abstract M : Minimalism "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://localhost:1313/post/spring/component/" />
+<link rel="canonical" href="http://localhost:1313/post/book/clean_code_2/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Code Quality Dilema Of Start Up Company - Pink Spider"
+  content="Clean_code_2 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="@Component 내에 static method 에서 쓰는 member가 null 일떄 @Component 내에 static method에서 사용하는 static member @Component @RequiredArgsConstructor public class SomeComponentClass { private final ObjectMapper objectMapper; private static void staticMethod() { objectMapper.convertValue() // objectMapper NullPointerException 발생 } } -&gt; 이렇게 바꾸세요.
-@Component @RequiredArgsConstructor public class SomeComponentClass { private static ObjectMapper objectMapper; // Autowired로 constructor 생성 @Autowired public SomeComponentClass(ObjectMapper objectMapper) { SomeComponentClass.objectMapper = objectMapper; } private static void staticMethod() { objectMapper ~~~ } } "
+  content="Clean Code 1장 클린 코드의 조건 - 내 나름의 정리 SARAM S : Simple A : Atomic R : Readability A : Abstract M : Minimalism "
 />
 <meta name="twitter:site" content="http://localhost:1313/" />
 <meta name="twitter:creator" content="" />
@@ -58,15 +56,14 @@
 />
 <meta
   property="og:title"
-  content="Code Quality Dilema Of Start Up Company - Pink Spider"
+  content="Clean_code_2 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="@Component 내에 static method 에서 쓰는 member가 null 일떄 @Component 내에 static method에서 사용하는 static member @Component @RequiredArgsConstructor public class SomeComponentClass { private final ObjectMapper objectMapper; private static void staticMethod() { objectMapper.convertValue() // objectMapper NullPointerException 발생 } } -&gt; 이렇게 바꾸세요.
-@Component @RequiredArgsConstructor public class SomeComponentClass { private static ObjectMapper objectMapper; // Autowired로 constructor 생성 @Autowired public SomeComponentClass(ObjectMapper objectMapper) { SomeComponentClass.objectMapper = objectMapper; } private static void staticMethod() { objectMapper ~~~ } } "
+  content="Clean Code 1장 클린 코드의 조건 - 내 나름의 정리 SARAM S : Simple A : Atomic R : Readability A : Abstract M : Minimalism "
 />
-<meta property="og:url" content="http://localhost:1313/post/spring/component/" />
-<meta property="og:site_name" content="Code Quality Dilema Of Start Up Company" />
+<meta property="og:url" content="http://localhost:1313/post/book/clean_code_2/" />
+<meta property="og:site_name" content="Clean_code_2" />
 <meta
   property="og:image"
   content="http://localhost:1313/"
@@ -74,7 +71,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2024-11-27 17:14:05 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-18 17:16:08 &#43;0900 KST" />
 
 
 
@@ -282,18 +279,18 @@
                   <span class="author">
                     <a href="http://localhost:1313/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="http://localhost:1313/post/spring/component/">Code Quality Dilema Of Start Up Company</a></strong>
+                      href="http://localhost:1313/post/book/clean_code_2/">Clean_code_2</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 27 Nov 2024 17:14:05 &#43;0900"
+                  Created <relative-time datetime="Tue, 18 Mar 2025 17:16:08 &#43;0900"
                     class="no-wrap">
-                    Wed, 27 Nov 2024 17:14:05 &#43;0900</relative-time>
+                    Tue, 18 Mar 2025 17:16:08 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 18 Mar 2025 15:01:24 &#43;0900"
+                  Modified <relative-time datetime="Tue, 18 Mar 2025 17:17:45 &#43;0900"
                     class="no-wrap">
-                    Tue, 18 Mar 2025 15:01:24 &#43;0900</relative-time>
+                    Tue, 18 Mar 2025 17:17:45 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -323,9 +320,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      111 Words
+                      34 Words
                     <span class="file-info-divider"></span>
-                                        1 min
+                                        0 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -336,36 +333,20 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="component-내에-static-method-에서-쓰는-member가-null-일떄">@Component 내에 static method 에서 쓰는 member가 null 일떄</h1>
-<h2 id="component-내에-static-method에서-사용하는-static-member">@Component 내에 static method에서 사용하는 static member</h2>
-<pre tabindex="0"><code>@Component
-@RequiredArgsConstructor
-public class SomeComponentClass {
-
-    private final ObjectMapper objectMapper;
-
-    private static void staticMethod() {
-        objectMapper.convertValue() // objectMapper NullPointerException 발생
-    } 
-}
-</code></pre><p>-&gt; 이렇게 바꾸세요.</p>
-<pre tabindex="0"><code>@Component
-@RequiredArgsConstructor
-public class SomeComponentClass {
-
-    private static ObjectMapper objectMapper;
-
-    // Autowired로 constructor 생성
-    @Autowired
-    public SomeComponentClass(ObjectMapper objectMapper) {
-        SomeComponentClass.objectMapper = objectMapper;
-    }
-
-    private static void staticMethod() {
-        objectMapper ~~~
-    }
-}
-</code></pre></article>
+                <article class="markdown-body entry-content container-lg"><h1 id="clean-code-1장">Clean Code 1장</h1>
+<h2 id="클린-코드의-조건---내-나름의-정리">클린 코드의 조건 - 내 나름의 정리</h2>
+<ul>
+<li>SARAM
+<ul>
+<li>S : Simple</li>
+<li>A : Atomic</li>
+<li>R : Readability</li>
+<li>A : Abstract</li>
+<li>M : Minimalism</li>
+</ul>
+</li>
+</ul>
+</article>
               </div>
 
               
@@ -377,13 +358,13 @@ public class SomeComponentClass {
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="http://localhost:1313/post/infra/redis_install/"> Code Quality Dilema Of Start Up Company</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="http://localhost:1313/post/infra/ssl/"> Ssl</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="http://localhost:1313/post/spring/value/">Code Quality Dilema Of Start Up Company&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="http://localhost:1313/post/finance/required_rate_of_return/">Required_rate_of_return&nbsp;</a><div> »</div>
           
         </div>
       </div>
