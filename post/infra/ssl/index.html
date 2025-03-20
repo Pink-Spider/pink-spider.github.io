@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <script
     type="application/javascript"
-    src='http://localhost:1313/js/theme-mode.js'
+    src='https://pink-spider.github.io/js/theme-mode.js'
   ></script>
-  <link rel="stylesheet" href='http://localhost:1313/css/frameworks.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github-style.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
   
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Ssl | Pink Spider
+    내 우분투 서버에 SSL 무료 설치하기 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,26 +27,26 @@
   
   <meta
   name="description"
-  content="내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있다. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용한다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워준다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않는다 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
+  content="내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 다른 무료 사이트도 많이 있음. 내가 쓰는 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있다. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용한다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워준다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않는다 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://localhost:1313/post/infra/ssl/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/infra/ssl/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Ssl - Pink Spider"
+  content="내 우분투 서버에 SSL 무료 설치하기 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있다. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용한다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워준다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않는다 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
+  content="내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 다른 무료 사이트도 많이 있음. 내가 쓰는 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있다. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용한다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워준다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않는다 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
 />
-<meta name="twitter:site" content="http://localhost:1313/" />
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta
   name="twitter:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 
 
@@ -56,22 +56,22 @@
 />
 <meta
   property="og:title"
-  content="Ssl - Pink Spider"
+  content="내 우분투 서버에 SSL 무료 설치하기 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있다. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용한다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워준다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않는다 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
+  content="내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 다른 무료 사이트도 많이 있음. 내가 쓰는 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있다. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용한다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워준다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않는다 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
 />
-<meta property="og:url" content="http://localhost:1313/post/infra/ssl/" />
-<meta property="og:site_name" content="Ssl" />
+<meta property="og:url" content="https://pink-spider.github.io/post/infra/ssl/" />
+<meta property="og:site_name" content="내 우분투 서버에 SSL 무료 설치하기" />
 <meta
   property="og:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-03-19 15:03:58 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-19 15:19:58 &#43;0900 KST" />
 
 
 
@@ -127,7 +127,7 @@
       class="Header-item mobile-none"
       style="margin-top: -4px; margin-bottom: -4px"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon"
           height="32"
@@ -190,7 +190,7 @@
                 placeholder="Search"
                 autocomplete="off"
               />
-              <input type="hidden" name="q" value="site:http://localhost:1313/" />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
               <div
                 class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
               >
@@ -218,7 +218,7 @@
     <div
       class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon octicon-mark-github v-align-middle"
           height="32"
@@ -269,7 +269,7 @@
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:1313/">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
                   <img class=" avatar-user"
                     src="/images/logo_pinkspider.png"
                     width="32" height="32" alt="Pink Spider"></a>
@@ -277,20 +277,20 @@
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="http://localhost:1313/">Pink Spider</a></span><span
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="http://localhost:1313/post/infra/ssl/">Ssl</a></strong>
+                      href="https://pink-spider.github.io/post/infra/ssl/">내 우분투 서버에 SSL 무료 설치하기</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 19 Mar 2025 15:03:58 &#43;0900"
+                  Created <relative-time datetime="Wed, 19 Mar 2025 15:19:58 &#43;0900"
                     class="no-wrap">
-                    Wed, 19 Mar 2025 15:03:58 &#43;0900</relative-time>
+                    Wed, 19 Mar 2025 15:19:58 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 19 Mar 2025 16:24:12 &#43;0900"
+                  Modified <relative-time datetime="Thu, 20 Mar 2025 16:16:50 &#43;0900"
                     class="no-wrap">
-                    Wed, 19 Mar 2025 16:24:12 &#43;0900</relative-time>
+                    Thu, 20 Mar 2025 16:16:50 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -320,7 +320,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      1093 Words
+                      1110 Words
                     <span class="file-info-divider"></span>
                                         5 min
 
@@ -335,8 +335,8 @@
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><h1 id="내-우분투-서버에-ssl-무료-설치하기">내 우분투 서버에 SSL 무료 설치하기</h1>
 <ul>
-<li>SSL 발급 사이트 : <a href="https://zerossl.com/">https://zerossl.com/</a></li>
-<li>도메인 서비스 업체 : whois</li>
+<li>SSL 발급 사이트 : <a href="https://zerossl.com/">https://zerossl.com/</a>  다른 무료 사이트도 많이 있음.</li>
+<li>내가 쓰는 도메인 서비스 업체 : whois</li>
 </ul>
 <h2 id="ssl-설치-절차">SSL 설치 절차</h2>
 <ul>
@@ -348,7 +348,7 @@
 <h3 id="도메인-소유주임을-확인-받기">도메인 소유주임을 확인 받기</h3>
 <ol>
 <li>ZeroSSL에 회원가입
-<img src="./images/zerossl_dashboard.png" alt="image">
+<img src="./images/ssl/zerossl_dashboard.png" alt="image">
 <!-- raw HTML omitted --></li>
 <li>SSL Certificate Setup 에서 각 항목 채워준다.</li>
 </ol>
@@ -359,7 +359,7 @@
 <li>CSR &amp; Contact : Auto-Generate CSR 활성화</li>
 <li>Finalize Your Order: Free 선택</li>
 </ul>
-<p><img src="./images/zero_new_certificate.png" alt="image"></p>
+<p><img src="./images/ssl/zero_new_certificate.png" alt="image"></p>
 <ul>
 <li>Domain 소유주가 맞는지 확인하는 절차가 있는데 캡쳐를 못했다.<!-- raw HTML omitted -->
 whois의 경우엔 [네임서버 고급설정] 가서 [CNAME 레코드 관리]에서<!-- raw HTML omitted -->
@@ -367,7 +367,7 @@ zeroSsl에서 제공한 호스트명과 CNAME 레코드를 등록해주면 도�
 </ul>
 <h3 id="인증서-받아서-서버에-설치했음을-확인-받기">인증서 받아서 서버에 설치했음을 확인 받기</h3>
 <h4 id="install-certificate">Install Certificate</h4>
-<p><img src="./images/zerossl_install_certificate.png" alt="image"></p>
+<p><img src="./images/ssl/zerossl_install_certificate.png" alt="image"></p>
 <ol>
 <li>
 <p>Download Certificate 에서 내 경우엔 Server Type을 Ubuntu로 하였다.<!-- raw HTML omitted -->
@@ -486,19 +486,17 @@ apache2가 설치가 되어 있는지 확인하려면 아래 명령어를 쳐보
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="http://localhost:1313/post/book/clean_code_2/">Clean_code_2&nbsp;</a><div> »</div>
-          
         </div>
       </div>
     </div>
   </main>
 </div>
-<script type="application/javascript" src='http://localhost:1313/js/toc.js'></script>
-<link rel="stylesheet" href='http://localhost:1313/css/toc.css' />
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='http://localhost:1313/css/gitalk.css'>
-<script src='http://localhost:1313/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     accessToken: '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',
@@ -531,9 +529,9 @@ apache2가 설치가 되어 있는지 확인하려면 아래 명령어를 쳐보
 
 </body>
 
-<script type="application/javascript" src="http://localhost:1313/js/github-style.js"></script>
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
 
-<script src="http://localhost:1313/js/mark.es6.min.js"></script>
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
 
 
 <script type="text/javascript">

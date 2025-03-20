@@ -6,7 +6,14 @@
     <description>Recent content in Posts on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate></lastBuildDate>
+    <lastBuildDate>Thu, 20 Mar 2025 16:16:50 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>내 우분투 서버에 SSL 무료 설치하기</title>
+      <link>https://pink-spider.github.io/post/infra/ssl/</link>
+      <pubDate>Wed, 19 Mar 2025 15:19:58 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/infra/ssl/</guid>
+      <description>&lt;h1 id=&#34;내-우분투-서버에-ssl-무료-설치하기&#34;&gt;내 우분투 서버에 SSL 무료 설치하기&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;SSL 발급 사이트 : &lt;a href=&#34;https://zerossl.com/&#34;&gt;https://zerossl.com/&lt;/a&gt;  다른 무료 사이트도 많이 있음.&lt;/li&gt;&#xA;&lt;li&gt;내가 쓰는 도메인 서비스 업체 : whois&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;ssl-설치-절차&#34;&gt;SSL 설치 절차&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;무료 SSL의 제약사항은 별도로 알아보기로 하고&lt;/li&gt;&#xA;&lt;li&gt;기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 &lt;!-- raw HTML omitted --&gt;&#xA;인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있다.&lt;/li&gt;&#xA;&lt;li&gt;이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용한다.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;도메인-소유주임을-확인-받기&#34;&gt;도메인 소유주임을 확인 받기&lt;/h3&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;ZeroSSL에 회원가입&#xA;&lt;img src=&#34;./images/ssl/zerossl_dashboard.png&#34; alt=&#34;image&#34;&gt;&#xA;&lt;!-- raw HTML omitted --&gt;&lt;/li&gt;&#xA;&lt;li&gt;SSL Certificate Setup 에서 각 항목 채워준다.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Domains&lt;/li&gt;&#xA;&lt;li&gt;Validity : 90-Day Certificate 로 해야 무료&lt;/li&gt;&#xA;&lt;li&gt;Add-Ons : 아무것도 선택하지 않는다&lt;/li&gt;&#xA;&lt;li&gt;CSR &amp;amp; Contact : Auto-Generate CSR 활성화&lt;/li&gt;&#xA;&lt;li&gt;Finalize Your Order: Free 선택&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;./images/ssl/zero_new_certificate.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>
