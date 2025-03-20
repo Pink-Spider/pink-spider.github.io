@@ -607,75 +607,28 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="http://localhost:56338/post/spring/logging/">Logging</a>
+                <a href="http://localhost:56338/post/infra/redis_install/">Code Quality Dilema Of Start Up Company</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Fri, 29 Nov 2024 07:03:15 &#43;0900" class="no-wrap"
-                title=" Fri, 29 Nov 2024 07:03:15 &#43;0900">
-                Fri, 29 Nov 2024 07:03:15 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="http://localhost:56338/post/cs/data_structure/data_structure_1/">다시보는 CS 전공필수 - 1. Data Structure : 배열</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 27 Nov 2024 17:37:38 &#43;0900" class="no-wrap"
-                title=" Wed, 27 Nov 2024 17:37:38 &#43;0900">
-                Wed, 27 Nov 2024 17:37:38 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="http://localhost:56338/post/book/clean_code_1/">Clean Code 서론</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><a href=""><img src="https://img.shields.io/badge/book-green" alt="GoDoc"></a>
-<a href=""><img src="https://img.shields.io/badge/clean-code-green" alt="GoDoc"></a></p>
-<h1 id="clean-code-서론">Clean Code 서론</h1>
-<h2 id="abstract">Abstract</h2>
-<p>주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다.<!-- raw HTML omitted -->
-다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다.<!-- raw HTML omitted -->
-아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다.<!-- raw HTML omitted -->
-업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다.<!-- raw HTML omitted -->
-심지어 Clean Code가 뭔지 모르는 사람도 많다.<!-- raw HTML omitted -->
-하지만 코드에도 <!-- raw HTML omitted -->품질<!-- raw HTML omitted -->이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다.
-모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.</p>
+                <pre tabindex="0"><code>sudo apt-get update
+sudo apt-get upgrade
+</code></pre><pre tabindex="0"><code>sudo apt-get install redis-server
+</code></pre><pre tabindex="0"><code>redis-server --version
+</code></pre><pre tabindex="0"><code>sudo vi /etc/redis/redis.conf
+</code></pre><p>maxmemory 1g
+maxmemory-policy allkeys-lru</p>
+<p>sudo systemctl restart redis-server.service</p>
+<p>netstat -nlpt | grep 6379</p>
+<p>redis-cli</p>
+<p>set [key] [value]
+get [key]</p>
+<p>검색
+keys <em>검색어</em></p>
+<p>전체
+keys *</p>
               </div>
             </div>
 
@@ -695,37 +648,42 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="http://localhost:56338/post/book/%EC%9E%90%EB%B0%94-%ED%8D%BC%EC%A6%90%EB%9F%AC/">Code Quality Dilema Of Start Up Company</a>
+                <a href="http://localhost:56338/post/spring/component/">Code Quality Dilema Of Start Up Company</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="자바-퍼즐러">자바 퍼즐러</h1>
-<ol>
-<li>% 의 특징</li>
-</ol>
-<ul>
-<li>A % B 나눗셈 연산의 나머지값</li>
-<li>A를 피연산자라고 하는데, % 연산결과는 왼쪽 피연산자의 부호와 같다</li>
-<li>i % 2 != 0</li>
-<li>(i &amp; 1) != 0</li>
-</ul>
-<ol start="2">
-<li>BigDecimal</li>
-</ol>
-<ul>
-<li>BigDecimal(String)</li>
-</ul>
-<ol start="3">
-<li>Long</li>
-</ol>
-<ul>
-<li>Long x = 24 * 60 * 60 * 1000 * 1000</li>
-<li>오버플로우 발생</li>
-<li>타킷 타이핑</li>
-<li>24L * 60 * 60 * 1000</li>
-</ul>
+                <h1 id="component-내에-static-method-에서-쓰는-member가-null-일떄">@Component 내에 static method 에서 쓰는 member가 null 일떄</h1>
+<h2 id="component-내에-static-method에서-사용하는-static-member">@Component 내에 static method에서 사용하는 static member</h2>
+<pre tabindex="0"><code>@Component
+@RequiredArgsConstructor
+public class SomeComponentClass {
+
+    private final ObjectMapper objectMapper;
+
+    private static void staticMethod() {
+        objectMapper.convertValue() // objectMapper NullPointerException 발생
+    } 
+}
+</code></pre><p>-&gt; 이렇게 바꾸세요.</p>
+<pre tabindex="0"><code>@Component
+@RequiredArgsConstructor
+public class SomeComponentClass {
+
+    private static ObjectMapper objectMapper;
+
+    // Autowired로 constructor 생성
+    @Autowired
+    public SomeComponentClass(ObjectMapper objectMapper) {
+        SomeComponentClass.objectMapper = objectMapper;
+    }
+
+    private static void staticMethod() {
+        objectMapper ~~~
+    }
+}
+</code></pre>
               </div>
             </div>
 
@@ -745,84 +703,26 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="http://localhost:56338/post/column/dilema_of_startup/">Code Quality Dilema Of Start Up Company</a>
+                <a href="http://localhost:56338/post/spring/value/">Code Quality Dilema Of Start Up Company</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><img src="https://private-user-images.githubusercontent.com/16929257/350295672-88b98864-cf8b-4256-9385-b912f494c7f0.jpeg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzI2OTU4MDUsIm5iZiI6MTczMjY5NTUwNSwicGF0aCI6Ii8xNjkyOTI1Ny8zNTAyOTU2NzItODhiOTg4NjQtY2Y4Yi00MjU2LTkzODUtYjkxMmY0OTRjN2YwLmpwZWc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMTI3JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTEyN1QwODE4MjVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0wNTZlYWFhMWM2MDJhNDM1ZWY1NGRlNjEwM2NjNjIwMTIzMTI5ZWM0YWU2NmYyYzAzOGRhZTUxOTE4ZGFhZmU3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.W-H8qfEUbQ8y1SqAMBWAvkqRhb0_OYG6O6BQzl6VMJ4" alt="image"></p>
-<h1 id="it-스타트업-회사에서의-code-quality-딜레마">IT 스타트업 회사에서의 Code Quality 딜레마</h1>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 27 Nov 2024 17:14:05 &#43;0900" class="no-wrap"
-                title=" Wed, 27 Nov 2024 17:14:05 &#43;0900">
-                Wed, 27 Nov 2024 17:14:05 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="http://localhost:56338/post/infra/kafka_install/">Code Quality Dilema Of Start Up Company</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>wget -d <a href="https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz">https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz</a></p>
-<p>tar -xzf kafka_2.13-3.7.0.tgz</p>
-<p>./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties</p>
-<p>./bin/zookeeper-server-stop.sh</p>
-<hr>
-<p>[Unit]
-Description=Kafka UI Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<hr>
-<p>[Unit]
-Description=Zookeeper Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<hr>
-<p>[Unit]
-Description=Kafka Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<p>sudo systemctl enable zookeeper
-sudo systemctl enable kafka
-sudo systemctl enable kafka-ui</p>
+                <h1 id="value-의-값이-바인딩-되지-않으신가요">@Value 의 값이 바인딩 되지 않으신가요?</h1>
+<ul>
+<li>
+<p>Spring Boot 애플리케이션을 실행시킬 떄 @Value로 (org.springframework.beans.factory.annotation.Value) 값을 주입하려고 할떄
+생각과는 다르게 @Value로 주입한 값이 제대로 바인딩되지 않는 경우가 있습니다.</p>
+</li>
+<li>
+<p>이러한 현상은 왜 생기며, 어떻게 해결할 수 있는지 알아보겠습니다.</p>
+</li>
+<li>
+<p>우선 Spring Boot를 실행시킬떄 loading 순서는 어떻게 되는지 먼저 살펴보겠습니다.</p>
+</li>
+<li>
+<p>Spring Boot 애플리케이션이 실행될 때의 로딩 순서는 크게 다음과 같은 단계로 이루어집니다. 이 순서는 Spring Framework의 동작 원리에 기반하며, Spring Boot 특유의 기능들이 추가적으로 포함됩니다.</p>
               </div>
             </div>
 
@@ -842,10 +742,10 @@ sudo systemctl enable kafka-ui</p>
       <div class="paginate-container">
         <div class="BtnGroup">
           
-          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/">Previous</a>
+          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/page/2/">Previous</a>
           
           
-          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/page/3/">Next</a>
+          <button class="btn btn-outline BtnGroup-item" disabled="disabled">Next</button>
           
         </div>
       </div>
