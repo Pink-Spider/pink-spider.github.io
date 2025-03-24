@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Kafka 설치 | Pink Spider
+    Restdoc Swagger Ui Sample | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,48 +27,20 @@
   
   <meta
   name="description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
-"
+  content=""
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://localhost:1313/post/infra/kafka_install/" />
+<link rel="canonical" href="http://localhost:1313/post/spring/restdoc-swagger-ui-sample/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Kafka 설치 - Pink Spider"
+  content="Restdoc Swagger Ui Sample - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
-"
+  content=""
 />
 <meta name="twitter:site" content="http://localhost:1313/" />
 <meta name="twitter:creator" content="" />
@@ -84,28 +56,14 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 />
 <meta
   property="og:title"
-  content="Kafka 설치 - Pink Spider"
+  content="Restdoc Swagger Ui Sample - Pink Spider"
 />
 <meta
   property="og:description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
-"
+  content=""
 />
-<meta property="og:url" content="http://localhost:1313/post/infra/kafka_install/" />
-<meta property="og:site_name" content="Kafka 설치" />
+<meta property="og:url" content="http://localhost:1313/post/spring/restdoc-swagger-ui-sample/" />
+<meta property="og:site_name" content="Restdoc Swagger Ui Sample" />
 <meta
   property="og:image"
   content="http://localhost:1313/"
@@ -113,7 +71,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2024-11-27 17:14:05 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-24 13:18:03 &#43;0900 KST" />
 
 
 
@@ -321,18 +279,18 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
                   <span class="author">
                     <a href="http://localhost:1313/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="http://localhost:1313/post/infra/kafka_install/">Kafka 설치</a></strong>
+                      href="http://localhost:1313/post/spring/restdoc-swagger-ui-sample/">Restdoc Swagger Ui Sample</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 27 Nov 2024 17:14:05 &#43;0900"
+                  Created <relative-time datetime="Mon, 24 Mar 2025 13:18:03 &#43;0900"
                     class="no-wrap">
-                    Wed, 27 Nov 2024 17:14:05 &#43;0900</relative-time>
+                    Mon, 24 Mar 2025 13:18:03 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 24 Mar 2025 13:10:57 &#43;0900"
+                  Modified <relative-time datetime="Mon, 24 Mar 2025 13:27:10 &#43;0900"
                     class="no-wrap">
-                    Mon, 24 Mar 2025 13:10:57 &#43;0900</relative-time>
+                    Mon, 24 Mar 2025 13:27:10 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -362,7 +320,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
                         </div>
                       </div>
                     </details-menu>
-                      67 Words
+                      0 Words
                     <span class="file-info-divider"></span>
                                         0 min
 
@@ -375,52 +333,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>wget -d <a href="https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz">https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz</a></p>
-<p>tar -xzf kafka_2.13-3.7.0.tgz</p>
-<p>./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties</p>
-<p>./bin/zookeeper-server-stop.sh</p>
-<hr>
-<p>[Unit]
-Description=Kafka UI Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<hr>
-<p>[Unit]
-Description=Zookeeper Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<hr>
-<p>[Unit]
-Description=Kafka Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<p>sudo systemctl enable zookeeper
-sudo systemctl enable kafka
-sudo systemctl enable kafka-ui</p>
-</article>
+                <article class="markdown-body entry-content container-lg"></article>
               </div>
 
               
@@ -432,11 +345,11 @@ sudo systemctl enable kafka-ui</p>
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="http://localhost:1313/post/spring/component/"> Component 내에 static method 에서 쓰는 member 객체가 null 일...</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="http://localhost:1313/post/til/about_aes/">About AES&nbsp;</a><div> »</div>
           
         </div>
       </div>

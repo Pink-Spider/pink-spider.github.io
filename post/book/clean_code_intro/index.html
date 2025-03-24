@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <script
     type="application/javascript"
-    src='http://localhost:1313/js/theme-mode.js'
+    src='https://pink-spider.github.io/js/theme-mode.js'
   ></script>
-  <link rel="stylesheet" href='http://localhost:1313/css/frameworks.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github-style.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
   
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Kafka 설치 | Pink Spider
+    Clean Code 서론 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,54 +27,28 @@
   
   <meta
   name="description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
+  content=" Clean Code 서론 Abstract 주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다. 다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다. 아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다. 업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다. 심지어 Clean Code가 뭔지 모르는 사람도 많다. 하지만 코드에도 품질이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다. 모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://localhost:1313/post/infra/kafka_install/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/book/clean_code_intro/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Kafka 설치 - Pink Spider"
+  content="Clean Code 서론 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
+  content=" Clean Code 서론 Abstract 주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다. 다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다. 아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다. 업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다. 심지어 Clean Code가 뭔지 모르는 사람도 많다. 하지만 코드에도 품질이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다. 모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.
 "
 />
-<meta name="twitter:site" content="http://localhost:1313/" />
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta
   name="twitter:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 
 
@@ -84,31 +58,18 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 />
 <meta
   property="og:title"
-  content="Kafka 설치 - Pink Spider"
+  content="Clean Code 서론 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
+  content=" Clean Code 서론 Abstract 주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다. 다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다. 아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다. 업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다. 심지어 Clean Code가 뭔지 모르는 사람도 많다. 하지만 코드에도 품질이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다. 모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.
 "
 />
-<meta property="og:url" content="http://localhost:1313/post/infra/kafka_install/" />
-<meta property="og:site_name" content="Kafka 설치" />
+<meta property="og:url" content="https://pink-spider.github.io/post/book/clean_code_intro/" />
+<meta property="og:site_name" content="Clean Code 서론" />
 <meta
   property="og:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
@@ -169,7 +130,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
       class="Header-item mobile-none"
       style="margin-top: -4px; margin-bottom: -4px"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon"
           height="32"
@@ -232,7 +193,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
                 placeholder="Search"
                 autocomplete="off"
               />
-              <input type="hidden" name="q" value="site:http://localhost:1313/" />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
               <div
                 class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
               >
@@ -260,7 +221,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
     <div
       class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon octicon-mark-github v-align-middle"
           height="32"
@@ -311,7 +272,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:1313/">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
                   <img class=" avatar-user"
                     src="/images/logo_pinkspider.png"
                     width="32" height="32" alt="Pink Spider"></a>
@@ -319,9 +280,9 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="http://localhost:1313/">Pink Spider</a></span><span
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="http://localhost:1313/post/infra/kafka_install/">Kafka 설치</a></strong>
+                      href="https://pink-spider.github.io/post/book/clean_code_intro/">Clean Code 서론</a></strong>
                 </h1>
                 <div class="note m-0">
                   Created <relative-time datetime="Wed, 27 Nov 2024 17:14:05 &#43;0900"
@@ -330,9 +291,9 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 24 Mar 2025 13:10:57 &#43;0900"
+                  Modified <relative-time datetime="Mon, 24 Mar 2025 13:03:21 &#43;0900"
                     class="no-wrap">
-                    Mon, 24 Mar 2025 13:10:57 &#43;0900</relative-time>
+                    Mon, 24 Mar 2025 13:03:21 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -362,9 +323,9 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
                         </div>
                       </div>
                     </details-menu>
-                      67 Words
+                      523 Words
                     <span class="file-info-divider"></span>
-                                        0 min
+                                        2 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -375,51 +336,32 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>wget -d <a href="https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz">https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz</a></p>
-<p>tar -xzf kafka_2.13-3.7.0.tgz</p>
-<p>./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties</p>
-<p>./bin/zookeeper-server-stop.sh</p>
-<hr>
-<p>[Unit]
-Description=Kafka UI Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<hr>
-<p>[Unit]
-Description=Zookeeper Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<hr>
-<p>[Unit]
-Description=Kafka Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<p>sudo systemctl enable zookeeper
-sudo systemctl enable kafka
-sudo systemctl enable kafka-ui</p>
+                <article class="markdown-body entry-content container-lg"><p><a href=""><img src="https://img.shields.io/badge/book-green" alt="GoDoc"></a>
+<a href=""><img src="https://img.shields.io/badge/clean-code-green" alt="GoDoc"></a></p>
+<h1 id="clean-code-서론">Clean Code 서론</h1>
+<h2 id="abstract">Abstract</h2>
+<p>주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다.<!-- raw HTML omitted -->
+다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다.<!-- raw HTML omitted -->
+아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다.<!-- raw HTML omitted -->
+업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다.<!-- raw HTML omitted -->
+심지어 Clean Code가 뭔지 모르는 사람도 많다.<!-- raw HTML omitted -->
+하지만 코드에도 <!-- raw HTML omitted -->품질<!-- raw HTML omitted -->이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다.
+모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.</p>
+<h2 id="clean-code">Clean Code</h2>
+<ul>
+<li>
+<p>Clean Code 는 우리의 큰 형님 Robert C. Martin의 대표 저서중에 하나인데<!-- raw HTML omitted -->
+Clean Code 책 에서 말하는 내용을 이해하고 공부했다고 끝이 아니다.
+오히려 이제부터 시작이다. <!-- raw HTML omitted -->
+작성하는 코드를 더 clean 하게 하기위해 이미 작성한 코드도 고치고 또 고쳐야 한다.
+개발자로서 궁극적으로 추구해야 하는 방향은 clean code를 작성하기 위해 고민하지 않고
+습관대로 작성해도 자연스럽게 clean 원칙에 맞게 코드 작성이 될 정도로 체화된 상태가 되는 것이다.
+이는 현장 업무를 다년간 걸치면서 이루어 지는 제법 쉽지 않은 과정이다.</p>
+</li>
+<li>
+<p>물론 이 책의 내용이 절대적인 것은 아니다. 현업의 개발자로서 어떤건 수용하고 어떤건 조절해야 할지 판단할 수 있어야 한다.</p>
+</li>
+</ul>
 </article>
               </div>
 
@@ -432,7 +374,7 @@ sudo systemctl enable kafka-ui</p>
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="http://localhost:1313/post/spring/component/"> Component 내에 static method 에서 쓰는 member 객체가 null 일...</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/git_tag/"> git에서 tag의 활용</a>
           
         </div>
         
@@ -443,12 +385,12 @@ sudo systemctl enable kafka-ui</p>
     </div>
   </main>
 </div>
-<script type="application/javascript" src='http://localhost:1313/js/toc.js'></script>
-<link rel="stylesheet" href='http://localhost:1313/css/toc.css' />
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='http://localhost:1313/css/gitalk.css'>
-<script src='http://localhost:1313/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     accessToken: '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',
@@ -481,9 +423,9 @@ sudo systemctl enable kafka-ui</p>
 
 </body>
 
-<script type="application/javascript" src="http://localhost:1313/js/github-style.js"></script>
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
 
-<script src="http://localhost:1313/js/mark.es6.min.js"></script>
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
 
 
 <script type="text/javascript">

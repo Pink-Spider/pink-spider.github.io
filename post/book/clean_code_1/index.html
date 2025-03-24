@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=56338&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <script
     type="application/javascript"
-    src='http://localhost:56338/js/theme-mode.js'
+    src='https://pink-spider.github.io/js/theme-mode.js'
   ></script>
-  <link rel="stylesheet" href='http://localhost:56338/css/frameworks.min.css' />
-  <link rel="stylesheet" href='http://localhost:56338/css/github.min.css' />
-  <link rel="stylesheet" href='http://localhost:56338/css/github-style.css' />
-  <link rel="stylesheet" href='http://localhost:56338/css/light.css' />
-  <link rel="stylesheet" href='http://localhost:56338/css/dark.css' />
-  <link rel="stylesheet" href='http://localhost:56338/css/syntax.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
   
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Clean Code 서론 | Pink Spider
+    Clean Code 1장 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,28 +27,30 @@
   
   <meta
   name="description"
-  content=" Clean Code 서론 Abstract 주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다. 다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다. 아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다. 업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다. 심지어 Clean Code가 뭔지 모르는 사람도 많다. 하지만 코드에도 품질이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다. 모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.
+  content="Clean Code 1장 클린 코드의 조건- 내 나름의 정리 1장에서는 자바나 C 창시자등 개발계의 거장들이 생각하는 좋은 코드에 대한 견해를 모아놓은 부분입니다. 다음은 이 분들의 의견에서 나름 공통적인 부분을 추려서 내 나름대로 정리한 내용입니다. 사실상 책 전체에 녹아 있는 내용이기도 합니다. SARAM S : Simple
+내 의견 : 코드는 단순해야 합니다. 비즈니스 로직이 코드에 녹아들기 시작하면 프로젝트 자체는 복잡해집니다. 코드(클래스, 메소드 차원)이라도 심플해야 합니다. A : Atomic
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://localhost:56338/post/book/clean_code_1/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/book/clean_code_1/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Clean Code 서론 - Pink Spider"
+  content="Clean Code 1장 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content=" Clean Code 서론 Abstract 주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다. 다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다. 아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다. 업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다. 심지어 Clean Code가 뭔지 모르는 사람도 많다. 하지만 코드에도 품질이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다. 모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.
+  content="Clean Code 1장 클린 코드의 조건- 내 나름의 정리 1장에서는 자바나 C 창시자등 개발계의 거장들이 생각하는 좋은 코드에 대한 견해를 모아놓은 부분입니다. 다음은 이 분들의 의견에서 나름 공통적인 부분을 추려서 내 나름대로 정리한 내용입니다. 사실상 책 전체에 녹아 있는 내용이기도 합니다. SARAM S : Simple
+내 의견 : 코드는 단순해야 합니다. 비즈니스 로직이 코드에 녹아들기 시작하면 프로젝트 자체는 복잡해집니다. 코드(클래스, 메소드 차원)이라도 심플해야 합니다. A : Atomic
 "
 />
-<meta name="twitter:site" content="http://localhost:56338/" />
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta
   name="twitter:image"
-  content="http://localhost:56338/"
+  content="https://pink-spider.github.io/"
 />
 
 
@@ -58,23 +60,24 @@
 />
 <meta
   property="og:title"
-  content="Clean Code 서론 - Pink Spider"
+  content="Clean Code 1장 - Pink Spider"
 />
 <meta
   property="og:description"
-  content=" Clean Code 서론 Abstract 주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다. 다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다. 아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다. 업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다. 심지어 Clean Code가 뭔지 모르는 사람도 많다. 하지만 코드에도 품질이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다. 모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.
+  content="Clean Code 1장 클린 코드의 조건- 내 나름의 정리 1장에서는 자바나 C 창시자등 개발계의 거장들이 생각하는 좋은 코드에 대한 견해를 모아놓은 부분입니다. 다음은 이 분들의 의견에서 나름 공통적인 부분을 추려서 내 나름대로 정리한 내용입니다. 사실상 책 전체에 녹아 있는 내용이기도 합니다. SARAM S : Simple
+내 의견 : 코드는 단순해야 합니다. 비즈니스 로직이 코드에 녹아들기 시작하면 프로젝트 자체는 복잡해집니다. 코드(클래스, 메소드 차원)이라도 심플해야 합니다. A : Atomic
 "
 />
-<meta property="og:url" content="http://localhost:56338/post/book/clean_code_1/" />
-<meta property="og:site_name" content="Clean Code 서론" />
+<meta property="og:url" content="https://pink-spider.github.io/post/book/clean_code_1/" />
+<meta property="og:site_name" content="Clean Code 1장" />
 <meta
   property="og:image"
-  content="http://localhost:56338/"
+  content="https://pink-spider.github.io/"
 />
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2024-11-27 17:14:05 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-22 20:16:08 &#43;0900 KST" />
 
 
 
@@ -130,7 +133,7 @@
       class="Header-item mobile-none"
       style="margin-top: -4px; margin-bottom: -4px"
     >
-      <a class="Header-link" href="http://localhost:56338/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon"
           height="32"
@@ -193,7 +196,7 @@
                 placeholder="Search"
                 autocomplete="off"
               />
-              <input type="hidden" name="q" value="site:http://localhost:56338/" />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
               <div
                 class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
               >
@@ -221,7 +224,7 @@
     <div
       class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
     >
-      <a class="Header-link" href="http://localhost:56338/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon octicon-mark-github v-align-middle"
           height="32"
@@ -272,7 +275,7 @@
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:56338/">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
                   <img class=" avatar-user"
                     src="/images/logo_pinkspider.png"
                     width="32" height="32" alt="Pink Spider"></a>
@@ -280,20 +283,20 @@
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="http://localhost:56338/">Pink Spider</a></span><span
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="http://localhost:56338/post/book/clean_code_1/">Clean Code 서론</a></strong>
+                      href="https://pink-spider.github.io/post/book/clean_code_1/">Clean Code 1장</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 27 Nov 2024 17:14:05 &#43;0900"
+                  Created <relative-time datetime="Sat, 22 Mar 2025 20:16:08 &#43;0900"
                     class="no-wrap">
-                    Wed, 27 Nov 2024 17:14:05 &#43;0900</relative-time>
+                    Sat, 22 Mar 2025 20:16:08 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 18 Mar 2025 17:18:07 &#43;0900"
+                  Modified <relative-time datetime="Mon, 24 Mar 2025 14:44:28 &#43;0900"
                     class="no-wrap">
-                    Tue, 18 Mar 2025 17:18:07 &#43;0900</relative-time>
+                    Mon, 24 Mar 2025 14:44:28 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -323,9 +326,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      523 Words
+                      651 Words
                     <span class="file-info-divider"></span>
-                                        2 min
+                                        3 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -336,30 +339,54 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p><a href=""><img src="https://img.shields.io/badge/book-green" alt="GoDoc"></a>
-<a href=""><img src="https://img.shields.io/badge/clean-code-green" alt="GoDoc"></a></p>
-<h1 id="clean-code-서론">Clean Code 서론</h1>
-<h2 id="abstract">Abstract</h2>
-<p>주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다.<!-- raw HTML omitted -->
-다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다.<!-- raw HTML omitted -->
-아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다.<!-- raw HTML omitted -->
-업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다.<!-- raw HTML omitted -->
-심지어 Clean Code가 뭔지 모르는 사람도 많다.<!-- raw HTML omitted -->
-하지만 코드에도 <!-- raw HTML omitted -->품질<!-- raw HTML omitted -->이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다.
-모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.</p>
-<h2 id="clean-code">Clean Code</h2>
+                <article class="markdown-body entry-content container-lg"><h1 id="clean-code-1장">Clean Code 1장</h1>
+<h2 id="클린-코드의-조건--내-나름의-정리">클린 코드의 조건- 내 나름의 정리</h2>
+<ul>
+<li>1장에서는 자바나 C 창시자등 개발계의 거장들이 생각하는 좋은 코드에 대한 견해를 모아놓은 부분입니다.</li>
+<li>다음은 이 분들의 의견에서 나름 공통적인 부분을 추려서 내 나름대로 정리한 내용입니다.</li>
+<li>사실상 책 전체에 녹아 있는 내용이기도 합니다.</li>
+</ul>
+<h3 id="saram">SARAM</h3>
 <ul>
 <li>
-<p>Clean Code 는 우리의 큰 형님 Robert C. Martin의 대표 저서중에 하나인데<!-- raw HTML omitted -->
-Clean Code 책 에서 말하는 내용을 이해하고 공부했다고 끝이 아니다.
-오히려 이제부터 시작이다. <!-- raw HTML omitted -->
-작성하는 코드를 더 clean 하게 하기위해 이미 작성한 코드도 고치고 또 고쳐야 한다.
-개발자로서 궁극적으로 추구해야 하는 방향은 clean code를 작성하기 위해 고민하지 않고
-습관대로 작성해도 자연스럽게 clean 원칙에 맞게 코드 작성이 될 정도로 체화된 상태가 되는 것이다.
-이는 현장 업무를 다년간 걸치면서 이루어 지는 제법 쉽지 않은 과정이다.</p>
+<p>S : Simple</p>
+<ul>
+<li>내 의견 : 코드는 단순해야 합니다.
+비즈니스 로직이 코드에 녹아들기 시작하면 프로젝트 자체는 복잡해집니다.<!-- raw HTML omitted -->
+코드(클래스, 메소드 차원)이라도 심플해야 합니다.</li>
+</ul>
 </li>
 <li>
-<p>물론 이 책의 내용이 절대적인 것은 아니다. 현업의 개발자로서 어떤건 수용하고 어떤건 조절해야 할지 판단할 수 있어야 한다.</p>
+<p>A : Atomic</p>
+<ul>
+<li>내 의견 : 코드는 더 이상 쪼갤 수 없는 단위로 작성되어야 합니다.<!-- raw HTML omitted -->
+많은 경우, 한 코드에서 이것 저것 다 처리하게 하려고 (이걸 재사용성이라고 오해하는 개발자도 있었음.) 코드를 작성하는 경우가 있었는데,<!-- raw HTML omitted -->
+그럴 경우 유지보수를 더 힘들게 할 수도 있습니다. 이는 SOLID의 single response principle 과도 연관이 있는데, SOLID 추후 다른 포스트에서 다루겠습니다.</li>
+</ul>
+</li>
+<li>
+<p>R : Readability</p>
+<ul>
+<li>내 의견 : 가독성. 읽기 힘들게 작성한 코드 만큼 개발자 스스로를 고통스럽게 하는 게 있을까요</li>
+</ul>
+</li>
+<li>
+<p>A : Abstract</p>
+<ul>
+<li>내 의견 : 추상화. 추상화를 어느 정도 레벨까지 둘 것인지, 얼마나 코드에 잘 녹아있는지는 개발자의 역량이자 노하우가 아닐까요.</li>
+</ul>
+</li>
+<li>
+<p>M : Minimalism</p>
+<ul>
+<li>내 의견 : 미니멀리즘은 위의 atomic과 혼동할 수 있으나, 전혀 다릅니다.<!-- raw HTML omitted --> 불필요한 클래스와 메소드, 주석 등 없어도 될 것은 없애고, 꼭 필요한 것만 남긴다는 의미로 받아들이면 좋겠습니다. 반대의 의미는 Dirty Code겠죠.</li>
+</ul>
+</li>
+<li>
+<p>몇 년 전부터 클린코드에 대해 얘기할 때마다, SARAM, SARAM 얘기를 하며, 제 나름대로의 정리내용을 글로 옮겨 보았습니다.</p>
+</li>
+<li>
+<p>개발자도 기술자로서 명장이든 장인이든 경지에 오를 수 있도록 결과물에 정성이 필요합니다. 대강 로직만 돌아가면 OK인 시대는 지났습니다.</p>
 </li>
 </ul>
 </article>
@@ -374,25 +401,23 @@ Clean Code 책 에서 말하는 내용을 이해하고 공부했다고 끝이 �
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="http://localhost:56338/post/cs/data_structure/data_structure_1/"> 다시보는 CS 전공필수 - 1. Data Structure : 배열</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="http://localhost:56338/post/book/%EC%9E%90%EB%B0%94-%ED%8D%BC%EC%A6%90%EB%9F%AC/">Code Quality Dilema Of Start Up Company&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/ssl/">내 우분투 서버에 SSL 무료 설치하기&nbsp;</a><div> »</div>
           
         </div>
       </div>
     </div>
   </main>
 </div>
-<script type="application/javascript" src='http://localhost:56338/js/toc.js'></script>
-<link rel="stylesheet" href='http://localhost:56338/css/toc.css' />
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='http://localhost:56338/css/gitalk.css'>
-<script src='http://localhost:56338/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     accessToken: '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',
@@ -425,9 +450,9 @@ Clean Code 책 에서 말하는 내용을 이해하고 공부했다고 끝이 �
 
 </body>
 
-<script type="application/javascript" src="http://localhost:56338/js/github-style.js"></script>
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
 
-<script src="http://localhost:56338/js/mark.es6.min.js"></script>
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
 
 
 <script type="text/javascript">

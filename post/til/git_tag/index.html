@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <script
     type="application/javascript"
-    src='http://localhost:1313/js/theme-mode.js'
+    src='https://pink-spider.github.io/js/theme-mode.js'
   ></script>
-  <link rel="stylesheet" href='http://localhost:1313/css/frameworks.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github-style.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
   
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Kafka 설치 | Pink Spider
+    git에서 tag의 활용 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,54 +27,32 @@
   
   <meta
   name="description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
-"
+  content="git 에서 tag는 언제 쓰고 어떻게 쓸까? Git에서 **tag(태그)**는 특정 커밋에 이름을 붙여서 식별하기 쉽게 만드는 기능입니다. 일반적으로 릴리즈 버전을 표시할 때 많이 사용되며, 특정 시점의 스냅샷을 의미합니다. 🎯 태그의 주요 역할 릴리즈 마킹
+예: v1.0.0, v2.1.3 배포한 버전이 어떤 커밋인지 명확하게 추적할 수 있습니다. 스냅샷 저장
+특정 커밋에 중요한 의미를 부여하고 싶을 때 (예: 첫 배포, 테스트 완료 지점 등) CI/CD 트리거용
+태그가 push될 때 자동 배포되도록 CI 파이프라인 설정이 가능 🛠️ 태그의 종류 Lightweight Tag (가벼운 태그) 단순히 커밋을 가리키는 포인터 Git 내부적으로는 브랜치와 유사한 구조 git tag v1.0.0 Annotated Tag (주석이 있는 태그) 태그 생성자 정보, 날짜, 메시지 등을 포함 릴리즈에는 보통 이걸 사용 git tag -a v1.0.0 -m &#34;Release version 1.0.0&#34; 📤 태그 푸시 및 공유 태그는 기본적으로 git push로 자동 푸시되지 않음. 명시적으로 푸시해야 함: # 특정 태그 푸시 git push origin v1.0.0 # 모든 태그 푸시 git push origin --tags 🔍 태그 확인 # 로컬 태그 목록 git tag # 특정 태그가 가리키는 커밋 보기 git show v1.0.0 🧽 태그 삭제 # 로컬 태그 삭제 git tag -d v1.0.0 # 원격 태그 삭제 git push origin --delete v1.0.0 📦 활용 예시 (릴리즈 관리) # 코드가 안정화된 시점 git checkout main git pull git tag -a v1.0.0 -m &#34;First stable release&#34; git push origin v1.0.0 CI/CD 도구(GitHub Actions, Jenkins 등)는 이 태그를 감지해서 v1.0.0을 자동으로 배포하게 할 수 있습니다. "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://localhost:1313/post/infra/kafka_install/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/git_tag/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Kafka 설치 - Pink Spider"
+  content="git에서 tag의 활용 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
-"
+  content="git 에서 tag는 언제 쓰고 어떻게 쓸까? Git에서 **tag(태그)**는 특정 커밋에 이름을 붙여서 식별하기 쉽게 만드는 기능입니다. 일반적으로 릴리즈 버전을 표시할 때 많이 사용되며, 특정 시점의 스냅샷을 의미합니다. 🎯 태그의 주요 역할 릴리즈 마킹
+예: v1.0.0, v2.1.3 배포한 버전이 어떤 커밋인지 명확하게 추적할 수 있습니다. 스냅샷 저장
+특정 커밋에 중요한 의미를 부여하고 싶을 때 (예: 첫 배포, 테스트 완료 지점 등) CI/CD 트리거용
+태그가 push될 때 자동 배포되도록 CI 파이프라인 설정이 가능 🛠️ 태그의 종류 Lightweight Tag (가벼운 태그) 단순히 커밋을 가리키는 포인터 Git 내부적으로는 브랜치와 유사한 구조 git tag v1.0.0 Annotated Tag (주석이 있는 태그) 태그 생성자 정보, 날짜, 메시지 등을 포함 릴리즈에는 보통 이걸 사용 git tag -a v1.0.0 -m &#34;Release version 1.0.0&#34; 📤 태그 푸시 및 공유 태그는 기본적으로 git push로 자동 푸시되지 않음. 명시적으로 푸시해야 함: # 특정 태그 푸시 git push origin v1.0.0 # 모든 태그 푸시 git push origin --tags 🔍 태그 확인 # 로컬 태그 목록 git tag # 특정 태그가 가리키는 커밋 보기 git show v1.0.0 🧽 태그 삭제 # 로컬 태그 삭제 git tag -d v1.0.0 # 원격 태그 삭제 git push origin --delete v1.0.0 📦 활용 예시 (릴리즈 관리) # 코드가 안정화된 시점 git checkout main git pull git tag -a v1.0.0 -m &#34;First stable release&#34; git push origin v1.0.0 CI/CD 도구(GitHub Actions, Jenkins 등)는 이 태그를 감지해서 v1.0.0을 자동으로 배포하게 할 수 있습니다. "
 />
-<meta name="twitter:site" content="http://localhost:1313/" />
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta
   name="twitter:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 
 
@@ -84,36 +62,25 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 />
 <meta
   property="og:title"
-  content="Kafka 설치 - Pink Spider"
+  content="git에서 tag의 활용 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
-"
+  content="git 에서 tag는 언제 쓰고 어떻게 쓸까? Git에서 **tag(태그)**는 특정 커밋에 이름을 붙여서 식별하기 쉽게 만드는 기능입니다. 일반적으로 릴리즈 버전을 표시할 때 많이 사용되며, 특정 시점의 스냅샷을 의미합니다. 🎯 태그의 주요 역할 릴리즈 마킹
+예: v1.0.0, v2.1.3 배포한 버전이 어떤 커밋인지 명확하게 추적할 수 있습니다. 스냅샷 저장
+특정 커밋에 중요한 의미를 부여하고 싶을 때 (예: 첫 배포, 테스트 완료 지점 등) CI/CD 트리거용
+태그가 push될 때 자동 배포되도록 CI 파이프라인 설정이 가능 🛠️ 태그의 종류 Lightweight Tag (가벼운 태그) 단순히 커밋을 가리키는 포인터 Git 내부적으로는 브랜치와 유사한 구조 git tag v1.0.0 Annotated Tag (주석이 있는 태그) 태그 생성자 정보, 날짜, 메시지 등을 포함 릴리즈에는 보통 이걸 사용 git tag -a v1.0.0 -m &#34;Release version 1.0.0&#34; 📤 태그 푸시 및 공유 태그는 기본적으로 git push로 자동 푸시되지 않음. 명시적으로 푸시해야 함: # 특정 태그 푸시 git push origin v1.0.0 # 모든 태그 푸시 git push origin --tags 🔍 태그 확인 # 로컬 태그 목록 git tag # 특정 태그가 가리키는 커밋 보기 git show v1.0.0 🧽 태그 삭제 # 로컬 태그 삭제 git tag -d v1.0.0 # 원격 태그 삭제 git push origin --delete v1.0.0 📦 활용 예시 (릴리즈 관리) # 코드가 안정화된 시점 git checkout main git pull git tag -a v1.0.0 -m &#34;First stable release&#34; git push origin v1.0.0 CI/CD 도구(GitHub Actions, Jenkins 등)는 이 태그를 감지해서 v1.0.0을 자동으로 배포하게 할 수 있습니다. "
 />
-<meta property="og:url" content="http://localhost:1313/post/infra/kafka_install/" />
-<meta property="og:site_name" content="Kafka 설치" />
+<meta property="og:url" content="https://pink-spider.github.io/post/til/git_tag/" />
+<meta property="og:site_name" content="git에서 tag의 활용" />
 <meta
   property="og:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2024-11-27 17:14:05 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-01-04 13:18:03 &#43;0900 KST" />
 
 
 
@@ -169,7 +136,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
       class="Header-item mobile-none"
       style="margin-top: -4px; margin-bottom: -4px"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon"
           height="32"
@@ -232,7 +199,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
                 placeholder="Search"
                 autocomplete="off"
               />
-              <input type="hidden" name="q" value="site:http://localhost:1313/" />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
               <div
                 class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
               >
@@ -260,7 +227,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
     <div
       class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon octicon-mark-github v-align-middle"
           height="32"
@@ -311,7 +278,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:1313/">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
                   <img class=" avatar-user"
                     src="/images/logo_pinkspider.png"
                     width="32" height="32" alt="Pink Spider"></a>
@@ -319,20 +286,20 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="http://localhost:1313/">Pink Spider</a></span><span
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="http://localhost:1313/post/infra/kafka_install/">Kafka 설치</a></strong>
+                      href="https://pink-spider.github.io/post/til/git_tag/">git에서 tag의 활용</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 27 Nov 2024 17:14:05 &#43;0900"
+                  Created <relative-time datetime="Sat, 04 Jan 2025 13:18:03 &#43;0900"
                     class="no-wrap">
-                    Wed, 27 Nov 2024 17:14:05 &#43;0900</relative-time>
+                    Sat, 04 Jan 2025 13:18:03 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 24 Mar 2025 13:10:57 &#43;0900"
+                  Modified <relative-time datetime="Mon, 24 Mar 2025 14:08:43 &#43;0900"
                     class="no-wrap">
-                    Mon, 24 Mar 2025 13:10:57 &#43;0900</relative-time>
+                    Mon, 24 Mar 2025 14:08:43 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -362,9 +329,9 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
                         </div>
                       </div>
                     </details-menu>
-                      67 Words
+                      513 Words
                     <span class="file-info-divider"></span>
-                                        0 min
+                                        2 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -375,51 +342,81 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>wget -d <a href="https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz">https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz</a></p>
-<p>tar -xzf kafka_2.13-3.7.0.tgz</p>
-<p>./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties</p>
-<p>./bin/zookeeper-server-stop.sh</p>
-<hr>
-<p>[Unit]
-Description=Kafka UI Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<hr>
-<p>[Unit]
-Description=Zookeeper Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<hr>
-<p>[Unit]
-Description=Kafka Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<p>sudo systemctl enable zookeeper
-sudo systemctl enable kafka
-sudo systemctl enable kafka-ui</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="git-에서-tag는-언제-쓰고-어떻게-쓸까">git 에서 tag는 언제 쓰고 어떻게 쓸까?</h1>
+<ul>
+<li>Git에서 **tag(태그)**는 특정 커밋에 이름을 붙여서 식별하기 쉽게 만드는 기능입니다. <!-- raw HTML omitted --></li>
+<li>일반적으로 릴리즈 버전을 표시할 때 많이 사용되며, 특정 시점의 스냅샷을 의미합니다.</li>
+</ul>
+<h2 id="-태그의-주요-역할">🎯 태그의 주요 역할</h2>
+<ol>
+<li>
+<p>릴리즈 마킹</p>
+<ul>
+<li>예: v1.0.0, v2.1.3</li>
+<li>배포한 버전이 어떤 커밋인지 명확하게 추적할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p>스냅샷 저장</p>
+<ul>
+<li>특정 커밋에 중요한 의미를 부여하고 싶을 때 (예: 첫 배포, 테스트 완료 지점 등)</li>
+</ul>
+</li>
+<li>
+<p>CI/CD 트리거용</p>
+<ul>
+<li>태그가 push될 때 자동 배포되도록 CI 파이프라인 설정이 가능</li>
+</ul>
+</li>
+</ol>
+<h2 id="-태그의-종류">🛠️ 태그의 종류</h2>
+<ol>
+<li>Lightweight Tag (가벼운 태그)
+<ul>
+<li>단순히 커밋을 가리키는 포인터</li>
+<li>Git 내부적으로는 브랜치와 유사한 구조</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git tag v1.0.0
+</span></span></code></pre></div></li>
+<li>Annotated Tag (주석이 있는 태그)
+<ul>
+<li>태그 생성자 정보, 날짜, 메시지 등을 포함</li>
+<li>릴리즈에는 보통 이걸 사용</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git tag -a v1.0.0 -m <span class="s2">&#34;Release version 1.0.0&#34;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="-태그-푸시-및-공유">📤 태그 푸시 및 공유</h3>
+<ul>
+<li>태그는 기본적으로 git push로 자동 푸시되지 않음. 명시적으로 푸시해야 함:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 특정 태그 푸시</span>
+</span></span><span class="line"><span class="cl">git push origin v1.0.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 모든 태그 푸시</span>
+</span></span><span class="line"><span class="cl">git push origin --tags
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="-태그-확인">🔍 태그 확인</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 로컬 태그 목록</span>
+</span></span><span class="line"><span class="cl">git tag
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 특정 태그가 가리키는 커밋 보기</span>
+</span></span><span class="line"><span class="cl">git show v1.0.0
+</span></span></code></pre></div><h3 id="-태그-삭제">🧽 태그 삭제</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 로컬 태그 삭제</span>
+</span></span><span class="line"><span class="cl">git tag -d v1.0.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 원격 태그 삭제</span>
+</span></span><span class="line"><span class="cl">git push origin --delete v1.0.0
+</span></span></code></pre></div><h3 id="-활용-예시-릴리즈-관리">📦 활용 예시 (릴리즈 관리)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 코드가 안정화된 시점</span>
+</span></span><span class="line"><span class="cl">git checkout main
+</span></span><span class="line"><span class="cl">git pull
+</span></span><span class="line"><span class="cl">git tag -a v1.0.0 -m <span class="s2">&#34;First stable release&#34;</span>
+</span></span><span class="line"><span class="cl">git push origin v1.0.0
+</span></span></code></pre></div><ul>
+<li>CI/CD 도구(GitHub Actions, Jenkins 등)는 이 태그를 감지해서 v1.0.0을 자동으로 배포하게 할 수 있습니다.</li>
+</ul>
 </article>
               </div>
 
@@ -432,23 +429,25 @@ sudo systemctl enable kafka-ui</p>
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="http://localhost:1313/post/spring/component/"> Component 내에 static method 에서 쓰는 member 객체가 null 일...</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/git_tag_deploy/"> gitbub에서 tag기반 릴리즈 활용법</a>
           
         </div>
         
         <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/book/clean_code_intro/">Clean Code 서론&nbsp;</a><div> »</div>
           
         </div>
       </div>
     </div>
   </main>
 </div>
-<script type="application/javascript" src='http://localhost:1313/js/toc.js'></script>
-<link rel="stylesheet" href='http://localhost:1313/css/toc.css' />
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='http://localhost:1313/css/gitalk.css'>
-<script src='http://localhost:1313/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     accessToken: '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',
@@ -481,9 +480,9 @@ sudo systemctl enable kafka-ui</p>
 
 </body>
 
-<script type="application/javascript" src="http://localhost:1313/js/github-style.js"></script>
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
 
-<script src="http://localhost:1313/js/mark.es6.min.js"></script>
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
 
 
 <script type="text/javascript">

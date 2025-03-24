@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <script
     type="application/javascript"
-    src='http://localhost:1313/js/theme-mode.js'
+    src='https://pink-spider.github.io/js/theme-mode.js'
   ></script>
-  <link rel="stylesheet" href='http://localhost:1313/css/frameworks.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github-style.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
   
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Kafka 설치 | Pink Spider
+    gitbub에서 tag기반 릴리즈 활용법 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,54 +27,28 @@
   
   <meta
   name="description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
+  content="서론 GitHub에서 **태그(Tag)**를 기반으로 **릴리즈(Release)**를 만들면, 릴리즈 노트를 작성하고, 바이너리 파일(zip, tar.gz 등)을 첨부할 수 있어서 배포에 아주 유용합니다.. 아래에 GitHub 릴리즈 생성 및 연동 방법을 정리합니다. 👇 🎁 GitHub 릴리즈란? 특정 태그에 대한 릴리즈 정보를 시각화해서 보여주는 GitHub의 기능 릴리즈 노트 작성 가능 실행 파일, 아티팩트(.zip, .jar 등) 첨부 가능 GitHub Actions 같은 CI 도구와 쉽게 연동 가능 🛠️ GitHub 릴리즈 만드는 방법 1. Git 태그 만들기 (로컬 or GitHub에서) # 로컬에서 annotated tag 만들기 git tag -a v1.0.0 -m &#34;Release version 1.0.0&#34; # 원격 푸시 git push origin v1.0.0 또는 GitHub 웹 UI에서 새 태그를 만들 수도 있음.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://localhost:1313/post/infra/kafka_install/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/git_tag_deploy/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Kafka 설치 - Pink Spider"
+  content="gitbub에서 tag기반 릴리즈 활용법 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
+  content="서론 GitHub에서 **태그(Tag)**를 기반으로 **릴리즈(Release)**를 만들면, 릴리즈 노트를 작성하고, 바이너리 파일(zip, tar.gz 등)을 첨부할 수 있어서 배포에 아주 유용합니다.. 아래에 GitHub 릴리즈 생성 및 연동 방법을 정리합니다. 👇 🎁 GitHub 릴리즈란? 특정 태그에 대한 릴리즈 정보를 시각화해서 보여주는 GitHub의 기능 릴리즈 노트 작성 가능 실행 파일, 아티팩트(.zip, .jar 등) 첨부 가능 GitHub Actions 같은 CI 도구와 쉽게 연동 가능 🛠️ GitHub 릴리즈 만드는 방법 1. Git 태그 만들기 (로컬 or GitHub에서) # 로컬에서 annotated tag 만들기 git tag -a v1.0.0 -m &#34;Release version 1.0.0&#34; # 원격 푸시 git push origin v1.0.0 또는 GitHub 웹 UI에서 새 태그를 만들 수도 있음.
 "
 />
-<meta name="twitter:site" content="http://localhost:1313/" />
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta
   name="twitter:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 
 
@@ -84,36 +58,23 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 />
 <meta
   property="og:title"
-  content="Kafka 설치 - Pink Spider"
+  content="gitbub에서 tag기반 릴리즈 활용법 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="wget -d https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz
-tar -xzf kafka_2.13-3.7.0.tgz
-./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
-./bin/zookeeper-server-stop.sh
-[Unit] Description=Kafka UI Service After=network.target
-[Service] Type=simple ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Zookeeper Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-[Unit] Description=Kafka Service After=network.target
-[Service] Type=simple ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh User=pinkspider Group=pinkspider Restart=on-abnormal
-[Install] WantedBy=multi-user.target
-sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enable kafka-ui
+  content="서론 GitHub에서 **태그(Tag)**를 기반으로 **릴리즈(Release)**를 만들면, 릴리즈 노트를 작성하고, 바이너리 파일(zip, tar.gz 등)을 첨부할 수 있어서 배포에 아주 유용합니다.. 아래에 GitHub 릴리즈 생성 및 연동 방법을 정리합니다. 👇 🎁 GitHub 릴리즈란? 특정 태그에 대한 릴리즈 정보를 시각화해서 보여주는 GitHub의 기능 릴리즈 노트 작성 가능 실행 파일, 아티팩트(.zip, .jar 등) 첨부 가능 GitHub Actions 같은 CI 도구와 쉽게 연동 가능 🛠️ GitHub 릴리즈 만드는 방법 1. Git 태그 만들기 (로컬 or GitHub에서) # 로컬에서 annotated tag 만들기 git tag -a v1.0.0 -m &#34;Release version 1.0.0&#34; # 원격 푸시 git push origin v1.0.0 또는 GitHub 웹 UI에서 새 태그를 만들 수도 있음.
 "
 />
-<meta property="og:url" content="http://localhost:1313/post/infra/kafka_install/" />
-<meta property="og:site_name" content="Kafka 설치" />
+<meta property="og:url" content="https://pink-spider.github.io/post/til/git_tag_deploy/" />
+<meta property="og:site_name" content="gitbub에서 tag기반 릴리즈 활용법" />
 <meta
   property="og:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2024-11-27 17:14:05 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-01-11 16:11:03 &#43;0900 KST" />
 
 
 
@@ -169,7 +130,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
       class="Header-item mobile-none"
       style="margin-top: -4px; margin-bottom: -4px"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon"
           height="32"
@@ -232,7 +193,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
                 placeholder="Search"
                 autocomplete="off"
               />
-              <input type="hidden" name="q" value="site:http://localhost:1313/" />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
               <div
                 class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
               >
@@ -260,7 +221,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
     <div
       class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon octicon-mark-github v-align-middle"
           height="32"
@@ -311,7 +272,7 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:1313/">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
                   <img class=" avatar-user"
                     src="/images/logo_pinkspider.png"
                     width="32" height="32" alt="Pink Spider"></a>
@@ -319,20 +280,20 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="http://localhost:1313/">Pink Spider</a></span><span
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="http://localhost:1313/post/infra/kafka_install/">Kafka 설치</a></strong>
+                      href="https://pink-spider.github.io/post/til/git_tag_deploy/">gitbub에서 tag기반 릴리즈 활용법</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 27 Nov 2024 17:14:05 &#43;0900"
+                  Created <relative-time datetime="Sat, 11 Jan 2025 16:11:03 &#43;0900"
                     class="no-wrap">
-                    Wed, 27 Nov 2024 17:14:05 &#43;0900</relative-time>
+                    Sat, 11 Jan 2025 16:11:03 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 24 Mar 2025 13:10:57 &#43;0900"
+                  Modified <relative-time datetime="Mon, 24 Mar 2025 14:08:43 &#43;0900"
                     class="no-wrap">
-                    Mon, 24 Mar 2025 13:10:57 &#43;0900</relative-time>
+                    Mon, 24 Mar 2025 14:08:43 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -362,9 +323,9 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
                         </div>
                       </div>
                     </details-menu>
-                      67 Words
+                      607 Words
                     <span class="file-info-divider"></span>
-                                        0 min
+                                        3 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -375,51 +336,102 @@ sudo systemctl enable zookeeper sudo systemctl enable kafka sudo systemctl enabl
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>wget -d <a href="https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz">https://dlcdn.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz</a></p>
-<p>tar -xzf kafka_2.13-3.7.0.tgz</p>
-<p>./bin/zookeeper-server-start.sh -daemon config/zookeeper.properties</p>
-<p>./bin/zookeeper-server-stop.sh</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="서론">서론</h1>
+<ul>
+<li>GitHub에서 **태그(Tag)**를 기반으로 **릴리즈(Release)**를 만들면, <!-- raw HTML omitted --></li>
+<li>릴리즈 노트를 작성하고, 바이너리 파일(zip, tar.gz 등)을 첨부할 수 있어서 배포에 아주 유용합니다..</li>
+<li>아래에 GitHub 릴리즈 생성 및 연동 방법을 정리합니다. 👇</li>
+</ul>
 <hr>
-<p>[Unit]
-Description=Kafka UI Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/usr/bin/java -jar /home/pinkspider/infra/kafka-ui/kafka-ui-api-v0.7.2.jar &ndash;spring.config.location=file:/home/pinkspider/infra/kafka-ui/kafka-ui/application.yml
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
+<h2 id="-github-릴리즈란">🎁 GitHub 릴리즈란?</h2>
+<ul>
+<li>특정 <strong>태그에 대한 릴리즈 정보를 시각화</strong>해서 보여주는 GitHub의 기능</li>
+<li>릴리즈 노트 작성 가능</li>
+<li>실행 파일, 아티팩트(.zip, .jar 등) 첨부 가능</li>
+<li>GitHub Actions 같은 CI 도구와 쉽게 연동 가능</li>
+</ul>
 <hr>
-<p>[Unit]
-Description=Zookeeper Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-start.sh start-foreground
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/zookeeper-server-stop.sh stop
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
+<h2 id="-github-릴리즈-만드는-방법">🛠️ GitHub 릴리즈 만드는 방법</h2>
+<h3 id="1-git-태그-만들기-로컬-or-github에서">1. Git 태그 만들기 (로컬 or GitHub에서)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 로컬에서 annotated tag 만들기</span>
+</span></span><span class="line"><span class="cl">git tag -a v1.0.0 -m <span class="s2">&#34;Release version 1.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 원격 푸시</span>
+</span></span><span class="line"><span class="cl">git push origin v1.0.0
+</span></span></code></pre></div><blockquote>
+<p>또는 GitHub 웹 UI에서 새 태그를 만들 수도 있음.</p></blockquote>
 <hr>
-<p>[Unit]
-Description=Kafka Service
-After=network.target</p>
-<p>[Service]
-Type=simple
-ExecStart=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-start.sh /home/pinkspider/infra/kafka/kafka_2.13-3.9.0/config/server.properties
-ExecStop=/home/pinkspider/infra/kafka/kafka_2.13-3.9.0/bin/kafka-server-stop.sh
-User=pinkspider
-Group=pinkspider
-Restart=on-abnormal</p>
-<p>[Install]
-WantedBy=multi-user.target</p>
-<p>sudo systemctl enable zookeeper
-sudo systemctl enable kafka
-sudo systemctl enable kafka-ui</p>
+<h3 id="2-github에서-릴리즈-생성">2. GitHub에서 릴리즈 생성</h3>
+<ol>
+<li>해당 리포지토리로 이동</li>
+<li>상단 탭에서 <strong>&ldquo;Releases&rdquo;</strong> 클릭 (또는 <code>/releases</code> 경로로 이동)</li>
+<li><strong>&ldquo;Draft a new release&rdquo;</strong> 클릭</li>
+<li>입력 항목:
+<ul>
+<li><strong>Tag version</strong>: <code>v1.0.0</code> (기존 태그 선택 또는 새로 만들기)</li>
+<li><strong>Release title</strong>: 예) <code>First official release</code></li>
+<li><strong>Description</strong>: 변경사항 요약 (릴리즈 노트)</li>
+<li><strong>파일 첨부</strong>: 실행 파일, jar, zip 등 필요한 바이너리 업로드 가능</li>
+</ul>
+</li>
+<li><strong>&ldquo;Publish release&rdquo;</strong> 클릭</li>
+</ol>
+<hr>
+<h2 id="-github-actions와-릴리즈-연동-자동화">🔁 GitHub Actions와 릴리즈 연동 (자동화)</h2>
+<p>릴리즈가 만들어졌을 때 자동으로 빌드/배포하게 설정 가능.</p>
+<p>예: 릴리즈 생성 시 <code>.jar</code> 파일 빌드 후 릴리즈에 자동 첨부</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># .github/workflows/release.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Release Build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">release</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">created]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout repo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Set up Java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-java@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;17&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build project</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">./gradlew build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Upload .jar to Release</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">softprops/action-gh-release@v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l">build/libs/*.jar</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-요약">✅ 요약</h2>
+<table>
+  <thead>
+      <tr>
+          <th>기능</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Tag</td>
+          <td>Git 커밋에 이름 부여</td>
+      </tr>
+      <tr>
+          <td>Release</td>
+          <td>태그에 대한 릴리즈 노트 및 파일 첨부</td>
+      </tr>
+      <tr>
+          <td>GitHub Actions 연동</td>
+          <td>릴리즈 생성 시 자동 빌드 및 배포 가능</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p>원한다면 실제 GitHub Actions 설정 파일 만들어줄 수도 있어. 혹시 사용하는 언어나 빌드 도구가 뭐야? (예: Java/Gradle, Node.js/NPM 등)</p>
 </article>
               </div>
 
@@ -432,23 +444,25 @@ sudo systemctl enable kafka-ui</p>
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="http://localhost:1313/post/spring/component/"> Component 내에 static method 에서 쓰는 member 객체가 null 일...</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/ssl/"> 내 우분투 서버에 SSL 무료 설치하기</a>
           
         </div>
         
         <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/git_tag/">git에서 tag의 활용&nbsp;</a><div> »</div>
           
         </div>
       </div>
     </div>
   </main>
 </div>
-<script type="application/javascript" src='http://localhost:1313/js/toc.js'></script>
-<link rel="stylesheet" href='http://localhost:1313/css/toc.css' />
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='http://localhost:1313/css/gitalk.css'>
-<script src='http://localhost:1313/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     accessToken: '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',
@@ -481,9 +495,9 @@ sudo systemctl enable kafka-ui</p>
 
 </body>
 
-<script type="application/javascript" src="http://localhost:1313/js/github-style.js"></script>
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
 
-<script src="http://localhost:1313/js/mark.es6.min.js"></script>
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
 
 
 <script type="text/javascript">

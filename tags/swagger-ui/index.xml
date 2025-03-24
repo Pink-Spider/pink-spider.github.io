@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Swagger-Ui on Pink Spider</title>
+    <link>http://localhost:53294/tags/swagger-ui/</link>
+    <description>Recent content in Swagger-Ui on Pink Spider</description>
+    <generator>Hugo</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Mon, 24 Mar 2025 13:26:35 +0900</lastBuildDate>
+    <atom:link href="http://localhost:53294/tags/swagger-ui/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Restdoc Swagger Ui Sample</title>
+      <link>http://localhost:53294/post/spring/restdoc-swagger-ui-sample/</link>
+      <pubDate>Mon, 24 Mar 2025 13:18:03 +0900</pubDate>
+      <guid>http://localhost:53294/post/spring/restdoc-swagger-ui-sample/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
