@@ -689,7 +689,7 @@ public class OtherServerFeignConfig {
             int index = counter.getAndIncrement() % serverUris.size();
             String selectedUrl = serverUris.get(index);
 
-            requestTemplate.target(updatedUrl);
+            requestTemplate.target(selectedUrl);
         };
     }
 }
