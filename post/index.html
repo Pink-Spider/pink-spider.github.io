@@ -296,7 +296,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">8</span>
+              <span class="Counter">9</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -588,7 +588,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">8</span>
+      <span class="Counter ">9</span>
     </a>
   </nav>
 </div>
@@ -794,6 +794,111 @@ api가 수정될 때마다 문서를 수정해줘야 하는 단점이 있습니�
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/component_bean_difference/">Component 내에 static method 에서 쓰는 member 객체가 null 일떄</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="spring-에서-boot-포함-component와-bean의-차이는">Spring 에서 (boot 포함) component와 bean의 차이는?</h1>
+<p>Spring Boot (정확히는 Spring Framework)에서 <code>@Component</code>와 <code>@Bean</code>은 모두 <strong>Spring 컨테이너에 객체(빈, Bean)를 등록</strong>하는 데 사용되지만, 사용하는 방식과 목적이 조금 다릅니다.</p>
+<hr>
+<h2 id="-1-component">🔹 1. <code>@Component</code></h2>
+<ul>
+<li><strong>클래스에 붙이는 어노테이션</strong></li>
+<li>Spring이 자동으로 해당 클래스를 <strong>빈으로 등록</strong></li>
+<li><code>@ComponentScan</code>에 의해 탐지되어 등록됨</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyComponent</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Component is working&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h3 id="-특징">✅ 특징</h3>
+<ul>
+<li>자동 등록</li>
+<li><code>@Service</code>, <code>@Repository</code>, <code>@Controller</code>도 사실 <code>@Component</code>의 특수화 버전</li>
+<li>패키지 스캔 경로 안에 있어야 함</li>
+</ul>
+<hr>
+<h2 id="-2-bean">🔹 2. <code>@Bean</code></h2>
+<ul>
+<li><strong>메서드에 붙이는 어노테이션</strong></li>
+<li>주로 <code>@Configuration</code> 클래스 안에서 사용</li>
+<li>개발자가 직접 객체를 생성하고 그 결과를 Spring 컨테이너에 등록</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Configuration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Bean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MyComponent</span><span class="w"> </span><span class="nf">myComponent</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyComponent</span><span class="p">();</span><span class="w"> </span><span class="c1">// 수동 등록</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h3 id="-특징-1">✅ 특징</h3>
+<ul>
+<li>수동 등록</li>
+<li>외부 라이브러리 객체, 설정값이 필요한 경우 등 유연한 객체 생성 가능</li>
+<li>메서드 이름이 빈 이름이 됨 (필요시 <code>@Bean(name = &quot;beanName&quot;)</code>으로 지정 가능)</li>
+</ul>
+<hr>
+<h2 id="-정리">📌 정리</h2>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th><code>@Component</code></th>
+          <th><code>@Bean</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>붙이는 위치</td>
+          <td>클래스</td>
+          <td>메서드</td>
+      </tr>
+      <tr>
+          <td>등록 방식</td>
+          <td>자동 등록 (컴포넌트 스캔)</td>
+          <td>수동 등록 (개발자가 명시적으로 생성)</td>
+      </tr>
+      <tr>
+          <td>사용 용도</td>
+          <td>애플리케이션 내부 클래스</td>
+          <td>외부 라이브러리, 복잡한 초기화</td>
+      </tr>
+      <tr>
+          <td>설정 클래스 필요 여부</td>
+          <td>필요 없음</td>
+          <td><code>@Configuration</code> 필요</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-언제-써야-할까">🙋 언제 써야 할까?</h2>
+<ul>
+<li><strong>내가 만든 클래스</strong>를 빈으로 등록하고 싶다면 → <code>@Component</code></li>
+<li><strong>외부 라이브러리</strong> 객체나 <strong>조건에 따라 달라지는 객체 생성</strong>이 필요할 때 → <code>@Bean</code></li>
+</ul>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sat, 25 Jan 2025 17:14:05 &#43;0900" class="no-wrap"
+                title=" Sat, 25 Jan 2025 17:14:05 &#43;0900">
+                Sat, 25 Jan 2025 17:14:05 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
                 <a href="https://pink-spider.github.io/post/spring/component_static_member/">Component 내에 static method 에서 쓰는 member 객체가 null 일떄</a>
               </h3>
             </div>
@@ -840,55 +945,6 @@ public class SomeComponentClass {
               <relative-time datetime=" Sat, 25 Jan 2025 17:14:05 &#43;0900" class="no-wrap"
                 title=" Sat, 25 Jan 2025 17:14:05 &#43;0900">
                 Sat, 25 Jan 2025 17:14:05 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git_tag_deploy/">gitbub에서 tag기반 릴리즈 활용법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="서론">서론</h1>
-<ul>
-<li>GitHub에서 **태그(Tag)**를 기반으로 **릴리즈(Release)**를 만들면, <!-- raw HTML omitted --></li>
-<li>릴리즈 노트를 작성하고, 바이너리 파일(zip, tar.gz 등)을 첨부할 수 있어서 배포에 아주 유용합니다..</li>
-<li>아래에 GitHub 릴리즈 생성 및 연동 방법을 정리합니다. 👇</li>
-</ul>
-<hr>
-<h2 id="-github-릴리즈란">🎁 GitHub 릴리즈란?</h2>
-<ul>
-<li>특정 <strong>태그에 대한 릴리즈 정보를 시각화</strong>해서 보여주는 GitHub의 기능</li>
-<li>릴리즈 노트 작성 가능</li>
-<li>실행 파일, 아티팩트(.zip, .jar 등) 첨부 가능</li>
-<li>GitHub Actions 같은 CI 도구와 쉽게 연동 가능</li>
-</ul>
-<hr>
-<h2 id="-github-릴리즈-만드는-방법">🛠️ GitHub 릴리즈 만드는 방법</h2>
-<h3 id="1-git-태그-만들기-로컬-or-github에서">1. Git 태그 만들기 (로컬 or GitHub에서)</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 로컬에서 annotated tag 만들기</span>
-</span></span><span class="line"><span class="cl">git tag -a v1.0.0 -m <span class="s2">&#34;Release version 1.0.0&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 원격 푸시</span>
-</span></span><span class="line"><span class="cl">git push origin v1.0.0
-</span></span></code></pre></div><blockquote>
-<p>또는 GitHub 웹 UI에서 새 태그를 만들 수도 있음.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sat, 11 Jan 2025 16:11:03 &#43;0900" class="no-wrap"
-                title=" Sat, 11 Jan 2025 16:11:03 &#43;0900">
-                Sat, 11 Jan 2025 16:11:03 &#43;0900
               </relative-time>
             </div>
           </div>
