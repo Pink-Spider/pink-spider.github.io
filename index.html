@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">7</span>
+              <span class="Counter">8</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">7</span>
+      <span class="Counter ">8</span>
     </a>
   </nav>
 </div>
@@ -790,43 +790,26 @@
                       d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
                     </path>
                   </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/component_static_member/">
-                    <span class="repo" title="Component 내에 static method 에서 쓰는 member 객체가 null 일떄">Component 내에 static method 에서 쓰는 member 객체가 null 일떄</span>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/restdoc_swagger_ui_sample/">
+                    <span class="repo" title="Restdoc Swagger Ui Sample">Restdoc Swagger Ui Sample</span>
                   </a>
                 </div>
 
 
                 <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h1 id="component-내에-static-method-에서-쓰는-member-객체가-null-일떄">@Component 내에 static method 에서 쓰는 member 객체가 null 일떄</h1>
-<h2 id="component-내에-static-method에서-사용하는-static-member">@Component 내에 static method에서 사용하는 static member</h2>
-<pre tabindex="0"><code>@Component
-@RequiredArgsConstructor
-public class SomeComponentClass {
-
-    private final ObjectMapper objectMapper;
-
-    private static void staticMethod() {
-        objectMapper.convertValue() // objectMapper NullPointerException 발생
-    } 
-}
-</code></pre><p>-&gt; 이렇게 바꾸세요.</p>
-<pre tabindex="0"><code>@Component
-@RequiredArgsConstructor
-public class SomeComponentClass {
-
-    private static ObjectMapper objectMapper;
-
-    // Autowired로 constructor 생성
-    @Autowired
-    public SomeComponentClass(ObjectMapper objectMapper) {
-        SomeComponentClass.objectMapper = objectMapper;
-    }
-
-    private static void staticMethod() {
-        objectMapper ~~~
-    }
-}
-</code></pre>
+                  <h1 id="restdoc-swagger-ui-sample">Restdoc Swagger Ui Sample</h1>
+<h2 id="서론">서론</h2>
+<ul>
+<li>
+<p>개발에서 테스트 코드의 중요성에 대해서는 따로 포스팅 예정입니다.</p>
+</li>
+<li>
+<p>백엔드에서 api 개발시 해당 api의 사용법에 대한 문서화는 협업에서 필수입니다.<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>가장 무식한 방법으로는 confluence가 되었든 wiki가 되었든, 엑셀이 되었든<!-- raw HTML omitted -->
+api 개발이 있을때 마다 수작업으로 문서화하는 방법이 있는데<!-- raw HTML omitted -->
+api가 수정될 때마다 문서를 수정해줘야 하는 단점이 있습니다. 깜빡하고 문서 업데이트가 안되는 케이스가 현업에서 얼마나 자주 발생하는 지를 생각하면 절대 비추.</p>
                 </div>
 
                 <p class="mb-0 f6 text-gray">
@@ -858,6 +841,12 @@ public class SomeComponentClass {
   "title": "%eb%82%b4%20%ec%9a%b0%eb%b6%84%ed%88%ac%20%ec%84%9c%eb%b2%84%ec%97%90%20SSL%20%eb%ac%b4%eb%a3%8c%20%ec%84%a4%ec%b9%98%ed%95%98%ea%b8%b0",
   "link": "https://pink-spider.github.io/post/infra/ssl/",
   "publishDate": "2025-03-01%2015:19:58"
+},
+
+{
+  "title": "Restdoc%20Swagger%20Ui%20Sample",
+  "link": "https://pink-spider.github.io/post/spring/restdoc_swagger_ui_sample/",
+  "publishDate": "2025-02-01%2020:18:03"
 },
 
 {
