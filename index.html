@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">13</span>
+              <span class="Counter">14</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">13</span>
+      <span class="Counter ">14</span>
     </a>
   </nav>
 </div>
@@ -623,6 +623,93 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/">
+                    <span class="repo" title="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <h1 id="feign-client-사용팁-1---상대-서버가-여러대-일때-랜덤-호출">feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출</h1>
+<h2 id="load-balancing-되고-있는-상대측에-번갈아가면서-호출하는-방법">load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법</h2>
+<ul>
+<li>build.gradle</li>
+</ul>
+<pre tabindex="0"><code>...
+dependencies {
+    implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39;
+}
+...
+</code></pre><ul>
+<li>application.yml</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 상대 측에서 3개의 서버 LB되고 있을 때 </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">other-party-url</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.002</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.003</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>ServerProperties.java</li>
+</ul>
+<pre tabindex="0"><code>@Setter
+@Getter
+@Configuration
+@ConfigurationProperties(prefix = &#34;other-party-url&#34;)
+public class OtherServerProperties {
+
+    private List&lt;String&gt; serverUris;
+}
+</code></pre><ul>
+<li>FeignConfig.java</li>
+</ul>
+<pre tabindex="0"><code>@RequiredArgsConstructor
+public class OtherServerFeignConfig {
+
+    private final OtherServerProperties otherServerProperties;
+
+    private final AtomicInteger counter = new AtomicInteger(0);
+
+    @Bean
+    public RequestInterceptor randomServerInterceptor() {
+        return requestTemplate -&gt; {
+            List&lt;String&gt; serverUris = otherServerProperties.getServerUris();
+
+            int index = counter.getAndIncrement() % serverUris.size();
+            String selectedUrl = serverUris.get(index);
+
+            requestTemplate.target(updatedUrl);
+        };
+    }
+}
+</code></pre><ul>
+<li>FeignClient interface</li>
+</ul>
+<pre tabindex="0"><code>@FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class)
+public interface OtherServerFeignClientV1 {
+    
+    ...
+}
+</code></pre>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -799,145 +886,18 @@
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/til/github_action_sample/">
-                    <span class="repo" title="github action sample with spring boot">github action sample with spring boot</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h1 id="github-action-sample">github action sample</h1>
-<h2 id="spring-boot">spring boot</h2>
-<ul>
-<li>
-<p>gradle build를 사용하는 spring boot를 빌드하고 ssh로</p>
-</li>
-<li>
-<p>secret 류는 setting-&gt; security에 Secrets and variables 내 action 메뉴에서 설정</p>
-</li>
-<li>
-<p>마지막에 slack webhook으로 배포 상황 알림</p>
-</li>
-<li>
-<p>action 설정이나 slack webhoook url 설정하는 방법은 다른 블로그에도 많으니 생략하겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build and Deploy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">develop</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build-and-deploy</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 1. SSH 호스트 키 추가</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Add SSH known hosts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          mkdir -p ~/.ssh
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh-keyscan -H github.com &gt;&gt; ~/.ssh/known_hosts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 2. 리포지토리 체크아웃 (서브모듈 포함)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout repository with submodules</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="l">recursive</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ssh-key</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.PRIVATE_KEY_FOR_SUBMODULE }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 3. 서브모듈 최신화</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update submodules to the latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          git submodule update --init --recursive
-</span></span></span><span class="line"><span class="cl"><span class="sd">          git submodule foreach git pull origin $(git rev-parse --abbrev-ref HEAD)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 4. JDK 설정</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Set up JDK 23</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-java@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;23&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;temurin&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 5. Gradle 빌드</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build with Gradle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">./gradlew clean build -x test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 6. 서버로 파일 전송</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy to Server</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SSH_PRIVATE_KEY</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SSH_PRIVATE_KEY }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_IP</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_IP }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_USER</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_USER }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          echo &#34;DEPLOY_SERVER_IP: $DEPLOY_SERVER_IP&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sd">          mkdir -p ~/.ssh
-</span></span></span><span class="line"><span class="cl"><span class="sd">          echo &#34;$SSH_PRIVATE_KEY&#34; &gt; ~/.ssh/github_action
-</span></span></span><span class="line"><span class="cl"><span class="sd">          chmod 600 ~/.ssh/github_action
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh-keyscan -H &#34;$DEPLOY_SERVER_IP&#34; &gt;&gt; ~/.ssh/known_hosts
-</span></span></span><span class="line"><span class="cl"><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # 빌드 파일 전송
-</span></span></span><span class="line"><span class="cl"><span class="sd">          scp -i ~/.ssh/github_action build/libs/*.jar $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/backend/
-</span></span></span><span class="line"><span class="cl"><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # swagger rest doc json
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/
-</span></span></span><span class="line"><span class="cl"><span class="sd">          find build/resources/main/restdocs -name &#34;*.json&#34; | grep . &amp;&amp; scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ || echo &#34;No JSON files to copy, skipping...&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 7. 서버에서 애플리케이션 실행</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Start Application</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_IP</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_IP }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SERVER_USER</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_USER }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">REPOSITORY_NAME</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.repository }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          PROJECT_NAME=$(echo $REPOSITORY_NAME | cut -d&#39;/&#39; -f2)
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh -i ~/.ssh/github_action $SERVER_USER@$DEPLOY_SERVER_IP &lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="sd">          cd /home/$SERVER_USER/backend
-</span></span></span><span class="line"><span class="cl"><span class="sd">          chmod 700 /home/$SERVER_USER/backend/${PROJECT_NAME}*-exec.jar 
-</span></span></span><span class="line"><span class="cl"><span class="sd">          sh /home/$SERVER_USER/bin/deploy.sh $PROJECT_NAME dev /home/$SERVER_USER 512m
-</span></span></span><span class="line"><span class="cl"><span class="sd">          sh /home/$SERVER_USER/infra/swagger/swagger_script.sh restart ${PROJECT}-api.json
-</span></span></span><span class="line"><span class="cl"><span class="sd">          EOF</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">action-slack</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">8398a7/action-slack@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l">${{ job.status }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">author_name</span><span class="p">:</span><span class="w"> </span><span class="l">Pink Spider - dev</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l">repo,commit,message,author</span><span class="w"> </span><span class="c"># action,eventName,ref,workflow,job,took 추가할 수 있음</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">mention</span><span class="p">:</span><span class="w"> </span><span class="l">here</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">if_mention</span><span class="p">:</span><span class="w"> </span><span class="l">failure,cancelled</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SLACK_WEBHOOK_URL</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SLACK_WEBHOOK_URL }}</span><span class="w"> </span><span class="c"># required</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">always()</span><span class="w"> </span><span class="c"># Pick up events even if the job fails or is canceled.</span><span class="w">
-</span></span></span></code></pre></div></li>
-<li>
-<p>deploy.sh</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "feign%20client%20%ec%82%ac%ec%9a%a9%ed%8c%81%20-%20%ec%83%81%eb%8c%80%20%ec%84%9c%eb%b2%84%ea%b0%80%20%ec%97%ac%eb%9f%ac%eb%8c%80%20%ec%9d%bc%eb%95%8c%20%eb%9e%9c%eb%8d%a4%20%ed%98%b8%ec%b6%9c",
+  "link": "https://pink-spider.github.io/post/spring/feignclient_load_balancing/",
+  "publishDate": "2025-03-26%2008:37:45"
+},
+
 {
   "title": "DispatcherServlet%20%ec%b4%88%ea%b8%b0%ed%99%94%20%ea%b3%bc%ec%a0%95",
   "link": "https://pink-spider.github.io/post/spring/dispatcher/",

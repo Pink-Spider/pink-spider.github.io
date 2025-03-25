@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    DispatcherServlet 초기화 과정 | Pink Spider
+    feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,24 +27,20 @@
   
   <meta
   name="description"
-  content=" 🚀 DispatcherServlet 초기화 과정 1. ServletContainer가 DispatcherServlet을 로딩 Spring Boot 앱을 실행하면, 내장 톰캣이 뜨고 아래 과정이 시작돼요:
-Spring Boot가 자동으로 DispatcherServlet을 서블릿으로 등록함 (/ 매핑) DispatcherServlet은 사실 HttpServlet을 상속받은 클래스 이때 호출되는 메서드가 → init() → 그 안에서 initServletBean() 실행됨 2. WebApplicationContext 생성 및 초기화 DispatcherServlet은 자신의 Spring WebApplicationContext를 가지고 있음 이 WebApplicationContext는 @Controller, @RestController, @Service, @Repository 등이 등록된 공간 GenericWebApplicationContext ↑ AnnotationConfigWebApplicationContext ↑ WebApplicationContext ← DispatcherServlet이 사용 DispatcherServlet은 이 context를 통해 빈을 찾고, 라우팅을 수행함
-"
+  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(updatedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/dispatcher/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="DispatcherServlet 초기화 과정 - Pink Spider"
+  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content=" 🚀 DispatcherServlet 초기화 과정 1. ServletContainer가 DispatcherServlet을 로딩 Spring Boot 앱을 실행하면, 내장 톰캣이 뜨고 아래 과정이 시작돼요:
-Spring Boot가 자동으로 DispatcherServlet을 서블릿으로 등록함 (/ 매핑) DispatcherServlet은 사실 HttpServlet을 상속받은 클래스 이때 호출되는 메서드가 → init() → 그 안에서 initServletBean() 실행됨 2. WebApplicationContext 생성 및 초기화 DispatcherServlet은 자신의 Spring WebApplicationContext를 가지고 있음 이 WebApplicationContext는 @Controller, @RestController, @Service, @Repository 등이 등록된 공간 GenericWebApplicationContext ↑ AnnotationConfigWebApplicationContext ↑ WebApplicationContext ← DispatcherServlet이 사용 DispatcherServlet은 이 context를 통해 빈을 찾고, 라우팅을 수행함
-"
+  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(updatedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -60,16 +56,14 @@ Spring Boot가 자동으로 DispatcherServlet을 서블릿으로 등록함 (/ �
 />
 <meta
   property="og:title"
-  content="DispatcherServlet 초기화 과정 - Pink Spider"
+  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
 />
 <meta
   property="og:description"
-  content=" 🚀 DispatcherServlet 초기화 과정 1. ServletContainer가 DispatcherServlet을 로딩 Spring Boot 앱을 실행하면, 내장 톰캣이 뜨고 아래 과정이 시작돼요:
-Spring Boot가 자동으로 DispatcherServlet을 서블릿으로 등록함 (/ 매핑) DispatcherServlet은 사실 HttpServlet을 상속받은 클래스 이때 호출되는 메서드가 → init() → 그 안에서 initServletBean() 실행됨 2. WebApplicationContext 생성 및 초기화 DispatcherServlet은 자신의 Spring WebApplicationContext를 가지고 있음 이 WebApplicationContext는 @Controller, @RestController, @Service, @Repository 등이 등록된 공간 GenericWebApplicationContext ↑ AnnotationConfigWebApplicationContext ↑ WebApplicationContext ← DispatcherServlet이 사용 DispatcherServlet은 이 context를 통해 빈을 찾고, 라우팅을 수행함
-"
+  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(updatedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/dispatcher/" />
-<meta property="og:site_name" content="DispatcherServlet 초기화 과정" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/feignclient_load_balancing/" />
+<meta property="og:site_name" content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -77,7 +71,7 @@ Spring Boot가 자동으로 DispatcherServlet을 서블릿으로 등록함 (/ �
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-03-26 08:20:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-26 08:37:45 &#43;0900 KST" />
 
 
 
@@ -285,18 +279,18 @@ Spring Boot가 자동으로 DispatcherServlet을 서블릿으로 등록함 (/ �
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/dispatcher/">DispatcherServlet 초기화 과정</a></strong>
+                      href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 26 Mar 2025 08:20:45 &#43;0900"
+                  Created <relative-time datetime="Wed, 26 Mar 2025 08:37:45 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 08:20:45 &#43;0900</relative-time>
+                    Wed, 26 Mar 2025 08:37:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 26 Mar 2025 08:24:48 &#43;0900"
+                  Modified <relative-time datetime="Wed, 26 Mar 2025 08:38:02 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 08:24:48 &#43;0900</relative-time>
+                    Wed, 26 Mar 2025 08:38:02 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -326,9 +320,9 @@ Spring Boot가 자동으로 DispatcherServlet을 서블릿으로 등록함 (/ �
                         </div>
                       </div>
                     </details-menu>
-                      892 Words
+                      150 Words
                     <span class="file-info-divider"></span>
-                                        4 min
+                                        1 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -339,133 +333,66 @@ Spring Boot가 자동으로 DispatcherServlet을 서블릿으로 등록함 (/ �
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><hr>
-<h2 id="-dispatcherservlet-초기화-과정">🚀 DispatcherServlet 초기화 과정</h2>
-<h3 id="1-servletcontainer가-dispatcherservlet을-로딩">1. <strong>ServletContainer가 DispatcherServlet을 로딩</strong></h3>
-<p>Spring Boot 앱을 실행하면, 내장 톰캣이 뜨고 아래 과정이 시작돼요:</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="feign-client-사용팁-1---상대-서버가-여러대-일때-랜덤-호출">feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출</h1>
+<h2 id="load-balancing-되고-있는-상대측에-번갈아가면서-호출하는-방법">load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법</h2>
 <ul>
-<li>Spring Boot가 자동으로 <code>DispatcherServlet</code>을 <strong>서블릿으로 등록</strong>함 (<code>/</code> 매핑)</li>
-<li><code>DispatcherServlet</code>은 사실 <code>HttpServlet</code>을 상속받은 클래스</li>
-<li>이때 호출되는 메서드가 → <code>init()</code> → 그 안에서 <code>initServletBean()</code> 실행됨</li>
+<li>build.gradle</li>
 </ul>
-<hr>
-<h3 id="2-webapplicationcontext-생성-및-초기화">2. <strong>WebApplicationContext 생성 및 초기화</strong></h3>
-<ul>
-<li><code>DispatcherServlet</code>은 자신의 <strong>Spring WebApplicationContext</strong>를 가지고 있음</li>
-<li>이 WebApplicationContext는 <code>@Controller</code>, <code>@RestController</code>, <code>@Service</code>, <code>@Repository</code> 등이 등록된 공간</li>
+<pre tabindex="0"><code>...
+dependencies {
+    implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39;
+}
+...
+</code></pre><ul>
+<li>application.yml</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">GenericWebApplicationContext
-</span></span><span class="line"><span class="cl">      ↑
-</span></span><span class="line"><span class="cl">AnnotationConfigWebApplicationContext
-</span></span><span class="line"><span class="cl">      ↑
-</span></span><span class="line"><span class="cl">WebApplicationContext ← DispatcherServlet이 사용
-</span></span></code></pre></div><blockquote>
-<p><code>DispatcherServlet</code>은 이 context를 통해 빈을 찾고, 라우팅을 수행함</p></blockquote>
-<hr>
-<h3 id="3-핵심-컴포넌트-초기화">3. <strong>핵심 컴포넌트 초기화</strong></h3>
-<p>DispatcherServlet 내부에서 아래와 같은 핵심 컴포넌트들이 초기화됨:</p>
-<table>
-  <thead>
-      <tr>
-          <th>컴포넌트</th>
-          <th>역할</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>HandlerMapping</strong></td>
-          <td>URL → 어떤 Controller로 보낼지 결정</td>
-      </tr>
-      <tr>
-          <td><strong>HandlerAdapter</strong></td>
-          <td>Controller 실행을 위한 어댑터</td>
-      </tr>
-      <tr>
-          <td><strong>HandlerExceptionResolver</strong></td>
-          <td>예외 발생 시 처리할 Resolver</td>
-      </tr>
-      <tr>
-          <td><strong>ViewResolver</strong></td>
-          <td>View 이름 → 실제 뷰 객체로 변환</td>
-      </tr>
-      <tr>
-          <td><strong>LocaleResolver</strong></td>
-          <td>요청의 언어/지역 설정 결정</td>
-      </tr>
-      <tr>
-          <td><strong>ThemeResolver</strong></td>
-          <td>테마 설정</td>
-      </tr>
-      <tr>
-          <td><strong>MultipartResolver</strong></td>
-          <td>파일 업로드 처리</td>
-      </tr>
-  </tbody>
-</table>
-<blockquote>
-<p>이 컴포넌트들은 Spring MVC의 요청 흐름에 참여함</p></blockquote>
-<hr>
-<h2 id="-dispatcherservlet-내부-구조-시퀀스-흐름">🧠 DispatcherServlet 내부 구조 (시퀀스 흐름)</h2>
-<p>클라이언트 요청이 DispatcherServlet에 들어오면 실행되는 핵심 메서드 흐름:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">doDispatch</span><span class="p">()</span><span class="w"> </span><span class="c1">// DispatcherServlet의 핵심 로직</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">├──</span><span class="w"> </span><span class="n">getHandler</span><span class="p">()</span><span class="w">               </span><span class="c1">// HandlerMapping으로 컨트롤러 찾기</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">├──</span><span class="w"> </span><span class="n">getHandlerAdapter</span><span class="p">()</span><span class="w">        </span><span class="c1">// HandlerAdapter로 실행 방식 결정</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">├──</span><span class="w"> </span><span class="n">applyPreHandle</span><span class="p">()</span><span class="w">           </span><span class="c1">// 인터셉터 preHandle 실행</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">├──</span><span class="w"> </span><span class="n">handlerAdapter</span><span class="p">.</span><span class="na">handle</span><span class="p">()</span><span class="w">    </span><span class="c1">// 실제 컨트롤러 실행</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">├──</span><span class="w"> </span><span class="n">applyPostHandle</span><span class="p">()</span><span class="w">          </span><span class="c1">// 인터셉터 postHandle 실행</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">├──</span><span class="w"> </span><span class="n">processDispatchResult</span><span class="p">()</span><span class="w">    </span><span class="c1">// 뷰 리졸빙, 예외 처리 등</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">└──</span><span class="w"> </span><span class="n">render</span><span class="p">()</span><span class="w">                   </span><span class="c1">// ViewResolver 통해 뷰 렌더링</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-구조-그림-요약-텍스트-버전">📦 구조 그림 요약 (텍스트 버전)</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Client 요청]
-</span></span><span class="line"><span class="cl">    ↓
-</span></span><span class="line"><span class="cl">[DispatcherServlet]
-</span></span><span class="line"><span class="cl">    ├─ HandlerMapping      ← URL에 맞는 Controller 찾음
-</span></span><span class="line"><span class="cl">    ├─ HandlerAdapter      ← 실행 방법 결정
-</span></span><span class="line"><span class="cl">    ├─ Controller          ← 실제 로직 실행
-</span></span><span class="line"><span class="cl">    ├─ ViewResolver        ← 뷰 이름 → JSP, HTML 등으로 변환
-</span></span><span class="line"><span class="cl">    └─ View                ← 결과 렌더링
-</span></span><span class="line"><span class="cl">    ↓
-</span></span><span class="line"><span class="cl">[응답 반환]
-</span></span></code></pre></div><hr>
-<h2 id="-dispatcherservlet-설정-관련-팁">🔧 DispatcherServlet 설정 관련 팁</h2>
-<p>Spring Boot에서는 대부분 자동 설정되지만, 직접 설정도 가능해요:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Bean</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">DispatcherServlet</span><span class="w"> </span><span class="nf">dispatcherServlet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">DispatcherServlet</span><span class="w"> </span><span class="n">ds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DispatcherServlet</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">ds</span><span class="p">.</span><span class="na">setThrowExceptionIfNoHandlerFound</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span><span class="c1">// 404 예외 발생</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ds</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-요약">✅ 요약</h2>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>DispatcherServlet 역할</td>
-          <td>Spring MVC의 중앙 컨트롤러 (Front Controller)</td>
-      </tr>
-      <tr>
-          <td>초기화 시점</td>
-          <td>톰캣이 시작되면서 자동 등록되고 <code>init()</code> 호출됨</td>
-      </tr>
-      <tr>
-          <td>내부 구조</td>
-          <td>HandlerMapping, HandlerAdapter, ViewResolver 등 MVC 핵심 컴포넌트 포함</td>
-      </tr>
-      <tr>
-          <td>핵심 메서드</td>
-          <td><code>doDispatch()</code>가 요청 처리의 중심</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-</article>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 상대 측에서 3개의 서버 LB되고 있을 때 </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">other-party-url</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.002</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.003</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>ServerProperties.java</li>
+</ul>
+<pre tabindex="0"><code>@Setter
+@Getter
+@Configuration
+@ConfigurationProperties(prefix = &#34;other-party-url&#34;)
+public class OtherServerProperties {
+
+    private List&lt;String&gt; serverUris;
+}
+</code></pre><ul>
+<li>FeignConfig.java</li>
+</ul>
+<pre tabindex="0"><code>@RequiredArgsConstructor
+public class OtherServerFeignConfig {
+
+    private final OtherServerProperties otherServerProperties;
+
+    private final AtomicInteger counter = new AtomicInteger(0);
+
+    @Bean
+    public RequestInterceptor randomServerInterceptor() {
+        return requestTemplate -&gt; {
+            List&lt;String&gt; serverUris = otherServerProperties.getServerUris();
+
+            int index = counter.getAndIncrement() % serverUris.size();
+            String selectedUrl = serverUris.get(index);
+
+            requestTemplate.target(updatedUrl);
+        };
+    }
+}
+</code></pre><ul>
+<li>FeignClient interface</li>
+</ul>
+<pre tabindex="0"><code>@FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class)
+public interface OtherServerFeignClientV1 {
+    
+    ...
+}
+</code></pre></article>
               </div>
 
               
@@ -477,13 +404,11 @@ Spring Boot가 자동으로 DispatcherServlet을 서블릿으로 등록함 (/ �
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/"> feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/servlet_dispatcherservlet/">servlet은 무엇이고 dispatcher servlet은 무엇인가&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/dispatcher/">DispatcherServlet 초기화 과정&nbsp;</a><div> »</div>
           
         </div>
       </div>
