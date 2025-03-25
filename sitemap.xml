@@ -3,10 +3,10 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://pink-spider.github.io/</loc>
-    <lastmod>2025-03-25T16:10:54+09:00</lastmod>
+    <lastmod>2025-03-25T16:16:10+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/</loc>
-    <lastmod>2025-03-25T16:10:54+09:00</lastmod>
+    <lastmod>2025-03-25T16:16:10+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/git_repository_history_reset/</loc>
     <lastmod>2025-03-24T16:03:39+09:00</lastmod>
@@ -16,6 +16,9 @@
   </url><url>
     <loc>https://pink-spider.github.io/post/infra/ssl/</loc>
     <lastmod>2025-03-24T14:14:23+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/component_static_member/</loc>
+    <lastmod>2025-03-25T16:16:10+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/git_tag_deploy/</loc>
     <lastmod>2025-03-24T14:08:43+09:00</lastmod>
