@@ -925,92 +925,42 @@ api가 수정될 때마다 문서를 수정해줘야 하는 단점이 있습니�
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/component_bean_difference/">Component 내에 static method 에서 쓰는 member 객체가 null 일떄</a>
+                <a href="https://pink-spider.github.io/post/spring/component_static_member/">Component 내에 static method 에서 쓰는 member 객체가 null 일떄</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="spring-에서-boot-포함-component와-bean의-차이는">Spring 에서 (boot 포함) component와 bean의 차이는?</h1>
-<p>Spring Boot (정확히는 Spring Framework)에서 <code>@Component</code>와 <code>@Bean</code>은 모두 <strong>Spring 컨테이너에 객체(빈, Bean)를 등록</strong>하는 데 사용되지만, 사용하는 방식과 목적이 조금 다릅니다.</p>
-<hr>
-<h2 id="-1-component">🔹 1. <code>@Component</code></h2>
-<ul>
-<li><strong>클래스에 붙이는 어노테이션</strong></li>
-<li>Spring이 자동으로 해당 클래스를 <strong>빈으로 등록</strong></li>
-<li><code>@ComponentScan</code>에 의해 탐지되어 등록됨</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyComponent</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Component is working&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징">✅ 특징</h3>
-<ul>
-<li>자동 등록</li>
-<li><code>@Service</code>, <code>@Repository</code>, <code>@Controller</code>도 사실 <code>@Component</code>의 특수화 버전</li>
-<li>패키지 스캔 경로 안에 있어야 함</li>
-</ul>
-<hr>
-<h2 id="-2-bean">🔹 2. <code>@Bean</code></h2>
-<ul>
-<li><strong>메서드에 붙이는 어노테이션</strong></li>
-<li>주로 <code>@Configuration</code> 클래스 안에서 사용</li>
-<li>개발자가 직접 객체를 생성하고 그 결과를 Spring 컨테이너에 등록</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Configuration</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Bean</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MyComponent</span><span class="w"> </span><span class="nf">myComponent</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyComponent</span><span class="p">();</span><span class="w"> </span><span class="c1">// 수동 등록</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-1">✅ 특징</h3>
-<ul>
-<li>수동 등록</li>
-<li>외부 라이브러리 객체, 설정값이 필요한 경우 등 유연한 객체 생성 가능</li>
-<li>메서드 이름이 빈 이름이 됨 (필요시 <code>@Bean(name = &quot;beanName&quot;)</code>으로 지정 가능)</li>
-</ul>
-<hr>
-<h2 id="-정리">📌 정리</h2>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th><code>@Component</code></th>
-          <th><code>@Bean</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>붙이는 위치</td>
-          <td>클래스</td>
-          <td>메서드</td>
-      </tr>
-      <tr>
-          <td>등록 방식</td>
-          <td>자동 등록 (컴포넌트 스캔)</td>
-          <td>수동 등록 (개발자가 명시적으로 생성)</td>
-      </tr>
-      <tr>
-          <td>사용 용도</td>
-          <td>애플리케이션 내부 클래스</td>
-          <td>외부 라이브러리, 복잡한 초기화</td>
-      </tr>
-      <tr>
-          <td>설정 클래스 필요 여부</td>
-          <td>필요 없음</td>
-          <td><code>@Configuration</code> 필요</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="-언제-써야-할까">🙋 언제 써야 할까?</h2>
-<ul>
-<li><strong>내가 만든 클래스</strong>를 빈으로 등록하고 싶다면 → <code>@Component</code></li>
-<li><strong>외부 라이브러리</strong> 객체나 <strong>조건에 따라 달라지는 객체 생성</strong>이 필요할 때 → <code>@Bean</code></li>
-</ul>
+                <h1 id="component-내에-static-method-에서-쓰는-member-객체가-null-일떄">@Component 내에 static method 에서 쓰는 member 객체가 null 일떄</h1>
+<h2 id="component-내에-static-method에서-사용하는-static-member">@Component 내에 static method에서 사용하는 static member</h2>
+<pre tabindex="0"><code>@Component
+@RequiredArgsConstructor
+public class SomeComponentClass {
+
+    private final ObjectMapper objectMapper;
+
+    private static void staticMethod() {
+        objectMapper.convertValue() // objectMapper NullPointerException 발생
+    } 
+}
+</code></pre><p>-&gt; 이렇게 바꾸세요.</p>
+<pre tabindex="0"><code>@Component
+@RequiredArgsConstructor
+public class SomeComponentClass {
+
+    private static ObjectMapper objectMapper;
+
+    // Autowired로 constructor 생성
+    @Autowired
+    public SomeComponentClass(ObjectMapper objectMapper) {
+        SomeComponentClass.objectMapper = objectMapper;
+    }
+
+    private static void staticMethod() {
+        objectMapper ~~~
+    }
+}
+</code></pre>
               </div>
             </div>
 
