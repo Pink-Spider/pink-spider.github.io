@@ -6,8 +6,22 @@
     <description>Recent content on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 26 Mar 2025 11:34:49 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 26 Mar 2025 13:38:25 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache Kafka 사용 시 코드로 오류 처리 방법</title>
+      <link>https://pink-spider.github.io/post/infra/kakfa_fallback/</link>
+      <pubDate>Wed, 26 Mar 2025 13:38:03 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/infra/kakfa_fallback/</guid>
+      <description>&lt;p&gt;Spring Boot에서 Kafka를 사용할 때 오류를 코드로 해결하는 방법을 설명해볼게요.&lt;br&gt;&#xA;Kafka 프로듀서와 컨슈머에서 &lt;strong&gt;Fallback 메소드, 재시도 (Retry), 예외 처리&lt;/strong&gt; 등을 적용하는 방법을 알아봅니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-kafka-프로듀서에서-오류-처리-fallback-retry&#34;&gt;&lt;strong&gt;1. Kafka 프로듀서에서 오류 처리 (Fallback, Retry)&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Kafka 프로듀서는 메시지를 브로커로 보내는 과정에서 오류가 발생할 수 있습니다.&lt;br&gt;&#xA;예를 들어, &lt;strong&gt;네트워크 문제, 브로커 다운, 메시지 크기 초과&lt;/strong&gt; 등의 문제가 있을 수 있는데요, 이를 처리하는 방법입니다.&lt;/p&gt;&#xA;&lt;h3 id=&#34;-1-fallback-메소드-적용-resilience4j-사용&#34;&gt;✅ &lt;strong&gt;(1) Fallback 메소드 적용 (Resilience4j 사용)&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://resilience4j.readme.io/&#34;&gt;Resilience4j&lt;/a&gt;의 &lt;code&gt;@Retry&lt;/code&gt;와 &lt;code&gt;@Recover&lt;/code&gt;를 활용하면&lt;br&gt;&#xA;Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으로 실패하면 대체 로직을 수행할 수 있습니다.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Apache Kafka 사용 시 발생할 수 있는 주요 오류</title>
+      <link>https://pink-spider.github.io/post/infra/kakfa_exception/</link>
+      <pubDate>Wed, 26 Mar 2025 13:30:03 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/infra/kakfa_exception/</guid>
+      <description>&lt;p&gt;Apache Kafka 사용 시 발생할 수 있는 주요 오류 유형과 그 해결 방법을 정리해 보겠습니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-네트워크-및-연결-오류&#34;&gt;&lt;strong&gt;1. 네트워크 및 연결 오류&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;h3 id=&#34;-오류-connection-to-broker-broker_id-failed&#34;&gt;❌ 오류: &lt;code&gt;Connection to broker &amp;lt;broker_id&amp;gt; failed&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;p&gt;📌 &lt;strong&gt;원인&lt;/strong&gt;: 브로커와의 네트워크 연결 문제, 브로커 다운, 방화벽 문제 등&lt;br&gt;&#xA;✅ &lt;strong&gt;해결 방법&lt;/strong&gt;:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;zookeeper&lt;/code&gt;와 &lt;code&gt;broker&lt;/code&gt;가 실행 중인지 확인 (&lt;code&gt;ps aux | grep kafka&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;listeners&lt;/code&gt; 및 &lt;code&gt;advertised.listeners&lt;/code&gt; 설정 확인 (&lt;code&gt;server.properties&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;방화벽 설정 (&lt;code&gt;iptables -L&lt;/code&gt;, &lt;code&gt;firewalld&lt;/code&gt;)을 점검하여 포트가 열려 있는지 확인&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;2-브로커-및-토픽-관련-오류&#34;&gt;&lt;strong&gt;2. 브로커 및 토픽 관련 오류&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;h3 id=&#34;-오류-leader-not-available-for-partition-partition_id&#34;&gt;❌ 오류: &lt;code&gt;Leader not available for partition &amp;lt;partition_id&amp;gt;&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;p&gt;📌 &lt;strong&gt;원인&lt;/strong&gt;:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>데이터베이스에서 모든 트랜잭션에 대해 Lock과 Unlock을 사용하는 방법</title>
       <link>https://pink-spider.github.io/post/spring/lock_unlock/</link>
