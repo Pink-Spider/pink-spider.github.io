@@ -296,7 +296,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">14</span>
+              <span class="Counter">18</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -588,7 +588,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">14</span>
+      <span class="Counter ">18</span>
     </a>
   </nav>
 </div>
@@ -602,6 +602,245 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/spring-%EC%8B%9C%EC%9E%91%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%84%A4%EC%A0%95/">Spring 시작시 메모리 설정 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Java 애플리케이션을 실행할 때 <code>-Xmx512m</code>과 <code>-XX:MaxRAM=512m</code>는 모두 최대 메모리 사용량을 제한하는 옵션이지만, 동작 방식에 차이가 있습니다.</p>
+<h3 id="1--xmx512m">1. <code>-Xmx512m</code></h3>
+<ul>
+<li>힙(Heap) 메모리의 최대 크기를 512MB로 설정합니다.</li>
+<li>예제:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -Xmx512m -jar myapp.jar
+</span></span></code></pre></div></li>
+<li>이 설정은 Java 힙 메모리만 제한하며, 전체 프로세스의 메모리 사용량을 제한하는 것은 아닙니다.</li>
+<li>즉, 힙 외의 메모리(메타스페이스, 스택, 네이티브 메모리 등)는 따로 제한되지 않습니다.</li>
+</ul>
+<h3 id="2--xxmaxram512m">2. <code>-XX:MaxRAM=512m</code></h3>
+<ul>
+<li>JVM이 사용할 수 있는 <strong>전체 메모리(힙 + 메타스페이스 + 기타 네이티브 메모리)</strong> 를 512MB로 제한합니다.</li>
+<li>예제:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -XX:MaxRAM<span class="o">=</span>512m -jar myapp.jar
+</span></span></code></pre></div></li>
+<li><code>-XX:MaxRAM</code>을 설정하면 <code>-Xmx</code>의 기본값이 달라질 수 있습니다.
+<ul>
+<li>일반적으로 <code>-Xmx</code>의 기본값은 <code>MaxRAM</code> 값의 25~50% 정도로 설정됩니다(JVM 버전에 따라 다름).</li>
+</ul>
+</li>
+<li>이 설정은 <strong>컨테이너 환경(Docker, Kubernetes)</strong> 에서 JVM이 사용할 수 있는 메모리를 제어하는 데 유용합니다.</li>
+</ul>
+<h3 id="차이점-요약">차이점 요약</h3>
+<table>
+  <thead>
+      <tr>
+          <th>옵션</th>
+          <th>대상</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>-Xmx512m</code></td>
+          <td>힙(Heap) 메모리</td>
+          <td>힙 메모리의 최대 크기만 제한</td>
+      </tr>
+      <tr>
+          <td><code>-XX:MaxRAM=512m</code></td>
+          <td>전체 JVM 메모리</td>
+          <td>힙 + 메타스페이스 + 네이티브 메모리를 포함한 JVM 전체 메모리 제한</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="함께-사용하면">함께 사용하면?</h3>
+<p>두 옵션을 함께 사용할 수도 있습니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 11:26:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 11:26:45 &#43;0900">
+                Wed, 26 Mar 2025 11:26:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/jpa_transaction/">Spring Boot JPA에서 @Transactional 옵션 정리</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h3 id="spring-boot-jpa에서-transactional-사용법">Spring Boot JPA에서 <code>@Transactional</code> 사용법</h3>
+<p>Spring Boot JPA에서 <code>@Transactional</code> 어노테이션은 <strong>트랜잭션 범위 내에서 데이터베이스 작업을 실행하고, 실패 시 롤백하는 기능</strong>을 제공하는 중요한 요소입니다.</p>
+<hr>
+<h2 id="1-transactional-기본-사용법">1. <code>@Transactional</code> 기본 사용법</h2>
+<p>Spring의 <code>@Transactional</code>을 사용하면 하나의 메서드에서 여러 개의 JPA 작업(조회, 저장, 수정, 삭제 등)을 수행할 때 <strong>트랜잭션을 자동으로 관리</strong>할 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MemberRepository</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MemberService</span><span class="p">(</span><span class="n">MemberRepository</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">memberRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateMember</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Member not found&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">member</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w">  </span><span class="c1">// JPA 영속성 컨텍스트에 의해 자동으로 업데이트됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li><code>@Transactional</code>을 사용하면, <strong>메서드 실행 중 예외가 발생하면 롤백</strong>되며, 성공하면 자동으로 커밋됩니다.</li>
+<li><code>member.setName(name);</code>을 호출하면 JPA의 <strong>변경 감지(dirty checking)</strong> 덕분에 <code>save()</code>를 명시적으로 호출하지 않아도 업데이트됩니다.</li>
+</ul>
+<hr>
+<h2 id="2-읽기-전용-트랜잭션-transactionalreadonly--true">2. 읽기 전용 트랜잭션 (<code>@Transactional(readOnly = true)</code>)</h2>
+<p><code>readOnly = true</code>를 설정하면 성능 최적화를 할 수 있습니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 11:21:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 11:21:45 &#43;0900">
+                Wed, 26 Mar 2025 11:21:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/about_trasactional/">Spring Boot JPA에서 @Transactional 옵션 정리</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="spring-boot-jpa에서-transactional-옵션-정리">Spring Boot JPA에서 @Transactional 옵션 정리</h1>
+<p>Spring Boot JPA에서 <code>@Transactional</code>은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.</p>
+<hr>
+<h3 id="-기본-사용법">📌 기본 사용법</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">joinMember</span><span class="p">(</span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">member</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 예외 발생 시 전체 트랜잭션 롤백</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li><code>@Transactional</code>을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요.</li>
+<li>런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 <strong>unchecked exception</strong>일 때만 롤백)</li>
+</ul>
+<hr>
+<h3 id="-클래스-레벨에-사용">📌 클래스 레벨에 사용</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다.</li>
+</ul>
+<hr>
+<h3 id="-rollbackfor-옵션">📌 rollbackFor 옵션</h3>
+<p>기본적으로 <code>RuntimeException</code>과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(<code>Exception</code>)도 롤백하고 싶다면:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 11:15:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 11:15:45 &#43;0900">
+                Wed, 26 Mar 2025 11:15:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/redis_crud_template/">Boot에서 redis 사용하는 2가지 방법</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Java에서 Redis를 사용할 때 <code>CRUD Repository</code>와 <code>RedisTemplate</code>은 각각 다른 수준의 추상화를 제공하는 방식입니다.
+주요 차이점은 다음과 같습니다:</p>
+<hr>
+<h3 id="-1-crud-repository-spring-data-redis">✅ 1. <strong>CRUD Repository (Spring Data Redis)</strong></h3>
+<p><code>RedisRepository</code>, <code>CrudRepository</code>, <code>PagingAndSortingRepository</code> 등과 같이 <strong>Spring Data</strong>가 제공하는 Repository 인터페이스를 사용하는 방식입니다.</p>
+<h4 id="-장점">🔹 장점</h4>
+<ul>
+<li><strong>높은 추상화 수준</strong>: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작.</li>
+<li><strong>개발 속도 빠름</strong>: 반복적인 로직 줄일 수 있음 (<code>findById</code>, <code>save</code>, <code>delete</code> 등 기본 제공).</li>
+<li><strong>Spring Data의 기능</strong>을 활용 가능 (예: 쿼리 메서드, 페이징 등).</li>
+</ul>
+<h4 id="-단점">🔹 단점</h4>
+<ul>
+<li><strong>세밀한 제어 어려움</strong>: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움.</li>
+<li><strong>직렬화 방식 고정</strong>: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요.</li>
+</ul>
+<h4 id="-예시">🔹 예시</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserRedisRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUsername</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-2-redistemplate">✅ 2. <strong>RedisTemplate</strong></h3>
+<p>Spring에서 제공하는 <strong>저수준 API</strong>로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 11:11:03 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 11:11:03 &#43;0900">
+                Wed, 26 Mar 2025 11:11:03 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -730,311 +969,6 @@ public interface OtherServerFeignClientV1 {
               <relative-time datetime=" Wed, 26 Mar 2025 08:20:45 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 08:20:45 &#43;0900">
                 Wed, 26 Mar 2025 08:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/servlet_dispatcherservlet/">servlet은 무엇이고 dispatcher servlet은 무엇인가</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring에서는 <code>Servlet</code>과 <code>DispatcherServlet</code>이 웹 요청 처리에서 핵심적인 역할을 해요.
-개념을 하나씩 명확히 정리해볼게요.</p>
-<hr>
-<h2 id="-1-servlet이란">🧱 1. <strong>Servlet</strong>이란?</h2>
-<h3 id="-정의">✅ 정의</h3>
-<ul>
-<li><strong>자바 웹에서 가장 기본적인 컴포넌트</strong></li>
-<li>HTTP 요청을 처리하고, HTTP 응답을 반환하는 <strong>자바 클래스</strong></li>
-<li>톰캣(Tomcat) 같은 서블릿 컨테이너에서 실행됨</li>
-</ul>
-<h3 id="-역할">✅ 역할</h3>
-<ul>
-<li>웹 브라우저에서 온 요청을 받아서 처리하고, 응답을 생성함</li>
-<li>예전에는 모든 요청을 직접 Servlet에서 처리했어요.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">write</span><span class="p">(</span><span class="s">&#34;Hello from Servlet!&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
-<p>이건 거의 Spring 이전의 <strong>전통적인 웹 방식</strong>이에요.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:19:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:19:45 &#43;0900">
-                Wed, 26 Mar 2025 08:19:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/filter_interceptor/">Boot에서 filter와 interceptor의 차이</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring Boot에서 <strong>Filter</strong>와 <strong>Interceptor</strong>는 모두 요청(Request)과 응답(Response)을 가로채서 처리할 수 있게 해주는 기능이지만, <strong>역할, 실행 시점, 적용 범위</strong>에서 차이가 있습니다. 아래에서 간단 + 예시와 함께 정리해볼게요.</p>
-<hr>
-<h2 id="-1-filter-서블릿-필터">🔹 1. Filter (서블릿 필터)</h2>
-<h3 id="-개요">✅ 개요</h3>
-<ul>
-<li><strong>Servlet 스펙에 정의된 기능</strong></li>
-<li>Spring보다 더 <strong>하위 레벨</strong></li>
-<li>DispatcherServlet 이전에 실행됨</li>
-</ul>
-<h3 id="-사용-예시">✅ 사용 예시</h3>
-<ul>
-<li>인증, 인코딩, 로깅, XSS 방어</li>
-<li>공통 전처리/후처리</li>
-</ul>
-<h3 id="-예제">✅ 예제</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Filter: 요청 전&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">chain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Filter: 응답 후&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-2-interceptor-스프링-인터셉터">🔹 2. Interceptor (스프링 인터셉터)</h2>
-<h3 id="-개요-1">✅ 개요</h3>
-<ul>
-<li><strong>Spring MVC의 기능</strong></li>
-<li>DispatcherServlet 이후에 동작</li>
-<li>주로 <strong>컨트롤러 진입 전/후</strong>에 로직 적용</li>
-</ul>
-<h3 id="-사용-예시-1">✅ 사용 예시</h3>
-<ul>
-<li>로그인 체크</li>
-<li>권한 검사</li>
-<li>요청 로깅</li>
-<li>공통 응답 가공</li>
-</ul>
-<h3 id="-예제-1">✅ 예제</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">HandlerInterceptor</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">preHandle</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Interceptor: 컨트롤러 호출 전&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// false면 컨트롤러로 안 넘어감</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>그리고 등록은 이렇게 해야 해요:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:15:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:15:45 &#43;0900">
-                Wed, 26 Mar 2025 08:15:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/github_action_sample/">github action sample with spring boot</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="github-action-sample">github action sample</h1>
-<h2 id="spring-boot">spring boot</h2>
-<ul>
-<li>
-<p>gradle build를 사용하는 spring boot를 빌드하고 ssh로</p>
-</li>
-<li>
-<p>secret 류는 setting-&gt; security에 Secrets and variables 내 action 메뉴에서 설정</p>
-</li>
-<li>
-<p>마지막에 slack webhook으로 배포 상황 알림</p>
-</li>
-<li>
-<p>action 설정이나 slack webhoook url 설정하는 방법은 다른 블로그에도 많으니 생략하겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build and Deploy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">develop</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build-and-deploy</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 1. SSH 호스트 키 추가</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Add SSH known hosts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          mkdir -p ~/.ssh
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh-keyscan -H github.com &gt;&gt; ~/.ssh/known_hosts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 2. 리포지토리 체크아웃 (서브모듈 포함)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout repository with submodules</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="l">recursive</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ssh-key</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.PRIVATE_KEY_FOR_SUBMODULE }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 3. 서브모듈 최신화</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update submodules to the latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          git submodule update --init --recursive
-</span></span></span><span class="line"><span class="cl"><span class="sd">          git submodule foreach git pull origin $(git rev-parse --abbrev-ref HEAD)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 4. JDK 설정</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Set up JDK 23</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-java@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;23&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;temurin&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 5. Gradle 빌드</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build with Gradle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">./gradlew clean build -x test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 6. 서버로 파일 전송</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy to Server</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SSH_PRIVATE_KEY</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SSH_PRIVATE_KEY }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_IP</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_IP }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_USER</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_USER }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          echo &#34;DEPLOY_SERVER_IP: $DEPLOY_SERVER_IP&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sd">          mkdir -p ~/.ssh
-</span></span></span><span class="line"><span class="cl"><span class="sd">          echo &#34;$SSH_PRIVATE_KEY&#34; &gt; ~/.ssh/github_action
-</span></span></span><span class="line"><span class="cl"><span class="sd">          chmod 600 ~/.ssh/github_action
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh-keyscan -H &#34;$DEPLOY_SERVER_IP&#34; &gt;&gt; ~/.ssh/known_hosts
-</span></span></span><span class="line"><span class="cl"><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # 빌드 파일 전송
-</span></span></span><span class="line"><span class="cl"><span class="sd">          scp -i ~/.ssh/github_action build/libs/*.jar $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/backend/
-</span></span></span><span class="line"><span class="cl"><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # swagger rest doc json
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/
-</span></span></span><span class="line"><span class="cl"><span class="sd">          find build/resources/main/restdocs -name &#34;*.json&#34; | grep . &amp;&amp; scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ || echo &#34;No JSON files to copy, skipping...&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 7. 서버에서 애플리케이션 실행</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Start Application</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_IP</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_IP }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SERVER_USER</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_USER }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">REPOSITORY_NAME</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.repository }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          PROJECT_NAME=$(echo $REPOSITORY_NAME | cut -d&#39;/&#39; -f2)
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh -i ~/.ssh/github_action $SERVER_USER@$DEPLOY_SERVER_IP &lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="sd">          cd /home/$SERVER_USER/backend
-</span></span></span><span class="line"><span class="cl"><span class="sd">          chmod 700 /home/$SERVER_USER/backend/${PROJECT_NAME}*-exec.jar 
-</span></span></span><span class="line"><span class="cl"><span class="sd">          sh /home/$SERVER_USER/bin/deploy.sh $PROJECT_NAME dev /home/$SERVER_USER 512m
-</span></span></span><span class="line"><span class="cl"><span class="sd">          sh /home/$SERVER_USER/infra/swagger/swagger_script.sh restart ${PROJECT}-api.json
-</span></span></span><span class="line"><span class="cl"><span class="sd">          EOF</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">action-slack</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">8398a7/action-slack@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l">${{ job.status }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">author_name</span><span class="p">:</span><span class="w"> </span><span class="l">Pink Spider - dev</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l">repo,commit,message,author</span><span class="w"> </span><span class="c"># action,eventName,ref,workflow,job,took 추가할 수 있음</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">mention</span><span class="p">:</span><span class="w"> </span><span class="l">here</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">if_mention</span><span class="p">:</span><span class="w"> </span><span class="l">failure,cancelled</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SLACK_WEBHOOK_URL</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SLACK_WEBHOOK_URL }}</span><span class="w"> </span><span class="c"># required</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">always()</span><span class="w"> </span><span class="c"># Pick up events even if the job fails or is canceled.</span><span class="w">
-</span></span></span></code></pre></div></li>
-<li>
-<p>deploy.sh</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 25 Mar 2025 18:01:05 &#43;0900" class="no-wrap"
-                title=" Tue, 25 Mar 2025 18:01:05 &#43;0900">
-                Tue, 25 Mar 2025 18:01:05 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git_repository_history_reset/">git history 전부 없애고 reset 하는 방법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="git-history-전부-없애고-reset-하는-방법">git history 전부 없애고 reset 하는 방법</h1>
-<ul>
-<li>git history 를 왜 없애야 할까?
-<ul>
-<li>자주있는 일은 아니지만, git history를 전부 날리고 reset 해야 할 때가 있습니다..</li>
-<li>예를 들어, 서버의 비밀번호나 암복호화 key, 개인정보 등 노출되면 민감정보나 파일등이 git에 올라가 버렸다면?</li>
-<li>해당 내용을 지우고 다시 commit &amp; push를 했지만, history를 보고 이전 commit을 불러오면 그만이므로, 해결책이 될 수 없지요.</li>
-<li>아예 history까지 날려버려서 이전의 실수(꼭 실수했을때만 reset 한다고 할 수는 없지만)를 이력까지 지웁시다.</li>
-</ul>
-</li>
-</ul>
-<h2 id="main-혹은-develop등-남겨놓을-브랜치에서-여기선-main">main 혹은 develop등 남겨놓을 브랜치에서 (여기선 main)</h2>
-<ul>
-<li>&ndash;orphan 은 기존커밋 이력없이&hellip;의 의미입니다. 즉, 기존 이력없이 시작하는 브랜치를 하나 만듭니다.
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout --orphan latest_branch
-</span></span></code></pre></div></li>
-</ul>
-<h2 id="새로-커밋">새로 커밋</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git add .
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;initial commit after reset&#34;</span>
-</span></span></code></pre></div><h2 id="기존-브랜치-날리고-새로-만듦">기존 브랜치 날리고 새로 만듦</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git branch -D main
-</span></span><span class="line"><span class="cl">git branch -m main
-</span></span></code></pre></div><h2 id="main에-force-push하고-불필요한-내용-정리해서-repo-최적화">main에 force push하고 불필요한 내용 정리해서 repo 최적화</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git push -f origin main
-</span></span><span class="line"><span class="cl">git gc --aggressive --prune<span class="o">=</span>all
-</span></span></code></pre></div><p><img src="./images/bob_ross.jpg" alt="image"></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 24 Mar 2025 20:18:45 &#43;0900" class="no-wrap"
-                title=" Mon, 24 Mar 2025 20:18:45 &#43;0900">
-                Mon, 24 Mar 2025 20:18:45 &#43;0900
               </relative-time>
             </div>
           </div>

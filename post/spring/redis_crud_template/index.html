@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 | Pink Spider
+    Boot에서 redis 사용하는 2가지 방법 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,20 +27,26 @@
   
   <meta
   name="description"
-  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+  content="Java에서 Redis를 사용할 때 CRUD Repository와 RedisTemplate은 각각 다른 수준의 추상화를 제공하는 방식입니다. 주요 차이점은 다음과 같습니다:
+✅ 1. CRUD Repository (Spring Data Redis) RedisRepository, CrudRepository, PagingAndSortingRepository 등과 같이 Spring Data가 제공하는 Repository 인터페이스를 사용하는 방식입니다.
+🔹 장점 높은 추상화 수준: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작. 개발 속도 빠름: 반복적인 로직 줄일 수 있음 (findById, save, delete 등 기본 제공). Spring Data의 기능을 활용 가능 (예: 쿼리 메서드, 페이징 등). 🔹 단점 세밀한 제어 어려움: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움. 직렬화 방식 고정: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요. 🔹 예시 public interface UserRedisRepository extends CrudRepository&lt;User, String&gt; { Optional&lt;User&gt; findByUsername(String username); } ✅ 2. RedisTemplate Spring에서 제공하는 저수준 API로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.
+"
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/redis_crud_template/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
+  content="Boot에서 redis 사용하는 2가지 방법 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+  content="Java에서 Redis를 사용할 때 CRUD Repository와 RedisTemplate은 각각 다른 수준의 추상화를 제공하는 방식입니다. 주요 차이점은 다음과 같습니다:
+✅ 1. CRUD Repository (Spring Data Redis) RedisRepository, CrudRepository, PagingAndSortingRepository 등과 같이 Spring Data가 제공하는 Repository 인터페이스를 사용하는 방식입니다.
+🔹 장점 높은 추상화 수준: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작. 개발 속도 빠름: 반복적인 로직 줄일 수 있음 (findById, save, delete 등 기본 제공). Spring Data의 기능을 활용 가능 (예: 쿼리 메서드, 페이징 등). 🔹 단점 세밀한 제어 어려움: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움. 직렬화 방식 고정: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요. 🔹 예시 public interface UserRedisRepository extends CrudRepository&lt;User, String&gt; { Optional&lt;User&gt; findByUsername(String username); } ✅ 2. RedisTemplate Spring에서 제공하는 저수준 API로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.
+"
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -56,14 +62,17 @@
 />
 <meta
   property="og:title"
-  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
+  content="Boot에서 redis 사용하는 2가지 방법 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+  content="Java에서 Redis를 사용할 때 CRUD Repository와 RedisTemplate은 각각 다른 수준의 추상화를 제공하는 방식입니다. 주요 차이점은 다음과 같습니다:
+✅ 1. CRUD Repository (Spring Data Redis) RedisRepository, CrudRepository, PagingAndSortingRepository 등과 같이 Spring Data가 제공하는 Repository 인터페이스를 사용하는 방식입니다.
+🔹 장점 높은 추상화 수준: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작. 개발 속도 빠름: 반복적인 로직 줄일 수 있음 (findById, save, delete 등 기본 제공). Spring Data의 기능을 활용 가능 (예: 쿼리 메서드, 페이징 등). 🔹 단점 세밀한 제어 어려움: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움. 직렬화 방식 고정: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요. 🔹 예시 public interface UserRedisRepository extends CrudRepository&lt;User, String&gt; { Optional&lt;User&gt; findByUsername(String username); } ✅ 2. RedisTemplate Spring에서 제공하는 저수준 API로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.
+"
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/feignclient_load_balancing/" />
-<meta property="og:site_name" content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/redis_crud_template/" />
+<meta property="og:site_name" content="Boot에서 redis 사용하는 2가지 방법" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -71,7 +80,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-03-26 08:37:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-26 11:11:03 &#43;0900 KST" />
 
 
 
@@ -279,18 +288,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</a></strong>
+                      href="https://pink-spider.github.io/post/spring/redis_crud_template/">Boot에서 redis 사용하는 2가지 방법</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 26 Mar 2025 08:37:45 &#43;0900"
+                  Created <relative-time datetime="Wed, 26 Mar 2025 11:11:03 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 08:37:45 &#43;0900</relative-time>
+                    Wed, 26 Mar 2025 11:11:03 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 26 Mar 2025 08:39:52 &#43;0900"
+                  Modified <relative-time datetime="Wed, 26 Mar 2025 11:14:59 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 08:39:52 &#43;0900</relative-time>
+                    Wed, 26 Mar 2025 11:14:59 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -320,9 +329,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      150 Words
+                      705 Words
                     <span class="file-info-divider"></span>
-                                        1 min
+                                        3 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -333,66 +342,103 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="feign-client-사용팁-1---상대-서버가-여러대-일때-랜덤-호출">feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출</h1>
-<h2 id="load-balancing-되고-있는-상대측에-번갈아가면서-호출하는-방법">load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법</h2>
+                <article class="markdown-body entry-content container-lg"><p>Java에서 Redis를 사용할 때 <code>CRUD Repository</code>와 <code>RedisTemplate</code>은 각각 다른 수준의 추상화를 제공하는 방식입니다.
+주요 차이점은 다음과 같습니다:</p>
+<hr>
+<h3 id="-1-crud-repository-spring-data-redis">✅ 1. <strong>CRUD Repository (Spring Data Redis)</strong></h3>
+<p><code>RedisRepository</code>, <code>CrudRepository</code>, <code>PagingAndSortingRepository</code> 등과 같이 <strong>Spring Data</strong>가 제공하는 Repository 인터페이스를 사용하는 방식입니다.</p>
+<h4 id="-장점">🔹 장점</h4>
 <ul>
-<li>build.gradle</li>
+<li><strong>높은 추상화 수준</strong>: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작.</li>
+<li><strong>개발 속도 빠름</strong>: 반복적인 로직 줄일 수 있음 (<code>findById</code>, <code>save</code>, <code>delete</code> 등 기본 제공).</li>
+<li><strong>Spring Data의 기능</strong>을 활용 가능 (예: 쿼리 메서드, 페이징 등).</li>
 </ul>
-<pre tabindex="0"><code>...
-dependencies {
-    implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39;
-}
-...
-</code></pre><ul>
-<li>application.yml</li>
+<h4 id="-단점">🔹 단점</h4>
+<ul>
+<li><strong>세밀한 제어 어려움</strong>: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움.</li>
+<li><strong>직렬화 방식 고정</strong>: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 상대 측에서 3개의 서버 LB되고 있을 때 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">other-party-url</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.001</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.002</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.003</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>ServerProperties.java</li>
+<h4 id="-예시">🔹 예시</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserRedisRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUsername</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-2-redistemplate">✅ 2. <strong>RedisTemplate</strong></h3>
+<p>Spring에서 제공하는 <strong>저수준 API</strong>로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.</p>
+<h4 id="-장점-1">🔹 장점</h4>
+<ul>
+<li><strong>유연성</strong>: Hash, List, Set 등 다양한 자료구조 지원.</li>
+<li><strong>복잡한 로직 가능</strong>: 파이프라이닝, 트랜잭션, Lua 스크립트 등 사용 가능.</li>
+<li><strong>직렬화 제어 용이</strong>: JSON, String, ByteArray 등 원하는 형태로 자유롭게 직렬화 가능.</li>
 </ul>
-<pre tabindex="0"><code>@Setter
-@Getter
-@Configuration
-@ConfigurationProperties(prefix = &#34;other-party-url&#34;)
-public class OtherServerProperties {
-
-    private List&lt;String&gt; serverUris;
-}
-</code></pre><ul>
-<li>FeignConfig.java</li>
+<h4 id="-단점-1">🔹 단점</h4>
+<ul>
+<li><strong>코드가 길어짐</strong>: CRUD도 직접 작성해야 하므로 보일러플레이트 코드 증가.</li>
+<li><strong>추상화 부족</strong>: 비즈니스 로직에 Redis 코드가 많이 들어올 수 있음.</li>
 </ul>
-<pre tabindex="0"><code>@RequiredArgsConstructor
-public class OtherServerFeignConfig {
-
-    private final OtherServerProperties otherServerProperties;
-
-    private final AtomicInteger counter = new AtomicInteger(0);
-
-    @Bean
-    public RequestInterceptor randomServerInterceptor() {
-        return requestTemplate -&gt; {
-            List&lt;String&gt; serverUris = otherServerProperties.getServerUris();
-
-            int index = counter.getAndIncrement() % serverUris.size();
-            String selectedUrl = serverUris.get(index);
-
-            requestTemplate.target(selectedUrl);
-        };
-    }
-}
-</code></pre><ul>
-<li>FeignClient interface</li>
+<h4 id="-예시-1">🔹 예시</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Autowired</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">saveUser</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">set</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">user</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-요약-비교">🆚 요약 비교</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th><code>RedisRepository</code> (CRUD 방식)</th>
+          <th><code>RedisTemplate</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>추상화 수준</td>
+          <td>높음</td>
+          <td>낮음</td>
+      </tr>
+      <tr>
+          <td>사용 편의성</td>
+          <td>쉬움 (자동 구현)</td>
+          <td>직접 구현 필요</td>
+      </tr>
+      <tr>
+          <td>커스터마이징 가능성</td>
+          <td>제한적</td>
+          <td>매우 높음</td>
+      </tr>
+      <tr>
+          <td>자료구조 지원</td>
+          <td>제한적 (주로 String 기반)</td>
+          <td>다양함 (Hash, List, Set 등)</td>
+      </tr>
+      <tr>
+          <td>직렬화 설정</td>
+          <td>설정 필요</td>
+          <td>자유로움</td>
+      </tr>
+      <tr>
+          <td>사용처</td>
+          <td>단순 CRUD, 캐싱 중심</td>
+          <td>복잡한 구조/로직 필요한 경우</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="-언제-어떤-걸-써야-할까">🧠 언제 어떤 걸 써야 할까?</h3>
+<ul>
+<li><strong>단순한 CRUD 중심의 캐시</strong>: <code>RedisRepository</code></li>
+<li><strong>복잡한 자료구조나 세밀한 제어가 필요한 경우</strong>: <code>RedisTemplate</code></li>
 </ul>
-<pre tabindex="0"><code>@FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class)
-public interface OtherServerFeignClientV1 {
-    
-    ...
-}
-</code></pre></article>
+<hr>
+<p>원하는 기능에 따라 두 가지를 <strong>혼합</strong>해서 사용하는 것도 일반적입니다.</p>
+</article>
               </div>
 
               
@@ -404,13 +450,13 @@ public interface OtherServerFeignClientV1 {
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/redis_crud_template/"> Boot에서 redis 사용하는 2가지 방법</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/about_trasactional/"> Spring Boot JPA에서 @Transactional 옵션 정리</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/dispatcher/">DispatcherServlet 초기화 과정&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출&nbsp;</a><div> »</div>
           
         </div>
       </div>

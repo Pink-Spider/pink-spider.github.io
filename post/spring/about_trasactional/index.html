@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 | Pink Spider
+    Spring Boot JPA에서 @Transactional 옵션 정리 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,20 +27,24 @@
   
   <meta
   name="description"
-  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 Spring Boot JPA에서 @Transactional은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.
+📌 기본 사용법 import org.springframework.transaction.annotation.Transactional; @Service public class MemberService { @Transactional public void joinMember(Member member) { memberRepository.save(member); // 예외 발생 시 전체 트랜잭션 롤백 } } @Transactional을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요. 런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 unchecked exception일 때만 롤백) 📌 클래스 레벨에 사용 @Transactional @Service public class MemberService { public void method1() { // 트랜잭션 적용됨 } public void method2() { // 트랜잭션 적용됨 } } 클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다. 📌 rollbackFor 옵션 기본적으로 RuntimeException과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(Exception)도 롤백하고 싶다면:
+"
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/about_trasactional/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 Spring Boot JPA에서 @Transactional은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.
+📌 기본 사용법 import org.springframework.transaction.annotation.Transactional; @Service public class MemberService { @Transactional public void joinMember(Member member) { memberRepository.save(member); // 예외 발생 시 전체 트랜잭션 롤백 } } @Transactional을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요. 런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 unchecked exception일 때만 롤백) 📌 클래스 레벨에 사용 @Transactional @Service public class MemberService { public void method1() { // 트랜잭션 적용됨 } public void method2() { // 트랜잭션 적용됨 } } 클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다. 📌 rollbackFor 옵션 기본적으로 RuntimeException과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(Exception)도 롤백하고 싶다면:
+"
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -56,14 +60,16 @@
 />
 <meta
   property="og:title"
-  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 Spring Boot JPA에서 @Transactional은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.
+📌 기본 사용법 import org.springframework.transaction.annotation.Transactional; @Service public class MemberService { @Transactional public void joinMember(Member member) { memberRepository.save(member); // 예외 발생 시 전체 트랜잭션 롤백 } } @Transactional을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요. 런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 unchecked exception일 때만 롤백) 📌 클래스 레벨에 사용 @Transactional @Service public class MemberService { public void method1() { // 트랜잭션 적용됨 } public void method2() { // 트랜잭션 적용됨 } } 클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다. 📌 rollbackFor 옵션 기본적으로 RuntimeException과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(Exception)도 롤백하고 싶다면:
+"
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/feignclient_load_balancing/" />
-<meta property="og:site_name" content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/about_trasactional/" />
+<meta property="og:site_name" content="Spring Boot JPA에서 @Transactional 옵션 정리" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -71,7 +77,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-03-26 08:37:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-26 11:15:45 &#43;0900 KST" />
 
 
 
@@ -279,18 +285,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</a></strong>
+                      href="https://pink-spider.github.io/post/spring/about_trasactional/">Spring Boot JPA에서 @Transactional 옵션 정리</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 26 Mar 2025 08:37:45 &#43;0900"
+                  Created <relative-time datetime="Wed, 26 Mar 2025 11:15:45 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 08:37:45 &#43;0900</relative-time>
+                    Wed, 26 Mar 2025 11:15:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 26 Mar 2025 08:39:52 &#43;0900"
+                  Modified <relative-time datetime="Wed, 26 Mar 2025 11:23:45 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 08:39:52 &#43;0900</relative-time>
+                    Wed, 26 Mar 2025 11:23:45 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -320,9 +326,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      150 Words
+                      570 Words
                     <span class="file-info-divider"></span>
-                                        1 min
+                                        3 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -333,66 +339,69 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="feign-client-사용팁-1---상대-서버가-여러대-일때-랜덤-호출">feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출</h1>
-<h2 id="load-balancing-되고-있는-상대측에-번갈아가면서-호출하는-방법">load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법</h2>
-<ul>
-<li>build.gradle</li>
-</ul>
-<pre tabindex="0"><code>...
-dependencies {
-    implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39;
-}
-...
-</code></pre><ul>
-<li>application.yml</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 상대 측에서 3개의 서버 LB되고 있을 때 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">other-party-url</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.001</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.002</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.003</span><span class="w">
+                <article class="markdown-body entry-content container-lg"><h1 id="spring-boot-jpa에서-transactional-옵션-정리">Spring Boot JPA에서 @Transactional 옵션 정리</h1>
+<p>Spring Boot JPA에서 <code>@Transactional</code>은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.</p>
+<hr>
+<h3 id="-기본-사용법">📌 기본 사용법</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">joinMember</span><span class="p">(</span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">member</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 예외 발생 시 전체 트랜잭션 롤백</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><ul>
-<li>ServerProperties.java</li>
+<li><code>@Transactional</code>을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요.</li>
+<li>런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 <strong>unchecked exception</strong>일 때만 롤백)</li>
 </ul>
-<pre tabindex="0"><code>@Setter
-@Getter
-@Configuration
-@ConfigurationProperties(prefix = &#34;other-party-url&#34;)
-public class OtherServerProperties {
-
-    private List&lt;String&gt; serverUris;
-}
-</code></pre><ul>
-<li>FeignConfig.java</li>
+<hr>
+<h3 id="-클래스-레벨에-사용">📌 클래스 레벨에 사용</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다.</li>
 </ul>
-<pre tabindex="0"><code>@RequiredArgsConstructor
-public class OtherServerFeignConfig {
-
-    private final OtherServerProperties otherServerProperties;
-
-    private final AtomicInteger counter = new AtomicInteger(0);
-
-    @Bean
-    public RequestInterceptor randomServerInterceptor() {
-        return requestTemplate -&gt; {
-            List&lt;String&gt; serverUris = otherServerProperties.getServerUris();
-
-            int index = counter.getAndIncrement() % serverUris.size();
-            String selectedUrl = serverUris.get(index);
-
-            requestTemplate.target(selectedUrl);
-        };
-    }
-}
-</code></pre><ul>
-<li>FeignClient interface</li>
+<hr>
+<h3 id="-rollbackfor-옵션">📌 rollbackFor 옵션</h3>
+<p>기본적으로 <code>RuntimeException</code>과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(<code>Exception</code>)도 롤백하고 싶다면:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Transactional</span><span class="p">(</span><span class="n">rollbackFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Exception</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateMember</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 체크 예외 발생 시에도 롤백됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-readonly-옵션">📌 readOnly 옵션</h3>
+<p>읽기 전용 트랜잭션일 경우 성능 최적화를 위해 <code>readOnly = true</code>를 지정할 수 있어요.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Transactional</span><span class="p">(</span><span class="n">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Member</span><span class="w"> </span><span class="nf">findMember</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-propagation-옵션">📌 Propagation 옵션</h3>
+<p>트랜잭션 전파 방식도 지정할 수 있어요. 대표적으로:</p>
+<ul>
+<li><code>REQUIRED</code> (기본값): 기존 트랜잭션이 있으면 참여, 없으면 새로 생성</li>
+<li><code>REQUIRES_NEW</code>: 항상 새 트랜잭션 생성</li>
+<li><code>NESTED</code>: 현재 트랜잭션 안에 중첩 트랜잭션 생성</li>
 </ul>
-<pre tabindex="0"><code>@FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class)
-public interface OtherServerFeignClientV1 {
-    
-    ...
-}
-</code></pre></article>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Transactional</span><span class="p">(</span><span class="n">propagation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Propagation</span><span class="p">.</span><span class="na">REQUIRES_NEW</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendEmail</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 별도 트랜잭션으로 실행됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+</article>
               </div>
 
               
@@ -404,13 +413,13 @@ public interface OtherServerFeignClientV1 {
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/redis_crud_template/"> Boot에서 redis 사용하는 2가지 방법</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jpa_transaction/"> Spring Boot JPA에서 @Transactional 옵션 정리</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/dispatcher/">DispatcherServlet 초기화 과정&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/redis_crud_template/">Boot에서 redis 사용하는 2가지 방법&nbsp;</a><div> »</div>
           
         </div>
       </div>

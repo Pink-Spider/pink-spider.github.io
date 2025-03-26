@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 | Pink Spider
+    Spring 시작시 메모리 설정 차이 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,20 +27,24 @@
   
   <meta
   name="description"
-  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+  content="Java 애플리케이션을 실행할 때 -Xmx512m과 -XX:MaxRAM=512m는 모두 최대 메모리 사용량을 제한하는 옵션이지만, 동작 방식에 차이가 있습니다.
+1. -Xmx512m 힙(Heap) 메모리의 최대 크기를 512MB로 설정합니다. 예제: java -Xmx512m -jar myapp.jar 이 설정은 Java 힙 메모리만 제한하며, 전체 프로세스의 메모리 사용량을 제한하는 것은 아닙니다. 즉, 힙 외의 메모리(메타스페이스, 스택, 네이티브 메모리 등)는 따로 제한되지 않습니다. 2. -XX:MaxRAM=512m JVM이 사용할 수 있는 전체 메모리(힙 &#43; 메타스페이스 &#43; 기타 네이티브 메모리) 를 512MB로 제한합니다. 예제: java -XX:MaxRAM=512m -jar myapp.jar -XX:MaxRAM을 설정하면 -Xmx의 기본값이 달라질 수 있습니다. 일반적으로 -Xmx의 기본값은 MaxRAM 값의 25~50% 정도로 설정됩니다(JVM 버전에 따라 다름). 이 설정은 컨테이너 환경(Docker, Kubernetes) 에서 JVM이 사용할 수 있는 메모리를 제어하는 데 유용합니다. 차이점 요약 옵션 대상 설명 -Xmx512m 힙(Heap) 메모리 힙 메모리의 최대 크기만 제한 -XX:MaxRAM=512m 전체 JVM 메모리 힙 &#43; 메타스페이스 &#43; 네이티브 메모리를 포함한 JVM 전체 메모리 제한 함께 사용하면? 두 옵션을 함께 사용할 수도 있습니다.
+"
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/spring-%EC%8B%9C%EC%9E%91%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%84%A4%EC%A0%95/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
+  content="Spring 시작시 메모리 설정 차이 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+  content="Java 애플리케이션을 실행할 때 -Xmx512m과 -XX:MaxRAM=512m는 모두 최대 메모리 사용량을 제한하는 옵션이지만, 동작 방식에 차이가 있습니다.
+1. -Xmx512m 힙(Heap) 메모리의 최대 크기를 512MB로 설정합니다. 예제: java -Xmx512m -jar myapp.jar 이 설정은 Java 힙 메모리만 제한하며, 전체 프로세스의 메모리 사용량을 제한하는 것은 아닙니다. 즉, 힙 외의 메모리(메타스페이스, 스택, 네이티브 메모리 등)는 따로 제한되지 않습니다. 2. -XX:MaxRAM=512m JVM이 사용할 수 있는 전체 메모리(힙 &#43; 메타스페이스 &#43; 기타 네이티브 메모리) 를 512MB로 제한합니다. 예제: java -XX:MaxRAM=512m -jar myapp.jar -XX:MaxRAM을 설정하면 -Xmx의 기본값이 달라질 수 있습니다. 일반적으로 -Xmx의 기본값은 MaxRAM 값의 25~50% 정도로 설정됩니다(JVM 버전에 따라 다름). 이 설정은 컨테이너 환경(Docker, Kubernetes) 에서 JVM이 사용할 수 있는 메모리를 제어하는 데 유용합니다. 차이점 요약 옵션 대상 설명 -Xmx512m 힙(Heap) 메모리 힙 메모리의 최대 크기만 제한 -XX:MaxRAM=512m 전체 JVM 메모리 힙 &#43; 메타스페이스 &#43; 네이티브 메모리를 포함한 JVM 전체 메모리 제한 함께 사용하면? 두 옵션을 함께 사용할 수도 있습니다.
+"
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -56,14 +60,16 @@
 />
 <meta
   property="og:title"
-  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
+  content="Spring 시작시 메모리 설정 차이 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+  content="Java 애플리케이션을 실행할 때 -Xmx512m과 -XX:MaxRAM=512m는 모두 최대 메모리 사용량을 제한하는 옵션이지만, 동작 방식에 차이가 있습니다.
+1. -Xmx512m 힙(Heap) 메모리의 최대 크기를 512MB로 설정합니다. 예제: java -Xmx512m -jar myapp.jar 이 설정은 Java 힙 메모리만 제한하며, 전체 프로세스의 메모리 사용량을 제한하는 것은 아닙니다. 즉, 힙 외의 메모리(메타스페이스, 스택, 네이티브 메모리 등)는 따로 제한되지 않습니다. 2. -XX:MaxRAM=512m JVM이 사용할 수 있는 전체 메모리(힙 &#43; 메타스페이스 &#43; 기타 네이티브 메모리) 를 512MB로 제한합니다. 예제: java -XX:MaxRAM=512m -jar myapp.jar -XX:MaxRAM을 설정하면 -Xmx의 기본값이 달라질 수 있습니다. 일반적으로 -Xmx의 기본값은 MaxRAM 값의 25~50% 정도로 설정됩니다(JVM 버전에 따라 다름). 이 설정은 컨테이너 환경(Docker, Kubernetes) 에서 JVM이 사용할 수 있는 메모리를 제어하는 데 유용합니다. 차이점 요약 옵션 대상 설명 -Xmx512m 힙(Heap) 메모리 힙 메모리의 최대 크기만 제한 -XX:MaxRAM=512m 전체 JVM 메모리 힙 &#43; 메타스페이스 &#43; 네이티브 메모리를 포함한 JVM 전체 메모리 제한 함께 사용하면? 두 옵션을 함께 사용할 수도 있습니다.
+"
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/feignclient_load_balancing/" />
-<meta property="og:site_name" content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/spring-%EC%8B%9C%EC%9E%91%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%84%A4%EC%A0%95/" />
+<meta property="og:site_name" content="Spring 시작시 메모리 설정 차이" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -71,7 +77,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-03-26 08:37:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-26 11:26:45 &#43;0900 KST" />
 
 
 
@@ -279,18 +285,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</a></strong>
+                      href="https://pink-spider.github.io/post/spring/spring-%EC%8B%9C%EC%9E%91%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%84%A4%EC%A0%95/">Spring 시작시 메모리 설정 차이</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 26 Mar 2025 08:37:45 &#43;0900"
+                  Created <relative-time datetime="Wed, 26 Mar 2025 11:26:45 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 08:37:45 &#43;0900</relative-time>
+                    Wed, 26 Mar 2025 11:26:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 26 Mar 2025 08:39:52 &#43;0900"
+                  Modified <relative-time datetime="Wed, 26 Mar 2025 11:29:15 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 08:39:52 &#43;0900</relative-time>
+                    Wed, 26 Mar 2025 11:29:15 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -320,9 +326,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      150 Words
+                      614 Words
                     <span class="file-info-divider"></span>
-                                        1 min
+                                        3 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -333,66 +339,65 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="feign-client-사용팁-1---상대-서버가-여러대-일때-랜덤-호출">feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출</h1>
-<h2 id="load-balancing-되고-있는-상대측에-번갈아가면서-호출하는-방법">load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법</h2>
+                <article class="markdown-body entry-content container-lg"><p>Java 애플리케이션을 실행할 때 <code>-Xmx512m</code>과 <code>-XX:MaxRAM=512m</code>는 모두 최대 메모리 사용량을 제한하는 옵션이지만, 동작 방식에 차이가 있습니다.</p>
+<h3 id="1--xmx512m">1. <code>-Xmx512m</code></h3>
 <ul>
-<li>build.gradle</li>
+<li>힙(Heap) 메모리의 최대 크기를 512MB로 설정합니다.</li>
+<li>예제:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -Xmx512m -jar myapp.jar
+</span></span></code></pre></div></li>
+<li>이 설정은 Java 힙 메모리만 제한하며, 전체 프로세스의 메모리 사용량을 제한하는 것은 아닙니다.</li>
+<li>즉, 힙 외의 메모리(메타스페이스, 스택, 네이티브 메모리 등)는 따로 제한되지 않습니다.</li>
 </ul>
-<pre tabindex="0"><code>...
-dependencies {
-    implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39;
-}
-...
-</code></pre><ul>
-<li>application.yml</li>
+<h3 id="2--xxmaxram512m">2. <code>-XX:MaxRAM=512m</code></h3>
+<ul>
+<li>JVM이 사용할 수 있는 <strong>전체 메모리(힙 + 메타스페이스 + 기타 네이티브 메모리)</strong> 를 512MB로 제한합니다.</li>
+<li>예제:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -XX:MaxRAM<span class="o">=</span>512m -jar myapp.jar
+</span></span></code></pre></div></li>
+<li><code>-XX:MaxRAM</code>을 설정하면 <code>-Xmx</code>의 기본값이 달라질 수 있습니다.
+<ul>
+<li>일반적으로 <code>-Xmx</code>의 기본값은 <code>MaxRAM</code> 값의 25~50% 정도로 설정됩니다(JVM 버전에 따라 다름).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 상대 측에서 3개의 서버 LB되고 있을 때 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">other-party-url</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.001</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.002</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.003</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>ServerProperties.java</li>
+</li>
+<li>이 설정은 <strong>컨테이너 환경(Docker, Kubernetes)</strong> 에서 JVM이 사용할 수 있는 메모리를 제어하는 데 유용합니다.</li>
 </ul>
-<pre tabindex="0"><code>@Setter
-@Getter
-@Configuration
-@ConfigurationProperties(prefix = &#34;other-party-url&#34;)
-public class OtherServerProperties {
-
-    private List&lt;String&gt; serverUris;
-}
-</code></pre><ul>
-<li>FeignConfig.java</li>
+<h3 id="차이점-요약">차이점 요약</h3>
+<table>
+  <thead>
+      <tr>
+          <th>옵션</th>
+          <th>대상</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>-Xmx512m</code></td>
+          <td>힙(Heap) 메모리</td>
+          <td>힙 메모리의 최대 크기만 제한</td>
+      </tr>
+      <tr>
+          <td><code>-XX:MaxRAM=512m</code></td>
+          <td>전체 JVM 메모리</td>
+          <td>힙 + 메타스페이스 + 네이티브 메모리를 포함한 JVM 전체 메모리 제한</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="함께-사용하면">함께 사용하면?</h3>
+<p>두 옵션을 함께 사용할 수도 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -Xmx512m -XX:MaxRAM<span class="o">=</span>1g -jar myapp.jar
+</span></span></code></pre></div><ul>
+<li>힙 메모리는 최대 512MB까지 사용하고, JVM 전체 메모리는 1GB까지 사용 가능하도록 설정됩니다.</li>
 </ul>
-<pre tabindex="0"><code>@RequiredArgsConstructor
-public class OtherServerFeignConfig {
-
-    private final OtherServerProperties otherServerProperties;
-
-    private final AtomicInteger counter = new AtomicInteger(0);
-
-    @Bean
-    public RequestInterceptor randomServerInterceptor() {
-        return requestTemplate -&gt; {
-            List&lt;String&gt; serverUris = otherServerProperties.getServerUris();
-
-            int index = counter.getAndIncrement() % serverUris.size();
-            String selectedUrl = serverUris.get(index);
-
-            requestTemplate.target(selectedUrl);
-        };
-    }
-}
-</code></pre><ul>
-<li>FeignClient interface</li>
+<p><strong>어떤 옵션을 사용할지 선택하는 기준:</strong></p>
+<ul>
+<li><strong>힙만 조정하고 싶다면</strong> → <code>-Xmx512m</code></li>
+<li><strong>JVM 전체 메모리를 제한하고 싶다면</strong> → <code>-XX:MaxRAM=512m</code></li>
+<li><strong>컨테이너 환경에서 적절한 제한을 두고 싶다면</strong> → <code>-XX:MaxRAM</code>을 활용하는 것이 좋음</li>
 </ul>
-<pre tabindex="0"><code>@FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class)
-public interface OtherServerFeignClientV1 {
-    
-    ...
-}
-</code></pre></article>
+<p>어떤 환경에서 실행하는지에 따라 적절한 값을 설정하면 됩니다. 🚀</p>
+</article>
               </div>
 
               
@@ -404,13 +409,11 @@ public interface OtherServerFeignClientV1 {
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/redis_crud_template/"> Boot에서 redis 사용하는 2가지 방법</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/dispatcher/">DispatcherServlet 초기화 과정&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jpa_transaction/">Spring Boot JPA에서 @Transactional 옵션 정리&nbsp;</a><div> »</div>
           
         </div>
       </div>
