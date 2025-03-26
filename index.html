@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">20</span>
+              <span class="Counter">21</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">20</span>
+      <span class="Counter ">21</span>
     </a>
   </nav>
 </div>
@@ -623,6 +623,38 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/lock_unlock/">
+                    <span class="repo" title="데이터베이스에서 모든 트랜잭션에 대해 Lock과 Unlock을 사용하는 방법">데이터베이스에서 모든 트랜잭션에 대해 Lock과 Unlock을 사용하는 방법</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>데이터베이스에서 모든 트랜잭션에 대해 <strong>Lock</strong>과 <strong>Unlock</strong>을 사용하는 방법은 데이터베이스 및 트랜잭션의 동작 방식에 따라 다릅니다. 일반적으로 <strong>테이블 잠금</strong>, <strong>행 잠금</strong>, <strong>트랜잭션 격리 수준</strong>, <strong>명시적 잠금 해제</strong>를 조합하여 구현할 수 있습니다. Java 환경에서는 JDBC, JPA, QueryDSL 등을 활용해 이를 설정할 수 있습니다.</p>
+<p>아래는 SELECT뿐만 아니라 <strong>INSERT</strong>, <strong>UPDATE</strong>, <strong>DELETE</strong> 등 모든 트랜잭션에서 Lock과 Unlock을 사용하는 방법을 설명합니다.</p>
+<hr>
+<h2 id="1-테이블-잠금-table-lock">1. <strong>테이블 잠금 (Table Lock)</strong></h2>
+<p><strong>테이블 단위로 잠금을 설정</strong>하여 트랜잭션이 완료되기 전까지 다른 트랜잭션의 접근을 막습니다.</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -836,70 +868,18 @@
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/jpa_transaction/">
-                    <span class="repo" title="Spring Boot JPA에서 @Transactional 옵션 정리">Spring Boot JPA에서 @Transactional 옵션 정리</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h3 id="spring-boot-jpa에서-transactional-사용법">Spring Boot JPA에서 <code>@Transactional</code> 사용법</h3>
-<p>Spring Boot JPA에서 <code>@Transactional</code> 어노테이션은 <strong>트랜잭션 범위 내에서 데이터베이스 작업을 실행하고, 실패 시 롤백하는 기능</strong>을 제공하는 중요한 요소입니다.</p>
-<hr>
-<h2 id="1-transactional-기본-사용법">1. <code>@Transactional</code> 기본 사용법</h2>
-<p>Spring의 <code>@Transactional</code>을 사용하면 하나의 메서드에서 여러 개의 JPA 작업(조회, 저장, 수정, 삭제 등)을 수행할 때 <strong>트랜잭션을 자동으로 관리</strong>할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MemberRepository</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MemberService</span><span class="p">(</span><span class="n">MemberRepository</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">memberRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateMember</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Member not found&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">member</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w">  </span><span class="c1">// JPA 영속성 컨텍스트에 의해 자동으로 업데이트됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>@Transactional</code>을 사용하면, <strong>메서드 실행 중 예외가 발생하면 롤백</strong>되며, 성공하면 자동으로 커밋됩니다.</li>
-<li><code>member.setName(name);</code>을 호출하면 JPA의 <strong>변경 감지(dirty checking)</strong> 덕분에 <code>save()</code>를 명시적으로 호출하지 않아도 업데이트됩니다.</li>
-</ul>
-<hr>
-<h2 id="2-읽기-전용-트랜잭션-transactionalreadonly--true">2. 읽기 전용 트랜잭션 (<code>@Transactional(readOnly = true)</code>)</h2>
-<p><code>readOnly = true</code>를 설정하면 성능 최적화를 할 수 있습니다.</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4%ec%97%90%ec%84%9c%20%eb%aa%a8%eb%93%a0%20%ed%8a%b8%eb%9e%9c%ec%9e%ad%ec%85%98%ec%97%90%20%eb%8c%80%ed%95%b4%20Lock%ea%b3%bc%20Unlock%ec%9d%84%20%ec%82%ac%ec%9a%a9%ed%95%98%eb%8a%94%20%eb%b0%a9%eb%b2%95",
+  "link": "https://pink-spider.github.io/post/spring/lock_unlock/",
+  "publishDate": "2025-03-26%2011:33:45"
+},
+
 {
   "title": "QueryDSL%ec%9d%84%20%ec%82%ac%ec%9a%a9%ed%95%a0%20%eb%95%8c%20%eb%8d%b0%ec%9d%b4%ed%84%b0%eb%b2%a0%ec%9d%b4%ec%8a%a4%ec%9d%98%20Lock",
   "link": "https://pink-spider.github.io/post/spring/querydsl_select_lock_unlock/",
@@ -919,7 +899,7 @@
 },
 
 {
-  "title": "Spring%20Boot%20JPA%ec%97%90%ec%84%9c%20@Transactional%20%ec%98%b5%ec%85%98%20%ec%a0%95%eb%a6%ac",
+  "title": "Spring%20Boot%20JPA%ec%97%90%ec%84%9c%20%60@Transactional%60%20%ec%82%ac%ec%9a%a9%eb%b2%95",
   "link": "https://pink-spider.github.io/post/spring/jpa_transaction/",
   "publishDate": "2025-03-26%2011:21:45"
 },
