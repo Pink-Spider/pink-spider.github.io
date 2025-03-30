@@ -3,10 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://pink-spider.github.io/</loc>
-    <lastmod>2025-03-31T01:00:15+09:00</lastmod>
+    <lastmod>2025-03-31T01:14:47+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/</loc>
-    <lastmod>2025-03-31T01:00:15+09:00</lastmod>
+    <lastmod>2025-03-31T01:14:47+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/preflightcorsconfig_example/</loc>
+    <lastmod>2025-03-31T01:14:47+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/vo_dto_comparison/</loc>
+    <lastmod>2025-03-31T01:14:47+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/jwt_strategy/</loc>
     <lastmod>2025-03-28T02:33:20+09:00</lastmod>
