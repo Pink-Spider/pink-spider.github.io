@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 27 Mar 2025 11:49:11 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 28 Mar 2025 02:33:20 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>QueryDSL을 사용할 때 데이터베이스의 Lock</title>
