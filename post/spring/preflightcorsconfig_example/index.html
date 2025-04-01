@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Boot에서 redis 사용하는 2가지 방법 | Pink Spider
+    PreFlightCorsConfig_example | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,25 +27,21 @@
   
   <meta
   name="description"
-  content="Java에서 Redis를 사용할 때 CRUD Repository와 RedisTemplate은 각각 다른 수준의 추상화를 제공하는 방식입니다. 주요 차이점은 다음과 같습니다:
-✅ 1. CRUD Repository (Spring Data Redis) RedisRepository, CrudRepository, PagingAndSortingRepository 등과 같이 Spring Data가 제공하는 Repository 인터페이스를 사용하는 방식입니다.
-🔹 장점 높은 추상화 수준: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작. 개발 속도 빠름: 반복적인 로직 줄일 수 있음 (findById, save, delete 등 기본 제공). Spring Data의 기능을 활용 가능 (예: 쿼리 메서드, 페이징 등). 🔹 단점 세밀한 제어 어려움: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움. 직렬화 방식 고정: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요. 🔹 예시 public interface UserRedisRepository extends CrudRepository&lt;User, String&gt; { Optional&lt;User&gt; findByUsername(String username); } ✅ 2. RedisTemplate Spring에서 제공하는 저수준 API로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.
+  content="PreFlightCorsConfig example @Configuration public class PreFlightCorsConfig { private final CorsProperties corsProperties; public PreFlightCorsConfig(CorsProperties corsProperties) { this.corsProperties = corsProperties; } private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;; private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;; private static final String ALLOWED_CREDENTIALS = &#34;true&#34;; // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함 private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;; private static final String MAX_AGE = &#34;3600&#34;; @Bean public WebFilter corsFilter() { return (ServerWebExchange ctx, WebFilterChain chain) -&gt; { ServerHttpRequest request = ctx.getRequest(); String requestOrigin = request.getHeaders().getOrigin(); if (CorsUtils.isPreFlightRequest(request)) { ServerHttpResponse response = ctx.getResponse(); HttpHeaders headers = response.getHeaders(); if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) { headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin); } headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS); headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE); headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS); headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS); headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); // 프론트에서 해당 헤더를 확인할수잇게 허가해줌 headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); if (request.getMethod() == HttpMethod.OPTIONS) { response.setStatusCode(HttpStatus.OK); return Mono.empty(); } } return chain.filter(ctx); }; } } CorsProperties @Component @Getter @Setter @ConfigurationProperties(prefix = &#34;app.cors&#34;) public class CorsProperties { private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;(); } 설정 dev, prod profile 별로 다르게 설정하는 게 일반적 # application-dev.yml cors: allowed-origins: - &#34;http://localhost:3000&#34; - &#34;http://127.0.0.1:3000&#34; # application-prod.yml cors: allowed-origins: - &#34;https://example.com&#34; - &#34;https://another-domain.com&#34; spspring-cloud-starter-gateway 사용시 Spring Cloud Gateway를 사용하고 있다면 PreFlightCorsConfig 같은 별도의 Java Config 없이도 application.yml에 설정만으로 CORS 처리가 가능합니다.**
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/redis_crud_template/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/preflightcorsconfig_example/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Boot에서 redis 사용하는 2가지 방법 - Pink Spider"
+  content="PreFlightCorsConfig_example - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="Java에서 Redis를 사용할 때 CRUD Repository와 RedisTemplate은 각각 다른 수준의 추상화를 제공하는 방식입니다. 주요 차이점은 다음과 같습니다:
-✅ 1. CRUD Repository (Spring Data Redis) RedisRepository, CrudRepository, PagingAndSortingRepository 등과 같이 Spring Data가 제공하는 Repository 인터페이스를 사용하는 방식입니다.
-🔹 장점 높은 추상화 수준: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작. 개발 속도 빠름: 반복적인 로직 줄일 수 있음 (findById, save, delete 등 기본 제공). Spring Data의 기능을 활용 가능 (예: 쿼리 메서드, 페이징 등). 🔹 단점 세밀한 제어 어려움: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움. 직렬화 방식 고정: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요. 🔹 예시 public interface UserRedisRepository extends CrudRepository&lt;User, String&gt; { Optional&lt;User&gt; findByUsername(String username); } ✅ 2. RedisTemplate Spring에서 제공하는 저수준 API로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.
+  content="PreFlightCorsConfig example @Configuration public class PreFlightCorsConfig { private final CorsProperties corsProperties; public PreFlightCorsConfig(CorsProperties corsProperties) { this.corsProperties = corsProperties; } private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;; private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;; private static final String ALLOWED_CREDENTIALS = &#34;true&#34;; // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함 private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;; private static final String MAX_AGE = &#34;3600&#34;; @Bean public WebFilter corsFilter() { return (ServerWebExchange ctx, WebFilterChain chain) -&gt; { ServerHttpRequest request = ctx.getRequest(); String requestOrigin = request.getHeaders().getOrigin(); if (CorsUtils.isPreFlightRequest(request)) { ServerHttpResponse response = ctx.getResponse(); HttpHeaders headers = response.getHeaders(); if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) { headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin); } headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS); headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE); headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS); headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS); headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); // 프론트에서 해당 헤더를 확인할수잇게 허가해줌 headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); if (request.getMethod() == HttpMethod.OPTIONS) { response.setStatusCode(HttpStatus.OK); return Mono.empty(); } } return chain.filter(ctx); }; } } CorsProperties @Component @Getter @Setter @ConfigurationProperties(prefix = &#34;app.cors&#34;) public class CorsProperties { private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;(); } 설정 dev, prod profile 별로 다르게 설정하는 게 일반적 # application-dev.yml cors: allowed-origins: - &#34;http://localhost:3000&#34; - &#34;http://127.0.0.1:3000&#34; # application-prod.yml cors: allowed-origins: - &#34;https://example.com&#34; - &#34;https://another-domain.com&#34; spspring-cloud-starter-gateway 사용시 Spring Cloud Gateway를 사용하고 있다면 PreFlightCorsConfig 같은 별도의 Java Config 없이도 application.yml에 설정만으로 CORS 처리가 가능합니다.**
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -62,17 +58,15 @@
 />
 <meta
   property="og:title"
-  content="Boot에서 redis 사용하는 2가지 방법 - Pink Spider"
+  content="PreFlightCorsConfig_example - Pink Spider"
 />
 <meta
   property="og:description"
-  content="Java에서 Redis를 사용할 때 CRUD Repository와 RedisTemplate은 각각 다른 수준의 추상화를 제공하는 방식입니다. 주요 차이점은 다음과 같습니다:
-✅ 1. CRUD Repository (Spring Data Redis) RedisRepository, CrudRepository, PagingAndSortingRepository 등과 같이 Spring Data가 제공하는 Repository 인터페이스를 사용하는 방식입니다.
-🔹 장점 높은 추상화 수준: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작. 개발 속도 빠름: 반복적인 로직 줄일 수 있음 (findById, save, delete 등 기본 제공). Spring Data의 기능을 활용 가능 (예: 쿼리 메서드, 페이징 등). 🔹 단점 세밀한 제어 어려움: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움. 직렬화 방식 고정: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요. 🔹 예시 public interface UserRedisRepository extends CrudRepository&lt;User, String&gt; { Optional&lt;User&gt; findByUsername(String username); } ✅ 2. RedisTemplate Spring에서 제공하는 저수준 API로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.
+  content="PreFlightCorsConfig example @Configuration public class PreFlightCorsConfig { private final CorsProperties corsProperties; public PreFlightCorsConfig(CorsProperties corsProperties) { this.corsProperties = corsProperties; } private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;; private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;; private static final String ALLOWED_CREDENTIALS = &#34;true&#34;; // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함 private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;; private static final String MAX_AGE = &#34;3600&#34;; @Bean public WebFilter corsFilter() { return (ServerWebExchange ctx, WebFilterChain chain) -&gt; { ServerHttpRequest request = ctx.getRequest(); String requestOrigin = request.getHeaders().getOrigin(); if (CorsUtils.isPreFlightRequest(request)) { ServerHttpResponse response = ctx.getResponse(); HttpHeaders headers = response.getHeaders(); if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) { headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin); } headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS); headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE); headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS); headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS); headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); // 프론트에서 해당 헤더를 확인할수잇게 허가해줌 headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); if (request.getMethod() == HttpMethod.OPTIONS) { response.setStatusCode(HttpStatus.OK); return Mono.empty(); } } return chain.filter(ctx); }; } } CorsProperties @Component @Getter @Setter @ConfigurationProperties(prefix = &#34;app.cors&#34;) public class CorsProperties { private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;(); } 설정 dev, prod profile 별로 다르게 설정하는 게 일반적 # application-dev.yml cors: allowed-origins: - &#34;http://localhost:3000&#34; - &#34;http://127.0.0.1:3000&#34; # application-prod.yml cors: allowed-origins: - &#34;https://example.com&#34; - &#34;https://another-domain.com&#34; spspring-cloud-starter-gateway 사용시 Spring Cloud Gateway를 사용하고 있다면 PreFlightCorsConfig 같은 별도의 Java Config 없이도 application.yml에 설정만으로 CORS 처리가 가능합니다.**
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/redis_crud_template/" />
-<meta property="og:site_name" content="Boot에서 redis 사용하는 2가지 방법" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/preflightcorsconfig_example/" />
+<meta property="og:site_name" content="PreFlightCorsConfig_example" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -80,7 +74,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-03-26 11:11:03 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-31 00:49:17 &#43;0900 KST" />
 
 
 
@@ -288,18 +282,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/redis_crud_template/">Boot에서 redis 사용하는 2가지 방법</a></strong>
+                      href="https://pink-spider.github.io/post/spring/preflightcorsconfig_example/">PreFlightCorsConfig_example</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 26 Mar 2025 11:11:03 &#43;0900"
+                  Created <relative-time datetime="Mon, 31 Mar 2025 00:49:17 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 11:11:03 &#43;0900</relative-time>
+                    Mon, 31 Mar 2025 00:49:17 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 26 Mar 2025 22:01:52 &#43;0900"
+                  Modified <relative-time datetime="Mon, 31 Mar 2025 01:14:47 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 22:01:52 &#43;0900</relative-time>
+                    Mon, 31 Mar 2025 01:14:47 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -329,7 +323,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      705 Words
+                      632 Words
                     <span class="file-info-divider"></span>
                                         3 min
 
@@ -342,102 +336,141 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>Java에서 Redis를 사용할 때 <code>CRUD Repository</code>와 <code>RedisTemplate</code>은 각각 다른 수준의 추상화를 제공하는 방식입니다.
-주요 차이점은 다음과 같습니다:</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="preflightcorsconfig-example">PreFlightCorsConfig example</h1>
+<pre tabindex="0"><code>@Configuration
+public class PreFlightCorsConfig {
+
+    private final CorsProperties corsProperties;
+
+    public PreFlightCorsConfig(CorsProperties corsProperties) {
+        this.corsProperties = corsProperties;
+    }
+
+    private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;;
+
+    private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;;
+
+    private static final String ALLOWED_CREDENTIALS = &#34;true&#34;;
+
+    // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함
+    private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;;
+
+    private static final String MAX_AGE = &#34;3600&#34;;
+
+    @Bean
+    public WebFilter corsFilter() {
+        return (ServerWebExchange ctx, WebFilterChain chain) -&gt; {
+            ServerHttpRequest request = ctx.getRequest();
+            String requestOrigin = request.getHeaders().getOrigin();
+
+            if (CorsUtils.isPreFlightRequest(request)) {
+                ServerHttpResponse response = ctx.getResponse();
+                HttpHeaders headers = response.getHeaders();
+
+                if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) {
+                    headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin);
+                }
+
+                headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS);
+                headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE);
+                headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS);
+                headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS);
+                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
+
+                // 프론트에서 해당 헤더를 확인할수잇게 허가해줌
+                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
+                if (request.getMethod() == HttpMethod.OPTIONS) {
+                    response.setStatusCode(HttpStatus.OK);
+                    return Mono.empty();
+                }
+            }
+
+            return chain.filter(ctx);
+        };
+    }
+}
+</code></pre><h1 id="corsproperties">CorsProperties</h1>
+<pre tabindex="0"><code>@Component
+@Getter
+@Setter
+@ConfigurationProperties(prefix = &#34;app.cors&#34;)
+public class CorsProperties {
+
+    private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;();
+}
+</code></pre><h1 id="설정">설정</h1>
+<ul>
+<li>dev, prod profile 별로 다르게 설정하는 게 일반적</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-dev.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://localhost:3000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://127.0.0.1:3000&#34;</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-prod.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://example.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://another-domain.com&#34;</span><span class="w">
+</span></span></span></code></pre></div><h1 id="spspring-cloud-starter-gateway-사용시">spspring-cloud-starter-gateway 사용시</h1>
+<p>Spring Cloud Gateway를 사용하고 있다면 <code>PreFlightCorsConfig</code> 같은 별도의 Java Config 없이도 <code>application.yml</code>에 설정만으로 CORS 처리가 가능합니다.**</p>
 <hr>
-<h3 id="-1-crud-repository-spring-data-redis">✅ 1. <strong>CRUD Repository (Spring Data Redis)</strong></h3>
-<p><code>RedisRepository</code>, <code>CrudRepository</code>, <code>PagingAndSortingRepository</code> 등과 같이 <strong>Spring Data</strong>가 제공하는 Repository 인터페이스를 사용하는 방식입니다.</p>
-<h4 id="-장점">🔹 장점</h4>
-<ul>
-<li><strong>높은 추상화 수준</strong>: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작.</li>
-<li><strong>개발 속도 빠름</strong>: 반복적인 로직 줄일 수 있음 (<code>findById</code>, <code>save</code>, <code>delete</code> 등 기본 제공).</li>
-<li><strong>Spring Data의 기능</strong>을 활용 가능 (예: 쿼리 메서드, 페이징 등).</li>
-</ul>
-<h4 id="-단점">🔹 단점</h4>
-<ul>
-<li><strong>세밀한 제어 어려움</strong>: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움.</li>
-<li><strong>직렬화 방식 고정</strong>: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요.</li>
-</ul>
-<h4 id="-예시">🔹 예시</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserRedisRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUsername</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-2-redistemplate">✅ 2. <strong>RedisTemplate</strong></h3>
-<p>Spring에서 제공하는 <strong>저수준 API</strong>로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.</p>
-<h4 id="-장점-1">🔹 장점</h4>
-<ul>
-<li><strong>유연성</strong>: Hash, List, Set 등 다양한 자료구조 지원.</li>
-<li><strong>복잡한 로직 가능</strong>: 파이프라이닝, 트랜잭션, Lua 스크립트 등 사용 가능.</li>
-<li><strong>직렬화 제어 용이</strong>: JSON, String, ByteArray 등 원하는 형태로 자유롭게 직렬화 가능.</li>
-</ul>
-<h4 id="-단점-1">🔹 단점</h4>
-<ul>
-<li><strong>코드가 길어짐</strong>: CRUD도 직접 작성해야 하므로 보일러플레이트 코드 증가.</li>
-<li><strong>추상화 부족</strong>: 비즈니스 로직에 Redis 코드가 많이 들어올 수 있음.</li>
-</ul>
-<h4 id="-예시-1">🔹 예시</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Autowired</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">saveUser</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">set</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">user</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">getUser</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">id</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-요약-비교">🆚 요약 비교</h3>
+<h2 id="-tldr">✅ TL;DR</h2>
+<h3 id="-springcloudgatewayglobalcorscors-configurations">✔️ <code>spring.cloud.gateway.globalcors.cors-configurations</code></h3>
+<p>이 설정은 <strong>Spring Cloud Gateway 전용</strong>이며, Gateway 레벨에서 전역적으로 CORS 프리플라이트 요청을 처리합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cloud</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">gateway</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">globalcors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cors-configurations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">&#39;[/**]&#39;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedOrigins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="s2">&#34;https://dev.pink-spider.io&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedMethods</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">OPTIONS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">PUT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">DELETE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedHeaders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="s2">&#34;*&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">exposedHeaders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="s2">&#34;Authorization&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="s2">&#34;Refresh-token&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowCredentials</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></div><blockquote>
+<p><code>allowedHeaders: &quot;*&quot;</code> 와 같이 와일드카드도 가능합니다 (필요 시 명시적으로 지정 가능).</p></blockquote>
+<hr>
+<h2 id="-언제-preflightcorsconfig가-필요한가">✅ 언제 <code>PreFlightCorsConfig</code>가 필요한가?</h2>
 <table>
   <thead>
       <tr>
-          <th>항목</th>
-          <th><code>RedisRepository</code> (CRUD 방식)</th>
-          <th><code>RedisTemplate</code></th>
+          <th>상황</th>
+          <th>필요 여부</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>추상화 수준</td>
-          <td>높음</td>
-          <td>낮음</td>
+          <td><strong>Spring Cloud Gateway 사용</strong></td>
+          <td>❌ <strong>필요 없음</strong> (YAML 설정으로 충분)</td>
       </tr>
       <tr>
-          <td>사용 편의성</td>
-          <td>쉬움 (자동 구현)</td>
-          <td>직접 구현 필요</td>
+          <td><strong>Spring WebFlux/Web MVC 단독 서버</strong></td>
+          <td>✅ 필요 (Filter 또는 WebMvcConfigurer 필요)</td>
       </tr>
       <tr>
-          <td>커스터마이징 가능성</td>
-          <td>제한적</td>
-          <td>매우 높음</td>
-      </tr>
-      <tr>
-          <td>자료구조 지원</td>
-          <td>제한적 (주로 String 기반)</td>
-          <td>다양함 (Hash, List, Set 등)</td>
-      </tr>
-      <tr>
-          <td>직렬화 설정</td>
-          <td>설정 필요</td>
-          <td>자유로움</td>
-      </tr>
-      <tr>
-          <td>사용처</td>
-          <td>단순 CRUD, 캐싱 중심</td>
-          <td>복잡한 구조/로직 필요한 경우</td>
+          <td><strong>특정 조건 하에서 커스텀 로직이 필요한 경우</strong></td>
+          <td>✅ 필요할 수 있음 (예: 다이내믹 Origin 체크 등)</td>
       </tr>
   </tbody>
 </table>
 <hr>
-<h3 id="-언제-어떤-걸-써야-할까">🧠 언제 어떤 걸 써야 할까?</h3>
+<h2 id="-정리">🎯 정리</h2>
 <ul>
-<li><strong>단순한 CRUD 중심의 캐시</strong>: <code>RedisRepository</code></li>
-<li><strong>복잡한 자료구조나 세밀한 제어가 필요한 경우</strong>: <code>RedisTemplate</code></li>
+<li><strong>Spring Cloud Gateway를 쓰고 있고, YAML 설정만으로 잘 작동 중이라면 <code>PreFlightCorsConfig</code>는 제거해도 됩니다.</strong></li>
+<li>단, 프리플라이트 요청이 제대로 처리되지 않거나, 동적으로 origin을 제어해야 할 필요가 있을 때만 Java 코드 수준에서 커스터마이징이 필요합니다.</li>
 </ul>
 <hr>
-<p>원하는 기능에 따라 두 가지를 <strong>혼합</strong>해서 사용하는 것도 일반적입니다.</p>
 </article>
               </div>
 
@@ -450,13 +483,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/about_trasactional/"> Spring Boot JPA에서 @Transactional 옵션 정리</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/vo_dto_comparison/">Vo와 Dto&nbsp;</a><div> »</div>
           
         </div>
       </div>
