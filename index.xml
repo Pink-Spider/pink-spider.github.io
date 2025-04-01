@@ -6,8 +6,15 @@
     <description>Recent content on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 01 Apr 2025 11:36:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 01 Apr 2025 14:08:06 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JVM에서 Heap 메모리의 용도와 GC 튜닝</title>
+      <link>https://pink-spider.github.io/post/spring/heap_gc/</link>
+      <pubDate>Tue, 01 Apr 2025 13:59:38 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/spring/heap_gc/</guid>
+      <description>&lt;p&gt;JVM(Java Virtual Machine)에서 &lt;strong&gt;heap 메모리&lt;/strong&gt;는 자바 애플리케이션이 &lt;strong&gt;런타임 시 동적으로 생성하는 객체들이 저장되는 영역&lt;/strong&gt;입니다. 즉, &lt;code&gt;new&lt;/code&gt; 키워드를 사용해서 생성하는 대부분의 객체들이 이 영역에 저장됩니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;-heap-메모리-구성&#34;&gt;📌 Heap 메모리 구성&lt;/h3&gt;&#xA;&lt;p&gt;Heap은 크게 다음 두 영역으로 나뉩니다:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Young Generation (Young Gen)&lt;/strong&gt;: 새로 생성된 객체가 저장되는 곳.&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Eden&lt;/strong&gt;: 대부분의 새 객체가 여기에 생성됨.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Survivor&lt;/strong&gt;: Eden에서 살아남은 객체들이 이동.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Old Generation (Tenured Gen)&lt;/strong&gt;: Young Gen을 거쳐 오래 살아남은 객체들이 이동하는 공간.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Garbage Collector(GC)는 이 heap 영역의 객체들을 주기적으로 검사해서 &lt;strong&gt;더 이상 참조되지 않는 객체는 메모리에서 제거&lt;/strong&gt;합니다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Cacheable 어노테이션에 대해서</title>
       <link>https://pink-spider.github.io/post/spring/cacheable/</link>

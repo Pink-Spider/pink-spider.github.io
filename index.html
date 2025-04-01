@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">29</span>
+              <span class="Counter">30</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">29</span>
+      <span class="Counter ">30</span>
     </a>
   </nav>
 </div>
@@ -623,6 +623,47 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/heap_gc/">
+                    <span class="repo" title="JVM에서 Heap 메모리의 용도와 GC 튜닝">JVM에서 Heap 메모리의 용도와 GC 튜닝</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>JVM(Java Virtual Machine)에서 <strong>heap 메모리</strong>는 자바 애플리케이션이 <strong>런타임 시 동적으로 생성하는 객체들이 저장되는 영역</strong>입니다. 즉, <code>new</code> 키워드를 사용해서 생성하는 대부분의 객체들이 이 영역에 저장됩니다.</p>
+<hr>
+<h3 id="-heap-메모리-구성">📌 Heap 메모리 구성</h3>
+<p>Heap은 크게 다음 두 영역으로 나뉩니다:</p>
+<ul>
+<li><strong>Young Generation (Young Gen)</strong>: 새로 생성된 객체가 저장되는 곳.
+<ul>
+<li><strong>Eden</strong>: 대부분의 새 객체가 여기에 생성됨.</li>
+<li><strong>Survivor</strong>: Eden에서 살아남은 객체들이 이동.</li>
+</ul>
+</li>
+<li><strong>Old Generation (Tenured Gen)</strong>: Young Gen을 거쳐 오래 살아남은 객체들이 이동하는 공간.</li>
+</ul>
+<p>Garbage Collector(GC)는 이 heap 영역의 객체들을 주기적으로 검사해서 <strong>더 이상 참조되지 않는 객체는 메모리에서 제거</strong>합니다.</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -837,117 +878,18 @@
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/preflightcorsconfig_example/">
-                    <span class="repo" title="PreFlightCorsConfig_example">PreFlightCorsConfig_example</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h1 id="preflightcorsconfig-example">PreFlightCorsConfig example</h1>
-<pre tabindex="0"><code>@Configuration
-public class PreFlightCorsConfig {
-
-    private final CorsProperties corsProperties;
-
-    public PreFlightCorsConfig(CorsProperties corsProperties) {
-        this.corsProperties = corsProperties;
-    }
-
-    private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;;
-
-    private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;;
-
-    private static final String ALLOWED_CREDENTIALS = &#34;true&#34;;
-
-    // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함
-    private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;;
-
-    private static final String MAX_AGE = &#34;3600&#34;;
-
-    @Bean
-    public WebFilter corsFilter() {
-        return (ServerWebExchange ctx, WebFilterChain chain) -&gt; {
-            ServerHttpRequest request = ctx.getRequest();
-            String requestOrigin = request.getHeaders().getOrigin();
-
-            if (CorsUtils.isPreFlightRequest(request)) {
-                ServerHttpResponse response = ctx.getResponse();
-                HttpHeaders headers = response.getHeaders();
-
-                if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) {
-                    headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin);
-                }
-
-                headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS);
-                headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE);
-                headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS);
-                headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS);
-                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
-
-                // 프론트에서 해당 헤더를 확인할수잇게 허가해줌
-                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
-                if (request.getMethod() == HttpMethod.OPTIONS) {
-                    response.setStatusCode(HttpStatus.OK);
-                    return Mono.empty();
-                }
-            }
-
-            return chain.filter(ctx);
-        };
-    }
-}
-</code></pre><h1 id="corsproperties">CorsProperties</h1>
-<pre tabindex="0"><code>@Component
-@Getter
-@Setter
-@ConfigurationProperties(prefix = &#34;app.cors&#34;)
-public class CorsProperties {
-
-    private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;();
-}
-</code></pre><h1 id="설정">설정</h1>
-<ul>
-<li>dev, prod profile 별로 다르게 설정하는 게 일반적</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-dev.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://localhost:3000&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://127.0.0.1:3000&#34;</span><span class="w">
-</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-prod.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://example.com&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://another-domain.com&#34;</span><span class="w">
-</span></span></span></code></pre></div><h1 id="spspring-cloud-starter-gateway-사용시">spspring-cloud-starter-gateway 사용시</h1>
-<p>Spring Cloud Gateway를 사용하고 있다면 <code>PreFlightCorsConfig</code> 같은 별도의 Java Config 없이도 <code>application.yml</code>에 설정만으로 CORS 처리가 가능합니다.**</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "JVM%ec%97%90%ec%84%9c%20Heap%20%eb%a9%94%eb%aa%a8%eb%a6%ac%ec%9d%98%20%ec%9a%a9%eb%8f%84%ec%99%80%20GC%20%ed%8a%9c%eb%8b%9d",
+  "link": "https://pink-spider.github.io/post/spring/heap_gc/",
+  "publishDate": "2025-04-01%2013:59:38"
+},
+
 {
   "title": "Cacheable%20%ec%96%b4%eb%85%b8%ed%85%8c%ec%9d%b4%ec%85%98%ec%97%90%20%eb%8c%80%ed%95%b4%ec%84%9c",
   "link": "https://pink-spider.github.io/post/spring/cacheable/",
