@@ -296,7 +296,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">26</span>
+              <span class="Counter">27</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -588,7 +588,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">26</span>
+      <span class="Counter ">27</span>
     </a>
   </nav>
 </div>
@@ -602,6 +602,67 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/k8s/">About k8s</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="k8s란">k8s란?</h1>
+<p>**Kubernetes (k8s)**는 컨테이너화된 애플리케이션을 자동으로 <strong>배포, 확장, 관리</strong>해주는 <strong>오픈소스 컨테이너 오케스트레이션 플랫폼</strong>입니다.<!-- raw HTML omitted -->
+구글에서 개발한 기술을 기반으로 CNCF(Cloud Native Computing Foundation)에 기부되었고, 현재는 클라우드 환경에서 가장 널리 사용되는 컨테이너 관리 시스템이에요.</p>
+<hr>
+<h3 id="핵심-개념-정리">핵심 개념 정리</h3>
+<ul>
+<li><strong>컨테이너(Container)</strong>: 애플리케이션과 그 실행 환경을 패키징한 단위 (주로 Docker 사용)</li>
+<li><strong>Pod</strong>: Kubernetes의 가장 작은 배포 단위. 하나 이상의 컨테이너를 포함할 수 있어요.</li>
+<li><strong>Node</strong>: 컨테이너가 실제로 실행되는 물리/가상 머신</li>
+<li><strong>Cluster</strong>: 여러 노드로 구성된 Kubernetes의 전체 인프라</li>
+<li><strong>Deployment</strong>: 애플리케이션의 원하는 상태(예: 몇 개의 복제본 유지 등)를 정의하고 관리</li>
+<li><strong>Service</strong>: Pod에 접근할 수 있는 안정적인 네트워크 주소를 제공 (LoadBalancer, ClusterIP, NodePort 등)</li>
+<li><strong>Ingress</strong>: 외부 트래픽을 내부 서비스로 라우팅해주는 HTTP(S) 레벨 라우터</li>
+<li><strong>ConfigMap / Secret</strong>: 애플리케이션 설정 값이나 민감한 정보를 외부에서 주입</li>
+</ul>
+<hr>
+<h3 id="kubernetes의-장점">Kubernetes의 장점</h3>
+<ul>
+<li><strong>자동화된 배포 및 롤백</strong>: 애플리케이션을 손쉽게 배포/업데이트하고, 문제 발생 시 자동으로 이전 버전으로 롤백 가능</li>
+<li><strong>자동 스케일링</strong>: 트래픽에 따라 Pod 수를 자동 조절 가능</li>
+<li><strong>자가 치유(Self-healing)</strong>: 장애 난 컨테이너는 자동으로 다시 생성</li>
+<li><strong>서비스 디스커버리 및 로드 밸런싱</strong>: Pod 간 통신을 쉽게 할 수 있게 도와줌</li>
+</ul>
+<hr>
+<h3 id="간단한-동작-흐름">간단한 동작 흐름</h3>
+<ol>
+<li>사용자는 애플리케이션을 컨테이너(Docker)로 패키징</li>
+<li>이를 Kubernetes 클러스터에 배포</li>
+<li>Kubernetes가 이를 적절한 Node에 스케줄링하고 실행</li>
+<li>서비스나 Ingress를 통해 외부 접근 가능</li>
+</ol>
+<hr>
+<h1 id="helm-이란">helm 이란?</h1>
+<p><strong>Helm</strong>은 Kubernetes의 <strong>패키지 관리자</strong>입니다.<!-- raw HTML omitted -->
+쉽게 말해서, Kubernetes에서 애플리케이션을 <strong>더 쉽고, 재사용 가능하게 배포</strong>할 수 있도록 도와주는 도구입니다.<!-- raw HTML omitted -->
+마치 <code>apt</code>(Ubuntu), <code>brew</code>(macOS), <code>npm</code>(Node.js) 같은 느낌.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 31 Mar 2025 12:48:01 &#43;0900" class="no-wrap"
+                title=" Mon, 31 Mar 2025 12:48:01 &#43;0900">
+                Mon, 31 Mar 2025 12:48:01 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1037,36 +1098,6 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
               <relative-time datetime=" Wed, 26 Mar 2025 13:30:03 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 13:30:03 &#43;0900">
                 Wed, 26 Mar 2025 13:30:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/lock_unlock/">데이터베이스에서 모든 트랜잭션에 대해 Lock과 Unlock을 사용하는 방법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>데이터베이스에서 모든 트랜잭션에 대해 <strong>Lock</strong>과 <strong>Unlock</strong>을 사용하는 방법은 데이터베이스 및 트랜잭션의 동작 방식에 따라 다릅니다. 일반적으로 <strong>테이블 잠금</strong>, <strong>행 잠금</strong>, <strong>트랜잭션 격리 수준</strong>, <strong>명시적 잠금 해제</strong>를 조합하여 구현할 수 있습니다. Java 환경에서는 JDBC, JPA, QueryDSL 등을 활용해 이를 설정할 수 있습니다.</p>
-<p>아래는 SELECT뿐만 아니라 <strong>INSERT</strong>, <strong>UPDATE</strong>, <strong>DELETE</strong> 등 모든 트랜잭션에서 Lock과 Unlock을 사용하는 방법을 설명합니다.</p>
-<hr>
-<h2 id="1-테이블-잠금-table-lock">1. <strong>테이블 잠금 (Table Lock)</strong></h2>
-<p><strong>테이블 단위로 잠금을 설정</strong>하여 트랜잭션이 완료되기 전까지 다른 트랜잭션의 접근을 막습니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:33:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:33:45 &#43;0900">
-                Wed, 26 Mar 2025 11:33:45 &#43;0900
               </relative-time>
             </div>
           </div>
