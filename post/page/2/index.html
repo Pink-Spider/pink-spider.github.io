@@ -296,7 +296,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">30</span>
+              <span class="Counter">31</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -588,7 +588,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">30</span>
+      <span class="Counter ">31</span>
     </a>
   </nav>
 </div>
@@ -602,6 +602,115 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/vo_dto_comparison/">Vo와 Dto</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Spring을 포함한 Java 기반 애플리케이션에서 **VO(Value Object)**와 **DTO(Data Transfer Object)**는 개념적으로 비슷해 보일 수 있지만, 그 목적과 사용하는 맥락에서 차이가 있습니다. 아래에 각각을 설명하고 차이를 정리할게요.</p>
+<hr>
+<h3 id="1-vo-value-object"><strong>1. VO (Value Object)</strong></h3>
+<ul>
+<li><strong>의미</strong>: <strong>값 자체를 표현하는 객체</strong>. 값의 동등성을 비교할 때, 객체의 참조가 아니라 <strong>값이 같은지</strong>로 판단합니다.</li>
+<li><strong>특징</strong>:
+<ul>
+<li>**불변(Immutable)**하게 설계하는 것이 일반적입니다.</li>
+<li><code>equals()</code>, <code>hashCode()</code>를 재정의해서 <strong>값이 같으면 동일한 객체로 간주</strong>합니다.</li>
+<li>주로 <strong>도메인 모델</strong>에서 사용되며, 특정 개념(예: 주소, 돈, 이름 등)을 캡슐화합니다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Address</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Address</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">street</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">street</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// equals, hashCode 반드시 재정의</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="2-dto-data-transfer-object"><strong>2. DTO (Data Transfer Object)</strong></h3>
+<ul>
+<li><strong>의미</strong>: <strong>계층 간 데이터 전달</strong>을 위해 사용하는 객체 (예: Controller → Service → Repository)</li>
+<li><strong>특징</strong>:
+<ul>
+<li><strong>불변일 필요 없음</strong>, Getter/Setter 있음</li>
+<li>단순히 데이터를 <strong>옮기는 목적</strong> (로직이 없어야 함)</li>
+<li>보통 <strong>입력(Request)</strong>, **출력(Response)**용으로 많이 쓰임</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResponseDto</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 기본 생성자, getter/setter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="정리-vo-vs-dto"><strong>정리: VO vs DTO</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>VO (Value Object)</th>
+          <th>DTO (Data Transfer Object)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>목적</td>
+          <td>값 자체를 표현</td>
+          <td>데이터 전달</td>
+      </tr>
+      <tr>
+          <td>불변성</td>
+          <td>보통 불변</td>
+          <td>보통 가변</td>
+      </tr>
+      <tr>
+          <td>사용 위치</td>
+          <td>도메인 모델</td>
+          <td>계층 간 데이터 전달</td>
+      </tr>
+      <tr>
+          <td>equals/hashCode</td>
+          <td>값 기준으로 재정의</td>
+          <td>일반적으로 재정의하지 않음</td>
+      </tr>
+      <tr>
+          <td>로직 포함</td>
+          <td>가능</td>
+          <td>없음 (순수 데이터만)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="사용-예시">사용 예시</h1>
+<p>간단한 Spring 기반 애플리케이션 구조에서 <strong>VO와 DTO의 차이</strong>를 실제 예제 코드입니다.<!-- raw HTML omitted -->
+예시는 “사용자(User) 정보 처리”를 중심으로 구성합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sun, 30 Mar 2025 17:14:05 &#43;0900" class="no-wrap"
+                title=" Sun, 30 Mar 2025 17:14:05 &#43;0900">
+                Sun, 30 Mar 2025 17:14:05 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -918,78 +1027,6 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
               <relative-time datetime=" Wed, 26 Mar 2025 11:30:45 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 11:30:45 &#43;0900">
                 Wed, 26 Mar 2025 11:30:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/spring-%EC%8B%9C%EC%9E%91%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%84%A4%EC%A0%95/">Spring 시작시 메모리 설정 차이</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java 애플리케이션을 실행할 때 <code>-Xmx512m</code>과 <code>-XX:MaxRAM=512m</code>는 모두 최대 메모리 사용량을 제한하는 옵션이지만, 동작 방식에 차이가 있습니다.</p>
-<h3 id="1--xmx512m">1. <code>-Xmx512m</code></h3>
-<ul>
-<li>힙(Heap) 메모리의 최대 크기를 512MB로 설정합니다.</li>
-<li>예제:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -Xmx512m -jar myapp.jar
-</span></span></code></pre></div></li>
-<li>이 설정은 Java 힙 메모리만 제한하며, 전체 프로세스의 메모리 사용량을 제한하는 것은 아닙니다.</li>
-<li>즉, 힙 외의 메모리(메타스페이스, 스택, 네이티브 메모리 등)는 따로 제한되지 않습니다.</li>
-</ul>
-<h3 id="2--xxmaxram512m">2. <code>-XX:MaxRAM=512m</code></h3>
-<ul>
-<li>JVM이 사용할 수 있는 <strong>전체 메모리(힙 + 메타스페이스 + 기타 네이티브 메모리)</strong> 를 512MB로 제한합니다.</li>
-<li>예제:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -XX:MaxRAM<span class="o">=</span>512m -jar myapp.jar
-</span></span></code></pre></div></li>
-<li><code>-XX:MaxRAM</code>을 설정하면 <code>-Xmx</code>의 기본값이 달라질 수 있습니다.
-<ul>
-<li>일반적으로 <code>-Xmx</code>의 기본값은 <code>MaxRAM</code> 값의 25~50% 정도로 설정됩니다(JVM 버전에 따라 다름).</li>
-</ul>
-</li>
-<li>이 설정은 <strong>컨테이너 환경(Docker, Kubernetes)</strong> 에서 JVM이 사용할 수 있는 메모리를 제어하는 데 유용합니다.</li>
-</ul>
-<h3 id="차이점-요약">차이점 요약</h3>
-<table>
-  <thead>
-      <tr>
-          <th>옵션</th>
-          <th>대상</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>-Xmx512m</code></td>
-          <td>힙(Heap) 메모리</td>
-          <td>힙 메모리의 최대 크기만 제한</td>
-      </tr>
-      <tr>
-          <td><code>-XX:MaxRAM=512m</code></td>
-          <td>전체 JVM 메모리</td>
-          <td>힙 + 메타스페이스 + 네이티브 메모리를 포함한 JVM 전체 메모리 제한</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="함께-사용하면">함께 사용하면?</h3>
-<p>두 옵션을 함께 사용할 수도 있습니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:26:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:26:45 &#43;0900">
-                Wed, 26 Mar 2025 11:26:45 &#43;0900
               </relative-time>
             </div>
           </div>
