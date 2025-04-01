@@ -296,7 +296,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">28</span>
+              <span class="Counter">29</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -588,7 +588,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">28</span>
+      <span class="Counter ">29</span>
     </a>
   </nav>
 </div>
@@ -602,6 +602,40 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/kakfa_fallback/">Apache Kafka 사용 시 코드로 오류 처리 방법</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Spring Boot에서 Kafka를 사용할 때 오류를 코드로 해결하는 방법을 설명해볼게요.<br>
+Kafka 프로듀서와 컨슈머에서 <strong>Fallback 메소드, 재시도 (Retry), 예외 처리</strong> 등을 적용하는 방법을 알아봅니다.</p>
+<hr>
+<h2 id="1-kafka-프로듀서에서-오류-처리-fallback-retry"><strong>1. Kafka 프로듀서에서 오류 처리 (Fallback, Retry)</strong></h2>
+<p>Kafka 프로듀서는 메시지를 브로커로 보내는 과정에서 오류가 발생할 수 있습니다.<br>
+예를 들어, <strong>네트워크 문제, 브로커 다운, 메시지 크기 초과</strong> 등의 문제가 있을 수 있는데요, 이를 처리하는 방법입니다.</p>
+<h3 id="-1-fallback-메소드-적용-resilience4j-사용">✅ <strong>(1) Fallback 메소드 적용 (Resilience4j 사용)</strong></h3>
+<p><a href="https://resilience4j.readme.io/">Resilience4j</a>의 <code>@Retry</code>와 <code>@Recover</code>를 활용하면<br>
+Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으로 실패하면 대체 로직을 수행할 수 있습니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 13:38:03 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 13:38:03 &#43;0900">
+                Wed, 26 Mar 2025 13:38:03 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -874,62 +908,6 @@
               <relative-time datetime=" Wed, 26 Mar 2025 11:25:45 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 11:25:45 &#43;0900">
                 Wed, 26 Mar 2025 11:25:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/jpa_transaction/">Spring Boot JPA에서 `@Transactional` 사용법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h3 id="spring-boot-jpa에서-transactional-사용법">Spring Boot JPA에서 <code>@Transactional</code> 사용법</h3>
-<p>Spring Boot JPA에서 <code>@Transactional</code> 어노테이션은 <strong>트랜잭션 범위 내에서 데이터베이스 작업을 실행하고, 실패 시 롤백하는 기능</strong>을 제공하는 중요한 요소입니다.</p>
-<hr>
-<h2 id="1-transactional-기본-사용법">1. <code>@Transactional</code> 기본 사용법</h2>
-<p>Spring의 <code>@Transactional</code>을 사용하면 하나의 메서드에서 여러 개의 JPA 작업(조회, 저장, 수정, 삭제 등)을 수행할 때 <strong>트랜잭션을 자동으로 관리</strong>할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MemberRepository</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MemberService</span><span class="p">(</span><span class="n">MemberRepository</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">memberRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateMember</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Member not found&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">member</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w">  </span><span class="c1">// JPA 영속성 컨텍스트에 의해 자동으로 업데이트됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>@Transactional</code>을 사용하면, <strong>메서드 실행 중 예외가 발생하면 롤백</strong>되며, 성공하면 자동으로 커밋됩니다.</li>
-<li><code>member.setName(name);</code>을 호출하면 JPA의 <strong>변경 감지(dirty checking)</strong> 덕분에 <code>save()</code>를 명시적으로 호출하지 않아도 업데이트됩니다.</li>
-</ul>
-<hr>
-<h2 id="2-읽기-전용-트랜잭션-transactionalreadonly--true">2. 읽기 전용 트랜잭션 (<code>@Transactional(readOnly = true)</code>)</h2>
-<p><code>readOnly = true</code>를 설정하면 성능 최적화를 할 수 있습니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:21:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:21:45 &#43;0900">
-                Wed, 26 Mar 2025 11:21:45 &#43;0900
               </relative-time>
             </div>
           </div>

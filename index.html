@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">28</span>
+              <span class="Counter">29</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">28</span>
+      <span class="Counter ">29</span>
     </a>
   </nav>
 </div>
@@ -623,6 +623,94 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/cacheable/">
+                    <span class="repo" title="Cacheable 어노테이션에 대해서">Cacheable 어노테이션에 대해서</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p><code>@Cacheable</code> 어노테이션은 Spring Framework에서 <strong>메서드의 반환값을 캐시에 저장</strong>하여, <strong>같은 인자가 들어올 경우 캐시된 값을 재사용</strong>하도록 하는 기능을 제공합니다. 즉, 메서드를 반복적으로 호출하더라도 실제로는 <strong>처음 한 번만 실행되고</strong>, 이후 호출은 캐시된 결과를 반환하게 됩니다.</p>
+<hr>
+<h3 id="-주요-역할-요약">📌 주요 역할 요약</h3>
+<ul>
+<li><strong>중복 호출 방지</strong>: 동일한 입력값에 대해 메서드를 반복 호출하면, 캐시된 결과를 반환해 성능 향상.</li>
+<li><strong>결과 저장</strong>: 메서드 실행 결과를 캐시에 저장.</li>
+<li><strong>조건부 캐싱</strong>: 특정 조건에 따라 캐싱 여부 제어 가능.</li>
+</ul>
+<hr>
+<h3 id="-기본-사용-예시">✅ 기본 사용 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="s">&#34;users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">findUserById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 실제로는 DB나 외부 API 호출</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>위 메서드는 <code>users</code>라는 캐시 이름으로 결과를 저장합니다.</li>
+<li><code>id</code>가 동일한 경우, 이후 호출은 캐시된 <code>User</code> 객체를 반환합니다.</li>
+</ul>
+<hr>
+<h3 id="-주요-속성">🔧 주요 속성</h3>
+<table>
+  <thead>
+      <tr>
+          <th>속성</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>value</code> 또는 <code>cacheNames</code></td>
+          <td>사용할 캐시 이름 지정</td>
+      </tr>
+      <tr>
+          <td><code>key</code></td>
+          <td>캐시 키를 지정 (SpEL 표현식 사용 가능)</td>
+      </tr>
+      <tr>
+          <td><code>condition</code></td>
+          <td>캐싱할 조건 지정 (SpEL)</td>
+      </tr>
+      <tr>
+          <td><code>unless</code></td>
+          <td>결과를 저장하지 않을 조건 (SpEL)</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="예시">예시:</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;books&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#isbn&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">unless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#result == null&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Book</span><span class="w"> </span><span class="nf">findBook</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">isbn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bookRepository</span><span class="p">.</span><span class="na">findByIsbn</span><span class="p">(</span><span class="n">isbn</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-함께-알아두면-좋은-어노테이션">🧠 함께 알아두면 좋은 어노테이션</h3>
+<ul>
+<li><code>@CachePut</code> : 캐시를 <strong>강제로 업데이트</strong>할 때 사용</li>
+<li><code>@CacheEvict</code> : 캐시를 <strong>삭제</strong>할 때 사용</li>
+<li><code>@Caching</code> : 여러 캐시 어노테이션을 함께 사용할 때</li>
+</ul>
+<hr>
+<p>필요하다면 Redis나 Caffeine 같은 캐시 스토어와 함께 연동도 가능합니다.</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -854,123 +942,18 @@ public class CorsProperties {
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/vo_dto_comparison/">
-                    <span class="repo" title="Vo와 Dto">Vo와 Dto</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p>Spring을 포함한 Java 기반 애플리케이션에서 **VO(Value Object)**와 **DTO(Data Transfer Object)**는 개념적으로 비슷해 보일 수 있지만, 그 목적과 사용하는 맥락에서 차이가 있습니다. 아래에 각각을 설명하고 차이를 정리할게요.</p>
-<hr>
-<h3 id="1-vo-value-object"><strong>1. VO (Value Object)</strong></h3>
-<ul>
-<li><strong>의미</strong>: <strong>값 자체를 표현하는 객체</strong>. 값의 동등성을 비교할 때, 객체의 참조가 아니라 <strong>값이 같은지</strong>로 판단합니다.</li>
-<li><strong>특징</strong>:
-<ul>
-<li>**불변(Immutable)**하게 설계하는 것이 일반적입니다.</li>
-<li><code>equals()</code>, <code>hashCode()</code>를 재정의해서 <strong>값이 같으면 동일한 객체로 간주</strong>합니다.</li>
-<li>주로 <strong>도메인 모델</strong>에서 사용되며, 특정 개념(예: 주소, 돈, 이름 등)을 캡슐화합니다.</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Address</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Address</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">street</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">street</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// equals, hashCode 반드시 재정의</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="2-dto-data-transfer-object"><strong>2. DTO (Data Transfer Object)</strong></h3>
-<ul>
-<li><strong>의미</strong>: <strong>계층 간 데이터 전달</strong>을 위해 사용하는 객체 (예: Controller → Service → Repository)</li>
-<li><strong>특징</strong>:
-<ul>
-<li><strong>불변일 필요 없음</strong>, Getter/Setter 있음</li>
-<li>단순히 데이터를 <strong>옮기는 목적</strong> (로직이 없어야 함)</li>
-<li>보통 <strong>입력(Request)</strong>, **출력(Response)**용으로 많이 쓰임</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResponseDto</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 기본 생성자, getter/setter</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="정리-vo-vs-dto"><strong>정리: VO vs DTO</strong></h3>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>VO (Value Object)</th>
-          <th>DTO (Data Transfer Object)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>목적</td>
-          <td>값 자체를 표현</td>
-          <td>데이터 전달</td>
-      </tr>
-      <tr>
-          <td>불변성</td>
-          <td>보통 불변</td>
-          <td>보통 가변</td>
-      </tr>
-      <tr>
-          <td>사용 위치</td>
-          <td>도메인 모델</td>
-          <td>계층 간 데이터 전달</td>
-      </tr>
-      <tr>
-          <td>equals/hashCode</td>
-          <td>값 기준으로 재정의</td>
-          <td>일반적으로 재정의하지 않음</td>
-      </tr>
-      <tr>
-          <td>로직 포함</td>
-          <td>가능</td>
-          <td>없음 (순수 데이터만)</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h1 id="사용-예시">사용 예시</h1>
-<p>간단한 Spring 기반 애플리케이션 구조에서 <strong>VO와 DTO의 차이</strong>를 실제 예제 코드입니다.<!-- raw HTML omitted -->
-예시는 “사용자(User) 정보 처리”를 중심으로 구성합니다.</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "Cacheable%20%ec%96%b4%eb%85%b8%ed%85%8c%ec%9d%b4%ec%85%98%ec%97%90%20%eb%8c%80%ed%95%b4%ec%84%9c",
+  "link": "https://pink-spider.github.io/post/spring/cacheable/",
+  "publishDate": "2025-04-01%2011:34:10"
+},
+
 {
   "title": "%ec%84%9c%eb%b8%8c%eb%aa%a8%eb%93%88%20%ec%99%84%ec%a0%84%ed%9e%88%20%ec%b4%88%ea%b8%b0%ed%99%94%ed%95%98%ea%b3%a0%20%eb%8b%a4%ec%8b%9c%20%ec%85%8b%ed%8c%85",
   "link": "https://pink-spider.github.io/post/til/git_submodule_reset/",
