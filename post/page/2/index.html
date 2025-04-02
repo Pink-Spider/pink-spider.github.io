@@ -296,7 +296,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">31</span>
+              <span class="Counter">32</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -588,7 +588,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">31</span>
+      <span class="Counter ">32</span>
     </a>
   </nav>
 </div>
@@ -602,6 +602,109 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/preflightcorsconfig_example/">PreFlightCorsConfig_example</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="preflightcorsconfig-example">PreFlightCorsConfig example</h1>
+<pre tabindex="0"><code>@Configuration
+public class PreFlightCorsConfig {
+
+    private final CorsProperties corsProperties;
+
+    public PreFlightCorsConfig(CorsProperties corsProperties) {
+        this.corsProperties = corsProperties;
+    }
+
+    private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;;
+
+    private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;;
+
+    private static final String ALLOWED_CREDENTIALS = &#34;true&#34;;
+
+    // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함
+    private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;;
+
+    private static final String MAX_AGE = &#34;3600&#34;;
+
+    @Bean
+    public WebFilter corsFilter() {
+        return (ServerWebExchange ctx, WebFilterChain chain) -&gt; {
+            ServerHttpRequest request = ctx.getRequest();
+            String requestOrigin = request.getHeaders().getOrigin();
+
+            if (CorsUtils.isPreFlightRequest(request)) {
+                ServerHttpResponse response = ctx.getResponse();
+                HttpHeaders headers = response.getHeaders();
+
+                if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) {
+                    headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin);
+                }
+
+                headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS);
+                headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE);
+                headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS);
+                headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS);
+                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
+
+                // 프론트에서 해당 헤더를 확인할수잇게 허가해줌
+                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
+                if (request.getMethod() == HttpMethod.OPTIONS) {
+                    response.setStatusCode(HttpStatus.OK);
+                    return Mono.empty();
+                }
+            }
+
+            return chain.filter(ctx);
+        };
+    }
+}
+</code></pre><h1 id="corsproperties">CorsProperties</h1>
+<pre tabindex="0"><code>@Component
+@Getter
+@Setter
+@ConfigurationProperties(prefix = &#34;app.cors&#34;)
+public class CorsProperties {
+
+    private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;();
+}
+</code></pre><h1 id="설정">설정</h1>
+<ul>
+<li>dev, prod profile 별로 다르게 설정하는 게 일반적</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-dev.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://localhost:3000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://127.0.0.1:3000&#34;</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-prod.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://example.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://another-domain.com&#34;</span><span class="w">
+</span></span></span></code></pre></div><h1 id="spspring-cloud-starter-gateway-사용시">spspring-cloud-starter-gateway 사용시</h1>
+<p>Spring Cloud Gateway를 사용하고 있다면 <code>PreFlightCorsConfig</code> 같은 별도의 Java Config 없이도 <code>application.yml</code>에 설정만으로 CORS 처리가 가능합니다.**</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 31 Mar 2025 00:49:17 &#43;0900" class="no-wrap"
+                title=" Mon, 31 Mar 2025 00:49:17 &#43;0900">
+                Mon, 31 Mar 2025 00:49:17 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -964,69 +1067,6 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
               <relative-time datetime=" Wed, 26 Mar 2025 11:33:45 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 11:33:45 &#43;0900">
                 Wed, 26 Mar 2025 11:33:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/querydsl_select_lock_unlock/">QueryDSL을 사용할 때 데이터베이스의 Lock</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>QueryDSL을 사용할 때 데이터베이스의 <strong>Lock</strong> 기능을 활용하는 방법은 JPA와 유사합니다. QueryDSL은 JPA와 통합되어 동작하며, JPQL 및 Native Query에서 사용하는 잠금 메커니즘을 제공합니다. 아래는 QueryDSL에서 Lock과 관련된 주요 기능과 구현 방법을 설명합니다.</p>
-<hr>
-<h2 id="1-querydsl에서-pessimistic-lock-사용">1. <strong>QueryDSL에서 Pessimistic Lock 사용</strong></h2>
-<p>QueryDSL은 JPA <code>LockModeType</code>을 지원하여 비관적 잠금을 구현할 수 있습니다.</p>
-<h3 id="예제-lockmodetypepessimistic_write-사용">예제: <code>LockModeType.PESSIMISTIC_WRITE</code> 사용</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.querydsl.jpa.impl.JPAQueryFactory</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.EntityManager</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.LockModeType</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">JPAQueryFactory</span><span class="w"> </span><span class="n">queryFactory</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ProductService</span><span class="p">(</span><span class="n">EntityManager</span><span class="w"> </span><span class="n">entityManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">queryFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JPAQueryFactory</span><span class="p">(</span><span class="n">entityManager</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">findByIdWithLock</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">QProduct</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QProduct</span><span class="p">.</span><span class="na">product</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Pessimistic Write Lock 설정</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">queryFactory</span><span class="p">.</span><span class="na">selectFrom</span><span class="p">(</span><span class="n">product</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">where</span><span class="p">(</span><span class="n">product</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">productId</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">setLockMode</span><span class="p">(</span><span class="n">LockModeType</span><span class="p">.</span><span class="na">PESSIMISTIC_WRITE</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">fetchOne</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h4 id="주요-포인트">주요 포인트:</h4>
-<ul>
-<li><code>setLockMode(LockModeType.PESSIMISTIC_WRITE)</code>를 사용하여 비관적 쓰기 잠금을 설정합니다.</li>
-<li><code>PESSIMISTIC_READ</code>와 같은 다른 잠금 모드도 사용할 수 있습니다.</li>
-</ul>
-<hr>
-<h2 id="2-낙관적-잠금-optimistic-lock">2. <strong>낙관적 잠금 (Optimistic Lock)</strong></h2>
-<p>낙관적 잠금은 QueryDSL에서 별도로 지원되지 않지만, JPA 엔터티의 <code>@Version</code> 필드를 활용하여 동작합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:30:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:30:45 &#43;0900">
-                Wed, 26 Mar 2025 11:30:45 &#43;0900
               </relative-time>
             </div>
           </div>

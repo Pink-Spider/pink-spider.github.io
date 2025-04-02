@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Jvm_stack | Pink Spider
+    MSA에서 traceId 와 spanId 란? | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,24 +27,22 @@
   
   <meta
   name="description"
-  content="JVM(Java Virtual Machine)에서는 내부적으로 여러 종류의 스택(stack) 을 사용합니다. 각각의 스택은 JVM의 실행 및 메모리 관리 등에서 중요한 역할을 합니다. 주요 스택 종류는 다음과 같습니다:
-🧠 1. Java Virtual Machine Stack (또는 Thread Stack) 설명: 각 스레드(thread) 마다 하나씩 존재하는 스택입니다. 역할: 메서드 호출 시 생성되는 스택 프레임(stack frame) 을 저장합니다. 각 프레임에는: 지역 변수(Local Variables) 피연산자 스택(Operand Stack) 메서드 반환 주소 등이 포함됨 예외: 스택 오버플로우 발생 시 StackOverflowError 발생 🔁 2. Native Method Stack 설명: 네이티브 메서드(C로 구현된 JNI 메서드 등) 호출 시 사용되는 스택입니다. 역할: C/C&#43;&#43; 등 JVM 외부 언어로 구현된 메서드에서 필요한 데이터를 저장 특이사항: 일부 JVM 구현에서는 Java 스택과 통합되기도 함 💾 3. Operand Stack (피연산자 스택) 설명: 위의 JVM Stack의 각 스택 프레임 내에 존재하는 스택입니다. 역할: 바이트코드 명령어가 실행 중인 중간 연산 결과를 임시로 저장 예시: iadd, imul 같은 바이트코드 명령은 이 스택에서 피연산자를 꺼내 계산 🧱 4. Call Stack (호출 스택) 설명: JVM Stack의 구조적인 측면을 지칭하는 용어로, 메서드 호출의 흐름을 나타냅니다. 역할: 현재 실행 중인 메서드부터 시작해 호출된 메서드들이 차곡차곡 쌓여 있음 특징: 디버깅 시 &ldquo;Stack Trace&quot;로 확인 가능 추가로 JVM에는 스택 이외에도 다음과 같은 메모리 영역이 있습니다:
-"
+  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
+1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/jvm_stack/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Jvm_stack - Pink Spider"
+  content="MSA에서 traceId 와 spanId 란? - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="JVM(Java Virtual Machine)에서는 내부적으로 여러 종류의 스택(stack) 을 사용합니다. 각각의 스택은 JVM의 실행 및 메모리 관리 등에서 중요한 역할을 합니다. 주요 스택 종류는 다음과 같습니다:
-🧠 1. Java Virtual Machine Stack (또는 Thread Stack) 설명: 각 스레드(thread) 마다 하나씩 존재하는 스택입니다. 역할: 메서드 호출 시 생성되는 스택 프레임(stack frame) 을 저장합니다. 각 프레임에는: 지역 변수(Local Variables) 피연산자 스택(Operand Stack) 메서드 반환 주소 등이 포함됨 예외: 스택 오버플로우 발생 시 StackOverflowError 발생 🔁 2. Native Method Stack 설명: 네이티브 메서드(C로 구현된 JNI 메서드 등) 호출 시 사용되는 스택입니다. 역할: C/C&#43;&#43; 등 JVM 외부 언어로 구현된 메서드에서 필요한 데이터를 저장 특이사항: 일부 JVM 구현에서는 Java 스택과 통합되기도 함 💾 3. Operand Stack (피연산자 스택) 설명: 위의 JVM Stack의 각 스택 프레임 내에 존재하는 스택입니다. 역할: 바이트코드 명령어가 실행 중인 중간 연산 결과를 임시로 저장 예시: iadd, imul 같은 바이트코드 명령은 이 스택에서 피연산자를 꺼내 계산 🧱 4. Call Stack (호출 스택) 설명: JVM Stack의 구조적인 측면을 지칭하는 용어로, 메서드 호출의 흐름을 나타냅니다. 역할: 현재 실행 중인 메서드부터 시작해 호출된 메서드들이 차곡차곡 쌓여 있음 특징: 디버깅 시 &ldquo;Stack Trace&quot;로 확인 가능 추가로 JVM에는 스택 이외에도 다음과 같은 메모리 영역이 있습니다:
-"
+  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
+1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -60,16 +58,15 @@
 />
 <meta
   property="og:title"
-  content="Jvm_stack - Pink Spider"
+  content="MSA에서 traceId 와 spanId 란? - Pink Spider"
 />
 <meta
   property="og:description"
-  content="JVM(Java Virtual Machine)에서는 내부적으로 여러 종류의 스택(stack) 을 사용합니다. 각각의 스택은 JVM의 실행 및 메모리 관리 등에서 중요한 역할을 합니다. 주요 스택 종류는 다음과 같습니다:
-🧠 1. Java Virtual Machine Stack (또는 Thread Stack) 설명: 각 스레드(thread) 마다 하나씩 존재하는 스택입니다. 역할: 메서드 호출 시 생성되는 스택 프레임(stack frame) 을 저장합니다. 각 프레임에는: 지역 변수(Local Variables) 피연산자 스택(Operand Stack) 메서드 반환 주소 등이 포함됨 예외: 스택 오버플로우 발생 시 StackOverflowError 발생 🔁 2. Native Method Stack 설명: 네이티브 메서드(C로 구현된 JNI 메서드 등) 호출 시 사용되는 스택입니다. 역할: C/C&#43;&#43; 등 JVM 외부 언어로 구현된 메서드에서 필요한 데이터를 저장 특이사항: 일부 JVM 구현에서는 Java 스택과 통합되기도 함 💾 3. Operand Stack (피연산자 스택) 설명: 위의 JVM Stack의 각 스택 프레임 내에 존재하는 스택입니다. 역할: 바이트코드 명령어가 실행 중인 중간 연산 결과를 임시로 저장 예시: iadd, imul 같은 바이트코드 명령은 이 스택에서 피연산자를 꺼내 계산 🧱 4. Call Stack (호출 스택) 설명: JVM Stack의 구조적인 측면을 지칭하는 용어로, 메서드 호출의 흐름을 나타냅니다. 역할: 현재 실행 중인 메서드부터 시작해 호출된 메서드들이 차곡차곡 쌓여 있음 특징: 디버깅 시 &ldquo;Stack Trace&quot;로 확인 가능 추가로 JVM에는 스택 이외에도 다음과 같은 메모리 영역이 있습니다:
-"
+  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
+1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/jvm_stack/" />
-<meta property="og:site_name" content="Jvm_stack" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/msa_traceid_spanid/" />
+<meta property="og:site_name" content="MSA에서 traceId 와 spanId 란?" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -77,7 +74,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-01 15:44:09 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-02 10:50:33 &#43;0900 KST" />
 
 
 
@@ -285,18 +282,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/jvm_stack/">Jvm_stack</a></strong>
+                      href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/">MSA에서 traceId 와 spanId 란?</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Tue, 01 Apr 2025 15:44:09 &#43;0900"
+                  Created <relative-time datetime="Wed, 02 Apr 2025 10:50:33 &#43;0900"
                     class="no-wrap">
-                    Tue, 01 Apr 2025 15:44:09 &#43;0900</relative-time>
+                    Wed, 02 Apr 2025 10:50:33 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 01 Apr 2025 15:44:50 &#43;0900"
+                  Modified <relative-time datetime="Wed, 02 Apr 2025 10:53:33 &#43;0900"
                     class="no-wrap">
-                    Tue, 01 Apr 2025 15:44:50 &#43;0900</relative-time>
+                    Wed, 02 Apr 2025 10:53:33 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -326,7 +323,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      597 Words
+                      703 Words
                     <span class="file-info-divider"></span>
                                         3 min
 
@@ -339,50 +336,66 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>JVM(Java Virtual Machine)에서는 내부적으로 여러 종류의 <strong>스택(stack)</strong> 을 사용합니다. <!-- raw HTML omitted -->
-각각의 스택은 JVM의 실행 및 메모리 관리 등에서 중요한 역할을 합니다. 주요 스택 종류는 다음과 같습니다:</p>
+                <article class="markdown-body entry-content container-lg"><p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
 <hr>
-<h3 id="-1-java-virtual-machine-stack-또는-thread-stack">🧠 1. <strong>Java Virtual Machine Stack (또는 Thread Stack)</strong></h3>
+<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
 <ul>
-<li><strong>설명</strong>: 각 <strong>스레드(thread)</strong> 마다 하나씩 존재하는 스택입니다.</li>
-<li><strong>역할</strong>: 메서드 호출 시 생성되는 <strong>스택 프레임(stack frame)</strong> 을 저장합니다. 각 프레임에는:
-<ul>
-<li>지역 변수(Local Variables)</li>
-<li>피연산자 스택(Operand Stack)</li>
-<li>메서드 반환 주소 등이 포함됨</li>
-</ul>
-</li>
-<li><strong>예외</strong>: 스택 오버플로우 발생 시 <code>StackOverflowError</code> 발생</li>
+<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
+<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
+<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
 </ul>
 <hr>
-<h3 id="-2-native-method-stack">🔁 2. <strong>Native Method Stack</strong></h3>
+<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
 <ul>
-<li><strong>설명</strong>: 네이티브 메서드(C로 구현된 JNI 메서드 등) 호출 시 사용되는 스택입니다.</li>
-<li><strong>역할</strong>: C/C++ 등 JVM 외부 언어로 구현된 메서드에서 필요한 데이터를 저장</li>
-<li><strong>특이사항</strong>: 일부 JVM 구현에서는 Java 스택과 통합되기도 함</li>
+<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
+<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
+<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
 </ul>
 <hr>
-<h3 id="-3-operand-stack-피연산자-스택">💾 3. <strong>Operand Stack (피연산자 스택)</strong></h3>
-<ul>
-<li><strong>설명</strong>: 위의 JVM Stack의 <strong>각 스택 프레임 내</strong>에 존재하는 스택입니다.</li>
-<li><strong>역할</strong>: 바이트코드 명령어가 실행 중인 <strong>중간 연산 결과</strong>를 임시로 저장</li>
-<li><strong>예시</strong>: <code>iadd</code>, <code>imul</code> 같은 바이트코드 명령은 이 스택에서 피연산자를 꺼내 계산</li>
+<h3 id="구조-예시">구조 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
+</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
+</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
+</span></span><span class="line"><span class="cl">                                           ▼
+</span></span><span class="line"><span class="cl">                                   ┌────────────┐
+</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
+</span></span><span class="line"><span class="cl">                                   └────────────┘   │
+</span></span><span class="line"><span class="cl">                                                    ▼
+</span></span><span class="line"><span class="cl">                                            ┌────────────┐
+</span></span><span class="line"><span class="cl">                                            │ Service B  │
+</span></span><span class="line"><span class="cl">                                            └────────────┘
+</span></span></code></pre></div><ul>
+<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
+<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
 </ul>
 <hr>
-<h3 id="-4-call-stack-호출-스택">🧱 4. <strong>Call Stack (호출 스택)</strong></h3>
-<ul>
-<li><strong>설명</strong>: JVM Stack의 구조적인 측면을 지칭하는 용어로, 메서드 호출의 흐름을 나타냅니다.</li>
-<li><strong>역할</strong>: 현재 실행 중인 메서드부터 시작해 호출된 메서드들이 차곡차곡 쌓여 있음</li>
-<li><strong>특징</strong>: 디버깅 시 &ldquo;Stack Trace&quot;로 확인 가능</li>
-</ul>
+<h3 id="요약">요약</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Trace ID</td>
+          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
+      </tr>
+      <tr>
+          <td>Span ID</td>
+          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
+      </tr>
+  </tbody>
+</table>
 <hr>
-<p>추가로 JVM에는 스택 이외에도 다음과 같은 메모리 영역이 있습니다:</p>
+<h3 id="첨언">첨언</h3>
 <ul>
-<li><strong>Heap</strong>: 객체 및 배열 저장</li>
-<li><strong>Method Area</strong> (또는 Metaspace in Java 8+): 클래스 메타데이터, 정적 변수 등 저장</li>
-<li><strong>Program Counter (PC) Register</strong>: 현재 실행 중인 명령어의 주소 보관</li>
+<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
+<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
 </ul>
-<hr>
 </article>
               </div>
 
@@ -395,13 +408,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/"> MSA에서 traceId 와 spanId 란?</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/heap_gc/">JVM에서 Heap 메모리의 용도와 GC 튜닝&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jvm_stack/">Jvm_stack&nbsp;</a><div> »</div>
           
         </div>
       </div>
