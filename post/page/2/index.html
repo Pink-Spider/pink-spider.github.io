@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">33</span>
+              <span class="Counter">34</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">33</span>
+      <span class="Counter ">34</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,66 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/git_submodule_reset/">서브모듈 완전히 초기화하고 다시 셋팅</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h2 id="-서브모듈-완전히-초기화하고-다시-셋팅">✅ 서브모듈 완전히 초기화하고 다시 셋팅</h2>
+<ol>
+<li>
+<p><strong>서브모듈을 Git에서 먼저 제거</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule deinit -f .
+</span></span></code></pre></div></li>
+<li>
+<p><strong>서브모듈 디렉토리를 제거</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf .git/modules/&lt;서브모듈_이름&gt;
+</span></span><span class="line"><span class="cl">rm -rf &lt;서브모듈_디렉토리&gt;
+</span></span></code></pre></div></li>
+<li>
+<p><strong><code>.gitmodules</code> 파일 삭제</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .gitmodules
+</span></span></code></pre></div></li>
+<li>
+<p><strong>인덱스에서 서브모듈 흔적 제거</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rm --cached &lt;서브모듈_디렉토리&gt;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>커밋</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Remove submodule completely&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>새로운 서브모듈 추가 (필요한 경우)</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add &lt;repo-url&gt; &lt;path&gt;
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Add submodule&#34;</span>
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h2 id="-정리하자면">🧠 정리하자면:</h2>
+<ul>
+<li>단순히 <code>.gitmodules</code> 파일만 지우면 안 되고,</li>
+<li>Git 내부의 서브모듈 정보 (<code>.git/modules</code>, 인덱스 등)도 같이 정리해줘야 해요.</li>
+</ul>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 01 Apr 2025 11:25:45 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 11:25:45 &#43;0900">
+                Tue, 01 Apr 2025 11:25:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1060,46 +1120,6 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
               <relative-time datetime=" Wed, 26 Mar 2025 13:38:03 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 13:38:03 &#43;0900">
                 Wed, 26 Mar 2025 13:38:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/kakfa_exception/">Apache Kafka 사용 시 발생할 수 있는 주요 오류</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Apache Kafka 사용 시 발생할 수 있는 주요 오류 유형과 그 해결 방법을 정리해 보겠습니다.</p>
-<hr>
-<h2 id="1-네트워크-및-연결-오류"><strong>1. 네트워크 및 연결 오류</strong></h2>
-<h3 id="-오류-connection-to-broker-broker_id-failed">❌ 오류: <code>Connection to broker &lt;broker_id&gt; failed</code></h3>
-<p>📌 <strong>원인</strong>: 브로커와의 네트워크 연결 문제, 브로커 다운, 방화벽 문제 등<br>
-✅ <strong>해결 방법</strong>:</p>
-<ul>
-<li><code>zookeeper</code>와 <code>broker</code>가 실행 중인지 확인 (<code>ps aux | grep kafka</code>)</li>
-<li><code>listeners</code> 및 <code>advertised.listeners</code> 설정 확인 (<code>server.properties</code>)</li>
-<li>방화벽 설정 (<code>iptables -L</code>, <code>firewalld</code>)을 점검하여 포트가 열려 있는지 확인</li>
-</ul>
-<hr>
-<h2 id="2-브로커-및-토픽-관련-오류"><strong>2. 브로커 및 토픽 관련 오류</strong></h2>
-<h3 id="-오류-leader-not-available-for-partition-partition_id">❌ 오류: <code>Leader not available for partition &lt;partition_id&gt;</code></h3>
-<p>📌 <strong>원인</strong>:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 13:30:03 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 13:30:03 &#43;0900">
-                Wed, 26 Mar 2025 13:30:03 &#43;0900
               </relative-time>
             </div>
           </div>

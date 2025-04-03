@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">33</span>
+              <span class="Counter">34</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">33</span>
+      <span class="Counter ">34</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,49 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/restapi/">@Mock @MockBean 의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="rest-api란-무엇이며-restful-하다는-건-어떤-의미인가">Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가?</h1>
+<p>REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.</p>
+<hr>
+<h3 id="-rest-api란">🔹 REST API란?</h3>
+<p><strong>REST</strong>는 &ldquo;<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer&quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 <strong>웹 아키텍처 스타일</strong> 중 하나죠.</p>
+<p>즉, <strong>REST API</strong>는 이 REST 원칙에 따라 설계된 <strong>웹 API</strong>를 말해요.</p>
+<hr>
+<h3 id="-rest의-핵심-개념">🔹 REST의 핵심 개념</h3>
+<p>REST는 다음의 6가지 제약 조건을 기반으로 해요:</p>
+<ol>
+<li>
+<p><strong>클라이언트-서버 구조</strong></p>
+<ul>
+<li>클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔.</li>
+</ul>
+</li>
+<li>
+<p><strong>무상태성 (Stateless)</strong></p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 18:02:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 18:02:29 &#43;0900">
+                Thu, 03 Apr 2025 18:02:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -932,66 +975,6 @@
               <relative-time datetime=" Tue, 01 Apr 2025 11:34:10 &#43;0900" class="no-wrap"
                 title=" Tue, 01 Apr 2025 11:34:10 &#43;0900">
                 Tue, 01 Apr 2025 11:34:10 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git_submodule_reset/">서브모듈 완전히 초기화하고 다시 셋팅</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h2 id="-서브모듈-완전히-초기화하고-다시-셋팅">✅ 서브모듈 완전히 초기화하고 다시 셋팅</h2>
-<ol>
-<li>
-<p><strong>서브모듈을 Git에서 먼저 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule deinit -f .
-</span></span></code></pre></div></li>
-<li>
-<p><strong>서브모듈 디렉토리를 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf .git/modules/&lt;서브모듈_이름&gt;
-</span></span><span class="line"><span class="cl">rm -rf &lt;서브모듈_디렉토리&gt;
-</span></span></code></pre></div></li>
-<li>
-<p><strong><code>.gitmodules</code> 파일 삭제</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .gitmodules
-</span></span></code></pre></div></li>
-<li>
-<p><strong>인덱스에서 서브모듈 흔적 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rm --cached &lt;서브모듈_디렉토리&gt;
-</span></span></code></pre></div></li>
-<li>
-<p><strong>커밋</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Remove submodule completely&#34;</span>
-</span></span></code></pre></div></li>
-<li>
-<p><strong>새로운 서브모듈 추가 (필요한 경우)</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add &lt;repo-url&gt; &lt;path&gt;
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Add submodule&#34;</span>
-</span></span></code></pre></div></li>
-</ol>
-<hr>
-<h2 id="-정리하자면">🧠 정리하자면:</h2>
-<ul>
-<li>단순히 <code>.gitmodules</code> 파일만 지우면 안 되고,</li>
-<li>Git 내부의 서브모듈 정보 (<code>.git/modules</code>, 인덱스 등)도 같이 정리해줘야 해요.</li>
-</ul>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 01 Apr 2025 11:25:45 &#43;0900" class="no-wrap"
-                title=" Tue, 01 Apr 2025 11:25:45 &#43;0900">
-                Tue, 01 Apr 2025 11:25:45 &#43;0900
               </relative-time>
             </div>
           </div>

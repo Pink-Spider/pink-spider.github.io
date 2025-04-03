@@ -6,8 +6,15 @@
     <description>Recent content on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 03 Apr 2025 16:36:40 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 03 Apr 2025 18:02:54 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>@Mock @MockBean 의 차이</title>
+      <link>https://pink-spider.github.io/post/til/restapi/</link>
+      <pubDate>Thu, 03 Apr 2025 18:02:29 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/til/restapi/</guid>
+      <description>&lt;h1 id=&#34;rest-api란-무엇이며-restful-하다는-건-어떤-의미인가&#34;&gt;Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가?&lt;/h1&gt;&#xA;&lt;p&gt;REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;-rest-api란&#34;&gt;🔹 REST API란?&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;REST&lt;/strong&gt;는 &amp;ldquo;&lt;strong&gt;RE&lt;/strong&gt;presentational &lt;strong&gt;S&lt;/strong&gt;tate &lt;strong&gt;T&lt;/strong&gt;ransfer&amp;quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 &lt;strong&gt;웹 아키텍처 스타일&lt;/strong&gt; 중 하나죠.&lt;/p&gt;&#xA;&lt;p&gt;즉, &lt;strong&gt;REST API&lt;/strong&gt;는 이 REST 원칙에 따라 설계된 &lt;strong&gt;웹 API&lt;/strong&gt;를 말해요.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;-rest의-핵심-개념&#34;&gt;🔹 REST의 핵심 개념&lt;/h3&gt;&#xA;&lt;p&gt;REST는 다음의 6가지 제약 조건을 기반으로 해요:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;클라이언트-서버 구조&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;무상태성 (Stateless)&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>@Mock @MockBean 의 차이</title>
       <link>https://pink-spider.github.io/post/spring/mock_mockbean/</link>
