@@ -306,9 +306,9 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 26 Mar 2025 22:01:52 &#43;0900"
+                  Modified <relative-time datetime="Wed, 26 Mar 2025 13:38:25 &#43;0900"
                     class="no-wrap">
-                    Wed, 26 Mar 2025 22:01:52 &#43;0900</relative-time>
+                    Wed, 26 Mar 2025 13:38:25 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -401,7 +401,7 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
 → 이곳에서 <strong>DB 저장, 재처리 큐(RabbitMQ 등)로 메시지 전달</strong> 가능</li>
 </ul>
 <hr>
-<h3 id="-2-kafka-send-실패-시">✅ <strong>(2) Kafka Send 실패 시 <code>Callback</code>으로 예외 처리</strong></h3>
+<h3 id="-2-kafka-send-실패-시-callback으로-예외-처리">✅ <strong>(2) Kafka Send 실패 시 <code>Callback</code>으로 예외 처리</strong></h3>
 <p>KafkaTemplate에서 <code>send()</code> 메소드의 <code>addCallback</code>을 활용하여 실패 시 처리하는 방법입니다.</p>
 <h4 id="-구현-예제-1"><strong>📌 구현 예제</strong></h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.kafka.core.KafkaTemplate</span><span class="p">;</span><span class="w">
@@ -449,7 +449,7 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
 <p>Kafka 컨슈머가 메시지를 받을 때 <strong>네트워크 문제, 오프셋 오류, 데이터 파싱 오류</strong> 등이 발생할 수 있습니다.<br>
 이를 해결하는 방법을 알아볼게요.</p>
 <hr>
-<h3 id="-1">✅ <strong>(1) <code>@Retryable</code>을 사용한 자동 재시도</strong></h3>
+<h3 id="-1-retryable을-사용한-자동-재시도">✅ <strong>(1) <code>@Retryable</code>을 사용한 자동 재시도</strong></h3>
 <p>컨슈머에서 특정 오류 발생 시 자동으로 재시도할 수 있습니다.</p>
 <h4 id="-구현-예제-2"><strong>📌 구현 예제</strong></h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.kafka.annotation.KafkaListener</span><span class="p">;</span><span class="w">
@@ -487,7 +487,7 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
 <h3 id="-2-kafka-dead-letter-queue-dlq-활용">✅ <strong>(2) Kafka Dead Letter Queue (DLQ) 활용</strong></h3>
 <p>Kafka에서는 <strong>DLQ (Dead Letter Queue)</strong> 를 활용하여<br>
 처리 실패한 메시지를 별도의 토픽으로 보낼 수 있습니다.</p>
-<h4 id="-설정-예제-"><strong>📌 설정 예제 (<code>application.yml</code>)</strong></h4>
+<h4 id="-설정-예제-applicationyml"><strong>📌 설정 예제 (<code>application.yml</code>)</strong></h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">kafka</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">consumer</span><span class="p">:</span><span class="w">
