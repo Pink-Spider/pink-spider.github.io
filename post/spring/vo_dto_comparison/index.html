@@ -296,9 +296,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 01 Apr 2025 11:29:43 &#43;0900"
+                  Modified <relative-time datetime="Mon, 31 Mar 2025 01:14:47 &#43;0900"
                     class="no-wrap">
-                    Tue, 01 Apr 2025 11:29:43 &#43;0900</relative-time>
+                    Mon, 31 Mar 2025 01:14:47 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -556,7 +556,7 @@
 <h1 id="record나-lombok을-이용한-간단한-버전"><code>Record</code>나 Lombok을 이용한 간단한 버전</h1>
 <p>좋아! 그럼 위에서 보여준 VO와 DTO 예제를 <strong><code>record</code>와 Lombok</strong>으로 각각 간단하게 리팩토링 해보겠습니다..</p>
 <hr>
-<h2 id="1-vo-java-16의-record-사용"><strong>1. VO: Java 16+의 <code>record</code> 사용</strong></h2>
+<h2 id="1-vo-java-16의"><strong>1. VO: Java 16+의 <code>record</code> 사용</strong></h2>
 <p>값 객체(VO)는 불변이고, <code>equals/hashCode</code>를 잘 구현해야 하므로 <code>record</code>와 아주 잘 맞아.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// Email.java</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">Email</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
