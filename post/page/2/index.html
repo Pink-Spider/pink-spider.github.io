@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">34</span>
+              <span class="Counter">43</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">34</span>
+      <span class="Counter ">43</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,279 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/">MSA에서 traceId 와 spanId 란?</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
+<hr>
+<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
+<ul>
+<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
+<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
+<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
+</ul>
+<hr>
+<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
+<ul>
+<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
+<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
+<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
+</ul>
+<hr>
+<h3 id="구조-예시">구조 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
+</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
+</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
+</span></span><span class="line"><span class="cl">                                           ▼
+</span></span><span class="line"><span class="cl">                                   ┌────────────┐
+</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
+</span></span><span class="line"><span class="cl">                                   └────────────┘   │
+</span></span><span class="line"><span class="cl">                                                    ▼
+</span></span><span class="line"><span class="cl">                                            ┌────────────┐
+</span></span><span class="line"><span class="cl">                                            │ Service B  │
+</span></span><span class="line"><span class="cl">                                            └────────────┘
+</span></span></code></pre></div><ul>
+<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
+<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
+</ul>
+<hr>
+<h3 id="요약">요약</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Trace ID</td>
+          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
+      </tr>
+      <tr>
+          <td>Span ID</td>
+          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="첨언">첨언</h3>
+<ul>
+<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
+<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
+</ul>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 02 Apr 2025 10:50:33 &#43;0900" class="no-wrap"
+                title=" Wed, 02 Apr 2025 10:50:33 &#43;0900">
+                Wed, 02 Apr 2025 10:50:33 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/jvm_stack/">JVM 에서 쓰이는 stack 의 종류</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>JVM(Java Virtual Machine)에서는 내부적으로 여러 종류의 <strong>스택(stack)</strong> 을 사용합니다. <!-- raw HTML omitted -->
+각각의 스택은 JVM의 실행 및 메모리 관리 등에서 중요한 역할을 합니다. 주요 스택 종류는 다음과 같습니다:</p>
+<hr>
+<h3 id="-1-java-virtual-machine-stack-또는-thread-stack">🧠 1. <strong>Java Virtual Machine Stack (또는 Thread Stack)</strong></h3>
+<ul>
+<li><strong>설명</strong>: 각 <strong>스레드(thread)</strong> 마다 하나씩 존재하는 스택입니다.</li>
+<li><strong>역할</strong>: 메서드 호출 시 생성되는 <strong>스택 프레임(stack frame)</strong> 을 저장합니다. 각 프레임에는:
+<ul>
+<li>지역 변수(Local Variables)</li>
+<li>피연산자 스택(Operand Stack)</li>
+<li>메서드 반환 주소 등이 포함됨</li>
+</ul>
+</li>
+<li><strong>예외</strong>: 스택 오버플로우 발생 시 <code>StackOverflowError</code> 발생</li>
+</ul>
+<hr>
+<h3 id="-2-native-method-stack">🔁 2. <strong>Native Method Stack</strong></h3>
+<ul>
+<li><strong>설명</strong>: 네이티브 메서드(C로 구현된 JNI 메서드 등) 호출 시 사용되는 스택입니다.</li>
+<li><strong>역할</strong>: C/C++ 등 JVM 외부 언어로 구현된 메서드에서 필요한 데이터를 저장</li>
+<li><strong>특이사항</strong>: 일부 JVM 구현에서는 Java 스택과 통합되기도 함</li>
+</ul>
+<hr>
+<h3 id="-3-operand-stack-피연산자-스택">💾 3. <strong>Operand Stack (피연산자 스택)</strong></h3>
+<ul>
+<li><strong>설명</strong>: 위의 JVM Stack의 <strong>각 스택 프레임 내</strong>에 존재하는 스택입니다.</li>
+<li><strong>역할</strong>: 바이트코드 명령어가 실행 중인 <strong>중간 연산 결과</strong>를 임시로 저장</li>
+<li><strong>예시</strong>: <code>iadd</code>, <code>imul</code> 같은 바이트코드 명령은 이 스택에서 피연산자를 꺼내 계산</li>
+</ul>
+<hr>
+<h3 id="-4-call-stack-호출-스택">🧱 4. <strong>Call Stack (호출 스택)</strong></h3>
+<ul>
+<li><strong>설명</strong>: JVM Stack의 구조적인 측면을 지칭하는 용어로, 메서드 호출의 흐름을 나타냅니다.</li>
+<li><strong>역할</strong>: 현재 실행 중인 메서드부터 시작해 호출된 메서드들이 차곡차곡 쌓여 있음</li>
+<li><strong>특징</strong>: 디버깅 시 &ldquo;Stack Trace&quot;로 확인 가능</li>
+</ul>
+<hr>
+<p>추가로 JVM에는 스택 이외에도 다음과 같은 메모리 영역이 있습니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 01 Apr 2025 15:44:09 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 15:44:09 &#43;0900">
+                Tue, 01 Apr 2025 15:44:09 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/heap_gc/">JVM에서 Heap 메모리의 용도와 GC 튜닝</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>JVM(Java Virtual Machine)에서 <strong>heap 메모리</strong>는 자바 애플리케이션이 <strong>런타임 시 동적으로 생성하는 객체들이 저장되는 영역</strong>입니다. 즉, <code>new</code> 키워드를 사용해서 생성하는 대부분의 객체들이 이 영역에 저장됩니다.</p>
+<hr>
+<h3 id="-heap-메모리-구성">📌 Heap 메모리 구성</h3>
+<p>Heap은 크게 다음 두 영역으로 나뉩니다:</p>
+<ul>
+<li><strong>Young Generation (Young Gen)</strong>: 새로 생성된 객체가 저장되는 곳.
+<ul>
+<li><strong>Eden</strong>: 대부분의 새 객체가 여기에 생성됨.</li>
+<li><strong>Survivor</strong>: Eden에서 살아남은 객체들이 이동.</li>
+</ul>
+</li>
+<li><strong>Old Generation (Tenured Gen)</strong>: Young Gen을 거쳐 오래 살아남은 객체들이 이동하는 공간.</li>
+</ul>
+<p>Garbage Collector(GC)는 이 heap 영역의 객체들을 주기적으로 검사해서 <strong>더 이상 참조되지 않는 객체는 메모리에서 제거</strong>합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 01 Apr 2025 13:59:38 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 13:59:38 &#43;0900">
+                Tue, 01 Apr 2025 13:59:38 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/cacheable/">Cacheable 어노테이션에 대해서</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><code>@Cacheable</code> 어노테이션은 Spring Framework에서 <strong>메서드의 반환값을 캐시에 저장</strong>하여, <strong>같은 인자가 들어올 경우 캐시된 값을 재사용</strong>하도록 하는 기능을 제공합니다. 즉, 메서드를 반복적으로 호출하더라도 실제로는 <strong>처음 한 번만 실행되고</strong>, 이후 호출은 캐시된 결과를 반환하게 됩니다.</p>
+<hr>
+<h3 id="-주요-역할-요약">📌 주요 역할 요약</h3>
+<ul>
+<li><strong>중복 호출 방지</strong>: 동일한 입력값에 대해 메서드를 반복 호출하면, 캐시된 결과를 반환해 성능 향상.</li>
+<li><strong>결과 저장</strong>: 메서드 실행 결과를 캐시에 저장.</li>
+<li><strong>조건부 캐싱</strong>: 특정 조건에 따라 캐싱 여부 제어 가능.</li>
+</ul>
+<hr>
+<h3 id="-기본-사용-예시">✅ 기본 사용 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="s">&#34;users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">findUserById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 실제로는 DB나 외부 API 호출</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>위 메서드는 <code>users</code>라는 캐시 이름으로 결과를 저장합니다.</li>
+<li><code>id</code>가 동일한 경우, 이후 호출은 캐시된 <code>User</code> 객체를 반환합니다.</li>
+</ul>
+<hr>
+<h3 id="-주요-속성">🔧 주요 속성</h3>
+<table>
+  <thead>
+      <tr>
+          <th>속성</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>value</code> 또는 <code>cacheNames</code></td>
+          <td>사용할 캐시 이름 지정</td>
+      </tr>
+      <tr>
+          <td><code>key</code></td>
+          <td>캐시 키를 지정 (SpEL 표현식 사용 가능)</td>
+      </tr>
+      <tr>
+          <td><code>condition</code></td>
+          <td>캐싱할 조건 지정 (SpEL)</td>
+      </tr>
+      <tr>
+          <td><code>unless</code></td>
+          <td>결과를 저장하지 않을 조건 (SpEL)</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="예시">예시:</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;books&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#isbn&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">unless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#result == null&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Book</span><span class="w"> </span><span class="nf">findBook</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">isbn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bookRepository</span><span class="p">.</span><span class="na">findByIsbn</span><span class="p">(</span><span class="n">isbn</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-함께-알아두면-좋은-어노테이션">🧠 함께 알아두면 좋은 어노테이션</h3>
+<ul>
+<li><code>@CachePut</code> : 캐시를 <strong>강제로 업데이트</strong>할 때 사용</li>
+<li><code>@CacheEvict</code> : 캐시를 <strong>삭제</strong>할 때 사용</li>
+<li><code>@Caching</code> : 여러 캐시 어노테이션을 함께 사용할 때</li>
+</ul>
+<hr>
+<p>필요하다면 Redis나 Caffeine 같은 캐시 스토어와 함께 연동도 가능합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 01 Apr 2025 11:34:10 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 11:34:10 &#43;0900">
+                Tue, 01 Apr 2025 11:34:10 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -721,405 +994,6 @@
               <relative-time datetime=" Mon, 31 Mar 2025 12:48:01 &#43;0900" class="no-wrap"
                 title=" Mon, 31 Mar 2025 12:48:01 &#43;0900">
                 Mon, 31 Mar 2025 12:48:01 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/preflightcorsconfig_example/">PreFlightCorsConfig_example</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="preflightcorsconfig-example">PreFlightCorsConfig example</h1>
-<pre tabindex="0"><code>@Configuration
-public class PreFlightCorsConfig {
-
-    private final CorsProperties corsProperties;
-
-    public PreFlightCorsConfig(CorsProperties corsProperties) {
-        this.corsProperties = corsProperties;
-    }
-
-    private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;;
-
-    private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;;
-
-    private static final String ALLOWED_CREDENTIALS = &#34;true&#34;;
-
-    // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함
-    private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;;
-
-    private static final String MAX_AGE = &#34;3600&#34;;
-
-    @Bean
-    public WebFilter corsFilter() {
-        return (ServerWebExchange ctx, WebFilterChain chain) -&gt; {
-            ServerHttpRequest request = ctx.getRequest();
-            String requestOrigin = request.getHeaders().getOrigin();
-
-            if (CorsUtils.isPreFlightRequest(request)) {
-                ServerHttpResponse response = ctx.getResponse();
-                HttpHeaders headers = response.getHeaders();
-
-                if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) {
-                    headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin);
-                }
-
-                headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS);
-                headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE);
-                headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS);
-                headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS);
-                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
-
-                // 프론트에서 해당 헤더를 확인할수잇게 허가해줌
-                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
-                if (request.getMethod() == HttpMethod.OPTIONS) {
-                    response.setStatusCode(HttpStatus.OK);
-                    return Mono.empty();
-                }
-            }
-
-            return chain.filter(ctx);
-        };
-    }
-}
-</code></pre><h1 id="corsproperties">CorsProperties</h1>
-<pre tabindex="0"><code>@Component
-@Getter
-@Setter
-@ConfigurationProperties(prefix = &#34;app.cors&#34;)
-public class CorsProperties {
-
-    private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;();
-}
-</code></pre><h1 id="설정">설정</h1>
-<ul>
-<li>dev, prod profile 별로 다르게 설정하는 게 일반적</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-dev.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://localhost:3000&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://127.0.0.1:3000&#34;</span><span class="w">
-</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-prod.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://example.com&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://another-domain.com&#34;</span><span class="w">
-</span></span></span></code></pre></div><h1 id="spspring-cloud-starter-gateway-사용시">spspring-cloud-starter-gateway 사용시</h1>
-<p>Spring Cloud Gateway를 사용하고 있다면 <code>PreFlightCorsConfig</code> 같은 별도의 Java Config 없이도 <code>application.yml</code>에 설정만으로 CORS 처리가 가능합니다.**</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 31 Mar 2025 00:49:17 &#43;0900" class="no-wrap"
-                title=" Mon, 31 Mar 2025 00:49:17 &#43;0900">
-                Mon, 31 Mar 2025 00:49:17 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/vo_dto_comparison/">Vo와 Dto</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring을 포함한 Java 기반 애플리케이션에서 **VO(Value Object)**와 **DTO(Data Transfer Object)**는 개념적으로 비슷해 보일 수 있지만, 그 목적과 사용하는 맥락에서 차이가 있습니다. 아래에 각각을 설명하고 차이를 정리할게요.</p>
-<hr>
-<h3 id="1-vo-value-object"><strong>1. VO (Value Object)</strong></h3>
-<ul>
-<li><strong>의미</strong>: <strong>값 자체를 표현하는 객체</strong>. 값의 동등성을 비교할 때, 객체의 참조가 아니라 <strong>값이 같은지</strong>로 판단합니다.</li>
-<li><strong>특징</strong>:
-<ul>
-<li>**불변(Immutable)**하게 설계하는 것이 일반적입니다.</li>
-<li><code>equals()</code>, <code>hashCode()</code>를 재정의해서 <strong>값이 같으면 동일한 객체로 간주</strong>합니다.</li>
-<li>주로 <strong>도메인 모델</strong>에서 사용되며, 특정 개념(예: 주소, 돈, 이름 등)을 캡슐화합니다.</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Address</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Address</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">street</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">street</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// equals, hashCode 반드시 재정의</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="2-dto-data-transfer-object"><strong>2. DTO (Data Transfer Object)</strong></h3>
-<ul>
-<li><strong>의미</strong>: <strong>계층 간 데이터 전달</strong>을 위해 사용하는 객체 (예: Controller → Service → Repository)</li>
-<li><strong>특징</strong>:
-<ul>
-<li><strong>불변일 필요 없음</strong>, Getter/Setter 있음</li>
-<li>단순히 데이터를 <strong>옮기는 목적</strong> (로직이 없어야 함)</li>
-<li>보통 <strong>입력(Request)</strong>, **출력(Response)**용으로 많이 쓰임</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResponseDto</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 기본 생성자, getter/setter</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="정리-vo-vs-dto"><strong>정리: VO vs DTO</strong></h3>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>VO (Value Object)</th>
-          <th>DTO (Data Transfer Object)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>목적</td>
-          <td>값 자체를 표현</td>
-          <td>데이터 전달</td>
-      </tr>
-      <tr>
-          <td>불변성</td>
-          <td>보통 불변</td>
-          <td>보통 가변</td>
-      </tr>
-      <tr>
-          <td>사용 위치</td>
-          <td>도메인 모델</td>
-          <td>계층 간 데이터 전달</td>
-      </tr>
-      <tr>
-          <td>equals/hashCode</td>
-          <td>값 기준으로 재정의</td>
-          <td>일반적으로 재정의하지 않음</td>
-      </tr>
-      <tr>
-          <td>로직 포함</td>
-          <td>가능</td>
-          <td>없음 (순수 데이터만)</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h1 id="사용-예시">사용 예시</h1>
-<p>간단한 Spring 기반 애플리케이션 구조에서 <strong>VO와 DTO의 차이</strong>를 실제 예제 코드입니다.<!-- raw HTML omitted -->
-예시는 “사용자(User) 정보 처리”를 중심으로 구성합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sun, 30 Mar 2025 17:14:05 &#43;0900" class="no-wrap"
-                title=" Sun, 30 Mar 2025 17:14:05 &#43;0900">
-                Sun, 30 Mar 2025 17:14:05 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/jwt_strategy/">QueryDSL을 사용할 때 데이터베이스의 Lock</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="jwt-관련-tip">jwt 관련 Tip</h1>
-<h2 id="q-access-token-이-만료되면-refresh-token을-통해-재발행-한다-refresh-token은-만료-기간이-없을까">Q. access token 이 만료되면, refresh token을 통해 재발행 한다. refresh token은 만료 기간이 없을까?</h2>
-<h2 id="a-refresh-token도-반드시-만료-기간이-있어야-합니다">A. <code>Refresh Token</code>도 <strong>반드시 만료 기간이 있어야</strong> 합니다.</h2>
-<ul>
-<li>일반적으로는 <code>Access Token</code>보다 <strong>훨씬 긴 만료 기간</strong>을 설정할 뿐이에요.</li>
-</ul>
-<h3 id="1-일반적인-만료-시간-설정">1. 일반적인 만료 시간 설정</h3>
-<ul>
-<li><strong>Access Token</strong>: 보통 <strong>15분 ~ 1시간</strong></li>
-<li><strong>Refresh Token</strong>: 보통 <strong>7일 ~ 30일</strong> 또는 <strong>90일</strong></li>
-</ul>
-<hr>
-<h3 id="2-왜-refresh-token도-만료-기간이-필요한가">2. 왜 Refresh Token도 만료 기간이 필요한가?</h3>
-<ul>
-<li>Refresh Token이 <strong>유출되었을 경우</strong>, 무제한으로 Access Token을 재발급받을 수 있다면 <strong>보안에 치명적</strong>입니다.</li>
-<li>일정 기간이 지나면 <strong>로그인 세션을 재확인</strong>하거나 <strong>재로그인</strong>을 유도하는 것이 보안상 더 안전합니다.</li>
-</ul>
-<hr>
-<h3 id="3-저장-위치는">3. 저장 위치는?</h3>
-<ul>
-<li>Refresh Token은 보통 <strong>서버 저장 방식</strong> (e.g., Redis)에 저장하고, 사용자에게는 식별자만 전달하거나 클라이언트에 저장하되 <strong>보안적으로 안전한 저장소</strong> (e.g., Secure Cookie, LocalStorage X) 를 사용하는 것이 권장됩니다.</li>
-</ul>
-<hr>
-<h2 id="q-spring-boot에서의-예시">Q. Spring Boot에서의 예시</h2>
-<h2 id="a-spring-boot에서-jwt-기반으로-access-token과-refresh-token을-발급-및-재발급하는-기본적인-구조를-예시">A. Spring Boot에서 JWT 기반으로 Access Token과 Refresh Token을 발급 및 재발급하는 기본적인 구조를 예시</h2>
-<hr>
-<h3 id="1-토큰-생성-클래스-jwtprovider"><strong>1. 토큰 생성 클래스 (JwtProvider)</strong></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">JwtProvider</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">secretKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;yourSecretKey&#34;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 적절히 암호화 필요</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">accessTokenValidity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1000L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">15</span><span class="p">;</span><span class="w">  </span><span class="c1">// 15분</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">refreshTokenValidity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1000L</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">24</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">14</span><span class="p">;</span><span class="w"> </span><span class="c1">// 14일</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">createAccessToken</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">createToken</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">accessTokenValidity</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">createRefreshToken</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">createToken</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">refreshTokenValidity</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">createToken</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">validity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Claims</span><span class="w"> </span><span class="n">claims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Jwts</span><span class="p">.</span><span class="na">claims</span><span class="p">().</span><span class="na">setSubject</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Date</span><span class="w"> </span><span class="n">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Date</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Date</span><span class="w"> </span><span class="n">expiry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="n">now</span><span class="p">.</span><span class="na">getTime</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">validity</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Jwts</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">setClaims</span><span class="p">(</span><span class="n">claims</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">setIssuedAt</span><span class="p">(</span><span class="n">now</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">setExpiration</span><span class="p">(</span><span class="n">expiry</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">signWith</span><span class="p">(</span><span class="n">SignatureAlgorithm</span><span class="p">.</span><span class="na">HS256</span><span class="p">,</span><span class="w"> </span><span class="n">secretKey</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">compact</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getUserIdFromToken</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">token</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Jwts</span><span class="p">.</span><span class="na">parser</span><span class="p">().</span><span class="na">setSigningKey</span><span class="p">(</span><span class="n">secretKey</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">parseClaimsJws</span><span class="p">(</span><span class="n">token</span><span class="p">).</span><span class="na">getBody</span><span class="p">().</span><span class="na">getSubject</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">validateToken</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">token</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Jwts</span><span class="p">.</span><span class="na">parser</span><span class="p">().</span><span class="na">setSigningKey</span><span class="p">(</span><span class="n">secretKey</span><span class="p">).</span><span class="na">parseClaimsJws</span><span class="p">(</span><span class="n">token</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ExpiredJwtException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="2-로그인-시-토큰-발급"><strong>2. 로그인 시 토큰 발급</strong></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&#34;/login&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">TokenResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">LoginRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 인증 처리 (생략)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;user-id&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">accessToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jwtProvider</span><span class="p">.</span><span class="na">createAccessToken</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">refreshToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jwtProvider</span><span class="p">.</span><span class="na">createRefreshToken</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Refresh Token을 DB나 Redis에 저장</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">refreshTokenService</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">refreshToken</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TokenResponse</span><span class="p">(</span><span class="n">accessToken</span><span class="p">,</span><span class="w"> </span><span class="n">refreshToken</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="3-access-token-만료-시-refresh-token으로-재발급"><strong>3. Access Token 만료 시 Refresh Token으로 재발급</strong></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&#34;/token/refresh&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">TokenResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">refreshToken</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">TokenRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">refreshToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getRefreshToken</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">jwtProvider</span><span class="p">.</span><span class="na">validateToken</span><span class="p">(</span><span class="n">refreshToken</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&#34;Invalid refresh token&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jwtProvider</span><span class="p">.</span><span class="na">getUserIdFromToken</span><span class="p">(</span><span class="n">refreshToken</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 저장된 refresh token과 비교</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">stored</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">refreshTokenService</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">stored</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">refreshToken</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&#34;Token mismatch&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">newAccessToken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jwtProvider</span><span class="p">.</span><span class="na">createAccessToken</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TokenResponse</span><span class="p">(</span><span class="n">newAccessToken</span><span class="p">,</span><span class="w"> </span><span class="n">refreshToken</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="4-refresh-token-저장-예시-redis-기반"><strong>4. Refresh Token 저장 예시 (Redis 기반)</strong></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RefreshTokenService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">RefreshTokenService</span><span class="p">(</span><span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">redisTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">token</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">set</span><span class="p">(</span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="p">,</span><span class="w"> </span><span class="n">14</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">DAYS</span><span class="p">);</span><span class="w"> </span><span class="c1">// 유효 기간 설정</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForValue</span><span class="p">().</span><span class="na">get</span><span class="p">(</span><span class="n">userId</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="q-에시에서-refreshtoken-에서-refresh-save전에-기존꺼는-안지워도-될까">Q. 에시에서 RefreshToken 에서 refresh save전에 기존꺼는 안지워도 될까?</h2>
-<h2 id="a-일반적으로는-기존-refresh-token을-삭제하거나-덮어써야-합니다">A. 일반적으로는 <strong>기존 Refresh Token을 삭제하거나 덮어써야 합니다</strong>.</h2>
-<p>왜냐면:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 27 Mar 2025 11:36:45 &#43;0900" class="no-wrap"
-                title=" Thu, 27 Mar 2025 11:36:45 &#43;0900">
-                Thu, 27 Mar 2025 11:36:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/kakfa_fallback/">Apache Kafka 사용 시 코드로 오류 처리 방법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring Boot에서 Kafka를 사용할 때 오류를 코드로 해결하는 방법을 설명해볼게요.<br>
-Kafka 프로듀서와 컨슈머에서 <strong>Fallback 메소드, 재시도 (Retry), 예외 처리</strong> 등을 적용하는 방법을 알아봅니다.</p>
-<hr>
-<h2 id="1-kafka-프로듀서에서-오류-처리-fallback-retry"><strong>1. Kafka 프로듀서에서 오류 처리 (Fallback, Retry)</strong></h2>
-<p>Kafka 프로듀서는 메시지를 브로커로 보내는 과정에서 오류가 발생할 수 있습니다.<br>
-예를 들어, <strong>네트워크 문제, 브로커 다운, 메시지 크기 초과</strong> 등의 문제가 있을 수 있는데요, 이를 처리하는 방법입니다.</p>
-<h3 id="-1-fallback-메소드-적용-resilience4j-사용">✅ <strong>(1) Fallback 메소드 적용 (Resilience4j 사용)</strong></h3>
-<p><a href="https://resilience4j.readme.io/">Resilience4j</a>의 <code>@Retry</code>와 <code>@Recover</code>를 활용하면<br>
-Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으로 실패하면 대체 로직을 수행할 수 있습니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 13:38:03 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 13:38:03 &#43;0900">
-                Wed, 26 Mar 2025 13:38:03 &#43;0900
               </relative-time>
             </div>
           </div>

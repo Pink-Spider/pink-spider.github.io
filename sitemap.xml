@@ -2,113 +2,140 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://pink-spider.github.io/post/spring/jsonignore_include/</loc>
+    <lastmod>2025-04-08T17:43:44+09:00</lastmod>
+  </url><url>
     <loc>https://pink-spider.github.io/</loc>
-    <lastmod>2025-04-05T14:35:45+09:00</lastmod>
+    <lastmod>2025-04-08T17:43:44+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/</loc>
-    <lastmod>2025-04-05T14:35:45+09:00</lastmod>
+    <lastmod>2025-04-08T17:43:44+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/restapi/</loc>
-    <lastmod>2025-04-05T14:35:45+09:00</lastmod>
+    <lastmod>2025-04-07T10:19:36+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/mock_mockbean/</loc>
-    <lastmod>2025-04-04T02:23:17+09:00</lastmod>
+    <lastmod>2025-04-03T16:36:40+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/mock_injectmock/</loc>
+    <lastmod>2025-04-07T10:29:24+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/mock_stub/</loc>
+    <lastmod>2025-04-07T10:29:24+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/test_double/</loc>
+    <lastmod>2025-04-07T10:29:24+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/msa_traceid_spanid/</loc>
-    <lastmod>2025-04-03T00:07:29+09:00</lastmod>
+    <lastmod>2025-04-02T10:53:33+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/jvm_stack/</loc>
-    <lastmod>2025-04-03T00:07:29+09:00</lastmod>
+    <lastmod>2025-04-02T10:54:55+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/heap_gc/</loc>
-    <lastmod>2025-04-03T00:07:29+09:00</lastmod>
+    <lastmod>2025-04-01T14:08:06+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/cacheable/</loc>
-    <lastmod>2025-04-03T00:07:29+09:00</lastmod>
+    <lastmod>2025-04-01T11:36:00+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/git_submodule_reset/</loc>
-    <lastmod>2025-04-03T00:07:29+09:00</lastmod>
+    <lastmod>2025-04-01T11:31:39+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/k8s/</loc>
-    <lastmod>2025-04-03T00:07:29+09:00</lastmod>
+    <lastmod>2025-03-31T12:52:32+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/preflightcorsconfig_example/</loc>
-    <lastmod>2025-03-31T01:14:47+09:00</lastmod>
+    <lastmod>2025-04-01T11:29:43+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/vo_dto_comparison/</loc>
-    <lastmod>2025-03-31T01:14:47+09:00</lastmod>
+    <lastmod>2025-04-01T11:29:43+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/jpa_log_yml/</loc>
+    <lastmod>2025-04-07T10:29:24+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/gateway_cors/</loc>
+    <lastmod>2025-04-07T10:29:24+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/jwt_strategy/</loc>
-    <lastmod>2025-03-28T02:33:20+09:00</lastmod>
+    <lastmod>2025-03-27T11:49:11+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/infra/kakfa_fallback/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T13:38:25+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/infra/kakfa_exception/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T13:38:25+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/lock_unlock/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T11:33:29+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/querydsl_select_lock_unlock/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T11:33:29+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/spring-%EC%8B%9C%EC%9E%91%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%84%A4%EC%A0%95/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T11:29:15+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/select_lock_unlock/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T11:33:29+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/jpa_transaction/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T11:34:49+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/about_trasactional/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T11:23:45+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/redis_crud_template/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T11:14:59+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/feignclient_load_balancing/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T08:39:52+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/dispatcher/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T08:24:48+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/servlet_dispatcherservlet/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T08:24:48+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/filter_interceptor/</loc>
-    <lastmod>2025-03-26T22:01:52+09:00</lastmod>
+    <lastmod>2025-03-26T08:24:48+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/github_action_sample/</loc>
-    <lastmod>2025-03-26T04:08:41+09:00</lastmod>
+    <lastmod>2025-03-25T18:01:24+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/git_repository_history_reset/</loc>
-    <lastmod>2025-03-26T04:08:41+09:00</lastmod>
+    <lastmod>2025-03-25T18:15:32+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/book/clean_code_1/</loc>
-    <lastmod>2025-03-24T22:16:01+09:00</lastmod>
+    <lastmod>2025-03-24T14:44:28+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/til/about_aes/</loc>
+    <lastmod>2025-04-07T10:29:24+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/til/aes_key_generate/</loc>
+    <lastmod>2025-04-07T10:29:24+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/infra/ssl/</loc>
-    <lastmod>2025-03-24T22:16:01+09:00</lastmod>
+    <lastmod>2025-03-24T14:14:23+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/restdoc_swagger_ui_sample/</loc>
-    <lastmod>2025-03-26T04:08:41+09:00</lastmod>
+    <lastmod>2025-03-25T16:16:58+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/component_static_member/</loc>
-    <lastmod>2025-03-26T04:08:41+09:00</lastmod>
+    <lastmod>2025-03-25T16:16:10+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/git_tag_deploy/</loc>
-    <lastmod>2025-03-24T22:16:01+09:00</lastmod>
+    <lastmod>2025-03-24T14:08:43+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/til/git_tag/</loc>
-    <lastmod>2025-03-24T22:16:01+09:00</lastmod>
+    <lastmod>2025-03-24T14:08:43+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/spring/component_bean_difference/</loc>
-    <lastmod>2025-03-26T04:08:41+09:00</lastmod>
+    <lastmod>2025-03-25T18:08:00+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/value/</loc>
+    <lastmod>2025-04-07T10:29:24+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/book/clean_code_intro/</loc>
-    <lastmod>2025-03-24T22:16:01+09:00</lastmod>
+    <lastmod>2025-03-24T13:03:21+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/categories/</loc>
   </url><url>

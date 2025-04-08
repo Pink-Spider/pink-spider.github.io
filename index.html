@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
 <head>
-	<meta name="generator" content="Hugo 0.144.2">
+	<meta name="generator" content="Hugo 0.143.1">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <script
@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">34</span>
+              <span class="Counter">43</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">34</span>
+      <span class="Counter ">43</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,51 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/jsonignore_include/">
+                    <span class="repo" title="@JsonIgnore 와 JsonInclude">@JsonIgnore 와 JsonInclude</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p><code>@JsonIgnore</code>를 붙이면 <strong>해당 필드는 JSON 변환 시 무조건 제외</strong>됩니다. <!-- raw HTML omitted -->
+즉, <strong>값이 있든 없든 관계없이</strong> JSON 결과에 <strong>필드 자체가 포함되지 않습니다.</strong></p>
+<p>예시로 보면:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@JsonIgnore</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// getters/setters</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>위 객체를 JSON으로 변환하면 (예: <code>name=&quot;Alice&quot;</code>, <code>password=&quot;secret&quot;</code>이더라도):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Alice&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>password</code> 필드는 무조건 빠집니다.</p>
+<hr>
+<p>반면, <strong>값이 없을 때만 필드를 제외하고 싶다면</strong> <code>@JsonInclude</code>를 사용해야 합니다:</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -743,138 +788,73 @@
                       d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
                     </path>
                   </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/">
-                    <span class="repo" title="MSA에서 traceId 와 spanId 란?">MSA에서 traceId 와 spanId 란?</span>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/mock_injectmock/">
+                    <span class="repo" title="@Mock, @InjectBean 의 차이">@Mock, @InjectBean 의 차이</span>
                   </a>
                 </div>
 
 
                 <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
+                  <h1 id="mock-과-injectedmock">@Mock 과 @InjectedMock</h1>
+<p><code>@Mock</code>과 <code>@InjectMocks</code>의 차이를 알아볼게요. 이 둘은 <strong>함께 자주 쓰이지만 서로 다른 역할</strong>을 해요.</p>
 <hr>
-<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
+<h3 id="-mock">🔹 <code>@Mock</code></h3>
 <ul>
-<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
-<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
-<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
+<li>Mockito에서 제공</li>
+<li><strong>Mock 객체를 생성</strong>해줌</li>
+<li>단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음</li>
 </ul>
-<hr>
-<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w"> </span><span class="c1">// 가짜 객체 생성</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-injectmocks">🔸 <code>@InjectMocks</code></h3>
 <ul>
-<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
-<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
-<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
+<li>역시 Mockito에서 제공</li>
+<li><strong>테스트 대상 객체(테스트할 클래스)를 생성</strong>하고,<br>
+그 안에 있는 의존성 필드에 <code>@Mock</code>으로 만든 객체들을 <strong>자동으로 주입</strong></li>
 </ul>
-<hr>
-<h3 id="구조-예시">구조 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
-</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
-</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
-</span></span><span class="line"><span class="cl">                                           ▼
-</span></span><span class="line"><span class="cl">                                   ┌────────────┐
-</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
-</span></span><span class="line"><span class="cl">                                   └────────────┘   │
-</span></span><span class="line"><span class="cl">                                                    ▼
-</span></span><span class="line"><span class="cl">                                            ┌────────────┐
-</span></span><span class="line"><span class="cl">                                            │ Service B  │
-</span></span><span class="line"><span class="cl">                                            └────────────┘
-</span></span></code></pre></div><ul>
-<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
-<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
-</ul>
-<hr>
-<h3 id="요약">요약</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w"> </span><span class="c1">// MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-간단-예시">✅ 간단 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyServiceTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService는 실제 객체</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myRepository는 mock 객체</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService 내부에서 myRepository가 사용될 때 mock이 주입됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-정리하자면">📌 정리하자면:</h3>
 <table>
   <thead>
       <tr>
-          <th>항목</th>
-          <th>설명</th>
+          <th>어노테이션</th>
+          <th>역할</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>Trace ID</td>
-          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
+          <td><code>@Mock</code></td>
+          <td>가짜(Mock) 객체 생성</td>
       </tr>
       <tr>
-          <td>Span ID</td>
-          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
+          <td><code>@InjectMocks</code></td>
+          <td>테스트 대상 객체를 생성하고, <code>@Mock</code> 객체를 그 안에 주입</td>
       </tr>
   </tbody>
 </table>
-<hr>
-<h3 id="첨언">첨언</h3>
-<ul>
-<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
-<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
-</ul>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/jvm_stack/">
-                    <span class="repo" title="JVM 에서 쓰이는 stack 의 종류">JVM 에서 쓰이는 stack 의 종류</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p>JVM(Java Virtual Machine)에서는 내부적으로 여러 종류의 <strong>스택(stack)</strong> 을 사용합니다. <!-- raw HTML omitted -->
-각각의 스택은 JVM의 실행 및 메모리 관리 등에서 중요한 역할을 합니다. 주요 스택 종류는 다음과 같습니다:</p>
-<hr>
-<h3 id="-1-java-virtual-machine-stack-또는-thread-stack">🧠 1. <strong>Java Virtual Machine Stack (또는 Thread Stack)</strong></h3>
-<ul>
-<li><strong>설명</strong>: 각 <strong>스레드(thread)</strong> 마다 하나씩 존재하는 스택입니다.</li>
-<li><strong>역할</strong>: 메서드 호출 시 생성되는 <strong>스택 프레임(stack frame)</strong> 을 저장합니다. 각 프레임에는:
-<ul>
-<li>지역 변수(Local Variables)</li>
-<li>피연산자 스택(Operand Stack)</li>
-<li>메서드 반환 주소 등이 포함됨</li>
-</ul>
-</li>
-<li><strong>예외</strong>: 스택 오버플로우 발생 시 <code>StackOverflowError</code> 발생</li>
-</ul>
-<hr>
-<h3 id="-2-native-method-stack">🔁 2. <strong>Native Method Stack</strong></h3>
-<ul>
-<li><strong>설명</strong>: 네이티브 메서드(C로 구현된 JNI 메서드 등) 호출 시 사용되는 스택입니다.</li>
-<li><strong>역할</strong>: C/C++ 등 JVM 외부 언어로 구현된 메서드에서 필요한 데이터를 저장</li>
-<li><strong>특이사항</strong>: 일부 JVM 구현에서는 Java 스택과 통합되기도 함</li>
-</ul>
-<hr>
-<h3 id="-3-operand-stack-피연산자-스택">💾 3. <strong>Operand Stack (피연산자 스택)</strong></h3>
-<ul>
-<li><strong>설명</strong>: 위의 JVM Stack의 <strong>각 스택 프레임 내</strong>에 존재하는 스택입니다.</li>
-<li><strong>역할</strong>: 바이트코드 명령어가 실행 중인 <strong>중간 연산 결과</strong>를 임시로 저장</li>
-<li><strong>예시</strong>: <code>iadd</code>, <code>imul</code> 같은 바이트코드 명령은 이 스택에서 피연산자를 꺼내 계산</li>
-</ul>
-<hr>
-<h3 id="-4-call-stack-호출-스택">🧱 4. <strong>Call Stack (호출 스택)</strong></h3>
-<ul>
-<li><strong>설명</strong>: JVM Stack의 구조적인 측면을 지칭하는 용어로, 메서드 호출의 흐름을 나타냅니다.</li>
-<li><strong>역할</strong>: 현재 실행 중인 메서드부터 시작해 호출된 메서드들이 차곡차곡 쌓여 있음</li>
-<li><strong>특징</strong>: 디버깅 시 &ldquo;Stack Trace&quot;로 확인 가능</li>
-</ul>
-<hr>
-<p>추가로 JVM에는 스택 이외에도 다음과 같은 메모리 영역이 있습니다:</p>
+<p>즉, <code>@Mock</code>이 가짜 부품을 만드는 거고,<br>
+<code>@InjectMocks</code>는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.</p>
                 </div>
 
                 <p class="mb-0 f6 text-gray">
@@ -891,6 +871,12 @@
     
     <div class="mt-4 position-relative" id="contributions" data='[
 {
+  "title": "@JsonIgnore%20%ec%99%80%20JsonInclude",
+  "link": "https://pink-spider.github.io/post/spring/jsonignore_include/",
+  "publishDate": "2025-04-08%2017:42:13"
+},
+
+{
   "title": "REST%20API",
   "link": "https://pink-spider.github.io/post/til/restapi/",
   "publishDate": "2025-04-03%2018:02:29"
@@ -899,6 +885,24 @@
 {
   "title": "@Mock%20@MockBean%20%ec%9d%98%20%ec%b0%a8%ec%9d%b4",
   "link": "https://pink-spider.github.io/post/spring/mock_mockbean/",
+  "publishDate": "2025-04-03%2015:57:29"
+},
+
+{
+  "title": "@Mock,%20@InjectBean%20%ec%9d%98%20%ec%b0%a8%ec%9d%b4",
+  "link": "https://pink-spider.github.io/post/spring/mock_injectmock/",
+  "publishDate": "2025-04-03%2015:57:29"
+},
+
+{
+  "title": "Mock,%20Stub%20%ec%9d%98%20%ec%b0%a8%ec%9d%b4",
+  "link": "https://pink-spider.github.io/post/spring/mock_stub/",
+  "publishDate": "2025-04-03%2015:57:29"
+},
+
+{
+  "title": "Test%20Double",
+  "link": "https://pink-spider.github.io/post/spring/test_double/",
   "publishDate": "2025-04-03%2015:57:29"
 },
 
@@ -948,6 +952,18 @@
   "title": "Vo%ec%99%80%20Dto",
   "link": "https://pink-spider.github.io/post/spring/vo_dto_comparison/",
   "publishDate": "2025-03-30%2017:14:05"
+},
+
+{
+  "title": "Jpa%ea%b4%80%eb%a0%a8%20log%ec%84%a4%ec%a0%95%20yml",
+  "link": "https://pink-spider.github.io/post/spring/jpa_log_yml/",
+  "publishDate": "2025-03-28%2013:25:03"
+},
+
+{
+  "title": "Spring%20Gateway%20Cors%20%ec%84%a4%ec%9e%a5%ed%95%98%ea%b8%b0",
+  "link": "https://pink-spider.github.io/post/spring/gateway_cors/",
+  "publishDate": "2025-03-28%2011:41:41"
 },
 
 {
@@ -1053,6 +1069,18 @@
 },
 
 {
+  "title": "About%20AES",
+  "link": "https://pink-spider.github.io/post/til/about_aes/",
+  "publishDate": "2025-03-20%2016:18:45"
+},
+
+{
+  "title": "AES%20key%20Generator",
+  "link": "https://pink-spider.github.io/post/til/aes_key_generate/",
+  "publishDate": "2025-03-20%2016:18:45"
+},
+
+{
   "title": "%eb%82%b4%20%ec%9a%b0%eb%b6%84%ed%88%ac%20%ec%84%9c%eb%b2%84%ec%97%90%20SSL%20%eb%ac%b4%eb%a3%8c%20%ec%84%a4%ec%b9%98%ed%95%98%ea%b8%b0",
   "link": "https://pink-spider.github.io/post/infra/ssl/",
   "publishDate": "2025-03-01%2015:19:58"
@@ -1086,6 +1114,12 @@
   "title": "Spring%20%ec%97%90%ec%84%9c%20%28boot%20%ed%8f%ac%ed%95%a8%29%20component%ec%99%80%20bean%ec%9d%98%20%ec%b0%a8%ec%9d%b4",
   "link": "https://pink-spider.github.io/post/spring/component_bean_difference/",
   "publishDate": "2024-12-21%2017:14:05"
+},
+
+{
+  "title": "@Value%20%ec%9d%98%20%ea%b0%92%ec%9d%b4%20%eb%b0%94%ec%9d%b8%eb%94%a9%20%eb%90%98%ec%a7%80%20%ec%95%8a%ec%9c%bc%ec%8b%a0%ea%b0%80%ec%9a%94",
+  "link": "https://pink-spider.github.io/post/spring/value/",
+  "publishDate": "2024-11-27%2017:14:05"
 },
 
 {

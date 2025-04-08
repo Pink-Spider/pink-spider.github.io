@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    MSA에서 traceId 와 spanId 란? | Pink Spider
+    Spring Gateway Cors 설장하기 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,22 +27,22 @@
   
   <meta
   name="description"
-  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
-1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
+  content="Spring Cloud Gateway에서 globalcors 설정 특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, 설정한 cors-configurations 키의 패턴을 세분화하면 됩니다. 현재는 &lsquo;/**&lsquo;로 모든 경로에 대해 허용하고 있으므로, 이를 제한하려면 예를 들어 /api/public/** 처럼 특정 경로로 좁혀주면 됩니다. Spring Cloud Gateway에서 globalcors 설정을 사용할 때 특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, 설정한 cors-configurations 키의 패턴을 세분화하면 됩니다. 현재는 &#39;/\*\*&#39;로 모든 경로에 대해 허용하고 있으므로, 이를 제한하려면 예를 들어 /api/public/** 처럼 특정 경로로 좁혀주면 됩니다.
+"
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/gateway_cors/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="MSA에서 traceId 와 spanId 란? - Pink Spider"
+  content="Spring Gateway Cors 설장하기 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
-1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
+  content="Spring Cloud Gateway에서 globalcors 설정 특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, 설정한 cors-configurations 키의 패턴을 세분화하면 됩니다. 현재는 &lsquo;/**&lsquo;로 모든 경로에 대해 허용하고 있으므로, 이를 제한하려면 예를 들어 /api/public/** 처럼 특정 경로로 좁혀주면 됩니다. Spring Cloud Gateway에서 globalcors 설정을 사용할 때 특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, 설정한 cors-configurations 키의 패턴을 세분화하면 됩니다. 현재는 &#39;/\*\*&#39;로 모든 경로에 대해 허용하고 있으므로, 이를 제한하려면 예를 들어 /api/public/** 처럼 특정 경로로 좁혀주면 됩니다.
+"
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -58,15 +58,15 @@
 />
 <meta
   property="og:title"
-  content="MSA에서 traceId 와 spanId 란? - Pink Spider"
+  content="Spring Gateway Cors 설장하기 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
-1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
+  content="Spring Cloud Gateway에서 globalcors 설정 특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, 설정한 cors-configurations 키의 패턴을 세분화하면 됩니다. 현재는 &lsquo;/**&lsquo;로 모든 경로에 대해 허용하고 있으므로, 이를 제한하려면 예를 들어 /api/public/** 처럼 특정 경로로 좁혀주면 됩니다. Spring Cloud Gateway에서 globalcors 설정을 사용할 때 특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, 설정한 cors-configurations 키의 패턴을 세분화하면 됩니다. 현재는 &#39;/\*\*&#39;로 모든 경로에 대해 허용하고 있으므로, 이를 제한하려면 예를 들어 /api/public/** 처럼 특정 경로로 좁혀주면 됩니다.
+"
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/msa_traceid_spanid/" />
-<meta property="og:site_name" content="MSA에서 traceId 와 spanId 란?" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/gateway_cors/" />
+<meta property="og:site_name" content="Spring Gateway Cors 설장하기" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -74,7 +74,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-02 10:50:33 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-28 11:41:41 &#43;0900 KST" />
 
 
 
@@ -284,18 +284,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/">MSA에서 traceId 와 spanId 란?</a></strong>
+                      href="https://pink-spider.github.io/post/spring/gateway_cors/">Spring Gateway Cors 설장하기</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 02 Apr 2025 10:50:33 &#43;0900"
+                  Created <relative-time datetime="Fri, 28 Mar 2025 11:41:41 &#43;0900"
                     class="no-wrap">
-                    Wed, 02 Apr 2025 10:50:33 &#43;0900</relative-time>
+                    Fri, 28 Mar 2025 11:41:41 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 02 Apr 2025 10:53:33 &#43;0900"
+                  Modified <relative-time datetime="Mon, 07 Apr 2025 10:29:24 &#43;0900"
                     class="no-wrap">
-                    Wed, 02 Apr 2025 10:53:33 &#43;0900</relative-time>
+                    Mon, 07 Apr 2025 10:29:24 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -325,9 +325,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      703 Words
+                      903 Words
                     <span class="file-info-divider"></span>
-                                        3 min
+                                        4 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -338,67 +338,108 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
-<hr>
-<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
+                <article class="markdown-body entry-content container-lg"><h1 id="spring-cloud-gateway에서-globalcors-설정">Spring Cloud Gateway에서 globalcors 설정</h1>
 <ul>
-<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
-<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
-<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
+<li>특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, 설정한 cors-configurations 키의 패턴을 세분화하면 됩니다. <!-- raw HTML omitted --></li>
+<li>현재는 &lsquo;/**&lsquo;로 모든 경로에 대해 허용하고 있으므로, 이를 제한하려면 예를 들어 /api/public/** 처럼 특정 경로로 좁혀주면 됩니다.</li>
 </ul>
-<hr>
-<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
+<p>Spring Cloud Gateway에서 <code>globalcors</code> 설정을 사용할 때 특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, <!-- raw HTML omitted -->
+설정한 <code>cors-configurations</code> 키의 패턴을 세분화하면 됩니다. <!-- raw HTML omitted -->
+현재는 <code>'/\*\*'</code>로 모든 경로에 대해 허용하고 있으므로, <!-- raw HTML omitted -->
+이를 제한하려면 예를 들어 <code>/api/public/**</code> 처럼 특정 경로로 좁혀주면 됩니다.</p>
+<h3 id="예시-특정-경로-apipublic-에-대해서만-cors-허용">예시: 특정 경로 <code>/api/public/**</code> 에 대해서만 CORS 허용</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cloud</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">gateway</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">globalcors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cors-configurations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">&#39;[/**]&#39;</span><span class="p">:</span><span class="w"> </span><span class="c"># ← 이걸 아래처럼 변경</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c"># 이걸 삭제하거나 아래처럼 경로를 제한</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">&#39;[ /api/public/** ]&#39;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedOriginsPattern</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;http://example.com:8899&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedMethods</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">PUT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">DELETE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">OPTIONS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">PATCH</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedHeaders</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allow-credentials</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></div><h3 id="주의사항">주의사항:</h3>
 <ul>
-<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
-<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
-<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
+<li><code>allowedOriginsPattern</code>은 정규식 기반입니다. <code>allowedOrigins</code>는 정확한 도메인 문자열 기반입니다.</li>
+<li><code>allow-credentials: true</code>를 사용하려면 <code>allowedOriginsPattern</code> 대신 <code>allowedOrigins</code>를 사용하는 것이 더 안정적입니다. (와일드카드와 <code>credentials</code>을 함께 사용하면 브라우저에서 막을 수 있음)</li>
+<li><code>globalcors</code> 설정은 Gateway 필터보다 먼저 적용되는 <strong>WebFlux</strong> 레벨의 설정입니다.</li>
 </ul>
 <hr>
-<h3 id="구조-예시">구조 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
-</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
-</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
-</span></span><span class="line"><span class="cl">                                           ▼
-</span></span><span class="line"><span class="cl">                                   ┌────────────┐
-</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
-</span></span><span class="line"><span class="cl">                                   └────────────┘   │
-</span></span><span class="line"><span class="cl">                                                    ▼
-</span></span><span class="line"><span class="cl">                                            ┌────────────┐
-</span></span><span class="line"><span class="cl">                                            │ Service B  │
-</span></span><span class="line"><span class="cl">                                            └────────────┘
-</span></span></code></pre></div><ul>
-<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
-<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
-</ul>
-<hr>
-<h3 id="요약">요약</h3>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Trace ID</td>
-          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
-      </tr>
-      <tr>
-          <td>Span ID</td>
-          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h3 id="첨언">첨언</h3>
+<p>필요하다면 여러 경로를 구분해서 여러 개의 설정도 가능해요:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">cors-configurations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#39;[ /api/public/** ]&#39;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">allowedOrigins</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;http://example.com&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">allowedMethods</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">allowedHeaders</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">allow-credentials</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">&#39;[ /api/another-path/** ]&#39;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">allowedOrigins</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;http://example.com&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">allowedMethods</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">allowedHeaders</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w">
+</span></span></span></code></pre></div><h2 id="allowedoriginspattern-에-여러-주소로-설정할-수는-없을까">allowedOriginsPattern 에 여러 주소로 설정할 수는 없을까?</h2>
+<p><code>allowedOriginsPattern</code>에 여러 주소를 넣으려면 <strong>하나의 정규식</strong>으로 표현해야 합니다.<!-- raw HTML omitted -->
+YAML에서 리스트처럼 쓰는 게 아니라, 여러 패턴을 <strong>파이프 <code>|</code>로 묶은 정규식</strong>을 하나의 문자열로 작성해야 해요.</p>
+<h3 id="예시-http121136108448899-와-httpsexamplecom-두-개-허용">예시: <code>http://121.136.108.44:8899</code> 와 <code>https://example.com</code> 두 개 허용</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cloud</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">gateway</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">globalcors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cors-configurations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">&#39;[ /api/public/** ]&#39;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedOriginsPattern</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;http://121\\.000\\.111\\.222|https://example\\.com&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedMethods</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">PUT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">DELETE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">OPTIONS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">PATCH</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedHeaders</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allow-credentials</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></div><h3 id="팁">팁:</h3>
 <ul>
-<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
-<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
+<li>정규식이기 때문에 <code>.</code>, <code>:</code> 같은 특수 문자는 백슬래시(<code>\</code>)로 이스케이프 해줘야 해요.</li>
+<li><code>allowedOriginsPattern</code> 대신 <code>allowedOrigins</code>를 쓰면 여러 개를 리스트 형식으로 쉽게 쓸 수 있어요:</li>
 </ul>
-</article>
+<h3 id="대안-allowedorigins-리스트로-간단하게-여러-도메인-허용">대안: <code>allowedOrigins</code> 리스트로 간단하게 여러 도메인 허용</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cloud</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">gateway</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">globalcors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cors-configurations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">&#39;[ /api/public/** ]&#39;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedOrigins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">http://121.000.111.222</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">https://example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedMethods</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">PUT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">DELETE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">OPTIONS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">PATCH</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedHeaders</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allow-credentials</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<p>둘 중 어느 방식이든 쓸 수 있고, <code>allowedOrigins</code> 방식이 직관적이라 실수도 줄일 수 있어요. <!-- raw HTML omitted -->
+정규식이 꼭 필요한 게 아니라면 <code>allowedOrigins</code>를 추천!</p>
+<p>정규식이 복잡하게 느껴지면, 특정 서브도메인 몇 개만 허용할 거라면 그냥 이렇게:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">allowedOrigins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="l">https://pink-spider.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="l">https://admin.pink-spider.io</span><span class="w">
+</span></span></span></code></pre></div></article>
               </div>
 
               
@@ -410,13 +451,13 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/test_double/"> Test Double</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jpa_log_yml/"> Jpa관련 log설정 yml</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jvm_stack/">JVM 에서 쓰이는 stack 의 종류&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/jwt_strategy/">QueryDSL을 사용할 때 데이터베이스의 Lock&nbsp;</a><div> »</div>
           
         </div>
       </div>

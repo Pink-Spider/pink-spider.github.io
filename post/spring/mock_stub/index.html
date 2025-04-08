@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    MSA에서 traceId 와 spanId 란? | Pink Spider
+    Mock, Stub 의 차이 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,22 +27,22 @@
   
   <meta
   name="description"
-  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
-1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
+  content="Mock, Stub 의 차이 mock과 stub은 테스트에서 외부 의존성을 대체하기 위해 쓰이는 객체인데, 둘은 목적과 기능 면에서 조금 달라요.
+📌 요약 비교 항목 Stub Mock 목적 고정된 값 반환 (단순 대체) 동작 검증 &#43; 유연한 설정 기능 미리 정의된 응답 제공 호출 여부, 호출 횟수, 파라미터 검증 등 가능 테스트 타입 주로 상태 기반 테스트 (State-based) 주로 행위 기반 테스트 (Behavior-based) 예시 &ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo; &ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo; 🔹 Stub: 단순하게 리턴값만 정해놓은 가짜 실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품. 주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용. when(userRepository.findById(1L)).thenReturn(Optional.of(user)); 🔸 Mock: 행위(호출 여부 등)까지 확인하는 가짜 리턴값도 정의할 수 있지만, &ldquo;정말로 이 메서드가 호출됐는가?&rdquo; 같은 검증도 가능. verify() 같은 메서드를 통해 테스트의 정확성을 높임. verify(userRepository, times(1)).findById(1L); ✅ 실제 테스트 예시 @Mock UserRepository userRepository; @InjectMocks UserService userService; @Test void testUserFetch() { // Stub: 리턴값 지정 when(userRepository.findById(1L)).thenReturn(Optional.of(new User(&#34;Alice&#34;))); // 메서드 실행 User user = userService.getUser(1L); // Mock: 호출 여부 검증 verify(userRepository, times(1)).findById(1L); } 📎 간단 비유 Stub: “누가 와도 무조건 이 대사만 말해!” Mock: “누가 오면 이 대사를 하고, 제대로 말했는지 검사도 합니다.!” "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/mock_stub/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="MSA에서 traceId 와 spanId 란? - Pink Spider"
+  content="Mock, Stub 의 차이 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
-1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
+  content="Mock, Stub 의 차이 mock과 stub은 테스트에서 외부 의존성을 대체하기 위해 쓰이는 객체인데, 둘은 목적과 기능 면에서 조금 달라요.
+📌 요약 비교 항목 Stub Mock 목적 고정된 값 반환 (단순 대체) 동작 검증 &#43; 유연한 설정 기능 미리 정의된 응답 제공 호출 여부, 호출 횟수, 파라미터 검증 등 가능 테스트 타입 주로 상태 기반 테스트 (State-based) 주로 행위 기반 테스트 (Behavior-based) 예시 &ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo; &ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo; 🔹 Stub: 단순하게 리턴값만 정해놓은 가짜 실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품. 주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용. when(userRepository.findById(1L)).thenReturn(Optional.of(user)); 🔸 Mock: 행위(호출 여부 등)까지 확인하는 가짜 리턴값도 정의할 수 있지만, &ldquo;정말로 이 메서드가 호출됐는가?&rdquo; 같은 검증도 가능. verify() 같은 메서드를 통해 테스트의 정확성을 높임. verify(userRepository, times(1)).findById(1L); ✅ 실제 테스트 예시 @Mock UserRepository userRepository; @InjectMocks UserService userService; @Test void testUserFetch() { // Stub: 리턴값 지정 when(userRepository.findById(1L)).thenReturn(Optional.of(new User(&#34;Alice&#34;))); // 메서드 실행 User user = userService.getUser(1L); // Mock: 호출 여부 검증 verify(userRepository, times(1)).findById(1L); } 📎 간단 비유 Stub: “누가 와도 무조건 이 대사만 말해!” Mock: “누가 오면 이 대사를 하고, 제대로 말했는지 검사도 합니다.!” "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -58,15 +58,15 @@
 />
 <meta
   property="og:title"
-  content="MSA에서 traceId 와 spanId 란? - Pink Spider"
+  content="Mock, Stub 의 차이 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
-1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
+  content="Mock, Stub 의 차이 mock과 stub은 테스트에서 외부 의존성을 대체하기 위해 쓰이는 객체인데, 둘은 목적과 기능 면에서 조금 달라요.
+📌 요약 비교 항목 Stub Mock 목적 고정된 값 반환 (단순 대체) 동작 검증 &#43; 유연한 설정 기능 미리 정의된 응답 제공 호출 여부, 호출 횟수, 파라미터 검증 등 가능 테스트 타입 주로 상태 기반 테스트 (State-based) 주로 행위 기반 테스트 (Behavior-based) 예시 &ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo; &ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo; 🔹 Stub: 단순하게 리턴값만 정해놓은 가짜 실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품. 주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용. when(userRepository.findById(1L)).thenReturn(Optional.of(user)); 🔸 Mock: 행위(호출 여부 등)까지 확인하는 가짜 리턴값도 정의할 수 있지만, &ldquo;정말로 이 메서드가 호출됐는가?&rdquo; 같은 검증도 가능. verify() 같은 메서드를 통해 테스트의 정확성을 높임. verify(userRepository, times(1)).findById(1L); ✅ 실제 테스트 예시 @Mock UserRepository userRepository; @InjectMocks UserService userService; @Test void testUserFetch() { // Stub: 리턴값 지정 when(userRepository.findById(1L)).thenReturn(Optional.of(new User(&#34;Alice&#34;))); // 메서드 실행 User user = userService.getUser(1L); // Mock: 호출 여부 검증 verify(userRepository, times(1)).findById(1L); } 📎 간단 비유 Stub: “누가 와도 무조건 이 대사만 말해!” Mock: “누가 오면 이 대사를 하고, 제대로 말했는지 검사도 합니다.!” "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/msa_traceid_spanid/" />
-<meta property="og:site_name" content="MSA에서 traceId 와 spanId 란?" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/mock_stub/" />
+<meta property="og:site_name" content="Mock, Stub 의 차이" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -74,7 +74,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-02 10:50:33 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-03 15:57:29 &#43;0900 KST" />
 
 
 
@@ -284,18 +284,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/">MSA에서 traceId 와 spanId 란?</a></strong>
+                      href="https://pink-spider.github.io/post/spring/mock_stub/">Mock, Stub 의 차이</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 02 Apr 2025 10:50:33 &#43;0900"
+                  Created <relative-time datetime="Thu, 03 Apr 2025 15:57:29 &#43;0900"
                     class="no-wrap">
-                    Wed, 02 Apr 2025 10:50:33 &#43;0900</relative-time>
+                    Thu, 03 Apr 2025 15:57:29 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 02 Apr 2025 10:53:33 &#43;0900"
+                  Modified <relative-time datetime="Mon, 07 Apr 2025 10:29:24 &#43;0900"
                     class="no-wrap">
-                    Wed, 02 Apr 2025 10:53:33 &#43;0900</relative-time>
+                    Mon, 07 Apr 2025 10:29:24 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -325,9 +325,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      703 Words
+                      505 Words
                     <span class="file-info-divider"></span>
-                                        3 min
+                                        2 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -338,66 +338,81 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="mock-stub-의-차이">Mock, Stub 의 차이</h1>
+<p><code>mock</code>과 <code>stub</code>은 테스트에서 <strong>외부 의존성을 대체</strong>하기 위해 쓰이는 객체인데, 둘은 <strong>목적과 기능 면에서 조금 달라요.</strong></p>
 <hr>
-<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
-<ul>
-<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
-<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
-<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
-</ul>
-<hr>
-<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
-<ul>
-<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
-<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
-<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
-</ul>
-<hr>
-<h3 id="구조-예시">구조 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
-</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
-</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
-</span></span><span class="line"><span class="cl">                                           ▼
-</span></span><span class="line"><span class="cl">                                   ┌────────────┐
-</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
-</span></span><span class="line"><span class="cl">                                   └────────────┘   │
-</span></span><span class="line"><span class="cl">                                                    ▼
-</span></span><span class="line"><span class="cl">                                            ┌────────────┐
-</span></span><span class="line"><span class="cl">                                            │ Service B  │
-</span></span><span class="line"><span class="cl">                                            └────────────┘
-</span></span></code></pre></div><ul>
-<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
-<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
-</ul>
-<hr>
-<h3 id="요약">요약</h3>
+<h2 id="-요약-비교">📌 요약 비교</h2>
 <table>
   <thead>
       <tr>
           <th>항목</th>
-          <th>설명</th>
+          <th><strong>Stub</strong></th>
+          <th><strong>Mock</strong></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>Trace ID</td>
-          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
+          <td>목적</td>
+          <td>고정된 값 반환 (단순 대체)</td>
+          <td>동작 검증 + 유연한 설정</td>
       </tr>
       <tr>
-          <td>Span ID</td>
-          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
+          <td>기능</td>
+          <td>미리 정의된 응답 제공</td>
+          <td>호출 여부, 호출 횟수, 파라미터 검증 등 가능</td>
+      </tr>
+      <tr>
+          <td>테스트 타입</td>
+          <td>주로 상태 기반 테스트 (State-based)</td>
+          <td>주로 행위 기반 테스트 (Behavior-based)</td>
+      </tr>
+      <tr>
+          <td>예시</td>
+          <td>&ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo;</td>
+          <td>&ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo;</td>
       </tr>
   </tbody>
 </table>
 <hr>
-<h3 id="첨언">첨언</h3>
+<h2 id="-stub-단순하게-리턴값만-정해놓은-가짜">🔹 Stub: 단순하게 <strong>리턴값만 정해놓은 가짜</strong></h2>
 <ul>
-<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
-<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
+<li>실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품.</li>
+<li>주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용.</li>
 </ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">user</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-mock-행위호출-여부-등까지-확인하는-가짜">🔸 Mock: <strong>행위(호출 여부 등)까지 확인</strong>하는 가짜</h2>
+<ul>
+<li>리턴값도 정의할 수 있지만, <strong>&ldquo;정말로 이 메서드가 호출됐는가?&rdquo;</strong> 같은 검증도 가능.</li>
+<li><code>verify()</code> 같은 메서드를 통해 테스트의 정확성을 높임.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-실제-테스트-예시">✅ 실제 테스트 예시</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">void</span><span class="w"> </span><span class="nf">testUserFetch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Stub: 리턴값 지정</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">)));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 메서드 실행</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Mock: 호출 여부 검증</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-간단-비유">📎 간단 비유</h2>
+<ul>
+<li><strong>Stub</strong>: “누가 와도 <strong>무조건 이 대사만 말해!”</strong></li>
+<li><strong>Mock</strong>: “누가 오면 이 대사를 하고, <strong>제대로 말했는지 검사도 합니다.!”</strong></li>
+</ul>
+<hr>
 </article>
               </div>
 
@@ -410,13 +425,13 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/test_double/"> Test Double</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/mock_injectmock/"> @Mock, @InjectBean 의 차이</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jvm_stack/">JVM 에서 쓰이는 stack 의 종류&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/test_double/">Test Double&nbsp;</a><div> »</div>
           
         </div>
       </div>

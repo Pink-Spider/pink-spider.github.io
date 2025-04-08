@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    MSA에서 traceId 와 spanId 란? | Pink Spider
+    @Mock, @InjectBean 의 차이 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,22 +27,28 @@
   
   <meta
   name="description"
-  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
-1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
+  content="@Mock 과 @InjectedMock @Mock과 @InjectMocks의 차이를 알아볼게요. 이 둘은 함께 자주 쓰이지만 서로 다른 역할을 해요.
+🔹 @Mock Mockito에서 제공 Mock 객체를 생성해줌 단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음 @Mock private MyRepository myRepository; // 가짜 객체 생성 🔸 @InjectMocks 역시 Mockito에서 제공 테스트 대상 객체(테스트할 클래스)를 생성하고,
+그 안에 있는 의존성 필드에 @Mock으로 만든 객체들을 자동으로 주입 @InjectMocks private MyService myService; // MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입 ✅ 간단 예시 @ExtendWith(MockitoExtension.class) class MyServiceTest { @Mock private MyRepository myRepository; @InjectMocks private MyService myService; @Test void testSomething() { // myService는 실제 객체 // myRepository는 mock 객체 // myService 내부에서 myRepository가 사용될 때 mock이 주입됨 } } 📌 정리하자면: 어노테이션 역할 @Mock 가짜(Mock) 객체 생성 @InjectMocks 테스트 대상 객체를 생성하고, @Mock 객체를 그 안에 주입 즉, @Mock이 가짜 부품을 만드는 거고,
+@InjectMocks는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.
+"
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/mock_injectmock/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="MSA에서 traceId 와 spanId 란? - Pink Spider"
+  content="@Mock, @InjectBean 의 차이 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
-1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
+  content="@Mock 과 @InjectedMock @Mock과 @InjectMocks의 차이를 알아볼게요. 이 둘은 함께 자주 쓰이지만 서로 다른 역할을 해요.
+🔹 @Mock Mockito에서 제공 Mock 객체를 생성해줌 단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음 @Mock private MyRepository myRepository; // 가짜 객체 생성 🔸 @InjectMocks 역시 Mockito에서 제공 테스트 대상 객체(테스트할 클래스)를 생성하고,
+그 안에 있는 의존성 필드에 @Mock으로 만든 객체들을 자동으로 주입 @InjectMocks private MyService myService; // MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입 ✅ 간단 예시 @ExtendWith(MockitoExtension.class) class MyServiceTest { @Mock private MyRepository myRepository; @InjectMocks private MyService myService; @Test void testSomething() { // myService는 실제 객체 // myRepository는 mock 객체 // myService 내부에서 myRepository가 사용될 때 mock이 주입됨 } } 📌 정리하자면: 어노테이션 역할 @Mock 가짜(Mock) 객체 생성 @InjectMocks 테스트 대상 객체를 생성하고, @Mock 객체를 그 안에 주입 즉, @Mock이 가짜 부품을 만드는 거고,
+@InjectMocks는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.
+"
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -58,15 +64,18 @@
 />
 <meta
   property="og:title"
-  content="MSA에서 traceId 와 spanId 란? - Pink Spider"
+  content="@Mock, @InjectBean 의 차이 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="MSA(Microservices Architecture)에서 trace ID와 span ID는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.
-1. Trace ID 하나의 전체 요청(Request)을 식별하는 고유한 ID입니다. 예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, 이 전체 흐름을 하나의 trace로 봅니다. 즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄. 2. Span ID trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다. 예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 span이 되고, 각각에 대한 span ID가 있습니다. Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다. 구조 예시 [Trace ID: abc123] ┌─────────────┐ ┌─────────────┐ │ User Request│──────▶│ API Gateway │───┐ └─────────────┘ └─────────────┘ │ ▼ ┌────────────┐ │ Service A │───┐ └────────────┘ │ ▼ ┌────────────┐ │ Service B │ └────────────┘ 전체 요청의 흐름이 하나의 Trace ID (abc123)를 공유하고, 각 서비스 간 호출은 서로 다른 Span ID를 가짐. 요약 항목 설명 Trace ID 전체 요청 흐름을 추적하기 위한 고유 ID Span ID Trace 내에서 개별 작업을 구분하는 ID 첨언 실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고 예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다. "
+  content="@Mock 과 @InjectedMock @Mock과 @InjectMocks의 차이를 알아볼게요. 이 둘은 함께 자주 쓰이지만 서로 다른 역할을 해요.
+🔹 @Mock Mockito에서 제공 Mock 객체를 생성해줌 단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음 @Mock private MyRepository myRepository; // 가짜 객체 생성 🔸 @InjectMocks 역시 Mockito에서 제공 테스트 대상 객체(테스트할 클래스)를 생성하고,
+그 안에 있는 의존성 필드에 @Mock으로 만든 객체들을 자동으로 주입 @InjectMocks private MyService myService; // MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입 ✅ 간단 예시 @ExtendWith(MockitoExtension.class) class MyServiceTest { @Mock private MyRepository myRepository; @InjectMocks private MyService myService; @Test void testSomething() { // myService는 실제 객체 // myRepository는 mock 객체 // myService 내부에서 myRepository가 사용될 때 mock이 주입됨 } } 📌 정리하자면: 어노테이션 역할 @Mock 가짜(Mock) 객체 생성 @InjectMocks 테스트 대상 객체를 생성하고, @Mock 객체를 그 안에 주입 즉, @Mock이 가짜 부품을 만드는 거고,
+@InjectMocks는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.
+"
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/msa_traceid_spanid/" />
-<meta property="og:site_name" content="MSA에서 traceId 와 spanId 란?" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/mock_injectmock/" />
+<meta property="og:site_name" content="@Mock, @InjectBean 의 차이" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -74,7 +83,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-02 10:50:33 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-03 15:57:29 &#43;0900 KST" />
 
 
 
@@ -284,18 +293,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/msa_traceid_spanid/">MSA에서 traceId 와 spanId 란?</a></strong>
+                      href="https://pink-spider.github.io/post/spring/mock_injectmock/">@Mock, @InjectBean 의 차이</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 02 Apr 2025 10:50:33 &#43;0900"
+                  Created <relative-time datetime="Thu, 03 Apr 2025 15:57:29 &#43;0900"
                     class="no-wrap">
-                    Wed, 02 Apr 2025 10:50:33 &#43;0900</relative-time>
+                    Thu, 03 Apr 2025 15:57:29 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 02 Apr 2025 10:53:33 &#43;0900"
+                  Modified <relative-time datetime="Mon, 07 Apr 2025 10:29:24 &#43;0900"
                     class="no-wrap">
-                    Wed, 02 Apr 2025 10:53:33 &#43;0900</relative-time>
+                    Mon, 07 Apr 2025 10:29:24 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -325,9 +334,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      703 Words
+                      976 Words
                     <span class="file-info-divider"></span>
-                                        3 min
+                                        4 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -338,66 +347,130 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="mock-과-injectedmock">@Mock 과 @InjectedMock</h1>
+<p><code>@Mock</code>과 <code>@InjectMocks</code>의 차이를 알아볼게요. 이 둘은 <strong>함께 자주 쓰이지만 서로 다른 역할</strong>을 해요.</p>
 <hr>
-<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
+<h3 id="-mock">🔹 <code>@Mock</code></h3>
 <ul>
-<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
-<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
-<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
+<li>Mockito에서 제공</li>
+<li><strong>Mock 객체를 생성</strong>해줌</li>
+<li>단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음</li>
 </ul>
-<hr>
-<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w"> </span><span class="c1">// 가짜 객체 생성</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-injectmocks">🔸 <code>@InjectMocks</code></h3>
 <ul>
-<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
-<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
-<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
+<li>역시 Mockito에서 제공</li>
+<li><strong>테스트 대상 객체(테스트할 클래스)를 생성</strong>하고,<br>
+그 안에 있는 의존성 필드에 <code>@Mock</code>으로 만든 객체들을 <strong>자동으로 주입</strong></li>
 </ul>
-<hr>
-<h3 id="구조-예시">구조 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
-</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
-</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
-</span></span><span class="line"><span class="cl">                                           ▼
-</span></span><span class="line"><span class="cl">                                   ┌────────────┐
-</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
-</span></span><span class="line"><span class="cl">                                   └────────────┘   │
-</span></span><span class="line"><span class="cl">                                                    ▼
-</span></span><span class="line"><span class="cl">                                            ┌────────────┐
-</span></span><span class="line"><span class="cl">                                            │ Service B  │
-</span></span><span class="line"><span class="cl">                                            └────────────┘
-</span></span></code></pre></div><ul>
-<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
-<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
-</ul>
-<hr>
-<h3 id="요약">요약</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w"> </span><span class="c1">// MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-간단-예시">✅ 간단 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyServiceTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService는 실제 객체</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myRepository는 mock 객체</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService 내부에서 myRepository가 사용될 때 mock이 주입됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-정리하자면">📌 정리하자면:</h3>
 <table>
   <thead>
       <tr>
-          <th>항목</th>
-          <th>설명</th>
+          <th>어노테이션</th>
+          <th>역할</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>Trace ID</td>
-          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
+          <td><code>@Mock</code></td>
+          <td>가짜(Mock) 객체 생성</td>
       </tr>
       <tr>
-          <td>Span ID</td>
-          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
+          <td><code>@InjectMocks</code></td>
+          <td>테스트 대상 객체를 생성하고, <code>@Mock</code> 객체를 그 안에 주입</td>
+      </tr>
+  </tbody>
+</table>
+<p>즉, <code>@Mock</code>이 가짜 부품을 만드는 거고,<br>
+<code>@InjectMocks</code>는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.</p>
+<hr>
+<h1 id="mockbean-과-injectmock-혼용할-수-있을까요">@MockBean 과 @InjectMock 혼용할 수 있을까요?</h1>
+<p><code>@MockBean</code>과 <code>@InjectMocks</code>의 혼용… 가능은 하지만, <strong>거의 안 하고, 대부분은 피하는 게 좋아요.</strong><br>
+왜냐면 이 둘은 <strong>역할이 완전히 다르고</strong>, <strong>쓰는 테스트 환경이 충돌</strong>할 수 있기 때문이에요.</p>
+<hr>
+<h2 id="-핵심-정리">📌 핵심 정리</h2>
+<table>
+  <thead>
+      <tr>
+          <th>어노테이션</th>
+          <th>역할</th>
+          <th>주로 쓰는 테스트 환경</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>@MockBean</code></td>
+          <td>Spring 컨텍스트에 있는 Bean을 <strong>Mock으로 교체</strong></td>
+          <td><code>@SpringBootTest</code>, <code>@WebMvcTest</code> 등</td>
+      </tr>
+      <tr>
+          <td><code>@InjectMocks</code></td>
+          <td>테스트 대상 객체를 만들고, <code>@Mock</code>된 의존성을 <strong>직접 주입</strong></td>
+          <td><code>@ExtendWith(MockitoExtension.class)</code></td>
       </tr>
   </tbody>
 </table>
 <hr>
-<h3 id="첨언">첨언</h3>
+<h2 id="-왜-혼용이-거의-없을까">🚫 왜 혼용이 거의 없을까?</h2>
 <ul>
-<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
-<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
+<li><code>@MockBean</code>은 Spring이 관리하는 Bean이고,<br>
+<code>@InjectMocks</code>는 Mockito가 관리하는 객체에 Mock을 주입하는 방식이거든요.</li>
+<li><strong>Spring vs Mockito</strong> → 둘 다 주입하려고 하면 <strong>어떤 게 실제로 주입되는지 예측이 어렵고 충돌 가능성 있음</strong></li>
 </ul>
+<hr>
+<h2 id="-예외적으로-가능은-한-경우-하지만-추천은-안-함">📎 예외적으로 가능은 한 경우 (하지만 추천은 안 함)</h2>
+<p>예를 들어, 다음과 같이 Spring Boot 컨텍스트를 띄우고 <code>@MockBean</code>으로 외부 Bean을 막으면서도,<br>
+<code>@InjectMocks</code>를 써서 특정 빈이 아닌 클래스를 테스트 대상으로 쓸 수는 있어요:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@SpringBootTest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyServiceTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@MockBean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ExternalService</span><span class="w"> </span><span class="n">externalService</span><span class="p">;</span><span class="w"> </span><span class="c1">// 이건 Spring 컨텍스트에 등록된 Bean 대체</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">InternalRepository</span><span class="w"> </span><span class="n">internalRepository</span><span class="p">;</span><span class="w"> </span><span class="c1">// 순수 Mockito mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w"> </span><span class="c1">// internalRepository는 여기에 직접 주입</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 가능한 구조지만 복잡하고 혼란스럽기 쉬움</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><blockquote>
+<p>✔️ 되긴 하지만&hellip; <strong>이럴 바엔 차라리 완전한 통합 테스트 or 완전한 단위 테스트 중 하나로 가는 게 깔끔합니다.</strong></p></blockquote>
+<hr>
+<h2 id="-실전-팁">✅ 실전 팁</h2>
+<ul>
+<li><strong>단위 테스트(Unit Test)</strong>: <code>@Mock</code> + <code>@InjectMocks</code></li>
+<li><strong>Spring 통합 테스트</strong>: <code>@MockBean</code> + <code>@Autowired</code>로 테스트 대상 주입</li>
+</ul>
+<hr>
 </article>
               </div>
 
@@ -410,13 +483,13 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/test_double/"> Test Double</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/mock_mockbean/"> @Mock @MockBean 의 차이</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jvm_stack/">JVM 에서 쓰이는 stack 의 종류&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/mock_stub/">Mock, Stub 의 차이&nbsp;</a><div> »</div>
           
         </div>
       </div>
