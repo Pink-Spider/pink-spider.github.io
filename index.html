@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">43</span>
+              <span class="Counter">44</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">43</span>
+      <span class="Counter ">44</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,48 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/feign-timecheck/">
+                    <span class="repo" title="Feign Timecheck">Feign Timecheck</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>서버 응답 지연이나 Timeout 관련 이슈를 추적하려면, <strong>요청/응답 시간 로그를 직접 남기거나</strong>, <strong>Spring에 커스텀 <code>Filter</code> 또는 <code>Feign Logger</code></strong> 를 활용하면 아주 효과적입니다. 아래에서 두 가지 케이스 모두 다뤄볼게요.</p>
+<hr>
+<h2 id="-1-feign-요청응답-시간-로깅-필터">✅ 1. <strong>Feign 요청/응답 시간 로깅 필터</strong></h2>
+<h3 id="-요청-전에-시간-저장--응답-후-소요-시간-측정">🔧 요청 전에 시간 저장 → 응답 후 소요 시간 측정</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FeignRequestTimingInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">RequestInterceptor</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">FeignRequestTimingInterceptor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">RequestTemplate</span><span class="w"> </span><span class="n">template</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">template</span><span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="s">&#34;X-Request-Start-Time&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>그리고 <code>ErrorDecoder</code>나 <code>FeignClientExceptionDecoder</code> 에서 시간 로그 출력:</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -777,99 +819,18 @@
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/mock_injectmock/">
-                    <span class="repo" title="@Mock, @InjectBean 의 차이">@Mock, @InjectBean 의 차이</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h1 id="mock-과-injectedmock">@Mock 과 @InjectedMock</h1>
-<p><code>@Mock</code>과 <code>@InjectMocks</code>의 차이를 알아볼게요. 이 둘은 <strong>함께 자주 쓰이지만 서로 다른 역할</strong>을 해요.</p>
-<hr>
-<h3 id="-mock">🔹 <code>@Mock</code></h3>
-<ul>
-<li>Mockito에서 제공</li>
-<li><strong>Mock 객체를 생성</strong>해줌</li>
-<li>단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w"> </span><span class="c1">// 가짜 객체 생성</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-injectmocks">🔸 <code>@InjectMocks</code></h3>
-<ul>
-<li>역시 Mockito에서 제공</li>
-<li><strong>테스트 대상 객체(테스트할 클래스)를 생성</strong>하고,<br>
-그 안에 있는 의존성 필드에 <code>@Mock</code>으로 만든 객체들을 <strong>자동으로 주입</strong></li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@InjectMocks</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w"> </span><span class="c1">// MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-간단-예시">✅ 간단 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyServiceTest</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Mock</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@InjectMocks</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService는 실제 객체</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myRepository는 mock 객체</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService 내부에서 myRepository가 사용될 때 mock이 주입됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-정리하자면">📌 정리하자면:</h3>
-<table>
-  <thead>
-      <tr>
-          <th>어노테이션</th>
-          <th>역할</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>@Mock</code></td>
-          <td>가짜(Mock) 객체 생성</td>
-      </tr>
-      <tr>
-          <td><code>@InjectMocks</code></td>
-          <td>테스트 대상 객체를 생성하고, <code>@Mock</code> 객체를 그 안에 주입</td>
-      </tr>
-  </tbody>
-</table>
-<p>즉, <code>@Mock</code>이 가짜 부품을 만드는 거고,<br>
-<code>@InjectMocks</code>는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "Feign%20Timecheck",
+  "link": "https://pink-spider.github.io/post/spring/feign-timecheck/",
+  "publishDate": "2025-04-11%2018:54:11"
+},
+
 {
   "title": "@JsonIgnore%20%ec%99%80%20JsonInclude",
   "link": "https://pink-spider.github.io/post/spring/jsonignore_include/",

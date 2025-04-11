@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">43</span>
+              <span class="Counter">44</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">43</span>
+      <span class="Counter ">44</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,46 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/feign-timecheck/">Feign Timecheck</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>서버 응답 지연이나 Timeout 관련 이슈를 추적하려면, <strong>요청/응답 시간 로그를 직접 남기거나</strong>, <strong>Spring에 커스텀 <code>Filter</code> 또는 <code>Feign Logger</code></strong> 를 활용하면 아주 효과적입니다. 아래에서 두 가지 케이스 모두 다뤄볼게요.</p>
+<hr>
+<h2 id="-1-feign-요청응답-시간-로깅-필터">✅ 1. <strong>Feign 요청/응답 시간 로깅 필터</strong></h2>
+<h3 id="-요청-전에-시간-저장--응답-후-소요-시간-측정">🔧 요청 전에 시간 저장 → 응답 후 소요 시간 측정</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FeignRequestTimingInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">RequestInterceptor</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">FeignRequestTimingInterceptor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">RequestTemplate</span><span class="w"> </span><span class="n">template</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">template</span><span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="s">&#34;X-Request-Start-Time&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>그리고 <code>ErrorDecoder</code>나 <code>FeignClientExceptionDecoder</code> 에서 시간 로그 출력:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Fri, 11 Apr 2025 18:54:11 &#43;0900" class="no-wrap"
+                title=" Fri, 11 Apr 2025 18:54:11 &#43;0900">
+                Fri, 11 Apr 2025 18:54:11 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -920,158 +960,6 @@
 <li><strong>Mock</strong>: “누가 오면 이 대사를 하고, <strong>제대로 말했는지 검사도 합니다.!”</strong></li>
 </ul>
 <hr>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
-                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
-                Thu, 03 Apr 2025 15:57:29 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/test_double/">Test Double</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="테스트-더블test-double-용어-정리">테스트 더블(Test Double) 용어 정리</h1>
-<ul>
-<li>아래는 <strong>테스트에서 자주 쓰이는 5가지 테스트 대역</strong>입니다:</li>
-</ul>
-<hr>
-<h2 id="-테스트-더블test-double-종류-요약">🧪 테스트 더블(Test Double) 종류 요약</h2>
-<table>
-  <thead>
-      <tr>
-          <th>타입</th>
-          <th>설명</th>
-          <th>주로 하는 일</th>
-          <th>대표 예시</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Dummy</strong></td>
-          <td>값이 필요하지만 <strong>아무 역할도 하지 않는 객체</strong></td>
-          <td>메서드 시그니처 채우기 용</td>
-          <td><code>new User(null)</code>처럼 값만 채움</td>
-      </tr>
-      <tr>
-          <td><strong>Fake</strong></td>
-          <td>실제 구현에 가까우나, <strong>단순하거나 in-memory 기반</strong></td>
-          <td>간단한 대체 구현</td>
-          <td>InMemory DB, FakeEmailSender</td>
-      </tr>
-      <tr>
-          <td><strong>Stub</strong></td>
-          <td><strong>고정된 응답을 리턴</strong>하는 객체</td>
-          <td>상태 기반 테스트</td>
-          <td><code>when(repo.findById()).thenReturn()</code></td>
-      </tr>
-      <tr>
-          <td><strong>Mock</strong></td>
-          <td>행위 기반, <strong>호출 여부나 순서 검증이 가능한 객체</strong></td>
-          <td>행위 기반 테스트</td>
-          <td><code>verify(repo).save()</code></td>
-      </tr>
-      <tr>
-          <td><strong>Spy</strong></td>
-          <td>실제 객체를 감싸면서, <strong>부분적으로 mock 가능</strong></td>
-          <td>실제 동작 + 호출 감시</td>
-          <td><code>spy(new UserService(...))</code></td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="1--dummy">1. 🐣 Dummy</h2>
-<ul>
-<li>가장 단순한 형태.</li>
-<li>아무 일도 하지 않고, <strong>값만 채우는 용도</strong>.</li>
-<li>테스트에 직접적 의미 없음. 없어도 테스트 통과 가능.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">User</span><span class="w"> </span><span class="n">dummyUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"> </span><span class="c1">// 생성자 매개변수 맞추려고 넣는 용도</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="2--stub">2. 🧪 Stub</h2>
-<ul>
-<li>호출하면 <strong>정해진 값을 리턴</strong>함.</li>
-<li>동작 자체는 단순하고 검증 로직은 없음.</li>
-<li>상태 기반 테스트에 사용됨.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">)));</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="3--mock">3. 🤖 Mock</h2>
-<ul>
-<li>Stub처럼 리턴값을 줄 수 있지만, <strong>추가로 호출 여부도 검증</strong>함.</li>
-<li>테스트의 **행위 검증(Behavior Verification)**에 초점.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">save</span><span class="p">(</span><span class="n">any</span><span class="p">());</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="4--spy">4. 🕵️ Spy</h2>
-<ul>
-<li><strong>실제 객체를 감싸면서</strong>, 필요한 부분만 mock 처리 가능.</li>
-<li>일부 메서드는 진짜 실행, 일부는 stub/mock 가능.</li>
-<li>사용 시 조심: 진짜 의존성이 따라올 수 있음.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">UserService</span><span class="w"> </span><span class="n">spyService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spy</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserService</span><span class="p">(</span><span class="n">realRepository</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">doReturn</span><span class="p">(</span><span class="s">&#34;fakeName&#34;</span><span class="p">).</span><span class="na">when</span><span class="p">(</span><span class="n">spyService</span><span class="p">).</span><span class="na">getUserName</span><span class="p">();</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="5--fake">5. 🧩 Fake</h2>
-<ul>
-<li>진짜 구현체는 아니지만, <strong>실제로 동작하는 간단한 구현</strong>.</li>
-<li>테스트용으로 가볍게 만든 <strong>진짜 비즈니스 로직을 흉내</strong>낸 것.</li>
-<li>예: InMemory DB, 테스트용 메시지 큐 등</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InMemoryUserRepository</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">id</span><span class="p">));</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-어떤-걸-언제-써야-할까">🎯 어떤 걸 언제 써야 할까?</h2>
-<table>
-  <thead>
-      <tr>
-          <th>테스트 목적</th>
-          <th>적합한 더블</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>파라미터 채우기만 하면 됨</td>
-          <td>Dummy</td>
-      </tr>
-      <tr>
-          <td>고정된 값 리턴만 필요</td>
-          <td>Stub</td>
-      </tr>
-      <tr>
-          <td>호출 여부/횟수 검증</td>
-          <td>Mock</td>
-      </tr>
-      <tr>
-          <td>실제 객체 + 일부 mocking</td>
-          <td>Spy</td>
-      </tr>
-      <tr>
-          <td>실제 구현 비슷한 동작 필요</td>
-          <td>Fake</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h1 id="fake-repository-예시">Fake Repository 예시</h1>
-<p>Spring 환경에서 자주 쓰이는 <strong>Fake Repository</strong> 예제를 보여드릴게요.<br>
-단위 테스트에서 JPA 같은 실제 DB 연결 없이도 로직을 검증하고 싶을 때 아주 유용합니다.</p>
               </div>
             </div>
 
