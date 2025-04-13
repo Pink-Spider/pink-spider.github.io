@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <script
     type="application/javascript"
-    src='http://localhost:1313/js/theme-mode.js'
+    src='https://pink-spider.github.io/js/theme-mode.js'
   ></script>
-  <link rel="stylesheet" href='http://localhost:1313/css/frameworks.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github.min.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/github-style.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
-  <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
   
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    AES key Generator | Pink Spider
+    AES key 저장방식 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -31,24 +31,24 @@
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://localhost:1313/post/til/aes_key_save/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/aes_key_save/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="AES key Generator - Pink Spider"
+  content="AES key 저장방식 - Pink Spider"
 />
 <meta
   name="twitter:description"
   content="AES key에 대한 보안성 본 포스트는 AES Key는 어떤 식으로 생성하고 보관할 것인지에 대한 ChatGPT의 의견?을 기반으로 작성 되었습니다. 질문 AES/CBC/PKCS5Padding 256 으로 암복화할때 secret key를 바이너리 32byte를 base64 encode해서 저장해놓고 암복호화시 decode해서 사용하는 방법 영단어 조합 32byte 그대로 저장해놓고 사용 영단어와 _ 조합 32byte 를 base64 encode해서 저장 영,숫자,특수문자 조합의 랜덤스트링 32byte를 그대로 사용 어떤 방법이 보안상 가장 안전한가 답변 AES/CBC/PKCS5Padding 256 암호화에서 SecretKey를 저장하고 사용하는 방식은 보안에 매우 중요한 요소입니다. 주어진 4가지 방식 중 보안상 가장 안전한 방법을 판단하려면, 다음 두 가지 기준을 고려해야 합니다:
 "
 />
-<meta name="twitter:site" content="http://localhost:1313/" />
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta
   name="twitter:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 
 
@@ -58,23 +58,23 @@
 />
 <meta
   property="og:title"
-  content="AES key Generator - Pink Spider"
+  content="AES key 저장방식 - Pink Spider"
 />
 <meta
   property="og:description"
   content="AES key에 대한 보안성 본 포스트는 AES Key는 어떤 식으로 생성하고 보관할 것인지에 대한 ChatGPT의 의견?을 기반으로 작성 되었습니다. 질문 AES/CBC/PKCS5Padding 256 으로 암복화할때 secret key를 바이너리 32byte를 base64 encode해서 저장해놓고 암복호화시 decode해서 사용하는 방법 영단어 조합 32byte 그대로 저장해놓고 사용 영단어와 _ 조합 32byte 를 base64 encode해서 저장 영,숫자,특수문자 조합의 랜덤스트링 32byte를 그대로 사용 어떤 방법이 보안상 가장 안전한가 답변 AES/CBC/PKCS5Padding 256 암호화에서 SecretKey를 저장하고 사용하는 방식은 보안에 매우 중요한 요소입니다. 주어진 4가지 방식 중 보안상 가장 안전한 방법을 판단하려면, 다음 두 가지 기준을 고려해야 합니다:
 "
 />
-<meta property="og:url" content="http://localhost:1313/post/til/aes_key_save/" />
-<meta property="og:site_name" content="AES key Generator" />
+<meta property="og:url" content="https://pink-spider.github.io/post/til/aes_key_save/" />
+<meta property="og:site_name" content="AES key 저장방식" />
 <meta
   property="og:image"
-  content="http://localhost:1313/"
+  content="https://pink-spider.github.io/"
 />
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-03-20 16:18:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-12 16:18:45 &#43;0900 KST" />
 
 
 
@@ -92,6 +92,8 @@
 
 </head>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
 
 <body>
   
@@ -130,7 +132,7 @@
       class="Header-item mobile-none"
       style="margin-top: -4px; margin-bottom: -4px"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon"
           height="32"
@@ -193,7 +195,7 @@
                 placeholder="Search"
                 autocomplete="off"
               />
-              <input type="hidden" name="q" value="site:http://localhost:1313/" />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
               <div
                 class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
               >
@@ -221,7 +223,7 @@
     <div
       class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
     >
-      <a class="Header-link" href="http://localhost:1313/" aria-label="Home">
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
         <svg
           class="octicon octicon-mark-github v-align-middle"
           height="32"
@@ -272,7 +274,7 @@
           <div class="flex-auto min-width-0 width-fit mr-3">
             <div class="d-flex">
               <div class="d-none d-md-block">
-                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:1313/">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
                   <img class=" avatar-user"
                     src="/images/logo_pinkspider.png"
                     width="32" height="32" alt="Pink Spider"></a>
@@ -280,20 +282,20 @@
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="http://localhost:1313/">Pink Spider</a></span><span
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="http://localhost:1313/post/til/aes_key_save/">AES key Generator</a></strong>
+                      href="https://pink-spider.github.io/post/til/aes_key_save/">AES key 저장방식</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Thu, 20 Mar 2025 16:18:45 &#43;0900"
+                  Created <relative-time datetime="Sat, 12 Apr 2025 16:18:45 &#43;0900"
                     class="no-wrap">
-                    Thu, 20 Mar 2025 16:18:45 &#43;0900</relative-time>
+                    Sat, 12 Apr 2025 16:18:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 24 Mar 2025 11:59:56 &#43;0900"
+                  Modified <relative-time datetime="Mon, 14 Apr 2025 07:41:22 &#43;0900"
                     class="no-wrap">
-                    Mon, 24 Mar 2025 11:59:56 &#43;0900</relative-time>
+                    Mon, 14 Apr 2025 07:41:22 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -323,9 +325,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      2093 Words
+                      2059 Words
                     <span class="file-info-divider"></span>
-                                        10 min
+                                        9 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -479,7 +481,6 @@ System.out.println(&#34;SecretKey (Base64): &#34; + base64Key);
 <li>생성된 키는 Base64로 인코딩하여 안전한 위치에 저장하세요 (환경변수, Vault, KMS 등).</li>
 <li>가능하다면 <strong>대칭키를 직접 관리하지 않고</strong>, **키 교환 알고리즘이나 키 관리 시스템(KMS)**을 사용하는 것이 이상적입니다.</li>
 </ul>
-<p>필요하시면 키 관리 방안이나 VPN+암호화 키 분리 전략도 같이 설명드릴게요.</p>
 </article>
               </div>
 
@@ -492,25 +493,25 @@ System.out.println(&#34;SecretKey (Base64): &#34; + base64Key);
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="http://localhost:1313/post/til/aes_key_generate/"> AES key Generator</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/aes_crypto_code/"> AES Encrypt &amp; Decrypt</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="http://localhost:1313/post/infra/ssl/">내 우분투 서버에 SSL 무료 설치하기&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/feign-timecheck/">Feign Timecheck&nbsp;</a><div> »</div>
           
         </div>
       </div>
     </div>
   </main>
 </div>
-<script type="application/javascript" src='http://localhost:1313/js/toc.js'></script>
-<link rel="stylesheet" href='http://localhost:1313/css/toc.css' />
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
 
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='http://localhost:1313/css/gitalk.css'>
-<script src='http://localhost:1313/js/gitalk.min.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
     accessToken: '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',
@@ -543,9 +544,9 @@ System.out.println(&#34;SecretKey (Base64): &#34; + base64Key);
 
 </body>
 
-<script type="application/javascript" src="http://localhost:1313/js/github-style.js"></script>
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
 
-<script src="http://localhost:1313/js/mark.es6.min.js"></script>
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
 
 
 <script type="text/javascript">
