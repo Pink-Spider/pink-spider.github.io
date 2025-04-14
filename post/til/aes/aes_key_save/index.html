@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    AES key 저장방식 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="AES key에 대한 보안성 본 포스트는 AES Key는 어떤 식으로 생성하고 보관할 것인지에 대한 ChatGPT의 의견?을 기반으로 작성 되었습니다. 질문 AES/CBC/PKCS5Padding 256 으로 암복화할때 secret key를 바이너리 32byte를 base64 encode해서 저장해놓고 암복호화시 decode해서 사용하는 방법 영단어 조합 32byte 그대로 저장해놓고 사용 영단어와 _ 조합 32byte 를 base64 encode해서 저장 영,숫자,특수문자 조합의 랜덤스트링 32byte를 그대로 사용 어떤 방법이 보안상 가장 안전한가 답변 AES/CBC/PKCS5Padding 256 암호화에서 SecretKey를 저장하고 사용하는 방식은 보안에 매우 중요한 요소입니다. 주어진 4가지 방식 중 보안상 가장 안전한 방법을 판단하려면, 다음 두 가지 기준을 고려해야 합니다:
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/aes/aes_key_save/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="AES key 저장방식 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="AES key에 대한 보안성 본 포스트는 AES Key는 어떤 식으로 생성하고 보관할 것인지에 대한 ChatGPT의 의견?을 기반으로 작성 되었습니다. 질문 AES/CBC/PKCS5Padding 256 으로 암복화할때 secret key를 바이너리 32byte를 base64 encode해서 저장해놓고 암복호화시 decode해서 사용하는 방법 영단어 조합 32byte 그대로 저장해놓고 사용 영단어와 _ 조합 32byte 를 base64 encode해서 저장 영,숫자,특수문자 조합의 랜덤스트링 32byte를 그대로 사용 어떤 방법이 보안상 가장 안전한가 답변 AES/CBC/PKCS5Padding 256 암호화에서 SecretKey를 저장하고 사용하는 방식은 보안에 매우 중요한 요소입니다. 주어진 4가지 방식 중 보안상 가장 안전한 방법을 판단하려면, 다음 두 가지 기준을 고려해야 합니다:
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="AES key 저장방식 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="AES key에 대한 보안성 본 포스트는 AES Key는 어떤 식으로 생성하고 보관할 것인지에 대한 ChatGPT의 의견?을 기반으로 작성 되었습니다. 질문 AES/CBC/PKCS5Padding 256 으로 암복화할때 secret key를 바이너리 32byte를 base64 encode해서 저장해놓고 암복호화시 decode해서 사용하는 방법 영단어 조합 32byte 그대로 저장해놓고 사용 영단어와 _ 조합 32byte 를 base64 encode해서 저장 영,숫자,특수문자 조합의 랜덤스트링 32byte를 그대로 사용 어떤 방법이 보안상 가장 안전한가 답변 AES/CBC/PKCS5Padding 256 암호화에서 SecretKey를 저장하고 사용하는 방식은 보안에 매우 중요한 요소입니다. 주어진 4가지 방식 중 보안상 가장 안전한 방법을 판단하려면, 다음 두 가지 기준을 고려해야 합니다:
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/til/aes/aes_key_save/" />
+<meta property="og:site_name" content="AES key 저장방식" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-04-12 16:18:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/til/aes/aes_key_save/">AES key 저장방식</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Sat, 12 Apr 2025 16:18:45 &#43;0900"
+                    class="no-wrap">
+                    Sat, 12 Apr 2025 16:18:45 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Mon, 14 Apr 2025 07:41:22 &#43;0900"
+                    class="no-wrap">
+                    Mon, 14 Apr 2025 07:41:22 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      2059 Words
+                    <span class="file-info-divider"></span>
+                                        9 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="aes-key에-대한-보안성">AES key에 대한 보안성</h1>
+<ul>
+<li>본 포스트는 AES Key는 어떤 식으로 생성하고 보관할 것인지에 대한 ChatGPT의 의견?을 기반으로 작성 되었습니다.</li>
+</ul>
+<h2 id="질문">질문</h2>
+<ul>
+<li>AES/CBC/PKCS5Padding 256 으로 암복화할때 secret key를</li>
+</ul>
+<ol>
+<li>바이너리 32byte를 base64 encode해서 저장해놓고 암복호화시 decode해서 사용하는 방법</li>
+<li>영단어 조합 32byte 그대로 저장해놓고 사용</li>
+<li>영단어와 _ 조합 32byte 를 base64 encode해서 저장</li>
+<li>영,숫자,특수문자 조합의 랜덤스트링 32byte를 그대로 사용
+어떤 방법이 보안상 가장 안전한가</li>
+</ol>
+<h2 id="답변">답변</h2>
+<p>AES/CBC/PKCS5Padding 256 암호화에서 SecretKey를 저장하고 사용하는 방식은 보안에 매우 중요한 요소입니다.<!-- raw HTML omitted -->
+주어진 4가지 방식 중 보안상 가장 안전한 방법을 판단하려면, 다음 두 가지 기준을 고려해야 합니다:</p>
+<p>키의 무작위성 (Entropy): 예측 불가능하고 충분히 랜덤해야 합니다.
+키 저장 방식: 안전하게 저장되고 노출될 가능성이 낮아야 합니다.</p>
+<p>각 방법의 분석:</p>
+<ol>
+<li>
+<p>바이너리 32바이트를 base64 encode해서 저장해놓고 암복호화시 decode해서 사용<!-- raw HTML omitted -->
+✅ 랜덤성 확보 가능 (바이너리 생성 시 보안 랜덤 사용 가정)<!-- raw HTML omitted -->
+✅ Base64는 단순히 저장/전송을 위한 인코딩일 뿐, 키의 강도에는 영향 없음<!-- raw HTML omitted -->
+✅ 가장 일반적이고 권장되는 키 저장/사용 방법<!-- raw HTML omitted -->
+🔒 단, 저장 위치(파일, 환경변수 등)는 안전해야 함<!-- raw HTML omitted -->
+📌 보안 수준: 매우 높음 (가장 권장되는 방식)<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>영단어 조합 32byte 그대로 저장해놓고 사용<!-- raw HTML omitted -->
+❌ 키의 랜덤성이 부족함 (예측 가능성이 있음)<!-- raw HTML omitted -->
+❌ 사전 기반 공격(Dictionary attack)에 취약<!-- raw HTML omitted -->
+❌ 키 스트레칭 같은 추가 보안 기법 없이는 권장되지 않음<!-- raw HTML omitted -->
+📌 보안 수준: 낮음<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>영단어와 _ 조합 32byte를 base64 encode해서 저장<!-- raw HTML omitted -->
+❌ 키가 여전히 사람이 만든 구조적 문자열<!-- raw HTML omitted -->
+❌ Base64는 키의 랜덤성을 높이지 않음<!-- raw HTML omitted -->
+❌ 구조적인 패턴이 존재해 예측 가능성 존재<!-- raw HTML omitted -->
+📌 보안 수준: 낮음 (2번과 거의 동일)<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>영문+숫자+특수문자 조합의 랜덤 스트링 32byte를 그대로 사용<!-- raw HTML omitted -->
+✅ 충분히 무작위로 생성된 경우(예: 보안 랜덤 generator 사용) 보안성 높음</p>
+<p>✅ 사람이 만든 문자열이 아니라면 예측 어려움</p>
+<p>⚠️ 사람이 직접 만든 랜덤 스트링이면 위험할 수 있음</p>
+<p>📌 보안 수준: 높음, 단 무작위성 확보가 전제되어야 함</p>
+</li>
+</ol>
+<h2 id="-결론-보안상-가장-안전한-방법">🔐 결론: 보안상 가장 안전한 방법</h2>
+<ul>
+<li>
+<p>✅ 1번 (바이너리 32byte 키 → Base64로 저장 → 복호화해서 사용)</p>
+<p>이유: 고 entropy (무작위성), 적절한 인코딩, 널리 쓰이는 안전한 방식<!-- raw HTML omitted -->
+단, 키 생성 시 SecureRandom 같은 보안 랜덤 소스를 사용해야 하며, <!-- raw HTML omitted -->
+저장 방식도 안전하게 관리해야 함 (예: 환경변수, Vault 등)</p>
+</li>
+<li>
+<p>보너스 팁: 안전한 키 생성 예 (Java 기준)</p>
+<pre tabindex="0"><code>SecureRandom random = new SecureRandom();
+byte[] keyBytes = new byte[32]; // 256 bit
+random.nextBytes(keyBytes);
+
+String base64Key = Base64.getEncoder().encodeToString(keyBytes);
+System.out.println(&#34;SecretKey (Base64): &#34; + base64Key);
+</code></pre><p>이렇게 생성한 키를 1번 방식으로 저장/사용하는 것이 가장 안전합니다.
+필요하다면 키 저장 위치나 키 관리 시스템(Vault, AWS KMS 등) 관련 보안 전략도 도와드릴게요!</p>
+</li>
+</ul>
+<h2 id="추가-질문">추가 질문</h2>
+<ul>
+<li>VPN 환경에서 a사, b사가 암호화된 데이터를 송수신할때 2번 방식은 안전한가 그리고 4번 방식과 비교했을 때는 어떠한가</li>
+</ul>
+<h2 id="답변-1">답변</h2>
+<ul>
+<li>좋은 질문입니다! &ldquo;VPN 환경&quot;이라는 보안 채널 위에서 <strong>a사, b사가 AES-256 암호화된 데이터를 송수신할 때</strong>,<br>
+<code>2번(영단어 조합 32byte)</code> 방식이 과연 안전한지,<br>
+그리고 <code>4번(랜덤한 문자 조합 32byte)</code> 방식과 비교해 어느 쪽이 더 나은지 설명드릴게요.</li>
+</ul>
+<hr>
+<h3 id="-먼저-vpn-환경을-고려해도-키의-품질은-여전히-중요합니다">🔍 먼저, VPN 환경을 고려해도 키의 품질은 여전히 <strong>중요</strong>합니다.</h3>
+<p>VPN은 트래픽을 암호화해주는 <strong>전송 계층의 보안</strong>을 제공합니다. 하지만 **암호화 키 자체의 보안(무작위성, 예측불가능성)**은 여전히 중요합니다.<br>
+왜냐하면:</p>
+<ul>
+<li>키가 한 번 노출되면, VPN 밖에서 누가 데이터를 가로채든 해독할 수 있기 때문입니다.</li>
+<li>키가 약하면 (예: 사람이 만든 영단어 조합) 공격자가 키를 예측하거나 사전 공격을 통해 복호화할 수 있습니다.</li>
+</ul>
+<hr>
+<h3 id="-2번-영단어-조합-32byte의-보안성">✅ 2번 (영단어 조합 32byte)의 보안성</h3>
+<ul>
+<li>❌ <strong>랜덤성이 낮음</strong>: 사람이 조합한 영단어는 구조가 있기 때문에, 예측이나 사전공격(dictionary attack)에 취약합니다.</li>
+<li>❌ 키 스페이스가 작음: 예를 들어, 영어 단어 5~10개로 만들 수 있는 키 수는 무작위 바이트보다 <strong>훨씬 적음</strong></li>
+<li>🔐 <strong>VPN이 있다고 해도</strong> 키가 취약하면 암호화된 데이터의 보안성이 무너질 수 있음</li>
+<li>✔️ VPN 환경이라면 <strong>전송 중 탈취 위험은 낮지만</strong>, 키가 공격자에게 유출되면 해독 가능</li>
+</ul>
+<p>📌 <strong>요약</strong>: <strong>VPN 환경에서도 2번은 안전하지 않음</strong><br>
+<strong>중요한 암호화 키는 절대 사람이 의미 있는 패턴으로 생성하지 말아야 합니다.</strong></p>
+<hr>
+<h3 id="-4번-영숫자특수문자-조합의-랜덤-32byte의-보안성">✅ 4번 (영숫자+특수문자 조합의 랜덤 32byte)의 보안성</h3>
+<ul>
+<li>✅ <strong>무작위성</strong>이 충분히 확보되면 안전 (SecureRandom 등으로 생성 시)</li>
+<li>✅ 키 스페이스가 큼: 예측 불가, brute-force 불가능 (충분한 길이와 entropy 전제)</li>
+<li>🔒 단, 사람이 직접 &ldquo;랜덤해 보이게 만든&rdquo; 키는 위험할 수 있음</li>
+</ul>
+<p>📌 <strong>요약</strong>: VPN + 4번 방식이면 <strong>상당히 안전한 보안 수준</strong></p>
+<hr>
+<h3 id="-결론">🔐 결론</h3>
+<table>
+  <thead>
+      <tr>
+          <th>방식</th>
+          <th>VPN 없이</th>
+          <th>VPN 환경에서</th>
+          <th>종합 판단</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>2번 (영단어 조합)</strong></td>
+          <td>❌ 취약</td>
+          <td>⚠️ 전송은 안전하지만 키는 약함</td>
+          <td>❌ 비추천</td>
+      </tr>
+      <tr>
+          <td><strong>4번 (랜덤 스트링)</strong></td>
+          <td>✅ 안전 (전제: 충분히 랜덤)</td>
+          <td>✅ 더 안전</td>
+          <td>✅ 추천</td>
+      </tr>
+  </tbody>
+</table>
+<p>➡️ <strong>VPN이 있든 없든, 키 자체는 강해야 합니다.</strong><br>
+즉, <strong>랜덤성 높은 키를 사용하는 4번 방식이 2번보다 압도적으로 안전합니다.</strong></p>
+<hr>
+<h4 id="-보안-팁">✅ 보안 팁:</h4>
+<ul>
+<li>키는 반드시 **보안 랜덤(SecureRandom, <code>/dev/urandom</code>)**을 통해 생성하세요.</li>
+<li>생성된 키는 Base64로 인코딩하여 안전한 위치에 저장하세요 (환경변수, Vault, KMS 등).</li>
+<li>가능하다면 <strong>대칭키를 직접 관리하지 않고</strong>, **키 교환 알고리즘이나 키 관리 시스템(KMS)**을 사용하는 것이 이상적입니다.</li>
+</ul>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/aes/aes_crypto_code/"> AES Encrypt &amp; Decrypt</a>
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/feign/feign-timecheck/">Feign Timecheck&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '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',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>

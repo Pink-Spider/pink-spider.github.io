@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    REST API | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가? REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.
+🔹 REST API란? REST는 &ldquo;REpresentational State Transfer&quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 웹 아키텍처 스타일 중 하나죠.
+즉, REST API는 이 REST 원칙에 따라 설계된 웹 API를 말해요.
+🔹 REST의 핵심 개념 REST는 다음의 6가지 제약 조건을 기반으로 해요:
+클라이언트-서버 구조
+클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔. 무상태성 (Stateless)
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/basic_theory/restapi/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="REST API - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가? REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.
+🔹 REST API란? REST는 &ldquo;REpresentational State Transfer&quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 웹 아키텍처 스타일 중 하나죠.
+즉, REST API는 이 REST 원칙에 따라 설계된 웹 API를 말해요.
+🔹 REST의 핵심 개념 REST는 다음의 6가지 제약 조건을 기반으로 해요:
+클라이언트-서버 구조
+클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔. 무상태성 (Stateless)
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="REST API - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가? REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.
+🔹 REST API란? REST는 &ldquo;REpresentational State Transfer&quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 웹 아키텍처 스타일 중 하나죠.
+즉, REST API는 이 REST 원칙에 따라 설계된 웹 API를 말해요.
+🔹 REST의 핵심 개념 REST는 다음의 6가지 제약 조건을 기반으로 해요:
+클라이언트-서버 구조
+클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔. 무상태성 (Stateless)
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/til/basic_theory/restapi/" />
+<meta property="og:site_name" content="REST API" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-04-03 18:02:29 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/til/basic_theory/restapi/">REST API</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Thu, 03 Apr 2025 18:02:29 &#43;0900"
+                    class="no-wrap">
+                    Thu, 03 Apr 2025 18:02:29 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Mon, 07 Apr 2025 10:19:36 &#43;0900"
+                    class="no-wrap">
+                    Mon, 07 Apr 2025 10:19:36 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      2050 Words
+                    <span class="file-info-divider"></span>
+                                        9 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="rest-api란-무엇이며-restful-하다는-건-어떤-의미인가">Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가?</h1>
+<p>REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.</p>
+<hr>
+<h3 id="-rest-api란">🔹 REST API란?</h3>
+<p><strong>REST</strong>는 &ldquo;<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer&quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 <strong>웹 아키텍처 스타일</strong> 중 하나죠.</p>
+<p>즉, <strong>REST API</strong>는 이 REST 원칙에 따라 설계된 <strong>웹 API</strong>를 말해요.</p>
+<hr>
+<h3 id="-rest의-핵심-개념">🔹 REST의 핵심 개념</h3>
+<p>REST는 다음의 6가지 제약 조건을 기반으로 해요:</p>
+<ol>
+<li>
+<p><strong>클라이언트-서버 구조</strong></p>
+<ul>
+<li>클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔.</li>
+</ul>
+</li>
+<li>
+<p><strong>무상태성 (Stateless)</strong></p>
+<ul>
+<li>서버는 클라이언트의 요청 간 상태를 저장하지 않음. 매 요청마다 필요한 정보가 다 포함되어야 해요.</li>
+</ul>
+</li>
+<li>
+<p><strong>캐시 처리 가능</strong></p>
+<ul>
+<li>응답은 캐시가 가능해야 함. 클라이언트 성능 향상.</li>
+</ul>
+</li>
+<li>
+<p><strong>계층화 구조</strong></p>
+<ul>
+<li>클라이언트는 중간 서버가 있는지 몰라도 됨.</li>
+</ul>
+</li>
+<li>
+<p><strong>인터페이스 일관성 (Uniform Interface)</strong></p>
+<ul>
+<li>자원에 접근하는 방식이 일관되어야 함.</li>
+</ul>
+</li>
+<li>
+<p><strong>Code on Demand (선택 사항)</strong></p>
+<ul>
+<li>서버는 클라이언트에게 실행할 코드를 전달할 수 있음 (잘 안 씀).</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="-restful-하다는-건">🔹 RESTful 하다는 건?</h3>
+<p>**&ldquo;RESTful하다&rdquo;**는 표현은, 위의 REST 원칙을 <strong>얼마나 잘 지켜서 구현했는가</strong>를 말해요.</p>
+<p>예시로 이해해볼게요:</p>
+<h4 id="-restful한-api-예시">✅ RESTful한 API 예시</h4>
+<table>
+  <thead>
+      <tr>
+          <th>동작</th>
+          <th>HTTP Method</th>
+          <th>URL</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>글 목록 조회</td>
+          <td>GET</td>
+          <td><code>/posts</code></td>
+          <td>전체 글 조회</td>
+      </tr>
+      <tr>
+          <td>글 하나 조회</td>
+          <td>GET</td>
+          <td><code>/posts/1</code></td>
+          <td>ID가 1인 글 조회</td>
+      </tr>
+      <tr>
+          <td>글 작성</td>
+          <td>POST</td>
+          <td><code>/posts</code></td>
+          <td>글 생성</td>
+      </tr>
+      <tr>
+          <td>글 수정</td>
+          <td>PUT</td>
+          <td><code>/posts/1</code></td>
+          <td>ID가 1인 글 전체 수정</td>
+      </tr>
+      <tr>
+          <td>글 삭제</td>
+          <td>DELETE</td>
+          <td><code>/posts/1</code></td>
+          <td>ID가 1인 글 삭제</td>
+      </tr>
+  </tbody>
+</table>
+<p>이처럼 <strong>HTTP Method와 URL을 일관되게 사용</strong>하는 게 RESTful한 API의 특징이에요.</p>
+<h4 id="-restful하지-않은-api-예시">❌ RESTful하지 않은 API 예시</h4>
+<ul>
+<li><code>/getAllPosts</code>, <code>/deletePost?id=1</code>, <code>/createNewPost</code> 등<br>
+→ 행위(동사)가 URL에 포함되고 HTTP Method와 역할이 맞지 않음</li>
+</ul>
+<hr>
+<h3 id="-요약하면">🔸 요약하면?</h3>
+<ul>
+<li><strong>REST API</strong>: REST 원칙을 따르는 API</li>
+<li><strong>RESTful</strong>: 그 원칙을 <strong>얼마나 잘 지켜서</strong> 구현했는가</li>
+<li>RESTful한 API는 → 이해하기 쉽고, 일관성 있고, 확장성 높고, 클라이언트-서버가 분리된 구조를 가짐</li>
+</ul>
+<hr>
+<h1 id="hateoas와-self-descriptive-messages-에-대하여">HATEOAS와 Self-descriptive messages 에 대하여</h1>
+<hr>
+<h2 id="-self-descriptive-messages-자체-기술-메시지">🔹 Self-descriptive Messages (자체 기술 메시지)</h2>
+<h3 id="-뜻">👉 뜻</h3>
+<p>REST에서 <strong>각 요청과 응답은 그 자체만으로 이해될 수 있어야 한다</strong>는 원칙이에요.</p>
+<p>즉, 서버는 요청을 받고 나서 <strong>추가 맥락 없이도</strong> 무슨 일을 해야 하는지 알 수 있어야 하고, 클라이언트는 응답만 보고 <strong>다음에 무엇을 해야 할지 유추할 수 있어야</strong> 해요.</p>
+<h3 id="-예시">✅ 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="nf">GET</span> <span class="nn">/users/123</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="o">:</span> <span class="l">api.example.com</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+</span></span></code></pre></div><p>서버 응답:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Alice&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;email&#34;</span><span class="p">:</span> <span class="s2">&#34;alice@example.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>위 응답은 JSON 포맷으로 되어 있고, 어떤 정보가 담겼는지 명확하게 설명되어 있죠.<br>
+즉, <strong>&ldquo;응답만 봐도 내용이 뭔지 알 수 있다&rdquo; → Self-descriptive</strong> 메시지라는 거예요.</p>
+<hr>
+<h2 id="-hateoas-hypermedia-as-the-engine-of-application-state">🔹 HATEOAS (Hypermedia As The Engine Of Application State)</h2>
+<h3 id="-뜻-1">👉 뜻</h3>
+<p>REST 시스템에서 <strong>클라이언트는 서버로부터 받은 응답의 링크를 통해 다음 행동을 결정</strong>해야 한다는 개념이에요.<br>
+말이 어려운데, 쉽게 말하면:</p>
+<blockquote>
+<p>&ldquo;응답 안에 다음에 뭘 할 수 있는지 링크를 줘서, 클라이언트가 직접 경로를 알아내지 않아도 되게 한다.&rdquo;</p></blockquote>
+<h3 id="-예시-사용자-조회-응답에-hateoas-적용">✅ 예시 (사용자 조회 응답에 HATEOAS 적용)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Alice&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;email&#34;</span><span class="p">:</span> <span class="s2">&#34;alice@example.com&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;_links&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;self&#34;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&#34;href&#34;</span><span class="p">:</span> <span class="s2">&#34;/users/123&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;update&#34;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&#34;href&#34;</span><span class="p">:</span> <span class="s2">&#34;/users/123&#34;</span><span class="p">,</span> <span class="nt">&#34;method&#34;</span><span class="p">:</span> <span class="s2">&#34;PUT&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;delete&#34;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&#34;href&#34;</span><span class="p">:</span> <span class="s2">&#34;/users/123&#34;</span><span class="p">,</span> <span class="nt">&#34;method&#34;</span><span class="p">:</span> <span class="s2">&#34;DELETE&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;posts&#34;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&#34;href&#34;</span><span class="p">:</span> <span class="s2">&#34;/users/123/posts&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>여기서 <code>_links</code>는 바로 HATEOAS의 핵심이에요.<br>
+클라이언트는 이 정보를 보고 <strong>&ldquo;아! 이 사용자에 대해 수정도 가능하고, 글도 볼 수 있네&rdquo;</strong> 라는 걸 <strong>API 문서를 몰라도 알 수 있어요.</strong></p>
+<hr>
+<h2 id="-요약">🔸 요약</h2>
+<table>
+  <thead>
+      <tr>
+          <th>개념</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Self-descriptive</strong></td>
+          <td>요청과 응답이 스스로 어떤 의미인지 설명할 수 있어야 함</td>
+      </tr>
+      <tr>
+          <td><strong>HATEOAS</strong></td>
+          <td>응답 안에 <strong>다음 행동을 위한 링크/정보</strong>가 들어 있어야 함 (하이퍼미디어 중심 설계)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p>이 둘은 REST 아키텍처의 <strong>일관성, 유연성, 확장성</strong>을 높이는 데 큰 역할을 해요.<br>
+다만 실제 서비스에서는 HATEOAS까지 구현하는 경우는 드물기도 해요. 너무 무거워지기도 하고, 모바일이나 SPA 환경에서는 URL을 클라이언트가 이미 알고 있는 경우가 많거든요.</p>
+<hr>
+<h2 id="restful-한-api를-제공하는-대표-사례">Restful 한 api를 제공하는 대표 사례</h2>
+<hr>
+<h3 id="1-github-api">1. <strong>GitHub API</strong></h3>
+<ul>
+<li><strong>설명</strong>: GitHub는 개발자들이 코드를 호스팅하고 협업할 수 있는 플랫폼입니다. GitHub의 RESTful API를 통해 리포지토리, 이슈, 사용자 정보 등 다양한 데이터를 조회하고 조작할 수 있습니다.</li>
+<li><strong>API 문서</strong>: <a href="https://docs.github.com/en/rest">https://docs.github.com/en/rest</a></li>
+</ul>
+<hr>
+<h3 id="2-twitter-api">2. <strong>Twitter API</strong></h3>
+<ul>
+<li><strong>설명</strong>: Twitter는 소셜 네트워크 서비스로, 트윗, 사용자, 해시태그 등의 데이터를 RESTful API를 통해 제공합니다. 이를 통해 트윗 작성, 검색, 사용자 정보 조회 등의 기능을 구현할 수 있습니다.</li>
+<li><strong>API 문서</strong>: <a href="https://developer.twitter.com/en/docs/twitter-api">https://developer.twitter.com/en/docs/twitter-api</a></li>
+</ul>
+<hr>
+<h3 id="3-google-maps-api">3. <strong>Google Maps API</strong></h3>
+<ul>
+<li><strong>설명</strong>: Google Maps는 지도 서비스로, RESTful API를 통해 지도 이미지, 장소 정보, 경로 안내 등의 기능을 제공합니다. 이를 통해 위치 기반 서비스를 개발할 수 있습니다.</li>
+<li><strong>API 문서</strong>: <a href="https://developers.google.com/maps/documentation">https://developers.google.com/maps/documentation</a></li>
+</ul>
+<hr>
+<h3 id="4-stripe-api">4. <strong>Stripe API</strong></h3>
+<ul>
+<li><strong>설명</strong>: Stripe는 온라인 결제 처리 플랫폼으로, RESTful API를 통해 결제, 환불, 구독 관리 등의 기능을 제공합니다. 이를 통해 전자상거래 사이트나 앱에서 결제 시스템을 통합할 수 있습니다.</li>
+<li><strong>API 문서</strong>: <a href="https://stripe.com/docs/api">https://stripe.com/docs/api</a></li>
+</ul>
+<hr>
+<h3 id="5-spotify-api">5. <strong>Spotify API</strong></h3>
+<ul>
+<li><strong>설명</strong>: Spotify는 음악 스트리밍 서비스로, RESTful API를 통해 음악 트랙, 앨범, 아티스트 정보 등을 제공합니다. 이를 통해 음악 검색, 재생 목록 관리 등의 기능을 앱에 통합할 수 있습니다.</li>
+<li><strong>API 문서</strong>: <a href="https://developer.spotify.com/documentation/web-api/">https://developer.spotify.com/documentation/web-api/</a></li>
+</ul>
+<hr>
+<h3 id="6-nasa-open-apis">6. <strong>NASA Open APIs</strong></h3>
+<ul>
+<li><strong>설명</strong>: 미국 항공우주국(NASA)은 다양한 우주 관련 데이터를 RESTful API 형태로 공개하고 있습니다. 예를 들어, Astronomy Picture of the Day(API)를 통해 매일 새로운 우주 사진과 설명을 제공받을 수 있습니다.</li>
+<li><strong>API 문서</strong>: <a href="https://api.nasa.gov/">https://api.nasa.gov/</a></li>
+</ul>
+<hr>
+<h3 id="7-openweathermap-api">7. <strong>OpenWeatherMap API</strong></h3>
+<ul>
+<li><strong>설명</strong>: OpenWeatherMap은 전 세계 날씨 데이터를 제공하는 서비스로, RESTful API를 통해 현재 날씨, 예보, 과거 날씨 데이터 등을 제공합니다.</li>
+<li><strong>API 문서</strong>: <a href="https://openweathermap.org/api">https://openweathermap.org/api</a></li>
+</ul>
+<hr>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/jsonignore_include/"> @JsonIgnore 와 JsonInclude</a>
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/tdd/mock_mockbean/">@Mock @MockBean 의 차이&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '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',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>
