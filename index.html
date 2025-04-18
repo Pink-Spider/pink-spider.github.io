@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">47</span>
+              <span class="Counter">48</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">47</span>
+      <span class="Counter ">48</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,86 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/ddd/about_ddd/">
+                    <span class="repo" title="Feign Timecheck">Feign Timecheck</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>DDD(Domain-Driven Design, 도메인 주도 설계)는 복잡한 소프트웨어 시스템을 설계할 때 <strong>비즈니스 도메인(업무 영역)</strong> 을 중심에 두고 개발하는 방법론이에요. 에릭 에반스(Eric Evans)의 책 *&ldquo;Domain-Driven Design: Tackling Complexity in the Heart of Software&rdquo;*에서 처음 제안되었고, 특히 <strong>도메인 복잡성이 높은 시스템</strong>에서 강력한 효과를 발휘합니다.</p>
+<hr>
+<h3 id="-ddd란">✅ DDD란?</h3>
+<p>간단히 말해 DDD는:</p>
+<ul>
+<li><strong>비즈니스의 핵심 로직(도메인)</strong> 을 가장 중요한 것으로 보고,</li>
+<li><strong>도메인 전문가와 개발자가 협력</strong>하여,</li>
+<li>소프트웨어 모델을 <strong>업무 용어와 일치</strong>시키고,</li>
+<li>유지보수 가능하고 유연한 설계를 만드는 것을 목표로 해요.</li>
+</ul>
+<hr>
+<h3 id="-ddd의-핵심-개념">✅ DDD의 핵심 개념</h3>
+<table>
+  <thead>
+      <tr>
+          <th>개념</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Entity</strong></td>
+          <td>식별자가 있어 고유하게 구분되는 객체 (ex. <code>Order</code>, <code>User</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Value Object</strong></td>
+          <td>식별자 없이 값 자체로 의미가 있는 객체 (ex. <code>Address</code>, <code>Money</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Aggregate</strong></td>
+          <td>도메인 객체들의 군집. 하나의 루트 엔티티(Aggregate Root)가 존재</td>
+      </tr>
+      <tr>
+          <td><strong>Repository</strong></td>
+          <td>도메인 객체를 저장하고 조회하는 인터페이스 (<code>findById</code>, <code>save</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Service (도메인 서비스)</strong></td>
+          <td>특정 엔티티에 속하지 않는 비즈니스 로직 담당</td>
+      </tr>
+      <tr>
+          <td><strong>Factory</strong></td>
+          <td>복잡한 객체 생성 로직 담당</td>
+      </tr>
+      <tr>
+          <td><strong>Bounded Context</strong></td>
+          <td>특정 도메인 모델이 적용되는 명확한 경계</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="-spring-boot에서-ddd-코드상-특징">✅ Spring Boot에서 DDD 코드상 특징</h3>
+<p>Spring Boot에서 DDD를 적용하면 다음과 같은 <strong>패키지 구조 및 역할 분리</strong>가 나타납니다:</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -767,54 +847,18 @@
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/feign/feign-timecheck/">
-                    <span class="repo" title="Feign Timecheck">Feign Timecheck</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p>서버 응답 지연이나 Timeout 관련 이슈를 추적하려면, <strong>요청/응답 시간 로그를 직접 남기거나</strong>, <strong>Spring에 커스텀 <code>Filter</code> 또는 <code>Feign Logger</code></strong> 를 활용하면 아주 효과적입니다. 아래에서 두 가지 케이스 모두 다뤄볼게요.</p>
-<hr>
-<h2 id="-1-feign-요청응답-시간-로깅-필터">✅ 1. <strong>Feign 요청/응답 시간 로깅 필터</strong></h2>
-<h3 id="-요청-전에-시간-저장--응답-후-소요-시간-측정">🔧 요청 전에 시간 저장 → 응답 후 소요 시간 측정</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FeignRequestTimingInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">RequestInterceptor</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">FeignRequestTimingInterceptor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">RequestTemplate</span><span class="w"> </span><span class="n">template</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">template</span><span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="s">&#34;X-Request-Start-Time&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>그리고 <code>ErrorDecoder</code>나 <code>FeignClientExceptionDecoder</code> 에서 시간 로그 출력:</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "Feign%20Timecheck",
+  "link": "https://pink-spider.github.io/post/spring/ddd/about_ddd/",
+  "publishDate": "2025-04-17%2018:54:11"
+},
+
 {
   "title": "%ed%8f%ac%ed%8a%b8%ed%8f%b4%eb%a6%ac%ec%98%a4%20%ec%9d%b4%eb%a1%a0",
   "link": "https://pink-spider.github.io/post/finance/portpolio/",
