@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">48</span>
+              <span class="Counter">49</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">48</span>
+      <span class="Counter ">49</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,100 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/hashmap_linkedhashmap/">Java에서 Hashmap과 LinkedHashMap의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><code>HashMap</code>과 <code>LinkedHashMap</code>은 둘 다 Java에서 제공하는 Map 인터페이스의 구현체이지만, <strong>동작 방식과 특징에 몇 가지 중요한 차이점</strong>이 있습니다:</p>
+<hr>
+<h3 id="-1-저장-순서-유지-여부">🔹 1. <strong>저장 순서 유지 여부</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>특징</th>
+          <th><code>HashMap</code></th>
+          <th><code>LinkedHashMap</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>순서 유지</td>
+          <td>❌ 저장 순서 보장 안 됨</td>
+          <td>✅ 입력 순서(또는 접근 순서) 유지</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li><code>HashMap</code>은 내부적으로 순서를 신경 쓰지 않기 때문에, 데이터를 삽입한 순서와 꺼낼 때 순서가 다를 수 있음.</li>
+<li><code>LinkedHashMap</code>은 이중 연결 리스트를 사용해 데이터를 저장한 순서를 기억함.</li>
+</ul>
+<hr>
+<h3 id="-2-성능">🔹 2. <strong>성능</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>성능</th>
+          <th><code>HashMap</code></th>
+          <th><code>LinkedHashMap</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>일반적으로 더 빠름</td>
+          <td>✅</td>
+          <td>❌ (조금 느림)</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li><code>LinkedHashMap</code>은 연결 리스트를 유지해야 하므로 약간의 오버헤드가 있음.</li>
+</ul>
+<hr>
+<h3 id="-3-null-허용-여부">🔹 3. <strong>null 허용 여부</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>요소</th>
+          <th><code>HashMap</code></th>
+          <th><code>LinkedHashMap</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>null</code> 키 허용</td>
+          <td>1개 가능</td>
+          <td>1개 가능</td>
+      </tr>
+      <tr>
+          <td><code>null</code> 값 허용</td>
+          <td>여러 개 가능</td>
+          <td>여러 개 가능</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>둘 다 <code>null</code> 키 하나와 <code>null</code> 값 여러 개 허용함.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sun, 20 Apr 2025 11:15:45 &#43;0900" class="no-wrap"
+                title=" Sun, 20 Apr 2025 11:15:45 &#43;0900">
+                Sun, 20 Apr 2025 11:15:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -853,49 +947,6 @@
               <relative-time datetime=" Fri, 11 Apr 2025 18:54:11 &#43;0900" class="no-wrap"
                 title=" Fri, 11 Apr 2025 18:54:11 &#43;0900">
                 Fri, 11 Apr 2025 18:54:11 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/jsonignore_include/">@JsonIgnore 와 JsonInclude</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>@JsonIgnore</code>를 붙이면 <strong>해당 필드는 JSON 변환 시 무조건 제외</strong>됩니다. <!-- raw HTML omitted -->
-즉, <strong>값이 있든 없든 관계없이</strong> JSON 결과에 <strong>필드 자체가 포함되지 않습니다.</strong></p>
-<p>예시로 보면:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@JsonIgnore</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// getters/setters</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>위 객체를 JSON으로 변환하면 (예: <code>name=&quot;Alice&quot;</code>, <code>password=&quot;secret&quot;</code>이더라도):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Alice&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><code>password</code> 필드는 무조건 빠집니다.</p>
-<hr>
-<p>반면, <strong>값이 없을 때만 필드를 제외하고 싶다면</strong> <code>@JsonInclude</code>를 사용해야 합니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 08 Apr 2025 17:42:13 &#43;0900" class="no-wrap"
-                title=" Tue, 08 Apr 2025 17:42:13 &#43;0900">
-                Tue, 08 Apr 2025 17:42:13 &#43;0900
               </relative-time>
             </div>
           </div>
