@@ -1,7 +1,103 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Java에서 데이터베이스의 SELECT 쿼리에 대해 Lock과 Unlock을 사용하는 방법 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Java에서 데이터베이스의 SELECT 쿼리에 대해 Lock과 Unlock을 사용하는 방법은 데이터베이스 시스템과 쿼리의 설정에 따라 달라집니다. 일반적으로 SELECT 자체는 데이터베이스에서 잠금을 유발하지 않지만, 트랜잭션이나 쿼리 힌트를 사용하여 잠금 동작을 제어할 수 있습니다. 아래에 몇 가지 방법을 설명합니다.
+1. 트랜잭션을 사용한 Lock 제어 트랜잭션을 통해 SELECT 문이 실행 중인 동안 다른 작업이 데이터에 접근하지 못하도록 잠금을 설정할 수 있습니다.
+예제 코드: import java.sql.Connection; import java.sql.DriverManager; import java.sql.PreparedStatement; import java.sql.ResultSet; public class DatabaseLockExample { public static void main(String[] args) { String url = &#34;jdbc:mysql://localhost:3306/your_database&#34;; String user = &#34;your_username&#34;; String password = &#34;your_password&#34;; try (Connection connection = DriverManager.getConnection(url, user, password)) { // Auto-commit 비활성화 connection.setAutoCommit(false); // SELECT ... FOR UPDATE (행 잠금 설정) String sql = &#34;SELECT * FROM your_table WHERE id = ? FOR UPDATE&#34;; try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) { preparedStatement.setInt(1, 1); // ID 값 바인딩 ResultSet resultSet = preparedStatement.executeQuery(); while (resultSet.next()) { System.out.println(&#34;Data: &#34; &#43; resultSet.getString(&#34;your_column&#34;)); } // 작업 후 커밋 connection.commit(); } } catch (Exception e) { e.printStackTrace(); } } } 설명: FOR UPDATE는 해당 행을 잠그고, 다른 트랜잭션이 수정하지 못하도록 합니다. 트랜잭션을 커밋하거나 롤백하면 잠금이 해제됩니다. 2. 쿼리 힌트를 사용한 Lock 제어 데이터베이스에 따라 SELECT 쿼리에 힌트를 추가하여 잠금 동작을 지정할 수 있습니다. 예를 들어, MySQL에서 LOCK IN SHARE MODE 또는 FOR UPDATE를 사용할 수 있습니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/jpa/select_lock_unlock/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Java에서 데이터베이스의 SELECT 쿼리에 대해 Lock과 Unlock을 사용하는 방법 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Java에서 데이터베이스의 SELECT 쿼리에 대해 Lock과 Unlock을 사용하는 방법은 데이터베이스 시스템과 쿼리의 설정에 따라 달라집니다. 일반적으로 SELECT 자체는 데이터베이스에서 잠금을 유발하지 않지만, 트랜잭션이나 쿼리 힌트를 사용하여 잠금 동작을 제어할 수 있습니다. 아래에 몇 가지 방법을 설명합니다.
+1. 트랜잭션을 사용한 Lock 제어 트랜잭션을 통해 SELECT 문이 실행 중인 동안 다른 작업이 데이터에 접근하지 못하도록 잠금을 설정할 수 있습니다.
+예제 코드: import java.sql.Connection; import java.sql.DriverManager; import java.sql.PreparedStatement; import java.sql.ResultSet; public class DatabaseLockExample { public static void main(String[] args) { String url = &#34;jdbc:mysql://localhost:3306/your_database&#34;; String user = &#34;your_username&#34;; String password = &#34;your_password&#34;; try (Connection connection = DriverManager.getConnection(url, user, password)) { // Auto-commit 비활성화 connection.setAutoCommit(false); // SELECT ... FOR UPDATE (행 잠금 설정) String sql = &#34;SELECT * FROM your_table WHERE id = ? FOR UPDATE&#34;; try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) { preparedStatement.setInt(1, 1); // ID 값 바인딩 ResultSet resultSet = preparedStatement.executeQuery(); while (resultSet.next()) { System.out.println(&#34;Data: &#34; &#43; resultSet.getString(&#34;your_column&#34;)); } // 작업 후 커밋 connection.commit(); } } catch (Exception e) { e.printStackTrace(); } } } 설명: FOR UPDATE는 해당 행을 잠그고, 다른 트랜잭션이 수정하지 못하도록 합니다. 트랜잭션을 커밋하거나 롤백하면 잠금이 해제됩니다. 2. 쿼리 힌트를 사용한 Lock 제어 데이터베이스에 따라 SELECT 쿼리에 힌트를 추가하여 잠금 동작을 지정할 수 있습니다. 예를 들어, MySQL에서 LOCK IN SHARE MODE 또는 FOR UPDATE를 사용할 수 있습니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Java에서 데이터베이스의 SELECT 쿼리에 대해 Lock과 Unlock을 사용하는 방법 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Java에서 데이터베이스의 SELECT 쿼리에 대해 Lock과 Unlock을 사용하는 방법은 데이터베이스 시스템과 쿼리의 설정에 따라 달라집니다. 일반적으로 SELECT 자체는 데이터베이스에서 잠금을 유발하지 않지만, 트랜잭션이나 쿼리 힌트를 사용하여 잠금 동작을 제어할 수 있습니다. 아래에 몇 가지 방법을 설명합니다.
+1. 트랜잭션을 사용한 Lock 제어 트랜잭션을 통해 SELECT 문이 실행 중인 동안 다른 작업이 데이터에 접근하지 못하도록 잠금을 설정할 수 있습니다.
+예제 코드: import java.sql.Connection; import java.sql.DriverManager; import java.sql.PreparedStatement; import java.sql.ResultSet; public class DatabaseLockExample { public static void main(String[] args) { String url = &#34;jdbc:mysql://localhost:3306/your_database&#34;; String user = &#34;your_username&#34;; String password = &#34;your_password&#34;; try (Connection connection = DriverManager.getConnection(url, user, password)) { // Auto-commit 비활성화 connection.setAutoCommit(false); // SELECT ... FOR UPDATE (행 잠금 설정) String sql = &#34;SELECT * FROM your_table WHERE id = ? FOR UPDATE&#34;; try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) { preparedStatement.setInt(1, 1); // ID 값 바인딩 ResultSet resultSet = preparedStatement.executeQuery(); while (resultSet.next()) { System.out.println(&#34;Data: &#34; &#43; resultSet.getString(&#34;your_column&#34;)); } // 작업 후 커밋 connection.commit(); } } catch (Exception e) { e.printStackTrace(); } } } 설명: FOR UPDATE는 해당 행을 잠그고, 다른 트랜잭션이 수정하지 못하도록 합니다. 트랜잭션을 커밋하거나 롤백하면 잠금이 해제됩니다. 2. 쿼리 힌트를 사용한 Lock 제어 데이터베이스에 따라 SELECT 쿼리에 힌트를 추가하여 잠금 동작을 지정할 수 있습니다. 예를 들어, MySQL에서 LOCK IN SHARE MODE 또는 FOR UPDATE를 사용할 수 있습니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/jpa/select_lock_unlock/" />
+<meta property="og:site_name" content="Java에서 데이터베이스의 SELECT 쿼리에 대해 Lock과 Unlock을 사용하는 방법" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-26 11:25:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -514,8 +610,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

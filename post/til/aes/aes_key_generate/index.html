@@ -1,7 +1,94 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    AES key Generator | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Java에서 AES를 사용하기 위해 key, iv 등 생성하는 코드 알고리즘은 AES-128, AES-192, AES-256 어떤 걸 사용하느냐에 따라 key, iv자체의 size가 달라질 수 있습니다 본 글에서는 AES/CBC/PKCS5Padding 256 을 기반으로 했습니다. Java에서 암복호화에 사용하기 위한 key, iv 는 어떻게 만들까? 현업에서는 key, iv를 데이터 제공 측과 소비측에서 양쪽에서 key, iv를 공유하는데 key, iv를 만드는 방법도 다양했습니다. 본 글에서 다양한 케이스를 코드로 처리한 내용을 적어봅니다. 대체로 key,iv는 base64혹은 hex등으로 encode해서 저장하고, runtime에 decode해서 쓰는 것이 일반적입니다. key 만들기 다양한 방법 base64등 encode 없이 그냥 문자열로 만들기 public String generateRandomString() { String CHARACTERS = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=&#43;&#34;; SecureRandom random = new SecureRandom(); StringBuilder sb = new StringBuilder(32); for (int i = 0; i &lt; 32; i&#43;&#43;) { sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))); } return sb.toString(); } base64는 java.util 을 쓰기도 하고 apache.commons.codec.binary등을 쓸 수 있습니다. public void keyGenerator() throws NoSuchAlgorithmException { // 1. Secret Key 생성 (AES-256) KeyGenerator keyGenerator = KeyGenerator.getInstance(&#34;AES&#34;); keyGenerator.init(256); // AES-256 사용 SecretKey secretKey = keyGenerator.generateKey(); // 2. IV 생성 (AES CBC 모드에서는 16바이트 IV 필요) byte[] iv = new byte[16]; SecureRandom secureRandom = new SecureRandom(); secureRandom.nextBytes(iv); // 3. Base64로 인코딩하여 출력 System.out.println(&#34;Secret Key (Base64): &#34; &#43; Base64.getEncoder().encodeToString(secretKey.getEncoded())); System.out.println(&#34;IV (Base64): &#34; &#43; Base64.getEncoder().encodeToString(iv)); } base64 public void generateBase64RandomKey() { int AES_KEY_SIZE = 32; //256 bit int IV_SIZE = 16; byte[] secretKeyBytes = new byte[AES_KEY_SIZE]; byte[] ivBytes = new byte[IV_SIZE]; new SecureRandom().nextBytes(secretKeyBytes); new SecureRandom().nextBytes(ivBytes); log.info(&#34;secretKeyBytes: {}&#34;, Base64.getEncoder().encodeToString(secretKeyBytes)); log.info(&#34;ivBytes: {}&#34;, Base64.getEncoder().encodeToString(ivBytes)); } hex public void generateHexRandomKey() { int AES_KEY_SIZE = 32; //256 bit int IV_SIZE = 16; byte[] secretKeyBytes = new byte[AES_KEY_SIZE]; byte[] ivBytes = new byte[IV_SIZE]; new SecureRandom().nextBytes(secretKeyBytes); new SecureRandom().nextBytes(ivBytes); log.info(&#34;secretKeyBytes: {}&#34;, bytesToHex(secretKeyBytes)); log.info(&#34;ivBytes: {}&#34;, bytesToHex(ivBytes)); } 32byte(256bit) 랜덤 문자열 만들고, base64 encode 하기 public void generateRandomStringAndGenerateKey() { int size = 32; String CHARACTERS = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=&#43;&#34;; SecureRandom random = new SecureRandom(); StringBuilder sb = new StringBuilder(size); for (int i = 0; i &lt; size; i&#43;&#43;) { sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))); } String secretKeyBase64 = Base64.getEncoder().encodeToString(sb.toString().getBytes()); String ivBase64 = Base64.getEncoder().encodeToString(sb.substring(0,16).getBytes()); } 32byte 문자열을 사용해서 base64 encode 하기 public void generateKeyWithString() { String input = &#34;YOUR 32자리 문자열&#34;; String secretKeyBase64 = Base64.getEncoder().encodeToString(input.getBytes()); String ivBase64 = Base64.getEncoder().encodeToString(input.substring(0,16).getBytes()); String decoded = new String(Base64.getDecoder().decode(secretKeyBase64)); } "
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/aes/aes_key_generate/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="AES key Generator - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Java에서 AES를 사용하기 위해 key, iv 등 생성하는 코드 알고리즘은 AES-128, AES-192, AES-256 어떤 걸 사용하느냐에 따라 key, iv자체의 size가 달라질 수 있습니다 본 글에서는 AES/CBC/PKCS5Padding 256 을 기반으로 했습니다. Java에서 암복호화에 사용하기 위한 key, iv 는 어떻게 만들까? 현업에서는 key, iv를 데이터 제공 측과 소비측에서 양쪽에서 key, iv를 공유하는데 key, iv를 만드는 방법도 다양했습니다. 본 글에서 다양한 케이스를 코드로 처리한 내용을 적어봅니다. 대체로 key,iv는 base64혹은 hex등으로 encode해서 저장하고, runtime에 decode해서 쓰는 것이 일반적입니다. key 만들기 다양한 방법 base64등 encode 없이 그냥 문자열로 만들기 public String generateRandomString() { String CHARACTERS = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=&#43;&#34;; SecureRandom random = new SecureRandom(); StringBuilder sb = new StringBuilder(32); for (int i = 0; i &lt; 32; i&#43;&#43;) { sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))); } return sb.toString(); } base64는 java.util 을 쓰기도 하고 apache.commons.codec.binary등을 쓸 수 있습니다. public void keyGenerator() throws NoSuchAlgorithmException { // 1. Secret Key 생성 (AES-256) KeyGenerator keyGenerator = KeyGenerator.getInstance(&#34;AES&#34;); keyGenerator.init(256); // AES-256 사용 SecretKey secretKey = keyGenerator.generateKey(); // 2. IV 생성 (AES CBC 모드에서는 16바이트 IV 필요) byte[] iv = new byte[16]; SecureRandom secureRandom = new SecureRandom(); secureRandom.nextBytes(iv); // 3. Base64로 인코딩하여 출력 System.out.println(&#34;Secret Key (Base64): &#34; &#43; Base64.getEncoder().encodeToString(secretKey.getEncoded())); System.out.println(&#34;IV (Base64): &#34; &#43; Base64.getEncoder().encodeToString(iv)); } base64 public void generateBase64RandomKey() { int AES_KEY_SIZE = 32; //256 bit int IV_SIZE = 16; byte[] secretKeyBytes = new byte[AES_KEY_SIZE]; byte[] ivBytes = new byte[IV_SIZE]; new SecureRandom().nextBytes(secretKeyBytes); new SecureRandom().nextBytes(ivBytes); log.info(&#34;secretKeyBytes: {}&#34;, Base64.getEncoder().encodeToString(secretKeyBytes)); log.info(&#34;ivBytes: {}&#34;, Base64.getEncoder().encodeToString(ivBytes)); } hex public void generateHexRandomKey() { int AES_KEY_SIZE = 32; //256 bit int IV_SIZE = 16; byte[] secretKeyBytes = new byte[AES_KEY_SIZE]; byte[] ivBytes = new byte[IV_SIZE]; new SecureRandom().nextBytes(secretKeyBytes); new SecureRandom().nextBytes(ivBytes); log.info(&#34;secretKeyBytes: {}&#34;, bytesToHex(secretKeyBytes)); log.info(&#34;ivBytes: {}&#34;, bytesToHex(ivBytes)); } 32byte(256bit) 랜덤 문자열 만들고, base64 encode 하기 public void generateRandomStringAndGenerateKey() { int size = 32; String CHARACTERS = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=&#43;&#34;; SecureRandom random = new SecureRandom(); StringBuilder sb = new StringBuilder(size); for (int i = 0; i &lt; size; i&#43;&#43;) { sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))); } String secretKeyBase64 = Base64.getEncoder().encodeToString(sb.toString().getBytes()); String ivBase64 = Base64.getEncoder().encodeToString(sb.substring(0,16).getBytes()); } 32byte 문자열을 사용해서 base64 encode 하기 public void generateKeyWithString() { String input = &#34;YOUR 32자리 문자열&#34;; String secretKeyBase64 = Base64.getEncoder().encodeToString(input.getBytes()); String ivBase64 = Base64.getEncoder().encodeToString(input.substring(0,16).getBytes()); String decoded = new String(Base64.getDecoder().decode(secretKeyBase64)); } "
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="AES key Generator - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Java에서 AES를 사용하기 위해 key, iv 등 생성하는 코드 알고리즘은 AES-128, AES-192, AES-256 어떤 걸 사용하느냐에 따라 key, iv자체의 size가 달라질 수 있습니다 본 글에서는 AES/CBC/PKCS5Padding 256 을 기반으로 했습니다. Java에서 암복호화에 사용하기 위한 key, iv 는 어떻게 만들까? 현업에서는 key, iv를 데이터 제공 측과 소비측에서 양쪽에서 key, iv를 공유하는데 key, iv를 만드는 방법도 다양했습니다. 본 글에서 다양한 케이스를 코드로 처리한 내용을 적어봅니다. 대체로 key,iv는 base64혹은 hex등으로 encode해서 저장하고, runtime에 decode해서 쓰는 것이 일반적입니다. key 만들기 다양한 방법 base64등 encode 없이 그냥 문자열로 만들기 public String generateRandomString() { String CHARACTERS = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=&#43;&#34;; SecureRandom random = new SecureRandom(); StringBuilder sb = new StringBuilder(32); for (int i = 0; i &lt; 32; i&#43;&#43;) { sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))); } return sb.toString(); } base64는 java.util 을 쓰기도 하고 apache.commons.codec.binary등을 쓸 수 있습니다. public void keyGenerator() throws NoSuchAlgorithmException { // 1. Secret Key 생성 (AES-256) KeyGenerator keyGenerator = KeyGenerator.getInstance(&#34;AES&#34;); keyGenerator.init(256); // AES-256 사용 SecretKey secretKey = keyGenerator.generateKey(); // 2. IV 생성 (AES CBC 모드에서는 16바이트 IV 필요) byte[] iv = new byte[16]; SecureRandom secureRandom = new SecureRandom(); secureRandom.nextBytes(iv); // 3. Base64로 인코딩하여 출력 System.out.println(&#34;Secret Key (Base64): &#34; &#43; Base64.getEncoder().encodeToString(secretKey.getEncoded())); System.out.println(&#34;IV (Base64): &#34; &#43; Base64.getEncoder().encodeToString(iv)); } base64 public void generateBase64RandomKey() { int AES_KEY_SIZE = 32; //256 bit int IV_SIZE = 16; byte[] secretKeyBytes = new byte[AES_KEY_SIZE]; byte[] ivBytes = new byte[IV_SIZE]; new SecureRandom().nextBytes(secretKeyBytes); new SecureRandom().nextBytes(ivBytes); log.info(&#34;secretKeyBytes: {}&#34;, Base64.getEncoder().encodeToString(secretKeyBytes)); log.info(&#34;ivBytes: {}&#34;, Base64.getEncoder().encodeToString(ivBytes)); } hex public void generateHexRandomKey() { int AES_KEY_SIZE = 32; //256 bit int IV_SIZE = 16; byte[] secretKeyBytes = new byte[AES_KEY_SIZE]; byte[] ivBytes = new byte[IV_SIZE]; new SecureRandom().nextBytes(secretKeyBytes); new SecureRandom().nextBytes(ivBytes); log.info(&#34;secretKeyBytes: {}&#34;, bytesToHex(secretKeyBytes)); log.info(&#34;ivBytes: {}&#34;, bytesToHex(ivBytes)); } 32byte(256bit) 랜덤 문자열 만들고, base64 encode 하기 public void generateRandomStringAndGenerateKey() { int size = 32; String CHARACTERS = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=&#43;&#34;; SecureRandom random = new SecureRandom(); StringBuilder sb = new StringBuilder(size); for (int i = 0; i &lt; size; i&#43;&#43;) { sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length()))); } String secretKeyBase64 = Base64.getEncoder().encodeToString(sb.toString().getBytes()); String ivBase64 = Base64.getEncoder().encodeToString(sb.substring(0,16).getBytes()); } 32byte 문자열을 사용해서 base64 encode 하기 public void generateKeyWithString() { String input = &#34;YOUR 32자리 문자열&#34;; String secretKeyBase64 = Base64.getEncoder().encodeToString(input.getBytes()); String ivBase64 = Base64.getEncoder().encodeToString(input.substring(0,16).getBytes()); String decoded = new String(Base64.getDecoder().decode(secretKeyBase64)); } "
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/til/aes/aes_key_generate/" />
+<meta property="og:site_name" content="AES key Generator" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-20 16:18:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -382,8 +469,6 @@ key, iv를 만드는 방법도 다양했습니다.</li>
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

@@ -1,7 +1,100 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    @Mock @MockBean 의 차이 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="@Mock과 @MockBean은 둘 다 테스트에서 Mock 객체를 만들기 위한 어노테이션이지만, 쓰이는 환경과 역할이 조금 달라요. 간단히 차이부터 요약하면: 🔹 @Mock (from Mockito) Mockito에서 제공하는 어노테이션 **순수 단위 테스트(Unit Test)**에 사용 Spring Context와는 무관 테스트 클래스 내에서 의존성을 Mock으로 주입하고 싶을 때 사용 MockitoAnnotations.openMocks(this) 또는 @ExtendWith(MockitoExtension.class) 와 함께 사용해야 함 예시:
+@ExtendWith(MockitoExtension.class) class MyServiceTest { @Mock private MyRepository myRepository; @InjectMocks private MyService myService; @Test void testSomething() { // myRepository는 mock 객체 } } 🔸 @MockBean (from Spring Boot) Spring Boot Test에서 제공하는 어노테이션 통합 테스트(Integration Test) 시 사용 Spring ApplicationContext에 등록된 Bean을 Mock으로 교체 @SpringBootTest, @WebMvcTest, @DataJpaTest 같은 Spring 기반 테스트 환경에서 사용 예시:
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/tdd/mock_mockbean/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="@Mock @MockBean 의 차이 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="@Mock과 @MockBean은 둘 다 테스트에서 Mock 객체를 만들기 위한 어노테이션이지만, 쓰이는 환경과 역할이 조금 달라요. 간단히 차이부터 요약하면: 🔹 @Mock (from Mockito) Mockito에서 제공하는 어노테이션 **순수 단위 테스트(Unit Test)**에 사용 Spring Context와는 무관 테스트 클래스 내에서 의존성을 Mock으로 주입하고 싶을 때 사용 MockitoAnnotations.openMocks(this) 또는 @ExtendWith(MockitoExtension.class) 와 함께 사용해야 함 예시:
+@ExtendWith(MockitoExtension.class) class MyServiceTest { @Mock private MyRepository myRepository; @InjectMocks private MyService myService; @Test void testSomething() { // myRepository는 mock 객체 } } 🔸 @MockBean (from Spring Boot) Spring Boot Test에서 제공하는 어노테이션 통합 테스트(Integration Test) 시 사용 Spring ApplicationContext에 등록된 Bean을 Mock으로 교체 @SpringBootTest, @WebMvcTest, @DataJpaTest 같은 Spring 기반 테스트 환경에서 사용 예시:
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="@Mock @MockBean 의 차이 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="@Mock과 @MockBean은 둘 다 테스트에서 Mock 객체를 만들기 위한 어노테이션이지만, 쓰이는 환경과 역할이 조금 달라요. 간단히 차이부터 요약하면: 🔹 @Mock (from Mockito) Mockito에서 제공하는 어노테이션 **순수 단위 테스트(Unit Test)**에 사용 Spring Context와는 무관 테스트 클래스 내에서 의존성을 Mock으로 주입하고 싶을 때 사용 MockitoAnnotations.openMocks(this) 또는 @ExtendWith(MockitoExtension.class) 와 함께 사용해야 함 예시:
+@ExtendWith(MockitoExtension.class) class MyServiceTest { @Mock private MyRepository myRepository; @InjectMocks private MyService myService; @Test void testSomething() { // myRepository는 mock 객체 } } 🔸 @MockBean (from Spring Boot) Spring Boot Test에서 제공하는 어노테이션 통합 테스트(Integration Test) 시 사용 Spring ApplicationContext에 등록된 Bean을 Mock으로 교체 @SpringBootTest, @WebMvcTest, @DataJpaTest 같은 Spring 기반 테스트 환경에서 사용 예시:
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/tdd/mock_mockbean/" />
+<meta property="og:site_name" content="@Mock @MockBean 의 차이" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-04-03 15:57:29 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -442,8 +535,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

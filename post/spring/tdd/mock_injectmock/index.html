@@ -1,7 +1,106 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    @Mock, @InjectBean 의 차이 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="@Mock 과 @InjectedMock @Mock과 @InjectMocks의 차이를 알아볼게요. 이 둘은 함께 자주 쓰이지만 서로 다른 역할을 해요.
+🔹 @Mock Mockito에서 제공 Mock 객체를 생성해줌 단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음 @Mock private MyRepository myRepository; // 가짜 객체 생성 🔸 @InjectMocks 역시 Mockito에서 제공 테스트 대상 객체(테스트할 클래스)를 생성하고,
+그 안에 있는 의존성 필드에 @Mock으로 만든 객체들을 자동으로 주입 @InjectMocks private MyService myService; // MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입 ✅ 간단 예시 @ExtendWith(MockitoExtension.class) class MyServiceTest { @Mock private MyRepository myRepository; @InjectMocks private MyService myService; @Test void testSomething() { // myService는 실제 객체 // myRepository는 mock 객체 // myService 내부에서 myRepository가 사용될 때 mock이 주입됨 } } 📌 정리하자면: 어노테이션 역할 @Mock 가짜(Mock) 객체 생성 @InjectMocks 테스트 대상 객체를 생성하고, @Mock 객체를 그 안에 주입 즉, @Mock이 가짜 부품을 만드는 거고,
+@InjectMocks는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/tdd/mock_injectmock/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="@Mock, @InjectBean 의 차이 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="@Mock 과 @InjectedMock @Mock과 @InjectMocks의 차이를 알아볼게요. 이 둘은 함께 자주 쓰이지만 서로 다른 역할을 해요.
+🔹 @Mock Mockito에서 제공 Mock 객체를 생성해줌 단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음 @Mock private MyRepository myRepository; // 가짜 객체 생성 🔸 @InjectMocks 역시 Mockito에서 제공 테스트 대상 객체(테스트할 클래스)를 생성하고,
+그 안에 있는 의존성 필드에 @Mock으로 만든 객체들을 자동으로 주입 @InjectMocks private MyService myService; // MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입 ✅ 간단 예시 @ExtendWith(MockitoExtension.class) class MyServiceTest { @Mock private MyRepository myRepository; @InjectMocks private MyService myService; @Test void testSomething() { // myService는 실제 객체 // myRepository는 mock 객체 // myService 내부에서 myRepository가 사용될 때 mock이 주입됨 } } 📌 정리하자면: 어노테이션 역할 @Mock 가짜(Mock) 객체 생성 @InjectMocks 테스트 대상 객체를 생성하고, @Mock 객체를 그 안에 주입 즉, @Mock이 가짜 부품을 만드는 거고,
+@InjectMocks는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="@Mock, @InjectBean 의 차이 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="@Mock 과 @InjectedMock @Mock과 @InjectMocks의 차이를 알아볼게요. 이 둘은 함께 자주 쓰이지만 서로 다른 역할을 해요.
+🔹 @Mock Mockito에서 제공 Mock 객체를 생성해줌 단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음 @Mock private MyRepository myRepository; // 가짜 객체 생성 🔸 @InjectMocks 역시 Mockito에서 제공 테스트 대상 객체(테스트할 클래스)를 생성하고,
+그 안에 있는 의존성 필드에 @Mock으로 만든 객체들을 자동으로 주입 @InjectMocks private MyService myService; // MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입 ✅ 간단 예시 @ExtendWith(MockitoExtension.class) class MyServiceTest { @Mock private MyRepository myRepository; @InjectMocks private MyService myService; @Test void testSomething() { // myService는 실제 객체 // myRepository는 mock 객체 // myService 내부에서 myRepository가 사용될 때 mock이 주입됨 } } 📌 정리하자면: 어노테이션 역할 @Mock 가짜(Mock) 객체 생성 @InjectMocks 테스트 대상 객체를 생성하고, @Mock 객체를 그 안에 주입 즉, @Mock이 가짜 부품을 만드는 거고,
+@InjectMocks는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/tdd/mock_injectmock/" />
+<meta property="og:site_name" content="@Mock, @InjectBean 의 차이" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-04-03 15:57:29 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -399,8 +498,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

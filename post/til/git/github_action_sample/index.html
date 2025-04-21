@@ -1,7 +1,109 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    github action sample with spring boot | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="github action sample spring boot gradle build를 사용하는 spring boot를 빌드하고 ssh로
+secret 류는 setting-&gt; security에 Secrets and variables 내 action 메뉴에서 설정
+마지막에 slack webhook으로 배포 상황 알림
+action 설정이나 slack webhoook url 설정하는 방법은 다른 블로그에도 많으니 생략하겠습니다.
+name: Build and Deploy on: push: branches: - develop jobs: build-and-deploy: runs-on: ubuntu-latest steps: # 1. SSH 호스트 키 추가 - name: Add SSH known hosts run: | mkdir -p ~/.ssh ssh-keyscan -H github.com &gt;&gt; ~/.ssh/known_hosts # 2. 리포지토리 체크아웃 (서브모듈 포함) - name: Checkout repository with submodules uses: actions/checkout@v3 with: submodules: recursive ssh-key: ${{ secrets.PRIVATE_KEY_FOR_SUBMODULE }} fetch-depth: 0 # 3. 서브모듈 최신화 - name: Update submodules to the latest run: | git submodule update --init --recursive git submodule foreach git pull origin $(git rev-parse --abbrev-ref HEAD) # 4. JDK 설정 - name: Set up JDK 23 uses: actions/setup-java@v3 with: java-version: &#39;23&#39; distribution: &#39;temurin&#39; # 5. Gradle 빌드 - name: Build with Gradle run: ./gradlew clean build -x test # 6. 서버로 파일 전송 - name: Deploy to Server env: SSH_PRIVATE_KEY: ${{ secrets.DEV_SSH_PRIVATE_KEY }} DEPLOY_SERVER_IP: ${{ secrets.DEV_SERVER_IP }} DEPLOY_SERVER_USER: ${{ secrets.DEV_SERVER_USER }} run: | echo &#34;DEPLOY_SERVER_IP: $DEPLOY_SERVER_IP&#34; mkdir -p ~/.ssh echo &#34;$SSH_PRIVATE_KEY&#34; &gt; ~/.ssh/github_action chmod 600 ~/.ssh/github_action ssh-keyscan -H &#34;$DEPLOY_SERVER_IP&#34; &gt;&gt; ~/.ssh/known_hosts # 빌드 파일 전송 scp -i ~/.ssh/github_action build/libs/*.jar $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/backend/ # swagger rest doc json # scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ find build/resources/main/restdocs -name &#34;*.json&#34; | grep . &amp;&amp; scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ || echo &#34;No JSON files to copy, skipping...&#34; # 7. 서버에서 애플리케이션 실행 - name: Start Application env: DEPLOY_SERVER_IP: ${{ secrets.DEV_SERVER_IP }} SERVER_USER: ${{ secrets.DEV_SERVER_USER }} REPOSITORY_NAME: ${{ github.repository }} run: | PROJECT_NAME=$(echo $REPOSITORY_NAME | cut -d&#39;/&#39; -f2) ssh -i ~/.ssh/github_action $SERVER_USER@$DEPLOY_SERVER_IP &lt;&lt; EOF cd /home/$SERVER_USER/backend chmod 700 /home/$SERVER_USER/backend/${PROJECT_NAME}*-exec.jar sh /home/$SERVER_USER/bin/deploy.sh $PROJECT_NAME dev /home/$SERVER_USER 512m sh /home/$SERVER_USER/infra/swagger/swagger_script.sh restart ${PROJECT}-api.json EOF - name: action-slack uses: 8398a7/action-slack@v3 with: status: ${{ job.status }} author_name: Pink Spider - dev fields: repo,commit,message,author # action,eventName,ref,workflow,job,took 추가할 수 있음 mention: here if_mention: failure,cancelled env: SLACK_WEBHOOK_URL: ${{ secrets.DEV_SLACK_WEBHOOK_URL }} # required if: always() # Pick up events even if the job fails or is canceled. deploy.sh
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/git/github_action_sample/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="github action sample with spring boot - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="github action sample spring boot gradle build를 사용하는 spring boot를 빌드하고 ssh로
+secret 류는 setting-&gt; security에 Secrets and variables 내 action 메뉴에서 설정
+마지막에 slack webhook으로 배포 상황 알림
+action 설정이나 slack webhoook url 설정하는 방법은 다른 블로그에도 많으니 생략하겠습니다.
+name: Build and Deploy on: push: branches: - develop jobs: build-and-deploy: runs-on: ubuntu-latest steps: # 1. SSH 호스트 키 추가 - name: Add SSH known hosts run: | mkdir -p ~/.ssh ssh-keyscan -H github.com &gt;&gt; ~/.ssh/known_hosts # 2. 리포지토리 체크아웃 (서브모듈 포함) - name: Checkout repository with submodules uses: actions/checkout@v3 with: submodules: recursive ssh-key: ${{ secrets.PRIVATE_KEY_FOR_SUBMODULE }} fetch-depth: 0 # 3. 서브모듈 최신화 - name: Update submodules to the latest run: | git submodule update --init --recursive git submodule foreach git pull origin $(git rev-parse --abbrev-ref HEAD) # 4. JDK 설정 - name: Set up JDK 23 uses: actions/setup-java@v3 with: java-version: &#39;23&#39; distribution: &#39;temurin&#39; # 5. Gradle 빌드 - name: Build with Gradle run: ./gradlew clean build -x test # 6. 서버로 파일 전송 - name: Deploy to Server env: SSH_PRIVATE_KEY: ${{ secrets.DEV_SSH_PRIVATE_KEY }} DEPLOY_SERVER_IP: ${{ secrets.DEV_SERVER_IP }} DEPLOY_SERVER_USER: ${{ secrets.DEV_SERVER_USER }} run: | echo &#34;DEPLOY_SERVER_IP: $DEPLOY_SERVER_IP&#34; mkdir -p ~/.ssh echo &#34;$SSH_PRIVATE_KEY&#34; &gt; ~/.ssh/github_action chmod 600 ~/.ssh/github_action ssh-keyscan -H &#34;$DEPLOY_SERVER_IP&#34; &gt;&gt; ~/.ssh/known_hosts # 빌드 파일 전송 scp -i ~/.ssh/github_action build/libs/*.jar $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/backend/ # swagger rest doc json # scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ find build/resources/main/restdocs -name &#34;*.json&#34; | grep . &amp;&amp; scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ || echo &#34;No JSON files to copy, skipping...&#34; # 7. 서버에서 애플리케이션 실행 - name: Start Application env: DEPLOY_SERVER_IP: ${{ secrets.DEV_SERVER_IP }} SERVER_USER: ${{ secrets.DEV_SERVER_USER }} REPOSITORY_NAME: ${{ github.repository }} run: | PROJECT_NAME=$(echo $REPOSITORY_NAME | cut -d&#39;/&#39; -f2) ssh -i ~/.ssh/github_action $SERVER_USER@$DEPLOY_SERVER_IP &lt;&lt; EOF cd /home/$SERVER_USER/backend chmod 700 /home/$SERVER_USER/backend/${PROJECT_NAME}*-exec.jar sh /home/$SERVER_USER/bin/deploy.sh $PROJECT_NAME dev /home/$SERVER_USER 512m sh /home/$SERVER_USER/infra/swagger/swagger_script.sh restart ${PROJECT}-api.json EOF - name: action-slack uses: 8398a7/action-slack@v3 with: status: ${{ job.status }} author_name: Pink Spider - dev fields: repo,commit,message,author # action,eventName,ref,workflow,job,took 추가할 수 있음 mention: here if_mention: failure,cancelled env: SLACK_WEBHOOK_URL: ${{ secrets.DEV_SLACK_WEBHOOK_URL }} # required if: always() # Pick up events even if the job fails or is canceled. deploy.sh
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="github action sample with spring boot - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="github action sample spring boot gradle build를 사용하는 spring boot를 빌드하고 ssh로
+secret 류는 setting-&gt; security에 Secrets and variables 내 action 메뉴에서 설정
+마지막에 slack webhook으로 배포 상황 알림
+action 설정이나 slack webhoook url 설정하는 방법은 다른 블로그에도 많으니 생략하겠습니다.
+name: Build and Deploy on: push: branches: - develop jobs: build-and-deploy: runs-on: ubuntu-latest steps: # 1. SSH 호스트 키 추가 - name: Add SSH known hosts run: | mkdir -p ~/.ssh ssh-keyscan -H github.com &gt;&gt; ~/.ssh/known_hosts # 2. 리포지토리 체크아웃 (서브모듈 포함) - name: Checkout repository with submodules uses: actions/checkout@v3 with: submodules: recursive ssh-key: ${{ secrets.PRIVATE_KEY_FOR_SUBMODULE }} fetch-depth: 0 # 3. 서브모듈 최신화 - name: Update submodules to the latest run: | git submodule update --init --recursive git submodule foreach git pull origin $(git rev-parse --abbrev-ref HEAD) # 4. JDK 설정 - name: Set up JDK 23 uses: actions/setup-java@v3 with: java-version: &#39;23&#39; distribution: &#39;temurin&#39; # 5. Gradle 빌드 - name: Build with Gradle run: ./gradlew clean build -x test # 6. 서버로 파일 전송 - name: Deploy to Server env: SSH_PRIVATE_KEY: ${{ secrets.DEV_SSH_PRIVATE_KEY }} DEPLOY_SERVER_IP: ${{ secrets.DEV_SERVER_IP }} DEPLOY_SERVER_USER: ${{ secrets.DEV_SERVER_USER }} run: | echo &#34;DEPLOY_SERVER_IP: $DEPLOY_SERVER_IP&#34; mkdir -p ~/.ssh echo &#34;$SSH_PRIVATE_KEY&#34; &gt; ~/.ssh/github_action chmod 600 ~/.ssh/github_action ssh-keyscan -H &#34;$DEPLOY_SERVER_IP&#34; &gt;&gt; ~/.ssh/known_hosts # 빌드 파일 전송 scp -i ~/.ssh/github_action build/libs/*.jar $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/backend/ # swagger rest doc json # scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ find build/resources/main/restdocs -name &#34;*.json&#34; | grep . &amp;&amp; scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ || echo &#34;No JSON files to copy, skipping...&#34; # 7. 서버에서 애플리케이션 실행 - name: Start Application env: DEPLOY_SERVER_IP: ${{ secrets.DEV_SERVER_IP }} SERVER_USER: ${{ secrets.DEV_SERVER_USER }} REPOSITORY_NAME: ${{ github.repository }} run: | PROJECT_NAME=$(echo $REPOSITORY_NAME | cut -d&#39;/&#39; -f2) ssh -i ~/.ssh/github_action $SERVER_USER@$DEPLOY_SERVER_IP &lt;&lt; EOF cd /home/$SERVER_USER/backend chmod 700 /home/$SERVER_USER/backend/${PROJECT_NAME}*-exec.jar sh /home/$SERVER_USER/bin/deploy.sh $PROJECT_NAME dev /home/$SERVER_USER 512m sh /home/$SERVER_USER/infra/swagger/swagger_script.sh restart ${PROJECT}-api.json EOF - name: action-slack uses: 8398a7/action-slack@v3 with: status: ${{ job.status }} author_name: Pink Spider - dev fields: repo,commit,message,author # action,eventName,ref,workflow,job,took 추가할 수 있음 mention: here if_mention: failure,cancelled env: SLACK_WEBHOOK_URL: ${{ secrets.DEV_SLACK_WEBHOOK_URL }} # required if: always() # Pick up events even if the job fails or is canceled. deploy.sh
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/til/git/github_action_sample/" />
+<meta property="og:site_name" content="github action sample with spring boot" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-25 18:01:05 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -422,8 +524,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

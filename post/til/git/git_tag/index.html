@@ -1,7 +1,103 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    git에서 tag의 활용 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="git 에서 tag는 언제 쓰고 어떻게 쓸까? Git에서 **tag(태그)**는 특정 커밋에 이름을 붙여서 식별하기 쉽게 만드는 기능입니다. 일반적으로 릴리즈 버전을 표시할 때 많이 사용되며, 특정 시점의 스냅샷을 의미합니다. 🎯 태그의 주요 역할 릴리즈 마킹
+예: v1.0.0, v2.1.3 배포한 버전이 어떤 커밋인지 명확하게 추적할 수 있습니다. 스냅샷 저장
+특정 커밋에 중요한 의미를 부여하고 싶을 때 (예: 첫 배포, 테스트 완료 지점 등) CI/CD 트리거용
+태그가 push될 때 자동 배포되도록 CI 파이프라인 설정이 가능 🛠️ 태그의 종류 Lightweight Tag (가벼운 태그) 단순히 커밋을 가리키는 포인터 Git 내부적으로는 브랜치와 유사한 구조 git tag v1.0.0 Annotated Tag (주석이 있는 태그) 태그 생성자 정보, 날짜, 메시지 등을 포함 릴리즈에는 보통 이걸 사용 git tag -a v1.0.0 -m &#34;Release version 1.0.0&#34; 📤 태그 푸시 및 공유 태그는 기본적으로 git push로 자동 푸시되지 않음. 명시적으로 푸시해야 함: # 특정 태그 푸시 git push origin v1.0.0 # 모든 태그 푸시 git push origin --tags 🔍 태그 확인 # 로컬 태그 목록 git tag # 특정 태그가 가리키는 커밋 보기 git show v1.0.0 🧽 태그 삭제 # 로컬 태그 삭제 git tag -d v1.0.0 # 원격 태그 삭제 git push origin --delete v1.0.0 📦 활용 예시 (릴리즈 관리) # 코드가 안정화된 시점 git checkout main git pull git tag -a v1.0.0 -m &#34;First stable release&#34; git push origin v1.0.0 CI/CD 도구(GitHub Actions, Jenkins 등)는 이 태그를 감지해서 v1.0.0을 자동으로 배포하게 할 수 있습니다. "
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/git/git_tag/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="git에서 tag의 활용 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="git 에서 tag는 언제 쓰고 어떻게 쓸까? Git에서 **tag(태그)**는 특정 커밋에 이름을 붙여서 식별하기 쉽게 만드는 기능입니다. 일반적으로 릴리즈 버전을 표시할 때 많이 사용되며, 특정 시점의 스냅샷을 의미합니다. 🎯 태그의 주요 역할 릴리즈 마킹
+예: v1.0.0, v2.1.3 배포한 버전이 어떤 커밋인지 명확하게 추적할 수 있습니다. 스냅샷 저장
+특정 커밋에 중요한 의미를 부여하고 싶을 때 (예: 첫 배포, 테스트 완료 지점 등) CI/CD 트리거용
+태그가 push될 때 자동 배포되도록 CI 파이프라인 설정이 가능 🛠️ 태그의 종류 Lightweight Tag (가벼운 태그) 단순히 커밋을 가리키는 포인터 Git 내부적으로는 브랜치와 유사한 구조 git tag v1.0.0 Annotated Tag (주석이 있는 태그) 태그 생성자 정보, 날짜, 메시지 등을 포함 릴리즈에는 보통 이걸 사용 git tag -a v1.0.0 -m &#34;Release version 1.0.0&#34; 📤 태그 푸시 및 공유 태그는 기본적으로 git push로 자동 푸시되지 않음. 명시적으로 푸시해야 함: # 특정 태그 푸시 git push origin v1.0.0 # 모든 태그 푸시 git push origin --tags 🔍 태그 확인 # 로컬 태그 목록 git tag # 특정 태그가 가리키는 커밋 보기 git show v1.0.0 🧽 태그 삭제 # 로컬 태그 삭제 git tag -d v1.0.0 # 원격 태그 삭제 git push origin --delete v1.0.0 📦 활용 예시 (릴리즈 관리) # 코드가 안정화된 시점 git checkout main git pull git tag -a v1.0.0 -m &#34;First stable release&#34; git push origin v1.0.0 CI/CD 도구(GitHub Actions, Jenkins 등)는 이 태그를 감지해서 v1.0.0을 자동으로 배포하게 할 수 있습니다. "
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="git에서 tag의 활용 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="git 에서 tag는 언제 쓰고 어떻게 쓸까? Git에서 **tag(태그)**는 특정 커밋에 이름을 붙여서 식별하기 쉽게 만드는 기능입니다. 일반적으로 릴리즈 버전을 표시할 때 많이 사용되며, 특정 시점의 스냅샷을 의미합니다. 🎯 태그의 주요 역할 릴리즈 마킹
+예: v1.0.0, v2.1.3 배포한 버전이 어떤 커밋인지 명확하게 추적할 수 있습니다. 스냅샷 저장
+특정 커밋에 중요한 의미를 부여하고 싶을 때 (예: 첫 배포, 테스트 완료 지점 등) CI/CD 트리거용
+태그가 push될 때 자동 배포되도록 CI 파이프라인 설정이 가능 🛠️ 태그의 종류 Lightweight Tag (가벼운 태그) 단순히 커밋을 가리키는 포인터 Git 내부적으로는 브랜치와 유사한 구조 git tag v1.0.0 Annotated Tag (주석이 있는 태그) 태그 생성자 정보, 날짜, 메시지 등을 포함 릴리즈에는 보통 이걸 사용 git tag -a v1.0.0 -m &#34;Release version 1.0.0&#34; 📤 태그 푸시 및 공유 태그는 기본적으로 git push로 자동 푸시되지 않음. 명시적으로 푸시해야 함: # 특정 태그 푸시 git push origin v1.0.0 # 모든 태그 푸시 git push origin --tags 🔍 태그 확인 # 로컬 태그 목록 git tag # 특정 태그가 가리키는 커밋 보기 git show v1.0.0 🧽 태그 삭제 # 로컬 태그 삭제 git tag -d v1.0.0 # 원격 태그 삭제 git push origin --delete v1.0.0 📦 활용 예시 (릴리즈 관리) # 코드가 안정화된 시점 git checkout main git pull git tag -a v1.0.0 -m &#34;First stable release&#34; git push origin v1.0.0 CI/CD 도구(GitHub Actions, Jenkins 등)는 이 태그를 감지해서 v1.0.0을 자동으로 배포하게 할 수 있습니다. "
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/til/git/git_tag/" />
+<meta property="og:site_name" content="git에서 tag의 활용" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-01-04 13:18:03 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -350,8 +446,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

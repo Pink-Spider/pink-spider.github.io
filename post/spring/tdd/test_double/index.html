@@ -1,7 +1,100 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Test Double | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="테스트 더블(Test Double) 용어 정리 아래는 테스트에서 자주 쓰이는 5가지 테스트 대역입니다: 🧪 테스트 더블(Test Double) 종류 요약 타입 설명 주로 하는 일 대표 예시 Dummy 값이 필요하지만 아무 역할도 하지 않는 객체 메서드 시그니처 채우기 용 new User(null)처럼 값만 채움 Fake 실제 구현에 가까우나, 단순하거나 in-memory 기반 간단한 대체 구현 InMemory DB, FakeEmailSender Stub 고정된 응답을 리턴하는 객체 상태 기반 테스트 when(repo.findById()).thenReturn() Mock 행위 기반, 호출 여부나 순서 검증이 가능한 객체 행위 기반 테스트 verify(repo).save() Spy 실제 객체를 감싸면서, 부분적으로 mock 가능 실제 동작 &#43; 호출 감시 spy(new UserService(...)) 1. 🐣 Dummy 가장 단순한 형태. 아무 일도 하지 않고, 값만 채우는 용도. 테스트에 직접적 의미 없음. 없어도 테스트 통과 가능. User dummyUser = new User(null); // 생성자 매개변수 맞추려고 넣는 용도 2. 🧪 Stub 호출하면 정해진 값을 리턴함. 동작 자체는 단순하고 검증 로직은 없음. 상태 기반 테스트에 사용됨. when(userRepository.findById(1L)).thenReturn(Optional.of(new User(&#34;Alice&#34;))); 3. 🤖 Mock Stub처럼 리턴값을 줄 수 있지만, 추가로 호출 여부도 검증함. 테스트의 **행위 검증(Behavior Verification)**에 초점. verify(userRepository, times(1)).save(any()); 4. 🕵️ Spy 실제 객체를 감싸면서, 필요한 부분만 mock 처리 가능. 일부 메서드는 진짜 실행, 일부는 stub/mock 가능. 사용 시 조심: 진짜 의존성이 따라올 수 있음. UserService spyService = spy(new UserService(realRepository)); doReturn(&#34;fakeName&#34;).when(spyService).getUserName(); 5. 🧩 Fake 진짜 구현체는 아니지만, 실제로 동작하는 간단한 구현. 테스트용으로 가볍게 만든 진짜 비즈니스 로직을 흉내낸 것. 예: InMemory DB, 테스트용 메시지 큐 등 public class InMemoryUserRepository implements UserRepository { private Map&lt;Long, User&gt; db = new HashMap&lt;&gt;(); public Optional&lt;User&gt; findById(Long id) { return Optional.ofNullable(db.get(id)); } } 🎯 어떤 걸 언제 써야 할까? 테스트 목적 적합한 더블 파라미터 채우기만 하면 됨 Dummy 고정된 값 리턴만 필요 Stub 호출 여부/횟수 검증 Mock 실제 객체 &#43; 일부 mocking Spy 실제 구현 비슷한 동작 필요 Fake Fake Repository 예시 Spring 환경에서 자주 쓰이는 Fake Repository 예제를 보여드릴게요.
+단위 테스트에서 JPA 같은 실제 DB 연결 없이도 로직을 검증하고 싶을 때 아주 유용합니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/tdd/test_double/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Test Double - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="테스트 더블(Test Double) 용어 정리 아래는 테스트에서 자주 쓰이는 5가지 테스트 대역입니다: 🧪 테스트 더블(Test Double) 종류 요약 타입 설명 주로 하는 일 대표 예시 Dummy 값이 필요하지만 아무 역할도 하지 않는 객체 메서드 시그니처 채우기 용 new User(null)처럼 값만 채움 Fake 실제 구현에 가까우나, 단순하거나 in-memory 기반 간단한 대체 구현 InMemory DB, FakeEmailSender Stub 고정된 응답을 리턴하는 객체 상태 기반 테스트 when(repo.findById()).thenReturn() Mock 행위 기반, 호출 여부나 순서 검증이 가능한 객체 행위 기반 테스트 verify(repo).save() Spy 실제 객체를 감싸면서, 부분적으로 mock 가능 실제 동작 &#43; 호출 감시 spy(new UserService(...)) 1. 🐣 Dummy 가장 단순한 형태. 아무 일도 하지 않고, 값만 채우는 용도. 테스트에 직접적 의미 없음. 없어도 테스트 통과 가능. User dummyUser = new User(null); // 생성자 매개변수 맞추려고 넣는 용도 2. 🧪 Stub 호출하면 정해진 값을 리턴함. 동작 자체는 단순하고 검증 로직은 없음. 상태 기반 테스트에 사용됨. when(userRepository.findById(1L)).thenReturn(Optional.of(new User(&#34;Alice&#34;))); 3. 🤖 Mock Stub처럼 리턴값을 줄 수 있지만, 추가로 호출 여부도 검증함. 테스트의 **행위 검증(Behavior Verification)**에 초점. verify(userRepository, times(1)).save(any()); 4. 🕵️ Spy 실제 객체를 감싸면서, 필요한 부분만 mock 처리 가능. 일부 메서드는 진짜 실행, 일부는 stub/mock 가능. 사용 시 조심: 진짜 의존성이 따라올 수 있음. UserService spyService = spy(new UserService(realRepository)); doReturn(&#34;fakeName&#34;).when(spyService).getUserName(); 5. 🧩 Fake 진짜 구현체는 아니지만, 실제로 동작하는 간단한 구현. 테스트용으로 가볍게 만든 진짜 비즈니스 로직을 흉내낸 것. 예: InMemory DB, 테스트용 메시지 큐 등 public class InMemoryUserRepository implements UserRepository { private Map&lt;Long, User&gt; db = new HashMap&lt;&gt;(); public Optional&lt;User&gt; findById(Long id) { return Optional.ofNullable(db.get(id)); } } 🎯 어떤 걸 언제 써야 할까? 테스트 목적 적합한 더블 파라미터 채우기만 하면 됨 Dummy 고정된 값 리턴만 필요 Stub 호출 여부/횟수 검증 Mock 실제 객체 &#43; 일부 mocking Spy 실제 구현 비슷한 동작 필요 Fake Fake Repository 예시 Spring 환경에서 자주 쓰이는 Fake Repository 예제를 보여드릴게요.
+단위 테스트에서 JPA 같은 실제 DB 연결 없이도 로직을 검증하고 싶을 때 아주 유용합니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Test Double - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="테스트 더블(Test Double) 용어 정리 아래는 테스트에서 자주 쓰이는 5가지 테스트 대역입니다: 🧪 테스트 더블(Test Double) 종류 요약 타입 설명 주로 하는 일 대표 예시 Dummy 값이 필요하지만 아무 역할도 하지 않는 객체 메서드 시그니처 채우기 용 new User(null)처럼 값만 채움 Fake 실제 구현에 가까우나, 단순하거나 in-memory 기반 간단한 대체 구현 InMemory DB, FakeEmailSender Stub 고정된 응답을 리턴하는 객체 상태 기반 테스트 when(repo.findById()).thenReturn() Mock 행위 기반, 호출 여부나 순서 검증이 가능한 객체 행위 기반 테스트 verify(repo).save() Spy 실제 객체를 감싸면서, 부분적으로 mock 가능 실제 동작 &#43; 호출 감시 spy(new UserService(...)) 1. 🐣 Dummy 가장 단순한 형태. 아무 일도 하지 않고, 값만 채우는 용도. 테스트에 직접적 의미 없음. 없어도 테스트 통과 가능. User dummyUser = new User(null); // 생성자 매개변수 맞추려고 넣는 용도 2. 🧪 Stub 호출하면 정해진 값을 리턴함. 동작 자체는 단순하고 검증 로직은 없음. 상태 기반 테스트에 사용됨. when(userRepository.findById(1L)).thenReturn(Optional.of(new User(&#34;Alice&#34;))); 3. 🤖 Mock Stub처럼 리턴값을 줄 수 있지만, 추가로 호출 여부도 검증함. 테스트의 **행위 검증(Behavior Verification)**에 초점. verify(userRepository, times(1)).save(any()); 4. 🕵️ Spy 실제 객체를 감싸면서, 필요한 부분만 mock 처리 가능. 일부 메서드는 진짜 실행, 일부는 stub/mock 가능. 사용 시 조심: 진짜 의존성이 따라올 수 있음. UserService spyService = spy(new UserService(realRepository)); doReturn(&#34;fakeName&#34;).when(spyService).getUserName(); 5. 🧩 Fake 진짜 구현체는 아니지만, 실제로 동작하는 간단한 구현. 테스트용으로 가볍게 만든 진짜 비즈니스 로직을 흉내낸 것. 예: InMemory DB, 테스트용 메시지 큐 등 public class InMemoryUserRepository implements UserRepository { private Map&lt;Long, User&gt; db = new HashMap&lt;&gt;(); public Optional&lt;User&gt; findById(Long id) { return Optional.ofNullable(db.get(id)); } } 🎯 어떤 걸 언제 써야 할까? 테스트 목적 적합한 더블 파라미터 채우기만 하면 됨 Dummy 고정된 값 리턴만 필요 Stub 호출 여부/횟수 검증 Mock 실제 객체 &#43; 일부 mocking Spy 실제 구현 비슷한 동작 필요 Fake Fake Repository 예시 Spring 환경에서 자주 쓰이는 Fake Repository 예제를 보여드릴게요.
+단위 테스트에서 JPA 같은 실제 DB 연결 없이도 로직을 검증하고 싶을 때 아주 유용합니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/tdd/test_double/" />
+<meta property="og:site_name" content="Test Double" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-04-03 15:57:29 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -496,8 +589,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

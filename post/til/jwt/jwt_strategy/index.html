@@ -1,7 +1,97 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    QueryDSL을 사용할 때 데이터베이스의 Lock | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="jwt 관련 Tip Q. access token 이 만료되면, refresh token을 통해 재발행 한다. refresh token은 만료 기간이 없을까? A. Refresh Token도 반드시 만료 기간이 있어야 합니다. 일반적으로는 Access Token보다 훨씬 긴 만료 기간을 설정할 뿐이에요. 1. 일반적인 만료 시간 설정 Access Token: 보통 15분 ~ 1시간 Refresh Token: 보통 7일 ~ 30일 또는 90일 2. 왜 Refresh Token도 만료 기간이 필요한가? Refresh Token이 유출되었을 경우, 무제한으로 Access Token을 재발급받을 수 있다면 보안에 치명적입니다. 일정 기간이 지나면 로그인 세션을 재확인하거나 재로그인을 유도하는 것이 보안상 더 안전합니다. 3. 저장 위치는? Refresh Token은 보통 서버 저장 방식 (e.g., Redis)에 저장하고, 사용자에게는 식별자만 전달하거나 클라이언트에 저장하되 보안적으로 안전한 저장소 (e.g., Secure Cookie, LocalStorage X) 를 사용하는 것이 권장됩니다. Q. Spring Boot에서의 예시 A. Spring Boot에서 JWT 기반으로 Access Token과 Refresh Token을 발급 및 재발급하는 기본적인 구조를 예시 1. 토큰 생성 클래스 (JwtProvider) @Component public class JwtProvider { private final String secretKey = &#34;yourSecretKey&#34;; // 적절히 암호화 필요 private final long accessTokenValidity = 1000L * 60 * 15; // 15분 private final long refreshTokenValidity = 1000L * 60 * 60 * 24 * 14; // 14일 public String createAccessToken(String userId) { return createToken(userId, accessTokenValidity); } public String createRefreshToken(String userId) { return createToken(userId, refreshTokenValidity); } private String createToken(String userId, long validity) { Claims claims = Jwts.claims().setSubject(userId); Date now = new Date(); Date expiry = new Date(now.getTime() &#43; validity); return Jwts.builder() .setClaims(claims) .setIssuedAt(now) .setExpiration(expiry) .signWith(SignatureAlgorithm.HS256, secretKey) .compact(); } public String getUserIdFromToken(String token) { return Jwts.parser().setSigningKey(secretKey) .parseClaimsJws(token).getBody().getSubject(); } public boolean validateToken(String token) { try { Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token); return true; } catch (ExpiredJwtException e) { return false; } } } 2. 로그인 시 토큰 발급 @PostMapping(&#34;/login&#34;) public ResponseEntity&lt;TokenResponse&gt; login(@RequestBody LoginRequest request) { // 인증 처리 (생략) String userId = &#34;user-id&#34;; String accessToken = jwtProvider.createAccessToken(userId); String refreshToken = jwtProvider.createRefreshToken(userId); // Refresh Token을 DB나 Redis에 저장 refreshTokenService.save(userId, refreshToken); return ResponseEntity.ok(new TokenResponse(accessToken, refreshToken)); } 3. Access Token 만료 시 Refresh Token으로 재발급 @PostMapping(&#34;/token/refresh&#34;) public ResponseEntity&lt;TokenResponse&gt; refreshToken(@RequestBody TokenRequest request) { String refreshToken = request.getRefreshToken(); if (!jwtProvider.validateToken(refreshToken)) { throw new RuntimeException(&#34;Invalid refresh token&#34;); } String userId = jwtProvider.getUserIdFromToken(refreshToken); // 저장된 refresh token과 비교 String stored = refreshTokenService.get(userId); if (!stored.equals(refreshToken)) { throw new RuntimeException(&#34;Token mismatch&#34;); } String newAccessToken = jwtProvider.createAccessToken(userId); return ResponseEntity.ok(new TokenResponse(newAccessToken, refreshToken)); } 4. Refresh Token 저장 예시 (Redis 기반) @Service public class RefreshTokenService { private final RedisTemplate&lt;String, String&gt; redisTemplate; public RefreshTokenService(RedisTemplate&lt;String, String&gt; redisTemplate) { this.redisTemplate = redisTemplate; } public void save(String userId, String token) { redisTemplate.opsForValue().set(userId, token, 14, TimeUnit.DAYS); // 유효 기간 설정 } public String get(String userId) { return redisTemplate.opsForValue().get(userId); } } Q. 에시에서 RefreshToken 에서 refresh save전에 기존꺼는 안지워도 될까? A. 일반적으로는 기존 Refresh Token을 삭제하거나 덮어써야 합니다. 왜냐면:
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/jwt/jwt_strategy/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="QueryDSL을 사용할 때 데이터베이스의 Lock - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="jwt 관련 Tip Q. access token 이 만료되면, refresh token을 통해 재발행 한다. refresh token은 만료 기간이 없을까? A. Refresh Token도 반드시 만료 기간이 있어야 합니다. 일반적으로는 Access Token보다 훨씬 긴 만료 기간을 설정할 뿐이에요. 1. 일반적인 만료 시간 설정 Access Token: 보통 15분 ~ 1시간 Refresh Token: 보통 7일 ~ 30일 또는 90일 2. 왜 Refresh Token도 만료 기간이 필요한가? Refresh Token이 유출되었을 경우, 무제한으로 Access Token을 재발급받을 수 있다면 보안에 치명적입니다. 일정 기간이 지나면 로그인 세션을 재확인하거나 재로그인을 유도하는 것이 보안상 더 안전합니다. 3. 저장 위치는? Refresh Token은 보통 서버 저장 방식 (e.g., Redis)에 저장하고, 사용자에게는 식별자만 전달하거나 클라이언트에 저장하되 보안적으로 안전한 저장소 (e.g., Secure Cookie, LocalStorage X) 를 사용하는 것이 권장됩니다. Q. Spring Boot에서의 예시 A. Spring Boot에서 JWT 기반으로 Access Token과 Refresh Token을 발급 및 재발급하는 기본적인 구조를 예시 1. 토큰 생성 클래스 (JwtProvider) @Component public class JwtProvider { private final String secretKey = &#34;yourSecretKey&#34;; // 적절히 암호화 필요 private final long accessTokenValidity = 1000L * 60 * 15; // 15분 private final long refreshTokenValidity = 1000L * 60 * 60 * 24 * 14; // 14일 public String createAccessToken(String userId) { return createToken(userId, accessTokenValidity); } public String createRefreshToken(String userId) { return createToken(userId, refreshTokenValidity); } private String createToken(String userId, long validity) { Claims claims = Jwts.claims().setSubject(userId); Date now = new Date(); Date expiry = new Date(now.getTime() &#43; validity); return Jwts.builder() .setClaims(claims) .setIssuedAt(now) .setExpiration(expiry) .signWith(SignatureAlgorithm.HS256, secretKey) .compact(); } public String getUserIdFromToken(String token) { return Jwts.parser().setSigningKey(secretKey) .parseClaimsJws(token).getBody().getSubject(); } public boolean validateToken(String token) { try { Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token); return true; } catch (ExpiredJwtException e) { return false; } } } 2. 로그인 시 토큰 발급 @PostMapping(&#34;/login&#34;) public ResponseEntity&lt;TokenResponse&gt; login(@RequestBody LoginRequest request) { // 인증 처리 (생략) String userId = &#34;user-id&#34;; String accessToken = jwtProvider.createAccessToken(userId); String refreshToken = jwtProvider.createRefreshToken(userId); // Refresh Token을 DB나 Redis에 저장 refreshTokenService.save(userId, refreshToken); return ResponseEntity.ok(new TokenResponse(accessToken, refreshToken)); } 3. Access Token 만료 시 Refresh Token으로 재발급 @PostMapping(&#34;/token/refresh&#34;) public ResponseEntity&lt;TokenResponse&gt; refreshToken(@RequestBody TokenRequest request) { String refreshToken = request.getRefreshToken(); if (!jwtProvider.validateToken(refreshToken)) { throw new RuntimeException(&#34;Invalid refresh token&#34;); } String userId = jwtProvider.getUserIdFromToken(refreshToken); // 저장된 refresh token과 비교 String stored = refreshTokenService.get(userId); if (!stored.equals(refreshToken)) { throw new RuntimeException(&#34;Token mismatch&#34;); } String newAccessToken = jwtProvider.createAccessToken(userId); return ResponseEntity.ok(new TokenResponse(newAccessToken, refreshToken)); } 4. Refresh Token 저장 예시 (Redis 기반) @Service public class RefreshTokenService { private final RedisTemplate&lt;String, String&gt; redisTemplate; public RefreshTokenService(RedisTemplate&lt;String, String&gt; redisTemplate) { this.redisTemplate = redisTemplate; } public void save(String userId, String token) { redisTemplate.opsForValue().set(userId, token, 14, TimeUnit.DAYS); // 유효 기간 설정 } public String get(String userId) { return redisTemplate.opsForValue().get(userId); } } Q. 에시에서 RefreshToken 에서 refresh save전에 기존꺼는 안지워도 될까? A. 일반적으로는 기존 Refresh Token을 삭제하거나 덮어써야 합니다. 왜냐면:
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="QueryDSL을 사용할 때 데이터베이스의 Lock - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="jwt 관련 Tip Q. access token 이 만료되면, refresh token을 통해 재발행 한다. refresh token은 만료 기간이 없을까? A. Refresh Token도 반드시 만료 기간이 있어야 합니다. 일반적으로는 Access Token보다 훨씬 긴 만료 기간을 설정할 뿐이에요. 1. 일반적인 만료 시간 설정 Access Token: 보통 15분 ~ 1시간 Refresh Token: 보통 7일 ~ 30일 또는 90일 2. 왜 Refresh Token도 만료 기간이 필요한가? Refresh Token이 유출되었을 경우, 무제한으로 Access Token을 재발급받을 수 있다면 보안에 치명적입니다. 일정 기간이 지나면 로그인 세션을 재확인하거나 재로그인을 유도하는 것이 보안상 더 안전합니다. 3. 저장 위치는? Refresh Token은 보통 서버 저장 방식 (e.g., Redis)에 저장하고, 사용자에게는 식별자만 전달하거나 클라이언트에 저장하되 보안적으로 안전한 저장소 (e.g., Secure Cookie, LocalStorage X) 를 사용하는 것이 권장됩니다. Q. Spring Boot에서의 예시 A. Spring Boot에서 JWT 기반으로 Access Token과 Refresh Token을 발급 및 재발급하는 기본적인 구조를 예시 1. 토큰 생성 클래스 (JwtProvider) @Component public class JwtProvider { private final String secretKey = &#34;yourSecretKey&#34;; // 적절히 암호화 필요 private final long accessTokenValidity = 1000L * 60 * 15; // 15분 private final long refreshTokenValidity = 1000L * 60 * 60 * 24 * 14; // 14일 public String createAccessToken(String userId) { return createToken(userId, accessTokenValidity); } public String createRefreshToken(String userId) { return createToken(userId, refreshTokenValidity); } private String createToken(String userId, long validity) { Claims claims = Jwts.claims().setSubject(userId); Date now = new Date(); Date expiry = new Date(now.getTime() &#43; validity); return Jwts.builder() .setClaims(claims) .setIssuedAt(now) .setExpiration(expiry) .signWith(SignatureAlgorithm.HS256, secretKey) .compact(); } public String getUserIdFromToken(String token) { return Jwts.parser().setSigningKey(secretKey) .parseClaimsJws(token).getBody().getSubject(); } public boolean validateToken(String token) { try { Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token); return true; } catch (ExpiredJwtException e) { return false; } } } 2. 로그인 시 토큰 발급 @PostMapping(&#34;/login&#34;) public ResponseEntity&lt;TokenResponse&gt; login(@RequestBody LoginRequest request) { // 인증 처리 (생략) String userId = &#34;user-id&#34;; String accessToken = jwtProvider.createAccessToken(userId); String refreshToken = jwtProvider.createRefreshToken(userId); // Refresh Token을 DB나 Redis에 저장 refreshTokenService.save(userId, refreshToken); return ResponseEntity.ok(new TokenResponse(accessToken, refreshToken)); } 3. Access Token 만료 시 Refresh Token으로 재발급 @PostMapping(&#34;/token/refresh&#34;) public ResponseEntity&lt;TokenResponse&gt; refreshToken(@RequestBody TokenRequest request) { String refreshToken = request.getRefreshToken(); if (!jwtProvider.validateToken(refreshToken)) { throw new RuntimeException(&#34;Invalid refresh token&#34;); } String userId = jwtProvider.getUserIdFromToken(refreshToken); // 저장된 refresh token과 비교 String stored = refreshTokenService.get(userId); if (!stored.equals(refreshToken)) { throw new RuntimeException(&#34;Token mismatch&#34;); } String newAccessToken = jwtProvider.createAccessToken(userId); return ResponseEntity.ok(new TokenResponse(newAccessToken, refreshToken)); } 4. Refresh Token 저장 예시 (Redis 기반) @Service public class RefreshTokenService { private final RedisTemplate&lt;String, String&gt; redisTemplate; public RefreshTokenService(RedisTemplate&lt;String, String&gt; redisTemplate) { this.redisTemplate = redisTemplate; } public void save(String userId, String token) { redisTemplate.opsForValue().set(userId, token, 14, TimeUnit.DAYS); // 유효 기간 설정 } public String get(String userId) { return redisTemplate.opsForValue().get(userId); } } Q. 에시에서 RefreshToken 에서 refresh save전에 기존꺼는 안지워도 될까? A. 일반적으로는 기존 Refresh Token을 삭제하거나 덮어써야 합니다. 왜냐면:
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/til/jwt/jwt_strategy/" />
+<meta property="og:site_name" content="QueryDSL을 사용할 때 데이터베이스의 Lock" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-27 11:36:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -555,8 +645,6 @@ UX와 보안 사이 균형을 잡을 수 있어요.</p></blockquote>
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

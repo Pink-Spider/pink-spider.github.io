@@ -1,7 +1,103 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Spring Boot JPA에서 `@Transactional` 사용법 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Spring Boot JPA에서 @Transactional 사용법 Spring Boot JPA에서 @Transactional 어노테이션은 트랜잭션 범위 내에서 데이터베이스 작업을 실행하고, 실패 시 롤백하는 기능을 제공하는 중요한 요소입니다.
+1. @Transactional 기본 사용법 Spring의 @Transactional을 사용하면 하나의 메서드에서 여러 개의 JPA 작업(조회, 저장, 수정, 삭제 등)을 수행할 때 트랜잭션을 자동으로 관리할 수 있습니다.
+import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; @Service public class MemberService { private final MemberRepository memberRepository; public MemberService(MemberRepository memberRepository) { this.memberRepository = memberRepository; } @Transactional public void updateMember(Long id, String name) { Member member = memberRepository.findById(id) .orElseThrow(() -&gt; new IllegalArgumentException(&#34;Member not found&#34;)); member.setName(name); // JPA 영속성 컨텍스트에 의해 자동으로 업데이트됨 } } @Transactional을 사용하면, 메서드 실행 중 예외가 발생하면 롤백되며, 성공하면 자동으로 커밋됩니다. member.setName(name);을 호출하면 JPA의 변경 감지(dirty checking) 덕분에 save()를 명시적으로 호출하지 않아도 업데이트됩니다. 2. 읽기 전용 트랜잭션 (@Transactional(readOnly = true)) readOnly = true를 설정하면 성능 최적화를 할 수 있습니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/jpa/jpa_transaction/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Spring Boot JPA에서 `@Transactional` 사용법 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Spring Boot JPA에서 @Transactional 사용법 Spring Boot JPA에서 @Transactional 어노테이션은 트랜잭션 범위 내에서 데이터베이스 작업을 실행하고, 실패 시 롤백하는 기능을 제공하는 중요한 요소입니다.
+1. @Transactional 기본 사용법 Spring의 @Transactional을 사용하면 하나의 메서드에서 여러 개의 JPA 작업(조회, 저장, 수정, 삭제 등)을 수행할 때 트랜잭션을 자동으로 관리할 수 있습니다.
+import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; @Service public class MemberService { private final MemberRepository memberRepository; public MemberService(MemberRepository memberRepository) { this.memberRepository = memberRepository; } @Transactional public void updateMember(Long id, String name) { Member member = memberRepository.findById(id) .orElseThrow(() -&gt; new IllegalArgumentException(&#34;Member not found&#34;)); member.setName(name); // JPA 영속성 컨텍스트에 의해 자동으로 업데이트됨 } } @Transactional을 사용하면, 메서드 실행 중 예외가 발생하면 롤백되며, 성공하면 자동으로 커밋됩니다. member.setName(name);을 호출하면 JPA의 변경 감지(dirty checking) 덕분에 save()를 명시적으로 호출하지 않아도 업데이트됩니다. 2. 읽기 전용 트랜잭션 (@Transactional(readOnly = true)) readOnly = true를 설정하면 성능 최적화를 할 수 있습니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Spring Boot JPA에서 `@Transactional` 사용법 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Spring Boot JPA에서 @Transactional 사용법 Spring Boot JPA에서 @Transactional 어노테이션은 트랜잭션 범위 내에서 데이터베이스 작업을 실행하고, 실패 시 롤백하는 기능을 제공하는 중요한 요소입니다.
+1. @Transactional 기본 사용법 Spring의 @Transactional을 사용하면 하나의 메서드에서 여러 개의 JPA 작업(조회, 저장, 수정, 삭제 등)을 수행할 때 트랜잭션을 자동으로 관리할 수 있습니다.
+import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; @Service public class MemberService { private final MemberRepository memberRepository; public MemberService(MemberRepository memberRepository) { this.memberRepository = memberRepository; } @Transactional public void updateMember(Long id, String name) { Member member = memberRepository.findById(id) .orElseThrow(() -&gt; new IllegalArgumentException(&#34;Member not found&#34;)); member.setName(name); // JPA 영속성 컨텍스트에 의해 자동으로 업데이트됨 } } @Transactional을 사용하면, 메서드 실행 중 예외가 발생하면 롤백되며, 성공하면 자동으로 커밋됩니다. member.setName(name);을 호출하면 JPA의 변경 감지(dirty checking) 덕분에 save()를 명시적으로 호출하지 않아도 업데이트됩니다. 2. 읽기 전용 트랜잭션 (@Transactional(readOnly = true)) readOnly = true를 설정하면 성능 최적화를 할 수 있습니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/jpa/jpa_transaction/" />
+<meta property="og:site_name" content="Spring Boot JPA에서 `@Transactional` 사용법" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-26 11:21:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -454,8 +550,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

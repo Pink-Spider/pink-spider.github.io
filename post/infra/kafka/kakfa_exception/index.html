@@ -1,7 +1,106 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Apache Kafka 사용 시 발생할 수 있는 주요 오류 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Apache Kafka 사용 시 발생할 수 있는 주요 오류 유형과 그 해결 방법을 정리해 보겠습니다.
+1. 네트워크 및 연결 오류 ❌ 오류: Connection to broker &lt;broker_id&gt; failed 📌 원인: 브로커와의 네트워크 연결 문제, 브로커 다운, 방화벽 문제 등
+✅ 해결 방법:
+zookeeper와 broker가 실행 중인지 확인 (ps aux | grep kafka) listeners 및 advertised.listeners 설정 확인 (server.properties) 방화벽 설정 (iptables -L, firewalld)을 점검하여 포트가 열려 있는지 확인 2. 브로커 및 토픽 관련 오류 ❌ 오류: Leader not available for partition &lt;partition_id&gt; 📌 원인:
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/infra/kafka/kakfa_exception/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Apache Kafka 사용 시 발생할 수 있는 주요 오류 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Apache Kafka 사용 시 발생할 수 있는 주요 오류 유형과 그 해결 방법을 정리해 보겠습니다.
+1. 네트워크 및 연결 오류 ❌ 오류: Connection to broker &lt;broker_id&gt; failed 📌 원인: 브로커와의 네트워크 연결 문제, 브로커 다운, 방화벽 문제 등
+✅ 해결 방법:
+zookeeper와 broker가 실행 중인지 확인 (ps aux | grep kafka) listeners 및 advertised.listeners 설정 확인 (server.properties) 방화벽 설정 (iptables -L, firewalld)을 점검하여 포트가 열려 있는지 확인 2. 브로커 및 토픽 관련 오류 ❌ 오류: Leader not available for partition &lt;partition_id&gt; 📌 원인:
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Apache Kafka 사용 시 발생할 수 있는 주요 오류 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Apache Kafka 사용 시 발생할 수 있는 주요 오류 유형과 그 해결 방법을 정리해 보겠습니다.
+1. 네트워크 및 연결 오류 ❌ 오류: Connection to broker &lt;broker_id&gt; failed 📌 원인: 브로커와의 네트워크 연결 문제, 브로커 다운, 방화벽 문제 등
+✅ 해결 방법:
+zookeeper와 broker가 실행 중인지 확인 (ps aux | grep kafka) listeners 및 advertised.listeners 설정 확인 (server.properties) 방화벽 설정 (iptables -L, firewalld)을 점검하여 포트가 열려 있는지 확인 2. 브로커 및 토픽 관련 오류 ❌ 오류: Leader not available for partition &lt;partition_id&gt; 📌 원인:
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/infra/kafka/kakfa_exception/" />
+<meta property="og:site_name" content="Apache Kafka 사용 시 발생할 수 있는 주요 오류" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-26 13:30:03 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -350,8 +449,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

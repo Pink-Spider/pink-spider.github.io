@@ -1,7 +1,100 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Java에서 Hashmap과 LinkedHashMap의 차이 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="HashMap과 LinkedHashMap은 둘 다 Java에서 제공하는 Map 인터페이스의 구현체이지만, 동작 방식과 특징에 몇 가지 중요한 차이점이 있습니다:
+🔹 1. 저장 순서 유지 여부 특징 HashMap LinkedHashMap 순서 유지 ❌ 저장 순서 보장 안 됨 ✅ 입력 순서(또는 접근 순서) 유지 HashMap은 내부적으로 순서를 신경 쓰지 않기 때문에, 데이터를 삽입한 순서와 꺼낼 때 순서가 다를 수 있음. LinkedHashMap은 이중 연결 리스트를 사용해 데이터를 저장한 순서를 기억함. 🔹 2. 성능 성능 HashMap LinkedHashMap 일반적으로 더 빠름 ✅ ❌ (조금 느림) LinkedHashMap은 연결 리스트를 유지해야 하므로 약간의 오버헤드가 있음. 🔹 3. null 허용 여부 요소 HashMap LinkedHashMap null 키 허용 1개 가능 1개 가능 null 값 허용 여러 개 가능 여러 개 가능 둘 다 null 키 하나와 null 값 여러 개 허용함.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/basic/hashmap_linkedhashmap/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Java에서 Hashmap과 LinkedHashMap의 차이 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="HashMap과 LinkedHashMap은 둘 다 Java에서 제공하는 Map 인터페이스의 구현체이지만, 동작 방식과 특징에 몇 가지 중요한 차이점이 있습니다:
+🔹 1. 저장 순서 유지 여부 특징 HashMap LinkedHashMap 순서 유지 ❌ 저장 순서 보장 안 됨 ✅ 입력 순서(또는 접근 순서) 유지 HashMap은 내부적으로 순서를 신경 쓰지 않기 때문에, 데이터를 삽입한 순서와 꺼낼 때 순서가 다를 수 있음. LinkedHashMap은 이중 연결 리스트를 사용해 데이터를 저장한 순서를 기억함. 🔹 2. 성능 성능 HashMap LinkedHashMap 일반적으로 더 빠름 ✅ ❌ (조금 느림) LinkedHashMap은 연결 리스트를 유지해야 하므로 약간의 오버헤드가 있음. 🔹 3. null 허용 여부 요소 HashMap LinkedHashMap null 키 허용 1개 가능 1개 가능 null 값 허용 여러 개 가능 여러 개 가능 둘 다 null 키 하나와 null 값 여러 개 허용함.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Java에서 Hashmap과 LinkedHashMap의 차이 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="HashMap과 LinkedHashMap은 둘 다 Java에서 제공하는 Map 인터페이스의 구현체이지만, 동작 방식과 특징에 몇 가지 중요한 차이점이 있습니다:
+🔹 1. 저장 순서 유지 여부 특징 HashMap LinkedHashMap 순서 유지 ❌ 저장 순서 보장 안 됨 ✅ 입력 순서(또는 접근 순서) 유지 HashMap은 내부적으로 순서를 신경 쓰지 않기 때문에, 데이터를 삽입한 순서와 꺼낼 때 순서가 다를 수 있음. LinkedHashMap은 이중 연결 리스트를 사용해 데이터를 저장한 순서를 기억함. 🔹 2. 성능 성능 HashMap LinkedHashMap 일반적으로 더 빠름 ✅ ❌ (조금 느림) LinkedHashMap은 연결 리스트를 유지해야 하므로 약간의 오버헤드가 있음. 🔹 3. null 허용 여부 요소 HashMap LinkedHashMap null 키 허용 1개 가능 1개 가능 null 값 허용 여러 개 가능 여러 개 가능 둘 다 null 키 하나와 null 값 여러 개 허용함.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/basic/hashmap_linkedhashmap/" />
+<meta property="og:site_name" content="Java에서 Hashmap과 LinkedHashMap의 차이" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-04-20 11:15:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -543,8 +636,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

@@ -1,7 +1,112 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Apache Kafka 사용 시 코드로 오류 처리 방법 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Spring Boot에서 Kafka를 사용할 때 오류를 코드로 해결하는 방법을 설명해볼게요.
+Kafka 프로듀서와 컨슈머에서 Fallback 메소드, 재시도 (Retry), 예외 처리 등을 적용하는 방법을 알아봅니다.
+1. Kafka 프로듀서에서 오류 처리 (Fallback, Retry) Kafka 프로듀서는 메시지를 브로커로 보내는 과정에서 오류가 발생할 수 있습니다.
+예를 들어, 네트워크 문제, 브로커 다운, 메시지 크기 초과 등의 문제가 있을 수 있는데요, 이를 처리하는 방법입니다.
+✅ (1) Fallback 메소드 적용 (Resilience4j 사용) Resilience4j의 @Retry와 @Recover를 활용하면
+Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으로 실패하면 대체 로직을 수행할 수 있습니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/infra/kafka/kakfa_fallback/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Apache Kafka 사용 시 코드로 오류 처리 방법 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Spring Boot에서 Kafka를 사용할 때 오류를 코드로 해결하는 방법을 설명해볼게요.
+Kafka 프로듀서와 컨슈머에서 Fallback 메소드, 재시도 (Retry), 예외 처리 등을 적용하는 방법을 알아봅니다.
+1. Kafka 프로듀서에서 오류 처리 (Fallback, Retry) Kafka 프로듀서는 메시지를 브로커로 보내는 과정에서 오류가 발생할 수 있습니다.
+예를 들어, 네트워크 문제, 브로커 다운, 메시지 크기 초과 등의 문제가 있을 수 있는데요, 이를 처리하는 방법입니다.
+✅ (1) Fallback 메소드 적용 (Resilience4j 사용) Resilience4j의 @Retry와 @Recover를 활용하면
+Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으로 실패하면 대체 로직을 수행할 수 있습니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Apache Kafka 사용 시 코드로 오류 처리 방법 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Spring Boot에서 Kafka를 사용할 때 오류를 코드로 해결하는 방법을 설명해볼게요.
+Kafka 프로듀서와 컨슈머에서 Fallback 메소드, 재시도 (Retry), 예외 처리 등을 적용하는 방법을 알아봅니다.
+1. Kafka 프로듀서에서 오류 처리 (Fallback, Retry) Kafka 프로듀서는 메시지를 브로커로 보내는 과정에서 오류가 발생할 수 있습니다.
+예를 들어, 네트워크 문제, 브로커 다운, 메시지 크기 초과 등의 문제가 있을 수 있는데요, 이를 처리하는 방법입니다.
+✅ (1) Fallback 메소드 적용 (Resilience4j 사용) Resilience4j의 @Retry와 @Recover를 활용하면
+Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으로 실패하면 대체 로직을 수행할 수 있습니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/infra/kafka/kakfa_fallback/" />
+<meta property="og:site_name" content="Apache Kafka 사용 시 코드로 오류 처리 방법" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-26 13:38:03 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -463,8 +568,6 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

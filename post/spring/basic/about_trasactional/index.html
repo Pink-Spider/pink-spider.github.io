@@ -1,7 +1,100 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Spring Boot JPA에서 @Transactional 옵션 정리 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 Spring Boot JPA에서 @Transactional은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.
+📌 기본 사용법 import org.springframework.transaction.annotation.Transactional; @Service public class MemberService { @Transactional public void joinMember(Member member) { memberRepository.save(member); // 예외 발생 시 전체 트랜잭션 롤백 } } @Transactional을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요. 런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 unchecked exception일 때만 롤백) 📌 클래스 레벨에 사용 @Transactional @Service public class MemberService { public void method1() { // 트랜잭션 적용됨 } public void method2() { // 트랜잭션 적용됨 } } 클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다. 📌 rollbackFor 옵션 기본적으로 RuntimeException과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(Exception)도 롤백하고 싶다면:
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/basic/about_trasactional/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 Spring Boot JPA에서 @Transactional은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.
+📌 기본 사용법 import org.springframework.transaction.annotation.Transactional; @Service public class MemberService { @Transactional public void joinMember(Member member) { memberRepository.save(member); // 예외 발생 시 전체 트랜잭션 롤백 } } @Transactional을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요. 런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 unchecked exception일 때만 롤백) 📌 클래스 레벨에 사용 @Transactional @Service public class MemberService { public void method1() { // 트랜잭션 적용됨 } public void method2() { // 트랜잭션 적용됨 } } 클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다. 📌 rollbackFor 옵션 기본적으로 RuntimeException과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(Exception)도 롤백하고 싶다면:
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Spring Boot JPA에서 @Transactional 옵션 정리 Spring Boot JPA에서 @Transactional은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.
+📌 기본 사용법 import org.springframework.transaction.annotation.Transactional; @Service public class MemberService { @Transactional public void joinMember(Member member) { memberRepository.save(member); // 예외 발생 시 전체 트랜잭션 롤백 } } @Transactional을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요. 런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 unchecked exception일 때만 롤백) 📌 클래스 레벨에 사용 @Transactional @Service public class MemberService { public void method1() { // 트랜잭션 적용됨 } public void method2() { // 트랜잭션 적용됨 } } 클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다. 📌 rollbackFor 옵션 기본적으로 RuntimeException과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(Exception)도 롤백하고 싶다면:
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/basic/about_trasactional/" />
+<meta property="og:site_name" content="Spring Boot JPA에서 @Transactional 옵션 정리" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-26 11:15:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -337,8 +430,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

@@ -1,7 +1,100 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Vo와 Dto | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Spring을 포함한 Java 기반 애플리케이션에서 **VO(Value Object)**와 **DTO(Data Transfer Object)**는 개념적으로 비슷해 보일 수 있지만, 그 목적과 사용하는 맥락에서 차이가 있습니다. 아래에 각각을 설명하고 차이를 정리할게요.
+1. VO (Value Object) 의미: 값 자체를 표현하는 객체. 값의 동등성을 비교할 때, 객체의 참조가 아니라 값이 같은지로 판단합니다. 특징: **불변(Immutable)**하게 설계하는 것이 일반적입니다. equals(), hashCode()를 재정의해서 값이 같으면 동일한 객체로 간주합니다. 주로 도메인 모델에서 사용되며, 특정 개념(예: 주소, 돈, 이름 등)을 캡슐화합니다. public class Address { private final String city; private final String street; public Address(String city, String street) { this.city = city; this.street = street; } // equals, hashCode 반드시 재정의 } 2. DTO (Data Transfer Object) 의미: 계층 간 데이터 전달을 위해 사용하는 객체 (예: Controller → Service → Repository) 특징: 불변일 필요 없음, Getter/Setter 있음 단순히 데이터를 옮기는 목적 (로직이 없어야 함) 보통 입력(Request), **출력(Response)**용으로 많이 쓰임 public class UserResponseDto { private String name; private String email; // 기본 생성자, getter/setter } 정리: VO vs DTO 항목 VO (Value Object) DTO (Data Transfer Object) 목적 값 자체를 표현 데이터 전달 불변성 보통 불변 보통 가변 사용 위치 도메인 모델 계층 간 데이터 전달 equals/hashCode 값 기준으로 재정의 일반적으로 재정의하지 않음 로직 포함 가능 없음 (순수 데이터만) 사용 예시 간단한 Spring 기반 애플리케이션 구조에서 VO와 DTO의 차이를 실제 예제 코드입니다. 예시는 “사용자(User) 정보 처리”를 중심으로 구성합니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/basic/vo_dto_comparison/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Vo와 Dto - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Spring을 포함한 Java 기반 애플리케이션에서 **VO(Value Object)**와 **DTO(Data Transfer Object)**는 개념적으로 비슷해 보일 수 있지만, 그 목적과 사용하는 맥락에서 차이가 있습니다. 아래에 각각을 설명하고 차이를 정리할게요.
+1. VO (Value Object) 의미: 값 자체를 표현하는 객체. 값의 동등성을 비교할 때, 객체의 참조가 아니라 값이 같은지로 판단합니다. 특징: **불변(Immutable)**하게 설계하는 것이 일반적입니다. equals(), hashCode()를 재정의해서 값이 같으면 동일한 객체로 간주합니다. 주로 도메인 모델에서 사용되며, 특정 개념(예: 주소, 돈, 이름 등)을 캡슐화합니다. public class Address { private final String city; private final String street; public Address(String city, String street) { this.city = city; this.street = street; } // equals, hashCode 반드시 재정의 } 2. DTO (Data Transfer Object) 의미: 계층 간 데이터 전달을 위해 사용하는 객체 (예: Controller → Service → Repository) 특징: 불변일 필요 없음, Getter/Setter 있음 단순히 데이터를 옮기는 목적 (로직이 없어야 함) 보통 입력(Request), **출력(Response)**용으로 많이 쓰임 public class UserResponseDto { private String name; private String email; // 기본 생성자, getter/setter } 정리: VO vs DTO 항목 VO (Value Object) DTO (Data Transfer Object) 목적 값 자체를 표현 데이터 전달 불변성 보통 불변 보통 가변 사용 위치 도메인 모델 계층 간 데이터 전달 equals/hashCode 값 기준으로 재정의 일반적으로 재정의하지 않음 로직 포함 가능 없음 (순수 데이터만) 사용 예시 간단한 Spring 기반 애플리케이션 구조에서 VO와 DTO의 차이를 실제 예제 코드입니다. 예시는 “사용자(User) 정보 처리”를 중심으로 구성합니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Vo와 Dto - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Spring을 포함한 Java 기반 애플리케이션에서 **VO(Value Object)**와 **DTO(Data Transfer Object)**는 개념적으로 비슷해 보일 수 있지만, 그 목적과 사용하는 맥락에서 차이가 있습니다. 아래에 각각을 설명하고 차이를 정리할게요.
+1. VO (Value Object) 의미: 값 자체를 표현하는 객체. 값의 동등성을 비교할 때, 객체의 참조가 아니라 값이 같은지로 판단합니다. 특징: **불변(Immutable)**하게 설계하는 것이 일반적입니다. equals(), hashCode()를 재정의해서 값이 같으면 동일한 객체로 간주합니다. 주로 도메인 모델에서 사용되며, 특정 개념(예: 주소, 돈, 이름 등)을 캡슐화합니다. public class Address { private final String city; private final String street; public Address(String city, String street) { this.city = city; this.street = street; } // equals, hashCode 반드시 재정의 } 2. DTO (Data Transfer Object) 의미: 계층 간 데이터 전달을 위해 사용하는 객체 (예: Controller → Service → Repository) 특징: 불변일 필요 없음, Getter/Setter 있음 단순히 데이터를 옮기는 목적 (로직이 없어야 함) 보통 입력(Request), **출력(Response)**용으로 많이 쓰임 public class UserResponseDto { private String name; private String email; // 기본 생성자, getter/setter } 정리: VO vs DTO 항목 VO (Value Object) DTO (Data Transfer Object) 목적 값 자체를 표현 데이터 전달 불변성 보통 불변 보통 가변 사용 위치 도메인 모델 계층 간 데이터 전달 equals/hashCode 값 기준으로 재정의 일반적으로 재정의하지 않음 로직 포함 가능 없음 (순수 데이터만) 사용 예시 간단한 Spring 기반 애플리케이션 구조에서 VO와 DTO의 차이를 실제 예제 코드입니다. 예시는 “사용자(User) 정보 처리”를 중심으로 구성합니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/basic/vo_dto_comparison/" />
+<meta property="og:site_name" content="Vo와 Dto" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-30 17:14:05 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -577,8 +670,6 @@
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>

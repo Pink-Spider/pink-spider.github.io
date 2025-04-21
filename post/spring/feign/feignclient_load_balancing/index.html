@@ -1,7 +1,94 @@
 <!DOCTYPE html>
 <html lang="ko-KR">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/feign/feignclient_load_balancing/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출 load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법 build.gradle ... dependencies { implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39; } ... application.yml # 상대 측에서 3개의 서버 LB되고 있을 때 other-party-url: - 123.456.789.001 - 123.456.789.002 - 123.456.789.003 ServerProperties.java @Setter @Getter @Configuration @ConfigurationProperties(prefix = &#34;other-party-url&#34;) public class OtherServerProperties { private List&lt;String&gt; serverUris; } FeignConfig.java @RequiredArgsConstructor public class OtherServerFeignConfig { private final OtherServerProperties otherServerProperties; private final AtomicInteger counter = new AtomicInteger(0); @Bean public RequestInterceptor randomServerInterceptor() { return requestTemplate -&gt; { List&lt;String&gt; serverUris = otherServerProperties.getServerUris(); int index = counter.getAndIncrement() % serverUris.size(); String selectedUrl = serverUris.get(index); requestTemplate.target(selectedUrl); }; } } FeignClient interface @FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class) public interface OtherServerFeignClientV1 { ... } "
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/feign/feignclient_load_balancing/" />
+<meta property="og:site_name" content="feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-26 08:37:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
         crossorigin="anonymous"></script>
 
@@ -334,8 +421,6 @@ public interface OtherServerFeignClientV1 {
 </div>
 <script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
-        crossorigin="anonymous"></script>
 
 <div id="gitalk-container" class="gitalk-container"></div>
 <link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
