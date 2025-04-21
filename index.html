@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">49</span>
+              <span class="Counter">50</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">49</span>
+      <span class="Counter ">50</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,66 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/basic/reentrantlock/">
+                    <span class="repo" title="ReentrantLock &amp; synchronized">ReentrantLock &amp; synchronized</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p><code>ReentrantLock</code>은 Java에서 제공하는 <strong>고급 동기화 도구</strong>로, <code>synchronized</code> 블록보다 더 많은 제어를 제공하는 <strong>Lock 인터페이스의 구현체</strong>입니다.</p>
+<hr>
+<h2 id="-reentrantlock이란">🔐 ReentrantLock이란?</h2>
+<ul>
+<li>Java의 <code>java.util.concurrent.locks.ReentrantLock</code> 클래스</li>
+<li><strong>재진입 가능(reentrant)</strong> 한 락<br>
+→ <strong>같은 스레드가 여러 번 lock을 획득해도 deadlock 없이 동작</strong></li>
+<li><code>synchronized</code>와 유사하지만 더 세밀한 컨트롤 가능</li>
+</ul>
+<hr>
+<h2 id="-기본-사용-예제">🔸 기본 사용 예제</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.locks.ReentrantLock</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Counter</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">increment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"> </span><span class="c1">// 🔐 lock 획득</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">count</span><span class="o">++</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"> </span><span class="c1">// 🔓 꼭 해제해줘야 함!</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getCount</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><blockquote>
+<p>⚠️ <code>finally</code> 블록에서 <code>unlock()</code>을 꼭 호출해야 합니다.<br>
+예외가 발생해도 락이 풀리지 않으면 <strong>데드락(deadlock)</strong> 발생할 수 있어요.</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -845,65 +905,18 @@
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/til/aes/aes_crypto_code/">
-                    <span class="repo" title="AES Encrypt &amp; Decrypt">AES Encrypt &amp; Decrypt</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h1 id="java에서-aes-암복호화-코드-예제">java에서 AES 암복호화 코드 예제</h1>
-<h2 id="암호화">암호화</h2>
-<pre tabindex="0"><code>    public static String encryptAes(String plainText) throws Exception {
-        Cipher c = Cipher.getInstance(&#34;AES/CBC/PKCS5Padding&#34;);
-        byte[] key = Base64.decodeBase64(&#34;YOUR_KEY&#34;);
-        byte[] iv = Base64.decodeBase64(&#34;YOUR_INITIAL_VALUE&#34;);
-
-        SecretKeySpec keySpec = new SecretKeySpec(key, &#34;AES&#34;);
-        c.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(iv));
-        byte[] encryptedByte = c.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
-
-        return new String(Base64.encodeBase64(encryptedByte));
-    }
-</code></pre><h2 id="복호화">복호화</h2>
-<pre tabindex="0"><code>    public static String decryptAes(String cipherText) throws Exception {
-        Cipher c = Cipher.getInstance(&#34;AES/CBC/PKCS5Padding&#34;);
-        byte[] key = Base64.decodeBase64(&#34;YOUR_KEY&#34;);
-        byte[] iv = Base64.decodeBase64(&#34;YOUR_INITIAL_VALUE&#34;);
-
-        SecretKeySpec keySpec = new SecretKeySpec(key, &#34;AES&#34;);
-        c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv));
-        byte[] encryptedByte = c.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
-
-        return new String(Base64.encodeBase64(encryptedByte));
-    }
-</code></pre>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "ReentrantLock%20&amp;%20synchronized",
+  "link": "https://pink-spider.github.io/post/spring/basic/reentrantlock/",
+  "publishDate": "2025-04-20%2018:15:45"
+},
+
 {
   "title": "Java%ec%97%90%ec%84%9c%20Hashmap%ea%b3%bc%20LinkedHashMap%ec%9d%98%20%ec%b0%a8%ec%9d%b4",
   "link": "https://pink-spider.github.io/post/spring/basic/hashmap_linkedhashmap/",
