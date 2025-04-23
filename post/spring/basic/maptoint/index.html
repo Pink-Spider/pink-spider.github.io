@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    코딩 테스트 합격자 되기 정리 #2 | Pink Spider
+    mapToInt | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,20 +27,26 @@
   
   <meta
   name="description"
-  content="배열 선언 int[] arr = {0,0,0,0,0,0}; int[] arr = new int[6]; ArrayList - 저장할 데이터 개수를 정확히 알 수 없다면&hellip; 차원 2차원 int[][] arr = { {1,2,3}, {4,5,6}}; ArrayList 추가 ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(); list.add(1); 초기화 ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(); ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;&gt;(list); 접근 - get(index) 삭제 - remove() length 변수 Arrays.sort() toString() size() isEmpty() Collections.sort ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(Arrays.asList(1,2,3,4,5)); Collections.sort(list); // array는 Arrays.sort() sort() 사용시 from 인덱스, to 인덱스로 특정범위만 정렬 가능 ArrayList 효율성 시간 복잡도 접근 O(1) 맨 뒤 삽입 O(1) 맨 앞이나 중간. O(N) 고려할 점 할당할 수 있는 메모리 - 정수형 1차원 1000만개, 2차원은 3000*3000 정도 중간에 데이터 삽입이 빈번한 경우 시간 초과할 수 있음. 몸풀기 문제 정렬 Arrays.sort() -&gt; Dual-Pivot QuickSort 혹은 Tim-Sort : 성능좋으니까 그냥 쓰자 // bubble sort 예 private static int[] bubbleSort(int[] org) { int[] arr = org.clone(); int n = arr.length; for(int i=0; i&lt; n; i&#43;&#43;) { for(int j=0; j&lt;n-i-1; j&#43;&#43;) { if(arr[j] &gt; arr[j&#43;1]) { int temp = arr[j]; arr[j] = arr[j&#43;1]; arr[j&#43;1] = temp; } } } } 원본을 그대로 두고 싶으면 int[] clone = arr.clone(); 제어 중복 제거 Integer[] result = Arrays.stream(arr).boxed().distinct().toArray(Integer[]::new); Arrays.sort(result, Collections.reverseOrder()); Arrays.stream(result).mapToInt(Integer::intValue).toArray(); // int[]로 가급적 표준 API를 사용해서 시간초과 발생하지 않도록 TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;(Collections.reverseOrder()); int[] result = new int[set.size()]; for(int i = 0; i &lt; result.length; i&#43;&#43;) { result[i] = set.pollFirst(); } // 중복제거 O(N), 정렬 O(NlogN) =&gt; O(NlogN) "
+  content="stream().mapToInt()는 Java Stream API에서 사용되는 메서드 중 하나로, Stream의 요소를 int형 정수로 변환하여 IntStream을 생성하는 역할을 합니다.
+💡 사용 목적 mapToInt()는 주로 객체 스트림에서 정수값을 추출하고자 할 때 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.
+📌 기본 구조 Stream&lt;T&gt; stream = ...; IntStream intStream = stream.mapToInt(element -&gt; 변환할 int 값); ✅ 예시 List&lt;String&gt; list = List.of(&#34;1&#34;, &#34;2&#34;, &#34;3&#34;); int sum = list.stream() .mapToInt(Integer::parseInt) // String → int .sum(); // IntStream 연산 사용 System.out.println(sum); // 출력: 6 위 코드에서:
+"
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/basic/maptoint/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="코딩 테스트 합격자 되기 정리 #2 - Pink Spider"
+  content="mapToInt - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="배열 선언 int[] arr = {0,0,0,0,0,0}; int[] arr = new int[6]; ArrayList - 저장할 데이터 개수를 정확히 알 수 없다면&hellip; 차원 2차원 int[][] arr = { {1,2,3}, {4,5,6}}; ArrayList 추가 ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(); list.add(1); 초기화 ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(); ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;&gt;(list); 접근 - get(index) 삭제 - remove() length 변수 Arrays.sort() toString() size() isEmpty() Collections.sort ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(Arrays.asList(1,2,3,4,5)); Collections.sort(list); // array는 Arrays.sort() sort() 사용시 from 인덱스, to 인덱스로 특정범위만 정렬 가능 ArrayList 효율성 시간 복잡도 접근 O(1) 맨 뒤 삽입 O(1) 맨 앞이나 중간. O(N) 고려할 점 할당할 수 있는 메모리 - 정수형 1차원 1000만개, 2차원은 3000*3000 정도 중간에 데이터 삽입이 빈번한 경우 시간 초과할 수 있음. 몸풀기 문제 정렬 Arrays.sort() -&gt; Dual-Pivot QuickSort 혹은 Tim-Sort : 성능좋으니까 그냥 쓰자 // bubble sort 예 private static int[] bubbleSort(int[] org) { int[] arr = org.clone(); int n = arr.length; for(int i=0; i&lt; n; i&#43;&#43;) { for(int j=0; j&lt;n-i-1; j&#43;&#43;) { if(arr[j] &gt; arr[j&#43;1]) { int temp = arr[j]; arr[j] = arr[j&#43;1]; arr[j&#43;1] = temp; } } } } 원본을 그대로 두고 싶으면 int[] clone = arr.clone(); 제어 중복 제거 Integer[] result = Arrays.stream(arr).boxed().distinct().toArray(Integer[]::new); Arrays.sort(result, Collections.reverseOrder()); Arrays.stream(result).mapToInt(Integer::intValue).toArray(); // int[]로 가급적 표준 API를 사용해서 시간초과 발생하지 않도록 TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;(Collections.reverseOrder()); int[] result = new int[set.size()]; for(int i = 0; i &lt; result.length; i&#43;&#43;) { result[i] = set.pollFirst(); } // 중복제거 O(N), 정렬 O(NlogN) =&gt; O(NlogN) "
+  content="stream().mapToInt()는 Java Stream API에서 사용되는 메서드 중 하나로, Stream의 요소를 int형 정수로 변환하여 IntStream을 생성하는 역할을 합니다.
+💡 사용 목적 mapToInt()는 주로 객체 스트림에서 정수값을 추출하고자 할 때 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.
+📌 기본 구조 Stream&lt;T&gt; stream = ...; IntStream intStream = stream.mapToInt(element -&gt; 변환할 int 값); ✅ 예시 List&lt;String&gt; list = List.of(&#34;1&#34;, &#34;2&#34;, &#34;3&#34;); int sum = list.stream() .mapToInt(Integer::parseInt) // String → int .sum(); // IntStream 연산 사용 System.out.println(sum); // 출력: 6 위 코드에서:
+"
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -56,14 +62,17 @@
 />
 <meta
   property="og:title"
-  content="코딩 테스트 합격자 되기 정리 #2 - Pink Spider"
+  content="mapToInt - Pink Spider"
 />
 <meta
   property="og:description"
-  content="배열 선언 int[] arr = {0,0,0,0,0,0}; int[] arr = new int[6]; ArrayList - 저장할 데이터 개수를 정확히 알 수 없다면&hellip; 차원 2차원 int[][] arr = { {1,2,3}, {4,5,6}}; ArrayList 추가 ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(); list.add(1); 초기화 ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(); ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;&gt;(list); 접근 - get(index) 삭제 - remove() length 변수 Arrays.sort() toString() size() isEmpty() Collections.sort ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(Arrays.asList(1,2,3,4,5)); Collections.sort(list); // array는 Arrays.sort() sort() 사용시 from 인덱스, to 인덱스로 특정범위만 정렬 가능 ArrayList 효율성 시간 복잡도 접근 O(1) 맨 뒤 삽입 O(1) 맨 앞이나 중간. O(N) 고려할 점 할당할 수 있는 메모리 - 정수형 1차원 1000만개, 2차원은 3000*3000 정도 중간에 데이터 삽입이 빈번한 경우 시간 초과할 수 있음. 몸풀기 문제 정렬 Arrays.sort() -&gt; Dual-Pivot QuickSort 혹은 Tim-Sort : 성능좋으니까 그냥 쓰자 // bubble sort 예 private static int[] bubbleSort(int[] org) { int[] arr = org.clone(); int n = arr.length; for(int i=0; i&lt; n; i&#43;&#43;) { for(int j=0; j&lt;n-i-1; j&#43;&#43;) { if(arr[j] &gt; arr[j&#43;1]) { int temp = arr[j]; arr[j] = arr[j&#43;1]; arr[j&#43;1] = temp; } } } } 원본을 그대로 두고 싶으면 int[] clone = arr.clone(); 제어 중복 제거 Integer[] result = Arrays.stream(arr).boxed().distinct().toArray(Integer[]::new); Arrays.sort(result, Collections.reverseOrder()); Arrays.stream(result).mapToInt(Integer::intValue).toArray(); // int[]로 가급적 표준 API를 사용해서 시간초과 발생하지 않도록 TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;(Collections.reverseOrder()); int[] result = new int[set.size()]; for(int i = 0; i &lt; result.length; i&#43;&#43;) { result[i] = set.pollFirst(); } // 중복제거 O(N), 정렬 O(NlogN) =&gt; O(NlogN) "
+  content="stream().mapToInt()는 Java Stream API에서 사용되는 메서드 중 하나로, Stream의 요소를 int형 정수로 변환하여 IntStream을 생성하는 역할을 합니다.
+💡 사용 목적 mapToInt()는 주로 객체 스트림에서 정수값을 추출하고자 할 때 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.
+📌 기본 구조 Stream&lt;T&gt; stream = ...; IntStream intStream = stream.mapToInt(element -&gt; 변환할 int 값); ✅ 예시 List&lt;String&gt; list = List.of(&#34;1&#34;, &#34;2&#34;, &#34;3&#34;); int sum = list.stream() .mapToInt(Integer::parseInt) // String → int .sum(); // IntStream 연산 사용 System.out.println(sum); // 출력: 6 위 코드에서:
+"
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/" />
-<meta property="og:site_name" content="코딩 테스트 합격자 되기 정리 #2" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/basic/maptoint/" />
+<meta property="og:site_name" content="mapToInt" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -71,7 +80,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-22 20:48:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-23 13:48:45 &#43;0900 KST" />
 
 
 
@@ -281,18 +290,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/">코딩 테스트 합격자 되기 정리 #2</a></strong>
+                      href="https://pink-spider.github.io/post/spring/basic/maptoint/">mapToInt</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Tue, 22 Apr 2025 20:48:45 &#43;0900"
+                  Created <relative-time datetime="Wed, 23 Apr 2025 13:48:45 &#43;0900"
                     class="no-wrap">
-                    Tue, 22 Apr 2025 20:48:45 &#43;0900</relative-time>
+                    Wed, 23 Apr 2025 13:48:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 23 Apr 2025 13:04:19 &#43;0900"
+                  Modified <relative-time datetime="Wed, 23 Apr 2025 13:07:14 &#43;0900"
                     class="no-wrap">
-                    Wed, 23 Apr 2025 13:04:19 &#43;0900</relative-time>
+                    Wed, 23 Apr 2025 13:07:14 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -322,9 +331,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      373 Words
+                      795 Words
                     <span class="file-info-divider"></span>
-                                        2 min
+                                        4 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -335,106 +344,93 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="배열">배열</h1>
-<h2 id="선언">선언</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">6</span><span class="o">]</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>ArrayList - 저장할 데이터 개수를 정확히 알 수 없다면&hellip;</li>
-</ul>
-<h2 id="차원">차원</h2>
+                <article class="markdown-body entry-content container-lg"><p><code>stream().mapToInt()</code>는 Java Stream API에서 사용되는 메서드 중 하나로, <strong>Stream의 요소를 <code>int</code>형 정수로 변환하여 <code>IntStream</code>을 생성</strong>하는 역할을 합니다.</p>
+<h3 id="-사용-목적">💡 사용 목적</h3>
+<p><code>mapToInt()</code>는 주로 <strong>객체 스트림에서 정수값을 추출하고자 할 때</strong> 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.</p>
+<hr>
+<h3 id="-기본-구조">📌 기본 구조</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">IntStream</span><span class="w"> </span><span class="n">intStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">element</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">변환할</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">값</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-예시">✅ 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">parseInt</span><span class="p">)</span><span class="w">  </span><span class="c1">// String → int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">sum</span><span class="p">();</span><span class="w">                       </span><span class="c1">// IntStream 연산 사용</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w"> </span><span class="c1">// 출력: 6</span><span class="w">
+</span></span></span></code></pre></div><p>위 코드에서:</p>
 <ul>
-<li>2차원</li>
-</ul>
-<pre tabindex="0"><code>int[][] arr = { {1,2,3}, {4,5,6}};
-</code></pre><h2 id="arraylist">ArrayList</h2>
-<ul>
-<li>추가</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>초기화</li>
-</ul>
-<pre tabindex="0"><code>ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;&gt;(list);
-</code></pre><ul>
-<li>접근 - get(index)</li>
-<li>삭제 - remove()</li>
+<li><code>mapToInt(Integer::parseInt)</code>는 <code>String</code>을 <code>int</code>로 바꾸어 <code>IntStream</code>으로 변환</li>
+<li>그 후 <code>sum()</code>을 통해 합계를 계산</li>
 </ul>
 <hr>
+<h3 id="-왜-intstream으로-변환하는가">🧠 왜 IntStream으로 변환하는가?</h3>
+<p><code>IntStream</code>은 <code>Stream&lt;Integer&gt;</code>보다 효율적입니다:</p>
 <ul>
-<li>length 변수</li>
-<li>Arrays.sort()</li>
-<li>toString()</li>
-<li>size()</li>
-<li>isEmpty()</li>
-<li>Collections.sort</li>
+<li><strong>boxing/unboxing 비용 없음</strong> (<code>int</code>는 기본형, <code>Integer</code>는 객체형)</li>
+<li><code>sum()</code>, <code>average()</code>, <code>max()</code> 등 <strong>숫자 전용 메서드 사용 가능</strong></li>
 </ul>
-<pre tabindex="0"><code>ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(Arrays.asList(1,2,3,4,5));
-Collections.sort(list); // array는 Arrays.sort()
-</code></pre><ul>
-<li>sort() 사용시 from 인덱스, to 인덱스로 특정범위만 정렬 가능</li>
-</ul>
-<h3 id="arraylist-효율성">ArrayList 효율성</h3>
+<hr>
+<p>Java에서 자주 나오는 개념인 <strong>boxing</strong>과 <strong>unboxing</strong>은 **기본형(primitive type)**과 <strong>객체형(wrapper class)</strong> 사이의 변환을 의미합니다. 아래에서 쉽게 정리해드릴게요.</p>
+<hr>
+<h2 id="-기본형-vs-객체형">🧱 기본형 vs 객체형</h2>
+<table>
+  <thead>
+      <tr>
+          <th>기본형 (Primitive)</th>
+          <th>객체형 (Wrapper Class)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>int</code></td>
+          <td><code>Integer</code></td>
+      </tr>
+      <tr>
+          <td><code>double</code></td>
+          <td><code>Double</code></td>
+      </tr>
+      <tr>
+          <td><code>boolean</code></td>
+          <td><code>Boolean</code></td>
+      </tr>
+      <tr>
+          <td>&hellip;</td>
+          <td>&hellip;</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-boxing이란">📦 Boxing이란?</h2>
+<p><strong>기본형 → 객체형</strong> 으로 감싸는 것</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Integer</span><span class="w"> </span><span class="n">boxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w">  </span><span class="c1">// 명시적 boxing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Integer</span><span class="w"> </span><span class="n">autoBoxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">               </span><span class="c1">// 자동 boxing (auto-boxing)</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-unboxing이란">📤 Unboxing이란?</h2>
+<p><strong>객체형 → 기본형</strong> 으로 풀어주는 것</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span><span class="w"> </span><span class="n">boxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">unboxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boxed</span><span class="p">.</span><span class="na">intValue</span><span class="p">();</span><span class="w">     </span><span class="c1">// 명시적 unboxing</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">autoUnboxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boxed</span><span class="p">;</span><span class="w">            </span><span class="c1">// 자동 unboxing (auto-unboxing)</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-왜-중요한가">🔧 왜 중요한가?</h2>
+<h3 id="-성능-차이">📌 성능 차이</h3>
 <ul>
-<li>시간 복잡도</li>
+<li><code>int</code>는 메모리상에서 값만 저장 → 가볍고 빠름</li>
+<li><code>Integer</code>는 객체이므로 힙에 저장되고 포인터 등 부가 비용 발생 → 느릴 수 있음</li>
 </ul>
+<h3 id="-예시-streaminteger-vs-intstream">📌 예시: <code>Stream&lt;Integer&gt;</code> vs <code>IntStream</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">).</span><span class="na">sum</span><span class="p">();</span><span class="w"> </span><span class="c1">// IntStream, unboxing 안 해도 됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">reduce</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// Integer 연산: boxing/unboxing 발생</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-결론">✅ 결론</h2>
 <ul>
-<li>접근 O(1)</li>
-<li>맨 뒤 삽입 O(1)</li>
-<li>맨 앞이나 중간. O(N)</li>
+<li><strong>boxing/unboxing은 변환 과정</strong>이며, <strong>자동으로도 일어나지만 성능에 영향</strong>을 줄 수 있음</li>
+<li>Stream에서 <code>mapToInt</code>, <code>mapToDouble</code> 등을 쓰는 이유 중 하나는 <strong>이러한 변환 비용을 피하기 위해서</strong>예요</li>
 </ul>
-<ul>
-<li>고려할 점
-<ul>
-<li>할당할 수 있는 메모리 - 정수형 1차원 1000만개, 2차원은 3000*3000 정도</li>
-<li>중간에 데이터 삽입이 빈번한 경우 시간 초과할 수 있음.</li>
-</ul>
-</li>
-</ul>
-<h3 id="몸풀기-문제">몸풀기 문제</h3>
-<h4 id="정렬">정렬</h4>
-<ul>
-<li>Arrays.sort() -&gt; Dual-Pivot QuickSort 혹은 Tim-Sort : 성능좋으니까 그냥 쓰자</li>
-</ul>
-<pre tabindex="0"><code>// bubble sort 예
-private static int[] bubbleSort(int[] org) {
-    int[] arr = org.clone();
-    int n = arr.length;
-    for(int i=0; i&lt; n; i++) {
-        for(int j=0; j&lt;n-i-1; j++) {
-            if(arr[j] &gt; arr[j+1]) {
-                int temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
-            }
-        }
-    }
-}
-</code></pre><ul>
-<li>원본을 그대로 두고 싶으면</li>
-</ul>
-<pre tabindex="0"><code>int[] clone = arr.clone();
-</code></pre><h4 id="제어">제어</h4>
-<ul>
-<li>중복 제거</li>
-</ul>
-<pre tabindex="0"><code>Integer[] result = Arrays.stream(arr).boxed().distinct().toArray(Integer[]::new);
-
-Arrays.sort(result, Collections.reverseOrder()); 
-
-Arrays.stream(result).mapToInt(Integer::intValue).toArray(); // int[]로
-</code></pre><ul>
-<li>가급적 표준 API를 사용해서 시간초과 발생하지 않도록</li>
-</ul>
-<pre tabindex="0"><code>TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;(Collections.reverseOrder());
-int[] result = new int[set.size()];
-for(int i = 0; i &lt; result.length; i++) {
-    result[i] = set.pollFirst();
-} 
-// 중복제거 O(N), 정렬 O(NlogN) =&gt; O(NlogN)
-</code></pre></article>
+</article>
               </div>
 
               
@@ -446,13 +442,11 @@ for(int i = 0; i &lt; result.length; i++) {
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/maptoint/"> mapToInt</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/1/">코딩 테스트 합격자 되기 정리 #1&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/">코딩 테스트 합격자 되기 정리 #2&nbsp;</a><div> »</div>
           
         </div>
       </div>

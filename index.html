@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">52</span>
+              <span class="Counter">53</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">52</span>
+      <span class="Counter ">53</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,48 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/basic/maptoint/">
+                    <span class="repo" title="mapToInt">mapToInt</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p><code>stream().mapToInt()</code>는 Java Stream API에서 사용되는 메서드 중 하나로, <strong>Stream의 요소를 <code>int</code>형 정수로 변환하여 <code>IntStream</code>을 생성</strong>하는 역할을 합니다.</p>
+<h3 id="-사용-목적">💡 사용 목적</h3>
+<p><code>mapToInt()</code>는 주로 <strong>객체 스트림에서 정수값을 추출하고자 할 때</strong> 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.</p>
+<hr>
+<h3 id="-기본-구조">📌 기본 구조</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">IntStream</span><span class="w"> </span><span class="n">intStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">element</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">변환할</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">값</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-예시">✅ 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">parseInt</span><span class="p">)</span><span class="w">  </span><span class="c1">// String → int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">sum</span><span class="p">();</span><span class="w">                       </span><span class="c1">// IntStream 연산 사용</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w"> </span><span class="c1">// 출력: 6</span><span class="w">
+</span></span></span></code></pre></div><p>위 코드에서:</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -974,108 +1016,18 @@ int total = numbers.stream().mapToInt(i-&gt;i).sum();
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/basic/hashmap_linkedhashmap/">
-                    <span class="repo" title="Java에서 Hashmap과 LinkedHashMap의 차이">Java에서 Hashmap과 LinkedHashMap의 차이</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p><code>HashMap</code>과 <code>LinkedHashMap</code>은 둘 다 Java에서 제공하는 Map 인터페이스의 구현체이지만, <strong>동작 방식과 특징에 몇 가지 중요한 차이점</strong>이 있습니다:</p>
-<hr>
-<h3 id="-1-저장-순서-유지-여부">🔹 1. <strong>저장 순서 유지 여부</strong></h3>
-<table>
-  <thead>
-      <tr>
-          <th>특징</th>
-          <th><code>HashMap</code></th>
-          <th><code>LinkedHashMap</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>순서 유지</td>
-          <td>❌ 저장 순서 보장 안 됨</td>
-          <td>✅ 입력 순서(또는 접근 순서) 유지</td>
-      </tr>
-  </tbody>
-</table>
-<ul>
-<li><code>HashMap</code>은 내부적으로 순서를 신경 쓰지 않기 때문에, 데이터를 삽입한 순서와 꺼낼 때 순서가 다를 수 있음.</li>
-<li><code>LinkedHashMap</code>은 이중 연결 리스트를 사용해 데이터를 저장한 순서를 기억함.</li>
-</ul>
-<hr>
-<h3 id="-2-성능">🔹 2. <strong>성능</strong></h3>
-<table>
-  <thead>
-      <tr>
-          <th>성능</th>
-          <th><code>HashMap</code></th>
-          <th><code>LinkedHashMap</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>일반적으로 더 빠름</td>
-          <td>✅</td>
-          <td>❌ (조금 느림)</td>
-      </tr>
-  </tbody>
-</table>
-<ul>
-<li><code>LinkedHashMap</code>은 연결 리스트를 유지해야 하므로 약간의 오버헤드가 있음.</li>
-</ul>
-<hr>
-<h3 id="-3-null-허용-여부">🔹 3. <strong>null 허용 여부</strong></h3>
-<table>
-  <thead>
-      <tr>
-          <th>요소</th>
-          <th><code>HashMap</code></th>
-          <th><code>LinkedHashMap</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>null</code> 키 허용</td>
-          <td>1개 가능</td>
-          <td>1개 가능</td>
-      </tr>
-      <tr>
-          <td><code>null</code> 값 허용</td>
-          <td>여러 개 가능</td>
-          <td>여러 개 가능</td>
-      </tr>
-  </tbody>
-</table>
-<blockquote>
-<p>둘 다 <code>null</code> 키 하나와 <code>null</code> 값 여러 개 허용함.</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "mapToInt",
+  "link": "https://pink-spider.github.io/post/spring/basic/maptoint/",
+  "publishDate": "2025-04-23%2013:48:45"
+},
+
 {
   "title": "%ec%bd%94%eb%94%a9%20%ed%85%8c%ec%8a%a4%ed%8a%b8%20%ed%95%a9%ea%b2%a9%ec%9e%90%20%eb%90%98%ea%b8%b0%20%ec%a0%95%eb%a6%ac%20#2",
   "link": "https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/",
