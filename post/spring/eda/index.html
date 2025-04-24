@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    mapToInt | Pink Spider
+    비동기 Event Driven Architecture | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,25 +27,25 @@
   
   <meta
   name="description"
-  content="stream().mapToInt()는 Java Stream API에서 사용되는 메서드 중 하나로, Stream의 요소를 int형 정수로 변환하여 IntStream을 생성하는 역할을 합니다.
-💡 사용 목적 mapToInt()는 주로 객체 스트림에서 정수값을 추출하고자 할 때 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.
-📌 기본 구조 Stream&lt;T&gt; stream = ...; IntStream intStream = stream.mapToInt(element -&gt; 변환할 int 값); ✅ 예시 List&lt;String&gt; list = List.of(&#34;1&#34;, &#34;2&#34;, &#34;3&#34;); int sum = list.stream() .mapToInt(Integer::parseInt) // String → int .sum(); // IntStream 연산 사용 System.out.println(sum); // 출력: 6 위 코드에서:
+  content="대용량 처리를 위한 **비동기 Event Driven Architecture (EDA)**는 시스템이 이벤트(event)를 중심으로 작동하며, 확장성, 유연성, 성능을 확보하는 데에 효과적인 아키텍처입니다. 아래에 개념과 구성 요소, 장점 및 적용 사례에 대해 자세히 설명드릴게요.
+✅ 1. 기본 개념 **Event Driven Architecture (EDA)**는 시스템 내에서 이벤트가 발생하면, 이를 감지하고 처리하는 구조로 구성됩니다. 이벤트는 어떤 상태의 변화를 의미하고, 이를 **프로듀서(생산자)**가 발생시키고, **컨슈머(소비자)**가 이를 처리합니다.
+비동기 방식에서는 이 이벤트가 즉시 처리되지 않고, 큐나 버퍼를 통해 일시 저장되며, 컨슈머가 가능한 시점에 이벤트를 처리합니다. 이 구조는 시스템이 처리해야 할 데이터나 요청이 많을 때 부하를 완화하고 확장성을 제공합니다.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/basic/maptoint/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/eda/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="mapToInt - Pink Spider"
+  content="비동기 Event Driven Architecture - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="stream().mapToInt()는 Java Stream API에서 사용되는 메서드 중 하나로, Stream의 요소를 int형 정수로 변환하여 IntStream을 생성하는 역할을 합니다.
-💡 사용 목적 mapToInt()는 주로 객체 스트림에서 정수값을 추출하고자 할 때 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.
-📌 기본 구조 Stream&lt;T&gt; stream = ...; IntStream intStream = stream.mapToInt(element -&gt; 변환할 int 값); ✅ 예시 List&lt;String&gt; list = List.of(&#34;1&#34;, &#34;2&#34;, &#34;3&#34;); int sum = list.stream() .mapToInt(Integer::parseInt) // String → int .sum(); // IntStream 연산 사용 System.out.println(sum); // 출력: 6 위 코드에서:
+  content="대용량 처리를 위한 **비동기 Event Driven Architecture (EDA)**는 시스템이 이벤트(event)를 중심으로 작동하며, 확장성, 유연성, 성능을 확보하는 데에 효과적인 아키텍처입니다. 아래에 개념과 구성 요소, 장점 및 적용 사례에 대해 자세히 설명드릴게요.
+✅ 1. 기본 개념 **Event Driven Architecture (EDA)**는 시스템 내에서 이벤트가 발생하면, 이를 감지하고 처리하는 구조로 구성됩니다. 이벤트는 어떤 상태의 변화를 의미하고, 이를 **프로듀서(생산자)**가 발생시키고, **컨슈머(소비자)**가 이를 처리합니다.
+비동기 방식에서는 이 이벤트가 즉시 처리되지 않고, 큐나 버퍼를 통해 일시 저장되며, 컨슈머가 가능한 시점에 이벤트를 처리합니다. 이 구조는 시스템이 처리해야 할 데이터나 요청이 많을 때 부하를 완화하고 확장성을 제공합니다.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -62,17 +62,17 @@
 />
 <meta
   property="og:title"
-  content="mapToInt - Pink Spider"
+  content="비동기 Event Driven Architecture - Pink Spider"
 />
 <meta
   property="og:description"
-  content="stream().mapToInt()는 Java Stream API에서 사용되는 메서드 중 하나로, Stream의 요소를 int형 정수로 변환하여 IntStream을 생성하는 역할을 합니다.
-💡 사용 목적 mapToInt()는 주로 객체 스트림에서 정수값을 추출하고자 할 때 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.
-📌 기본 구조 Stream&lt;T&gt; stream = ...; IntStream intStream = stream.mapToInt(element -&gt; 변환할 int 값); ✅ 예시 List&lt;String&gt; list = List.of(&#34;1&#34;, &#34;2&#34;, &#34;3&#34;); int sum = list.stream() .mapToInt(Integer::parseInt) // String → int .sum(); // IntStream 연산 사용 System.out.println(sum); // 출력: 6 위 코드에서:
+  content="대용량 처리를 위한 **비동기 Event Driven Architecture (EDA)**는 시스템이 이벤트(event)를 중심으로 작동하며, 확장성, 유연성, 성능을 확보하는 데에 효과적인 아키텍처입니다. 아래에 개념과 구성 요소, 장점 및 적용 사례에 대해 자세히 설명드릴게요.
+✅ 1. 기본 개념 **Event Driven Architecture (EDA)**는 시스템 내에서 이벤트가 발생하면, 이를 감지하고 처리하는 구조로 구성됩니다. 이벤트는 어떤 상태의 변화를 의미하고, 이를 **프로듀서(생산자)**가 발생시키고, **컨슈머(소비자)**가 이를 처리합니다.
+비동기 방식에서는 이 이벤트가 즉시 처리되지 않고, 큐나 버퍼를 통해 일시 저장되며, 컨슈머가 가능한 시점에 이벤트를 처리합니다. 이 구조는 시스템이 처리해야 할 데이터나 요청이 많을 때 부하를 완화하고 확장성을 제공합니다.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/basic/maptoint/" />
-<meta property="og:site_name" content="mapToInt" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/eda/" />
+<meta property="og:site_name" content="비동기 Event Driven Architecture" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -80,7 +80,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-23 13:48:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-24 11:22:53 &#43;0900 KST" />
 
 
 
@@ -290,18 +290,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/basic/maptoint/">mapToInt</a></strong>
+                      href="https://pink-spider.github.io/post/spring/eda/">비동기 Event Driven Architecture</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 23 Apr 2025 13:48:45 &#43;0900"
+                  Created <relative-time datetime="Thu, 24 Apr 2025 11:22:53 &#43;0900"
                     class="no-wrap">
-                    Wed, 23 Apr 2025 13:48:45 &#43;0900</relative-time>
+                    Thu, 24 Apr 2025 11:22:53 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 23 Apr 2025 13:07:14 &#43;0900"
+                  Modified <relative-time datetime="Thu, 24 Apr 2025 11:24:09 &#43;0900"
                     class="no-wrap">
-                    Wed, 23 Apr 2025 13:07:14 &#43;0900</relative-time>
+                    Thu, 24 Apr 2025 11:24:09 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -331,9 +331,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      795 Words
+                      1081 Words
                     <span class="file-info-divider"></span>
-                                        4 min
+                                        5 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -344,92 +344,116 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p><code>stream().mapToInt()</code>는 Java Stream API에서 사용되는 메서드 중 하나로, <strong>Stream의 요소를 <code>int</code>형 정수로 변환하여 <code>IntStream</code>을 생성</strong>하는 역할을 합니다.</p>
-<h3 id="-사용-목적">💡 사용 목적</h3>
-<p><code>mapToInt()</code>는 주로 <strong>객체 스트림에서 정수값을 추출하고자 할 때</strong> 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.</p>
+                <article class="markdown-body entry-content container-lg"><p>대용량 처리를 위한 **비동기 Event Driven Architecture (EDA)**는 시스템이 <strong>이벤트(event)를 중심으로 작동</strong>하며, <strong>확장성</strong>, <strong>유연성</strong>, <strong>성능</strong>을 확보하는 데에 효과적인 아키텍처입니다. 아래에 개념과 구성 요소, 장점 및 적용 사례에 대해 자세히 설명드릴게요.</p>
 <hr>
-<h3 id="-기본-구조">📌 기본 구조</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">IntStream</span><span class="w"> </span><span class="n">intStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">element</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">변환할</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">값</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-예시">✅ 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">parseInt</span><span class="p">)</span><span class="w">  </span><span class="c1">// String → int</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">sum</span><span class="p">();</span><span class="w">                       </span><span class="c1">// IntStream 연산 사용</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w"> </span><span class="c1">// 출력: 6</span><span class="w">
-</span></span></span></code></pre></div><p>위 코드에서:</p>
+<h2 id="-1-기본-개념">✅ 1. 기본 개념</h2>
+<p>**Event Driven Architecture (EDA)**는 시스템 내에서 이벤트가 발생하면, 이를 감지하고 처리하는 구조로 구성됩니다. 이벤트는 어떤 <strong>상태의 변화</strong>를 의미하고, 이를 **프로듀서(생산자)**가 발생시키고, **컨슈머(소비자)**가 이를 처리합니다.</p>
+<p>비동기 방식에서는 이 이벤트가 <strong>즉시 처리되지 않고</strong>, 큐나 버퍼를 통해 일시 저장되며, 컨슈머가 가능한 시점에 이벤트를 처리합니다. 이 구조는 시스템이 처리해야 할 데이터나 요청이 많을 때 <strong>부하를 완화하고 확장성을 제공</strong>합니다.</p>
+<hr>
+<h2 id="-2-핵심-구성-요소">🧱 2. 핵심 구성 요소</h2>
+<h3 id="1-이벤트-event">1. <strong>이벤트 (Event)</strong></h3>
 <ul>
-<li><code>mapToInt(Integer::parseInt)</code>는 <code>String</code>을 <code>int</code>로 바꾸어 <code>IntStream</code>으로 변환</li>
-<li>그 후 <code>sum()</code>을 통해 합계를 계산</li>
+<li>시스템 내에서 발생하는 상태 변화</li>
+<li>예: 주문 생성, 결제 완료, 사용자 가입 등</li>
+</ul>
+<h3 id="2-이벤트-프로듀서-producer">2. <strong>이벤트 프로듀서 (Producer)</strong></h3>
+<ul>
+<li>이벤트를 발생시키는 컴포넌트</li>
+<li>예: <code>order-service</code>가 주문 생성 이벤트를 발생</li>
+</ul>
+<h3 id="3-이벤트-브로커-broker--메시지-큐">3. <strong>이벤트 브로커 (Broker / 메시지 큐)</strong></h3>
+<ul>
+<li>이벤트를 중간에서 전달하는 역할</li>
+<li>예: Kafka, RabbitMQ, AWS SNS/SQS, Google Pub/Sub 등</li>
+</ul>
+<h3 id="4-이벤트-컨슈머-consumer">4. <strong>이벤트 컨슈머 (Consumer)</strong></h3>
+<ul>
+<li>이벤트를 수신하고 처리하는 컴포넌트</li>
+<li>예: <code>inventory-service</code>가 주문 이벤트를 받아 재고 차감</li>
 </ul>
 <hr>
-<h3 id="-왜-intstream으로-변환하는가">🧠 왜 IntStream으로 변환하는가?</h3>
-<p><code>IntStream</code>은 <code>Stream&lt;Integer&gt;</code>보다 효율적입니다:</p>
-<ul>
-<li><strong>boxing/unboxing 비용 없음</strong> (<code>int</code>는 기본형, <code>Integer</code>는 객체형)</li>
-<li><code>sum()</code>, <code>average()</code>, <code>max()</code> 등 <strong>숫자 전용 메서드 사용 가능</strong></li>
-</ul>
-<hr>
-<p>Java에서 자주 나오는 개념인 <strong>boxing</strong>과 <strong>unboxing</strong>은 **기본형(primitive type)**과 <strong>객체형(wrapper class)</strong> 사이의 변환을 의미합니다. 아래에서 쉽게 정리해드릴게요.</p>
-<hr>
-<h2 id="-기본형-vs-객체형">🧱 기본형 vs 객체형</h2>
+<h2 id="-3-대용량-처리에-강한-이유">🚀 3. 대용량 처리에 강한 이유</h2>
 <table>
   <thead>
       <tr>
-          <th>기본형 (Primitive)</th>
-          <th>객체형 (Wrapper Class)</th>
+          <th>특성</th>
+          <th>설명</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><code>int</code></td>
-          <td><code>Integer</code></td>
+          <td><strong>비동기 처리</strong></td>
+          <td>프로듀서가 이벤트를 브로커에 전달하면 즉시 반환 → 시스템 병목 방지</td>
       </tr>
       <tr>
-          <td><code>double</code></td>
-          <td><code>Double</code></td>
+          <td><strong>수평 확장성</strong></td>
+          <td>컨슈머를 여러 개 배포하여 이벤트 처리량 분산 가능</td>
       </tr>
       <tr>
-          <td><code>boolean</code></td>
-          <td><code>Boolean</code></td>
+          <td><strong>내결함성 (Fault Tolerance)</strong></td>
+          <td>한 컨슈머가 실패해도 다른 인스턴스가 처리 지속 가능</td>
       </tr>
       <tr>
-          <td>&hellip;</td>
-          <td>&hellip;</td>
+          <td><strong>버퍼링 기능</strong></td>
+          <td>브로커가 이벤트를 일시 저장하여 급격한 트래픽에도 유연하게 대응</td>
       </tr>
   </tbody>
 </table>
 <hr>
-<h2 id="-boxing이란">📦 Boxing이란?</h2>
-<p><strong>기본형 → 객체형</strong> 으로 감싸는 것</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Integer</span><span class="w"> </span><span class="n">boxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w">  </span><span class="c1">// 명시적 boxing</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Integer</span><span class="w"> </span><span class="n">autoBoxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">               </span><span class="c1">// 자동 boxing (auto-boxing)</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-unboxing이란">📤 Unboxing이란?</h2>
-<p><strong>객체형 → 기본형</strong> 으로 풀어주는 것</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span><span class="w"> </span><span class="n">boxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">unboxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boxed</span><span class="p">.</span><span class="na">intValue</span><span class="p">();</span><span class="w">     </span><span class="c1">// 명시적 unboxing</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">autoUnboxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boxed</span><span class="p">;</span><span class="w">            </span><span class="c1">// 자동 unboxing (auto-unboxing)</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-왜-중요한가">🔧 왜 중요한가?</h2>
-<h3 id="-성능-차이">📌 성능 차이</h3>
+<h2 id="-4-활용-예시">🔁 4. 활용 예시</h2>
+<h3 id="예시-1-전자상거래-플랫폼">예시 1: <strong>전자상거래 플랫폼</strong></h3>
 <ul>
-<li><code>int</code>는 메모리상에서 값만 저장 → 가볍고 빠름</li>
-<li><code>Integer</code>는 객체이므로 힙에 저장되고 포인터 등 부가 비용 발생 → 느릴 수 있음</li>
+<li>주문이 들어오면 <code>OrderCreated</code> 이벤트 발생</li>
+<li><code>InventoryService</code>, <code>ShippingService</code>, <code>NotificationService</code> 등이 이 이벤트를 각각 구독하여 독립적으로 작업 수행</li>
 </ul>
-<h3 id="-예시-streaminteger-vs-intstream">📌 예시: <code>Stream&lt;Integer&gt;</code> vs <code>IntStream</code></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">3</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">).</span><span class="na">sum</span><span class="p">();</span><span class="w"> </span><span class="c1">// IntStream, unboxing 안 해도 됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">reduce</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// Integer 연산: boxing/unboxing 발생</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-결론">✅ 결론</h2>
+<h3 id="예시-2-마이크로서비스-msa-구조">예시 2: <strong>마이크로서비스 MSA 구조</strong></h3>
 <ul>
-<li><strong>boxing/unboxing은 변환 과정</strong>이며, <strong>자동으로도 일어나지만 성능에 영향</strong>을 줄 수 있음</li>
-<li>Stream에서 <code>mapToInt</code>, <code>mapToDouble</code> 등을 쓰는 이유 중 하나는 <strong>이러한 변환 비용을 피하기 위해서</strong>예요</li>
+<li>서비스 간 강결합을 피하고, 느슨한 연결을 유지하면서 유연하게 확장 가능</li>
 </ul>
+<h3 id="예시-3-데이터-파이프라인--로그-수집">예시 3: <strong>데이터 파이프라인 / 로그 수집</strong></h3>
+<ul>
+<li>수많은 로그 데이터를 Kafka 등으로 전송 → 후속 분석/집계는 컨슈머에서 병렬 처리</li>
+</ul>
+<hr>
+<h2 id="-5-주요-구현-기술">🔧 5. 주요 구현 기술</h2>
+<table>
+  <thead>
+      <tr>
+          <th>기술 스택</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Apache Kafka</strong></td>
+          <td>고속 스트리밍 데이터 처리에 특화된 분산형 이벤트 브로커</td>
+      </tr>
+      <tr>
+          <td><strong>RabbitMQ</strong></td>
+          <td>AMQP 기반, 비교적 간단한 구성의 메시지 브로커</td>
+      </tr>
+      <tr>
+          <td><strong>Spring Cloud Stream</strong></td>
+          <td>Spring 기반에서 Kafka/RabbitMQ 통합을 쉽게 해주는 프레임워크</td>
+      </tr>
+      <tr>
+          <td><strong>AWS SNS/SQS</strong></td>
+          <td>클라우드 환경에서 빠르게 구축 가능한 브로커 서비스</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-6-고려해야-할-사항">⚠️ 6. 고려해야 할 사항</h2>
+<ul>
+<li><strong>정확히 한 번 처리 (Exactly-once semantics)</strong> 보장 필요 시 추가 구현 필요</li>
+<li><strong>이벤트 순서 보장</strong>이 필요한 경우 Partition 설정 주의</li>
+<li><strong>이벤트 스키마 관리</strong>: 이벤트 구조 변경 시의 호환성 고려 (예: Schema Registry)</li>
+</ul>
+<hr>
+<h2 id="-요약">📌 요약</h2>
+<blockquote>
+<p><strong>비동기 Event Driven Architecture는</strong> 시스템이 이벤트 중심으로 작동하며, 메시지 브로커를 통해 비동기적이고 느슨하게 연결된 구조로 대용량 요청도 유연하게 처리할 수 있도록 합니다. 이는 MSA, 실시간 처리 시스템, 대규모 서비스에 매우 적합한 구조입니다.</p></blockquote>
+<hr>
 </article>
               </div>
 
@@ -442,13 +466,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jpa/n&#43;1/"> JPA 사용시 N+1 이슈에 대하여</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/">코딩 테스트 합격자 되기 정리 #2&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jpa/n&#43;1/">JPA 사용시 N+1 이슈에 대하여&nbsp;</a><div> »</div>
           
         </div>
       </div>
