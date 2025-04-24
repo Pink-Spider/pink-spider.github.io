@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">55</span>
+              <span class="Counter">56</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">55</span>
+      <span class="Counter ">56</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,92 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/virtual_thread/">
+                    <span class="repo" title="Virtual Thread">Virtual Thread</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p><strong>Virtual Thread</strong>는 Java 19부터 도입되고 Java 21에서 정식으로 안정화된 <strong>Project Loom</strong>의 핵심 기능 중 하나로, 기존의 Java 플랫폼에서 사용되던 <strong>platform thread</strong>(또는 OS thread)와는 다른 개념입니다. Virtual thread는 **경량 스레드(lightweight thread)**로서, 수십만 개의 스레드를 동시에 실행할 수 있도록 설계되었습니다.</p>
+<hr>
+<h2 id="1-virtual-thread의-핵심-개념">1. Virtual Thread의 핵심 개념</h2>
+<h3 id="기존-platform-thread-vs-virtual-thread">기존 Platform Thread vs Virtual Thread</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>Platform Thread</th>
+          <th>Virtual Thread</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>구현</td>
+          <td>OS 레벨에서 관리</td>
+          <td>JVM에서 직접 관리</td>
+      </tr>
+      <tr>
+          <td>생성 비용</td>
+          <td>무겁고 리소스 많이 사용</td>
+          <td>가볍고 거의 무제한 생성 가능</td>
+      </tr>
+      <tr>
+          <td>컨텍스트 스위칭</td>
+          <td>OS 스케줄러에 의존</td>
+          <td>JVM 스케줄러 사용 (빠름)</td>
+      </tr>
+      <tr>
+          <td>동시성 처리</td>
+          <td>제한적인 동시성</td>
+          <td>고밀도 동시성 처리 가능</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="2-주요-특징">2. 주요 특징</h2>
+<h3 id="경량-스레드">경량 스레드</h3>
+<ul>
+<li>Virtual thread는 메모리 사용량이 훨씬 적고 생성 속도도 빠릅니다.</li>
+<li>1:1 매핑이 아닌 M:N 구조로, 여러 virtual thread가 하나의 OS thread를 공유합니다.</li>
+</ul>
+<h3 id="차단-io와의-통합">차단 I/O와의 통합</h3>
+<ul>
+<li>기존에는 <code>Thread.sleep()</code>이나 <code>InputStream.read()</code> 같은 blocking I/O 호출이 OS thread를 점유하여 비효율적이었음.</li>
+<li>Virtual thread에서는 이러한 호출이 발생하면 JVM이 해당 virtual thread를 <strong>parking</strong>하고, 다른 작업을 실행시켜 병목을 피함.</li>
+</ul>
+<h3 id="코드-스타일-유지">코드 스타일 유지</h3>
+<ul>
+<li>기존의 <code>CompletableFuture</code>, <code>Reactive</code> API 없이도 <strong>전통적인 동기 코드 스타일</strong>을 유지하면서도 고성능 비동기 처리가 가능.</li>
+</ul>
+<hr>
+<h2 id="3-사용-예시">3. 사용 예시</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello from &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Thread</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">ofVirtual</span><span class="p">().</span><span class="na">start</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>혹은 <code>Executors</code>를 통해 수많은 스레드 처리도 가능:</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -744,139 +830,18 @@
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/">
-                    <span class="repo" title="코딩 테스트 합격자 되기 정리 #2">코딩 테스트 합격자 되기 정리 #2</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h1 id="배열">배열</h1>
-<h2 id="선언">선언</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">6</span><span class="o">]</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>ArrayList - 저장할 데이터 개수를 정확히 알 수 없다면&hellip;</li>
-</ul>
-<h2 id="차원">차원</h2>
-<ul>
-<li>2차원</li>
-</ul>
-<pre tabindex="0"><code>int[][] arr = { {1,2,3}, {4,5,6}};
-</code></pre><h2 id="arraylist">ArrayList</h2>
-<ul>
-<li>추가</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>초기화</li>
-</ul>
-<pre tabindex="0"><code>ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;&gt;(list);
-</code></pre><ul>
-<li>접근 - get(index)</li>
-<li>삭제 - remove()</li>
-</ul>
-<hr>
-<ul>
-<li>length 변수</li>
-<li>Arrays.sort()</li>
-<li>toString()</li>
-<li>size()</li>
-<li>isEmpty()</li>
-<li>Collections.sort</li>
-</ul>
-<pre tabindex="0"><code>ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(Arrays.asList(1,2,3,4,5));
-Collections.sort(list); // array는 Arrays.sort()
-</code></pre><ul>
-<li>sort() 사용시 from 인덱스, to 인덱스로 특정범위만 정렬 가능</li>
-</ul>
-<h3 id="arraylist-효율성">ArrayList 효율성</h3>
-<ul>
-<li>시간 복잡도</li>
-</ul>
-<ul>
-<li>접근 O(1)</li>
-<li>맨 뒤 삽입 O(1)</li>
-<li>맨 앞이나 중간. O(N)</li>
-</ul>
-<ul>
-<li>고려할 점
-<ul>
-<li>할당할 수 있는 메모리 - 정수형 1차원 1000만개, 2차원은 3000*3000 정도</li>
-<li>중간에 데이터 삽입이 빈번한 경우 시간 초과할 수 있음.</li>
-</ul>
-</li>
-</ul>
-<h3 id="몸풀기-문제">몸풀기 문제</h3>
-<h4 id="정렬">정렬</h4>
-<ul>
-<li>Arrays.sort() -&gt; Dual-Pivot QuickSort 혹은 Tim-Sort : 성능좋으니까 그냥 쓰자</li>
-</ul>
-<pre tabindex="0"><code>// bubble sort 예
-private static int[] bubbleSort(int[] org) {
-    int[] arr = org.clone();
-    int n = arr.length;
-    for(int i=0; i&lt; n; i++) {
-        for(int j=0; j&lt;n-i-1; j++) {
-            if(arr[j] &gt; arr[j+1]) {
-                int temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
-            }
-        }
-    }
-}
-</code></pre><ul>
-<li>원본을 그대로 두고 싶으면</li>
-</ul>
-<pre tabindex="0"><code>int[] clone = arr.clone();
-</code></pre><h4 id="제어">제어</h4>
-<ul>
-<li>중복 제거</li>
-</ul>
-<pre tabindex="0"><code>Integer[] result = Arrays.stream(arr).boxed().distinct().toArray(Integer[]::new);
-
-Arrays.sort(result, Collections.reverseOrder()); 
-
-Arrays.stream(result).mapToInt(Integer::intValue).toArray(); // int[]로
-</code></pre><ul>
-<li>가급적 표준 API를 사용해서 시간초과 발생하지 않도록</li>
-</ul>
-<pre tabindex="0"><code>TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;(Collections.reverseOrder());
-int[] result = new int[set.size()];
-for(int i = 0; i &lt; result.length; i++) {
-    result[i] = set.pollFirst();
-} 
-// 중복제거 O(N), 정렬 O(NlogN) =&gt; O(NlogN)
-</code></pre>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "Virtual%20Thread",
+  "link": "https://pink-spider.github.io/post/spring/virtual_thread/",
+  "publishDate": "2025-04-24%2011:26:42"
+},
+
 {
   "title": "%eb%b9%84%eb%8f%99%ea%b8%b0%20Event%20Driven%20Architecture",
   "link": "https://pink-spider.github.io/post/spring/eda/",
@@ -897,13 +862,13 @@ for(int i = 0; i &lt; result.length; i++) {
 
 {
   "title": "%ec%bd%94%eb%94%a9%20%ed%85%8c%ec%8a%a4%ed%8a%b8%20%ed%95%a9%ea%b2%a9%ec%9e%90%20%eb%90%98%ea%b8%b0%20%ec%a0%95%eb%a6%ac%20#2",
-  "link": "https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/",
+  "link": "https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/",
   "publishDate": "2025-04-22%2020:48:45"
 },
 
 {
   "title": "%ec%bd%94%eb%94%a9%20%ed%85%8c%ec%8a%a4%ed%8a%b8%20%ed%95%a9%ea%b2%a9%ec%9e%90%20%eb%90%98%ea%b8%b0%20%ec%a0%95%eb%a6%ac%20#1",
-  "link": "https://pink-spider.github.io/post/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/1/",
+  "link": "https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/1/",
   "publishDate": "2025-04-22%2017:48:45"
 },
 

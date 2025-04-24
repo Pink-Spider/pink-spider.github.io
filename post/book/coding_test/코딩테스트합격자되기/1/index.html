@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    mapToInt | Pink Spider
+    코딩 테스트 합격자 되기 정리 #1 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,26 +27,20 @@
   
   <meta
   name="description"
-  content="stream().mapToInt()는 Java Stream API에서 사용되는 메서드 중 하나로, Stream의 요소를 int형 정수로 변환하여 IntStream을 생성하는 역할을 합니다.
-💡 사용 목적 mapToInt()는 주로 객체 스트림에서 정수값을 추출하고자 할 때 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.
-📌 기본 구조 Stream&lt;T&gt; stream = ...; IntStream intStream = stream.mapToInt(element -&gt; 변환할 int 값); ✅ 예시 List&lt;String&gt; list = List.of(&#34;1&#34;, &#34;2&#34;, &#34;3&#34;); int sum = list.stream() .mapToInt(Integer::parseInt) // String → int .sum(); // IntStream 연산 사용 System.out.println(sum); // 출력: 6 위 코드에서:
-"
+  content="코딩 테스트 합격자 되기 정리 #1 사전 준비 분석 먼저 예외 테스트 케이스 기록 - 못푼것도 기록은 해두자 나만의 언어로 요약 문제 분석 문제를 쪼개서 분석 제약사항과 테스트 케이스 입력값 분석하고 알고리즘 설정 greedy, 완전 탐색 뭘로 할지 데이터 흐름과 구성 파악 의사 코드로 설계 채점기준 정확성 테스트 효율성 테스트 시간복잡도 O(N) 허용 연산 횟수는 2000만 초당 연산 최대 횟수는 1억번, 제한시간이 1초면 연산 횟수가 3000만이 안넘도록 지수함수, 다항함수, 로그함수 입력 크기에 따른 연산 횟수의 추이를 활용해서 시간복잡도를 표현하는 방법 - 점근적 표기법 특정값을 계속 반으로 줄이는 동작을 한다면 O(logN) 코딩 테스트 필수 문법 프리미티브 타입 / 레퍼런스 타입 int, long, float, double Integer, Long, Float, Double - 연산 속도는 느림 엡실론 epsilon - 부동소수형 데이터를 이진법으로 표현해서 생기는 오차 비트연산 &amp;, |, ^ XOR, ~ NOT, &lt;&lt;, &gt;&gt; 논리연산 &amp;&amp;, ||, !(x&gt;y) 컬렉션 프레임워크 배열 연속된 메모리 공간 생성이후 크기 변경 불가, 새 데이터를 삽입,삭제 불가. 변경만 가능 index로 요소 접근 - index를 알고 있다면 접근,변경은 O(1) int[] array = {1,2,3,4,5}; int[] array2 = new int[]{1,3,5,7,9}; int[] array3 = new int[5]; 리스트 ArrayList (사실 LinkedList 도 있음) 가변 크기 맨 뒤 추가시 O(1), 삭제나 중간 삽입은 O(N) 해시맵 hashmap key, value // Integer = 32bit = 4byte HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;(); // 삽입 map.put(&#34;apple&#34;, 1); // 검색 if(map.containsKey(key)) { ... } map.get(key); // 삭제 map.remove(key); 문자열 immutable 객체 - 값을 변경할 수 없는 객체, 시간 복잡도 관점에서도 주의 추가, 삭제시 기존 객체를 수정하는 것이 아니라 새로운 객체를 반환한다. 수정 .replace(&#34;a&#34;, &#34;&#34;); StringBuffer, StringBuilder Sytem.out.println(System.identityHashCode(s)); long start = System.currentTimeMillis(); StringBuilder s = new StringBuilder(); for(int i=0; i&lt;=100_000; i&#43;&#43;) { s.append(i); } long end = System.currentTimeMillis(); System.out.println(((end-start)/1000.0) &#43; &#34;초&#34;); 차이 StringBuffer 는 Thread-Safe (코딩테스트에서는 거의 안씀) 속도면에서 StringBuilder 가 조금 더 빠름(코딩테스크 기준 권장) sb.deleteCharAt(index) sb.insert(index, 문자); Stack Queue ArrayDeque (덱 혹은 데크 라고 읽음) 양방향 queue, 즉 앞쪽, 뒤쪽에서 pop 가능 메서드 람다식 / 익명함수 - 한번만 사용하거나 함수자체를 다른 함수의 인자로 전달(고차함수) Node[] nodes = new Node[5]; Arrays.sort(nodes, (o1,o2) -&gt; Integer.compare(o1.cost, o2.cost)); Arrays.sort(nodes, new Comparator&lt;Node&gt;() { @Override public int compare(Node o1, Node o2) { return Integer.compare(o1.cost, o2.cost); } } Integer.compare(int x, int y) 는 x&lt;y면 -1, x&gt;y면 1, x=y면 0 코드 구현 노하우 조기 반환 보호 구문 List&lt;Integer&gt; numbers ... int total = numbers.stream().mapToInt(i-&gt;i).sum(); 제네릭 List&lt;Integer&gt; genericList = new ArrayList&lt;&gt;(); // 빌드 레벨에서 타입체크하여 타입 강제 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/basic/maptoint/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/1/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="mapToInt - Pink Spider"
+  content="코딩 테스트 합격자 되기 정리 #1 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="stream().mapToInt()는 Java Stream API에서 사용되는 메서드 중 하나로, Stream의 요소를 int형 정수로 변환하여 IntStream을 생성하는 역할을 합니다.
-💡 사용 목적 mapToInt()는 주로 객체 스트림에서 정수값을 추출하고자 할 때 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.
-📌 기본 구조 Stream&lt;T&gt; stream = ...; IntStream intStream = stream.mapToInt(element -&gt; 변환할 int 값); ✅ 예시 List&lt;String&gt; list = List.of(&#34;1&#34;, &#34;2&#34;, &#34;3&#34;); int sum = list.stream() .mapToInt(Integer::parseInt) // String → int .sum(); // IntStream 연산 사용 System.out.println(sum); // 출력: 6 위 코드에서:
-"
+  content="코딩 테스트 합격자 되기 정리 #1 사전 준비 분석 먼저 예외 테스트 케이스 기록 - 못푼것도 기록은 해두자 나만의 언어로 요약 문제 분석 문제를 쪼개서 분석 제약사항과 테스트 케이스 입력값 분석하고 알고리즘 설정 greedy, 완전 탐색 뭘로 할지 데이터 흐름과 구성 파악 의사 코드로 설계 채점기준 정확성 테스트 효율성 테스트 시간복잡도 O(N) 허용 연산 횟수는 2000만 초당 연산 최대 횟수는 1억번, 제한시간이 1초면 연산 횟수가 3000만이 안넘도록 지수함수, 다항함수, 로그함수 입력 크기에 따른 연산 횟수의 추이를 활용해서 시간복잡도를 표현하는 방법 - 점근적 표기법 특정값을 계속 반으로 줄이는 동작을 한다면 O(logN) 코딩 테스트 필수 문법 프리미티브 타입 / 레퍼런스 타입 int, long, float, double Integer, Long, Float, Double - 연산 속도는 느림 엡실론 epsilon - 부동소수형 데이터를 이진법으로 표현해서 생기는 오차 비트연산 &amp;, |, ^ XOR, ~ NOT, &lt;&lt;, &gt;&gt; 논리연산 &amp;&amp;, ||, !(x&gt;y) 컬렉션 프레임워크 배열 연속된 메모리 공간 생성이후 크기 변경 불가, 새 데이터를 삽입,삭제 불가. 변경만 가능 index로 요소 접근 - index를 알고 있다면 접근,변경은 O(1) int[] array = {1,2,3,4,5}; int[] array2 = new int[]{1,3,5,7,9}; int[] array3 = new int[5]; 리스트 ArrayList (사실 LinkedList 도 있음) 가변 크기 맨 뒤 추가시 O(1), 삭제나 중간 삽입은 O(N) 해시맵 hashmap key, value // Integer = 32bit = 4byte HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;(); // 삽입 map.put(&#34;apple&#34;, 1); // 검색 if(map.containsKey(key)) { ... } map.get(key); // 삭제 map.remove(key); 문자열 immutable 객체 - 값을 변경할 수 없는 객체, 시간 복잡도 관점에서도 주의 추가, 삭제시 기존 객체를 수정하는 것이 아니라 새로운 객체를 반환한다. 수정 .replace(&#34;a&#34;, &#34;&#34;); StringBuffer, StringBuilder Sytem.out.println(System.identityHashCode(s)); long start = System.currentTimeMillis(); StringBuilder s = new StringBuilder(); for(int i=0; i&lt;=100_000; i&#43;&#43;) { s.append(i); } long end = System.currentTimeMillis(); System.out.println(((end-start)/1000.0) &#43; &#34;초&#34;); 차이 StringBuffer 는 Thread-Safe (코딩테스트에서는 거의 안씀) 속도면에서 StringBuilder 가 조금 더 빠름(코딩테스크 기준 권장) sb.deleteCharAt(index) sb.insert(index, 문자); Stack Queue ArrayDeque (덱 혹은 데크 라고 읽음) 양방향 queue, 즉 앞쪽, 뒤쪽에서 pop 가능 메서드 람다식 / 익명함수 - 한번만 사용하거나 함수자체를 다른 함수의 인자로 전달(고차함수) Node[] nodes = new Node[5]; Arrays.sort(nodes, (o1,o2) -&gt; Integer.compare(o1.cost, o2.cost)); Arrays.sort(nodes, new Comparator&lt;Node&gt;() { @Override public int compare(Node o1, Node o2) { return Integer.compare(o1.cost, o2.cost); } } Integer.compare(int x, int y) 는 x&lt;y면 -1, x&gt;y면 1, x=y면 0 코드 구현 노하우 조기 반환 보호 구문 List&lt;Integer&gt; numbers ... int total = numbers.stream().mapToInt(i-&gt;i).sum(); 제네릭 List&lt;Integer&gt; genericList = new ArrayList&lt;&gt;(); // 빌드 레벨에서 타입체크하여 타입 강제 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -62,17 +56,14 @@
 />
 <meta
   property="og:title"
-  content="mapToInt - Pink Spider"
+  content="코딩 테스트 합격자 되기 정리 #1 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="stream().mapToInt()는 Java Stream API에서 사용되는 메서드 중 하나로, Stream의 요소를 int형 정수로 변환하여 IntStream을 생성하는 역할을 합니다.
-💡 사용 목적 mapToInt()는 주로 객체 스트림에서 정수값을 추출하고자 할 때 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.
-📌 기본 구조 Stream&lt;T&gt; stream = ...; IntStream intStream = stream.mapToInt(element -&gt; 변환할 int 값); ✅ 예시 List&lt;String&gt; list = List.of(&#34;1&#34;, &#34;2&#34;, &#34;3&#34;); int sum = list.stream() .mapToInt(Integer::parseInt) // String → int .sum(); // IntStream 연산 사용 System.out.println(sum); // 출력: 6 위 코드에서:
-"
+  content="코딩 테스트 합격자 되기 정리 #1 사전 준비 분석 먼저 예외 테스트 케이스 기록 - 못푼것도 기록은 해두자 나만의 언어로 요약 문제 분석 문제를 쪼개서 분석 제약사항과 테스트 케이스 입력값 분석하고 알고리즘 설정 greedy, 완전 탐색 뭘로 할지 데이터 흐름과 구성 파악 의사 코드로 설계 채점기준 정확성 테스트 효율성 테스트 시간복잡도 O(N) 허용 연산 횟수는 2000만 초당 연산 최대 횟수는 1억번, 제한시간이 1초면 연산 횟수가 3000만이 안넘도록 지수함수, 다항함수, 로그함수 입력 크기에 따른 연산 횟수의 추이를 활용해서 시간복잡도를 표현하는 방법 - 점근적 표기법 특정값을 계속 반으로 줄이는 동작을 한다면 O(logN) 코딩 테스트 필수 문법 프리미티브 타입 / 레퍼런스 타입 int, long, float, double Integer, Long, Float, Double - 연산 속도는 느림 엡실론 epsilon - 부동소수형 데이터를 이진법으로 표현해서 생기는 오차 비트연산 &amp;, |, ^ XOR, ~ NOT, &lt;&lt;, &gt;&gt; 논리연산 &amp;&amp;, ||, !(x&gt;y) 컬렉션 프레임워크 배열 연속된 메모리 공간 생성이후 크기 변경 불가, 새 데이터를 삽입,삭제 불가. 변경만 가능 index로 요소 접근 - index를 알고 있다면 접근,변경은 O(1) int[] array = {1,2,3,4,5}; int[] array2 = new int[]{1,3,5,7,9}; int[] array3 = new int[5]; 리스트 ArrayList (사실 LinkedList 도 있음) 가변 크기 맨 뒤 추가시 O(1), 삭제나 중간 삽입은 O(N) 해시맵 hashmap key, value // Integer = 32bit = 4byte HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;(); // 삽입 map.put(&#34;apple&#34;, 1); // 검색 if(map.containsKey(key)) { ... } map.get(key); // 삭제 map.remove(key); 문자열 immutable 객체 - 값을 변경할 수 없는 객체, 시간 복잡도 관점에서도 주의 추가, 삭제시 기존 객체를 수정하는 것이 아니라 새로운 객체를 반환한다. 수정 .replace(&#34;a&#34;, &#34;&#34;); StringBuffer, StringBuilder Sytem.out.println(System.identityHashCode(s)); long start = System.currentTimeMillis(); StringBuilder s = new StringBuilder(); for(int i=0; i&lt;=100_000; i&#43;&#43;) { s.append(i); } long end = System.currentTimeMillis(); System.out.println(((end-start)/1000.0) &#43; &#34;초&#34;); 차이 StringBuffer 는 Thread-Safe (코딩테스트에서는 거의 안씀) 속도면에서 StringBuilder 가 조금 더 빠름(코딩테스크 기준 권장) sb.deleteCharAt(index) sb.insert(index, 문자); Stack Queue ArrayDeque (덱 혹은 데크 라고 읽음) 양방향 queue, 즉 앞쪽, 뒤쪽에서 pop 가능 메서드 람다식 / 익명함수 - 한번만 사용하거나 함수자체를 다른 함수의 인자로 전달(고차함수) Node[] nodes = new Node[5]; Arrays.sort(nodes, (o1,o2) -&gt; Integer.compare(o1.cost, o2.cost)); Arrays.sort(nodes, new Comparator&lt;Node&gt;() { @Override public int compare(Node o1, Node o2) { return Integer.compare(o1.cost, o2.cost); } } Integer.compare(int x, int y) 는 x&lt;y면 -1, x&gt;y면 1, x=y면 0 코드 구현 노하우 조기 반환 보호 구문 List&lt;Integer&gt; numbers ... int total = numbers.stream().mapToInt(i-&gt;i).sum(); 제네릭 List&lt;Integer&gt; genericList = new ArrayList&lt;&gt;(); // 빌드 레벨에서 타입체크하여 타입 강제 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/basic/maptoint/" />
-<meta property="og:site_name" content="mapToInt" />
+<meta property="og:url" content="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/1/" />
+<meta property="og:site_name" content="코딩 테스트 합격자 되기 정리 #1" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -80,7 +71,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-23 13:48:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-22 17:48:45 &#43;0900 KST" />
 
 
 
@@ -290,18 +281,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/basic/maptoint/">mapToInt</a></strong>
+                      href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/1/">코딩 테스트 합격자 되기 정리 #1</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 23 Apr 2025 13:48:45 &#43;0900"
+                  Created <relative-time datetime="Tue, 22 Apr 2025 17:48:45 &#43;0900"
                     class="no-wrap">
-                    Wed, 23 Apr 2025 13:48:45 &#43;0900</relative-time>
+                    Tue, 22 Apr 2025 17:48:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 23 Apr 2025 13:07:14 &#43;0900"
+                  Modified <relative-time datetime="Wed, 23 Apr 2025 13:04:19 &#43;0900"
                     class="no-wrap">
-                    Wed, 23 Apr 2025 13:07:14 &#43;0900</relative-time>
+                    Wed, 23 Apr 2025 13:04:19 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -331,7 +322,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      795 Words
+                      816 Words
                     <span class="file-info-divider"></span>
                                         4 min
 
@@ -344,93 +335,140 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p><code>stream().mapToInt()</code>는 Java Stream API에서 사용되는 메서드 중 하나로, <strong>Stream의 요소를 <code>int</code>형 정수로 변환하여 <code>IntStream</code>을 생성</strong>하는 역할을 합니다.</p>
-<h3 id="-사용-목적">💡 사용 목적</h3>
-<p><code>mapToInt()</code>는 주로 <strong>객체 스트림에서 정수값을 추출하고자 할 때</strong> 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.</p>
-<hr>
-<h3 id="-기본-구조">📌 기본 구조</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">IntStream</span><span class="w"> </span><span class="n">intStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">element</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">변환할</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">값</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-예시">✅ 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">parseInt</span><span class="p">)</span><span class="w">  </span><span class="c1">// String → int</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">sum</span><span class="p">();</span><span class="w">                       </span><span class="c1">// IntStream 연산 사용</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w"> </span><span class="c1">// 출력: 6</span><span class="w">
-</span></span></span></code></pre></div><p>위 코드에서:</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="코딩-테스트-합격자-되기-정리-1">코딩 테스트 합격자 되기 정리 #1</h1>
+<h2 id="사전-준비">사전 준비</h2>
 <ul>
-<li><code>mapToInt(Integer::parseInt)</code>는 <code>String</code>을 <code>int</code>로 바꾸어 <code>IntStream</code>으로 변환</li>
-<li>그 후 <code>sum()</code>을 통해 합계를 계산</li>
+<li>분석 먼저</li>
+<li>예외 테스트 케이스</li>
+<li>기록 - 못푼것도 기록은 해두자</li>
+<li>나만의 언어로 요약</li>
 </ul>
-<hr>
-<h3 id="-왜-intstream으로-변환하는가">🧠 왜 IntStream으로 변환하는가?</h3>
-<p><code>IntStream</code>은 <code>Stream&lt;Integer&gt;</code>보다 효율적입니다:</p>
+<h2 id="문제-분석">문제 분석</h2>
 <ul>
-<li><strong>boxing/unboxing 비용 없음</strong> (<code>int</code>는 기본형, <code>Integer</code>는 객체형)</li>
-<li><code>sum()</code>, <code>average()</code>, <code>max()</code> 등 <strong>숫자 전용 메서드 사용 가능</strong></li>
+<li>문제를 쪼개서 분석</li>
+<li>제약사항과 테스트 케이스</li>
+<li>입력값 분석하고 알고리즘 설정</li>
+<li>greedy, 완전 탐색 뭘로 할지</li>
+<li>데이터 흐름과 구성 파악</li>
+<li>의사 코드로 설계</li>
 </ul>
-<hr>
-<p>Java에서 자주 나오는 개념인 <strong>boxing</strong>과 <strong>unboxing</strong>은 **기본형(primitive type)**과 <strong>객체형(wrapper class)</strong> 사이의 변환을 의미합니다. 아래에서 쉽게 정리해드릴게요.</p>
-<hr>
-<h2 id="-기본형-vs-객체형">🧱 기본형 vs 객체형</h2>
-<table>
-  <thead>
-      <tr>
-          <th>기본형 (Primitive)</th>
-          <th>객체형 (Wrapper Class)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>int</code></td>
-          <td><code>Integer</code></td>
-      </tr>
-      <tr>
-          <td><code>double</code></td>
-          <td><code>Double</code></td>
-      </tr>
-      <tr>
-          <td><code>boolean</code></td>
-          <td><code>Boolean</code></td>
-      </tr>
-      <tr>
-          <td>&hellip;</td>
-          <td>&hellip;</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="-boxing이란">📦 Boxing이란?</h2>
-<p><strong>기본형 → 객체형</strong> 으로 감싸는 것</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Integer</span><span class="w"> </span><span class="n">boxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w">  </span><span class="c1">// 명시적 boxing</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Integer</span><span class="w"> </span><span class="n">autoBoxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">               </span><span class="c1">// 자동 boxing (auto-boxing)</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-unboxing이란">📤 Unboxing이란?</h2>
-<p><strong>객체형 → 기본형</strong> 으로 풀어주는 것</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Integer</span><span class="w"> </span><span class="n">boxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">10</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">unboxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boxed</span><span class="p">.</span><span class="na">intValue</span><span class="p">();</span><span class="w">     </span><span class="c1">// 명시적 unboxing</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">autoUnboxed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boxed</span><span class="p">;</span><span class="w">            </span><span class="c1">// 자동 unboxing (auto-unboxing)</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-왜-중요한가">🔧 왜 중요한가?</h2>
-<h3 id="-성능-차이">📌 성능 차이</h3>
+<h2 id="채점기준">채점기준</h2>
 <ul>
-<li><code>int</code>는 메모리상에서 값만 저장 → 가볍고 빠름</li>
-<li><code>Integer</code>는 객체이므로 힙에 저장되고 포인터 등 부가 비용 발생 → 느릴 수 있음</li>
+<li>정확성 테스트</li>
+<li>효율성 테스트</li>
 </ul>
-<h3 id="-예시-streaminteger-vs-intstream">📌 예시: <code>Stream&lt;Integer&gt;</code> vs <code>IntStream</code></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="n">3</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">).</span><span class="na">sum</span><span class="p">();</span><span class="w"> </span><span class="c1">// IntStream, unboxing 안 해도 됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">reduce</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// Integer 연산: boxing/unboxing 발생</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-결론">✅ 결론</h2>
+<h2 id="시간복잡도">시간복잡도</h2>
 <ul>
-<li><strong>boxing/unboxing은 변환 과정</strong>이며, <strong>자동으로도 일어나지만 성능에 영향</strong>을 줄 수 있음</li>
-<li>Stream에서 <code>mapToInt</code>, <code>mapToDouble</code> 등을 쓰는 이유 중 하나는 <strong>이러한 변환 비용을 피하기 위해서</strong>예요</li>
+<li>O(N) 허용 연산 횟수는 2000만</li>
+<li>초당 연산 최대 횟수는 1억번, 제한시간이 1초면 연산 횟수가 3000만이 안넘도록</li>
+<li>지수함수, 다항함수, 로그함수</li>
+<li>입력 크기에 따른 연산 횟수의 추이를 활용해서 시간복잡도를 표현하는 방법 - 점근적 표기법</li>
+<li>특정값을 계속 반으로 줄이는 동작을 한다면 O(logN)</li>
 </ul>
-</article>
+<h2 id="코딩-테스트-필수-문법">코딩 테스트 필수 문법</h2>
+<h3 id="프리미티브-타입--레퍼런스-타입">프리미티브 타입 / 레퍼런스 타입</h3>
+<ul>
+<li>int, long, float, double</li>
+<li>Integer, Long, Float, Double - 연산 속도는 느림</li>
+<li>엡실론 epsilon - 부동소수형 데이터를 이진법으로 표현해서 생기는 오차</li>
+<li>비트연산</li>
+</ul>
+<pre tabindex="0"><code>&amp;, |, ^ XOR, ~ NOT, &lt;&lt;, &gt;&gt;
+</code></pre><ul>
+<li>논리연산</li>
+</ul>
+<pre tabindex="0"><code>&amp;&amp;, ||, !(x&gt;y)
+</code></pre><h2 id="컬렉션-프레임워크">컬렉션 프레임워크</h2>
+<h3 id="배열">배열</h3>
+<ul>
+<li>연속된 메모리 공간</li>
+<li>생성이후 크기 변경 불가, 새 데이터를 삽입,삭제 불가. 변경만 가능</li>
+<li>index로 요소 접근 - index를 알고 있다면 접근,변경은 O(1)</li>
+</ul>
+<pre tabindex="0"><code>int[] array = {1,2,3,4,5};
+int[] array2 = new int[]{1,3,5,7,9};
+int[] array3 = new int[5];
+</code></pre><h3 id="리스트-arraylist-사실-linkedlist-도-있음">리스트 ArrayList (사실 LinkedList 도 있음)</h3>
+<ul>
+<li>가변 크기</li>
+<li>맨 뒤 추가시 O(1), 삭제나 중간 삽입은 O(N)</li>
+</ul>
+<h3 id="해시맵-hashmap">해시맵 hashmap</h3>
+<ul>
+<li>key, value</li>
+</ul>
+<pre tabindex="0"><code>// Integer = 32bit = 4byte
+HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+
+// 삽입 
+map.put(&#34;apple&#34;, 1);
+
+// 검색
+if(map.containsKey(key)) { ... }
+
+map.get(key);
+
+// 삭제
+map.remove(key);
+</code></pre><h3 id="문자열">문자열</h3>
+<ul>
+<li>immutable 객체 - 값을 변경할 수 없는 객체, 시간 복잡도 관점에서도 주의</li>
+<li>추가, 삭제시 기존 객체를 수정하는 것이 아니라 새로운 객체를 반환한다.</li>
+<li>수정</li>
+</ul>
+<pre tabindex="0"><code>.replace(&#34;a&#34;, &#34;&#34;);
+</code></pre><h4 id="stringbuffer-stringbuilder">StringBuffer, StringBuilder</h4>
+<pre tabindex="0"><code>Sytem.out.println(System.identityHashCode(s));
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="kt">long</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;=</span><span class="n">100_000</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(((</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="n">1000</span><span class="p">.</span><span class="na">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;초&#34;</span><span class="p">);</span><span class="w"> 
+</span></span></span></code></pre></div><ul>
+<li>차이 StringBuffer 는 Thread-Safe (코딩테스트에서는 거의 안씀)</li>
+<li>속도면에서 StringBuilder 가 조금 더 빠름(코딩테스크 기준 권장)</li>
+</ul>
+<pre tabindex="0"><code>sb.deleteCharAt(index)
+sb.insert(index, 문자);
+</code></pre><h3 id="stack">Stack</h3>
+<h3 id="queue">Queue</h3>
+<h3 id="arraydeque-덱-혹은-데크-라고-읽음">ArrayDeque (덱 혹은 데크 라고 읽음)</h3>
+<ul>
+<li>양방향 queue, 즉 앞쪽, 뒤쪽에서 pop 가능</li>
+</ul>
+<h2 id="메서드">메서드</h2>
+<ul>
+<li>람다식 / 익명함수 - 한번만 사용하거나 함수자체를 다른 함수의 인자로 전달(고차함수)</li>
+</ul>
+<pre tabindex="0"><code>Node[] nodes = new Node[5];
+Arrays.sort(nodes, (o1,o2) -&gt; Integer.compare(o1.cost, o2.cost));
+
+
+Arrays.sort(nodes, new Comparator&lt;Node&gt;() {
+    @Override
+    public int compare(Node o1, Node o2) {
+        return Integer.compare(o1.cost, o2.cost);
+    } 
+}
+</code></pre><ul>
+<li>Integer.compare(int x, int y) 는 x&lt;y면 -1, x&gt;y면 1, x=y면 0</li>
+</ul>
+<h2 id="코드-구현-노하우">코드 구현 노하우</h2>
+<ul>
+<li>조기 반환</li>
+<li>보호 구문</li>
+</ul>
+<pre tabindex="0"><code>List&lt;Integer&gt; numbers
+...
+int total = numbers.stream().mapToInt(i-&gt;i).sum();
+</code></pre><ul>
+<li>제네릭</li>
+</ul>
+<pre tabindex="0"><code>List&lt;Integer&gt; genericList = new ArrayList&lt;&gt;();
+// 빌드 레벨에서 타입체크하여 타입 강제
+</code></pre></article>
               </div>
 
               
@@ -442,13 +480,13 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jpa/n&#43;1/"> JPA 사용시 N+1 이슈에 대하여</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/"> 코딩 테스트 합격자 되기 정리 #2</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/">코딩 테스트 합격자 되기 정리 #2&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/reentrantlock/">ReentrantLock &amp; synchronized&nbsp;</a><div> »</div>
           
         </div>
       </div>
