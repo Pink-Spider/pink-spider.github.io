@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Virtual Thread | Pink Spider
+    코딩 테스트 합격자 되기 정리 #3 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,24 +27,20 @@
   
   <meta
   name="description"
-  content="Virtual Thread는 Java 19부터 도입되고 Java 21에서 정식으로 안정화된 Project Loom의 핵심 기능 중 하나로, 기존의 Java 플랫폼에서 사용되던 platform thread(또는 OS thread)와는 다른 개념입니다. Virtual thread는 **경량 스레드(lightweight thread)**로서, 수십만 개의 스레드를 동시에 실행할 수 있도록 설계되었습니다.
-1. Virtual Thread의 핵심 개념 기존 Platform Thread vs Virtual Thread 항목 Platform Thread Virtual Thread 구현 OS 레벨에서 관리 JVM에서 직접 관리 생성 비용 무겁고 리소스 많이 사용 가볍고 거의 무제한 생성 가능 컨텍스트 스위칭 OS 스케줄러에 의존 JVM 스케줄러 사용 (빠름) 동시성 처리 제한적인 동시성 고밀도 동시성 처리 가능 2. 주요 특징 경량 스레드 Virtual thread는 메모리 사용량이 훨씬 적고 생성 속도도 빠릅니다. 1:1 매핑이 아닌 M:N 구조로, 여러 virtual thread가 하나의 OS thread를 공유합니다. 차단 I/O와의 통합 기존에는 Thread.sleep()이나 InputStream.read() 같은 blocking I/O 호출이 OS thread를 점유하여 비효율적이었음. Virtual thread에서는 이러한 호출이 발생하면 JVM이 해당 virtual thread를 parking하고, 다른 작업을 실행시켜 병목을 피함. 코드 스타일 유지 기존의 CompletableFuture, Reactive API 없이도 전통적인 동기 코드 스타일을 유지하면서도 고성능 비동기 처리가 가능. 3. 사용 예시 Runnable task = () -&gt; { System.out.println(&#34;Hello from &#34; &#43; Thread.currentThread()); }; Thread thread = Thread.ofVirtual().start(task); 혹은 Executors를 통해 수많은 스레드 처리도 가능:
-"
+  content="모의 테스트 두개 뽑아서 더하기 public static int[] solution_03(int[] numbers) { TreeSet&lt;Integer&gt; result = new TreeSet&lt;&gt;(); for (int i = 0; i &lt; numbers.length - 1; i&#43;&#43;) { for (int j = i &#43; 1; j &lt; numbers.length; j&#43;&#43;) { result.add(numbers[i] &#43; numbers[j]); } } return result.stream().sorted().mapToInt(Integer::intValue).toArray(); } stream 사용법 모의고사 (수포자) public static int[] solution_04(int[] answers) { int[] pattern1 = {1, 2, 3, 4, 5}; int[] pattern2 = {2, 1, 2, 3, 2, 4, 2, 5}; int[] pattern3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}; int[] scores = new int[3]; for (int i = 0; i &lt; answers.length; i&#43;&#43;) { scores[0] &#43;= answers[i] == pattern1[i % pattern1.length % pattern1.length] ? 1 : 0; scores[1] &#43;= answers[i] == pattern2[i % pattern2.length % pattern2.length] ? 1 : 0; scores[2] &#43;= answers[i] == pattern3[i % pattern3.length % pattern3.length] ? 1 : 0; } int maxScore = Arrays.stream(scores).max().getAsInt(); ArrayList&lt;Integer&gt; answer = new ArrayList&lt;&gt;(); for (int i = 0; i &lt; scores.length; i&#43;&#43;) { if (scores[i] == maxScore) { answer.add(i &#43; 1); } } return answer.stream().mapToInt(Integer::intValue).toArray(); } 패턴 파악, maxScore 구하는 방법 .max().getAsInt() 행렬의 곱셉 public static int[][] solution_05(int[][] arr1, int[][] arr2) { int[][] answer = new int[arr1.length][arr2[0].length]; for (int i = 0; i &lt; arr1.length; i&#43;&#43;) { for (int j = 0; j &lt; arr2[0].length; j&#43;&#43;) { for (int k = 0; k &lt; arr1[0].length; k&#43;&#43;) { answer[i][j] &#43;= arr1[i][k] * arr2[k][j]; } } } return answer; } O(N^3) 의 index 유의 실패율 public static int[] solution_06(int N, int[] stages) { int[] challenger = new int[N&#43;2]; Arrays.stream(stages).forEach(stage -&gt; challenger[stage]&#43;&#43;); HashMap&lt;Integer, Double&gt; fails = new HashMap&lt;&gt;(); double totalPlayer = stages.length; for( int i = 1; i &lt;= N; i&#43;&#43;) { if(challenger[i] == 0) { fails.put(i, 0.0); }else { fails.put(i, (double)challenger[i]/totalPlayer); totalPlayer -= challenger[i]; } } return fails.entrySet().stream() .sorted((o1, o2) -&gt; Double.compare(o2.getValue(), o1.getValue())) .mapToInt(HashMap.Entry::getKey).toArray(); } challenger 을 [N&#43;2] 개로 잡는 이유 for문에서 totalPlayer -= challenger[i]; HashMap의 entrySet 사용 요령 기억하기 방문 길이 import java.util.HashMap; import java.util.HashSet; class Solution { private static HashMap&lt;Character, int[]&gt; location = new HashMap&lt;&gt;(); private static void initLocation() { location.put(&#39;U&#39;, new int[]{0, 1}); location.put(&#39;D&#39;, new int[]{0, -1}); location.put(&#39;L&#39;, new int[]{-1, 0}); location.put(&#39;R&#39;, new int[]{1, 0}); } public int solution(String dirs) { initLocation(); int x = 5, y = 5; HashSet&lt;String&gt; answer = new HashSet&lt;&gt;(); for (int i = 0; i &lt; dirs.length(); i&#43;&#43;) { int[] move = location.get(dirs.charAt(i)); int nx = x &#43; move[0]; int ny = y &#43; move[1]; if (!isValidMove(nx, ny)) { continue; } answer.add(x &#43; &#34; &#34; &#43; y &#43; &#34; &#34; &#43; nx &#43; &#34; &#34; &#43; ny); answer.add(nx &#43; &#34; &#34; &#43; ny &#43; &#34; &#34; &#43; x &#43; &#34; &#34; &#43; y); x = nx; y = ny; } return answer.size() / 2; } private static boolean isValidMove(int nx, int ny) { return nx &lt; 11 &amp;&amp; nx &gt;= 0 &amp;&amp; ny &lt; 11 &amp;&amp; ny &gt;= 0; } } A-&gt;B, B-&gt;A 도 하나의 이동경로로 파악되는 점 유의 answer.size() / 2 (문제에는 상세 설명이 없음) "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/virtual_thread/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/3/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Virtual Thread - Pink Spider"
+  content="코딩 테스트 합격자 되기 정리 #3 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="Virtual Thread는 Java 19부터 도입되고 Java 21에서 정식으로 안정화된 Project Loom의 핵심 기능 중 하나로, 기존의 Java 플랫폼에서 사용되던 platform thread(또는 OS thread)와는 다른 개념입니다. Virtual thread는 **경량 스레드(lightweight thread)**로서, 수십만 개의 스레드를 동시에 실행할 수 있도록 설계되었습니다.
-1. Virtual Thread의 핵심 개념 기존 Platform Thread vs Virtual Thread 항목 Platform Thread Virtual Thread 구현 OS 레벨에서 관리 JVM에서 직접 관리 생성 비용 무겁고 리소스 많이 사용 가볍고 거의 무제한 생성 가능 컨텍스트 스위칭 OS 스케줄러에 의존 JVM 스케줄러 사용 (빠름) 동시성 처리 제한적인 동시성 고밀도 동시성 처리 가능 2. 주요 특징 경량 스레드 Virtual thread는 메모리 사용량이 훨씬 적고 생성 속도도 빠릅니다. 1:1 매핑이 아닌 M:N 구조로, 여러 virtual thread가 하나의 OS thread를 공유합니다. 차단 I/O와의 통합 기존에는 Thread.sleep()이나 InputStream.read() 같은 blocking I/O 호출이 OS thread를 점유하여 비효율적이었음. Virtual thread에서는 이러한 호출이 발생하면 JVM이 해당 virtual thread를 parking하고, 다른 작업을 실행시켜 병목을 피함. 코드 스타일 유지 기존의 CompletableFuture, Reactive API 없이도 전통적인 동기 코드 스타일을 유지하면서도 고성능 비동기 처리가 가능. 3. 사용 예시 Runnable task = () -&gt; { System.out.println(&#34;Hello from &#34; &#43; Thread.currentThread()); }; Thread thread = Thread.ofVirtual().start(task); 혹은 Executors를 통해 수많은 스레드 처리도 가능:
-"
+  content="모의 테스트 두개 뽑아서 더하기 public static int[] solution_03(int[] numbers) { TreeSet&lt;Integer&gt; result = new TreeSet&lt;&gt;(); for (int i = 0; i &lt; numbers.length - 1; i&#43;&#43;) { for (int j = i &#43; 1; j &lt; numbers.length; j&#43;&#43;) { result.add(numbers[i] &#43; numbers[j]); } } return result.stream().sorted().mapToInt(Integer::intValue).toArray(); } stream 사용법 모의고사 (수포자) public static int[] solution_04(int[] answers) { int[] pattern1 = {1, 2, 3, 4, 5}; int[] pattern2 = {2, 1, 2, 3, 2, 4, 2, 5}; int[] pattern3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}; int[] scores = new int[3]; for (int i = 0; i &lt; answers.length; i&#43;&#43;) { scores[0] &#43;= answers[i] == pattern1[i % pattern1.length % pattern1.length] ? 1 : 0; scores[1] &#43;= answers[i] == pattern2[i % pattern2.length % pattern2.length] ? 1 : 0; scores[2] &#43;= answers[i] == pattern3[i % pattern3.length % pattern3.length] ? 1 : 0; } int maxScore = Arrays.stream(scores).max().getAsInt(); ArrayList&lt;Integer&gt; answer = new ArrayList&lt;&gt;(); for (int i = 0; i &lt; scores.length; i&#43;&#43;) { if (scores[i] == maxScore) { answer.add(i &#43; 1); } } return answer.stream().mapToInt(Integer::intValue).toArray(); } 패턴 파악, maxScore 구하는 방법 .max().getAsInt() 행렬의 곱셉 public static int[][] solution_05(int[][] arr1, int[][] arr2) { int[][] answer = new int[arr1.length][arr2[0].length]; for (int i = 0; i &lt; arr1.length; i&#43;&#43;) { for (int j = 0; j &lt; arr2[0].length; j&#43;&#43;) { for (int k = 0; k &lt; arr1[0].length; k&#43;&#43;) { answer[i][j] &#43;= arr1[i][k] * arr2[k][j]; } } } return answer; } O(N^3) 의 index 유의 실패율 public static int[] solution_06(int N, int[] stages) { int[] challenger = new int[N&#43;2]; Arrays.stream(stages).forEach(stage -&gt; challenger[stage]&#43;&#43;); HashMap&lt;Integer, Double&gt; fails = new HashMap&lt;&gt;(); double totalPlayer = stages.length; for( int i = 1; i &lt;= N; i&#43;&#43;) { if(challenger[i] == 0) { fails.put(i, 0.0); }else { fails.put(i, (double)challenger[i]/totalPlayer); totalPlayer -= challenger[i]; } } return fails.entrySet().stream() .sorted((o1, o2) -&gt; Double.compare(o2.getValue(), o1.getValue())) .mapToInt(HashMap.Entry::getKey).toArray(); } challenger 을 [N&#43;2] 개로 잡는 이유 for문에서 totalPlayer -= challenger[i]; HashMap의 entrySet 사용 요령 기억하기 방문 길이 import java.util.HashMap; import java.util.HashSet; class Solution { private static HashMap&lt;Character, int[]&gt; location = new HashMap&lt;&gt;(); private static void initLocation() { location.put(&#39;U&#39;, new int[]{0, 1}); location.put(&#39;D&#39;, new int[]{0, -1}); location.put(&#39;L&#39;, new int[]{-1, 0}); location.put(&#39;R&#39;, new int[]{1, 0}); } public int solution(String dirs) { initLocation(); int x = 5, y = 5; HashSet&lt;String&gt; answer = new HashSet&lt;&gt;(); for (int i = 0; i &lt; dirs.length(); i&#43;&#43;) { int[] move = location.get(dirs.charAt(i)); int nx = x &#43; move[0]; int ny = y &#43; move[1]; if (!isValidMove(nx, ny)) { continue; } answer.add(x &#43; &#34; &#34; &#43; y &#43; &#34; &#34; &#43; nx &#43; &#34; &#34; &#43; ny); answer.add(nx &#43; &#34; &#34; &#43; ny &#43; &#34; &#34; &#43; x &#43; &#34; &#34; &#43; y); x = nx; y = ny; } return answer.size() / 2; } private static boolean isValidMove(int nx, int ny) { return nx &lt; 11 &amp;&amp; nx &gt;= 0 &amp;&amp; ny &lt; 11 &amp;&amp; ny &gt;= 0; } } A-&gt;B, B-&gt;A 도 하나의 이동경로로 파악되는 점 유의 answer.size() / 2 (문제에는 상세 설명이 없음) "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -60,16 +56,14 @@
 />
 <meta
   property="og:title"
-  content="Virtual Thread - Pink Spider"
+  content="코딩 테스트 합격자 되기 정리 #3 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="Virtual Thread는 Java 19부터 도입되고 Java 21에서 정식으로 안정화된 Project Loom의 핵심 기능 중 하나로, 기존의 Java 플랫폼에서 사용되던 platform thread(또는 OS thread)와는 다른 개념입니다. Virtual thread는 **경량 스레드(lightweight thread)**로서, 수십만 개의 스레드를 동시에 실행할 수 있도록 설계되었습니다.
-1. Virtual Thread의 핵심 개념 기존 Platform Thread vs Virtual Thread 항목 Platform Thread Virtual Thread 구현 OS 레벨에서 관리 JVM에서 직접 관리 생성 비용 무겁고 리소스 많이 사용 가볍고 거의 무제한 생성 가능 컨텍스트 스위칭 OS 스케줄러에 의존 JVM 스케줄러 사용 (빠름) 동시성 처리 제한적인 동시성 고밀도 동시성 처리 가능 2. 주요 특징 경량 스레드 Virtual thread는 메모리 사용량이 훨씬 적고 생성 속도도 빠릅니다. 1:1 매핑이 아닌 M:N 구조로, 여러 virtual thread가 하나의 OS thread를 공유합니다. 차단 I/O와의 통합 기존에는 Thread.sleep()이나 InputStream.read() 같은 blocking I/O 호출이 OS thread를 점유하여 비효율적이었음. Virtual thread에서는 이러한 호출이 발생하면 JVM이 해당 virtual thread를 parking하고, 다른 작업을 실행시켜 병목을 피함. 코드 스타일 유지 기존의 CompletableFuture, Reactive API 없이도 전통적인 동기 코드 스타일을 유지하면서도 고성능 비동기 처리가 가능. 3. 사용 예시 Runnable task = () -&gt; { System.out.println(&#34;Hello from &#34; &#43; Thread.currentThread()); }; Thread thread = Thread.ofVirtual().start(task); 혹은 Executors를 통해 수많은 스레드 처리도 가능:
-"
+  content="모의 테스트 두개 뽑아서 더하기 public static int[] solution_03(int[] numbers) { TreeSet&lt;Integer&gt; result = new TreeSet&lt;&gt;(); for (int i = 0; i &lt; numbers.length - 1; i&#43;&#43;) { for (int j = i &#43; 1; j &lt; numbers.length; j&#43;&#43;) { result.add(numbers[i] &#43; numbers[j]); } } return result.stream().sorted().mapToInt(Integer::intValue).toArray(); } stream 사용법 모의고사 (수포자) public static int[] solution_04(int[] answers) { int[] pattern1 = {1, 2, 3, 4, 5}; int[] pattern2 = {2, 1, 2, 3, 2, 4, 2, 5}; int[] pattern3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}; int[] scores = new int[3]; for (int i = 0; i &lt; answers.length; i&#43;&#43;) { scores[0] &#43;= answers[i] == pattern1[i % pattern1.length % pattern1.length] ? 1 : 0; scores[1] &#43;= answers[i] == pattern2[i % pattern2.length % pattern2.length] ? 1 : 0; scores[2] &#43;= answers[i] == pattern3[i % pattern3.length % pattern3.length] ? 1 : 0; } int maxScore = Arrays.stream(scores).max().getAsInt(); ArrayList&lt;Integer&gt; answer = new ArrayList&lt;&gt;(); for (int i = 0; i &lt; scores.length; i&#43;&#43;) { if (scores[i] == maxScore) { answer.add(i &#43; 1); } } return answer.stream().mapToInt(Integer::intValue).toArray(); } 패턴 파악, maxScore 구하는 방법 .max().getAsInt() 행렬의 곱셉 public static int[][] solution_05(int[][] arr1, int[][] arr2) { int[][] answer = new int[arr1.length][arr2[0].length]; for (int i = 0; i &lt; arr1.length; i&#43;&#43;) { for (int j = 0; j &lt; arr2[0].length; j&#43;&#43;) { for (int k = 0; k &lt; arr1[0].length; k&#43;&#43;) { answer[i][j] &#43;= arr1[i][k] * arr2[k][j]; } } } return answer; } O(N^3) 의 index 유의 실패율 public static int[] solution_06(int N, int[] stages) { int[] challenger = new int[N&#43;2]; Arrays.stream(stages).forEach(stage -&gt; challenger[stage]&#43;&#43;); HashMap&lt;Integer, Double&gt; fails = new HashMap&lt;&gt;(); double totalPlayer = stages.length; for( int i = 1; i &lt;= N; i&#43;&#43;) { if(challenger[i] == 0) { fails.put(i, 0.0); }else { fails.put(i, (double)challenger[i]/totalPlayer); totalPlayer -= challenger[i]; } } return fails.entrySet().stream() .sorted((o1, o2) -&gt; Double.compare(o2.getValue(), o1.getValue())) .mapToInt(HashMap.Entry::getKey).toArray(); } challenger 을 [N&#43;2] 개로 잡는 이유 for문에서 totalPlayer -= challenger[i]; HashMap의 entrySet 사용 요령 기억하기 방문 길이 import java.util.HashMap; import java.util.HashSet; class Solution { private static HashMap&lt;Character, int[]&gt; location = new HashMap&lt;&gt;(); private static void initLocation() { location.put(&#39;U&#39;, new int[]{0, 1}); location.put(&#39;D&#39;, new int[]{0, -1}); location.put(&#39;L&#39;, new int[]{-1, 0}); location.put(&#39;R&#39;, new int[]{1, 0}); } public int solution(String dirs) { initLocation(); int x = 5, y = 5; HashSet&lt;String&gt; answer = new HashSet&lt;&gt;(); for (int i = 0; i &lt; dirs.length(); i&#43;&#43;) { int[] move = location.get(dirs.charAt(i)); int nx = x &#43; move[0]; int ny = y &#43; move[1]; if (!isValidMove(nx, ny)) { continue; } answer.add(x &#43; &#34; &#34; &#43; y &#43; &#34; &#34; &#43; nx &#43; &#34; &#34; &#43; ny); answer.add(nx &#43; &#34; &#34; &#43; ny &#43; &#34; &#34; &#43; x &#43; &#34; &#34; &#43; y); x = nx; y = ny; } return answer.size() / 2; } private static boolean isValidMove(int nx, int ny) { return nx &lt; 11 &amp;&amp; nx &gt;= 0 &amp;&amp; ny &lt; 11 &amp;&amp; ny &gt;= 0; } } A-&gt;B, B-&gt;A 도 하나의 이동경로로 파악되는 점 유의 answer.size() / 2 (문제에는 상세 설명이 없음) "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/virtual_thread/" />
-<meta property="og:site_name" content="Virtual Thread" />
+<meta property="og:url" content="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/3/" />
+<meta property="og:site_name" content="코딩 테스트 합격자 되기 정리 #3" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -77,7 +71,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-24 11:26:42 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-24 20:48:45 &#43;0900 KST" />
 
 
 
@@ -287,18 +281,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/virtual_thread/">Virtual Thread</a></strong>
+                      href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/3/">코딩 테스트 합격자 되기 정리 #3</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Thu, 24 Apr 2025 11:26:42 &#43;0900"
+                  Created <relative-time datetime="Thu, 24 Apr 2025 20:48:45 &#43;0900"
                     class="no-wrap">
-                    Thu, 24 Apr 2025 11:26:42 &#43;0900</relative-time>
+                    Thu, 24 Apr 2025 20:48:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Thu, 24 Apr 2025 11:27:23 &#43;0900"
+                  Modified <relative-time datetime="Fri, 25 Apr 2025 13:27:11 &#43;0900"
                     class="no-wrap">
-                    Thu, 24 Apr 2025 11:27:23 &#43;0900</relative-time>
+                    Fri, 25 Apr 2025 13:27:11 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -328,7 +322,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      752 Words
+                      563 Words
                     <span class="file-info-divider"></span>
                                         3 min
 
@@ -341,86 +335,138 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p><strong>Virtual Thread</strong>는 Java 19부터 도입되고 Java 21에서 정식으로 안정화된 <strong>Project Loom</strong>의 핵심 기능 중 하나로, 기존의 Java 플랫폼에서 사용되던 <strong>platform thread</strong>(또는 OS thread)와는 다른 개념입니다. Virtual thread는 **경량 스레드(lightweight thread)**로서, 수십만 개의 스레드를 동시에 실행할 수 있도록 설계되었습니다.</p>
-<hr>
-<h2 id="1-virtual-thread의-핵심-개념">1. Virtual Thread의 핵심 개념</h2>
-<h3 id="기존-platform-thread-vs-virtual-thread">기존 Platform Thread vs Virtual Thread</h3>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>Platform Thread</th>
-          <th>Virtual Thread</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>구현</td>
-          <td>OS 레벨에서 관리</td>
-          <td>JVM에서 직접 관리</td>
-      </tr>
-      <tr>
-          <td>생성 비용</td>
-          <td>무겁고 리소스 많이 사용</td>
-          <td>가볍고 거의 무제한 생성 가능</td>
-      </tr>
-      <tr>
-          <td>컨텍스트 스위칭</td>
-          <td>OS 스케줄러에 의존</td>
-          <td>JVM 스케줄러 사용 (빠름)</td>
-      </tr>
-      <tr>
-          <td>동시성 처리</td>
-          <td>제한적인 동시성</td>
-          <td>고밀도 동시성 처리 가능</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="2-주요-특징">2. 주요 특징</h2>
-<h3 id="경량-스레드">경량 스레드</h3>
-<ul>
-<li>Virtual thread는 메모리 사용량이 훨씬 적고 생성 속도도 빠릅니다.</li>
-<li>1:1 매핑이 아닌 M:N 구조로, 여러 virtual thread가 하나의 OS thread를 공유합니다.</li>
+                <article class="markdown-body entry-content container-lg"><h1 id="모의-테스트">모의 테스트</h1>
+<h2 id="두개-뽑아서-더하기">두개 뽑아서 더하기</h2>
+<pre tabindex="0"><code>public static int[] solution_03(int[] numbers) {
+    TreeSet&lt;Integer&gt; result = new TreeSet&lt;&gt;();
+
+    for (int i = 0; i &lt; numbers.length - 1; i++) {
+        for (int j = i + 1; j &lt; numbers.length; j++) {
+            result.add(numbers[i] + numbers[j]);
+        }
+    }
+
+    return result.stream().sorted().mapToInt(Integer::intValue).toArray();
+}
+</code></pre><ul>
+<li>stream 사용법</li>
 </ul>
-<h3 id="차단-io와의-통합">차단 I/O와의 통합</h3>
-<ul>
-<li>기존에는 <code>Thread.sleep()</code>이나 <code>InputStream.read()</code> 같은 blocking I/O 호출이 OS thread를 점유하여 비효율적이었음.</li>
-<li>Virtual thread에서는 이러한 호출이 발생하면 JVM이 해당 virtual thread를 <strong>parking</strong>하고, 다른 작업을 실행시켜 병목을 피함.</li>
+<h2 id="모의고사-수포자">모의고사 (수포자)</h2>
+<pre tabindex="0"><code>public static int[] solution_04(int[] answers) {
+    int[] pattern1 = {1, 2, 3, 4, 5};
+    int[] pattern2 = {2, 1, 2, 3, 2, 4, 2, 5};
+    int[] pattern3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+
+    int[] scores = new int[3];
+
+    for (int i = 0; i &lt; answers.length; i++) {
+        scores[0] += answers[i] == pattern1[i % pattern1.length % pattern1.length] ? 1 : 0;
+        scores[1] += answers[i] == pattern2[i % pattern2.length % pattern2.length] ? 1 : 0;
+        scores[2] += answers[i] == pattern3[i % pattern3.length % pattern3.length] ? 1 : 0;
+    }
+
+    int maxScore = Arrays.stream(scores).max().getAsInt();
+
+    ArrayList&lt;Integer&gt; answer = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; scores.length; i++) {
+        if (scores[i] == maxScore) {
+            answer.add(i + 1);
+        }
+    }
+    return answer.stream().mapToInt(Integer::intValue).toArray();
+}
+</code></pre><ul>
+<li>패턴 파악, maxScore 구하는 방법 .max().getAsInt()</li>
 </ul>
-<h3 id="코드-스타일-유지">코드 스타일 유지</h3>
-<ul>
-<li>기존의 <code>CompletableFuture</code>, <code>Reactive</code> API 없이도 <strong>전통적인 동기 코드 스타일</strong>을 유지하면서도 고성능 비동기 처리가 가능.</li>
+<h2 id="행렬의-곱셉">행렬의 곱셉</h2>
+<pre tabindex="0"><code>public static int[][] solution_05(int[][] arr1, int[][] arr2) {
+    int[][] answer = new int[arr1.length][arr2[0].length];
+
+    for (int i = 0; i &lt; arr1.length; i++) {
+        for (int j = 0; j &lt; arr2[0].length; j++) {
+            for (int k = 0; k &lt; arr1[0].length; k++) {
+                answer[i][j] += arr1[i][k] * arr2[k][j];
+            }
+        }
+    }
+    return answer;
+}
+</code></pre><ul>
+<li>O(N^3) 의 index 유의</li>
 </ul>
-<hr>
-<h2 id="3-사용-예시">3. 사용 예시</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello from &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Thread</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">ofVirtual</span><span class="p">().</span><span class="na">start</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><p>혹은 <code>Executors</code>를 통해 수많은 스레드 처리도 가능:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">newVirtualThreadPerTaskExecutor</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">IntStream</span><span class="p">.</span><span class="na">range</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">1_000_000</span><span class="p">).</span><span class="na">forEach</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">executor</span><span class="p">.</span><span class="na">submit</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 처리 로직</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="4-virtual-thread의-활용-예">4. Virtual Thread의 활용 예</h2>
-<ul>
-<li><strong>고성능 웹 서버</strong>: 수천~수십만 개의 요청 처리.</li>
-<li><strong>데이터베이스 클라이언트</strong>: 블로킹 JDBC 호출을 병렬 처리.</li>
-<li><strong>배치 처리 / ETL 파이프라인</strong>: 작업을 수평 확장 없이 병렬화.</li>
+<h2 id="실패율">실패율</h2>
+<pre tabindex="0"><code>public static int[] solution_06(int N, int[] stages) {
+
+    int[] challenger = new int[N+2];
+    Arrays.stream(stages).forEach(stage -&gt; challenger[stage]++);
+
+    HashMap&lt;Integer, Double&gt; fails = new HashMap&lt;&gt;();
+    double totalPlayer = stages.length;
+
+    for( int i = 1; i &lt;= N; i++) {
+        if(challenger[i] == 0) {
+            fails.put(i, 0.0);
+        }else {
+            fails.put(i, (double)challenger[i]/totalPlayer);
+            totalPlayer -= challenger[i];
+        }
+    }
+
+    return fails.entrySet().stream()
+        .sorted((o1, o2) -&gt; Double.compare(o2.getValue(), o1.getValue()))
+        .mapToInt(HashMap.Entry::getKey).toArray();
+}
+</code></pre><ul>
+<li>challenger 을 [N+2] 개로 잡는 이유</li>
+<li>for문에서 totalPlayer -= challenger[i];</li>
+<li>HashMap의 entrySet 사용 요령 기억하기</li>
 </ul>
-<hr>
-<h2 id="5-참고-사항">5. 참고 사항</h2>
-<ul>
-<li>Virtual thread는 완전히 새로운 개념은 아니며, <strong>Coroutine, Green Thread</strong> 등의 과거 개념과 유사.</li>
-<li>기존 코드와 호환되며, 특별한 API 변경 없이 사용할 수 있음.</li>
-<li>단, 네이티브 코드와 상호작용하거나 특정 동기화 방식에서는 주의가 필요.</li>
+<h2 id="방문-길이">방문 길이</h2>
+<pre tabindex="0"><code>import java.util.HashMap;
+import java.util.HashSet;
+
+class Solution {
+
+    private static HashMap&lt;Character, int[]&gt; location = new HashMap&lt;&gt;();
+
+    private static void initLocation() {
+        location.put(&#39;U&#39;, new int[]{0, 1});
+        location.put(&#39;D&#39;, new int[]{0, -1});
+        location.put(&#39;L&#39;, new int[]{-1, 0});
+        location.put(&#39;R&#39;, new int[]{1, 0});
+    }
+
+    public int solution(String dirs) {
+        initLocation();
+        int x = 5, y = 5;
+
+        HashSet&lt;String&gt; answer = new HashSet&lt;&gt;();
+
+        for (int i = 0; i &lt; dirs.length(); i++) {
+            int[] move = location.get(dirs.charAt(i));
+            int nx = x + move[0];
+            int ny = y + move[1];
+
+            if (!isValidMove(nx, ny)) {
+                continue;
+            }
+            answer.add(x + &#34; &#34; + y + &#34; &#34; + nx + &#34; &#34; + ny);
+            answer.add(nx + &#34; &#34; + ny + &#34; &#34; + x + &#34; &#34; + y);
+
+            x = nx;
+            y = ny;
+        }
+
+        return answer.size() / 2;
+    }
+
+    private static boolean isValidMove(int nx, int ny) {
+        return nx &lt; 11 &amp;&amp; nx &gt;= 0 &amp;&amp; ny &lt; 11 &amp;&amp; ny &gt;= 0;
+    }
+}
+</code></pre><ul>
+<li>A-&gt;B, B-&gt;A 도 하나의 이동경로로 파악되는 점 유의 answer.size() / 2 (문제에는 상세 설명이 없음)</li>
 </ul>
-<hr>
 </article>
               </div>
 
@@ -433,13 +479,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/3/"> 코딩 테스트 합격자 되기 정리 #3</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/eda/">비동기 Event Driven Architecture&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/virtual_thread/">Virtual Thread&nbsp;</a><div> »</div>
           
         </div>
       </div>

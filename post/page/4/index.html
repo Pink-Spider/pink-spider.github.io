@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">56</span>
+              <span class="Counter">57</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">56</span>
+      <span class="Counter ">57</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,106 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/tdd/mock_stub/">Mock, Stub 의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="mock-stub-의-차이">Mock, Stub 의 차이</h1>
+<p><code>mock</code>과 <code>stub</code>은 테스트에서 <strong>외부 의존성을 대체</strong>하기 위해 쓰이는 객체인데, 둘은 <strong>목적과 기능 면에서 조금 달라요.</strong></p>
+<hr>
+<h2 id="-요약-비교">📌 요약 비교</h2>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th><strong>Stub</strong></th>
+          <th><strong>Mock</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>목적</td>
+          <td>고정된 값 반환 (단순 대체)</td>
+          <td>동작 검증 + 유연한 설정</td>
+      </tr>
+      <tr>
+          <td>기능</td>
+          <td>미리 정의된 응답 제공</td>
+          <td>호출 여부, 호출 횟수, 파라미터 검증 등 가능</td>
+      </tr>
+      <tr>
+          <td>테스트 타입</td>
+          <td>주로 상태 기반 테스트 (State-based)</td>
+          <td>주로 행위 기반 테스트 (Behavior-based)</td>
+      </tr>
+      <tr>
+          <td>예시</td>
+          <td>&ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo;</td>
+          <td>&ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo;</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-stub-단순하게-리턴값만-정해놓은-가짜">🔹 Stub: 단순하게 <strong>리턴값만 정해놓은 가짜</strong></h2>
+<ul>
+<li>실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품.</li>
+<li>주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">user</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-mock-행위호출-여부-등까지-확인하는-가짜">🔸 Mock: <strong>행위(호출 여부 등)까지 확인</strong>하는 가짜</h2>
+<ul>
+<li>리턴값도 정의할 수 있지만, <strong>&ldquo;정말로 이 메서드가 호출됐는가?&rdquo;</strong> 같은 검증도 가능.</li>
+<li><code>verify()</code> 같은 메서드를 통해 테스트의 정확성을 높임.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-실제-테스트-예시">✅ 실제 테스트 예시</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">void</span><span class="w"> </span><span class="nf">testUserFetch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Stub: 리턴값 지정</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">)));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 메서드 실행</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Mock: 호출 여부 검증</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-간단-비유">📎 간단 비유</h2>
+<ul>
+<li><strong>Stub</strong>: “누가 와도 <strong>무조건 이 대사만 말해!”</strong></li>
+<li><strong>Mock</strong>: “누가 오면 이 대사를 하고, <strong>제대로 말했는지 검사도 합니다.!”</strong></li>
+</ul>
+<hr>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
+                Thu, 03 Apr 2025 15:57:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1025,66 +1125,6 @@
               <relative-time datetime=" Tue, 01 Apr 2025 11:34:10 &#43;0900" class="no-wrap"
                 title=" Tue, 01 Apr 2025 11:34:10 &#43;0900">
                 Tue, 01 Apr 2025 11:34:10 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git/git_submodule_reset/">서브모듈 완전히 초기화하고 다시 셋팅</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h2 id="-서브모듈-완전히-초기화하고-다시-셋팅">✅ 서브모듈 완전히 초기화하고 다시 셋팅</h2>
-<ol>
-<li>
-<p><strong>서브모듈을 Git에서 먼저 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule deinit -f .
-</span></span></code></pre></div></li>
-<li>
-<p><strong>서브모듈 디렉토리를 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf .git/modules/&lt;서브모듈_이름&gt;
-</span></span><span class="line"><span class="cl">rm -rf &lt;서브모듈_디렉토리&gt;
-</span></span></code></pre></div></li>
-<li>
-<p><strong><code>.gitmodules</code> 파일 삭제</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .gitmodules
-</span></span></code></pre></div></li>
-<li>
-<p><strong>인덱스에서 서브모듈 흔적 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rm --cached &lt;서브모듈_디렉토리&gt;
-</span></span></code></pre></div></li>
-<li>
-<p><strong>커밋</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Remove submodule completely&#34;</span>
-</span></span></code></pre></div></li>
-<li>
-<p><strong>새로운 서브모듈 추가 (필요한 경우)</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add &lt;repo-url&gt; &lt;path&gt;
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Add submodule&#34;</span>
-</span></span></code></pre></div></li>
-</ol>
-<hr>
-<h2 id="-정리하자면">🧠 정리하자면:</h2>
-<ul>
-<li>단순히 <code>.gitmodules</code> 파일만 지우면 안 되고,</li>
-<li>Git 내부의 서브모듈 정보 (<code>.git/modules</code>, 인덱스 등)도 같이 정리해줘야 해요.</li>
-</ul>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 01 Apr 2025 11:25:45 &#43;0900" class="no-wrap"
-                title=" Tue, 01 Apr 2025 11:25:45 &#43;0900">
-                Tue, 01 Apr 2025 11:25:45 &#43;0900
               </relative-time>
             </div>
           </div>
