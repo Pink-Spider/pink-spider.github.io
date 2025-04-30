@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">58</span>
+              <span class="Counter">60</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">58</span>
+      <span class="Counter ">60</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,102 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/git/git_repository_history_reset/">git history 전부 없애고 reset 하는 방법</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="git-history-전부-없애고-reset-하는-방법">git history 전부 없애고 reset 하는 방법</h1>
+<ul>
+<li>git history 를 왜 없애야 할까?
+<ul>
+<li>자주있는 일은 아니지만, git history를 전부 날리고 reset 해야 할 때가 있습니다..</li>
+<li>예를 들어, 서버의 비밀번호나 암복호화 key, 개인정보 등 노출되면 민감정보나 파일등이 git에 올라가 버렸다면?</li>
+<li>해당 내용을 지우고 다시 commit &amp; push를 했지만, history를 보고 이전 commit을 불러오면 그만이므로, 해결책이 될 수 없지요.</li>
+<li>아예 history까지 날려버려서 이전의 실수(꼭 실수했을때만 reset 한다고 할 수는 없지만)를 이력까지 지웁시다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="main-혹은-develop등-남겨놓을-브랜치에서-여기선-main">main 혹은 develop등 남겨놓을 브랜치에서 (여기선 main)</h2>
+<ul>
+<li>&ndash;orphan 은 기존커밋 이력없이&hellip;의 의미입니다. 즉, 기존 이력없이 시작하는 브랜치를 하나 만듭니다.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout --orphan latest_branch
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="새로-커밋">새로 커밋</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;initial commit after reset&#34;</span>
+</span></span></code></pre></div><h2 id="기존-브랜치-날리고-새로-만듦">기존 브랜치 날리고 새로 만듦</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git branch -D main
+</span></span><span class="line"><span class="cl">git branch -m main
+</span></span></code></pre></div><h2 id="main에-force-push하고-불필요한-내용-정리해서-repo-최적화">main에 force push하고 불필요한 내용 정리해서 repo 최적화</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git push -f origin main
+</span></span><span class="line"><span class="cl">git gc --aggressive --prune<span class="o">=</span>all
+</span></span></code></pre></div><p><img src="./images/bob_ross.jpg" alt="image"></p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 24 Mar 2025 20:18:45 &#43;0900" class="no-wrap"
+                title=" Mon, 24 Mar 2025 20:18:45 &#43;0900">
+                Mon, 24 Mar 2025 20:18:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/book/clean_code/clean_code_1/">Clean Code 1장</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="clean-code-1장">Clean Code 1장</h1>
+<h2 id="클린-코드의-조건--내-나름의-정리">클린 코드의 조건- 내 나름의 정리</h2>
+<ul>
+<li>1장에서는 자바나 C 창시자등 개발계의 거장들이 생각하는 좋은 코드에 대한 견해를 모아놓은 부분입니다.</li>
+<li>다음은 이 분들의 의견에서 나름 공통적인 부분을 추려서 내 나름대로 정리한 내용입니다.</li>
+<li>사실상 책 전체에 녹아 있는 내용이기도 합니다.</li>
+</ul>
+<h3 id="saram">SARAM</h3>
+<ul>
+<li>
+<p>S : Simple</p>
+<ul>
+<li>내 의견 : 코드는 단순해야 합니다.
+비즈니스 로직이 코드에 녹아들기 시작하면 프로젝트 자체는 복잡해집니다.<!-- raw HTML omitted -->
+코드(클래스, 메소드 차원)이라도 심플해야 합니다.</li>
+</ul>
+</li>
+<li>
+<p>A : Atomic</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sat, 22 Mar 2025 20:16:08 &#43;0900" class="no-wrap"
+                title=" Sat, 22 Mar 2025 20:16:08 &#43;0900">
+                Sat, 22 Mar 2025 20:16:08 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -868,110 +964,6 @@ api가 수정될 때마다 문서를 수정해줘야 하는 단점이 있습니�
               <relative-time datetime=" Sat, 01 Feb 2025 20:18:03 &#43;0900" class="no-wrap"
                 title=" Sat, 01 Feb 2025 20:18:03 &#43;0900">
                 Sat, 01 Feb 2025 20:18:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/component_static_member/">Component 내에 static method 에서 쓰는 member 객체가 null 일떄</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="component-내에-static-method-에서-쓰는-member-객체가-null-일떄">@Component 내에 static method 에서 쓰는 member 객체가 null 일떄</h1>
-<h2 id="component-내에-static-method에서-사용하는-static-member">@Component 내에 static method에서 사용하는 static member</h2>
-<pre tabindex="0"><code>@Component
-@RequiredArgsConstructor
-public class SomeComponentClass {
-
-    private final ObjectMapper objectMapper;
-
-    private static void staticMethod() {
-        objectMapper.convertValue() // objectMapper NullPointerException 발생
-    } 
-}
-</code></pre><p>-&gt; 이렇게 바꾸세요.</p>
-<pre tabindex="0"><code>@Component
-@RequiredArgsConstructor
-public class SomeComponentClass {
-
-    private static ObjectMapper objectMapper;
-
-    // Autowired로 constructor 생성
-    @Autowired
-    public SomeComponentClass(ObjectMapper objectMapper) {
-        SomeComponentClass.objectMapper = objectMapper;
-    }
-
-    private static void staticMethod() {
-        objectMapper ~~~
-    }
-}
-</code></pre>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sat, 25 Jan 2025 17:14:05 &#43;0900" class="no-wrap"
-                title=" Sat, 25 Jan 2025 17:14:05 &#43;0900">
-                Sat, 25 Jan 2025 17:14:05 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git/git_tag_deploy/">gitbub에서 tag기반 릴리즈 활용법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="서론">서론</h1>
-<ul>
-<li>GitHub에서 **태그(Tag)**를 기반으로 **릴리즈(Release)**를 만들면, <!-- raw HTML omitted --></li>
-<li>릴리즈 노트를 작성하고, 바이너리 파일(zip, tar.gz 등)을 첨부할 수 있어서 배포에 아주 유용합니다..</li>
-<li>아래에 GitHub 릴리즈 생성 및 연동 방법을 정리합니다. 👇</li>
-</ul>
-<hr>
-<h2 id="-github-릴리즈란">🎁 GitHub 릴리즈란?</h2>
-<ul>
-<li>특정 <strong>태그에 대한 릴리즈 정보를 시각화</strong>해서 보여주는 GitHub의 기능</li>
-<li>릴리즈 노트 작성 가능</li>
-<li>실행 파일, 아티팩트(.zip, .jar 등) 첨부 가능</li>
-<li>GitHub Actions 같은 CI 도구와 쉽게 연동 가능</li>
-</ul>
-<hr>
-<h2 id="-github-릴리즈-만드는-방법">🛠️ GitHub 릴리즈 만드는 방법</h2>
-<h3 id="1-git-태그-만들기-로컬-or-github에서">1. Git 태그 만들기 (로컬 or GitHub에서)</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 로컬에서 annotated tag 만들기</span>
-</span></span><span class="line"><span class="cl">git tag -a v1.0.0 -m <span class="s2">&#34;Release version 1.0.0&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 원격 푸시</span>
-</span></span><span class="line"><span class="cl">git push origin v1.0.0
-</span></span></code></pre></div><blockquote>
-<p>또는 GitHub 웹 UI에서 새 태그를 만들 수도 있음.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sat, 11 Jan 2025 16:11:03 &#43;0900" class="no-wrap"
-                title=" Sat, 11 Jan 2025 16:11:03 &#43;0900">
-                Sat, 11 Jan 2025 16:11:03 &#43;0900
               </relative-time>
             </div>
           </div>

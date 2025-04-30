@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">58</span>
+              <span class="Counter">60</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">58</span>
+      <span class="Counter ">60</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,139 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/redis_crud_template/">Boot에서 redis 사용하는 2가지 방법</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Java에서 Redis를 사용할 때 <code>CRUD Repository</code>와 <code>RedisTemplate</code>은 각각 다른 수준의 추상화를 제공하는 방식입니다.
+주요 차이점은 다음과 같습니다:</p>
+<hr>
+<h3 id="-1-crud-repository-spring-data-redis">✅ 1. <strong>CRUD Repository (Spring Data Redis)</strong></h3>
+<p><code>RedisRepository</code>, <code>CrudRepository</code>, <code>PagingAndSortingRepository</code> 등과 같이 <strong>Spring Data</strong>가 제공하는 Repository 인터페이스를 사용하는 방식입니다.</p>
+<h4 id="-장점">🔹 장점</h4>
+<ul>
+<li><strong>높은 추상화 수준</strong>: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작.</li>
+<li><strong>개발 속도 빠름</strong>: 반복적인 로직 줄일 수 있음 (<code>findById</code>, <code>save</code>, <code>delete</code> 등 기본 제공).</li>
+<li><strong>Spring Data의 기능</strong>을 활용 가능 (예: 쿼리 메서드, 페이징 등).</li>
+</ul>
+<h4 id="-단점">🔹 단점</h4>
+<ul>
+<li><strong>세밀한 제어 어려움</strong>: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움.</li>
+<li><strong>직렬화 방식 고정</strong>: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요.</li>
+</ul>
+<h4 id="-예시">🔹 예시</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserRedisRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUsername</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-2-redistemplate">✅ 2. <strong>RedisTemplate</strong></h3>
+<p>Spring에서 제공하는 <strong>저수준 API</strong>로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 11:11:03 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 11:11:03 &#43;0900">
+                Wed, 26 Mar 2025 11:11:03 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/feign/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="feign-client-사용팁-1---상대-서버가-여러대-일때-랜덤-호출">feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출</h1>
+<h2 id="load-balancing-되고-있는-상대측에-번갈아가면서-호출하는-방법">load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법</h2>
+<ul>
+<li>build.gradle</li>
+</ul>
+<pre tabindex="0"><code>...
+dependencies {
+    implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39;
+}
+...
+</code></pre><ul>
+<li>application.yml</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 상대 측에서 3개의 서버 LB되고 있을 때 </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">other-party-url</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.002</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.003</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>ServerProperties.java</li>
+</ul>
+<pre tabindex="0"><code>@Setter
+@Getter
+@Configuration
+@ConfigurationProperties(prefix = &#34;other-party-url&#34;)
+public class OtherServerProperties {
+
+    private List&lt;String&gt; serverUris;
+}
+</code></pre><ul>
+<li>FeignConfig.java</li>
+</ul>
+<pre tabindex="0"><code>@RequiredArgsConstructor
+public class OtherServerFeignConfig {
+
+    private final OtherServerProperties otherServerProperties;
+
+    private final AtomicInteger counter = new AtomicInteger(0);
+
+    @Bean
+    public RequestInterceptor randomServerInterceptor() {
+        return requestTemplate -&gt; {
+            List&lt;String&gt; serverUris = otherServerProperties.getServerUris();
+
+            int index = counter.getAndIncrement() % serverUris.size();
+            String selectedUrl = serverUris.get(index);
+
+            requestTemplate.target(selectedUrl);
+        };
+    }
+}
+</code></pre><ul>
+<li>FeignClient interface</li>
+</ul>
+<pre tabindex="0"><code>@FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class)
+public interface OtherServerFeignClientV1 {
+    
+    ...
+}
+</code></pre>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 08:37:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 08:37:45 &#43;0900">
+                Wed, 26 Mar 2025 08:37:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -900,102 +1033,6 @@
               <relative-time datetime=" Tue, 25 Mar 2025 18:01:05 &#43;0900" class="no-wrap"
                 title=" Tue, 25 Mar 2025 18:01:05 &#43;0900">
                 Tue, 25 Mar 2025 18:01:05 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git/git_repository_history_reset/">git history 전부 없애고 reset 하는 방법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="git-history-전부-없애고-reset-하는-방법">git history 전부 없애고 reset 하는 방법</h1>
-<ul>
-<li>git history 를 왜 없애야 할까?
-<ul>
-<li>자주있는 일은 아니지만, git history를 전부 날리고 reset 해야 할 때가 있습니다..</li>
-<li>예를 들어, 서버의 비밀번호나 암복호화 key, 개인정보 등 노출되면 민감정보나 파일등이 git에 올라가 버렸다면?</li>
-<li>해당 내용을 지우고 다시 commit &amp; push를 했지만, history를 보고 이전 commit을 불러오면 그만이므로, 해결책이 될 수 없지요.</li>
-<li>아예 history까지 날려버려서 이전의 실수(꼭 실수했을때만 reset 한다고 할 수는 없지만)를 이력까지 지웁시다.</li>
-</ul>
-</li>
-</ul>
-<h2 id="main-혹은-develop등-남겨놓을-브랜치에서-여기선-main">main 혹은 develop등 남겨놓을 브랜치에서 (여기선 main)</h2>
-<ul>
-<li>&ndash;orphan 은 기존커밋 이력없이&hellip;의 의미입니다. 즉, 기존 이력없이 시작하는 브랜치를 하나 만듭니다.
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout --orphan latest_branch
-</span></span></code></pre></div></li>
-</ul>
-<h2 id="새로-커밋">새로 커밋</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git add .
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;initial commit after reset&#34;</span>
-</span></span></code></pre></div><h2 id="기존-브랜치-날리고-새로-만듦">기존 브랜치 날리고 새로 만듦</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git branch -D main
-</span></span><span class="line"><span class="cl">git branch -m main
-</span></span></code></pre></div><h2 id="main에-force-push하고-불필요한-내용-정리해서-repo-최적화">main에 force push하고 불필요한 내용 정리해서 repo 최적화</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git push -f origin main
-</span></span><span class="line"><span class="cl">git gc --aggressive --prune<span class="o">=</span>all
-</span></span></code></pre></div><p><img src="./images/bob_ross.jpg" alt="image"></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 24 Mar 2025 20:18:45 &#43;0900" class="no-wrap"
-                title=" Mon, 24 Mar 2025 20:18:45 &#43;0900">
-                Mon, 24 Mar 2025 20:18:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/book/clean_code/clean_code_1/">Clean Code 1장</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="clean-code-1장">Clean Code 1장</h1>
-<h2 id="클린-코드의-조건--내-나름의-정리">클린 코드의 조건- 내 나름의 정리</h2>
-<ul>
-<li>1장에서는 자바나 C 창시자등 개발계의 거장들이 생각하는 좋은 코드에 대한 견해를 모아놓은 부분입니다.</li>
-<li>다음은 이 분들의 의견에서 나름 공통적인 부분을 추려서 내 나름대로 정리한 내용입니다.</li>
-<li>사실상 책 전체에 녹아 있는 내용이기도 합니다.</li>
-</ul>
-<h3 id="saram">SARAM</h3>
-<ul>
-<li>
-<p>S : Simple</p>
-<ul>
-<li>내 의견 : 코드는 단순해야 합니다.
-비즈니스 로직이 코드에 녹아들기 시작하면 프로젝트 자체는 복잡해집니다.<!-- raw HTML omitted -->
-코드(클래스, 메소드 차원)이라도 심플해야 합니다.</li>
-</ul>
-</li>
-<li>
-<p>A : Atomic</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sat, 22 Mar 2025 20:16:08 &#43;0900" class="no-wrap"
-                title=" Sat, 22 Mar 2025 20:16:08 &#43;0900">
-                Sat, 22 Mar 2025 20:16:08 &#43;0900
               </relative-time>
             </div>
           </div>

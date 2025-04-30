@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">58</span>
+              <span class="Counter">60</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">58</span>
+      <span class="Counter ">60</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,88 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/jpa/n&#43;1/">JPA 사용시 N&#43;1 이슈에 대하여</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>JPA에서 <strong>N+1 문제</strong>는 성능 저하를 유발할 수 있는 대표적인 <strong>ORM 사용 시의 이슈</strong> 중 하나입니다. 아래에 자세히 설명드릴게요.</p>
+<hr>
+<h3 id="n1-문제란">N+1 문제란?</h3>
+<p><strong>N+1 문제</strong>는 JPA에서 <strong>연관된 엔티티를 지연 로딩(LAZY loading)</strong> 방식으로 조회할 때 발생합니다.</p>
+<p>예를 들어, 다음과 같은 상황을 가정해 봅시다:</p>
+<ul>
+<li>게시글(Post)과 작성자(Member)는 다대일(N:1) 관계이다.</li>
+<li>게시글 1개는 작성자 1명을 가진다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Entity</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Post</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ManyToOne</span><span class="p">(</span><span class="n">fetch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FetchType</span><span class="p">.</span><span class="na">LAZY</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Member</span><span class="w"> </span><span class="n">author</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>게시글 리스트를 조회하는 쿼리를 날리면:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Post</span><span class="o">&gt;</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">postRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>이때 JPA는 다음과 같은 방식으로 작동합니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 23 Apr 2025 20:48:45 &#43;0900" class="no-wrap"
+                title=" Wed, 23 Apr 2025 20:48:45 &#43;0900">
+                Wed, 23 Apr 2025 20:48:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/maptoint/">mapToInt</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><code>stream().mapToInt()</code>는 Java Stream API에서 사용되는 메서드 중 하나로, <strong>Stream의 요소를 <code>int</code>형 정수로 변환하여 <code>IntStream</code>을 생성</strong>하는 역할을 합니다.</p>
+<h3 id="-사용-목적">💡 사용 목적</h3>
+<p><code>mapToInt()</code>는 주로 <strong>객체 스트림에서 정수값을 추출하고자 할 때</strong> 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.</p>
+<hr>
+<h3 id="-기본-구조">📌 기본 구조</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">IntStream</span><span class="w"> </span><span class="n">intStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">element</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">변환할</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">값</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-예시">✅ 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">parseInt</span><span class="p">)</span><span class="w">  </span><span class="c1">// String → int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">sum</span><span class="p">();</span><span class="w">                       </span><span class="c1">// IntStream 연산 사용</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w"> </span><span class="c1">// 출력: 6</span><span class="w">
+</span></span></span></code></pre></div><p>위 코드에서:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 23 Apr 2025 13:48:45 &#43;0900" class="no-wrap"
+                title=" Wed, 23 Apr 2025 13:48:45 &#43;0900">
+                Wed, 23 Apr 2025 13:48:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1036,125 +1118,6 @@ int total = numbers.stream().mapToInt(i-&gt;i).sum();
               <relative-time datetime=" Sun, 20 Apr 2025 11:15:45 &#43;0900" class="no-wrap"
                 title=" Sun, 20 Apr 2025 11:15:45 &#43;0900">
                 Sun, 20 Apr 2025 11:15:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/ddd/about_ddd/">Feign Timecheck</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>DDD(Domain-Driven Design, 도메인 주도 설계)는 복잡한 소프트웨어 시스템을 설계할 때 <strong>비즈니스 도메인(업무 영역)</strong> 을 중심에 두고 개발하는 방법론이에요. 에릭 에반스(Eric Evans)의 책 *&ldquo;Domain-Driven Design: Tackling Complexity in the Heart of Software&rdquo;*에서 처음 제안되었고, 특히 <strong>도메인 복잡성이 높은 시스템</strong>에서 강력한 효과를 발휘합니다.</p>
-<hr>
-<h3 id="-ddd란">✅ DDD란?</h3>
-<p>간단히 말해 DDD는:</p>
-<ul>
-<li><strong>비즈니스의 핵심 로직(도메인)</strong> 을 가장 중요한 것으로 보고,</li>
-<li><strong>도메인 전문가와 개발자가 협력</strong>하여,</li>
-<li>소프트웨어 모델을 <strong>업무 용어와 일치</strong>시키고,</li>
-<li>유지보수 가능하고 유연한 설계를 만드는 것을 목표로 해요.</li>
-</ul>
-<hr>
-<h3 id="-ddd의-핵심-개념">✅ DDD의 핵심 개념</h3>
-<table>
-  <thead>
-      <tr>
-          <th>개념</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Entity</strong></td>
-          <td>식별자가 있어 고유하게 구분되는 객체 (ex. <code>Order</code>, <code>User</code>)</td>
-      </tr>
-      <tr>
-          <td><strong>Value Object</strong></td>
-          <td>식별자 없이 값 자체로 의미가 있는 객체 (ex. <code>Address</code>, <code>Money</code>)</td>
-      </tr>
-      <tr>
-          <td><strong>Aggregate</strong></td>
-          <td>도메인 객체들의 군집. 하나의 루트 엔티티(Aggregate Root)가 존재</td>
-      </tr>
-      <tr>
-          <td><strong>Repository</strong></td>
-          <td>도메인 객체를 저장하고 조회하는 인터페이스 (<code>findById</code>, <code>save</code>)</td>
-      </tr>
-      <tr>
-          <td><strong>Service (도메인 서비스)</strong></td>
-          <td>특정 엔티티에 속하지 않는 비즈니스 로직 담당</td>
-      </tr>
-      <tr>
-          <td><strong>Factory</strong></td>
-          <td>복잡한 객체 생성 로직 담당</td>
-      </tr>
-      <tr>
-          <td><strong>Bounded Context</strong></td>
-          <td>특정 도메인 모델이 적용되는 명확한 경계</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h3 id="-spring-boot에서-ddd-코드상-특징">✅ Spring Boot에서 DDD 코드상 특징</h3>
-<p>Spring Boot에서 DDD를 적용하면 다음과 같은 <strong>패키지 구조 및 역할 분리</strong>가 나타납니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 17 Apr 2025 18:54:11 &#43;0900" class="no-wrap"
-                title=" Thu, 17 Apr 2025 18:54:11 &#43;0900">
-                Thu, 17 Apr 2025 18:54:11 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/finance/portpolio/">포트폴리오 이론</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>**공분산(Covariance)**은 두 변수 간의 관계를 측정하는 통계적 개념으로, 한 변수의 변화가 다른 변수의 변화와 어떻게 연관되어 있는지를 나타냅니다. 공분산은 변수 간의 <strong>방향성과 크기</strong>를 설명합니다.</p>
-<h3 id="공분산의-정의">공분산의 정의</h3>
-<p>공분산은 두 변수 (X)와 (Y)의 값들이 각각 평균에서 벗어난 정도를 곱한 값의 평균으로 계산됩니다.<br>
-수식으로는 다음과 같습니다:</p>
-<p>[
-\text{Cov}(X, Y) = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})}{n}
-]</p>
-<ul>
-<li>(X_i, Y_i): 각 변수 (X)와 (Y)의 관측값</li>
-<li>(\bar{X}, \bar{Y}): 변수 (X)와 (Y)의 평균값</li>
-<li>(n): 관측값의 개수</li>
-</ul>
-<h3 id="공분산의-특징">공분산의 특징</h3>
-<ol>
-<li>
-<p><strong>양수(Positive):</strong></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 14 Apr 2025 09:10:45 &#43;0900" class="no-wrap"
-                title=" Mon, 14 Apr 2025 09:10:45 &#43;0900">
-                Mon, 14 Apr 2025 09:10:45 &#43;0900
               </relative-time>
             </div>
           </div>
