@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    @Value 의 값이 바인딩 되지 않으신가요 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="@Value 의 값이 바인딩 되지 않으신가요? Spring Boot 애플리케이션을 실행시킬 떄 @Value로 (org.springframework.beans.factory.annotation.Value) 값을 주입하려고 할떄 생각과는 다르게 @Value로 주입한 값이 제대로 바인딩되지 않는 경우가 있습니다.
+이러한 현상은 왜 생기며, 어떻게 해결할 수 있는지 알아보겠습니다.
+우선 Spring Boot를 실행시킬떄 loading 순서는 어떻게 되는지 먼저 살펴보겠습니다.
+Spring Boot 애플리케이션이 실행될 때의 로딩 순서는 크게 다음과 같은 단계로 이루어집니다. 이 순서는 Spring Framework의 동작 원리에 기반하며, Spring Boot 특유의 기능들이 추가적으로 포함됩니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/basic/value/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="@Value 의 값이 바인딩 되지 않으신가요 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="@Value 의 값이 바인딩 되지 않으신가요? Spring Boot 애플리케이션을 실행시킬 떄 @Value로 (org.springframework.beans.factory.annotation.Value) 값을 주입하려고 할떄 생각과는 다르게 @Value로 주입한 값이 제대로 바인딩되지 않는 경우가 있습니다.
+이러한 현상은 왜 생기며, 어떻게 해결할 수 있는지 알아보겠습니다.
+우선 Spring Boot를 실행시킬떄 loading 순서는 어떻게 되는지 먼저 살펴보겠습니다.
+Spring Boot 애플리케이션이 실행될 때의 로딩 순서는 크게 다음과 같은 단계로 이루어집니다. 이 순서는 Spring Framework의 동작 원리에 기반하며, Spring Boot 특유의 기능들이 추가적으로 포함됩니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="@Value 의 값이 바인딩 되지 않으신가요 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="@Value 의 값이 바인딩 되지 않으신가요? Spring Boot 애플리케이션을 실행시킬 떄 @Value로 (org.springframework.beans.factory.annotation.Value) 값을 주입하려고 할떄 생각과는 다르게 @Value로 주입한 값이 제대로 바인딩되지 않는 경우가 있습니다.
+이러한 현상은 왜 생기며, 어떻게 해결할 수 있는지 알아보겠습니다.
+우선 Spring Boot를 실행시킬떄 loading 순서는 어떻게 되는지 먼저 살펴보겠습니다.
+Spring Boot 애플리케이션이 실행될 때의 로딩 순서는 크게 다음과 같은 단계로 이루어집니다. 이 순서는 Spring Framework의 동작 원리에 기반하며, Spring Boot 특유의 기능들이 추가적으로 포함됩니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/basic/value/" />
+<meta property="og:site_name" content="@Value 의 값이 바인딩 되지 않으신가요" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2024-11-27 17:14:05 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/spring/basic/value/">@Value 의 값이 바인딩 되지 않으신가요</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Wed, 27 Nov 2024 17:14:05 &#43;0900"
+                    class="no-wrap">
+                    Wed, 27 Nov 2024 17:14:05 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Thu, 01 May 2025 23:38:46 &#43;0900"
+                    class="no-wrap">
+                    Thu, 01 May 2025 23:38:46 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      2600 Words
+                    <span class="file-info-divider"></span>
+                                        12 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="value-의-값이-바인딩-되지-않으신가요">@Value 의 값이 바인딩 되지 않으신가요?</h1>
+<ul>
+<li>
+<p>Spring Boot 애플리케이션을 실행시킬 떄 @Value로 (org.springframework.beans.factory.annotation.Value) 값을 주입하려고 할떄
+생각과는 다르게 @Value로 주입한 값이 제대로 바인딩되지 않는 경우가 있습니다.</p>
+</li>
+<li>
+<p>이러한 현상은 왜 생기며, 어떻게 해결할 수 있는지 알아보겠습니다.</p>
+</li>
+<li>
+<p>우선 Spring Boot를 실행시킬떄 loading 순서는 어떻게 되는지 먼저 살펴보겠습니다.</p>
+</li>
+<li>
+<p>Spring Boot 애플리케이션이 실행될 때의 로딩 순서는 크게 다음과 같은 단계로 이루어집니다. 이 순서는 Spring Framework의 동작 원리에 기반하며, Spring Boot 특유의 기능들이 추가적으로 포함됩니다.</p>
+</li>
+</ul>
+<hr>
+<ol>
+<li>JVM 초기화 및 Main 클래스 실행
+애플리케이션이 실행되면 JVM이 메인 클래스의 main() 메서드를 호출합니다.
+Spring Boot 애플리케이션의 진입점은 일반적으로 @SpringBootApplication이 선언된 클래스입니다.</li>
+</ol>
+<hr>
+<ol start="2">
+<li>SpringApplication 초기화
+SpringApplication.run() 메서드가 호출됩니다.
+SpringApplication 객체가 생성되며, 실행 환경(ApplicationEnvironment)과 초기화 설정이 수행됩니다.
+이떄 프로파일 Spring Boot 실행시 -Dspring.profiles.acitve=dev 등으로 설정한 프로파일에 따라서 속성(application.properties 또는 application.yml)이 로드됩니다.</li>
+</ol>
+<p>그다음 main(String[] args) 에서 넘긴 arg = 커맨드 라인 인자가 처리됩니다.</p>
+<hr>
+<ol start="3">
+<li>Application Context 생성 및 준비
+Spring Boot는 애플리케이션 컨텍스트를 생성합니다. 기본적으로 AnnotationConfigApplicationContext 또는 ServletWebServerApplicationContext를 사용합니다.
+ApplicationContextInitializer가 실행되어 초기 설정을 수행합니다.</li>
+</ol>
+<hr>
+<ol start="4">
+<li>EnvironmentPostProcessor 실행
+application.properties 또는 application.yml에서 정의된 설정과 커맨드 라인 인자 등을 기반으로 Environment 객체를 구성합니다.
+이를 통해 애플리케이션의 프로파일, 포트, 데이터베이스 연결 정보 등이 설정됩니다.</li>
+</ol>
+<hr>
+<ol start="5">
+<li>Bean Definition 등록 및 로드
+Spring은 컴포넌트 스캔(@Component, @Service, @Repository 등) 또는 명시적으로 정의된 설정 클래스(@Configuration)로부터 빈 정의를 로드합니다.
+각 빈의 의존성이 분석되고 생성이 준비됩니다.</li>
+</ol>
+<hr>
+<ol start="6">
+<li>Auto-Configuration 처리
+Spring Boot의 핵심 기능인 Auto-Configuration이 실행됩니다.
+@EnableAutoConfiguration에 의해 정의된 클래스들이 활성화됩니다.
+자동 설정은 spring-boot-autoconfigure 모듈의 빈들을 조건(@ConditionalOn&hellip;)에 따라 동적으로 등록합니다.</li>
+</ol>
+<hr>
+<ol start="7">
+<li>Servlet/WebServer 초기화 (웹 애플리케이션일 경우)
+내장 웹 서버(Tomcat, Jetty, Undertow 등)가 시작됩니다.
+서블릿 컨테이너와 DispatcherServlet이 초기화됩니다.</li>
+</ol>
+<hr>
+<ol start="8">
+<li>Application Context Refresh
+ApplicationContext가 리프레시(refresh) 됩니다.
+빈 생성, 의존성 주입, 초기화 메서드 호출(@PostConstruct 등)이 수행됩니다.
+이벤트 리스너(ApplicationListener)가 초기화됩니다.</li>
+</ol>
+<hr>
+<ol start="9">
+<li>CommandLineRunner 및 ApplicationRunner 실행
+애플리케이션이 실행 준비를 완료한 후, CommandLineRunner 또는 ApplicationRunner 인터페이스를 구현한 빈들이 실행됩니다.
+초기화 로직을 추가하고 싶을 때 이 단계에서 구현할 수 있습니다.</li>
+</ol>
+<hr>
+<ol start="10">
+<li>애플리케이션 준비 완료
+애플리케이션이 요청을 받을 준비를 마칩니다.
+이 시점 이후부터 애플리케이션은 클라이언트 요청을 처리하거나, 비동기 작업을 수행합니다.</li>
+</ol>
+<h3 id="추가적인-주요-컴포넌트">추가적인 주요 컴포넌트</h3>
+<p>Event Mechanism: Spring Boot는 로딩 과정에서 여러 이벤트를 발생시킵니다. (예: ApplicationStartedEvent, ApplicationReadyEvent)
+Actuator Monitoring: Spring Boot Actuator가 활성화된 경우, 애플리케이션의 상태 정보가 제공됩니다.</p>
+<h2 id="그럼-왜-바인딩이-안돼">그럼 왜 바인딩이 안돼?</h2>
+<ul>
+<li>위 설명대로 설정파일(application.properties 혹은 yml)을 먼저 로드한다면 @Value를 통해 주입한 값이 바인딩되지 않는 경우는 없어야 하지만, 실제로 발생하죠. 왜 그럴까요?</li>
+</ul>
+<hr>
+<ol>
+<li>프로퍼티 소스가 아직 ApplicationContext에 반영되지 않은 경우
+@Value는 Spring이 빈을 생성할 때 사용하는 Environment로부터 값을 가져옵니다. 하지만 프로퍼티 로딩과 @Value 바인딩이 일어나는 타이밍에 차이가 있다면, 바인딩이 실패할 수 있습니다.
+예를 들어, @Value가 바인딩되기 전에 설정이 완전히 로드되지 않았거나 Environment에 반영되지 않았다면 값이 주입되지 않습니다.</li>
+</ol>
+<p>해결 방법:<!-- raw HTML omitted -->
+@ConfigurationProperties를 사용하는 것이 좋습니다. 이는 Spring Boot에서 프로퍼티 값을 객체로 매핑하는 권장 방식으로, 보다 안정적이고 타입 안전합니다.</p>
+<hr>
+<ol start="2">
+<li>잘못된 프로파일 활성화
+활성화된 프로파일이 올바르게 설정되지 않았거나, 원하는 프로파일의 설정이 application.yml에 없을 수 있습니다.
+Spring Boot는 기본적으로 application.properties 또는 application.yml 파일을 로드하며, 활성화된 프로파일에 따라 다른 설정을 적용합니다.</li>
+</ol>
+<p>확인 방법:<!-- raw HTML omitted -->
+올바른 프로파일이 활성화되었는지 확인 (spring.profiles.active 설정).
+@Value로 주입하려는 키가 해당 프로파일에 존재하는지 확인.</p>
+<hr>
+<ol start="3">
+<li>@Value에서 사용하는 키가 존재하지 않음
+@Value에 명시된 키가 yml 또는 properties 파일에 정의되지 않았을 수 있습니다.
+키가 없으면 @Value는 기본적으로 바인딩을 실패합니다.</li>
+</ol>
+<p>확인 방법: <!-- raw HTML omitted -->
+application.yml 또는 application.properties에 해당 키가 정확히 정의되어 있는지 확인하세요.
+예: @Value(&quot;${app.name}&quot;)는 app.name 키가 정의되어 있어야 합니다.</p>
+<hr>
+<ol start="4">
+<li>스프링 컨텍스트 초기화 순서의 문제
+특정 빈의 초기화 시점이 너무 빨라 Environment로부터 값을 가져오기 전에 @Value가 처리될 수 있습니다.
+이는 @Component가 등록될 때 발생할 수 있습니다.</li>
+</ol>
+<p>해결 방법:<!-- raw HTML omitted -->
+@PostConstruct를 사용하여 초기화 시점 이후 값을 확인하거나,
+ApplicationContextAware를 구현하여 ApplicationContext에서 직접 값을 가져오도록 설계할 수 있습니다.</p>
+<hr>
+<ol start="5">
+<li>타입 불일치
+@Value는 문자열 기반으로 값을 주입합니다. yml이나 properties 파일에서 제공된 값이 바인딩 대상 필드와 타입이 맞지 않을 경우, 주입이 실패합니다.</li>
+</ol>
+<p>해결 방법:<!-- raw HTML omitted -->
+주입하려는 필드의 타입이 설정된 값과 호환되는지 확인하세요.
+필요하다면 값에 명시적인 변환을 적용합니다.</p>
+<hr>
+<ol start="6">
+<li>SpEL(Sprig Expression Language) 구문 문제
+@Value가 SpEL 표현식(#{})을 사용하고 있다면, 구문 오류가 있을 가능성이 있습니다.
+SpEL은 복잡한 표현식을 처리할 때 정확한 구문을 요구합니다.</li>
+</ol>
+<p>해결 방법:<!-- raw HTML omitted -->
+SpEL 표현식을 다시 확인하고, 테스트합니다.</p>
+<h1 id="내가-겪은-상황과-해결-방법">내가 겪은 상황과 해결 방법</h1>
+<h2 id="component로-만든-class에서-사용하는-static-member에서-value-바인딩이-안되서-null로-처리되는-경우">@Component로 만든 class에서 사용하는 static member에서 @Value 바인딩이 안되서 null로 처리되는 경우</h2>
+<ul>
+<li>load 안되는 case</li>
+</ul>
+<pre tabindex="0"><code>@Component
+@RefreshScope
+public class SomeComponentClass {
+
+    @Value(&#34;${some-static-member}&#34;)
+    public static String SOME_STATIC_MEMBER; // null로 처리됨
+}
+</code></pre><ul>
+<li>-&gt; 이렇게 바꾸면 해결</li>
+</ul>
+<pre tabindex="0"><code>@Component
+@RefreshScope
+public class SomeComponentClass {
+
+    public static String SOME_STATIC_MEMBER;
+
+    @Value(&#34;${some-static-member}&#34;)
+    public void setSomeStaticMember(String someStaticMember) {
+        SOME_STATIC_MEMBER = someStaticMember;
+    }
+}
+</code></pre></article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/component_bean_difference/"> Spring 에서 (boot 포함) component와 bean의 차이</a>
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/book/clean_code/clean_code_intro/">Clean Code 서론&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>

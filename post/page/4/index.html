@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">34</span>
+              <span class="Counter">60</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">34</span>
+      <span class="Counter ">60</span>
     </a>
   </nav>
 </div>
@@ -609,352 +609,89 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/about_trasactional/">Spring Boot JPA에서 @Transactional 옵션 정리</a>
+                <a href="https://pink-spider.github.io/post/til/basic_theory/restapi/">REST API</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="spring-boot-jpa에서-transactional-옵션-정리">Spring Boot JPA에서 @Transactional 옵션 정리</h1>
-<p>Spring Boot JPA에서 <code>@Transactional</code>은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.</p>
+                <h1 id="rest-api란-무엇이며-restful-하다는-건-어떤-의미인가">Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가?</h1>
+<p>REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.</p>
 <hr>
-<h3 id="-기본-사용법">📌 기본 사용법</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
+<h3 id="-rest-api란">🔹 REST API란?</h3>
+<p><strong>REST</strong>는 &ldquo;<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer&quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 <strong>웹 아키텍처 스타일</strong> 중 하나죠.</p>
+<p>즉, <strong>REST API</strong>는 이 REST 원칙에 따라 설계된 <strong>웹 API</strong>를 말해요.</p>
+<hr>
+<h3 id="-rest의-핵심-개념">🔹 REST의 핵심 개념</h3>
+<p>REST는 다음의 6가지 제약 조건을 기반으로 해요:</p>
+<ol>
+<li>
+<p><strong>클라이언트-서버 구조</strong></p>
+<ul>
+<li>클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔.</li>
+</ul>
+</li>
+<li>
+<p><strong>무상태성 (Stateless)</strong></p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 18:02:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 18:02:29 &#43;0900">
+                Thu, 03 Apr 2025 18:02:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/tdd/mock_mockbean/">@Mock @MockBean 의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h2 id="mock과-mockbean은-둘-다-테스트에서-mock-객체를-만들기-위한-어노테이션이지만-쓰이는-환경과-역할이-조금-달라요-간단히-차이부터-요약하면"><code>@Mock</code>과 <code>@MockBean</code>은 둘 다 테스트에서 <strong>Mock 객체</strong>를 만들기 위한 어노테이션이지만, <strong>쓰이는 환경과 역할</strong>이 조금 달라요. 간단히 차이부터 요약하면:</h2>
+<hr>
+<h3 id="-mock-from-mockito">🔹 <code>@Mock</code> (from Mockito)</h3>
+<ul>
+<li><strong>Mockito에서 제공</strong>하는 어노테이션</li>
+<li>**순수 단위 테스트(Unit Test)**에 사용</li>
+<li>Spring Context와는 무관</li>
+<li>테스트 클래스 내에서 <strong>의존성을 Mock</strong>으로 주입하고 싶을 때 사용</li>
+<li><code>MockitoAnnotations.openMocks(this)</code> 또는 <code>@ExtendWith(MockitoExtension.class)</code> 와 함께 사용해야 함</li>
+</ul>
+<p><strong>예시:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyServiceTest</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">joinMember</span><span class="p">(</span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">member</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 예외 발생 시 전체 트랜잭션 롤백</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>@Transactional</code>을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요.</li>
-<li>런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 <strong>unchecked exception</strong>일 때만 롤백)</li>
-</ul>
-<hr>
-<h3 id="-클래스-레벨에-사용">📌 클래스 레벨에 사용</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다.</li>
-</ul>
-<hr>
-<h3 id="-rollbackfor-옵션">📌 rollbackFor 옵션</h3>
-<p>기본적으로 <code>RuntimeException</code>과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(<code>Exception</code>)도 롤백하고 싶다면:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:15:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:15:45 &#43;0900">
-                Wed, 26 Mar 2025 11:15:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/redis_crud_template/">Boot에서 redis 사용하는 2가지 방법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java에서 Redis를 사용할 때 <code>CRUD Repository</code>와 <code>RedisTemplate</code>은 각각 다른 수준의 추상화를 제공하는 방식입니다.
-주요 차이점은 다음과 같습니다:</p>
-<hr>
-<h3 id="-1-crud-repository-spring-data-redis">✅ 1. <strong>CRUD Repository (Spring Data Redis)</strong></h3>
-<p><code>RedisRepository</code>, <code>CrudRepository</code>, <code>PagingAndSortingRepository</code> 등과 같이 <strong>Spring Data</strong>가 제공하는 Repository 인터페이스를 사용하는 방식입니다.</p>
-<h4 id="-장점">🔹 장점</h4>
-<ul>
-<li><strong>높은 추상화 수준</strong>: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작.</li>
-<li><strong>개발 속도 빠름</strong>: 반복적인 로직 줄일 수 있음 (<code>findById</code>, <code>save</code>, <code>delete</code> 등 기본 제공).</li>
-<li><strong>Spring Data의 기능</strong>을 활용 가능 (예: 쿼리 메서드, 페이징 등).</li>
-</ul>
-<h4 id="-단점">🔹 단점</h4>
-<ul>
-<li><strong>세밀한 제어 어려움</strong>: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움.</li>
-<li><strong>직렬화 방식 고정</strong>: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요.</li>
-</ul>
-<h4 id="-예시">🔹 예시</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserRedisRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUsername</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-2-redistemplate">✅ 2. <strong>RedisTemplate</strong></h3>
-<p>Spring에서 제공하는 <strong>저수준 API</strong>로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:11:03 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:11:03 &#43;0900">
-                Wed, 26 Mar 2025 11:11:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="feign-client-사용팁-1---상대-서버가-여러대-일때-랜덤-호출">feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출</h1>
-<h2 id="load-balancing-되고-있는-상대측에-번갈아가면서-호출하는-방법">load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법</h2>
-<ul>
-<li>build.gradle</li>
-</ul>
-<pre tabindex="0"><code>...
-dependencies {
-    implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39;
-}
-...
-</code></pre><ul>
-<li>application.yml</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 상대 측에서 3개의 서버 LB되고 있을 때 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">other-party-url</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.001</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.002</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.003</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>ServerProperties.java</li>
-</ul>
-<pre tabindex="0"><code>@Setter
-@Getter
-@Configuration
-@ConfigurationProperties(prefix = &#34;other-party-url&#34;)
-public class OtherServerProperties {
-
-    private List&lt;String&gt; serverUris;
-}
-</code></pre><ul>
-<li>FeignConfig.java</li>
-</ul>
-<pre tabindex="0"><code>@RequiredArgsConstructor
-public class OtherServerFeignConfig {
-
-    private final OtherServerProperties otherServerProperties;
-
-    private final AtomicInteger counter = new AtomicInteger(0);
-
-    @Bean
-    public RequestInterceptor randomServerInterceptor() {
-        return requestTemplate -&gt; {
-            List&lt;String&gt; serverUris = otherServerProperties.getServerUris();
-
-            int index = counter.getAndIncrement() % serverUris.size();
-            String selectedUrl = serverUris.get(index);
-
-            requestTemplate.target(selectedUrl);
-        };
-    }
-}
-</code></pre><ul>
-<li>FeignClient interface</li>
-</ul>
-<pre tabindex="0"><code>@FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class)
-public interface OtherServerFeignClientV1 {
-    
-    ...
-}
-</code></pre>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:37:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:37:45 &#43;0900">
-                Wed, 26 Mar 2025 08:37:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/dispatcher/">DispatcherServlet 초기화 과정</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <hr>
-<h2 id="-dispatcherservlet-초기화-과정">🚀 DispatcherServlet 초기화 과정</h2>
-<h3 id="1-servletcontainer가-dispatcherservlet을-로딩">1. <strong>ServletContainer가 DispatcherServlet을 로딩</strong></h3>
-<p>Spring Boot 앱을 실행하면, 내장 톰캣이 뜨고 아래 과정이 시작돼요:</p>
-<ul>
-<li>Spring Boot가 자동으로 <code>DispatcherServlet</code>을 <strong>서블릿으로 등록</strong>함 (<code>/</code> 매핑)</li>
-<li><code>DispatcherServlet</code>은 사실 <code>HttpServlet</code>을 상속받은 클래스</li>
-<li>이때 호출되는 메서드가 → <code>init()</code> → 그 안에서 <code>initServletBean()</code> 실행됨</li>
-</ul>
-<hr>
-<h3 id="2-webapplicationcontext-생성-및-초기화">2. <strong>WebApplicationContext 생성 및 초기화</strong></h3>
-<ul>
-<li><code>DispatcherServlet</code>은 자신의 <strong>Spring WebApplicationContext</strong>를 가지고 있음</li>
-<li>이 WebApplicationContext는 <code>@Controller</code>, <code>@RestController</code>, <code>@Service</code>, <code>@Repository</code> 등이 등록된 공간</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">GenericWebApplicationContext
-</span></span><span class="line"><span class="cl">      ↑
-</span></span><span class="line"><span class="cl">AnnotationConfigWebApplicationContext
-</span></span><span class="line"><span class="cl">      ↑
-</span></span><span class="line"><span class="cl">WebApplicationContext ← DispatcherServlet이 사용
-</span></span></code></pre></div><blockquote>
-<p><code>DispatcherServlet</code>은 이 context를 통해 빈을 찾고, 라우팅을 수행함</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:20:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:20:45 &#43;0900">
-                Wed, 26 Mar 2025 08:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/servlet_dispatcherservlet/">servlet은 무엇이고 dispatcher servlet은 무엇인가</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring에서는 <code>Servlet</code>과 <code>DispatcherServlet</code>이 웹 요청 처리에서 핵심적인 역할을 해요.
-개념을 하나씩 명확히 정리해볼게요.</p>
-<hr>
-<h2 id="-1-servlet이란">🧱 1. <strong>Servlet</strong>이란?</h2>
-<h3 id="-정의">✅ 정의</h3>
-<ul>
-<li><strong>자바 웹에서 가장 기본적인 컴포넌트</strong></li>
-<li>HTTP 요청을 처리하고, HTTP 응답을 반환하는 <strong>자바 클래스</strong></li>
-<li>톰캣(Tomcat) 같은 서블릿 컨테이너에서 실행됨</li>
-</ul>
-<h3 id="-역할">✅ 역할</h3>
-<ul>
-<li>웹 브라우저에서 온 요청을 받아서 처리하고, 응답을 생성함</li>
-<li>예전에는 모든 요청을 직접 Servlet에서 처리했어요.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">write</span><span class="p">(</span><span class="s">&#34;Hello from Servlet!&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
-<p>이건 거의 Spring 이전의 <strong>전통적인 웹 방식</strong>이에요.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:19:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:19:45 &#43;0900">
-                Wed, 26 Mar 2025 08:19:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/filter_interceptor/">Boot에서 filter와 interceptor의 차이</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring Boot에서 <strong>Filter</strong>와 <strong>Interceptor</strong>는 모두 요청(Request)과 응답(Response)을 가로채서 처리할 수 있게 해주는 기능이지만, <strong>역할, 실행 시점, 적용 범위</strong>에서 차이가 있습니다. 아래에서 간단 + 예시와 함께 정리해볼게요.</p>
-<hr>
-<h2 id="-1-filter-서블릿-필터">🔹 1. Filter (서블릿 필터)</h2>
-<h3 id="-개요">✅ 개요</h3>
-<ul>
-<li><strong>Servlet 스펙에 정의된 기능</strong></li>
-<li>Spring보다 더 <strong>하위 레벨</strong></li>
-<li>DispatcherServlet 이전에 실행됨</li>
-</ul>
-<h3 id="-사용-예시">✅ 사용 예시</h3>
-<ul>
-<li>인증, 인코딩, 로깅, XSS 방어</li>
-<li>공통 전처리/후처리</li>
-</ul>
-<h3 id="-예제">✅ 예제</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Filter: 요청 전&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">chain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Filter: 응답 후&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myRepository는 mock 객체</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><hr>
-<h2 id="-2-interceptor-스프링-인터셉터">🔹 2. Interceptor (스프링 인터셉터)</h2>
-<h3 id="-개요-1">✅ 개요</h3>
+<h3 id="-mockbean-from-spring-boot">🔸 <code>@MockBean</code> (from Spring Boot)</h3>
 <ul>
-<li><strong>Spring MVC의 기능</strong></li>
-<li>DispatcherServlet 이후에 동작</li>
-<li>주로 <strong>컨트롤러 진입 전/후</strong>에 로직 적용</li>
+<li><strong>Spring Boot Test에서 제공</strong>하는 어노테이션</li>
+<li><strong>통합 테스트(Integration Test)</strong> 시 사용</li>
+<li><strong>Spring ApplicationContext에 등록된 Bean을 Mock으로 교체</strong></li>
+<li><code>@SpringBootTest</code>, <code>@WebMvcTest</code>, <code>@DataJpaTest</code> 같은 Spring 기반 테스트 환경에서 사용</li>
 </ul>
-<h3 id="-사용-예시-1">✅ 사용 예시</h3>
-<ul>
-<li>로그인 체크</li>
-<li>권한 검사</li>
-<li>요청 로깅</li>
-<li>공통 응답 가공</li>
-</ul>
-<h3 id="-예제-1">✅ 예제</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">HandlerInterceptor</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">preHandle</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Interceptor: 컨트롤러 호출 전&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// false면 컨트롤러로 안 넘어감</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>그리고 등록은 이렇게 해야 해요:</p>
+<p><strong>예시:</strong></p>
               </div>
             </div>
 
@@ -962,9 +699,431 @@ public interface OtherServerFeignClientV1 {
               
 
               Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:15:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:15:45 &#43;0900">
-                Wed, 26 Mar 2025 08:15:45 &#43;0900
+              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
+                Thu, 03 Apr 2025 15:57:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/tdd/mock_injectmock/">@Mock, @InjectBean 의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="mock-과-injectedmock">@Mock 과 @InjectedMock</h1>
+<p><code>@Mock</code>과 <code>@InjectMocks</code>의 차이를 알아볼게요. 이 둘은 <strong>함께 자주 쓰이지만 서로 다른 역할</strong>을 해요.</p>
+<hr>
+<h3 id="-mock">🔹 <code>@Mock</code></h3>
+<ul>
+<li>Mockito에서 제공</li>
+<li><strong>Mock 객체를 생성</strong>해줌</li>
+<li>단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w"> </span><span class="c1">// 가짜 객체 생성</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-injectmocks">🔸 <code>@InjectMocks</code></h3>
+<ul>
+<li>역시 Mockito에서 제공</li>
+<li><strong>테스트 대상 객체(테스트할 클래스)를 생성</strong>하고,<br>
+그 안에 있는 의존성 필드에 <code>@Mock</code>으로 만든 객체들을 <strong>자동으로 주입</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w"> </span><span class="c1">// MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-간단-예시">✅ 간단 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyServiceTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService는 실제 객체</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myRepository는 mock 객체</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService 내부에서 myRepository가 사용될 때 mock이 주입됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-정리하자면">📌 정리하자면:</h3>
+<table>
+  <thead>
+      <tr>
+          <th>어노테이션</th>
+          <th>역할</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>@Mock</code></td>
+          <td>가짜(Mock) 객체 생성</td>
+      </tr>
+      <tr>
+          <td><code>@InjectMocks</code></td>
+          <td>테스트 대상 객체를 생성하고, <code>@Mock</code> 객체를 그 안에 주입</td>
+      </tr>
+  </tbody>
+</table>
+<p>즉, <code>@Mock</code>이 가짜 부품을 만드는 거고,<br>
+<code>@InjectMocks</code>는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
+                Thu, 03 Apr 2025 15:57:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/tdd/mock_stub/">Mock, Stub 의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="mock-stub-의-차이">Mock, Stub 의 차이</h1>
+<p><code>mock</code>과 <code>stub</code>은 테스트에서 <strong>외부 의존성을 대체</strong>하기 위해 쓰이는 객체인데, 둘은 <strong>목적과 기능 면에서 조금 달라요.</strong></p>
+<hr>
+<h2 id="-요약-비교">📌 요약 비교</h2>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th><strong>Stub</strong></th>
+          <th><strong>Mock</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>목적</td>
+          <td>고정된 값 반환 (단순 대체)</td>
+          <td>동작 검증 + 유연한 설정</td>
+      </tr>
+      <tr>
+          <td>기능</td>
+          <td>미리 정의된 응답 제공</td>
+          <td>호출 여부, 호출 횟수, 파라미터 검증 등 가능</td>
+      </tr>
+      <tr>
+          <td>테스트 타입</td>
+          <td>주로 상태 기반 테스트 (State-based)</td>
+          <td>주로 행위 기반 테스트 (Behavior-based)</td>
+      </tr>
+      <tr>
+          <td>예시</td>
+          <td>&ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo;</td>
+          <td>&ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo;</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-stub-단순하게-리턴값만-정해놓은-가짜">🔹 Stub: 단순하게 <strong>리턴값만 정해놓은 가짜</strong></h2>
+<ul>
+<li>실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품.</li>
+<li>주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">user</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-mock-행위호출-여부-등까지-확인하는-가짜">🔸 Mock: <strong>행위(호출 여부 등)까지 확인</strong>하는 가짜</h2>
+<ul>
+<li>리턴값도 정의할 수 있지만, <strong>&ldquo;정말로 이 메서드가 호출됐는가?&rdquo;</strong> 같은 검증도 가능.</li>
+<li><code>verify()</code> 같은 메서드를 통해 테스트의 정확성을 높임.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-실제-테스트-예시">✅ 실제 테스트 예시</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">void</span><span class="w"> </span><span class="nf">testUserFetch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Stub: 리턴값 지정</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">)));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 메서드 실행</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Mock: 호출 여부 검증</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-간단-비유">📎 간단 비유</h2>
+<ul>
+<li><strong>Stub</strong>: “누가 와도 <strong>무조건 이 대사만 말해!”</strong></li>
+<li><strong>Mock</strong>: “누가 오면 이 대사를 하고, <strong>제대로 말했는지 검사도 합니다.!”</strong></li>
+</ul>
+<hr>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
+                Thu, 03 Apr 2025 15:57:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/tdd/test_double/">Test Double</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="테스트-더블test-double-용어-정리">테스트 더블(Test Double) 용어 정리</h1>
+<ul>
+<li>아래는 <strong>테스트에서 자주 쓰이는 5가지 테스트 대역</strong>입니다:</li>
+</ul>
+<hr>
+<h2 id="-테스트-더블test-double-종류-요약">🧪 테스트 더블(Test Double) 종류 요약</h2>
+<table>
+  <thead>
+      <tr>
+          <th>타입</th>
+          <th>설명</th>
+          <th>주로 하는 일</th>
+          <th>대표 예시</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Dummy</strong></td>
+          <td>값이 필요하지만 <strong>아무 역할도 하지 않는 객체</strong></td>
+          <td>메서드 시그니처 채우기 용</td>
+          <td><code>new User(null)</code>처럼 값만 채움</td>
+      </tr>
+      <tr>
+          <td><strong>Fake</strong></td>
+          <td>실제 구현에 가까우나, <strong>단순하거나 in-memory 기반</strong></td>
+          <td>간단한 대체 구현</td>
+          <td>InMemory DB, FakeEmailSender</td>
+      </tr>
+      <tr>
+          <td><strong>Stub</strong></td>
+          <td><strong>고정된 응답을 리턴</strong>하는 객체</td>
+          <td>상태 기반 테스트</td>
+          <td><code>when(repo.findById()).thenReturn()</code></td>
+      </tr>
+      <tr>
+          <td><strong>Mock</strong></td>
+          <td>행위 기반, <strong>호출 여부나 순서 검증이 가능한 객체</strong></td>
+          <td>행위 기반 테스트</td>
+          <td><code>verify(repo).save()</code></td>
+      </tr>
+      <tr>
+          <td><strong>Spy</strong></td>
+          <td>실제 객체를 감싸면서, <strong>부분적으로 mock 가능</strong></td>
+          <td>실제 동작 + 호출 감시</td>
+          <td><code>spy(new UserService(...))</code></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="1--dummy">1. 🐣 Dummy</h2>
+<ul>
+<li>가장 단순한 형태.</li>
+<li>아무 일도 하지 않고, <strong>값만 채우는 용도</strong>.</li>
+<li>테스트에 직접적 의미 없음. 없어도 테스트 통과 가능.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">User</span><span class="w"> </span><span class="n">dummyUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"> </span><span class="c1">// 생성자 매개변수 맞추려고 넣는 용도</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="2--stub">2. 🧪 Stub</h2>
+<ul>
+<li>호출하면 <strong>정해진 값을 리턴</strong>함.</li>
+<li>동작 자체는 단순하고 검증 로직은 없음.</li>
+<li>상태 기반 테스트에 사용됨.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">)));</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="3--mock">3. 🤖 Mock</h2>
+<ul>
+<li>Stub처럼 리턴값을 줄 수 있지만, <strong>추가로 호출 여부도 검증</strong>함.</li>
+<li>테스트의 **행위 검증(Behavior Verification)**에 초점.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">save</span><span class="p">(</span><span class="n">any</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="4--spy">4. 🕵️ Spy</h2>
+<ul>
+<li><strong>실제 객체를 감싸면서</strong>, 필요한 부분만 mock 처리 가능.</li>
+<li>일부 메서드는 진짜 실행, 일부는 stub/mock 가능.</li>
+<li>사용 시 조심: 진짜 의존성이 따라올 수 있음.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">UserService</span><span class="w"> </span><span class="n">spyService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spy</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserService</span><span class="p">(</span><span class="n">realRepository</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">doReturn</span><span class="p">(</span><span class="s">&#34;fakeName&#34;</span><span class="p">).</span><span class="na">when</span><span class="p">(</span><span class="n">spyService</span><span class="p">).</span><span class="na">getUserName</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="5--fake">5. 🧩 Fake</h2>
+<ul>
+<li>진짜 구현체는 아니지만, <strong>실제로 동작하는 간단한 구현</strong>.</li>
+<li>테스트용으로 가볍게 만든 <strong>진짜 비즈니스 로직을 흉내</strong>낸 것.</li>
+<li>예: InMemory DB, 테스트용 메시지 큐 등</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InMemoryUserRepository</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">id</span><span class="p">));</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-어떤-걸-언제-써야-할까">🎯 어떤 걸 언제 써야 할까?</h2>
+<table>
+  <thead>
+      <tr>
+          <th>테스트 목적</th>
+          <th>적합한 더블</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>파라미터 채우기만 하면 됨</td>
+          <td>Dummy</td>
+      </tr>
+      <tr>
+          <td>고정된 값 리턴만 필요</td>
+          <td>Stub</td>
+      </tr>
+      <tr>
+          <td>호출 여부/횟수 검증</td>
+          <td>Mock</td>
+      </tr>
+      <tr>
+          <td>실제 객체 + 일부 mocking</td>
+          <td>Spy</td>
+      </tr>
+      <tr>
+          <td>실제 구현 비슷한 동작 필요</td>
+          <td>Fake</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="fake-repository-예시">Fake Repository 예시</h1>
+<p>Spring 환경에서 자주 쓰이는 <strong>Fake Repository</strong> 예제를 보여드릴게요.<br>
+단위 테스트에서 JPA 같은 실제 DB 연결 없이도 로직을 검증하고 싶을 때 아주 유용합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
+                Thu, 03 Apr 2025 15:57:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/msa/msa_traceid_spanid/">MSA에서 traceId 와 spanId 란?</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
+<hr>
+<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
+<ul>
+<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
+<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
+<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
+</ul>
+<hr>
+<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
+<ul>
+<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
+<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
+<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
+</ul>
+<hr>
+<h3 id="구조-예시">구조 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
+</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
+</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
+</span></span><span class="line"><span class="cl">                                           ▼
+</span></span><span class="line"><span class="cl">                                   ┌────────────┐
+</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
+</span></span><span class="line"><span class="cl">                                   └────────────┘   │
+</span></span><span class="line"><span class="cl">                                                    ▼
+</span></span><span class="line"><span class="cl">                                            ┌────────────┐
+</span></span><span class="line"><span class="cl">                                            │ Service B  │
+</span></span><span class="line"><span class="cl">                                            └────────────┘
+</span></span></code></pre></div><ul>
+<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
+<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
+</ul>
+<hr>
+<h3 id="요약">요약</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Trace ID</td>
+          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
+      </tr>
+      <tr>
+          <td>Span ID</td>
+          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="첨언">첨언</h3>
+<ul>
+<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
+<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
+</ul>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 02 Apr 2025 10:50:33 &#43;0900" class="no-wrap"
+                title=" Wed, 02 Apr 2025 10:50:33 &#43;0900">
+                Wed, 02 Apr 2025 10:50:33 &#43;0900
               </relative-time>
             </div>
           </div>

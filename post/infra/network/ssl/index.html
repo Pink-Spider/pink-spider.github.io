@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    내 우분투 서버에 SSL 무료 설치하기 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="
+내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다.. 내가 쓰는 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다.. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워줍니다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않아야 무료 가능 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/infra/network/ssl/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="내 우분투 서버에 SSL 무료 설치하기 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="
+내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다.. 내가 쓰는 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다.. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워줍니다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않아야 무료 가능 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="내 우분투 서버에 SSL 무료 설치하기 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="
+내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다.. 내가 쓰는 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다.. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워줍니다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않아야 무료 가능 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/infra/network/ssl/" />
+<meta property="og:site_name" content="내 우분투 서버에 SSL 무료 설치하기" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-03-01 15:19:58 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/infra/network/ssl/">내 우분투 서버에 SSL 무료 설치하기</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Sat, 01 Mar 2025 15:19:58 &#43;0900"
+                    class="no-wrap">
+                    Sat, 01 Mar 2025 15:19:58 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Thu, 01 May 2025 23:38:46 &#43;0900"
+                    class="no-wrap">
+                    Thu, 01 May 2025 23:38:46 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1199 Words
+                    <span class="file-info-divider"></span>
+                                        5 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><p><a href="https://zerossl.com"><img src="https://img.shields.io/badge/ssl-free-lightgreen" alt="GoDoc"></a></p>
+<h1 id="내-우분투-서버에-ssl-무료-설치하기">내 우분투 서버에 SSL 무료 설치하기</h1>
+<ul>
+<li>SSL 발급 사이트 : <a href="https://zerossl.com/">https://zerossl.com/</a>  다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다..</li>
+<li>내가 쓰는 도메인 서비스 업체 : whois</li>
+</ul>
+<h2 id="ssl-설치-절차">SSL 설치 절차</h2>
+<ul>
+<li>무료 SSL의 제약사항은 별도로 알아보기로 하고</li>
+<li>기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 <!-- raw HTML omitted -->
+인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다..</li>
+<li>이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다.</li>
+</ul>
+<h3 id="도메인-소유주임을-확인-받기">도메인 소유주임을 확인 받기</h3>
+<ol>
+<li>ZeroSSL에 회원가입
+<img src="./images/ssl/zerossl_dashboard.png" alt="image">
+<!-- raw HTML omitted --></li>
+<li>SSL Certificate Setup 에서 각 항목 채워줍니다.</li>
+</ol>
+<ul>
+<li>Domains</li>
+<li>Validity : 90-Day Certificate 로 해야 무료</li>
+<li>Add-Ons : 아무것도 선택하지 않아야 무료 가능</li>
+<li>CSR &amp; Contact : Auto-Generate CSR 활성화</li>
+<li>Finalize Your Order: Free 선택</li>
+</ul>
+<p><img src="./images/ssl/zero_new_certificate.png" alt="image"></p>
+<ul>
+<li>Domain 소유주가 맞는지 확인하는 절차가 있는데 캡쳐를 못했습니다..<!-- raw HTML omitted -->
+whois의 경우엔 [네임서버 고급설정] 가서 [CNAME 레코드 관리]에서<!-- raw HTML omitted -->
+zeroSsl에서 제공한 호스트명과 CNAME 레코드를 등록해주면 도메인 인증을 할 수 있습니다.</li>
+</ul>
+<h3 id="인증서-받아서-서버에-설치했음을-확인-받기">인증서 받아서 서버에 설치했음을 확인 받기</h3>
+<h4 id="install-certificate">Install Certificate</h4>
+<p><img src="./images/ssl/zerossl_install_certificate.png" alt="image"></p>
+<ol>
+<li>
+<p>Download Certificate 에서 내 경우엔 Server Type을 Ubuntu로 하였습니다..<!-- raw HTML omitted -->
+이렇게 해도 결국엔 apache2를 가동하고 실제 인증서가 서버에 설치가 되었는지 인증기관인 zerossl에 확인이 되어야 합니다.<!-- raw HTML omitted -->
+<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Install Certificate</p>
+<ul>
+<li>Zip 파일을 받아서 압축 풀고 tutorial 참고,
+<ul>
+<li>Follow the steps listed on this page. (on this page에 링크 걸려있음)</li>
+</ul>
+</li>
+<li>zip 파일에는 다음 3개의 파일이 들어있습니다.
+<ul>
+<li>certificate.crt</li>
+<li>ca_bundle.crt</li>
+<li>private.key</li>
+</ul>
+</li>
+<li>3개 파일을 우분투로 복사 (FTP든 scp든 사용)</li>
+<li>이제 apache를 띄워서 확인을 받아야 되는데 <!-- raw HTML omitted -->
+내 서버에 /etc/apache2/sites-enabled/your_site_name 이 경로가 없었고 a2ensite 명령어도 없었습니다.</li>
+<li>apache2가 제대로 설치가 안되어 있었기 때문입니다. <!-- raw HTML omitted -->
+apache2가 설치가 되어 있는지 확인하려면 아래 명령어를 쳐보면 됩니다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apache2 -v
+</span></span></code></pre></div><ul>
+<li>필요하니 설치. 꼭 아파치로 도메인 소유 인증을 할 필요는 없지만, 어떤 서버로든 인증은 해야 합니다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install apache2 -y
+</span></span></code></pre></div><ul>
+<li>/etc/apache2/sites-enabled 폴더에는 000-default.conf 파일이 있었는데 아래와 같이 생겼습니다.</li>
+</ul>
+<pre tabindex="0"><code>&lt;VirtualHost *:80&gt;
+    ServerAdmin admin@example.com
+    ServerName example.com
+    ServerAlias www.example.com
+
+    DocumentRoot /var/www/example.com/public_html
+
+    &lt;Directory /var/www/example.com/public_html&gt;
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+</code></pre></li>
+</ol>
+<ul>
+<li>튜토리얼대로 Apache에서 SSLEngine on을 사용하려 하면 &ldquo;Invalid command &lsquo;SSLEngine&rsquo;&rdquo; 오류가 발생할 수 있는데<!-- raw HTML omitted -->
+그 이유는 apache에 SSL 모듈이 활성화되지 않았기 때문입니다.</li>
+</ul>
+<ol>
+<li>
+<p>SSL 모듈이 활성화되어 있는지 확인
+먼저, Apache에서 SSL 모듈(mod_ssl)이 활성화되어 있는지 확인</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apache2ctl -M <span class="p">|</span> grep ssl
+</span></span></code></pre></div></li>
+<li>
+<p>SSL 모듈이 비활성화되어 있다면 아래 명령어를 실행하여 활성화 해야 SSL을 적용할 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo a2enmod ssl
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo systemctl restart apache2
+</span></span></code></pre></div></li>
+<li>
+<p>기본 SSL 설정 파일 활성화</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo a2ensite default-ssl
+</span></span></code></pre></div></li>
+<li>
+<p>여기까지 하고 Installation Complete 확인받으면 완료.</p>
+</li>
+</ol>
+<h4 id="spring-boot-에서-ssl-적용하려면">spring boot 에서 ssl 적용하려면..</h4>
+<ul>
+<li>
+<p>그리고 내가 사용하려는 서버는 Spring Boot 로 개발하였기 때문에 boot 에서 https 를 사용하려면 <!-- raw HTML omitted -->
+기본적으로 .p12(PKCS12) 또는 .jks(Java Key Store)형식의 SSL 키 저장소를 사용하여야 합니다.</p>
+</li>
+<li>
+<p>ZeroSsl 에서 다운로드 받은 .crt 와 .key 를 .p12로 변환하는 방법은 다음과 같습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">openssl pkcs12 -export -in certificate.crt -inkey private.key -out keystore.p12 -name mycert
+</span></span></code></pre></div></li>
+<li>
+<p>spring booot yml 설정에는 아래 예제처럼&hellip; keystore.p12 는 src/main/resources/ 아래에&hellip;</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">server</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">8443</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ssl</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key-store</span><span class="p">:</span><span class="w"> </span><span class="l">classpath:keystore.p12</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key-store-password</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;your-password&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key-store-type</span><span class="p">:</span><span class="w"> </span><span class="l">PKCS12</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key-alias</span><span class="p">:</span><span class="w"> </span><span class="l">myalias</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>서버에 install certificate 까지 마쳤다면 해당 서버에 ssl 인증서 적용이 완료.</li>
+</ul>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/aes/aes_key_generate/"> AES key Generator</a>
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/msa/restdoc_swagger_ui_sample/">Restdoc Swagger Ui Sample&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>

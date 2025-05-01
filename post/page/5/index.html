@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">34</span>
+              <span class="Counter">60</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">34</span>
+      <span class="Counter ">60</span>
     </a>
   </nav>
 </div>
@@ -609,118 +609,50 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/github_action_sample/">github action sample with spring boot</a>
+                <a href="https://pink-spider.github.io/post/spring/memory/jvm_stack/">JVM 에서 쓰이는 stack 의 종류</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="github-action-sample">github action sample</h1>
-<h2 id="spring-boot">spring boot</h2>
+                <p>JVM(Java Virtual Machine)에서는 내부적으로 여러 종류의 <strong>스택(stack)</strong> 을 사용합니다. <!-- raw HTML omitted -->
+각각의 스택은 JVM의 실행 및 메모리 관리 등에서 중요한 역할을 합니다. 주요 스택 종류는 다음과 같습니다:</p>
+<hr>
+<h3 id="-1-java-virtual-machine-stack-또는-thread-stack">🧠 1. <strong>Java Virtual Machine Stack (또는 Thread Stack)</strong></h3>
 <ul>
-<li>
-<p>gradle build를 사용하는 spring boot를 빌드하고 ssh로</p>
+<li><strong>설명</strong>: 각 <strong>스레드(thread)</strong> 마다 하나씩 존재하는 스택입니다.</li>
+<li><strong>역할</strong>: 메서드 호출 시 생성되는 <strong>스택 프레임(stack frame)</strong> 을 저장합니다. 각 프레임에는:
+<ul>
+<li>지역 변수(Local Variables)</li>
+<li>피연산자 스택(Operand Stack)</li>
+<li>메서드 반환 주소 등이 포함됨</li>
+</ul>
 </li>
-<li>
-<p>secret 류는 setting-&gt; security에 Secrets and variables 내 action 메뉴에서 설정</p>
-</li>
-<li>
-<p>마지막에 slack webhook으로 배포 상황 알림</p>
-</li>
-<li>
-<p>action 설정이나 slack webhoook url 설정하는 방법은 다른 블로그에도 많으니 생략하겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build and Deploy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">develop</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build-and-deploy</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 1. SSH 호스트 키 추가</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Add SSH known hosts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          mkdir -p ~/.ssh
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh-keyscan -H github.com &gt;&gt; ~/.ssh/known_hosts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 2. 리포지토리 체크아웃 (서브모듈 포함)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout repository with submodules</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="l">recursive</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ssh-key</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.PRIVATE_KEY_FOR_SUBMODULE }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 3. 서브모듈 최신화</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update submodules to the latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          git submodule update --init --recursive
-</span></span></span><span class="line"><span class="cl"><span class="sd">          git submodule foreach git pull origin $(git rev-parse --abbrev-ref HEAD)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 4. JDK 설정</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Set up JDK 23</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-java@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;23&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;temurin&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 5. Gradle 빌드</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build with Gradle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">./gradlew clean build -x test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 6. 서버로 파일 전송</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy to Server</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SSH_PRIVATE_KEY</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SSH_PRIVATE_KEY }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_IP</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_IP }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_USER</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_USER }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          echo &#34;DEPLOY_SERVER_IP: $DEPLOY_SERVER_IP&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sd">          mkdir -p ~/.ssh
-</span></span></span><span class="line"><span class="cl"><span class="sd">          echo &#34;$SSH_PRIVATE_KEY&#34; &gt; ~/.ssh/github_action
-</span></span></span><span class="line"><span class="cl"><span class="sd">          chmod 600 ~/.ssh/github_action
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh-keyscan -H &#34;$DEPLOY_SERVER_IP&#34; &gt;&gt; ~/.ssh/known_hosts
-</span></span></span><span class="line"><span class="cl"><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # 빌드 파일 전송
-</span></span></span><span class="line"><span class="cl"><span class="sd">          scp -i ~/.ssh/github_action build/libs/*.jar $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/backend/
-</span></span></span><span class="line"><span class="cl"><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # swagger rest doc json
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/
-</span></span></span><span class="line"><span class="cl"><span class="sd">          find build/resources/main/restdocs -name &#34;*.json&#34; | grep . &amp;&amp; scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ || echo &#34;No JSON files to copy, skipping...&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 7. 서버에서 애플리케이션 실행</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Start Application</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_IP</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_IP }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SERVER_USER</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_USER }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">REPOSITORY_NAME</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.repository }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          PROJECT_NAME=$(echo $REPOSITORY_NAME | cut -d&#39;/&#39; -f2)
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh -i ~/.ssh/github_action $SERVER_USER@$DEPLOY_SERVER_IP &lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="sd">          cd /home/$SERVER_USER/backend
-</span></span></span><span class="line"><span class="cl"><span class="sd">          chmod 700 /home/$SERVER_USER/backend/${PROJECT_NAME}*-exec.jar 
-</span></span></span><span class="line"><span class="cl"><span class="sd">          sh /home/$SERVER_USER/bin/deploy.sh $PROJECT_NAME dev /home/$SERVER_USER 512m
-</span></span></span><span class="line"><span class="cl"><span class="sd">          sh /home/$SERVER_USER/infra/swagger/swagger_script.sh restart ${PROJECT}-api.json
-</span></span></span><span class="line"><span class="cl"><span class="sd">          EOF</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">action-slack</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">8398a7/action-slack@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l">${{ job.status }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">author_name</span><span class="p">:</span><span class="w"> </span><span class="l">Pink Spider - dev</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l">repo,commit,message,author</span><span class="w"> </span><span class="c"># action,eventName,ref,workflow,job,took 추가할 수 있음</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">mention</span><span class="p">:</span><span class="w"> </span><span class="l">here</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">if_mention</span><span class="p">:</span><span class="w"> </span><span class="l">failure,cancelled</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SLACK_WEBHOOK_URL</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SLACK_WEBHOOK_URL }}</span><span class="w"> </span><span class="c"># required</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">always()</span><span class="w"> </span><span class="c"># Pick up events even if the job fails or is canceled.</span><span class="w">
-</span></span></span></code></pre></div></li>
-<li>
-<p>deploy.sh</p>
+<li><strong>예외</strong>: 스택 오버플로우 발생 시 <code>StackOverflowError</code> 발생</li>
+</ul>
+<hr>
+<h3 id="-2-native-method-stack">🔁 2. <strong>Native Method Stack</strong></h3>
+<ul>
+<li><strong>설명</strong>: 네이티브 메서드(C로 구현된 JNI 메서드 등) 호출 시 사용되는 스택입니다.</li>
+<li><strong>역할</strong>: C/C++ 등 JVM 외부 언어로 구현된 메서드에서 필요한 데이터를 저장</li>
+<li><strong>특이사항</strong>: 일부 JVM 구현에서는 Java 스택과 통합되기도 함</li>
+</ul>
+<hr>
+<h3 id="-3-operand-stack-피연산자-스택">💾 3. <strong>Operand Stack (피연산자 스택)</strong></h3>
+<ul>
+<li><strong>설명</strong>: 위의 JVM Stack의 <strong>각 스택 프레임 내</strong>에 존재하는 스택입니다.</li>
+<li><strong>역할</strong>: 바이트코드 명령어가 실행 중인 <strong>중간 연산 결과</strong>를 임시로 저장</li>
+<li><strong>예시</strong>: <code>iadd</code>, <code>imul</code> 같은 바이트코드 명령은 이 스택에서 피연산자를 꺼내 계산</li>
+</ul>
+<hr>
+<h3 id="-4-call-stack-호출-스택">🧱 4. <strong>Call Stack (호출 스택)</strong></h3>
+<ul>
+<li><strong>설명</strong>: JVM Stack의 구조적인 측면을 지칭하는 용어로, 메서드 호출의 흐름을 나타냅니다.</li>
+<li><strong>역할</strong>: 현재 실행 중인 메서드부터 시작해 호출된 메서드들이 차곡차곡 쌓여 있음</li>
+<li><strong>특징</strong>: 디버깅 시 &ldquo;Stack Trace&quot;로 확인 가능</li>
+</ul>
+<hr>
+<p>추가로 JVM에는 스택 이외에도 다음과 같은 메모리 영역이 있습니다:</p>
               </div>
             </div>
 
@@ -728,9 +660,9 @@
               
 
               Created
-              <relative-time datetime=" Tue, 25 Mar 2025 18:01:05 &#43;0900" class="no-wrap"
-                title=" Tue, 25 Mar 2025 18:01:05 &#43;0900">
-                Tue, 25 Mar 2025 18:01:05 &#43;0900
+              <relative-time datetime=" Tue, 01 Apr 2025 15:44:09 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 15:44:09 &#43;0900">
+                Tue, 01 Apr 2025 15:44:09 &#43;0900
               </relative-time>
             </div>
           </div>
@@ -740,39 +672,26 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git_repository_history_reset/">git history 전부 없애고 reset 하는 방법</a>
+                <a href="https://pink-spider.github.io/post/spring/memory/heap_gc/">JVM에서 Heap 메모리의 용도와 GC 튜닝</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="git-history-전부-없애고-reset-하는-방법">git history 전부 없애고 reset 하는 방법</h1>
+                <p>JVM(Java Virtual Machine)에서 <strong>heap 메모리</strong>는 자바 애플리케이션이 <strong>런타임 시 동적으로 생성하는 객체들이 저장되는 영역</strong>입니다. 즉, <code>new</code> 키워드를 사용해서 생성하는 대부분의 객체들이 이 영역에 저장됩니다.</p>
+<hr>
+<h3 id="-heap-메모리-구성">📌 Heap 메모리 구성</h3>
+<p>Heap은 크게 다음 두 영역으로 나뉩니다:</p>
 <ul>
-<li>git history 를 왜 없애야 할까?
+<li><strong>Young Generation (Young Gen)</strong>: 새로 생성된 객체가 저장되는 곳.
 <ul>
-<li>자주있는 일은 아니지만, git history를 전부 날리고 reset 해야 할 때가 있습니다..</li>
-<li>예를 들어, 서버의 비밀번호나 암복호화 key, 개인정보 등 노출되면 민감정보나 파일등이 git에 올라가 버렸다면?</li>
-<li>해당 내용을 지우고 다시 commit &amp; push를 했지만, history를 보고 이전 commit을 불러오면 그만이므로, 해결책이 될 수 없지요.</li>
-<li>아예 history까지 날려버려서 이전의 실수(꼭 실수했을때만 reset 한다고 할 수는 없지만)를 이력까지 지웁시다.</li>
+<li><strong>Eden</strong>: 대부분의 새 객체가 여기에 생성됨.</li>
+<li><strong>Survivor</strong>: Eden에서 살아남은 객체들이 이동.</li>
 </ul>
 </li>
+<li><strong>Old Generation (Tenured Gen)</strong>: Young Gen을 거쳐 오래 살아남은 객체들이 이동하는 공간.</li>
 </ul>
-<h2 id="main-혹은-develop등-남겨놓을-브랜치에서-여기선-main">main 혹은 develop등 남겨놓을 브랜치에서 (여기선 main)</h2>
-<ul>
-<li>&ndash;orphan 은 기존커밋 이력없이&hellip;의 의미입니다. 즉, 기존 이력없이 시작하는 브랜치를 하나 만듭니다.
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout --orphan latest_branch
-</span></span></code></pre></div></li>
-</ul>
-<h2 id="새로-커밋">새로 커밋</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git add .
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;initial commit after reset&#34;</span>
-</span></span></code></pre></div><h2 id="기존-브랜치-날리고-새로-만듦">기존 브랜치 날리고 새로 만듦</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git branch -D main
-</span></span><span class="line"><span class="cl">git branch -m main
-</span></span></code></pre></div><h2 id="main에-force-push하고-불필요한-내용-정리해서-repo-최적화">main에 force push하고 불필요한 내용 정리해서 repo 최적화</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git push -f origin main
-</span></span><span class="line"><span class="cl">git gc --aggressive --prune<span class="o">=</span>all
-</span></span></code></pre></div><p><img src="./images/bob_ross.jpg" alt="image"></p>
+<p>Garbage Collector(GC)는 이 heap 영역의 객체들을 주기적으로 검사해서 <strong>더 이상 참조되지 않는 객체는 메모리에서 제거</strong>합니다.</p>
               </div>
             </div>
 
@@ -780,9 +699,9 @@
               
 
               Created
-              <relative-time datetime=" Mon, 24 Mar 2025 20:18:45 &#43;0900" class="no-wrap"
-                title=" Mon, 24 Mar 2025 20:18:45 &#43;0900">
-                Mon, 24 Mar 2025 20:18:45 &#43;0900
+              <relative-time datetime=" Tue, 01 Apr 2025 13:59:38 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 13:59:38 &#43;0900">
+                Tue, 01 Apr 2025 13:59:38 &#43;0900
               </relative-time>
             </div>
           </div>
@@ -792,31 +711,73 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/book/clean_code_1/">Clean Code 1장</a>
+                <a href="https://pink-spider.github.io/post/spring/memory/cacheable/">Cacheable 어노테이션에 대해서</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="clean-code-1장">Clean Code 1장</h1>
-<h2 id="클린-코드의-조건--내-나름의-정리">클린 코드의 조건- 내 나름의 정리</h2>
+                <p><code>@Cacheable</code> 어노테이션은 Spring Framework에서 <strong>메서드의 반환값을 캐시에 저장</strong>하여, <strong>같은 인자가 들어올 경우 캐시된 값을 재사용</strong>하도록 하는 기능을 제공합니다. 즉, 메서드를 반복적으로 호출하더라도 실제로는 <strong>처음 한 번만 실행되고</strong>, 이후 호출은 캐시된 결과를 반환하게 됩니다.</p>
+<hr>
+<h3 id="-주요-역할-요약">📌 주요 역할 요약</h3>
 <ul>
-<li>1장에서는 자바나 C 창시자등 개발계의 거장들이 생각하는 좋은 코드에 대한 견해를 모아놓은 부분입니다.</li>
-<li>다음은 이 분들의 의견에서 나름 공통적인 부분을 추려서 내 나름대로 정리한 내용입니다.</li>
-<li>사실상 책 전체에 녹아 있는 내용이기도 합니다.</li>
+<li><strong>중복 호출 방지</strong>: 동일한 입력값에 대해 메서드를 반복 호출하면, 캐시된 결과를 반환해 성능 향상.</li>
+<li><strong>결과 저장</strong>: 메서드 실행 결과를 캐시에 저장.</li>
+<li><strong>조건부 캐싱</strong>: 특정 조건에 따라 캐싱 여부 제어 가능.</li>
 </ul>
-<h3 id="saram">SARAM</h3>
-<ul>
-<li>
-<p>S : Simple</p>
-<ul>
-<li>내 의견 : 코드는 단순해야 합니다.
-비즈니스 로직이 코드에 녹아들기 시작하면 프로젝트 자체는 복잡해집니다.<!-- raw HTML omitted -->
-코드(클래스, 메소드 차원)이라도 심플해야 합니다.</li>
+<hr>
+<h3 id="-기본-사용-예시">✅ 기본 사용 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="s">&#34;users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">findUserById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 실제로는 DB나 외부 API 호출</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>위 메서드는 <code>users</code>라는 캐시 이름으로 결과를 저장합니다.</li>
+<li><code>id</code>가 동일한 경우, 이후 호출은 캐시된 <code>User</code> 객체를 반환합니다.</li>
 </ul>
-</li>
-<li>
-<p>A : Atomic</p>
+<hr>
+<h3 id="-주요-속성">🔧 주요 속성</h3>
+<table>
+  <thead>
+      <tr>
+          <th>속성</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>value</code> 또는 <code>cacheNames</code></td>
+          <td>사용할 캐시 이름 지정</td>
+      </tr>
+      <tr>
+          <td><code>key</code></td>
+          <td>캐시 키를 지정 (SpEL 표현식 사용 가능)</td>
+      </tr>
+      <tr>
+          <td><code>condition</code></td>
+          <td>캐싱할 조건 지정 (SpEL)</td>
+      </tr>
+      <tr>
+          <td><code>unless</code></td>
+          <td>결과를 저장하지 않을 조건 (SpEL)</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="예시">예시:</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;books&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#isbn&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">unless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#result == null&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Book</span><span class="w"> </span><span class="nf">findBook</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">isbn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bookRepository</span><span class="p">.</span><span class="na">findByIsbn</span><span class="p">(</span><span class="n">isbn</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-함께-알아두면-좋은-어노테이션">🧠 함께 알아두면 좋은 어노테이션</h3>
+<ul>
+<li><code>@CachePut</code> : 캐시를 <strong>강제로 업데이트</strong>할 때 사용</li>
+<li><code>@CacheEvict</code> : 캐시를 <strong>삭제</strong>할 때 사용</li>
+<li><code>@Caching</code> : 여러 캐시 어노테이션을 함께 사용할 때</li>
+</ul>
+<hr>
+<p>필요하다면 Redis나 Caffeine 같은 캐시 스토어와 함께 연동도 가능합니다.</p>
               </div>
             </div>
 
@@ -824,9 +785,9 @@
               
 
               Created
-              <relative-time datetime=" Sat, 22 Mar 2025 20:16:08 &#43;0900" class="no-wrap"
-                title=" Sat, 22 Mar 2025 20:16:08 &#43;0900">
-                Sat, 22 Mar 2025 20:16:08 &#43;0900
+              <relative-time datetime=" Tue, 01 Apr 2025 11:34:10 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 11:34:10 &#43;0900">
+                Tue, 01 Apr 2025 11:34:10 &#43;0900
               </relative-time>
             </div>
           </div>
@@ -836,40 +797,47 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/ssl/">내 우분투 서버에 SSL 무료 설치하기</a>
+                <a href="https://pink-spider.github.io/post/til/git/git_submodule_reset/">서브모듈 완전히 초기화하고 다시 셋팅</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><a href="https://zerossl.com"><img src="https://img.shields.io/badge/ssl-free-lightgreen" alt="GoDoc"></a></p>
-<h1 id="내-우분투-서버에-ssl-무료-설치하기">내 우분투 서버에 SSL 무료 설치하기</h1>
-<ul>
-<li>SSL 발급 사이트 : <a href="https://zerossl.com/">https://zerossl.com/</a>  다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다..</li>
-<li>내가 쓰는 도메인 서비스 업체 : whois</li>
-</ul>
-<h2 id="ssl-설치-절차">SSL 설치 절차</h2>
-<ul>
-<li>무료 SSL의 제약사항은 별도로 알아보기로 하고</li>
-<li>기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 <!-- raw HTML omitted -->
-인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다..</li>
-<li>이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다.</li>
-</ul>
-<h3 id="도메인-소유주임을-확인-받기">도메인 소유주임을 확인 받기</h3>
+                <h2 id="-서브모듈-완전히-초기화하고-다시-셋팅">✅ 서브모듈 완전히 초기화하고 다시 셋팅</h2>
 <ol>
-<li>ZeroSSL에 회원가입
-<img src="./images/ssl/zerossl_dashboard.png" alt="image">
-<!-- raw HTML omitted --></li>
-<li>SSL Certificate Setup 에서 각 항목 채워줍니다.</li>
+<li>
+<p><strong>서브모듈을 Git에서 먼저 제거</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule deinit -f .
+</span></span></code></pre></div></li>
+<li>
+<p><strong>서브모듈 디렉토리를 제거</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf .git/modules/&lt;서브모듈_이름&gt;
+</span></span><span class="line"><span class="cl">rm -rf &lt;서브모듈_디렉토리&gt;
+</span></span></code></pre></div></li>
+<li>
+<p><strong><code>.gitmodules</code> 파일 삭제</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .gitmodules
+</span></span></code></pre></div></li>
+<li>
+<p><strong>인덱스에서 서브모듈 흔적 제거</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rm --cached &lt;서브모듈_디렉토리&gt;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>커밋</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Remove submodule completely&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>새로운 서브모듈 추가 (필요한 경우)</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add &lt;repo-url&gt; &lt;path&gt;
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Add submodule&#34;</span>
+</span></span></code></pre></div></li>
 </ol>
+<hr>
+<h2 id="-정리하자면">🧠 정리하자면:</h2>
 <ul>
-<li>Domains</li>
-<li>Validity : 90-Day Certificate 로 해야 무료</li>
-<li>Add-Ons : 아무것도 선택하지 않아야 무료 가능</li>
-<li>CSR &amp; Contact : Auto-Generate CSR 활성화</li>
-<li>Finalize Your Order: Free 선택</li>
+<li>단순히 <code>.gitmodules</code> 파일만 지우면 안 되고,</li>
+<li>Git 내부의 서브모듈 정보 (<code>.git/modules</code>, 인덱스 등)도 같이 정리해줘야 해요.</li>
 </ul>
-<p><img src="./images/ssl/zero_new_certificate.png" alt="image"></p>
               </div>
             </div>
 
@@ -877,9 +845,9 @@
               
 
               Created
-              <relative-time datetime=" Sat, 01 Mar 2025 15:19:58 &#43;0900" class="no-wrap"
-                title=" Sat, 01 Mar 2025 15:19:58 &#43;0900">
-                Sat, 01 Mar 2025 15:19:58 &#43;0900
+              <relative-time datetime=" Tue, 01 Apr 2025 11:25:45 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 11:25:45 &#43;0900">
+                Tue, 01 Apr 2025 11:25:45 &#43;0900
               </relative-time>
             </div>
           </div>
@@ -889,25 +857,48 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/restdoc_swagger_ui_sample/">Restdoc Swagger Ui Sample</a>
+                <a href="https://pink-spider.github.io/post/infra/k8s/k8s/">About k8s</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="restdoc-swagger-ui-sample">Restdoc Swagger Ui Sample</h1>
-<h2 id="서론">서론</h2>
+                <h1 id="k8s란">k8s란?</h1>
+<p>**Kubernetes (k8s)**는 컨테이너화된 애플리케이션을 자동으로 <strong>배포, 확장, 관리</strong>해주는 <strong>오픈소스 컨테이너 오케스트레이션 플랫폼</strong>입니다.<!-- raw HTML omitted -->
+구글에서 개발한 기술을 기반으로 CNCF(Cloud Native Computing Foundation)에 기부되었고, 현재는 클라우드 환경에서 가장 널리 사용되는 컨테이너 관리 시스템이에요.</p>
+<hr>
+<h3 id="핵심-개념-정리">핵심 개념 정리</h3>
 <ul>
-<li>
-<p>개발에서 테스트 코드의 중요성에 대해서는 따로 포스팅 예정입니다.</p>
-</li>
-<li>
-<p>백엔드에서 api 개발시 해당 api의 사용법에 대한 문서화는 협업에서 필수입니다.<!-- raw HTML omitted --></p>
-</li>
-<li>
-<p>가장 무식한 방법으로는 confluence가 되었든 wiki가 되었든, 엑셀이 되었든<!-- raw HTML omitted -->
-api 개발이 있을때 마다 수작업으로 문서화하는 방법이 있는데<!-- raw HTML omitted -->
-api가 수정될 때마다 문서를 수정해줘야 하는 단점이 있습니다. 깜빡하고 문서 업데이트가 안되는 케이스가 현업에서 얼마나 자주 발생하는 지를 생각하면 절대 비추.</p>
+<li><strong>컨테이너(Container)</strong>: 애플리케이션과 그 실행 환경을 패키징한 단위 (주로 Docker 사용)</li>
+<li><strong>Pod</strong>: Kubernetes의 가장 작은 배포 단위. 하나 이상의 컨테이너를 포함할 수 있어요.</li>
+<li><strong>Node</strong>: 컨테이너가 실제로 실행되는 물리/가상 머신</li>
+<li><strong>Cluster</strong>: 여러 노드로 구성된 Kubernetes의 전체 인프라</li>
+<li><strong>Deployment</strong>: 애플리케이션의 원하는 상태(예: 몇 개의 복제본 유지 등)를 정의하고 관리</li>
+<li><strong>Service</strong>: Pod에 접근할 수 있는 안정적인 네트워크 주소를 제공 (LoadBalancer, ClusterIP, NodePort 등)</li>
+<li><strong>Ingress</strong>: 외부 트래픽을 내부 서비스로 라우팅해주는 HTTP(S) 레벨 라우터</li>
+<li><strong>ConfigMap / Secret</strong>: 애플리케이션 설정 값이나 민감한 정보를 외부에서 주입</li>
+</ul>
+<hr>
+<h3 id="kubernetes의-장점">Kubernetes의 장점</h3>
+<ul>
+<li><strong>자동화된 배포 및 롤백</strong>: 애플리케이션을 손쉽게 배포/업데이트하고, 문제 발생 시 자동으로 이전 버전으로 롤백 가능</li>
+<li><strong>자동 스케일링</strong>: 트래픽에 따라 Pod 수를 자동 조절 가능</li>
+<li><strong>자가 치유(Self-healing)</strong>: 장애 난 컨테이너는 자동으로 다시 생성</li>
+<li><strong>서비스 디스커버리 및 로드 밸런싱</strong>: Pod 간 통신을 쉽게 할 수 있게 도와줌</li>
+</ul>
+<hr>
+<h3 id="간단한-동작-흐름">간단한 동작 흐름</h3>
+<ol>
+<li>사용자는 애플리케이션을 컨테이너(Docker)로 패키징</li>
+<li>이를 Kubernetes 클러스터에 배포</li>
+<li>Kubernetes가 이를 적절한 Node에 스케줄링하고 실행</li>
+<li>서비스나 Ingress를 통해 외부 접근 가능</li>
+</ol>
+<hr>
+<h1 id="helm-이란">helm 이란?</h1>
+<p><strong>Helm</strong>은 Kubernetes의 <strong>패키지 관리자</strong>입니다.<!-- raw HTML omitted -->
+쉽게 말해서, Kubernetes에서 애플리케이션을 <strong>더 쉽고, 재사용 가능하게 배포</strong>할 수 있도록 도와주는 도구입니다.<!-- raw HTML omitted -->
+마치 <code>apt</code>(Ubuntu), <code>brew</code>(macOS), <code>npm</code>(Node.js) 같은 느낌.</p>
               </div>
             </div>
 
@@ -915,9 +906,9 @@ api가 수정될 때마다 문서를 수정해줘야 하는 단점이 있습니�
               
 
               Created
-              <relative-time datetime=" Sat, 01 Feb 2025 20:18:03 &#43;0900" class="no-wrap"
-                title=" Sat, 01 Feb 2025 20:18:03 &#43;0900">
-                Sat, 01 Feb 2025 20:18:03 &#43;0900
+              <relative-time datetime=" Mon, 31 Mar 2025 12:48:01 &#43;0900" class="no-wrap"
+                title=" Mon, 31 Mar 2025 12:48:01 &#43;0900">
+                Mon, 31 Mar 2025 12:48:01 &#43;0900
               </relative-time>
             </div>
           </div>
@@ -927,42 +918,90 @@ api가 수정될 때마다 문서를 수정해줘야 하는 단점이 있습니�
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/component_static_member/">Component 내에 static method 에서 쓰는 member 객체가 null 일떄</a>
+                <a href="https://pink-spider.github.io/post/spring/msa/preflightcorsconfig_example/">PreFlightCorsConfig_example</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="component-내에-static-method-에서-쓰는-member-객체가-null-일떄">@Component 내에 static method 에서 쓰는 member 객체가 null 일떄</h1>
-<h2 id="component-내에-static-method에서-사용하는-static-member">@Component 내에 static method에서 사용하는 static member</h2>
-<pre tabindex="0"><code>@Component
-@RequiredArgsConstructor
-public class SomeComponentClass {
+                <h1 id="preflightcorsconfig-example">PreFlightCorsConfig example</h1>
+<pre tabindex="0"><code>@Configuration
+public class PreFlightCorsConfig {
 
-    private final ObjectMapper objectMapper;
+    private final CorsProperties corsProperties;
 
-    private static void staticMethod() {
-        objectMapper.convertValue() // objectMapper NullPointerException 발생
-    } 
-}
-</code></pre><p>-&gt; 이렇게 바꾸세요.</p>
-<pre tabindex="0"><code>@Component
-@RequiredArgsConstructor
-public class SomeComponentClass {
-
-    private static ObjectMapper objectMapper;
-
-    // Autowired로 constructor 생성
-    @Autowired
-    public SomeComponentClass(ObjectMapper objectMapper) {
-        SomeComponentClass.objectMapper = objectMapper;
+    public PreFlightCorsConfig(CorsProperties corsProperties) {
+        this.corsProperties = corsProperties;
     }
 
-    private static void staticMethod() {
-        objectMapper ~~~
+    private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;;
+
+    private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;;
+
+    private static final String ALLOWED_CREDENTIALS = &#34;true&#34;;
+
+    // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함
+    private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;;
+
+    private static final String MAX_AGE = &#34;3600&#34;;
+
+    @Bean
+    public WebFilter corsFilter() {
+        return (ServerWebExchange ctx, WebFilterChain chain) -&gt; {
+            ServerHttpRequest request = ctx.getRequest();
+            String requestOrigin = request.getHeaders().getOrigin();
+
+            if (CorsUtils.isPreFlightRequest(request)) {
+                ServerHttpResponse response = ctx.getResponse();
+                HttpHeaders headers = response.getHeaders();
+
+                if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) {
+                    headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin);
+                }
+
+                headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS);
+                headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE);
+                headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS);
+                headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS);
+                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
+
+                // 프론트에서 해당 헤더를 확인할수잇게 허가해줌
+                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
+                if (request.getMethod() == HttpMethod.OPTIONS) {
+                    response.setStatusCode(HttpStatus.OK);
+                    return Mono.empty();
+                }
+            }
+
+            return chain.filter(ctx);
+        };
     }
 }
-</code></pre>
+</code></pre><h1 id="corsproperties">CorsProperties</h1>
+<pre tabindex="0"><code>@Component
+@Getter
+@Setter
+@ConfigurationProperties(prefix = &#34;app.cors&#34;)
+public class CorsProperties {
+
+    private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;();
+}
+</code></pre><h1 id="설정">설정</h1>
+<ul>
+<li>dev, prod profile 별로 다르게 설정하는 게 일반적</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-dev.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://localhost:3000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://127.0.0.1:3000&#34;</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-prod.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://example.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://another-domain.com&#34;</span><span class="w">
+</span></span></span></code></pre></div><h1 id="spspring-cloud-starter-gateway-사용시">spspring-cloud-starter-gateway 사용시</h1>
+<p>Spring Cloud Gateway를 사용하고 있다면 <code>PreFlightCorsConfig</code> 같은 별도의 Java Config 없이도 <code>application.yml</code>에 설정만으로 CORS 처리가 가능합니다.**</p>
               </div>
             </div>
 
@@ -970,9 +1009,9 @@ public class SomeComponentClass {
               
 
               Created
-              <relative-time datetime=" Sat, 25 Jan 2025 17:14:05 &#43;0900" class="no-wrap"
-                title=" Sat, 25 Jan 2025 17:14:05 &#43;0900">
-                Sat, 25 Jan 2025 17:14:05 &#43;0900
+              <relative-time datetime=" Mon, 31 Mar 2025 00:49:17 &#43;0900" class="no-wrap"
+                title=" Mon, 31 Mar 2025 00:49:17 &#43;0900">
+                Mon, 31 Mar 2025 00:49:17 &#43;0900
               </relative-time>
             </div>
           </div>

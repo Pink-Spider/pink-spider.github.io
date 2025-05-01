@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">34</span>
+              <span class="Counter">60</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">34</span>
+      <span class="Counter ">60</span>
     </a>
   </nav>
 </div>
@@ -609,192 +609,65 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/kakfa_exception/">Apache Kafka 사용 시 발생할 수 있는 주요 오류</a>
+                <a href="https://pink-spider.github.io/post/spring/ddd/about_ddd/">Feign Timecheck</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Apache Kafka 사용 시 발생할 수 있는 주요 오류 유형과 그 해결 방법을 정리해 보겠습니다.</p>
+                <p>DDD(Domain-Driven Design, 도메인 주도 설계)는 복잡한 소프트웨어 시스템을 설계할 때 <strong>비즈니스 도메인(업무 영역)</strong> 을 중심에 두고 개발하는 방법론이에요. 에릭 에반스(Eric Evans)의 책 *&ldquo;Domain-Driven Design: Tackling Complexity in the Heart of Software&rdquo;*에서 처음 제안되었고, 특히 <strong>도메인 복잡성이 높은 시스템</strong>에서 강력한 효과를 발휘합니다.</p>
 <hr>
-<h2 id="1-네트워크-및-연결-오류"><strong>1. 네트워크 및 연결 오류</strong></h2>
-<h3 id="-오류-connection-to-broker-broker_id-failed">❌ 오류: <code>Connection to broker &lt;broker_id&gt; failed</code></h3>
-<p>📌 <strong>원인</strong>: 브로커와의 네트워크 연결 문제, 브로커 다운, 방화벽 문제 등<br>
-✅ <strong>해결 방법</strong>:</p>
+<h3 id="-ddd란">✅ DDD란?</h3>
+<p>간단히 말해 DDD는:</p>
 <ul>
-<li><code>zookeeper</code>와 <code>broker</code>가 실행 중인지 확인 (<code>ps aux | grep kafka</code>)</li>
-<li><code>listeners</code> 및 <code>advertised.listeners</code> 설정 확인 (<code>server.properties</code>)</li>
-<li>방화벽 설정 (<code>iptables -L</code>, <code>firewalld</code>)을 점검하여 포트가 열려 있는지 확인</li>
+<li><strong>비즈니스의 핵심 로직(도메인)</strong> 을 가장 중요한 것으로 보고,</li>
+<li><strong>도메인 전문가와 개발자가 협력</strong>하여,</li>
+<li>소프트웨어 모델을 <strong>업무 용어와 일치</strong>시키고,</li>
+<li>유지보수 가능하고 유연한 설계를 만드는 것을 목표로 해요.</li>
 </ul>
 <hr>
-<h2 id="2-브로커-및-토픽-관련-오류"><strong>2. 브로커 및 토픽 관련 오류</strong></h2>
-<h3 id="-오류-leader-not-available-for-partition-partition_id">❌ 오류: <code>Leader not available for partition &lt;partition_id&gt;</code></h3>
-<p>📌 <strong>원인</strong>:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 13:30:03 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 13:30:03 &#43;0900">
-                Wed, 26 Mar 2025 13:30:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/lock_unlock/">데이터베이스에서 모든 트랜잭션에 대해 Lock과 Unlock을 사용하는 방법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>데이터베이스에서 모든 트랜잭션에 대해 <strong>Lock</strong>과 <strong>Unlock</strong>을 사용하는 방법은 데이터베이스 및 트랜잭션의 동작 방식에 따라 다릅니다. 일반적으로 <strong>테이블 잠금</strong>, <strong>행 잠금</strong>, <strong>트랜잭션 격리 수준</strong>, <strong>명시적 잠금 해제</strong>를 조합하여 구현할 수 있습니다. Java 환경에서는 JDBC, JPA, QueryDSL 등을 활용해 이를 설정할 수 있습니다.</p>
-<p>아래는 SELECT뿐만 아니라 <strong>INSERT</strong>, <strong>UPDATE</strong>, <strong>DELETE</strong> 등 모든 트랜잭션에서 Lock과 Unlock을 사용하는 방법을 설명합니다.</p>
-<hr>
-<h2 id="1-테이블-잠금-table-lock">1. <strong>테이블 잠금 (Table Lock)</strong></h2>
-<p><strong>테이블 단위로 잠금을 설정</strong>하여 트랜잭션이 완료되기 전까지 다른 트랜잭션의 접근을 막습니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:33:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:33:45 &#43;0900">
-                Wed, 26 Mar 2025 11:33:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/querydsl_select_lock_unlock/">QueryDSL을 사용할 때 데이터베이스의 Lock</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>QueryDSL을 사용할 때 데이터베이스의 <strong>Lock</strong> 기능을 활용하는 방법은 JPA와 유사합니다. QueryDSL은 JPA와 통합되어 동작하며, JPQL 및 Native Query에서 사용하는 잠금 메커니즘을 제공합니다. 아래는 QueryDSL에서 Lock과 관련된 주요 기능과 구현 방법을 설명합니다.</p>
-<hr>
-<h2 id="1-querydsl에서-pessimistic-lock-사용">1. <strong>QueryDSL에서 Pessimistic Lock 사용</strong></h2>
-<p>QueryDSL은 JPA <code>LockModeType</code>을 지원하여 비관적 잠금을 구현할 수 있습니다.</p>
-<h3 id="예제-lockmodetypepessimistic_write-사용">예제: <code>LockModeType.PESSIMISTIC_WRITE</code> 사용</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.querydsl.jpa.impl.JPAQueryFactory</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.EntityManager</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.LockModeType</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">JPAQueryFactory</span><span class="w"> </span><span class="n">queryFactory</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ProductService</span><span class="p">(</span><span class="n">EntityManager</span><span class="w"> </span><span class="n">entityManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">queryFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JPAQueryFactory</span><span class="p">(</span><span class="n">entityManager</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">findByIdWithLock</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">QProduct</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QProduct</span><span class="p">.</span><span class="na">product</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Pessimistic Write Lock 설정</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">queryFactory</span><span class="p">.</span><span class="na">selectFrom</span><span class="p">(</span><span class="n">product</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">where</span><span class="p">(</span><span class="n">product</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">productId</span><span class="p">))</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">setLockMode</span><span class="p">(</span><span class="n">LockModeType</span><span class="p">.</span><span class="na">PESSIMISTIC_WRITE</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">fetchOne</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h4 id="주요-포인트">주요 포인트:</h4>
-<ul>
-<li><code>setLockMode(LockModeType.PESSIMISTIC_WRITE)</code>를 사용하여 비관적 쓰기 잠금을 설정합니다.</li>
-<li><code>PESSIMISTIC_READ</code>와 같은 다른 잠금 모드도 사용할 수 있습니다.</li>
-</ul>
-<hr>
-<h2 id="2-낙관적-잠금-optimistic-lock">2. <strong>낙관적 잠금 (Optimistic Lock)</strong></h2>
-<p>낙관적 잠금은 QueryDSL에서 별도로 지원되지 않지만, JPA 엔터티의 <code>@Version</code> 필드를 활용하여 동작합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:30:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:30:45 &#43;0900">
-                Wed, 26 Mar 2025 11:30:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/spring-%EC%8B%9C%EC%9E%91%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%84%A4%EC%A0%95/">Spring 시작시 메모리 설정 차이</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java 애플리케이션을 실행할 때 <code>-Xmx512m</code>과 <code>-XX:MaxRAM=512m</code>는 모두 최대 메모리 사용량을 제한하는 옵션이지만, 동작 방식에 차이가 있습니다.</p>
-<h3 id="1--xmx512m">1. <code>-Xmx512m</code></h3>
-<ul>
-<li>힙(Heap) 메모리의 최대 크기를 512MB로 설정합니다.</li>
-<li>예제:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -Xmx512m -jar myapp.jar
-</span></span></code></pre></div></li>
-<li>이 설정은 Java 힙 메모리만 제한하며, 전체 프로세스의 메모리 사용량을 제한하는 것은 아닙니다.</li>
-<li>즉, 힙 외의 메모리(메타스페이스, 스택, 네이티브 메모리 등)는 따로 제한되지 않습니다.</li>
-</ul>
-<h3 id="2--xxmaxram512m">2. <code>-XX:MaxRAM=512m</code></h3>
-<ul>
-<li>JVM이 사용할 수 있는 <strong>전체 메모리(힙 + 메타스페이스 + 기타 네이티브 메모리)</strong> 를 512MB로 제한합니다.</li>
-<li>예제:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -XX:MaxRAM<span class="o">=</span>512m -jar myapp.jar
-</span></span></code></pre></div></li>
-<li><code>-XX:MaxRAM</code>을 설정하면 <code>-Xmx</code>의 기본값이 달라질 수 있습니다.
-<ul>
-<li>일반적으로 <code>-Xmx</code>의 기본값은 <code>MaxRAM</code> 값의 25~50% 정도로 설정됩니다(JVM 버전에 따라 다름).</li>
-</ul>
-</li>
-<li>이 설정은 <strong>컨테이너 환경(Docker, Kubernetes)</strong> 에서 JVM이 사용할 수 있는 메모리를 제어하는 데 유용합니다.</li>
-</ul>
-<h3 id="차이점-요약">차이점 요약</h3>
+<h3 id="-ddd의-핵심-개념">✅ DDD의 핵심 개념</h3>
 <table>
   <thead>
       <tr>
-          <th>옵션</th>
-          <th>대상</th>
+          <th>개념</th>
           <th>설명</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><code>-Xmx512m</code></td>
-          <td>힙(Heap) 메모리</td>
-          <td>힙 메모리의 최대 크기만 제한</td>
+          <td><strong>Entity</strong></td>
+          <td>식별자가 있어 고유하게 구분되는 객체 (ex. <code>Order</code>, <code>User</code>)</td>
       </tr>
       <tr>
-          <td><code>-XX:MaxRAM=512m</code></td>
-          <td>전체 JVM 메모리</td>
-          <td>힙 + 메타스페이스 + 네이티브 메모리를 포함한 JVM 전체 메모리 제한</td>
+          <td><strong>Value Object</strong></td>
+          <td>식별자 없이 값 자체로 의미가 있는 객체 (ex. <code>Address</code>, <code>Money</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Aggregate</strong></td>
+          <td>도메인 객체들의 군집. 하나의 루트 엔티티(Aggregate Root)가 존재</td>
+      </tr>
+      <tr>
+          <td><strong>Repository</strong></td>
+          <td>도메인 객체를 저장하고 조회하는 인터페이스 (<code>findById</code>, <code>save</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Service (도메인 서비스)</strong></td>
+          <td>특정 엔티티에 속하지 않는 비즈니스 로직 담당</td>
+      </tr>
+      <tr>
+          <td><strong>Factory</strong></td>
+          <td>복잡한 객체 생성 로직 담당</td>
+      </tr>
+      <tr>
+          <td><strong>Bounded Context</strong></td>
+          <td>특정 도메인 모델이 적용되는 명확한 경계</td>
       </tr>
   </tbody>
 </table>
-<h3 id="함께-사용하면">함께 사용하면?</h3>
-<p>두 옵션을 함께 사용할 수도 있습니다.</p>
+<hr>
+<h3 id="-spring-boot에서-ddd-코드상-특징">✅ Spring Boot에서 DDD 코드상 특징</h3>
+<p>Spring Boot에서 DDD를 적용하면 다음과 같은 <strong>패키지 구조 및 역할 분리</strong>가 나타납니다:</p>
               </div>
             </div>
 
@@ -802,9 +675,9 @@
               
 
               Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:26:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:26:45 &#43;0900">
-                Wed, 26 Mar 2025 11:26:45 &#43;0900
+              <relative-time datetime=" Thu, 17 Apr 2025 18:54:11 &#43;0900" class="no-wrap"
+                title=" Thu, 17 Apr 2025 18:54:11 &#43;0900">
+                Thu, 17 Apr 2025 18:54:11 &#43;0900
               </relative-time>
             </div>
           </div>
@@ -814,58 +687,28 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/select_lock_unlock/">Java에서 데이터베이스의 SELECT 쿼리에 대해 Lock과 Unlock을 사용하는 방법</a>
+                <a href="https://pink-spider.github.io/post/finance/portpolio/">포트폴리오 이론</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java에서 데이터베이스의 SELECT 쿼리에 대해 <strong>Lock</strong>과 <strong>Unlock</strong>을 사용하는 방법은 데이터베이스 시스템과 쿼리의 설정에 따라 달라집니다. 일반적으로 SELECT 자체는 데이터베이스에서 잠금을 유발하지 않지만, <strong>트랜잭션</strong>이나 <strong>쿼리 힌트</strong>를 사용하여 잠금 동작을 제어할 수 있습니다. 아래에 몇 가지 방법을 설명합니다.</p>
-<hr>
-<h3 id="1-트랜잭션을-사용한-lock-제어">1. <strong>트랜잭션을 사용한 Lock 제어</strong></h3>
-<p>트랜잭션을 통해 SELECT 문이 실행 중인 동안 다른 작업이 데이터에 접근하지 못하도록 잠금을 설정할 수 있습니다.</p>
-<h4 id="예제-코드">예제 코드:</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.PreparedStatement</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DatabaseLockExample</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;jdbc:mysql://localhost:3306/your_database&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;your_username&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;your_password&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// Auto-commit 비활성화</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">connection</span><span class="p">.</span><span class="na">setAutoCommit</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// SELECT ... FOR UPDATE (행 잠금 설정)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;SELECT * FROM your_table WHERE id = ? FOR UPDATE&#34;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">preparedStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">sql</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">preparedStatement</span><span class="p">.</span><span class="na">setInt</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// ID 값 바인딩</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">resultSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preparedStatement</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">resultSet</span><span class="p">.</span><span class="na">next</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Data: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">resultSet</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&#34;your_column&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 작업 후 커밋</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">connection</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h4 id="설명">설명:</h4>
+                <p>**공분산(Covariance)**은 두 변수 간의 관계를 측정하는 통계적 개념으로, 한 변수의 변화가 다른 변수의 변화와 어떻게 연관되어 있는지를 나타냅니다. 공분산은 변수 간의 <strong>방향성과 크기</strong>를 설명합니다.</p>
+<h3 id="공분산의-정의">공분산의 정의</h3>
+<p>공분산은 두 변수 (X)와 (Y)의 값들이 각각 평균에서 벗어난 정도를 곱한 값의 평균으로 계산됩니다.<br>
+수식으로는 다음과 같습니다:</p>
+<p>[
+\text{Cov}(X, Y) = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})}{n}
+]</p>
 <ul>
-<li><code>FOR UPDATE</code>는 해당 행을 잠그고, 다른 트랜잭션이 수정하지 못하도록 합니다.</li>
-<li>트랜잭션을 커밋하거나 롤백하면 잠금이 해제됩니다.</li>
+<li>(X_i, Y_i): 각 변수 (X)와 (Y)의 관측값</li>
+<li>(\bar{X}, \bar{Y}): 변수 (X)와 (Y)의 평균값</li>
+<li>(n): 관측값의 개수</li>
 </ul>
-<hr>
-<h3 id="2-쿼리-힌트를-사용한-lock-제어">2. <strong>쿼리 힌트를 사용한 Lock 제어</strong></h3>
-<p>데이터베이스에 따라 SELECT 쿼리에 힌트를 추가하여 잠금 동작을 지정할 수 있습니다. 예를 들어, MySQL에서 <code>LOCK IN SHARE MODE</code> 또는 <code>FOR UPDATE</code>를 사용할 수 있습니다.</p>
+<h3 id="공분산의-특징">공분산의 특징</h3>
+<ol>
+<li>
+<p><strong>양수(Positive):</strong></p>
               </div>
             </div>
 
@@ -873,9 +716,9 @@
               
 
               Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:25:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:25:45 &#43;0900">
-                Wed, 26 Mar 2025 11:25:45 &#43;0900
+              <relative-time datetime=" Mon, 14 Apr 2025 09:10:45 &#43;0900" class="no-wrap"
+                title=" Mon, 14 Apr 2025 09:10:45 &#43;0900">
+                Mon, 14 Apr 2025 09:10:45 &#43;0900
               </relative-time>
             </div>
           </div>
@@ -885,43 +728,38 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/jpa_transaction/">Spring Boot JPA에서 `@Transactional` 사용법</a>
+                <a href="https://pink-spider.github.io/post/til/aes/aes_crypto_code/">AES Encrypt &amp; Decrypt</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h3 id="spring-boot-jpa에서-transactional-사용법">Spring Boot JPA에서 <code>@Transactional</code> 사용법</h3>
-<p>Spring Boot JPA에서 <code>@Transactional</code> 어노테이션은 <strong>트랜잭션 범위 내에서 데이터베이스 작업을 실행하고, 실패 시 롤백하는 기능</strong>을 제공하는 중요한 요소입니다.</p>
-<hr>
-<h2 id="1-transactional-기본-사용법">1. <code>@Transactional</code> 기본 사용법</h2>
-<p>Spring의 <code>@Transactional</code>을 사용하면 하나의 메서드에서 여러 개의 JPA 작업(조회, 저장, 수정, 삭제 등)을 수행할 때 <strong>트랜잭션을 자동으로 관리</strong>할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MemberRepository</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MemberService</span><span class="p">(</span><span class="n">MemberRepository</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">memberRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateMember</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Member not found&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">member</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w">  </span><span class="c1">// JPA 영속성 컨텍스트에 의해 자동으로 업데이트됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>@Transactional</code>을 사용하면, <strong>메서드 실행 중 예외가 발생하면 롤백</strong>되며, 성공하면 자동으로 커밋됩니다.</li>
-<li><code>member.setName(name);</code>을 호출하면 JPA의 <strong>변경 감지(dirty checking)</strong> 덕분에 <code>save()</code>를 명시적으로 호출하지 않아도 업데이트됩니다.</li>
-</ul>
-<hr>
-<h2 id="2-읽기-전용-트랜잭션-transactionalreadonly--true">2. 읽기 전용 트랜잭션 (<code>@Transactional(readOnly = true)</code>)</h2>
-<p><code>readOnly = true</code>를 설정하면 성능 최적화를 할 수 있습니다.</p>
+                <h1 id="java에서-aes-암복호화-코드-예제">java에서 AES 암복호화 코드 예제</h1>
+<h2 id="암호화">암호화</h2>
+<pre tabindex="0"><code>    public static String encryptAes(String plainText) throws Exception {
+        Cipher c = Cipher.getInstance(&#34;AES/CBC/PKCS5Padding&#34;);
+        byte[] key = Base64.decodeBase64(&#34;YOUR_KEY&#34;);
+        byte[] iv = Base64.decodeBase64(&#34;YOUR_INITIAL_VALUE&#34;);
+
+        SecretKeySpec keySpec = new SecretKeySpec(key, &#34;AES&#34;);
+        c.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(iv));
+        byte[] encryptedByte = c.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+
+        return new String(Base64.encodeBase64(encryptedByte));
+    }
+</code></pre><h2 id="복호화">복호화</h2>
+<pre tabindex="0"><code>    public static String decryptAes(String cipherText) throws Exception {
+        Cipher c = Cipher.getInstance(&#34;AES/CBC/PKCS5Padding&#34;);
+        byte[] key = Base64.decodeBase64(&#34;YOUR_KEY&#34;);
+        byte[] iv = Base64.decodeBase64(&#34;YOUR_INITIAL_VALUE&#34;);
+
+        SecretKeySpec keySpec = new SecretKeySpec(key, &#34;AES&#34;);
+        c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv));
+        byte[] encryptedByte = c.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+
+        return new String(Base64.encodeBase64(encryptedByte));
+    }
+</code></pre>
               </div>
             </div>
 
@@ -929,9 +767,135 @@
               
 
               Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:21:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:21:45 &#43;0900">
-                Wed, 26 Mar 2025 11:21:45 &#43;0900
+              <relative-time datetime=" Sun, 13 Apr 2025 16:18:45 &#43;0900" class="no-wrap"
+                title=" Sun, 13 Apr 2025 16:18:45 &#43;0900">
+                Sun, 13 Apr 2025 16:18:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/aes/aes_key_save/">AES key 저장방식</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="aes-key에-대한-보안성">AES key에 대한 보안성</h1>
+<ul>
+<li>본 포스트는 AES Key는 어떤 식으로 생성하고 보관할 것인지에 대한 ChatGPT의 의견?을 기반으로 작성 되었습니다.</li>
+</ul>
+<h2 id="질문">질문</h2>
+<ul>
+<li>AES/CBC/PKCS5Padding 256 으로 암복화할때 secret key를</li>
+</ul>
+<ol>
+<li>바이너리 32byte를 base64 encode해서 저장해놓고 암복호화시 decode해서 사용하는 방법</li>
+<li>영단어 조합 32byte 그대로 저장해놓고 사용</li>
+<li>영단어와 _ 조합 32byte 를 base64 encode해서 저장</li>
+<li>영,숫자,특수문자 조합의 랜덤스트링 32byte를 그대로 사용
+어떤 방법이 보안상 가장 안전한가</li>
+</ol>
+<h2 id="답변">답변</h2>
+<p>AES/CBC/PKCS5Padding 256 암호화에서 SecretKey를 저장하고 사용하는 방식은 보안에 매우 중요한 요소입니다.<!-- raw HTML omitted -->
+주어진 4가지 방식 중 보안상 가장 안전한 방법을 판단하려면, 다음 두 가지 기준을 고려해야 합니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sat, 12 Apr 2025 16:18:45 &#43;0900" class="no-wrap"
+                title=" Sat, 12 Apr 2025 16:18:45 &#43;0900">
+                Sat, 12 Apr 2025 16:18:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/feign/feign-timecheck/">Feign Timecheck</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>서버 응답 지연이나 Timeout 관련 이슈를 추적하려면, <strong>요청/응답 시간 로그를 직접 남기거나</strong>, <strong>Spring에 커스텀 <code>Filter</code> 또는 <code>Feign Logger</code></strong> 를 활용하면 아주 효과적입니다. 아래에서 두 가지 케이스 모두 다뤄볼게요.</p>
+<hr>
+<h2 id="-1-feign-요청응답-시간-로깅-필터">✅ 1. <strong>Feign 요청/응답 시간 로깅 필터</strong></h2>
+<h3 id="-요청-전에-시간-저장--응답-후-소요-시간-측정">🔧 요청 전에 시간 저장 → 응답 후 소요 시간 측정</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FeignRequestTimingInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">RequestInterceptor</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">FeignRequestTimingInterceptor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">RequestTemplate</span><span class="w"> </span><span class="n">template</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">template</span><span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="s">&#34;X-Request-Start-Time&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>그리고 <code>ErrorDecoder</code>나 <code>FeignClientExceptionDecoder</code> 에서 시간 로그 출력:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Fri, 11 Apr 2025 18:54:11 &#43;0900" class="no-wrap"
+                title=" Fri, 11 Apr 2025 18:54:11 &#43;0900">
+                Fri, 11 Apr 2025 18:54:11 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/jsonignore_include/">@JsonIgnore 와 JsonInclude</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><code>@JsonIgnore</code>를 붙이면 <strong>해당 필드는 JSON 변환 시 무조건 제외</strong>됩니다. <!-- raw HTML omitted -->
+즉, <strong>값이 있든 없든 관계없이</strong> JSON 결과에 <strong>필드 자체가 포함되지 않습니다.</strong></p>
+<p>예시로 보면:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@JsonIgnore</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// getters/setters</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>위 객체를 JSON으로 변환하면 (예: <code>name=&quot;Alice&quot;</code>, <code>password=&quot;secret&quot;</code>이더라도):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Alice&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>password</code> 필드는 무조건 빠집니다.</p>
+<hr>
+<p>반면, <strong>값이 없을 때만 필드를 제외하고 싶다면</strong> <code>@JsonInclude</code>를 사용해야 합니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 08 Apr 2025 17:42:13 &#43;0900" class="no-wrap"
+                title=" Tue, 08 Apr 2025 17:42:13 &#43;0900">
+                Tue, 08 Apr 2025 17:42:13 &#43;0900
               </relative-time>
             </div>
           </div>

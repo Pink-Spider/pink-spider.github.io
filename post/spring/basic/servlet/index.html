@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    servlet이란? | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Servlet이란? Servlet은 Java를 기반으로 작성된 서버 측 프로그램으로, 클라이언트(주로 웹 브라우저)의 요청을 처리하고, 응답을 생성하는 역할을 합니다. 주로 HTTP 요청과 응답을 처리하기 위해 사용되며, Java EE (이후 Jakarta EE로 이름 변경) 스펙의 일부입니다.
+Servlet은 기본적으로 웹 애플리케이션 서버(Tomcat, Jetty 등) 위에서 동작하며, 웹 서버와 클라이언트 간의 중간 처리자로 기능합니다.
+Servlet의 주요 특징 Java 언어 기반: 플랫폼 독립적이며 객체 지향 프로그래밍의 장점을 가집니다. 요청-응답 처리: HTTP 요청(GET, POST, PUT, DELETE 등)을 받아서 필요한 비즈니스 로직을 수행하고, 결과를 다시 클라이언트에 전송합니다. 확장성: 추가 설정과 라이프사이클 관리가 가능해 복잡한 웹 애플리케이션 개발이 가능합니다. 스레드 기반: 하나의 Servlet 인스턴스가 다수의 요청을 처리하기 위해 여러 스레드와 함께 동작합니다. 라이프사이클 관리: init(), service(), destroy() 메서드를 통해 생명주기를 관리합니다. Servlet의 동작 방식 클라이언트 요청: 사용자가 브라우저를 통해 서버로 요청을 보냅니다. 웹 서버 전달: 요청은 웹 서버(Tomcat 등)에 의해 해당 Servlet에 전달됩니다. Servlet 요청 처리: service() 메서드가 호출되어 요청을 처리합니다. 요청 방식에 따라 doGet(), doPost() 등의 메서드가 실행됩니다. 응답 생성: 처리 결과를 HttpServletResponse 객체를 통해 클라이언트로 반환합니다. 라이프사이클 종료: 서버가 내려가거나 특정 상황에서 destroy()가 호출되어 정리 작업을 합니다. Servlet의 기본 구조 (예제) import java.io.IOException; import javax.servlet.ServletException; import javax.servlet.annotation.WebServlet; import javax.servlet.http.HttpServlet; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse; @WebServlet(&#34;/hello&#34;) public class HelloServlet extends HttpServlet { @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { resp.setContentType(&#34;text/html&#34;); resp.getWriter().write(&#34;&lt;h1&gt;Hello, Servlet!&lt;/h1&gt;&#34;); } } 이 코드는 /hello 경로로 요청이 오면 &ldquo;Hello, Servlet!&rdquo; 이라는 HTML을 클라이언트에 반환합니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/basic/servlet/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="servlet이란? - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Servlet이란? Servlet은 Java를 기반으로 작성된 서버 측 프로그램으로, 클라이언트(주로 웹 브라우저)의 요청을 처리하고, 응답을 생성하는 역할을 합니다. 주로 HTTP 요청과 응답을 처리하기 위해 사용되며, Java EE (이후 Jakarta EE로 이름 변경) 스펙의 일부입니다.
+Servlet은 기본적으로 웹 애플리케이션 서버(Tomcat, Jetty 등) 위에서 동작하며, 웹 서버와 클라이언트 간의 중간 처리자로 기능합니다.
+Servlet의 주요 특징 Java 언어 기반: 플랫폼 독립적이며 객체 지향 프로그래밍의 장점을 가집니다. 요청-응답 처리: HTTP 요청(GET, POST, PUT, DELETE 등)을 받아서 필요한 비즈니스 로직을 수행하고, 결과를 다시 클라이언트에 전송합니다. 확장성: 추가 설정과 라이프사이클 관리가 가능해 복잡한 웹 애플리케이션 개발이 가능합니다. 스레드 기반: 하나의 Servlet 인스턴스가 다수의 요청을 처리하기 위해 여러 스레드와 함께 동작합니다. 라이프사이클 관리: init(), service(), destroy() 메서드를 통해 생명주기를 관리합니다. Servlet의 동작 방식 클라이언트 요청: 사용자가 브라우저를 통해 서버로 요청을 보냅니다. 웹 서버 전달: 요청은 웹 서버(Tomcat 등)에 의해 해당 Servlet에 전달됩니다. Servlet 요청 처리: service() 메서드가 호출되어 요청을 처리합니다. 요청 방식에 따라 doGet(), doPost() 등의 메서드가 실행됩니다. 응답 생성: 처리 결과를 HttpServletResponse 객체를 통해 클라이언트로 반환합니다. 라이프사이클 종료: 서버가 내려가거나 특정 상황에서 destroy()가 호출되어 정리 작업을 합니다. Servlet의 기본 구조 (예제) import java.io.IOException; import javax.servlet.ServletException; import javax.servlet.annotation.WebServlet; import javax.servlet.http.HttpServlet; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse; @WebServlet(&#34;/hello&#34;) public class HelloServlet extends HttpServlet { @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { resp.setContentType(&#34;text/html&#34;); resp.getWriter().write(&#34;&lt;h1&gt;Hello, Servlet!&lt;/h1&gt;&#34;); } } 이 코드는 /hello 경로로 요청이 오면 &ldquo;Hello, Servlet!&rdquo; 이라는 HTML을 클라이언트에 반환합니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="servlet이란? - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Servlet이란? Servlet은 Java를 기반으로 작성된 서버 측 프로그램으로, 클라이언트(주로 웹 브라우저)의 요청을 처리하고, 응답을 생성하는 역할을 합니다. 주로 HTTP 요청과 응답을 처리하기 위해 사용되며, Java EE (이후 Jakarta EE로 이름 변경) 스펙의 일부입니다.
+Servlet은 기본적으로 웹 애플리케이션 서버(Tomcat, Jetty 등) 위에서 동작하며, 웹 서버와 클라이언트 간의 중간 처리자로 기능합니다.
+Servlet의 주요 특징 Java 언어 기반: 플랫폼 독립적이며 객체 지향 프로그래밍의 장점을 가집니다. 요청-응답 처리: HTTP 요청(GET, POST, PUT, DELETE 등)을 받아서 필요한 비즈니스 로직을 수행하고, 결과를 다시 클라이언트에 전송합니다. 확장성: 추가 설정과 라이프사이클 관리가 가능해 복잡한 웹 애플리케이션 개발이 가능합니다. 스레드 기반: 하나의 Servlet 인스턴스가 다수의 요청을 처리하기 위해 여러 스레드와 함께 동작합니다. 라이프사이클 관리: init(), service(), destroy() 메서드를 통해 생명주기를 관리합니다. Servlet의 동작 방식 클라이언트 요청: 사용자가 브라우저를 통해 서버로 요청을 보냅니다. 웹 서버 전달: 요청은 웹 서버(Tomcat 등)에 의해 해당 Servlet에 전달됩니다. Servlet 요청 처리: service() 메서드가 호출되어 요청을 처리합니다. 요청 방식에 따라 doGet(), doPost() 등의 메서드가 실행됩니다. 응답 생성: 처리 결과를 HttpServletResponse 객체를 통해 클라이언트로 반환합니다. 라이프사이클 종료: 서버가 내려가거나 특정 상황에서 destroy()가 호출되어 정리 작업을 합니다. Servlet의 기본 구조 (예제) import java.io.IOException; import javax.servlet.ServletException; import javax.servlet.annotation.WebServlet; import javax.servlet.http.HttpServlet; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse; @WebServlet(&#34;/hello&#34;) public class HelloServlet extends HttpServlet { @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { resp.setContentType(&#34;text/html&#34;); resp.getWriter().write(&#34;&lt;h1&gt;Hello, Servlet!&lt;/h1&gt;&#34;); } } 이 코드는 /hello 경로로 요청이 오면 &ldquo;Hello, Servlet!&rdquo; 이라는 HTML을 클라이언트에 반환합니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/basic/servlet/" />
+<meta property="og:site_name" content="servlet이란?" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-04-29 20:19:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/spring/basic/servlet/">servlet이란?</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Tue, 29 Apr 2025 20:19:45 &#43;0900"
+                    class="no-wrap">
+                    Tue, 29 Apr 2025 20:19:45 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Thu, 01 May 2025 23:38:46 &#43;0900"
+                    class="no-wrap">
+                    Thu, 01 May 2025 23:38:46 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      2459 Words
+                    <span class="file-info-divider"></span>
+                                        11 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="servlet이란">Servlet이란?</h1>
+<p><strong>Servlet</strong>은 <strong>Java</strong>를 기반으로 작성된 서버 측 프로그램으로, <strong>클라이언트(주로 웹 브라우저)의 요청을 처리하고, 응답을 생성하는 역할</strong>을 합니다. 주로 <strong>HTTP 요청과 응답</strong>을 처리하기 위해 사용되며, Java EE (이후 Jakarta EE로 이름 변경) 스펙의 일부입니다.</p>
+<p>Servlet은 기본적으로 <strong>웹 애플리케이션 서버</strong>(Tomcat, Jetty 등) 위에서 동작하며, 웹 서버와 클라이언트 간의 중간 처리자로 기능합니다.</p>
+<hr>
+<h1 id="servlet의-주요-특징">Servlet의 주요 특징</h1>
+<ul>
+<li><strong>Java 언어 기반</strong>: 플랫폼 독립적이며 객체 지향 프로그래밍의 장점을 가집니다.</li>
+<li><strong>요청-응답 처리</strong>: HTTP 요청(<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code> 등)을 받아서 필요한 비즈니스 로직을 수행하고, 결과를 다시 클라이언트에 전송합니다.</li>
+<li><strong>확장성</strong>: 추가 설정과 라이프사이클 관리가 가능해 복잡한 웹 애플리케이션 개발이 가능합니다.</li>
+<li><strong>스레드 기반</strong>: 하나의 Servlet 인스턴스가 다수의 요청을 처리하기 위해 여러 스레드와 함께 동작합니다.</li>
+<li><strong>라이프사이클 관리</strong>: <code>init()</code>, <code>service()</code>, <code>destroy()</code> 메서드를 통해 생명주기를 관리합니다.</li>
+</ul>
+<hr>
+<h1 id="servlet의-동작-방식">Servlet의 동작 방식</h1>
+<ol>
+<li><strong>클라이언트 요청</strong>: 사용자가 브라우저를 통해 서버로 요청을 보냅니다.</li>
+<li><strong>웹 서버 전달</strong>: 요청은 웹 서버(Tomcat 등)에 의해 해당 Servlet에 전달됩니다.</li>
+<li><strong>Servlet 요청 처리</strong>:
+<ul>
+<li><code>service()</code> 메서드가 호출되어 요청을 처리합니다.</li>
+<li>요청 방식에 따라 <code>doGet()</code>, <code>doPost()</code> 등의 메서드가 실행됩니다.</li>
+</ul>
+</li>
+<li><strong>응답 생성</strong>: 처리 결과를 <code>HttpServletResponse</code> 객체를 통해 클라이언트로 반환합니다.</li>
+<li><strong>라이프사이클 종료</strong>: 서버가 내려가거나 특정 상황에서 <code>destroy()</code>가 호출되어 정리 작업을 합니다.</li>
+</ol>
+<hr>
+<h1 id="servlet의-기본-구조-예제">Servlet의 기본 구조 (예제)</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.annotation.WebServlet</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServlet</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletRequest</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletResponse</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">&#34;text/html&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">write</span><span class="p">(</span><span class="s">&#34;&lt;h1&gt;Hello, Servlet!&lt;/h1&gt;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>이 코드는 <code>/hello</code> 경로로 요청이 오면 <strong>&ldquo;Hello, Servlet!&rdquo;</strong> 이라는 HTML을 클라이언트에 반환합니다.</p>
+<hr>
+<h1 id="servlet과-다른-기술과의-관계">Servlet과 다른 기술과의 관계</h1>
+<table>
+  <thead>
+      <tr>
+          <th>기술</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>JSP</td>
+          <td>Servlet 기반 위에 HTML과 Java 코드를 섞어 쉽게 동적 웹페이지를 작성하기 위한 기술.</td>
+      </tr>
+      <tr>
+          <td>Spring MVC</td>
+          <td>Servlet을 기반으로 더 높은 추상화와 구조화된 웹 애플리케이션 아키텍처를 제공하는 프레임워크. DispatcherServlet이 핵심.</td>
+      </tr>
+      <tr>
+          <td>Servlet Filter</td>
+          <td>요청과 응답에 대해 사전, 사후 처리를 할 수 있도록 도와주는 서블릿 기능 확장 도구.</td>
+      </tr>
+      <tr>
+          <td>Servlet Listener</td>
+          <td>애플리케이션 또는 세션의 라이프사이클 이벤트를 감지하고 처리할 수 있도록 하는 기능.</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="요약">요약</h1>
+<ul>
+<li>Servlet은 <strong>웹 애플리케이션의 핵심 컴포넌트</strong>입니다.</li>
+<li><strong>요청-응답 흐름</strong>을 처리하는 기본 단위이며, Java 기반 웹 서버 프로그래밍의 출발점입니다.</li>
+<li>오늘날에는 직접 Servlet을 작성하기보다, <strong>Spring MVC</strong> 같은 프레임워크를 통해 보다 편리하게 개발하는 경우가 많습니다.</li>
+</ul>
+<hr>
+<p>추가로, <strong>Servlet 라이프사이클</strong>, <strong>ServletConfig / ServletContext 차이</strong>, 또는 <strong>Servlet 3.0 이상에서의 변화(JSP/Annotations 기반 설정)</strong> 등도 설명해드릴 수 있습니다.</p>
+<hr>
+<p>좋은 질문입니다. 이번에는 <strong>&ldquo;Servlet과 Controller의 관계&rdquo;</strong> 에 대해 깊이 있게 정리해드릴게요.</p>
+<hr>
+<h1 id="1-servlet과-controller의-기본-이해">1. Servlet과 Controller의 기본 이해</h1>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>Servlet</th>
+          <th>Controller</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>정의</td>
+          <td>Java 웹 서버에서 HTTP 요청을 받아 응답하는 <strong>기본 단위</strong></td>
+          <td>웹 프레임워크(Sprint MVC 등)에서 요청을 받아 <strong>비즈니스 로직을 연결하는 역할</strong></td>
+      </tr>
+      <tr>
+          <td>위치</td>
+          <td>서버에 직접 배포되는 컴포넌트</td>
+          <td>프레임워크 내에서 라우팅과 로직 연결을 담당</td>
+      </tr>
+      <tr>
+          <td>초점</td>
+          <td>요청/응답 처리 자체 (낮은 수준)</td>
+          <td>요청에 따라 알맞은 로직 호출 및 결과 리턴 (고수준)</td>
+      </tr>
+      <tr>
+          <td>구현 방식</td>
+          <td><code>HttpServlet</code> 클래스를 상속하여 작성</td>
+          <td>프레임워크 규약에 따라 작성 (<code>@Controller</code>, <code>@RestController</code>)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="2-servlet과-controller의-관계">2. Servlet과 Controller의 관계</h1>
+<p><strong>정리하면, Controller는 Servlet 위에서 동작하는 추상화된 개념</strong>입니다.</p>
+<p>구체적으로:</p>
+<ul>
+<li>Servlet은 <strong>HTTP 요청을 가장 먼저 받는</strong> 가장 하위(낮은 수준, Low-level)의 컴포넌트입니다.</li>
+<li>Controller는 <strong>Servlet이 받은 요청을 분기 처리하고, 비즈니스 로직을 호출하고, 결과를 가공해 반환하는</strong> 역할을 합니다.</li>
+</ul>
+<p>즉, <strong>Controller는 Servlet 위에서 동작</strong>하며, Servlet 덕분에 HTTP 요청/응답의 세부사항을 신경 쓰지 않고, 로직 구현에 집중할 수 있습니다.</p>
+<hr>
+<h1 id="3-spring-mvc에서의-실제-흐름-servlet과-controller-연결">3. Spring MVC에서의 실제 흐름 (Servlet과 Controller 연결)</h1>
+<p>Spring MVC를 예로 들면 다음과 같은 구조입니다:</p>
+<ol>
+<li>클라이언트가 서버에 요청을 보냄 (예: <code>/users</code>).</li>
+<li><strong>DispatcherServlet</strong>(Spring이 제공하는 특별한 Servlet)이 요청을 가장 먼저 받음.</li>
+<li>DispatcherServlet은 <strong>HandlerMapping</strong>을 통해 어떤 Controller가 요청을 처리할지 결정함.</li>
+<li>요청에 맞는 <strong>Controller</strong>가 호출되어 비즈니스 로직을 수행.</li>
+<li>Controller는 처리 결과를 DispatcherServlet에 반환.</li>
+<li>DispatcherServlet은 ViewResolver 등을 통해 최종 HTML(또는 JSON)을 생성하여 클라이언트에게 응답.</li>
+</ol>
+<p><strong>DispatcherServlet은 일종의 &ldquo;Front Controller&rdquo; 패턴을 따릅니다.</strong></p>
+<h3 id="그림으로-표현하면">그림으로 표현하면:</h3>
+<pre tabindex="0"><code>[Client] → [DispatcherServlet (Servlet)] → [Controller] → [Service / Business Logic]
+</code></pre><hr>
+<h1 id="4-dispatcherservlet이-하는-역할">4. DispatcherServlet이 하는 역할</h1>
+<p>Spring에서는 개발자가 직접 Servlet을 다루지 않고, Spring이 제공하는 <strong>DispatcherServlet</strong>이 대신 HTTP 요청을 받아서 Controller로 전달합니다. 이 DispatcherServlet은 다음을 합니다:</p>
+<ul>
+<li>요청 파싱</li>
+<li>어떤 Controller로 보낼지 결정</li>
+<li>요청/응답 객체(HttpServletRequest, HttpServletResponse) 관리</li>
+<li>Exception 핸들링</li>
+<li>뷰 선택 및 렌더링</li>
+</ul>
+<p>이 덕분에 우리는 <strong>단순히 <code>@Controller</code>만 작성하면 되고, HTTP 프로토콜 세부사항은 신경 쓰지 않아도</strong> 됩니다.</p>
+<hr>
+<h1 id="5-간단한-코드-예시">5. 간단한 코드 예시</h1>
+<h3 id="dispatcherservlet-설정-spring-boot에서는-자동-등록">DispatcherServlet 설정 (Spring Boot에서는 자동 등록)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// Spring Boot에서는 기본적으로 DispatcherServlet이 등록된다</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@SpringBootApplication</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Application</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h3 id="controller-코드">Controller 코드</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@RestController</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloController</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@GetMapping</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">sayHello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Hello, Controller!&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><strong>여기서 핵심은:</strong> 이 <code>HelloController</code>는 직접 Servlet을 만들지 않았지만, <strong>내부적으로 DispatcherServlet이 이 Controller를 호출해주는 것</strong>입니다.</p>
+<hr>
+<h1 id="6-요약">6. 요약</h1>
+<ul>
+<li><strong>Servlet</strong>: HTTP 요청/응답을 가장 낮은 수준에서 처리하는 Java 컴포넌트.</li>
+<li><strong>Controller</strong>: 비즈니스 로직과 사용자 요청을 연결하는 상위 수준의 컴포넌트.</li>
+<li><strong>Controller는 Servlet(DispatcherServlet)이 요청을 넘겨준 덕분에 동작</strong>하며, 개발자는 더 쉽게 로직에 집중할 수 있다.</li>
+<li><strong>Spring MVC</strong>는 이러한 관계를 &ldquo;Front Controller&rdquo; 패턴으로 구조화했다.</li>
+</ul>
+<hr>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/filestream_memory/"> File을 stream 방식으로 write할 때, 메모리는?</a>
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/abstract_interface/">abstract class 와 interface&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>
