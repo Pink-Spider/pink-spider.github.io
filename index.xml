@@ -6,8 +6,15 @@
     <description>Recent content on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 01 May 2025 23:38:46 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 01 May 2025 23:40:22 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2개의 @Transactional </title>
+      <link>https://pink-spider.github.io/post/spring/basic/transactional_annotaion/</link>
+      <pubDate>Thu, 01 May 2025 23:40:45 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/spring/basic/transactional_annotaion/</guid>
+      <description>&lt;p&gt;&lt;code&gt;@Transactional&lt;/code&gt; 어노테이션은 Java에서 트랜잭션 처리를 위한 핵심 수단으로, &lt;code&gt;springframework.transaction.annotation.Transactional&lt;/code&gt;과 &lt;code&gt;jakarta.transaction.Transactional&lt;/code&gt;은 비슷해 보이지만 다음과 같은 &lt;strong&gt;주요 차이점&lt;/strong&gt;이 있습니다:&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;1-패키지-출처&#34;&gt;1. &lt;strong&gt;패키지 출처&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;항목&lt;/th&gt;&#xA;          &lt;th&gt;Spring 어노테이션&lt;/th&gt;&#xA;          &lt;th&gt;Jakarta 어노테이션&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;어노테이션 경로&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;org.springframework.transaction.annotation.Transactional&lt;/code&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;code&gt;jakarta.transaction.Transactional&lt;/code&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;소속&lt;/td&gt;&#xA;          &lt;td&gt;Spring Framework&lt;/td&gt;&#xA;          &lt;td&gt;Jakarta EE (구 Java EE)&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;API 레벨&lt;/td&gt;&#xA;          &lt;td&gt;Spring 전용 기능&lt;/td&gt;&#xA;          &lt;td&gt;Java 표준 사양 (JSR-907 등) 기반&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;2-적용-대상의-차이&#34;&gt;2. &lt;strong&gt;적용 대상의 차이&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Spring &lt;code&gt;@Transactional&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Spring AOP 기반&lt;/strong&gt;으로 동작.&lt;/li&gt;&#xA;&lt;li&gt;프록시 방식으로 트랜잭션을 관리.&lt;/li&gt;&#xA;&lt;li&gt;Spring Data JPA, Spring JDBC, MyBatis 등 다양한 Spring 기술 스택과 자연스럽게 통합됨.&lt;/li&gt;&#xA;&lt;li&gt;세밀한 제어가 가능: &lt;code&gt;propagation&lt;/code&gt;, &lt;code&gt;isolation&lt;/code&gt;, &lt;code&gt;timeout&lt;/code&gt;, &lt;code&gt;rollbackFor&lt;/code&gt;, &lt;code&gt;readOnly&lt;/code&gt; 등 속성 다양.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Jakarta &lt;code&gt;@Transactional&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>File을 stream 방식으로 write할 때, 메모리는?</title>
       <link>https://pink-spider.github.io/post/spring/filestream_memory/</link>

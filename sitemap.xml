@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://pink-spider.github.io/post/spring/basic/transactional_annotaion/</loc>
+    <lastmod>2025-05-01T23:40:22+09:00</lastmod>
+  </url><url>
     <loc>https://pink-spider.github.io/</loc>
     <lastmod>2025-05-01T23:40:22+09:00</lastmod>
   </url><url>

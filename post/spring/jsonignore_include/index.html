@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    File을 stream 방식으로 write할 때, 메모리는? | Pink Spider
+    @JsonIgnore 와 JsonInclude | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,25 +27,29 @@
   
   <meta
   name="description"
-  content="Spring Boot에서 파일을 스트리밍(Stream) 방식으로 write할 때, 메모리에 올릴지 여부는 사용 방식에 따라 달라집니다. 하지만 일반적인 경우 스트리밍은 메모리 사용을 최소화하기 위한 기법으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.
-✅ 메모리에 올리지 않는 경우 (Streaming 방식) Java에서 InputStream → OutputStream 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:
-try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.txt&#34;)) { byte[] buffer = new byte[8192]; // 8KB 버퍼 int bytesRead; while ((bytesRead = in.read(buffer)) != -1) { out.write(buffer, bytesRead, 0); } } 이 방식은:
+  content="@JsonIgnore를 붙이면 해당 필드는 JSON 변환 시 무조건 제외됩니다. 즉, 값이 있든 없든 관계없이 JSON 결과에 필드 자체가 포함되지 않습니다.
+예시로 보면:
+public class User { private String name; @JsonIgnore private String password; // getters/setters } 위 객체를 JSON으로 변환하면 (예: name=&quot;Alice&quot;, password=&quot;secret&quot;이더라도):
+{ &#34;name&#34;: &#34;Alice&#34; } password 필드는 무조건 빠집니다.
+반면, 값이 없을 때만 필드를 제외하고 싶다면 @JsonInclude를 사용해야 합니다:
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/filestream_memory/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/jsonignore_include/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="File을 stream 방식으로 write할 때, 메모리는? - Pink Spider"
+  content="@JsonIgnore 와 JsonInclude - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="Spring Boot에서 파일을 스트리밍(Stream) 방식으로 write할 때, 메모리에 올릴지 여부는 사용 방식에 따라 달라집니다. 하지만 일반적인 경우 스트리밍은 메모리 사용을 최소화하기 위한 기법으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.
-✅ 메모리에 올리지 않는 경우 (Streaming 방식) Java에서 InputStream → OutputStream 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:
-try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.txt&#34;)) { byte[] buffer = new byte[8192]; // 8KB 버퍼 int bytesRead; while ((bytesRead = in.read(buffer)) != -1) { out.write(buffer, bytesRead, 0); } } 이 방식은:
+  content="@JsonIgnore를 붙이면 해당 필드는 JSON 변환 시 무조건 제외됩니다. 즉, 값이 있든 없든 관계없이 JSON 결과에 필드 자체가 포함되지 않습니다.
+예시로 보면:
+public class User { private String name; @JsonIgnore private String password; // getters/setters } 위 객체를 JSON으로 변환하면 (예: name=&quot;Alice&quot;, password=&quot;secret&quot;이더라도):
+{ &#34;name&#34;: &#34;Alice&#34; } password 필드는 무조건 빠집니다.
+반면, 값이 없을 때만 필드를 제외하고 싶다면 @JsonInclude를 사용해야 합니다:
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -62,17 +66,19 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
 />
 <meta
   property="og:title"
-  content="File을 stream 방식으로 write할 때, 메모리는? - Pink Spider"
+  content="@JsonIgnore 와 JsonInclude - Pink Spider"
 />
 <meta
   property="og:description"
-  content="Spring Boot에서 파일을 스트리밍(Stream) 방식으로 write할 때, 메모리에 올릴지 여부는 사용 방식에 따라 달라집니다. 하지만 일반적인 경우 스트리밍은 메모리 사용을 최소화하기 위한 기법으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.
-✅ 메모리에 올리지 않는 경우 (Streaming 방식) Java에서 InputStream → OutputStream 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:
-try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.txt&#34;)) { byte[] buffer = new byte[8192]; // 8KB 버퍼 int bytesRead; while ((bytesRead = in.read(buffer)) != -1) { out.write(buffer, bytesRead, 0); } } 이 방식은:
+  content="@JsonIgnore를 붙이면 해당 필드는 JSON 변환 시 무조건 제외됩니다. 즉, 값이 있든 없든 관계없이 JSON 결과에 필드 자체가 포함되지 않습니다.
+예시로 보면:
+public class User { private String name; @JsonIgnore private String password; // getters/setters } 위 객체를 JSON으로 변환하면 (예: name=&quot;Alice&quot;, password=&quot;secret&quot;이더라도):
+{ &#34;name&#34;: &#34;Alice&#34; } password 필드는 무조건 빠집니다.
+반면, 값이 없을 때만 필드를 제외하고 싶다면 @JsonInclude를 사용해야 합니다:
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/filestream_memory/" />
-<meta property="og:site_name" content="File을 stream 방식으로 write할 때, 메모리는?" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/jsonignore_include/" />
+<meta property="og:site_name" content="@JsonIgnore 와 JsonInclude" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -80,7 +86,7 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-30 13:25:18 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-08 17:42:13 &#43;0900 KST" />
 
 
 
@@ -290,18 +296,18 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/filestream_memory/">File을 stream 방식으로 write할 때, 메모리는?</a></strong>
+                      href="https://pink-spider.github.io/post/spring/jsonignore_include/">@JsonIgnore 와 JsonInclude</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 30 Apr 2025 13:25:18 &#43;0900"
+                  Created <relative-time datetime="Tue, 08 Apr 2025 17:42:13 &#43;0900"
                     class="no-wrap">
-                    Wed, 30 Apr 2025 13:25:18 &#43;0900</relative-time>
+                    Tue, 08 Apr 2025 17:42:13 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Thu, 01 May 2025 23:38:46 &#43;0900"
+                  Modified <relative-time datetime="Tue, 08 Apr 2025 17:43:44 &#43;0900"
                     class="no-wrap">
-                    Thu, 01 May 2025 23:38:46 &#43;0900</relative-time>
+                    Tue, 08 Apr 2025 17:43:44 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -331,9 +337,9 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
                         </div>
                       </div>
                     </details-menu>
-                      599 Words
+                      257 Words
                     <span class="file-info-divider"></span>
-                                        3 min
+                                        1 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -344,66 +350,33 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>Spring Boot에서 파일을 스트리밍(Stream) 방식으로 <strong>write</strong>할 때, <strong>메모리에 올릴지 여부는 사용 방식에 따라 달라집니다</strong>. <!-- raw HTML omitted -->
-하지만 일반적인 경우 스트리밍은 <strong>메모리 사용을 최소화하기 위한 기법</strong>으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.</p>
-<hr>
-<h2 id="-메모리에-올리지-않는-경우-streaming-방식">✅ 메모리에 올리지 않는 경우 (Streaming 방식)</h2>
-<p>Java에서 <code>InputStream</code> → <code>OutputStream</code> 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="s">&#34;output.txt&#34;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+                <article class="markdown-body entry-content container-lg"><p><code>@JsonIgnore</code>를 붙이면 <strong>해당 필드는 JSON 변환 시 무조건 제외</strong>됩니다. <!-- raw HTML omitted -->
+즉, <strong>값이 있든 없든 관계없이</strong> JSON 결과에 <strong>필드 자체가 포함되지 않습니다.</strong></p>
+<p>예시로 보면:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">8192</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">// 8KB 버퍼</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">bytesRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">,</span><span class="w"> </span><span class="n">0</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@JsonIgnore</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// getters/setters</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>이 방식은:</p>
-<ul>
-<li>한 번에 일정 크기만 메모리에 올림</li>
-<li>전체 파일을 메모리에 적재하지 않음 (메모리 친화적)</li>
-<li>대용량 파일 처리에 적합</li>
-</ul>
+</span></span></span></code></pre></div><p>위 객체를 JSON으로 변환하면 (예: <code>name=&quot;Alice&quot;</code>, <code>password=&quot;secret&quot;</code>이더라도):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Alice&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>password</code> 필드는 무조건 빠집니다.</p>
 <hr>
-<h2 id="-메모리에-올라가는-경우-비효율적-처리-방식">❌ 메모리에 올라가는 경우 (비효율적 처리 방식)</h2>
-<p>다음과 같이 <strong>전체 데이터를 한 번에 읽거나 쓸 경우</strong>, 전부 메모리에 올라가게 됩니다:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">readAllBytes</span><span class="p">(</span><span class="n">Paths</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;largefile.txt&#34;</span><span class="p">));</span><span class="w"> </span><span class="c1">// 전체 메모리에 로딩</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">Paths</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;output.txt&#34;</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="p">);</span><span class="w"> </span><span class="c1">// 한꺼번에 쓰기</span><span class="w">
-</span></span></span></code></pre></div><p>이는:</p>
-<ul>
-<li>메모리 부담이 큼</li>
-<li>대용량 파일 처리에는 부적합</li>
-<li>OOM(OutOfMemoryError) 발생 가능</li>
-</ul>
-<hr>
-<h2 id="spring-boot에서의-사용-예">Spring Boot에서의 사용 예</h2>
-<p>Spring Boot에서는 일반적으로 <code>StreamingResponseBody</code>, <code>FileCopyUtils</code>, 또는 <code>InputStreamResource</code> 등을 통해 스트리밍을 지원합니다:</p>
-<h3 id="예-클라이언트로-파일-스트리밍">예: 클라이언트로 파일 스트리밍</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&#34;/download&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">StreamingResponseBody</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">downloadFile</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">inputStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&#34;example.txt&#34;</span><span class="p">));</span><span class="w">
+<p>반면, <strong>값이 없을 때만 필드를 제외하고 싶다면</strong> <code>@JsonInclude</code>를 사용해야 합니다:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@JsonInclude</span><span class="p">(</span><span class="n">JsonInclude</span><span class="p">.</span><span class="na">Include</span><span class="p">.</span><span class="na">NON_NULL</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">StreamingResponseBody</span><span class="w"> </span><span class="n">responseBody</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputStream</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">8192</span><span class="o">]</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">bytesRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inputStream</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">outputStream</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">inputStream</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="n">HttpHeaders</span><span class="p">.</span><span class="na">CONTENT_DISPOSITION</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;attachment; filename=example.txt&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// getters/setters</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>위 방식은 실제로는 데이터를 <strong>조금씩 읽고 조금씩 쓰기</strong> 때문에 메모리에 전부 올라가지 않습니다.</p>
-<hr>
-<h2 id="결론">결론</h2>
-<ul>
-<li><strong>Stream 방식으로 처리하면 메모리에 전체 파일이 올라가지 않습니다.</strong></li>
-<li>다만, 사용 방식에 따라 잘못 구성하면 전부 메모리에 올릴 수 있습니다.</li>
-<li>특히 대용량 파일 처리 시에는 반드시 <code>Buffered</code> 스트림이나 <code>StreamingResponseBody</code> 등을 사용해야 합니다.</li>
-</ul>
+</span></span></span></code></pre></div><p>이렇게 하면 <code>password</code>가 <code>null</code>일 때만 JSON에서 제외됩니다.</p>
+<p>필요에 따라 <code>NON_EMPTY</code>, <code>NON_DEFAULT</code> 같은 옵션도 사용할 수 있어요.</p>
 </article>
               </div>
 
@@ -416,13 +389,13 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/transactional_annotaion/"> 2개의 @Transactional </a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/feign-timecheck/"> Feign Timecheck</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/servlet/">servlet이란?&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/restapi/">REST API&nbsp;</a><div> »</div>
           
         </div>
       </div>
@@ -437,7 +410,7 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
 <script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
-    accessToken: '',
+    accessToken: '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',
     repo: 'pink-spider.github.io',
     owner: 'pink-spider',
     admin: ['pink-spider'],

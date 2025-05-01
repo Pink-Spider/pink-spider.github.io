@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    File을 stream 방식으로 write할 때, 메모리는? | Pink Spider
+    Mock, Stub 의 차이 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,26 +27,22 @@
   
   <meta
   name="description"
-  content="Spring Boot에서 파일을 스트리밍(Stream) 방식으로 write할 때, 메모리에 올릴지 여부는 사용 방식에 따라 달라집니다. 하지만 일반적인 경우 스트리밍은 메모리 사용을 최소화하기 위한 기법으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.
-✅ 메모리에 올리지 않는 경우 (Streaming 방식) Java에서 InputStream → OutputStream 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:
-try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.txt&#34;)) { byte[] buffer = new byte[8192]; // 8KB 버퍼 int bytesRead; while ((bytesRead = in.read(buffer)) != -1) { out.write(buffer, bytesRead, 0); } } 이 방식은:
-"
+  content="Mock, Stub 의 차이 mock과 stub은 테스트에서 외부 의존성을 대체하기 위해 쓰이는 객체인데, 둘은 목적과 기능 면에서 조금 달라요.
+📌 요약 비교 항목 Stub Mock 목적 고정된 값 반환 (단순 대체) 동작 검증 &#43; 유연한 설정 기능 미리 정의된 응답 제공 호출 여부, 호출 횟수, 파라미터 검증 등 가능 테스트 타입 주로 상태 기반 테스트 (State-based) 주로 행위 기반 테스트 (Behavior-based) 예시 &ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo; &ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo; 🔹 Stub: 단순하게 리턴값만 정해놓은 가짜 실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품. 주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용. when(userRepository.findById(1L)).thenReturn(Optional.of(user)); 🔸 Mock: 행위(호출 여부 등)까지 확인하는 가짜 리턴값도 정의할 수 있지만, &ldquo;정말로 이 메서드가 호출됐는가?&rdquo; 같은 검증도 가능. verify() 같은 메서드를 통해 테스트의 정확성을 높임. verify(userRepository, times(1)).findById(1L); ✅ 실제 테스트 예시 @Mock UserRepository userRepository; @InjectMocks UserService userService; @Test void testUserFetch() { // Stub: 리턴값 지정 when(userRepository.findById(1L)).thenReturn(Optional.of(new User(&#34;Alice&#34;))); // 메서드 실행 User user = userService.getUser(1L); // Mock: 호출 여부 검증 verify(userRepository, times(1)).findById(1L); } 📎 간단 비유 Stub: “누가 와도 무조건 이 대사만 말해!” Mock: “누가 오면 이 대사를 하고, 제대로 말했는지 검사도 합니다.!” "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/filestream_memory/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/mock_stub/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="File을 stream 방식으로 write할 때, 메모리는? - Pink Spider"
+  content="Mock, Stub 의 차이 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="Spring Boot에서 파일을 스트리밍(Stream) 방식으로 write할 때, 메모리에 올릴지 여부는 사용 방식에 따라 달라집니다. 하지만 일반적인 경우 스트리밍은 메모리 사용을 최소화하기 위한 기법으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.
-✅ 메모리에 올리지 않는 경우 (Streaming 방식) Java에서 InputStream → OutputStream 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:
-try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.txt&#34;)) { byte[] buffer = new byte[8192]; // 8KB 버퍼 int bytesRead; while ((bytesRead = in.read(buffer)) != -1) { out.write(buffer, bytesRead, 0); } } 이 방식은:
-"
+  content="Mock, Stub 의 차이 mock과 stub은 테스트에서 외부 의존성을 대체하기 위해 쓰이는 객체인데, 둘은 목적과 기능 면에서 조금 달라요.
+📌 요약 비교 항목 Stub Mock 목적 고정된 값 반환 (단순 대체) 동작 검증 &#43; 유연한 설정 기능 미리 정의된 응답 제공 호출 여부, 호출 횟수, 파라미터 검증 등 가능 테스트 타입 주로 상태 기반 테스트 (State-based) 주로 행위 기반 테스트 (Behavior-based) 예시 &ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo; &ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo; 🔹 Stub: 단순하게 리턴값만 정해놓은 가짜 실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품. 주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용. when(userRepository.findById(1L)).thenReturn(Optional.of(user)); 🔸 Mock: 행위(호출 여부 등)까지 확인하는 가짜 리턴값도 정의할 수 있지만, &ldquo;정말로 이 메서드가 호출됐는가?&rdquo; 같은 검증도 가능. verify() 같은 메서드를 통해 테스트의 정확성을 높임. verify(userRepository, times(1)).findById(1L); ✅ 실제 테스트 예시 @Mock UserRepository userRepository; @InjectMocks UserService userService; @Test void testUserFetch() { // Stub: 리턴값 지정 when(userRepository.findById(1L)).thenReturn(Optional.of(new User(&#34;Alice&#34;))); // 메서드 실행 User user = userService.getUser(1L); // Mock: 호출 여부 검증 verify(userRepository, times(1)).findById(1L); } 📎 간단 비유 Stub: “누가 와도 무조건 이 대사만 말해!” Mock: “누가 오면 이 대사를 하고, 제대로 말했는지 검사도 합니다.!” "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -62,17 +58,15 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
 />
 <meta
   property="og:title"
-  content="File을 stream 방식으로 write할 때, 메모리는? - Pink Spider"
+  content="Mock, Stub 의 차이 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="Spring Boot에서 파일을 스트리밍(Stream) 방식으로 write할 때, 메모리에 올릴지 여부는 사용 방식에 따라 달라집니다. 하지만 일반적인 경우 스트리밍은 메모리 사용을 최소화하기 위한 기법으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.
-✅ 메모리에 올리지 않는 경우 (Streaming 방식) Java에서 InputStream → OutputStream 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:
-try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.txt&#34;)) { byte[] buffer = new byte[8192]; // 8KB 버퍼 int bytesRead; while ((bytesRead = in.read(buffer)) != -1) { out.write(buffer, bytesRead, 0); } } 이 방식은:
-"
+  content="Mock, Stub 의 차이 mock과 stub은 테스트에서 외부 의존성을 대체하기 위해 쓰이는 객체인데, 둘은 목적과 기능 면에서 조금 달라요.
+📌 요약 비교 항목 Stub Mock 목적 고정된 값 반환 (단순 대체) 동작 검증 &#43; 유연한 설정 기능 미리 정의된 응답 제공 호출 여부, 호출 횟수, 파라미터 검증 등 가능 테스트 타입 주로 상태 기반 테스트 (State-based) 주로 행위 기반 테스트 (Behavior-based) 예시 &ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo; &ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo; 🔹 Stub: 단순하게 리턴값만 정해놓은 가짜 실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품. 주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용. when(userRepository.findById(1L)).thenReturn(Optional.of(user)); 🔸 Mock: 행위(호출 여부 등)까지 확인하는 가짜 리턴값도 정의할 수 있지만, &ldquo;정말로 이 메서드가 호출됐는가?&rdquo; 같은 검증도 가능. verify() 같은 메서드를 통해 테스트의 정확성을 높임. verify(userRepository, times(1)).findById(1L); ✅ 실제 테스트 예시 @Mock UserRepository userRepository; @InjectMocks UserService userService; @Test void testUserFetch() { // Stub: 리턴값 지정 when(userRepository.findById(1L)).thenReturn(Optional.of(new User(&#34;Alice&#34;))); // 메서드 실행 User user = userService.getUser(1L); // Mock: 호출 여부 검증 verify(userRepository, times(1)).findById(1L); } 📎 간단 비유 Stub: “누가 와도 무조건 이 대사만 말해!” Mock: “누가 오면 이 대사를 하고, 제대로 말했는지 검사도 합니다.!” "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/filestream_memory/" />
-<meta property="og:site_name" content="File을 stream 방식으로 write할 때, 메모리는?" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/mock_stub/" />
+<meta property="og:site_name" content="Mock, Stub 의 차이" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -80,7 +74,7 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-04-30 13:25:18 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-04-03 15:57:29 &#43;0900 KST" />
 
 
 
@@ -290,18 +284,18 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/filestream_memory/">File을 stream 방식으로 write할 때, 메모리는?</a></strong>
+                      href="https://pink-spider.github.io/post/spring/mock_stub/">Mock, Stub 의 차이</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 30 Apr 2025 13:25:18 &#43;0900"
+                  Created <relative-time datetime="Thu, 03 Apr 2025 15:57:29 &#43;0900"
                     class="no-wrap">
-                    Wed, 30 Apr 2025 13:25:18 &#43;0900</relative-time>
+                    Thu, 03 Apr 2025 15:57:29 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Thu, 01 May 2025 23:38:46 &#43;0900"
+                  Modified <relative-time datetime="Mon, 07 Apr 2025 10:29:24 &#43;0900"
                     class="no-wrap">
-                    Thu, 01 May 2025 23:38:46 &#43;0900</relative-time>
+                    Mon, 07 Apr 2025 10:29:24 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -331,9 +325,9 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
                         </div>
                       </div>
                     </details-menu>
-                      599 Words
+                      505 Words
                     <span class="file-info-divider"></span>
-                                        3 min
+                                        2 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -344,66 +338,81 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>Spring Boot에서 파일을 스트리밍(Stream) 방식으로 <strong>write</strong>할 때, <strong>메모리에 올릴지 여부는 사용 방식에 따라 달라집니다</strong>. <!-- raw HTML omitted -->
-하지만 일반적인 경우 스트리밍은 <strong>메모리 사용을 최소화하기 위한 기법</strong>으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="mock-stub-의-차이">Mock, Stub 의 차이</h1>
+<p><code>mock</code>과 <code>stub</code>은 테스트에서 <strong>외부 의존성을 대체</strong>하기 위해 쓰이는 객체인데, 둘은 <strong>목적과 기능 면에서 조금 달라요.</strong></p>
 <hr>
-<h2 id="-메모리에-올리지-않는-경우-streaming-방식">✅ 메모리에 올리지 않는 경우 (Streaming 방식)</h2>
-<p>Java에서 <code>InputStream</code> → <code>OutputStream</code> 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="s">&#34;output.txt&#34;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+<h2 id="-요약-비교">📌 요약 비교</h2>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th><strong>Stub</strong></th>
+          <th><strong>Mock</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>목적</td>
+          <td>고정된 값 반환 (단순 대체)</td>
+          <td>동작 검증 + 유연한 설정</td>
+      </tr>
+      <tr>
+          <td>기능</td>
+          <td>미리 정의된 응답 제공</td>
+          <td>호출 여부, 호출 횟수, 파라미터 검증 등 가능</td>
+      </tr>
+      <tr>
+          <td>테스트 타입</td>
+          <td>주로 상태 기반 테스트 (State-based)</td>
+          <td>주로 행위 기반 테스트 (Behavior-based)</td>
+      </tr>
+      <tr>
+          <td>예시</td>
+          <td>&ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo;</td>
+          <td>&ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo;</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-stub-단순하게-리턴값만-정해놓은-가짜">🔹 Stub: 단순하게 <strong>리턴값만 정해놓은 가짜</strong></h2>
+<ul>
+<li>실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품.</li>
+<li>주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">user</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-mock-행위호출-여부-등까지-확인하는-가짜">🔸 Mock: <strong>행위(호출 여부 등)까지 확인</strong>하는 가짜</h2>
+<ul>
+<li>리턴값도 정의할 수 있지만, <strong>&ldquo;정말로 이 메서드가 호출됐는가?&rdquo;</strong> 같은 검증도 가능.</li>
+<li><code>verify()</code> 같은 메서드를 통해 테스트의 정확성을 높임.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-실제-테스트-예시">✅ 실제 테스트 예시</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">8192</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">// 8KB 버퍼</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">bytesRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">,</span><span class="w"> </span><span class="n">0</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">void</span><span class="w"> </span><span class="nf">testUserFetch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Stub: 리턴값 지정</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">)));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 메서드 실행</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Mock: 호출 여부 검증</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>이 방식은:</p>
+</span></span></span></code></pre></div><hr>
+<h2 id="-간단-비유">📎 간단 비유</h2>
 <ul>
-<li>한 번에 일정 크기만 메모리에 올림</li>
-<li>전체 파일을 메모리에 적재하지 않음 (메모리 친화적)</li>
-<li>대용량 파일 처리에 적합</li>
+<li><strong>Stub</strong>: “누가 와도 <strong>무조건 이 대사만 말해!”</strong></li>
+<li><strong>Mock</strong>: “누가 오면 이 대사를 하고, <strong>제대로 말했는지 검사도 합니다.!”</strong></li>
 </ul>
 <hr>
-<h2 id="-메모리에-올라가는-경우-비효율적-처리-방식">❌ 메모리에 올라가는 경우 (비효율적 처리 방식)</h2>
-<p>다음과 같이 <strong>전체 데이터를 한 번에 읽거나 쓸 경우</strong>, 전부 메모리에 올라가게 됩니다:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">readAllBytes</span><span class="p">(</span><span class="n">Paths</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;largefile.txt&#34;</span><span class="p">));</span><span class="w"> </span><span class="c1">// 전체 메모리에 로딩</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">Paths</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&#34;output.txt&#34;</span><span class="p">),</span><span class="w"> </span><span class="n">data</span><span class="p">);</span><span class="w"> </span><span class="c1">// 한꺼번에 쓰기</span><span class="w">
-</span></span></span></code></pre></div><p>이는:</p>
-<ul>
-<li>메모리 부담이 큼</li>
-<li>대용량 파일 처리에는 부적합</li>
-<li>OOM(OutOfMemoryError) 발생 가능</li>
-</ul>
-<hr>
-<h2 id="spring-boot에서의-사용-예">Spring Boot에서의 사용 예</h2>
-<p>Spring Boot에서는 일반적으로 <code>StreamingResponseBody</code>, <code>FileCopyUtils</code>, 또는 <code>InputStreamResource</code> 등을 통해 스트리밍을 지원합니다:</p>
-<h3 id="예-클라이언트로-파일-스트리밍">예: 클라이언트로 파일 스트리밍</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&#34;/download&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">StreamingResponseBody</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">downloadFile</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">InputStream</span><span class="w"> </span><span class="n">inputStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileInputStream</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&#34;example.txt&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">StreamingResponseBody</span><span class="w"> </span><span class="n">responseBody</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outputStream</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">8192</span><span class="o">]</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">bytesRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inputStream</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">outputStream</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">inputStream</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="n">HttpHeaders</span><span class="p">.</span><span class="na">CONTENT_DISPOSITION</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;attachment; filename=example.txt&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">responseBody</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>위 방식은 실제로는 데이터를 <strong>조금씩 읽고 조금씩 쓰기</strong> 때문에 메모리에 전부 올라가지 않습니다.</p>
-<hr>
-<h2 id="결론">결론</h2>
-<ul>
-<li><strong>Stream 방식으로 처리하면 메모리에 전체 파일이 올라가지 않습니다.</strong></li>
-<li>다만, 사용 방식에 따라 잘못 구성하면 전부 메모리에 올릴 수 있습니다.</li>
-<li>특히 대용량 파일 처리 시에는 반드시 <code>Buffered</code> 스트림이나 <code>StreamingResponseBody</code> 등을 사용해야 합니다.</li>
-</ul>
 </article>
               </div>
 
@@ -416,13 +425,13 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/transactional_annotaion/"> 2개의 @Transactional </a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/mock_injectmock/"> @Mock, @InjectBean 의 차이</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/servlet/">servlet이란?&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/test_double/">Test Double&nbsp;</a><div> »</div>
           
         </div>
       </div>
@@ -437,7 +446,7 @@ try (InputStream in = ...; OutputStream out = new FileOutputStream(&#34;output.t
 <script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
-    accessToken: '',
+    accessToken: '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',
     repo: 'pink-spider.github.io',
     owner: 'pink-spider',
     admin: ['pink-spider'],

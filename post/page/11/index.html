@@ -609,50 +609,23 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/about_trasactional/">Spring Boot JPA에서 @Transactional 옵션 정리</a>
+                <a href="https://pink-spider.github.io/post/book/clean_code/clean_code_intro/">Clean Code 서론</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="spring-boot-jpa에서-transactional-옵션-정리">Spring Boot JPA에서 @Transactional 옵션 정리</h1>
-<p>Spring Boot JPA에서 <code>@Transactional</code>은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.</p>
-<hr>
-<h3 id="-기본-사용법">📌 기본 사용법</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">joinMember</span><span class="p">(</span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">member</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 예외 발생 시 전체 트랜잭션 롤백</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>@Transactional</code>을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요.</li>
-<li>런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 <strong>unchecked exception</strong>일 때만 롤백)</li>
-</ul>
-<hr>
-<h3 id="-클래스-레벨에-사용">📌 클래스 레벨에 사용</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다.</li>
-</ul>
-<hr>
-<h3 id="-rollbackfor-옵션">📌 rollbackFor 옵션</h3>
-<p>기본적으로 <code>RuntimeException</code>과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(<code>Exception</code>)도 롤백하고 싶다면:</p>
+                <p><a href=""><img src="https://img.shields.io/badge/book-green" alt="GoDoc"></a>
+<a href=""><img src="https://img.shields.io/badge/clean-code-green" alt="GoDoc"></a></p>
+<h1 id="clean-code-서론">Clean Code 서론</h1>
+<h2 id="abstract">Abstract</h2>
+<p>주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다.<!-- raw HTML omitted -->
+다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다.<!-- raw HTML omitted -->
+아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다.<!-- raw HTML omitted -->
+업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다.<!-- raw HTML omitted -->
+심지어 Clean Code가 뭔지 모르는 사람도 많다.<!-- raw HTML omitted -->
+하지만 코드에도 <!-- raw HTML omitted -->품질<!-- raw HTML omitted -->이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다.
+모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.</p>
               </div>
             </div>
 
@@ -660,311 +633,9 @@
               
 
               Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:15:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:15:45 &#43;0900">
-                Wed, 26 Mar 2025 11:15:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/redis_crud_template/">Boot에서 redis 사용하는 2가지 방법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java에서 Redis를 사용할 때 <code>CRUD Repository</code>와 <code>RedisTemplate</code>은 각각 다른 수준의 추상화를 제공하는 방식입니다.
-주요 차이점은 다음과 같습니다:</p>
-<hr>
-<h3 id="-1-crud-repository-spring-data-redis">✅ 1. <strong>CRUD Repository (Spring Data Redis)</strong></h3>
-<p><code>RedisRepository</code>, <code>CrudRepository</code>, <code>PagingAndSortingRepository</code> 등과 같이 <strong>Spring Data</strong>가 제공하는 Repository 인터페이스를 사용하는 방식입니다.</p>
-<h4 id="-장점">🔹 장점</h4>
-<ul>
-<li><strong>높은 추상화 수준</strong>: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작.</li>
-<li><strong>개발 속도 빠름</strong>: 반복적인 로직 줄일 수 있음 (<code>findById</code>, <code>save</code>, <code>delete</code> 등 기본 제공).</li>
-<li><strong>Spring Data의 기능</strong>을 활용 가능 (예: 쿼리 메서드, 페이징 등).</li>
-</ul>
-<h4 id="-단점">🔹 단점</h4>
-<ul>
-<li><strong>세밀한 제어 어려움</strong>: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움.</li>
-<li><strong>직렬화 방식 고정</strong>: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요.</li>
-</ul>
-<h4 id="-예시">🔹 예시</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserRedisRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUsername</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-2-redistemplate">✅ 2. <strong>RedisTemplate</strong></h3>
-<p>Spring에서 제공하는 <strong>저수준 API</strong>로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:11:03 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:11:03 &#43;0900">
-                Wed, 26 Mar 2025 11:11:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/feign/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="feign-client-사용팁-1---상대-서버가-여러대-일때-랜덤-호출">feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출</h1>
-<h2 id="load-balancing-되고-있는-상대측에-번갈아가면서-호출하는-방법">load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법</h2>
-<ul>
-<li>build.gradle</li>
-</ul>
-<pre tabindex="0"><code>...
-dependencies {
-    implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39;
-}
-...
-</code></pre><ul>
-<li>application.yml</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 상대 측에서 3개의 서버 LB되고 있을 때 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">other-party-url</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.001</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.002</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.003</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>ServerProperties.java</li>
-</ul>
-<pre tabindex="0"><code>@Setter
-@Getter
-@Configuration
-@ConfigurationProperties(prefix = &#34;other-party-url&#34;)
-public class OtherServerProperties {
-
-    private List&lt;String&gt; serverUris;
-}
-</code></pre><ul>
-<li>FeignConfig.java</li>
-</ul>
-<pre tabindex="0"><code>@RequiredArgsConstructor
-public class OtherServerFeignConfig {
-
-    private final OtherServerProperties otherServerProperties;
-
-    private final AtomicInteger counter = new AtomicInteger(0);
-
-    @Bean
-    public RequestInterceptor randomServerInterceptor() {
-        return requestTemplate -&gt; {
-            List&lt;String&gt; serverUris = otherServerProperties.getServerUris();
-
-            int index = counter.getAndIncrement() % serverUris.size();
-            String selectedUrl = serverUris.get(index);
-
-            requestTemplate.target(selectedUrl);
-        };
-    }
-}
-</code></pre><ul>
-<li>FeignClient interface</li>
-</ul>
-<pre tabindex="0"><code>@FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class)
-public interface OtherServerFeignClientV1 {
-    
-    ...
-}
-</code></pre>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:37:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:37:45 &#43;0900">
-                Wed, 26 Mar 2025 08:37:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/dispatcher/">DispatcherServlet 초기화 과정</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <hr>
-<h2 id="-dispatcherservlet-초기화-과정">🚀 DispatcherServlet 초기화 과정</h2>
-<h3 id="1-servletcontainer가-dispatcherservlet을-로딩">1. <strong>ServletContainer가 DispatcherServlet을 로딩</strong></h3>
-<p>Spring Boot 앱을 실행하면, 내장 톰캣이 뜨고 아래 과정이 시작돼요:</p>
-<ul>
-<li>Spring Boot가 자동으로 <code>DispatcherServlet</code>을 <strong>서블릿으로 등록</strong>함 (<code>/</code> 매핑)</li>
-<li><code>DispatcherServlet</code>은 사실 <code>HttpServlet</code>을 상속받은 클래스</li>
-<li>이때 호출되는 메서드가 → <code>init()</code> → 그 안에서 <code>initServletBean()</code> 실행됨</li>
-</ul>
-<hr>
-<h3 id="2-webapplicationcontext-생성-및-초기화">2. <strong>WebApplicationContext 생성 및 초기화</strong></h3>
-<ul>
-<li><code>DispatcherServlet</code>은 자신의 <strong>Spring WebApplicationContext</strong>를 가지고 있음</li>
-<li>이 WebApplicationContext는 <code>@Controller</code>, <code>@RestController</code>, <code>@Service</code>, <code>@Repository</code> 등이 등록된 공간</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">GenericWebApplicationContext
-</span></span><span class="line"><span class="cl">      ↑
-</span></span><span class="line"><span class="cl">AnnotationConfigWebApplicationContext
-</span></span><span class="line"><span class="cl">      ↑
-</span></span><span class="line"><span class="cl">WebApplicationContext ← DispatcherServlet이 사용
-</span></span></code></pre></div><blockquote>
-<p><code>DispatcherServlet</code>은 이 context를 통해 빈을 찾고, 라우팅을 수행함</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:20:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:20:45 &#43;0900">
-                Wed, 26 Mar 2025 08:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/servlet_dispatcherservlet/">servlet은 무엇이고 dispatcher servlet은 무엇인가</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring에서는 <code>Servlet</code>과 <code>DispatcherServlet</code>이 웹 요청 처리에서 핵심적인 역할을 해요.
-개념을 하나씩 명확히 정리해볼게요.</p>
-<hr>
-<h2 id="-1-servlet이란">🧱 1. <strong>Servlet</strong>이란?</h2>
-<h3 id="-정의">✅ 정의</h3>
-<ul>
-<li><strong>자바 웹에서 가장 기본적인 컴포넌트</strong></li>
-<li>HTTP 요청을 처리하고, HTTP 응답을 반환하는 <strong>자바 클래스</strong></li>
-<li>톰캣(Tomcat) 같은 서블릿 컨테이너에서 실행됨</li>
-</ul>
-<h3 id="-역할">✅ 역할</h3>
-<ul>
-<li>웹 브라우저에서 온 요청을 받아서 처리하고, 응답을 생성함</li>
-<li>예전에는 모든 요청을 직접 Servlet에서 처리했어요.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">write</span><span class="p">(</span><span class="s">&#34;Hello from Servlet!&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
-<p>이건 거의 Spring 이전의 <strong>전통적인 웹 방식</strong>이에요.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:19:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:19:45 &#43;0900">
-                Wed, 26 Mar 2025 08:19:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/filter_interceptor/">Boot에서 filter와 interceptor의 차이</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring Boot에서 <strong>Filter</strong>와 <strong>Interceptor</strong>는 모두 요청(Request)과 응답(Response)을 가로채서 처리할 수 있게 해주는 기능이지만, <strong>역할, 실행 시점, 적용 범위</strong>에서 차이가 있습니다. 아래에서 간단 + 예시와 함께 정리해볼게요.</p>
-<hr>
-<h2 id="-1-filter-서블릿-필터">🔹 1. Filter (서블릿 필터)</h2>
-<h3 id="-개요">✅ 개요</h3>
-<ul>
-<li><strong>Servlet 스펙에 정의된 기능</strong></li>
-<li>Spring보다 더 <strong>하위 레벨</strong></li>
-<li>DispatcherServlet 이전에 실행됨</li>
-</ul>
-<h3 id="-사용-예시">✅ 사용 예시</h3>
-<ul>
-<li>인증, 인코딩, 로깅, XSS 방어</li>
-<li>공통 전처리/후처리</li>
-</ul>
-<h3 id="-예제">✅ 예제</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Filter: 요청 전&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">chain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Filter: 응답 후&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-2-interceptor-스프링-인터셉터">🔹 2. Interceptor (스프링 인터셉터)</h2>
-<h3 id="-개요-1">✅ 개요</h3>
-<ul>
-<li><strong>Spring MVC의 기능</strong></li>
-<li>DispatcherServlet 이후에 동작</li>
-<li>주로 <strong>컨트롤러 진입 전/후</strong>에 로직 적용</li>
-</ul>
-<h3 id="-사용-예시-1">✅ 사용 예시</h3>
-<ul>
-<li>로그인 체크</li>
-<li>권한 검사</li>
-<li>요청 로깅</li>
-<li>공통 응답 가공</li>
-</ul>
-<h3 id="-예제-1">✅ 예제</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">HandlerInterceptor</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">preHandle</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Interceptor: 컨트롤러 호출 전&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// false면 컨트롤러로 안 넘어감</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>그리고 등록은 이렇게 해야 해요:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:15:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:15:45 &#43;0900">
-                Wed, 26 Mar 2025 08:15:45 &#43;0900
+              <relative-time datetime=" Wed, 27 Nov 2024 17:14:05 &#43;0900" class="no-wrap"
+                title=" Wed, 27 Nov 2024 17:14:05 &#43;0900">
+                Wed, 27 Nov 2024 17:14:05 &#43;0900
               </relative-time>
             </div>
           </div>
@@ -974,10 +645,10 @@ public interface OtherServerFeignClientV1 {
       <div class="paginate-container">
         <div class="BtnGroup">
           
-          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/page/7/">Previous</a>
+          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/page/10/">Previous</a>
           
           
-          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/page/9/">Next</a>
+          <button class="btn btn-outline BtnGroup-item" disabled="disabled">Next</button>
           
         </div>
       </div>
