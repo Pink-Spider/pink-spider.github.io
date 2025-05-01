@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">61</span>
+              <span class="Counter">60</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">61</span>
+      <span class="Counter ">60</span>
     </a>
   </nav>
 </div>
@@ -604,137 +604,6 @@
         
       
       <ul>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git/github_action_sample/">github action sample with spring boot</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="github-action-sample">github action sample</h1>
-<h2 id="spring-boot">spring boot</h2>
-<ul>
-<li>
-<p>gradle build를 사용하는 spring boot를 빌드하고 ssh로</p>
-</li>
-<li>
-<p>secret 류는 setting-&gt; security에 Secrets and variables 내 action 메뉴에서 설정</p>
-</li>
-<li>
-<p>마지막에 slack webhook으로 배포 상황 알림</p>
-</li>
-<li>
-<p>action 설정이나 slack webhoook url 설정하는 방법은 다른 블로그에도 많으니 생략하겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build and Deploy</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">develop</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">build-and-deploy</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 1. SSH 호스트 키 추가</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Add SSH known hosts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          mkdir -p ~/.ssh
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh-keyscan -H github.com &gt;&gt; ~/.ssh/known_hosts</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 2. 리포지토리 체크아웃 (서브모듈 포함)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout repository with submodules</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="l">recursive</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">ssh-key</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.PRIVATE_KEY_FOR_SUBMODULE }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 3. 서브모듈 최신화</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Update submodules to the latest</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          git submodule update --init --recursive
-</span></span></span><span class="line"><span class="cl"><span class="sd">          git submodule foreach git pull origin $(git rev-parse --abbrev-ref HEAD)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 4. JDK 설정</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Set up JDK 23</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-java@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;23&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;temurin&#39;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 5. Gradle 빌드</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build with Gradle</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">./gradlew clean build -x test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 6. 서버로 파일 전송</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy to Server</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SSH_PRIVATE_KEY</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SSH_PRIVATE_KEY }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_IP</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_IP }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_USER</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_USER }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          echo &#34;DEPLOY_SERVER_IP: $DEPLOY_SERVER_IP&#34;
-</span></span></span><span class="line"><span class="cl"><span class="sd">          mkdir -p ~/.ssh
-</span></span></span><span class="line"><span class="cl"><span class="sd">          echo &#34;$SSH_PRIVATE_KEY&#34; &gt; ~/.ssh/github_action
-</span></span></span><span class="line"><span class="cl"><span class="sd">          chmod 600 ~/.ssh/github_action
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh-keyscan -H &#34;$DEPLOY_SERVER_IP&#34; &gt;&gt; ~/.ssh/known_hosts
-</span></span></span><span class="line"><span class="cl"><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # 빌드 파일 전송
-</span></span></span><span class="line"><span class="cl"><span class="sd">          scp -i ~/.ssh/github_action build/libs/*.jar $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/backend/
-</span></span></span><span class="line"><span class="cl"><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # swagger rest doc json
-</span></span></span><span class="line"><span class="cl"><span class="sd">          # scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/
-</span></span></span><span class="line"><span class="cl"><span class="sd">          find build/resources/main/restdocs -name &#34;*.json&#34; | grep . &amp;&amp; scp -i ~/.ssh/github_action build/resources/main/restdocs/*.json $DEPLOY_SERVER_USER@$DEPLOY_SERVER_IP:/home/$DEPLOY_SERVER_USER/swagger-docs/ || echo &#34;No JSON files to copy, skipping...&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 7. 서버에서 애플리케이션 실행</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Start Application</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">DEPLOY_SERVER_IP</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_IP }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SERVER_USER</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SERVER_USER }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">REPOSITORY_NAME</span><span class="p">:</span><span class="w"> </span><span class="l">${{ github.repository }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
-</span></span></span><span class="line"><span class="cl"><span class="sd">          PROJECT_NAME=$(echo $REPOSITORY_NAME | cut -d&#39;/&#39; -f2)
-</span></span></span><span class="line"><span class="cl"><span class="sd">          ssh -i ~/.ssh/github_action $SERVER_USER@$DEPLOY_SERVER_IP &lt;&lt; EOF
-</span></span></span><span class="line"><span class="cl"><span class="sd">          cd /home/$SERVER_USER/backend
-</span></span></span><span class="line"><span class="cl"><span class="sd">          chmod 700 /home/$SERVER_USER/backend/${PROJECT_NAME}*-exec.jar 
-</span></span></span><span class="line"><span class="cl"><span class="sd">          sh /home/$SERVER_USER/bin/deploy.sh $PROJECT_NAME dev /home/$SERVER_USER 512m
-</span></span></span><span class="line"><span class="cl"><span class="sd">          sh /home/$SERVER_USER/infra/swagger/swagger_script.sh restart ${PROJECT}-api.json
-</span></span></span><span class="line"><span class="cl"><span class="sd">          EOF</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">action-slack</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">8398a7/action-slack@v3</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="l">${{ job.status }}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">author_name</span><span class="p">:</span><span class="w"> </span><span class="l">Pink Spider - dev</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="l">repo,commit,message,author</span><span class="w"> </span><span class="c"># action,eventName,ref,workflow,job,took 추가할 수 있음</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">mention</span><span class="p">:</span><span class="w"> </span><span class="l">here</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">if_mention</span><span class="p">:</span><span class="w"> </span><span class="l">failure,cancelled</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">SLACK_WEBHOOK_URL</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEV_SLACK_WEBHOOK_URL }}</span><span class="w"> </span><span class="c"># required</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">always()</span><span class="w"> </span><span class="c"># Pick up events even if the job fails or is canceled.</span><span class="w">
-</span></span></span></code></pre></div></li>
-<li>
-<p>deploy.sh</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 25 Mar 2025 18:01:05 &#43;0900" class="no-wrap"
-                title=" Tue, 25 Mar 2025 18:01:05 &#43;0900">
-                Tue, 25 Mar 2025 18:01:05 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1057,6 +926,44 @@ key, iv를 만드는 방법도 다양했습니다.</li>
               <relative-time datetime=" Sat, 01 Mar 2025 15:19:58 &#43;0900" class="no-wrap"
                 title=" Sat, 01 Mar 2025 15:19:58 &#43;0900">
                 Sat, 01 Mar 2025 15:19:58 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/msa/restdoc_swagger_ui_sample/">Restdoc Swagger Ui Sample</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="restdoc-swagger-ui-sample">Restdoc Swagger Ui Sample</h1>
+<h2 id="서론">서론</h2>
+<ul>
+<li>
+<p>개발에서 테스트 코드의 중요성에 대해서는 따로 포스팅 예정입니다.</p>
+</li>
+<li>
+<p>백엔드에서 api 개발시 해당 api의 사용법에 대한 문서화는 협업에서 필수입니다.<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>가장 무식한 방법으로는 confluence가 되었든 wiki가 되었든, 엑셀이 되었든<!-- raw HTML omitted -->
+api 개발이 있을때 마다 수작업으로 문서화하는 방법이 있는데<!-- raw HTML omitted -->
+api가 수정될 때마다 문서를 수정해줘야 하는 단점이 있습니다. 깜빡하고 문서 업데이트가 안되는 케이스가 현업에서 얼마나 자주 발생하는 지를 생각하면 절대 비추.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sat, 01 Feb 2025 20:18:03 &#43;0900" class="no-wrap"
+                title=" Sat, 01 Feb 2025 20:18:03 &#43;0900">
+                Sat, 01 Feb 2025 20:18:03 &#43;0900
               </relative-time>
             </div>
           </div>
