@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">62</span>
+              <span class="Counter">63</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">62</span>
+      <span class="Counter ">63</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,77 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/jpa/select_lock_unlock/">Java에서 데이터베이스의 SELECT 쿼리에 대해 Lock과 Unlock을 사용하는 방법</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Java에서 데이터베이스의 SELECT 쿼리에 대해 <strong>Lock</strong>과 <strong>Unlock</strong>을 사용하는 방법은 데이터베이스 시스템과 쿼리의 설정에 따라 달라집니다. 일반적으로 SELECT 자체는 데이터베이스에서 잠금을 유발하지 않지만, <strong>트랜잭션</strong>이나 <strong>쿼리 힌트</strong>를 사용하여 잠금 동작을 제어할 수 있습니다. 아래에 몇 가지 방법을 설명합니다.</p>
+<hr>
+<h3 id="1-트랜잭션을-사용한-lock-제어">1. <strong>트랜잭션을 사용한 Lock 제어</strong></h3>
+<p>트랜잭션을 통해 SELECT 문이 실행 중인 동안 다른 작업이 데이터에 접근하지 못하도록 잠금을 설정할 수 있습니다.</p>
+<h4 id="예제-코드">예제 코드:</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.DriverManager</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.PreparedStatement</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DatabaseLockExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;jdbc:mysql://localhost:3306/your_database&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;your_username&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;your_password&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">password</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// Auto-commit 비활성화</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">connection</span><span class="p">.</span><span class="na">setAutoCommit</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// SELECT ... FOR UPDATE (행 잠금 설정)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;SELECT * FROM your_table WHERE id = ? FOR UPDATE&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">preparedStatement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">sql</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">preparedStatement</span><span class="p">.</span><span class="na">setInt</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="n">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// ID 값 바인딩</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">resultSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preparedStatement</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">resultSet</span><span class="p">.</span><span class="na">next</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Data: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">resultSet</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&#34;your_column&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 작업 후 커밋</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">connection</span><span class="p">.</span><span class="na">commit</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h4 id="설명">설명:</h4>
+<ul>
+<li><code>FOR UPDATE</code>는 해당 행을 잠그고, 다른 트랜잭션이 수정하지 못하도록 합니다.</li>
+<li>트랜잭션을 커밋하거나 롤백하면 잠금이 해제됩니다.</li>
+</ul>
+<hr>
+<h3 id="2-쿼리-힌트를-사용한-lock-제어">2. <strong>쿼리 힌트를 사용한 Lock 제어</strong></h3>
+<p>데이터베이스에 따라 SELECT 쿼리에 힌트를 추가하여 잠금 동작을 지정할 수 있습니다. 예를 들어, MySQL에서 <code>LOCK IN SHARE MODE</code> 또는 <code>FOR UPDATE</code>를 사용할 수 있습니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 11:25:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 11:25:45 &#43;0900">
+                Wed, 26 Mar 2025 11:25:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -899,54 +970,6 @@ public interface OtherServerFeignClientV1 {
               <relative-time datetime=" Wed, 26 Mar 2025 08:20:45 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 08:20:45 &#43;0900">
                 Wed, 26 Mar 2025 08:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/servlet_dispatcherservlet/">servlet은 무엇이고 dispatcher servlet은 무엇인가</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring에서는 <code>Servlet</code>과 <code>DispatcherServlet</code>이 웹 요청 처리에서 핵심적인 역할을 해요.
-개념을 하나씩 명확히 정리해볼게요.</p>
-<hr>
-<h2 id="-1-servlet이란">🧱 1. <strong>Servlet</strong>이란?</h2>
-<h3 id="-정의">✅ 정의</h3>
-<ul>
-<li><strong>자바 웹에서 가장 기본적인 컴포넌트</strong></li>
-<li>HTTP 요청을 처리하고, HTTP 응답을 반환하는 <strong>자바 클래스</strong></li>
-<li>톰캣(Tomcat) 같은 서블릿 컨테이너에서 실행됨</li>
-</ul>
-<h3 id="-역할">✅ 역할</h3>
-<ul>
-<li>웹 브라우저에서 온 요청을 받아서 처리하고, 응답을 생성함</li>
-<li>예전에는 모든 요청을 직접 Servlet에서 처리했어요.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">write</span><span class="p">(</span><span class="s">&#34;Hello from Servlet!&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
-<p>이건 거의 Spring 이전의 <strong>전통적인 웹 방식</strong>이에요.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:19:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:19:45 &#43;0900">
-                Wed, 26 Mar 2025 08:19:45 &#43;0900
               </relative-time>
             </div>
           </div>
