@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">66</span>
+              <span class="Counter">67</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">66</span>
+      <span class="Counter ">67</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,74 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/transactional_annotaion/">2개의 @Transactional </a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><code>@Transactional</code> 어노테이션은 Java에서 트랜잭션 처리를 위한 핵심 수단으로, <code>springframework.transaction.annotation.Transactional</code>과 <code>jakarta.transaction.Transactional</code>은 비슷해 보이지만 다음과 같은 <strong>주요 차이점</strong>이 있습니다:</p>
+<hr>
+<h3 id="1-패키지-출처">1. <strong>패키지 출처</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>Spring 어노테이션</th>
+          <th>Jakarta 어노테이션</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>어노테이션 경로</td>
+          <td><code>org.springframework.transaction.annotation.Transactional</code></td>
+          <td><code>jakarta.transaction.Transactional</code></td>
+      </tr>
+      <tr>
+          <td>소속</td>
+          <td>Spring Framework</td>
+          <td>Jakarta EE (구 Java EE)</td>
+      </tr>
+      <tr>
+          <td>API 레벨</td>
+          <td>Spring 전용 기능</td>
+          <td>Java 표준 사양 (JSR-907 등) 기반</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="2-적용-대상의-차이">2. <strong>적용 대상의 차이</strong></h3>
+<ul>
+<li>
+<p><strong>Spring <code>@Transactional</code></strong></p>
+<ul>
+<li><strong>Spring AOP 기반</strong>으로 동작.</li>
+<li>프록시 방식으로 트랜잭션을 관리.</li>
+<li>Spring Data JPA, Spring JDBC, MyBatis 등 다양한 Spring 기술 스택과 자연스럽게 통합됨.</li>
+<li>세밀한 제어가 가능: <code>propagation</code>, <code>isolation</code>, <code>timeout</code>, <code>rollbackFor</code>, <code>readOnly</code> 등 속성 다양.</li>
+</ul>
+</li>
+<li>
+<p><strong>Jakarta <code>@Transactional</code></strong></p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 01 May 2025 23:40:45 &#43;0900" class="no-wrap"
+                title=" Thu, 01 May 2025 23:40:45 &#43;0900">
+                Thu, 01 May 2025 23:40:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1049,36 +1117,6 @@ class Solution {
               <relative-time datetime=" Thu, 24 Apr 2025 11:26:42 &#43;0900" class="no-wrap"
                 title=" Thu, 24 Apr 2025 11:26:42 &#43;0900">
                 Thu, 24 Apr 2025 11:26:42 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/eda/">비동기 Event Driven Architecture</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>대용량 처리를 위한 **비동기 Event Driven Architecture (EDA)**는 시스템이 <strong>이벤트(event)를 중심으로 작동</strong>하며, <strong>확장성</strong>, <strong>유연성</strong>, <strong>성능</strong>을 확보하는 데에 효과적인 아키텍처입니다. 아래에 개념과 구성 요소, 장점 및 적용 사례에 대해 자세히 설명드릴게요.</p>
-<hr>
-<h2 id="-1-기본-개념">✅ 1. 기본 개념</h2>
-<p>**Event Driven Architecture (EDA)**는 시스템 내에서 이벤트가 발생하면, 이를 감지하고 처리하는 구조로 구성됩니다. 이벤트는 어떤 <strong>상태의 변화</strong>를 의미하고, 이를 **프로듀서(생산자)**가 발생시키고, **컨슈머(소비자)**가 이를 처리합니다.</p>
-<p>비동기 방식에서는 이 이벤트가 <strong>즉시 처리되지 않고</strong>, 큐나 버퍼를 통해 일시 저장되며, 컨슈머가 가능한 시점에 이벤트를 처리합니다. 이 구조는 시스템이 처리해야 할 데이터나 요청이 많을 때 <strong>부하를 완화하고 확장성을 제공</strong>합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 24 Apr 2025 11:22:53 &#43;0900" class="no-wrap"
-                title=" Thu, 24 Apr 2025 11:22:53 &#43;0900">
-                Thu, 24 Apr 2025 11:22:53 &#43;0900
               </relative-time>
             </div>
           </div>

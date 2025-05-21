@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Redis에서 pub/sub, 그리고 Redis Stream | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="Redis에서 Pub/Sub(Publish/Subscribe) 기능을 사용하는 방법은 비교적 간단합니다. 아래는 기본적인 사용 방법과 예제입니다.
+🧠 개념 요약 Redis Pub/Sub는 메시지 브로커 역할을 수행하여, 한 클라이언트가 메시지를 발행(Publish)하면, 해당 채널을 구독(Subscribe)하고 있는 다른 클라이언트들이 실시간으로 그 메시지를 받게 됩니다.
+Publisher: 채널에 메시지를 발행하는 클라이언트 Subscriber: 특정 채널을 구독하고 메시지를 받는 클라이언트 🛠 명령어 PUBLISH &lt;channel&gt; &lt;message&gt;: 메시지를 발행 SUBSCRIBE &lt;channel&gt; [&lt;channel&gt; ...]: 채널 구독 UNSUBSCRIBE [&lt;channel&gt; ...]: 채널 구독 취소 💻 예제 (CLI 기준) 터미널 1 – Subscriber redis-cli &gt; SUBSCRIBE news 터미널 2 – Publisher redis-cli &gt; PUBLISH news &#34;Hello from Redis!&#34; Subscriber는 다음과 같은 응답을 받습니다:
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/infra/redis/redis_pub_sub_stream/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Redis에서 pub/sub, 그리고 Redis Stream - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="Redis에서 Pub/Sub(Publish/Subscribe) 기능을 사용하는 방법은 비교적 간단합니다. 아래는 기본적인 사용 방법과 예제입니다.
+🧠 개념 요약 Redis Pub/Sub는 메시지 브로커 역할을 수행하여, 한 클라이언트가 메시지를 발행(Publish)하면, 해당 채널을 구독(Subscribe)하고 있는 다른 클라이언트들이 실시간으로 그 메시지를 받게 됩니다.
+Publisher: 채널에 메시지를 발행하는 클라이언트 Subscriber: 특정 채널을 구독하고 메시지를 받는 클라이언트 🛠 명령어 PUBLISH &lt;channel&gt; &lt;message&gt;: 메시지를 발행 SUBSCRIBE &lt;channel&gt; [&lt;channel&gt; ...]: 채널 구독 UNSUBSCRIBE [&lt;channel&gt; ...]: 채널 구독 취소 💻 예제 (CLI 기준) 터미널 1 – Subscriber redis-cli &gt; SUBSCRIBE news 터미널 2 – Publisher redis-cli &gt; PUBLISH news &#34;Hello from Redis!&#34; Subscriber는 다음과 같은 응답을 받습니다:
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Redis에서 pub/sub, 그리고 Redis Stream - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="Redis에서 Pub/Sub(Publish/Subscribe) 기능을 사용하는 방법은 비교적 간단합니다. 아래는 기본적인 사용 방법과 예제입니다.
+🧠 개념 요약 Redis Pub/Sub는 메시지 브로커 역할을 수행하여, 한 클라이언트가 메시지를 발행(Publish)하면, 해당 채널을 구독(Subscribe)하고 있는 다른 클라이언트들이 실시간으로 그 메시지를 받게 됩니다.
+Publisher: 채널에 메시지를 발행하는 클라이언트 Subscriber: 특정 채널을 구독하고 메시지를 받는 클라이언트 🛠 명령어 PUBLISH &lt;channel&gt; &lt;message&gt;: 메시지를 발행 SUBSCRIBE &lt;channel&gt; [&lt;channel&gt; ...]: 채널 구독 UNSUBSCRIBE [&lt;channel&gt; ...]: 채널 구독 취소 💻 예제 (CLI 기준) 터미널 1 – Subscriber redis-cli &gt; SUBSCRIBE news 터미널 2 – Publisher redis-cli &gt; PUBLISH news &#34;Hello from Redis!&#34; Subscriber는 다음과 같은 응답을 받습니다:
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/infra/redis/redis_pub_sub_stream/" />
+<meta property="og:site_name" content="Redis에서 pub/sub, 그리고 Redis Stream" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-05-21 14:20:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/infra/redis/redis_pub_sub_stream/">Redis에서 pub/sub, 그리고 Redis Stream</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Wed, 21 May 2025 14:20:45 &#43;0900"
+                    class="no-wrap">
+                    Wed, 21 May 2025 14:20:45 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Wed, 21 May 2025 14:53:55 &#43;0900"
+                    class="no-wrap">
+                    Wed, 21 May 2025 14:53:55 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1991 Words
+                    <span class="file-info-divider"></span>
+                                        9 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><p>Redis에서 <code>Pub/Sub</code>(Publish/Subscribe) 기능을 사용하는 방법은 비교적 간단합니다. 아래는 기본적인 사용 방법과 예제입니다.</p>
+<hr>
+<h2 id="-개념-요약">🧠 개념 요약</h2>
+<p>Redis Pub/Sub는 <strong>메시지 브로커</strong> 역할을 수행하여, 한 클라이언트가 메시지를 발행(Publish)하면, 해당 채널을 구독(Subscribe)하고 있는 다른 클라이언트들이 실시간으로 그 메시지를 받게 됩니다.</p>
+<ul>
+<li><strong>Publisher</strong>: 채널에 메시지를 발행하는 클라이언트</li>
+<li><strong>Subscriber</strong>: 특정 채널을 구독하고 메시지를 받는 클라이언트</li>
+</ul>
+<hr>
+<h2 id="-명령어">🛠 명령어</h2>
+<ul>
+<li><code>PUBLISH &lt;channel&gt; &lt;message&gt;</code>: 메시지를 발행</li>
+<li><code>SUBSCRIBE &lt;channel&gt; [&lt;channel&gt; ...]</code>: 채널 구독</li>
+<li><code>UNSUBSCRIBE [&lt;channel&gt; ...]</code>: 채널 구독 취소</li>
+</ul>
+<hr>
+<h2 id="-예제-cli-기준">💻 예제 (CLI 기준)</h2>
+<h3 id="터미널-1--subscriber">터미널 1 – Subscriber</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
+</span></span><span class="line"><span class="cl">&gt; SUBSCRIBE news
+</span></span></code></pre></div><h3 id="터미널-2--publisher">터미널 2 – Publisher</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
+</span></span><span class="line"><span class="cl">&gt; PUBLISH news <span class="s2">&#34;Hello from Redis!&#34;</span>
+</span></span></code></pre></div><p>Subscriber는 다음과 같은 응답을 받습니다:</p>
+<pre tabindex="0"><code>1) &#34;message&#34;
+2) &#34;news&#34;
+3) &#34;Hello from Redis!&#34;
+</code></pre><hr>
+<h2 id="-python-예제-redis-py-사용">🧑‍💻 Python 예제 (<code>redis-py</code> 사용)</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">redis</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">threading</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">r</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">6379</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">listen</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pubsub</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">pubsub</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pubsub</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s1">&#39;news&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">pubsub</span><span class="o">.</span><span class="n">listen</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;message&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Received: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Subscriber thread</span>
+</span></span><span class="line"><span class="cl"><span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">listen</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Publisher</span>
+</span></span><span class="line"><span class="cl"><span class="n">r</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="s1">&#39;news&#39;</span><span class="p">,</span> <span class="s1">&#39;Breaking News!&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><hr>
+<h2 id="-주의사항">⚠️ 주의사항</h2>
+<ul>
+<li><strong>Pub/Sub 메시지는 영속적이지 않음</strong>: 수신자가 구독 중이 아닐 경우 메시지는 유실됩니다.</li>
+<li><strong>분산 처리에 적합하지 않음</strong>: 메시지를 보장하거나 처리 상태를 추적해야 한다면 Redis Streams나 Kafka와 같은 큐 시스템을 고려하세요.</li>
+</ul>
+<hr>
+<h2 id="-활용-예시">✅ 활용 예시</h2>
+<ul>
+<li>실시간 채팅 시스템</li>
+<li>실시간 알림 시스템</li>
+<li>간단한 이벤트 전파</li>
+</ul>
+<hr>
+<h1 id="java">JAVA</h1>
+<p>Java에서 Redis의 Pub/Sub 기능을 사용하기 위해 보통 <a href="https://github.com/redis/jedis">Jedis</a> 클라이언트 라이브러리를 많이 활용합니다. 아래는 Jedis를 사용한 <strong>간단한 Redis Pub/Sub 예제</strong>입니다.</p>
+<hr>
+<h2 id="-1-maven-의존성-추가">📦 1. Maven 의존성 추가</h2>
+<p><code>pom.xml</code>에 다음 의존성을 추가합니다:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;groupId&gt;</span>redis.clients<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;artifactId&gt;</span>jedis<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;version&gt;</span>5.1.0<span class="nt">&lt;/version&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><hr>
+<h2 id="-2-subscriber-구현">📡 2. Subscriber 구현</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">redis.clients.jedis.Jedis</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">redis.clients.jedis.JedisPubSub</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisSubscriber</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Jedis</span><span class="w"> </span><span class="n">jedis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Jedis</span><span class="p">(</span><span class="s">&#34;localhost&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">6379</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">JedisPubSub</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JedisPubSub</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">channel</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Received on channel &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Subscribing to channel &#39;news&#39;...&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">jedis</span><span class="p">.</span><span class="na">subscribe</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;news&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">jedis</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-3-publisher-구현">📨 3. Publisher 구현</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">redis.clients.jedis.Jedis</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisPublisher</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Jedis</span><span class="w"> </span><span class="n">jedis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Jedis</span><span class="p">(</span><span class="s">&#34;localhost&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">6379</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;news&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;Hello from Java!&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">jedis</span><span class="p">.</span><span class="na">publish</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Published: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-실행-방법">🧪 실행 방법</h2>
+<ol>
+<li>먼저 <code>RedisSubscriber</code>를 실행하여 채널을 구독합니다.</li>
+<li>이후 <code>RedisPublisher</code>를 실행하여 메시지를 발행하면, 구독자가 메시지를 수신하게 됩니다.</li>
+</ol>
+<hr>
+<h2 id="-추가-팁">🛠 추가 팁</h2>
+<ul>
+<li><code>JedisPubSub</code>에는 <code>onSubscribe</code>, <code>onUnsubscribe</code>, <code>onPMessage</code> 등 다양한 콜백 메서드가 있습니다.</li>
+<li>여러 채널을 동시에 구독하거나 패턴 매칭(<code>psubscribe</code>)도 가능합니다.</li>
+<li>메시지 보존이 필요하다면 <code>Redis Streams</code>를 사용하는 것이 좋습니다.</li>
+</ul>
+<hr>
+<h1 id="redis의-특정-필드만-pubsub으로-쓰려면">redis의 특정 필드만 pub/sub으로 쓰려면?</h1>
+<p>Redis의 기본적인 <strong>Pub/Sub 모델은 &ldquo;채널&rdquo; 단위</strong>로 작동하며, <strong>Redis 키(key)나 필드(field) 수준에서 직접적으로 Pub/Sub을 사용하는 기능은 없습니다.</strong> 하지만 특정 필드에 대한 Pub/Sub처럼 동작하도록 구현하는 방법은 몇 가지가 있습니다.</p>
+<hr>
+<h2 id="-1-채널명을-필드처럼-설계하기-권장-방식">🔧 1. <strong>채널명을 필드처럼 설계하기 (권장 방식)</strong></h2>
+<h3 id="-개요">✔ 개요</h3>
+<p>필드 개념을 Redis Pub/Sub에서 구현하려면 <strong>채널명을 <code>키:필드</code> 형식으로 설계</strong>하세요.</p>
+<h3 id="-예시">✔ 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// Redis key: user:123</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 필드: status, 채널명은 user:123:status 로 정의</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jedis</span><span class="p">.</span><span class="na">publish</span><span class="p">(</span><span class="s">&#34;user:123:status&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;online&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>이렇게 하면 실제로는 필드를 따로 추적하지 않지만, <strong>구독자가 필요한 필드만 골라 구독</strong>할 수 있습니다:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">jedis</span><span class="p">.</span><span class="na">subscribe</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;user:123:status&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-2-hash-필드-변경과-pubsub을-연동하려면">🔄 2. <strong>Hash 필드 변경과 Pub/Sub을 연동하려면</strong></h2>
+<h3 id="-상황">✔ 상황</h3>
+<p>Redis <code>HASH</code> 타입 데이터 (<code>HSET</code>, <code>HGET</code>)를 사용하고 있을 때, 특정 필드 변경 시마다 알림을 보내고 싶을 수 있습니다.</p>
+<h3 id="-방법">✔ 방법</h3>
+<p>직접 <code>HSET</code> 후 Pub/Sub을 트리거해야 합니다 (Redis는 자동 알림을 하지 않음).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 1. Hash 필드 변경</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jedis</span><span class="p">.</span><span class="na">hset</span><span class="p">(</span><span class="s">&#34;user:123&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;status&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;offline&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 2. Pub/Sub 알림 수동 발행</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jedis</span><span class="p">.</span><span class="na">publish</span><span class="p">(</span><span class="s">&#34;user:123:status&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;offline&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><h3 id="-주의">⚠ 주의</h3>
+<p>Redis는 <code>HASH</code>나 <code>SET</code> 등 데이터 구조의 변화에 대해 자동으로 메시지를 발행하지 않기 때문에, 반드시 <strong>명시적으로 <code>PUBLISH</code> 호출</strong>이 필요합니다.</p>
+<hr>
+<h2 id="-3-keyspace-notifications-선택적-고급-기능">🧠 3. <strong>Keyspace Notifications (선택적 고급 기능)</strong></h2>
+<h3 id="-기능">✔ 기능</h3>
+<p>Redis는 <code>Keyspace Notifications</code>라는 기능을 통해 키 변경 이벤트를 Pub/Sub 형태로 알릴 수 있습니다.</p>
+<h3 id="-단점">✔ 단점</h3>
+<ul>
+<li><strong>키 단위만 지원하며 필드 단위는 아님</strong></li>
+<li><strong>별도 설정 필요</strong> (<code>notify-keyspace-events</code> 설정)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 설정 예시</span>
+</span></span><span class="line"><span class="cl">CONFIG SET notify-keyspace-events Kh
+</span></span></code></pre></div><h3 id="-예시-코드">✔ 예시 코드</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 키 변경 감지 구독 (ex. user:123)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">jedis</span><span class="p">.</span><span class="na">subscribe</span><span class="p">(</span><span class="n">listener</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;__keyspace@0__:user:123&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-결론">✅ 결론</h2>
+<table>
+  <thead>
+      <tr>
+          <th>방법</th>
+          <th>필드 단위 지원</th>
+          <th>메시지 보존</th>
+          <th>비고</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>채널명에 필드 포함</td>
+          <td>✅ 가능</td>
+          <td>❌</td>
+          <td>가장 일반적이며 유연함</td>
+      </tr>
+      <tr>
+          <td>HSET + 수동 Publish</td>
+          <td>✅ 가능</td>
+          <td>❌</td>
+          <td>데이터 + 알림 분리</td>
+      </tr>
+      <tr>
+          <td>Keyspace Notification</td>
+          <td>❌ 불가능</td>
+          <td>❌</td>
+          <td>키 수준 알림만, 서버 설정 필요</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="spring-boot--redis-와-redis-streams-구현">Spring Boot + Redis 와 Redis Streams 구현</h1>
+<hr>
+<h2 id="-1-spring-boot--redis-pubsub-필드-수준-구현">📘 1. Spring Boot + Redis Pub/Sub (필드 수준 구현)</h2>
+<h3 id="-아키텍처">✅ 아키텍처</h3>
+<ul>
+<li>Redis Pub/Sub 사용</li>
+<li>특정 필드 구독을 위해 <code>채널명을 key:field</code> 형태로 설계</li>
+<li><code>@Component</code>와 <code>MessageListenerAdapter</code> 사용</li>
+</ul>
+<hr>
+<h4 id="-maven-의존성-spring-boot-starter-data-redis">🔧 Maven 의존성 (<code>spring-boot-starter-data-redis</code>)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-data-redis<span class="nt">&lt;/artifactId&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><hr>
+<h4 id="-redis-config">🛠 Redis Config</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Configuration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisConfig</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Bean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">RedisMessageListenerContainer</span><span class="w"> </span><span class="nf">container</span><span class="p">(</span><span class="n">RedisConnectionFactory</span><span class="w"> </span><span class="n">connectionFactory</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                                   </span><span class="n">MessageListenerAdapter</span><span class="w"> </span><span class="n">listenerAdapter</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">RedisMessageListenerContainer</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RedisMessageListenerContainer</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">container</span><span class="p">.</span><span class="na">setConnectionFactory</span><span class="p">(</span><span class="n">connectionFactory</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">container</span><span class="p">.</span><span class="na">addMessageListener</span><span class="p">(</span><span class="n">listenerAdapter</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PatternTopic</span><span class="p">(</span><span class="s">&#34;user:123:status&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">container</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Bean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">MessageListenerAdapter</span><span class="w"> </span><span class="nf">listenerAdapter</span><span class="p">(</span><span class="n">RedisSubscriber</span><span class="w"> </span><span class="n">subscriber</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MessageListenerAdapter</span><span class="p">(</span><span class="n">subscriber</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;onMessage&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h4 id="-subscriber-component">📥 Subscriber Component</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisSubscriber</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">channel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&#34;Channel: %s | Received: %s%n&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">channel</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h4 id="-publisher-service">📤 Publisher Service</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RequiredArgsConstructor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisPublisher</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StringRedisTemplate</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">publish</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">field</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;user:123:&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">field</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">convertAndSend</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-2-spring-boot--redis-streams">📙 2. Spring Boot + Redis Streams</h2>
+<h3 id="-아키텍처-1">✅ 아키텍처</h3>
+<ul>
+<li>메시지 보존 및 소비 확인이 필요한 경우 Redis Streams 사용</li>
+<li><code>XADD</code>, <code>XREAD</code>, <code>XREADGROUP</code> 사용</li>
+</ul>
+<hr>
+<h4 id="-redis-stream-producer">🧩 Redis Stream Producer</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RequiredArgsConstructor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisStreamPublisher</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StringRedisTemplate</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sendToStream</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">streamKey</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">StreamRecords</span><span class="p">.</span><span class="na">mapBacked</span><span class="p">(</span><span class="n">message</span><span class="p">).</span><span class="na">withStreamKey</span><span class="p">(</span><span class="n">streamKey</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// 예시 호출</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">publisher</span><span class="p">.</span><span class="na">sendToStream</span><span class="p">(</span><span class="s">&#34;user:123:status&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;value&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;online&#34;</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h4 id="-redis-stream-consumer-with-consumer-group">🧲 Redis Stream Consumer with Consumer Group</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RequiredArgsConstructor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RedisStreamSubscriber</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StringRedisTemplate</span><span class="w"> </span><span class="n">redisTemplate</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@PostConstruct</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;user:123:status&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;statusGroup&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">consumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;consumer-1&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">().</span><span class="na">createGroup</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 그룹이 이미 있으면 무시</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Executors</span><span class="p">.</span><span class="na">newSingleThreadExecutor</span><span class="p">().</span><span class="na">submit</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">List</span><span class="o">&lt;</span><span class="n">MapRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">redisTemplate</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">.</span><span class="na">opsForStream</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">Consumer</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="n">consumer</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                          </span><span class="n">StreamReadOptions</span><span class="p">.</span><span class="na">empty</span><span class="p">().</span><span class="na">count</span><span class="p">(</span><span class="n">1</span><span class="p">).</span><span class="na">block</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="n">2</span><span class="p">)),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                          </span><span class="n">StreamOffset</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="n">ReadOffset</span><span class="p">.</span><span class="na">lastConsumed</span><span class="p">()));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">messages</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">MapRecord</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">messages</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Received Stream Message: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                        </span><span class="n">redisTemplate</span><span class="p">.</span><span class="na">opsForStream</span><span class="p">().</span><span class="na">acknowledge</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-주요-차이점-요약">🔑 주요 차이점 요약</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>Redis Pub/Sub</th>
+          <th>Redis Streams</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>메시지 영속성</td>
+          <td>❌ 없음</td>
+          <td>✅ 있음</td>
+      </tr>
+      <tr>
+          <td>메시지 누락 가능성</td>
+          <td>높음</td>
+          <td>낮음</td>
+      </tr>
+      <tr>
+          <td>소비자 그룹 지원</td>
+          <td>❌ 없음</td>
+          <td>✅ 있음</td>
+      </tr>
+      <tr>
+          <td>메시지 수신 확인 (ack)</td>
+          <td>❌ 불가</td>
+          <td>✅ 가능</td>
+      </tr>
+      <tr>
+          <td>적합한 용도</td>
+          <td>실시간 브로드캐스트</td>
+          <td>내결함성 있는 이벤트 소비</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-언제-무엇을-써야-할까">👉 언제 무엇을 써야 할까?</h2>
+<ul>
+<li><strong>단순한 실시간 알림</strong>만 필요하면 → <code>Pub/Sub</code></li>
+<li><strong>메시지 유실 방지</strong>, <strong>확인 처리</strong>, <strong>재처리</strong>, <strong>컨슈머 그룹</strong>이 필요하다면 → <code>Redis Streams</code></li>
+</ul>
+<hr>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/grafana_dashboard/">Grafana DashBoard&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>
