@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">63</span>
+              <span class="Counter">66</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">63</span>
+      <span class="Counter ">66</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,171 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/jpa/lock_unlock/">데이터베이스에서 모든 트랜잭션에 대해 Lock과 Unlock을 사용하는 방법</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>데이터베이스에서 모든 트랜잭션에 대해 <strong>Lock</strong>과 <strong>Unlock</strong>을 사용하는 방법은 데이터베이스 및 트랜잭션의 동작 방식에 따라 다릅니다. 일반적으로 <strong>테이블 잠금</strong>, <strong>행 잠금</strong>, <strong>트랜잭션 격리 수준</strong>, <strong>명시적 잠금 해제</strong>를 조합하여 구현할 수 있습니다. Java 환경에서는 JDBC, JPA, QueryDSL 등을 활용해 이를 설정할 수 있습니다.</p>
+<p>아래는 SELECT뿐만 아니라 <strong>INSERT</strong>, <strong>UPDATE</strong>, <strong>DELETE</strong> 등 모든 트랜잭션에서 Lock과 Unlock을 사용하는 방법을 설명합니다.</p>
+<hr>
+<h2 id="1-테이블-잠금-table-lock">1. <strong>테이블 잠금 (Table Lock)</strong></h2>
+<p><strong>테이블 단위로 잠금을 설정</strong>하여 트랜잭션이 완료되기 전까지 다른 트랜잭션의 접근을 막습니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 11:33:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 11:33:45 &#43;0900">
+                Wed, 26 Mar 2025 11:33:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/jpa/querydsl_select_lock_unlock/">QueryDSL을 사용할 때 데이터베이스의 Lock</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>QueryDSL을 사용할 때 데이터베이스의 <strong>Lock</strong> 기능을 활용하는 방법은 JPA와 유사합니다. QueryDSL은 JPA와 통합되어 동작하며, JPQL 및 Native Query에서 사용하는 잠금 메커니즘을 제공합니다. 아래는 QueryDSL에서 Lock과 관련된 주요 기능과 구현 방법을 설명합니다.</p>
+<hr>
+<h2 id="1-querydsl에서-pessimistic-lock-사용">1. <strong>QueryDSL에서 Pessimistic Lock 사용</strong></h2>
+<p>QueryDSL은 JPA <code>LockModeType</code>을 지원하여 비관적 잠금을 구현할 수 있습니다.</p>
+<h3 id="예제-lockmodetypepessimistic_write-사용">예제: <code>LockModeType.PESSIMISTIC_WRITE</code> 사용</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">com.querydsl.jpa.impl.JPAQueryFactory</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.EntityManager</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.LockModeType</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProductService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">JPAQueryFactory</span><span class="w"> </span><span class="n">queryFactory</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ProductService</span><span class="p">(</span><span class="n">EntityManager</span><span class="w"> </span><span class="n">entityManager</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">queryFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JPAQueryFactory</span><span class="p">(</span><span class="n">entityManager</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="nf">findByIdWithLock</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">productId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">QProduct</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QProduct</span><span class="p">.</span><span class="na">product</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Pessimistic Write Lock 설정</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">queryFactory</span><span class="p">.</span><span class="na">selectFrom</span><span class="p">(</span><span class="n">product</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">where</span><span class="p">(</span><span class="n">product</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">eq</span><span class="p">(</span><span class="n">productId</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">setLockMode</span><span class="p">(</span><span class="n">LockModeType</span><span class="p">.</span><span class="na">PESSIMISTIC_WRITE</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">fetchOne</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h4 id="주요-포인트">주요 포인트:</h4>
+<ul>
+<li><code>setLockMode(LockModeType.PESSIMISTIC_WRITE)</code>를 사용하여 비관적 쓰기 잠금을 설정합니다.</li>
+<li><code>PESSIMISTIC_READ</code>와 같은 다른 잠금 모드도 사용할 수 있습니다.</li>
+</ul>
+<hr>
+<h2 id="2-낙관적-잠금-optimistic-lock">2. <strong>낙관적 잠금 (Optimistic Lock)</strong></h2>
+<p>낙관적 잠금은 QueryDSL에서 별도로 지원되지 않지만, JPA 엔터티의 <code>@Version</code> 필드를 활용하여 동작합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 11:30:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 11:30:45 &#43;0900">
+                Wed, 26 Mar 2025 11:30:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/memory/spring-%EC%8B%9C%EC%9E%91%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%84%A4%EC%A0%95/">Spring 시작시 메모리 설정 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Java 애플리케이션을 실행할 때 <code>-Xmx512m</code>과 <code>-XX:MaxRAM=512m</code>는 모두 최대 메모리 사용량을 제한하는 옵션이지만, 동작 방식에 차이가 있습니다.</p>
+<h3 id="1--xmx512m">1. <code>-Xmx512m</code></h3>
+<ul>
+<li>힙(Heap) 메모리의 최대 크기를 512MB로 설정합니다.</li>
+<li>예제:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -Xmx512m -jar myapp.jar
+</span></span></code></pre></div></li>
+<li>이 설정은 Java 힙 메모리만 제한하며, 전체 프로세스의 메모리 사용량을 제한하는 것은 아닙니다.</li>
+<li>즉, 힙 외의 메모리(메타스페이스, 스택, 네이티브 메모리 등)는 따로 제한되지 않습니다.</li>
+</ul>
+<h3 id="2--xxmaxram512m">2. <code>-XX:MaxRAM=512m</code></h3>
+<ul>
+<li>JVM이 사용할 수 있는 <strong>전체 메모리(힙 + 메타스페이스 + 기타 네이티브 메모리)</strong> 를 512MB로 제한합니다.</li>
+<li>예제:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -XX:MaxRAM<span class="o">=</span>512m -jar myapp.jar
+</span></span></code></pre></div></li>
+<li><code>-XX:MaxRAM</code>을 설정하면 <code>-Xmx</code>의 기본값이 달라질 수 있습니다.
+<ul>
+<li>일반적으로 <code>-Xmx</code>의 기본값은 <code>MaxRAM</code> 값의 25~50% 정도로 설정됩니다(JVM 버전에 따라 다름).</li>
+</ul>
+</li>
+<li>이 설정은 <strong>컨테이너 환경(Docker, Kubernetes)</strong> 에서 JVM이 사용할 수 있는 메모리를 제어하는 데 유용합니다.</li>
+</ul>
+<h3 id="차이점-요약">차이점 요약</h3>
+<table>
+  <thead>
+      <tr>
+          <th>옵션</th>
+          <th>대상</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>-Xmx512m</code></td>
+          <td>힙(Heap) 메모리</td>
+          <td>힙 메모리의 최대 크기만 제한</td>
+      </tr>
+      <tr>
+          <td><code>-XX:MaxRAM=512m</code></td>
+          <td>전체 JVM 메모리</td>
+          <td>힙 + 메타스페이스 + 네이티브 메모리를 포함한 JVM 전체 메모리 제한</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="함께-사용하면">함께 사용하면?</h3>
+<p>두 옵션을 함께 사용할 수도 있습니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 11:26:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 11:26:45 &#43;0900">
+                Wed, 26 Mar 2025 11:26:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -790,186 +955,6 @@
               <relative-time datetime=" Wed, 26 Mar 2025 11:15:45 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 11:15:45 &#43;0900">
                 Wed, 26 Mar 2025 11:15:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/redis_crud_template/">Boot에서 redis 사용하는 2가지 방법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java에서 Redis를 사용할 때 <code>CRUD Repository</code>와 <code>RedisTemplate</code>은 각각 다른 수준의 추상화를 제공하는 방식입니다.
-주요 차이점은 다음과 같습니다:</p>
-<hr>
-<h3 id="-1-crud-repository-spring-data-redis">✅ 1. <strong>CRUD Repository (Spring Data Redis)</strong></h3>
-<p><code>RedisRepository</code>, <code>CrudRepository</code>, <code>PagingAndSortingRepository</code> 등과 같이 <strong>Spring Data</strong>가 제공하는 Repository 인터페이스를 사용하는 방식입니다.</p>
-<h4 id="-장점">🔹 장점</h4>
-<ul>
-<li><strong>높은 추상화 수준</strong>: 단순한 CRUD 작업을 인터페이스로 정의하기만 하면, 구현 없이 자동으로 동작.</li>
-<li><strong>개발 속도 빠름</strong>: 반복적인 로직 줄일 수 있음 (<code>findById</code>, <code>save</code>, <code>delete</code> 등 기본 제공).</li>
-<li><strong>Spring Data의 기능</strong>을 활용 가능 (예: 쿼리 메서드, 페이징 등).</li>
-</ul>
-<h4 id="-단점">🔹 단점</h4>
-<ul>
-<li><strong>세밀한 제어 어려움</strong>: 복잡한 데이터 구조나 커스텀 로직은 구현하기 어려움.</li>
-<li><strong>직렬화 방식 고정</strong>: 기본적으로 JDK 직렬화를 사용하고, 커스터마이징 하려면 설정 필요.</li>
-</ul>
-<h4 id="-예시">🔹 예시</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserRedisRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">CrudRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByUsername</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">username</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-2-redistemplate">✅ 2. <strong>RedisTemplate</strong></h3>
-<p>Spring에서 제공하는 <strong>저수준 API</strong>로, 키-값 저장소로서 Redis를 유연하게 다룰 수 있음.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:11:03 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:11:03 &#43;0900">
-                Wed, 26 Mar 2025 11:11:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/feign/feignclient_load_balancing/">feign client 사용팁 - 상대 서버가 여러대 일때 랜덤 호출</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="feign-client-사용팁-1---상대-서버가-여러대-일때-랜덤-호출">feign client 사용팁 1 - 상대 서버가 여러대 일때 랜덤 호출</h1>
-<h2 id="load-balancing-되고-있는-상대측에-번갈아가면서-호출하는-방법">load balancing 되고 있는 상대측에 번갈아가면서 호출하는 방법</h2>
-<ul>
-<li>build.gradle</li>
-</ul>
-<pre tabindex="0"><code>...
-dependencies {
-    implementation &#39;org.springframework.cloud:spring-cloud-starter-openfeign&#39;
-}
-...
-</code></pre><ul>
-<li>application.yml</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 상대 측에서 3개의 서버 LB되고 있을 때 </span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">other-party-url</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.001</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.002</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">123.456.789.003</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>ServerProperties.java</li>
-</ul>
-<pre tabindex="0"><code>@Setter
-@Getter
-@Configuration
-@ConfigurationProperties(prefix = &#34;other-party-url&#34;)
-public class OtherServerProperties {
-
-    private List&lt;String&gt; serverUris;
-}
-</code></pre><ul>
-<li>FeignConfig.java</li>
-</ul>
-<pre tabindex="0"><code>@RequiredArgsConstructor
-public class OtherServerFeignConfig {
-
-    private final OtherServerProperties otherServerProperties;
-
-    private final AtomicInteger counter = new AtomicInteger(0);
-
-    @Bean
-    public RequestInterceptor randomServerInterceptor() {
-        return requestTemplate -&gt; {
-            List&lt;String&gt; serverUris = otherServerProperties.getServerUris();
-
-            int index = counter.getAndIncrement() % serverUris.size();
-            String selectedUrl = serverUris.get(index);
-
-            requestTemplate.target(selectedUrl);
-        };
-    }
-}
-</code></pre><ul>
-<li>FeignClient interface</li>
-</ul>
-<pre tabindex="0"><code>@FeignClient(name = &#34;your-server&#34;, configuration = OtherServerFeignConfig.class)
-public interface OtherServerFeignClientV1 {
-    
-    ...
-}
-</code></pre>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:37:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:37:45 &#43;0900">
-                Wed, 26 Mar 2025 08:37:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/dispatcher/">DispatcherServlet 초기화 과정</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <hr>
-<h2 id="-dispatcherservlet-초기화-과정">🚀 DispatcherServlet 초기화 과정</h2>
-<h3 id="1-servletcontainer가-dispatcherservlet을-로딩">1. <strong>ServletContainer가 DispatcherServlet을 로딩</strong></h3>
-<p>Spring Boot 앱을 실행하면, 내장 톰캣이 뜨고 아래 과정이 시작돼요:</p>
-<ul>
-<li>Spring Boot가 자동으로 <code>DispatcherServlet</code>을 <strong>서블릿으로 등록</strong>함 (<code>/</code> 매핑)</li>
-<li><code>DispatcherServlet</code>은 사실 <code>HttpServlet</code>을 상속받은 클래스</li>
-<li>이때 호출되는 메서드가 → <code>init()</code> → 그 안에서 <code>initServletBean()</code> 실행됨</li>
-</ul>
-<hr>
-<h3 id="2-webapplicationcontext-생성-및-초기화">2. <strong>WebApplicationContext 생성 및 초기화</strong></h3>
-<ul>
-<li><code>DispatcherServlet</code>은 자신의 <strong>Spring WebApplicationContext</strong>를 가지고 있음</li>
-<li>이 WebApplicationContext는 <code>@Controller</code>, <code>@RestController</code>, <code>@Service</code>, <code>@Repository</code> 등이 등록된 공간</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">GenericWebApplicationContext
-</span></span><span class="line"><span class="cl">      ↑
-</span></span><span class="line"><span class="cl">AnnotationConfigWebApplicationContext
-</span></span><span class="line"><span class="cl">      ↑
-</span></span><span class="line"><span class="cl">WebApplicationContext ← DispatcherServlet이 사용
-</span></span></code></pre></div><blockquote>
-<p><code>DispatcherServlet</code>은 이 context를 통해 빈을 찾고, 라우팅을 수행함</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 08:20:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 08:20:45 &#43;0900">
-                Wed, 26 Mar 2025 08:20:45 &#43;0900
               </relative-time>
             </div>
           </div>

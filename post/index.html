@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">63</span>
+              <span class="Counter">66</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">63</span>
+      <span class="Counter ">66</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,329 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/grafana_dashboard/">Grafana DashBoard</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="grafana-dashboard-설정">Grafana Dashboard 설정</h1>
+<pre tabindex="0"><code>{
+  &#34;annotations&#34;: {
+    &#34;list&#34;: [
+      {
+        &#34;builtIn&#34;: 1,
+        &#34;datasource&#34;: {
+          &#34;type&#34;: &#34;grafana&#34;,
+          &#34;uid&#34;: &#34;-- Grafana --&#34;
+        },
+        &#34;enable&#34;: true,
+        &#34;hide&#34;: true,
+        &#34;iconColor&#34;: &#34;rgba(0, 211, 255, 1)&#34;,
+        &#34;name&#34;: &#34;Annotations &amp; Alerts&#34;,
+        &#34;type&#34;: &#34;dashboard&#34;
+      }
+    ]
+  },
+  &#34;editable&#34;: false,
+  &#34;fiscalYearStartMonth&#34;: 0,
+  &#34;graphTooltip&#34;: 0,
+  &#34;links&#34;: [],
+  &#34;liveNow&#34;: false,
+  &#34;panels&#34;: [
+    {
+      &#34;datasource&#34;: {
+        &#34;type&#34;: &#34;prometheus&#34;,
+        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
+      },
+      &#34;gridPos&#34;: {
+        &#34;h&#34;: 3,
+        &#34;w&#34;: 24,
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 0
+      },
+      &#34;id&#34;: 1,
+      &#34;targets&#34;: [
+        {
+          &#34;datasource&#34;: {
+            &#34;type&#34;: &#34;prometheus&#34;,
+            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
+          },
+          &#34;refId&#34;: &#34;A&#34;
+        }
+      ],
+      &#34;type&#34;: &#34;welcome&#34;
+    },
+    {
+      &#34;datasource&#34;: {
+        &#34;type&#34;: &#34;prometheus&#34;,
+        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
+      },
+      &#34;gridPos&#34;: {
+        &#34;h&#34;: 9,
+        &#34;w&#34;: 24,
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 3
+      },
+      &#34;id&#34;: 123123,
+      &#34;targets&#34;: [
+        {
+          &#34;datasource&#34;: {
+            &#34;type&#34;: &#34;prometheus&#34;,
+            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
+          },
+          &#34;refId&#34;: &#34;A&#34;
+        }
+      ],
+      &#34;type&#34;: &#34;gettingstarted&#34;
+    },
+    {
+      &#34;datasource&#34;: {
+        &#34;type&#34;: &#34;prometheus&#34;,
+        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
+      },
+      &#34;gridPos&#34;: {
+        &#34;h&#34;: 15,
+        &#34;w&#34;: 12,
+        &#34;x&#34;: 0,
+        &#34;y&#34;: 12
+      },
+      &#34;id&#34;: 3,
+      &#34;links&#34;: [],
+      &#34;options&#34;: {
+        &#34;folderUID&#34;: &#34;&#34;,
+        &#34;includeVars&#34;: false,
+        &#34;keepTime&#34;: false,
+        &#34;maxItems&#34;: 30,
+        &#34;query&#34;: &#34;&#34;,
+        &#34;showHeadings&#34;: true,
+        &#34;showRecentlyViewed&#34;: true,
+        &#34;showSearch&#34;: false,
+        &#34;showStarred&#34;: true,
+        &#34;tags&#34;: []
+      },
+      &#34;pluginVersion&#34;: &#34;10.3.3&#34;,
+      &#34;targets&#34;: [
+        {
+          &#34;datasource&#34;: {
+            &#34;type&#34;: &#34;prometheus&#34;,
+            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
+          },
+          &#34;refId&#34;: &#34;A&#34;
+        }
+      ],
+      &#34;title&#34;: &#34;Dashboards&#34;,
+      &#34;type&#34;: &#34;dashlist&#34;
+    },
+    {
+      &#34;datasource&#34;: {
+        &#34;type&#34;: &#34;prometheus&#34;,
+        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
+      },
+      &#34;gridPos&#34;: {
+        &#34;h&#34;: 15,
+        &#34;w&#34;: 12,
+        &#34;x&#34;: 12,
+        &#34;y&#34;: 12
+      },
+      &#34;id&#34;: 4,
+      &#34;links&#34;: [],
+      &#34;options&#34;: {
+        &#34;feedUrl&#34;: &#34;https://grafana.com/blog/news.xml&#34;,
+        &#34;showImage&#34;: true
+      },
+      &#34;targets&#34;: [
+        {
+          &#34;datasource&#34;: {
+            &#34;type&#34;: &#34;prometheus&#34;,
+            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
+          },
+          &#34;refId&#34;: &#34;A&#34;
+        }
+      ],
+      &#34;title&#34;: &#34;Latest from the blog&#34;,
+      &#34;type&#34;: &#34;news&#34;
+    }
+  ],
+  &#34;refresh&#34;: &#34;&#34;,
+  &#34;schemaVersion&#34;: 39,
+  &#34;tags&#34;: [],
+  &#34;templating&#34;: {
+    &#34;list&#34;: []
+  },
+  &#34;time&#34;: {
+    &#34;from&#34;: &#34;now-6h&#34;,
+    &#34;to&#34;: &#34;now&#34;
+  },
+  &#34;timepicker&#34;: {
+    &#34;hidden&#34;: true,
+    &#34;refresh_intervals&#34;: [
+      &#34;5s&#34;,
+      &#34;10s&#34;,
+      &#34;30s&#34;,
+      &#34;1m&#34;,
+      &#34;5m&#34;,
+      &#34;15m&#34;,
+      &#34;30m&#34;,
+      &#34;1h&#34;,
+      &#34;2h&#34;,
+      &#34;1d&#34;
+    ],
+    &#34;time_options&#34;: [
+      &#34;5m&#34;,
+      &#34;15m&#34;,
+      &#34;1h&#34;,
+      &#34;6h&#34;,
+      &#34;12h&#34;,
+      &#34;24h&#34;,
+      &#34;2d&#34;,
+      &#34;7d&#34;,
+      &#34;30d&#34;
+    ],
+    &#34;type&#34;: &#34;timepicker&#34;
+  },
+  &#34;timezone&#34;: &#34;browser&#34;,
+  &#34;title&#34;: &#34;Home&#34;,
+  &#34;version&#34;: 0,
+  &#34;weekStart&#34;: &#34;&#34;
+}
+</code></pre><p>이 JSON은 <strong>Grafana 대시보드 설정 파일</strong>입니다. 구체적으로는 Grafana에서 &ldquo;Home&quot;이라는 이름의 기본 대시보드를 정의한 구성입니다. 아래에 주요 항목들을 설명드리겠습니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 20 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Tue, 20 May 2025 20:20:45 &#43;0900">
+                Tue, 20 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/video_streaming_tool/">동영상 스트리밍에 사용되는 주요 기술 및 툴</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>동영상 스트리밍에 사용되는 주요 기술 및 툴은 다양한 목적(예: 실시간 스트리밍, VOD, 콘텐츠 전송, 인코딩, 플레이어 구현 등)에 따라 구분됩니다. 아래에 주요 기술과 툴을 영역별로 정리해드릴게요.</p>
+<hr>
+<h3 id="1-비디오-인코딩-및-트랜스코딩">1. <strong>비디오 인코딩 및 트랜스코딩</strong></h3>
+<ul>
+<li><strong>FFmpeg</strong>: 오픈소스 멀티미디어 처리 도구. 인코딩, 디코딩, 트랜스코딩, 포맷 변경, 필터링 등에 사용.</li>
+<li><strong>x264 / x265</strong>: 각각 H.264, H.265 표준 인코딩 라이브러리.</li>
+<li><strong>AWS Elemental MediaConvert</strong>: AWS에서 제공하는 클라우드 기반 트랜스코딩 서비스.</li>
+</ul>
+<hr>
+<h3 id="2-스트리밍-프로토콜">2. <strong>스트리밍 프로토콜</strong></h3>
+<ul>
+<li><strong>HLS (HTTP Live Streaming)</strong>: 애플이 개발. 대부분의 플랫폼에서 지원되며, 세그먼트 방식.</li>
+<li><strong>DASH (Dynamic Adaptive Streaming over HTTP)</strong>: MPEG 표준 기반으로, HLS와 비슷하지만 플랫폼 독립적.</li>
+<li><strong>RTMP (Real-Time Messaging Protocol)</strong>: 주로 라이브 방송에 사용되며, YouTube Live, Twitch 등에서 여전히 활용.</li>
+<li><strong>WebRTC</strong>: 지연이 극히 낮은 실시간 양방향 통신에 최적화된 스트리밍 프로토콜.</li>
+</ul>
+<hr>
+<h3 id="3-콘텐츠-전송-네트워크-cdn">3. <strong>콘텐츠 전송 네트워크 (CDN)</strong></h3>
+<ul>
+<li><strong>Cloudflare Stream / CDN</strong>: 빠르고 안정적인 콘텐츠 전송을 위한 글로벌 네트워크.</li>
+<li><strong>AWS CloudFront</strong>, <strong>Akamai</strong>, <strong>Fastly</strong>: 대형 스트리밍 서비스에서 많이 사용.</li>
+</ul>
+<hr>
+<h3 id="4-플레이어-및-프론트엔드-도구">4. <strong>플레이어 및 프론트엔드 도구</strong></h3>
+<ul>
+<li><strong>Video.js</strong>: HTML5 기반의 오픈소스 비디오 플레이어.</li>
+<li><strong>Shaka Player</strong>: 구글이 만든 MPEG-DASH 및 HLS 지원 오픈소스 플레이어.</li>
+<li><strong>HLS.js</strong>: JavaScript 기반 HLS 재생 라이브러리.</li>
+<li><strong>ExoPlayer</strong> (Android), <strong>AVPlayer</strong> (iOS): 모바일 앱용 기본 플레이어 SDK.</li>
+</ul>
+<hr>
+<h3 id="5-라이브-스트리밍-플랫폼서비스">5. <strong>라이브 스트리밍 플랫폼/서비스</strong></h3>
+<ul>
+<li><strong>OBS Studio (Open Broadcaster Software)</strong>: 무료 라이브 방송 도구, Twitch, YouTube에 방송 가능.</li>
+<li><strong>StreamYard, Restream, Wirecast</strong>: 라이브 멀티플랫폼 스트리밍 툴.</li>
+<li><strong>Wowza Streaming Engine</strong>: 엔터프라이즈급 라이브 및 VOD 스트리밍 서버.</li>
+</ul>
+<hr>
+<h3 id="6-drm-디지털-저작권-관리-및-보안">6. <strong>DRM (디지털 저작권 관리) 및 보안</strong></h3>
+<ul>
+<li><strong>Widevine (Google)</strong>, <strong>PlayReady (Microsoft)</strong>, <strong>FairPlay (Apple)</strong>: 각 플랫폼용 DRM 시스템.</li>
+<li><strong>AES-128 Encryption</strong>: HLS와 함께 사용되는 콘텐츠 암호화 표준.</li>
+</ul>
+<hr>
+<h3 id="7-모니터링-및-분석">7. <strong>모니터링 및 분석</strong></h3>
+<ul>
+<li><strong>Mux</strong>, <strong>Conviva</strong>, <strong>Bitmovin Analytics</strong>: 사용자 경험, 버퍼링, 시청 행동 분석 등 제공.</li>
+<li><strong>Prometheus + Grafana</strong>: 서버 측 스트리밍 성능 및 지표 모니터링.</li>
+</ul>
+<hr>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sun, 18 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Sun, 18 May 2025 20:20:45 &#43;0900">
+                Sun, 18 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/mysql_slow_query/">MySql slow query 모니터링</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MySQL에서 <strong>Slow Query(슬로우 쿼리)</strong> 를 모니터링하는 것은 성능 최적화를 위한 중요한 작업입니다. 다음은 슬로우 쿼리를 모니터링하는 일반적인 방법들입니다:</p>
+<hr>
+<h3 id="1-슬로우-쿼리-로그-활성화하기">1. <strong>슬로우 쿼리 로그 활성화하기</strong></h3>
+<p>슬로우 쿼리를 기록하기 위해 MySQL 설정을 조정합니다.</p>
+<h4 id="방법-1-mycnf-또는-myini-파일-수정">방법 1: <code>my.cnf</code> 또는 <code>my.ini</code> 파일 수정</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[mysqld]</span>
+</span></span><span class="line"><span class="cl"><span class="na">slow_query_log</span> <span class="o">=</span> <span class="s">1</span>
+</span></span><span class="line"><span class="cl"><span class="na">slow_query_log_file</span> <span class="o">=</span> <span class="s">/var/log/mysql/slow.log</span>
+</span></span><span class="line"><span class="cl"><span class="na">long_query_time</span> <span class="o">=</span> <span class="s">1</span>
+</span></span><span class="line"><span class="cl"><span class="na">log_queries_not_using_indexes</span> <span class="o">=</span> <span class="s">1</span>
+</span></span></code></pre></div><ul>
+<li><code>slow_query_log</code>: 슬로우 쿼리 로그 기능 활성화</li>
+<li><code>slow_query_log_file</code>: 로그 파일 위치</li>
+<li><code>long_query_time</code>: 몇 초 이상 걸리는 쿼리를 느린 쿼리로 간주할지 설정 (초 단위)</li>
+<li><code>log_queries_not_using_indexes</code>: 인덱스를 사용하지 않는 쿼리도 로그에 기록</li>
+</ul>
+<p>설정 후 MySQL을 재시작해야 반영됩니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 13 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Tue, 13 May 2025 20:20:45 &#43;0900">
+                Tue, 13 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -812,214 +1135,6 @@
               <relative-time datetime=" Thu, 01 May 2025 23:40:45 &#43;0900" class="no-wrap"
                 title=" Thu, 01 May 2025 23:40:45 &#43;0900">
                 Thu, 01 May 2025 23:40:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/filestream_memory/">File을 stream 방식으로 write할 때, 메모리는?</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring Boot에서 파일을 스트리밍(Stream) 방식으로 <strong>write</strong>할 때, <strong>메모리에 올릴지 여부는 사용 방식에 따라 달라집니다</strong>. <!-- raw HTML omitted -->
-하지만 일반적인 경우 스트리밍은 <strong>메모리 사용을 최소화하기 위한 기법</strong>으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.</p>
-<hr>
-<h2 id="-메모리에-올리지-않는-경우-streaming-방식">✅ 메모리에 올리지 않는 경우 (Streaming 방식)</h2>
-<p>Java에서 <code>InputStream</code> → <code>OutputStream</code> 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="s">&#34;output.txt&#34;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">8192</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">// 8KB 버퍼</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">bytesRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">,</span><span class="w"> </span><span class="n">0</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>이 방식은:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 30 Apr 2025 13:25:18 &#43;0900" class="no-wrap"
-                title=" Wed, 30 Apr 2025 13:25:18 &#43;0900">
-                Wed, 30 Apr 2025 13:25:18 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/servlet/">servlet이란?</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="servlet이란">Servlet이란?</h1>
-<p><strong>Servlet</strong>은 <strong>Java</strong>를 기반으로 작성된 서버 측 프로그램으로, <strong>클라이언트(주로 웹 브라우저)의 요청을 처리하고, 응답을 생성하는 역할</strong>을 합니다. 주로 <strong>HTTP 요청과 응답</strong>을 처리하기 위해 사용되며, Java EE (이후 Jakarta EE로 이름 변경) 스펙의 일부입니다.</p>
-<p>Servlet은 기본적으로 <strong>웹 애플리케이션 서버</strong>(Tomcat, Jetty 등) 위에서 동작하며, 웹 서버와 클라이언트 간의 중간 처리자로 기능합니다.</p>
-<hr>
-<h1 id="servlet의-주요-특징">Servlet의 주요 특징</h1>
-<ul>
-<li><strong>Java 언어 기반</strong>: 플랫폼 독립적이며 객체 지향 프로그래밍의 장점을 가집니다.</li>
-<li><strong>요청-응답 처리</strong>: HTTP 요청(<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code> 등)을 받아서 필요한 비즈니스 로직을 수행하고, 결과를 다시 클라이언트에 전송합니다.</li>
-<li><strong>확장성</strong>: 추가 설정과 라이프사이클 관리가 가능해 복잡한 웹 애플리케이션 개발이 가능합니다.</li>
-<li><strong>스레드 기반</strong>: 하나의 Servlet 인스턴스가 다수의 요청을 처리하기 위해 여러 스레드와 함께 동작합니다.</li>
-<li><strong>라이프사이클 관리</strong>: <code>init()</code>, <code>service()</code>, <code>destroy()</code> 메서드를 통해 생명주기를 관리합니다.</li>
-</ul>
-<hr>
-<h1 id="servlet의-동작-방식">Servlet의 동작 방식</h1>
-<ol>
-<li><strong>클라이언트 요청</strong>: 사용자가 브라우저를 통해 서버로 요청을 보냅니다.</li>
-<li><strong>웹 서버 전달</strong>: 요청은 웹 서버(Tomcat 등)에 의해 해당 Servlet에 전달됩니다.</li>
-<li><strong>Servlet 요청 처리</strong>:
-<ul>
-<li><code>service()</code> 메서드가 호출되어 요청을 처리합니다.</li>
-<li>요청 방식에 따라 <code>doGet()</code>, <code>doPost()</code> 등의 메서드가 실행됩니다.</li>
-</ul>
-</li>
-<li><strong>응답 생성</strong>: 처리 결과를 <code>HttpServletResponse</code> 객체를 통해 클라이언트로 반환합니다.</li>
-<li><strong>라이프사이클 종료</strong>: 서버가 내려가거나 특정 상황에서 <code>destroy()</code>가 호출되어 정리 작업을 합니다.</li>
-</ol>
-<hr>
-<h1 id="servlet의-기본-구조-예제">Servlet의 기본 구조 (예제)</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletException</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.annotation.WebServlet</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServlet</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletRequest</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletResponse</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">&#34;text/html&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">write</span><span class="p">(</span><span class="s">&#34;&lt;h1&gt;Hello, Servlet!&lt;/h1&gt;&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>이 코드는 <code>/hello</code> 경로로 요청이 오면 <strong>&ldquo;Hello, Servlet!&rdquo;</strong> 이라는 HTML을 클라이언트에 반환합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 29 Apr 2025 20:19:45 &#43;0900" class="no-wrap"
-                title=" Tue, 29 Apr 2025 20:19:45 &#43;0900">
-                Tue, 29 Apr 2025 20:19:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/abstract_interface/">abstract class 와 interface</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java에서 <code>abstract class</code>와 <code>interface</code>는 둘 다 **추상화(abstraction)**를 위한 수단이지만, 설계 목적과 사용 방식에 중요한 차이가 있습니다. 아래에 그 차이점을 정리해 드릴게요.</p>
-<hr>
-<h2 id="-공통점">✅ 공통점</h2>
-<ul>
-<li>둘 다 <strong>인스턴스화할 수 없음</strong></li>
-<li>둘 다 <strong>메서드 시그니처만 선언</strong>하고, 구현은 하위 클래스(또는 구현 클래스)에서 담당</li>
-<li>둘 다 **다형성(polymorphism)**을 위한 수단</li>
-</ul>
-<hr>
-<h2 id="-주요-차이점">🔍 주요 차이점</h2>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th><code>abstract class</code></th>
-          <th><code>interface</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>키워드</td>
-          <td><code>abstract class ClassName</code></td>
-          <td><code>interface InterfaceName</code></td>
-      </tr>
-      <tr>
-          <td>다중 상속</td>
-          <td><strong>불가</strong> (단일 상속만 가능)</td>
-          <td><strong>가능</strong> (여러 인터페이스 구현 가능)</td>
-      </tr>
-      <tr>
-          <td>생성자</td>
-          <td>생성자 정의 가능</td>
-          <td>생성자 없음</td>
-      </tr>
-      <tr>
-          <td>필드</td>
-          <td>인스턴스 변수, 정적 변수 가능</td>
-          <td><code>public static final</code> 상수만 선언 가능 (Java 8 이전 기준)</td>
-      </tr>
-      <tr>
-          <td>메서드 구현</td>
-          <td>일부 메서드 구현 가능</td>
-          <td>Java 8부터는 <code>default</code>, <code>static</code> 메서드 구현 가능</td>
-      </tr>
-      <tr>
-          <td>접근 제어자</td>
-          <td>다양한 접근 제어자(<code>private</code>, <code>protected</code>, <code>public</code>) 사용 가능</td>
-          <td>모든 메서드는 기본적으로 <code>public abstract</code> (Java 9 이후 <code>private</code> 메서드도 가능)</td>
-      </tr>
-      <tr>
-          <td>목적</td>
-          <td><strong>&ldquo;IS-A&rdquo; 관계 (상속 기반의 계층화)</strong></td>
-          <td><strong>기능 정의용, 계약 기반 구조 (다형성, 플러그인)</strong></td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="-java-8-이후-달라진-점">✨ Java 8+ 이후 달라진 점</h2>
-<ul>
-<li>Java 8부터 인터페이스에 <code>default</code> 메서드와 <code>static</code> 메서드 추가 가능
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">interface</span> <span class="nc">Vehicle</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Starting...&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div></li>
-<li>Java 9부터는 <code>private</code> 메서드도 인터페이스 내부에서 선언 가능</li>
-</ul>
-<hr>
-<h2 id="-언제-어떤-걸-써야-할까">✅ 언제 어떤 걸 써야 할까?</h2>
-<ul>
-<li>
-<p><code>abstract class</code>가 적합한 경우:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 24 Apr 2025 21:48:45 &#43;0900" class="no-wrap"
-                title=" Thu, 24 Apr 2025 21:48:45 &#43;0900">
-                Thu, 24 Apr 2025 21:48:45 &#43;0900
               </relative-time>
             </div>
           </div>

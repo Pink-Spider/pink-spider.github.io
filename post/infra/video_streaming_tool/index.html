@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Chat GPT 기능설정값 temperature, top-p | Pink Spider
+    동영상 스트리밍에 사용되는 주요 기술 및 툴 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,24 +27,22 @@
   
   <meta
   name="description"
-  content="temperature와 top-p(또는 nucleus sampling)는 자연어 생성 모델이 출력할 단어를 선택할 때의 랜덤성 조절 파라미터입니다. 두 개념은 유사한 역할을 하지만 작동 방식이 다릅니다. 아래에 각 개념에 대한 자세한 설명과 예제를 제공하겠습니다.
-🔥 Temperature: &ldquo;선택의 확률을 부드럽게 조정&rdquo; 개념 temperature는 모델이 다음 단어를 선택할 때의 확률 분포를 얼마나 평탄하게 만들지를 결정합니다. 기본값은 1.0이며, 이 값을 낮추면 더 결정론적(deterministic), **높이면 더 창의적(random)**이 됩니다. 작동 방식 모델이 생성 가능한 단어에 대해 logit(점수)을 부여한 후 softmax 함수를 통해 확률을 만듭니다.
-"
+  content="동영상 스트리밍에 사용되는 주요 기술 및 툴은 다양한 목적(예: 실시간 스트리밍, VOD, 콘텐츠 전송, 인코딩, 플레이어 구현 등)에 따라 구분됩니다. 아래에 주요 기술과 툴을 영역별로 정리해드릴게요.
+1. 비디오 인코딩 및 트랜스코딩 FFmpeg: 오픈소스 멀티미디어 처리 도구. 인코딩, 디코딩, 트랜스코딩, 포맷 변경, 필터링 등에 사용. x264 / x265: 각각 H.264, H.265 표준 인코딩 라이브러리. AWS Elemental MediaConvert: AWS에서 제공하는 클라우드 기반 트랜스코딩 서비스. 2. 스트리밍 프로토콜 HLS (HTTP Live Streaming): 애플이 개발. 대부분의 플랫폼에서 지원되며, 세그먼트 방식. DASH (Dynamic Adaptive Streaming over HTTP): MPEG 표준 기반으로, HLS와 비슷하지만 플랫폼 독립적. RTMP (Real-Time Messaging Protocol): 주로 라이브 방송에 사용되며, YouTube Live, Twitch 등에서 여전히 활용. WebRTC: 지연이 극히 낮은 실시간 양방향 통신에 최적화된 스트리밍 프로토콜. 3. 콘텐츠 전송 네트워크 (CDN) Cloudflare Stream / CDN: 빠르고 안정적인 콘텐츠 전송을 위한 글로벌 네트워크. AWS CloudFront, Akamai, Fastly: 대형 스트리밍 서비스에서 많이 사용. 4. 플레이어 및 프론트엔드 도구 Video.js: HTML5 기반의 오픈소스 비디오 플레이어. Shaka Player: 구글이 만든 MPEG-DASH 및 HLS 지원 오픈소스 플레이어. HLS.js: JavaScript 기반 HLS 재생 라이브러리. ExoPlayer (Android), AVPlayer (iOS): 모바일 앱용 기본 플레이어 SDK. 5. 라이브 스트리밍 플랫폼/서비스 OBS Studio (Open Broadcaster Software): 무료 라이브 방송 도구, Twitch, YouTube에 방송 가능. StreamYard, Restream, Wirecast: 라이브 멀티플랫폼 스트리밍 툴. Wowza Streaming Engine: 엔터프라이즈급 라이브 및 VOD 스트리밍 서버. 6. DRM (디지털 저작권 관리) 및 보안 Widevine (Google), PlayReady (Microsoft), FairPlay (Apple): 각 플랫폼용 DRM 시스템. AES-128 Encryption: HLS와 함께 사용되는 콘텐츠 암호화 표준. 7. 모니터링 및 분석 Mux, Conviva, Bitmovin Analytics: 사용자 경험, 버퍼링, 시청 행동 분석 등 제공. Prometheus &#43; Grafana: 서버 측 스트리밍 성능 및 지표 모니터링. "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/til/gpt_temperature_top-p/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/infra/video_streaming_tool/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Chat GPT 기능설정값 temperature, top-p - Pink Spider"
+  content="동영상 스트리밍에 사용되는 주요 기술 및 툴 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="temperature와 top-p(또는 nucleus sampling)는 자연어 생성 모델이 출력할 단어를 선택할 때의 랜덤성 조절 파라미터입니다. 두 개념은 유사한 역할을 하지만 작동 방식이 다릅니다. 아래에 각 개념에 대한 자세한 설명과 예제를 제공하겠습니다.
-🔥 Temperature: &ldquo;선택의 확률을 부드럽게 조정&rdquo; 개념 temperature는 모델이 다음 단어를 선택할 때의 확률 분포를 얼마나 평탄하게 만들지를 결정합니다. 기본값은 1.0이며, 이 값을 낮추면 더 결정론적(deterministic), **높이면 더 창의적(random)**이 됩니다. 작동 방식 모델이 생성 가능한 단어에 대해 logit(점수)을 부여한 후 softmax 함수를 통해 확률을 만듭니다.
-"
+  content="동영상 스트리밍에 사용되는 주요 기술 및 툴은 다양한 목적(예: 실시간 스트리밍, VOD, 콘텐츠 전송, 인코딩, 플레이어 구현 등)에 따라 구분됩니다. 아래에 주요 기술과 툴을 영역별로 정리해드릴게요.
+1. 비디오 인코딩 및 트랜스코딩 FFmpeg: 오픈소스 멀티미디어 처리 도구. 인코딩, 디코딩, 트랜스코딩, 포맷 변경, 필터링 등에 사용. x264 / x265: 각각 H.264, H.265 표준 인코딩 라이브러리. AWS Elemental MediaConvert: AWS에서 제공하는 클라우드 기반 트랜스코딩 서비스. 2. 스트리밍 프로토콜 HLS (HTTP Live Streaming): 애플이 개발. 대부분의 플랫폼에서 지원되며, 세그먼트 방식. DASH (Dynamic Adaptive Streaming over HTTP): MPEG 표준 기반으로, HLS와 비슷하지만 플랫폼 독립적. RTMP (Real-Time Messaging Protocol): 주로 라이브 방송에 사용되며, YouTube Live, Twitch 등에서 여전히 활용. WebRTC: 지연이 극히 낮은 실시간 양방향 통신에 최적화된 스트리밍 프로토콜. 3. 콘텐츠 전송 네트워크 (CDN) Cloudflare Stream / CDN: 빠르고 안정적인 콘텐츠 전송을 위한 글로벌 네트워크. AWS CloudFront, Akamai, Fastly: 대형 스트리밍 서비스에서 많이 사용. 4. 플레이어 및 프론트엔드 도구 Video.js: HTML5 기반의 오픈소스 비디오 플레이어. Shaka Player: 구글이 만든 MPEG-DASH 및 HLS 지원 오픈소스 플레이어. HLS.js: JavaScript 기반 HLS 재생 라이브러리. ExoPlayer (Android), AVPlayer (iOS): 모바일 앱용 기본 플레이어 SDK. 5. 라이브 스트리밍 플랫폼/서비스 OBS Studio (Open Broadcaster Software): 무료 라이브 방송 도구, Twitch, YouTube에 방송 가능. StreamYard, Restream, Wirecast: 라이브 멀티플랫폼 스트리밍 툴. Wowza Streaming Engine: 엔터프라이즈급 라이브 및 VOD 스트리밍 서버. 6. DRM (디지털 저작권 관리) 및 보안 Widevine (Google), PlayReady (Microsoft), FairPlay (Apple): 각 플랫폼용 DRM 시스템. AES-128 Encryption: HLS와 함께 사용되는 콘텐츠 암호화 표준. 7. 모니터링 및 분석 Mux, Conviva, Bitmovin Analytics: 사용자 경험, 버퍼링, 시청 행동 분석 등 제공. Prometheus &#43; Grafana: 서버 측 스트리밍 성능 및 지표 모니터링. "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -60,16 +58,15 @@
 />
 <meta
   property="og:title"
-  content="Chat GPT 기능설정값 temperature, top-p - Pink Spider"
+  content="동영상 스트리밍에 사용되는 주요 기술 및 툴 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="temperature와 top-p(또는 nucleus sampling)는 자연어 생성 모델이 출력할 단어를 선택할 때의 랜덤성 조절 파라미터입니다. 두 개념은 유사한 역할을 하지만 작동 방식이 다릅니다. 아래에 각 개념에 대한 자세한 설명과 예제를 제공하겠습니다.
-🔥 Temperature: &ldquo;선택의 확률을 부드럽게 조정&rdquo; 개념 temperature는 모델이 다음 단어를 선택할 때의 확률 분포를 얼마나 평탄하게 만들지를 결정합니다. 기본값은 1.0이며, 이 값을 낮추면 더 결정론적(deterministic), **높이면 더 창의적(random)**이 됩니다. 작동 방식 모델이 생성 가능한 단어에 대해 logit(점수)을 부여한 후 softmax 함수를 통해 확률을 만듭니다.
-"
+  content="동영상 스트리밍에 사용되는 주요 기술 및 툴은 다양한 목적(예: 실시간 스트리밍, VOD, 콘텐츠 전송, 인코딩, 플레이어 구현 등)에 따라 구분됩니다. 아래에 주요 기술과 툴을 영역별로 정리해드릴게요.
+1. 비디오 인코딩 및 트랜스코딩 FFmpeg: 오픈소스 멀티미디어 처리 도구. 인코딩, 디코딩, 트랜스코딩, 포맷 변경, 필터링 등에 사용. x264 / x265: 각각 H.264, H.265 표준 인코딩 라이브러리. AWS Elemental MediaConvert: AWS에서 제공하는 클라우드 기반 트랜스코딩 서비스. 2. 스트리밍 프로토콜 HLS (HTTP Live Streaming): 애플이 개발. 대부분의 플랫폼에서 지원되며, 세그먼트 방식. DASH (Dynamic Adaptive Streaming over HTTP): MPEG 표준 기반으로, HLS와 비슷하지만 플랫폼 독립적. RTMP (Real-Time Messaging Protocol): 주로 라이브 방송에 사용되며, YouTube Live, Twitch 등에서 여전히 활용. WebRTC: 지연이 극히 낮은 실시간 양방향 통신에 최적화된 스트리밍 프로토콜. 3. 콘텐츠 전송 네트워크 (CDN) Cloudflare Stream / CDN: 빠르고 안정적인 콘텐츠 전송을 위한 글로벌 네트워크. AWS CloudFront, Akamai, Fastly: 대형 스트리밍 서비스에서 많이 사용. 4. 플레이어 및 프론트엔드 도구 Video.js: HTML5 기반의 오픈소스 비디오 플레이어. Shaka Player: 구글이 만든 MPEG-DASH 및 HLS 지원 오픈소스 플레이어. HLS.js: JavaScript 기반 HLS 재생 라이브러리. ExoPlayer (Android), AVPlayer (iOS): 모바일 앱용 기본 플레이어 SDK. 5. 라이브 스트리밍 플랫폼/서비스 OBS Studio (Open Broadcaster Software): 무료 라이브 방송 도구, Twitch, YouTube에 방송 가능. StreamYard, Restream, Wirecast: 라이브 멀티플랫폼 스트리밍 툴. Wowza Streaming Engine: 엔터프라이즈급 라이브 및 VOD 스트리밍 서버. 6. DRM (디지털 저작권 관리) 및 보안 Widevine (Google), PlayReady (Microsoft), FairPlay (Apple): 각 플랫폼용 DRM 시스템. AES-128 Encryption: HLS와 함께 사용되는 콘텐츠 암호화 표준. 7. 모니터링 및 분석 Mux, Conviva, Bitmovin Analytics: 사용자 경험, 버퍼링, 시청 행동 분석 등 제공. Prometheus &#43; Grafana: 서버 측 스트리밍 성능 및 지표 모니터링. "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/til/gpt_temperature_top-p/" />
-<meta property="og:site_name" content="Chat GPT 기능설정값 temperature, top-p" />
+<meta property="og:url" content="https://pink-spider.github.io/post/infra/video_streaming_tool/" />
+<meta property="og:site_name" content="동영상 스트리밍에 사용되는 주요 기술 및 툴" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -77,7 +74,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-05-13 18:20:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-05-18 20:20:45 &#43;0900 KST" />
 
 
 
@@ -287,18 +284,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/til/gpt_temperature_top-p/">Chat GPT 기능설정값 temperature, top-p</a></strong>
+                      href="https://pink-spider.github.io/post/infra/video_streaming_tool/">동영상 스트리밍에 사용되는 주요 기술 및 툴</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Tue, 13 May 2025 18:20:45 &#43;0900"
+                  Created <relative-time datetime="Sun, 18 May 2025 20:20:45 &#43;0900"
                     class="no-wrap">
-                    Tue, 13 May 2025 18:20:45 &#43;0900</relative-time>
+                    Sun, 18 May 2025 20:20:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 13 May 2025 16:08:24 &#43;0900"
+                  Modified <relative-time datetime="Wed, 21 May 2025 09:45:02 &#43;0900"
                     class="no-wrap">
-                    Tue, 13 May 2025 16:08:24 &#43;0900</relative-time>
+                    Wed, 21 May 2025 09:45:02 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -328,9 +325,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      890 Words
+                      639 Words
                     <span class="file-info-divider"></span>
-                                        4 min
+                                        3 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -341,139 +338,54 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p><code>temperature</code>와 <code>top-p</code>(또는 <strong>nucleus sampling</strong>)는 <strong>자연어 생성 모델</strong>이 출력할 단어를 선택할 때의 <strong>랜덤성 조절 파라미터</strong>입니다. 두 개념은 유사한 역할을 하지만 <strong>작동 방식이 다릅니다</strong>. 아래에 각 개념에 대한 자세한 설명과 예제를 제공하겠습니다.</p>
+                <article class="markdown-body entry-content container-lg"><p>동영상 스트리밍에 사용되는 주요 기술 및 툴은 다양한 목적(예: 실시간 스트리밍, VOD, 콘텐츠 전송, 인코딩, 플레이어 구현 등)에 따라 구분됩니다. 아래에 주요 기술과 툴을 영역별로 정리해드릴게요.</p>
 <hr>
-<h2 id="-temperature-선택의-확률을-부드럽게-조정">🔥 Temperature: &ldquo;선택의 확률을 부드럽게 조정&rdquo;</h2>
-<h3 id="개념">개념</h3>
+<h3 id="1-비디오-인코딩-및-트랜스코딩">1. <strong>비디오 인코딩 및 트랜스코딩</strong></h3>
 <ul>
-<li><code>temperature</code>는 <strong>모델이 다음 단어를 선택할 때의 확률 분포를 얼마나 평탄하게 만들지</strong>를 결정합니다.</li>
-<li>기본값은 <code>1.0</code>이며, 이 값을 <strong>낮추면 더 결정론적(deterministic)</strong>, **높이면 더 창의적(random)**이 됩니다.</li>
-</ul>
-<h3 id="작동-방식">작동 방식</h3>
-<ul>
-<li>
-<p>모델이 생성 가능한 단어에 대해 logit(점수)을 부여한 후 softmax 함수를 통해 확률을 만듭니다.</p>
-</li>
-<li>
-<p>이때 softmax에 들어가기 전 logit을 <code>temperature</code>로 나눕니다.</p>
-<ul>
-<li>낮은 <code>temperature</code> → 큰 logit 격차 → 확률이 한쪽으로 치우침 → <strong>정해진 단어만 출력</strong></li>
-<li>높은 <code>temperature</code> → logit 격차 축소 → 확률 분산 → <strong>다양한 단어 가능성</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="값에-따른-특성">값에 따른 특성</h3>
-<table>
-  <thead>
-      <tr>
-          <th>Temperature 값</th>
-          <th>생성 특성</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>0.1 ~ 0.3</td>
-          <td>매우 보수적, 반복적일 수 있음</td>
-      </tr>
-      <tr>
-          <td>0.7</td>
-          <td>일반적으로 적절한 창의성</td>
-      </tr>
-      <tr>
-          <td>1.0</td>
-          <td>균형 있는 창의성</td>
-      </tr>
-      <tr>
-          <td>&gt; 1.0</td>
-          <td>매우 창의적, 논리 무너질 수 있음</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="예제">예제</h3>
-<p>입력 문장: &ldquo;AI is going to&rdquo;</p>
-<ul>
-<li><code>temperature = 0.2</code>: &ldquo;AI is going to <strong>change the world</strong>.&rdquo;</li>
-<li><code>temperature = 1.0</code>: &ldquo;AI is going to <strong>reshape the way humans interact with machines</strong>.&rdquo;</li>
-<li><code>temperature = 1.5</code>: &ldquo;AI is going to <strong>dance in the digital symphony of consciousness</strong>.&rdquo;</li>
+<li><strong>FFmpeg</strong>: 오픈소스 멀티미디어 처리 도구. 인코딩, 디코딩, 트랜스코딩, 포맷 변경, 필터링 등에 사용.</li>
+<li><strong>x264 / x265</strong>: 각각 H.264, H.265 표준 인코딩 라이브러리.</li>
+<li><strong>AWS Elemental MediaConvert</strong>: AWS에서 제공하는 클라우드 기반 트랜스코딩 서비스.</li>
 </ul>
 <hr>
-<h2 id="-top-p-nucleus-sampling-확률-누적값-기반으로-자르기">🎯 Top-p (Nucleus Sampling): &ldquo;확률 누적값 기반으로 자르기&rdquo;</h2>
-<h3 id="개념-1">개념</h3>
+<h3 id="2-스트리밍-프로토콜">2. <strong>스트리밍 프로토콜</strong></h3>
 <ul>
-<li>모델이 예측한 <strong>다음 단어 후보들 중 상위 누적 확률이 <code>p</code> 이하인 단어들만 후보로</strong> 사용하고, 이 중 하나를 샘플링합니다.</li>
-<li>즉, <strong>전체 단어 중 일부만 남기고 나머지는 잘라내는 방식</strong>입니다.</li>
-</ul>
-<h3 id="작동-방식-1">작동 방식</h3>
-<ul>
-<li>예측된 단어들의 확률을 <strong>내림차순 정렬</strong> → 누적 확률이 <code>p</code>를 넘기 전까지 단어들을 모음 → 이 집합 안에서 랜덤 선택</li>
-</ul>
-<h3 id="값에-따른-특성-1">값에 따른 특성</h3>
-<table>
-  <thead>
-      <tr>
-          <th>Top-p 값</th>
-          <th>생성 특성</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>0.1</td>
-          <td>상위 10% 단어만 선택 → <strong>보수적</strong></td>
-      </tr>
-      <tr>
-          <td>0.8</td>
-          <td>확률 분포 상위 80% 단어 → <strong>창의적</strong></td>
-      </tr>
-      <tr>
-          <td>1.0</td>
-          <td>전체 단어 사용 (즉, greedy sampling)</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="예제-1">예제</h3>
-<ul>
-<li><code>top-p = 0.1</code>: &ldquo;AI is going to <strong>revolutionize technology</strong>.&rdquo;</li>
-<li><code>top-p = 0.9</code>: &ldquo;AI is going to <strong>learn, adapt, and even imagine possibilities</strong>.&rdquo;</li>
+<li><strong>HLS (HTTP Live Streaming)</strong>: 애플이 개발. 대부분의 플랫폼에서 지원되며, 세그먼트 방식.</li>
+<li><strong>DASH (Dynamic Adaptive Streaming over HTTP)</strong>: MPEG 표준 기반으로, HLS와 비슷하지만 플랫폼 독립적.</li>
+<li><strong>RTMP (Real-Time Messaging Protocol)</strong>: 주로 라이브 방송에 사용되며, YouTube Live, Twitch 등에서 여전히 활용.</li>
+<li><strong>WebRTC</strong>: 지연이 극히 낮은 실시간 양방향 통신에 최적화된 스트리밍 프로토콜.</li>
 </ul>
 <hr>
-<h2 id="-temperature-vs-top-p">🎛️ Temperature vs Top-P</h2>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>Temperature</th>
-          <th>Top-P</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>방식</td>
-          <td>확률 분포 전체에 영향</td>
-          <td>누적 확률 기준 상위 n% 단어만 사용</td>
-      </tr>
-      <tr>
-          <td>조정 효과</td>
-          <td>전체 분포를 부드럽게 만들거나 날카롭게 만듦</td>
-          <td>샘플링 후보의 범위를 잘라냄</td>
-      </tr>
-      <tr>
-          <td>일반적인 사용</td>
-          <td><code>0.7 ~ 1.0</code></td>
-          <td><code>0.8 ~ 0.95</code></td>
-      </tr>
-      <tr>
-          <td>같이 사용할 수 있나?</td>
-          <td>✔️ 둘 다 조합 가능</td>
-          <td></td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="-실전-팁">🧠 실전 팁</h2>
+<h3 id="3-콘텐츠-전송-네트워크-cdn">3. <strong>콘텐츠 전송 네트워크 (CDN)</strong></h3>
 <ul>
-<li>둘 다 높이면 → <strong>더 창의적이고 예측 불가능한 결과</strong></li>
-<li>둘 다 낮추면 → <strong>더 보수적이고 일관성 있는 결과</strong></li>
-<li>일반적으로 <code>temperature = 0.7</code>, <code>top-p = 0.9</code> 조합이 <strong>균형</strong>이 좋음</li>
+<li><strong>Cloudflare Stream / CDN</strong>: 빠르고 안정적인 콘텐츠 전송을 위한 글로벌 네트워크.</li>
+<li><strong>AWS CloudFront</strong>, <strong>Akamai</strong>, <strong>Fastly</strong>: 대형 스트리밍 서비스에서 많이 사용.</li>
+</ul>
+<hr>
+<h3 id="4-플레이어-및-프론트엔드-도구">4. <strong>플레이어 및 프론트엔드 도구</strong></h3>
+<ul>
+<li><strong>Video.js</strong>: HTML5 기반의 오픈소스 비디오 플레이어.</li>
+<li><strong>Shaka Player</strong>: 구글이 만든 MPEG-DASH 및 HLS 지원 오픈소스 플레이어.</li>
+<li><strong>HLS.js</strong>: JavaScript 기반 HLS 재생 라이브러리.</li>
+<li><strong>ExoPlayer</strong> (Android), <strong>AVPlayer</strong> (iOS): 모바일 앱용 기본 플레이어 SDK.</li>
+</ul>
+<hr>
+<h3 id="5-라이브-스트리밍-플랫폼서비스">5. <strong>라이브 스트리밍 플랫폼/서비스</strong></h3>
+<ul>
+<li><strong>OBS Studio (Open Broadcaster Software)</strong>: 무료 라이브 방송 도구, Twitch, YouTube에 방송 가능.</li>
+<li><strong>StreamYard, Restream, Wirecast</strong>: 라이브 멀티플랫폼 스트리밍 툴.</li>
+<li><strong>Wowza Streaming Engine</strong>: 엔터프라이즈급 라이브 및 VOD 스트리밍 서버.</li>
+</ul>
+<hr>
+<h3 id="6-drm-디지털-저작권-관리-및-보안">6. <strong>DRM (디지털 저작권 관리) 및 보안</strong></h3>
+<ul>
+<li><strong>Widevine (Google)</strong>, <strong>PlayReady (Microsoft)</strong>, <strong>FairPlay (Apple)</strong>: 각 플랫폼용 DRM 시스템.</li>
+<li><strong>AES-128 Encryption</strong>: HLS와 함께 사용되는 콘텐츠 암호화 표준.</li>
+</ul>
+<hr>
+<h3 id="7-모니터링-및-분석">7. <strong>모니터링 및 분석</strong></h3>
+<ul>
+<li><strong>Mux</strong>, <strong>Conviva</strong>, <strong>Bitmovin Analytics</strong>: 사용자 경험, 버퍼링, 시청 행동 분석 등 제공.</li>
+<li><strong>Prometheus + Grafana</strong>: 서버 측 스트리밍 성능 및 지표 모니터링.</li>
 </ul>
 <hr>
 </article>
@@ -488,13 +400,13 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/mysql_slow_query/"> MySql slow query 모니터링</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/grafana_dashboard/"> Grafana DashBoard</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/cqrs/">CQRS&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/mysql_slow_query/">MySql slow query 모니터링&nbsp;</a><div> »</div>
           
         </div>
       </div>
