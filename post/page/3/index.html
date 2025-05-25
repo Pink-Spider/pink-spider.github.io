@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">67</span>
+              <span class="Counter">68</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">67</span>
+      <span class="Counter ">68</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,90 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/virtual_thread/">Virtual Thread</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><strong>Virtual Thread</strong>는 Java 19부터 도입되고 Java 21에서 정식으로 안정화된 <strong>Project Loom</strong>의 핵심 기능 중 하나로, 기존의 Java 플랫폼에서 사용되던 <strong>platform thread</strong>(또는 OS thread)와는 다른 개념입니다. Virtual thread는 **경량 스레드(lightweight thread)**로서, 수십만 개의 스레드를 동시에 실행할 수 있도록 설계되었습니다.</p>
+<hr>
+<h2 id="1-virtual-thread의-핵심-개념">1. Virtual Thread의 핵심 개념</h2>
+<h3 id="기존-platform-thread-vs-virtual-thread">기존 Platform Thread vs Virtual Thread</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>Platform Thread</th>
+          <th>Virtual Thread</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>구현</td>
+          <td>OS 레벨에서 관리</td>
+          <td>JVM에서 직접 관리</td>
+      </tr>
+      <tr>
+          <td>생성 비용</td>
+          <td>무겁고 리소스 많이 사용</td>
+          <td>가볍고 거의 무제한 생성 가능</td>
+      </tr>
+      <tr>
+          <td>컨텍스트 스위칭</td>
+          <td>OS 스케줄러에 의존</td>
+          <td>JVM 스케줄러 사용 (빠름)</td>
+      </tr>
+      <tr>
+          <td>동시성 처리</td>
+          <td>제한적인 동시성</td>
+          <td>고밀도 동시성 처리 가능</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="2-주요-특징">2. 주요 특징</h2>
+<h3 id="경량-스레드">경량 스레드</h3>
+<ul>
+<li>Virtual thread는 메모리 사용량이 훨씬 적고 생성 속도도 빠릅니다.</li>
+<li>1:1 매핑이 아닌 M:N 구조로, 여러 virtual thread가 하나의 OS thread를 공유합니다.</li>
+</ul>
+<h3 id="차단-io와의-통합">차단 I/O와의 통합</h3>
+<ul>
+<li>기존에는 <code>Thread.sleep()</code>이나 <code>InputStream.read()</code> 같은 blocking I/O 호출이 OS thread를 점유하여 비효율적이었음.</li>
+<li>Virtual thread에서는 이러한 호출이 발생하면 JVM이 해당 virtual thread를 <strong>parking</strong>하고, 다른 작업을 실행시켜 병목을 피함.</li>
+</ul>
+<h3 id="코드-스타일-유지">코드 스타일 유지</h3>
+<ul>
+<li>기존의 <code>CompletableFuture</code>, <code>Reactive</code> API 없이도 <strong>전통적인 동기 코드 스타일</strong>을 유지하면서도 고성능 비동기 처리가 가능.</li>
+</ul>
+<hr>
+<h2 id="3-사용-예시">3. 사용 예시</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello from &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Thread</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">ofVirtual</span><span class="p">().</span><span class="na">start</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>혹은 <code>Executors</code>를 통해 수많은 스레드 처리도 가능:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 24 Apr 2025 11:26:42 &#43;0900" class="no-wrap"
+                title=" Thu, 24 Apr 2025 11:26:42 &#43;0900">
+                Thu, 24 Apr 2025 11:26:42 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -996,64 +1080,6 @@ int total = numbers.stream().mapToInt(i-&gt;i).sum();
               <relative-time datetime=" Tue, 22 Apr 2025 17:48:45 &#43;0900" class="no-wrap"
                 title=" Tue, 22 Apr 2025 17:48:45 &#43;0900">
                 Tue, 22 Apr 2025 17:48:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/reentrantlock/">ReentrantLock &amp; synchronized</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>ReentrantLock</code>은 Java에서 제공하는 <strong>고급 동기화 도구</strong>로, <code>synchronized</code> 블록보다 더 많은 제어를 제공하는 <strong>Lock 인터페이스의 구현체</strong>입니다.</p>
-<hr>
-<h2 id="-reentrantlock이란">🔐 ReentrantLock이란?</h2>
-<ul>
-<li>Java의 <code>java.util.concurrent.locks.ReentrantLock</code> 클래스</li>
-<li><strong>재진입 가능(reentrant)</strong> 한 락<br>
-→ <strong>같은 스레드가 여러 번 lock을 획득해도 deadlock 없이 동작</strong></li>
-<li><code>synchronized</code>와 유사하지만 더 세밀한 컨트롤 가능</li>
-</ul>
-<hr>
-<h2 id="-기본-사용-예제">🔸 기본 사용 예제</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.locks.ReentrantLock</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Counter</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">increment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">();</span><span class="w"> </span><span class="c1">// 🔐 lock 획득</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">count</span><span class="o">++</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span><span class="w"> </span><span class="c1">// 🔓 꼭 해제해줘야 함!</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getCount</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
-<p>⚠️ <code>finally</code> 블록에서 <code>unlock()</code>을 꼭 호출해야 합니다.<br>
-예외가 발생해도 락이 풀리지 않으면 <strong>데드락(deadlock)</strong> 발생할 수 있어요.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sun, 20 Apr 2025 18:15:45 &#43;0900" class="no-wrap"
-                title=" Sun, 20 Apr 2025 18:15:45 &#43;0900">
-                Sun, 20 Apr 2025 18:15:45 &#43;0900
               </relative-time>
             </div>
           </div>
