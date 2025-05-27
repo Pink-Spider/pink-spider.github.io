@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">68</span>
+              <span class="Counter">71</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">68</span>
+      <span class="Counter ">71</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,147 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/til/msa_trasaction/">
+                    <span class="repo" title="msa에서 트랜잭션 처리 정책">msa에서 트랜잭션 처리 정책</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>MSA(Microservices Architecture) 환경에서 서비스 간 호출 중 오류가 발생했을 때의 <strong>트랜잭션 처리 정책</strong>은 일반적으로 <strong>분산 트랜잭션</strong> 또는 <strong>사후 보상 트랜잭션</strong>(Compensating Transaction) 방식으로 구분되며, 다음과 같은 용어와 정책으로 설명됩니다.</p>
+<hr>
+<h3 id="1-saga-패턴">1. <strong>SAGA 패턴</strong></h3>
+<ul>
+<li>
+<p><strong>정의</strong>: MSA에서 가장 널리 쓰이는 트랜잭션 처리 패턴으로, 각 서비스의 로컬 트랜잭션이 성공하면 다음 서비스를 호출하고, 중간에 실패 시 이전에 수행된 작업을 <strong>보상 작업(Compensation)</strong> 으로 되돌립니다.</p>
+</li>
+<li>
+<p><strong>종류</strong>:</p>
+<ul>
+<li><strong>Choreography 기반</strong>: 서비스들이 이벤트를 발행하고 서로 구독하면서 트랜잭션을 이어감. 오케스트레이터가 없음.</li>
+<li><strong>Orchestration 기반</strong>: 중앙 컨트롤러(오케스트레이터)가 전체 트랜잭션 흐름을 제어.</li>
+</ul>
+</li>
+<li>
+<p><strong>예시</strong>: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/til/singleton_pattern/">
+                    <span class="repo" title="Singleton Pattern">Singleton Pattern</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>자바(Java)에서 **싱글톤 패턴(Singleton Pattern)**은 특정 클래스의 인스턴스를 <strong>하나만 생성</strong>하고, <strong>전체 애플리케이션에서 공유</strong>할 수 있도록 보장하는 디자인 패턴입니다. 주로 <strong>공통된 설정, 로깅, 스레드 풀, 캐시, DB 연결 관리</strong> 등에 사용됩니다.</p>
+<hr>
+<h2 id="-싱글톤-패턴의-핵심-개념">✅ 싱글톤 패턴의 핵심 개념</h2>
+<ul>
+<li>클래스의 <strong>인스턴스를 하나만 생성</strong>.</li>
+<li><strong>전역 접근점(Global Access Point)</strong> 제공.</li>
+<li><strong>생성자를 <code>private</code>으로</strong> 숨김.</li>
+<li><strong>정적 메서드로 인스턴스를 반환</strong>.</li>
+</ul>
+<hr>
+<h2 id="-싱글톤-패턴-구현-예제">📦 싱글톤 패턴 구현 예제</h2>
+<h3 id="1-기본-싱글톤-lazy-initialization">1. <strong>기본 싱글톤 (Lazy Initialization)</strong></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Singleton</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 생성자를 private으로 설정하여 외부에서 new로 인스턴스 생성하지 못하도록 함</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">Singleton</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 인스턴스를 필요할 때 생성</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Singleton</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">showMessage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello from Singleton!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><strong>사용 예시:</strong></p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/til/idempotence/">
+                    <span class="repo" title="멱등성(Idempotence)에 대하여">멱등성(Idempotence)에 대하여</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>멱등성(Idempotence)은 컴퓨터 과학에서 자주 등장하는 중요한 개념입니다. 아래에 일반적인 의미와 API 개발과의 관련성을 나누어 자세히 설명드리겠습니다.</p>
+<hr>
+<h2 id="-멱등성idempotence이란">💡 멱등성(Idempotence)이란?</h2>
+<p>멱등성이란 <strong>동일한 연산을 여러 번 수행해도 결과가 같아지는 성질</strong>을 말합니다. 수학에서 출발한 개념인데, 예를 들어 함수 <code>f(x)</code>가 있을 때 다음이 성립하면 멱등함수라고 합니다:</p>
+<pre tabindex="0"><code>f(f(x)) = f(x)
+</code></pre><h3 id="예시-수학적-관점">예시 (수학적 관점)</h3>
+<ul>
+<li>절댓값 함수: <code>| |x|| = |x|</code></li>
+<li>집합의 합집합 연산: <code>A ∪ A = A</code></li>
+</ul>
+<hr>
+<h2 id="-멱등성과-api-개발">🌐 멱등성과 API 개발</h2>
+<p>웹 API 설계 시, 멱등성은 <strong>안정적이고 예측 가능한 API</strong>를 만들기 위해 매우 중요한 성질입니다. 특히 REST API에서는 각 HTTP 메서드가 멱등성을 가질지를 설계 시 명확히 고려해야 합니다.</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -704,348 +845,30 @@
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/infra/redis/redis_pub_sub_stream/">
-                    <span class="repo" title="Redis에서 pub/sub, 그리고 Redis Stream">Redis에서 pub/sub, 그리고 Redis Stream</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p>Redis에서 <code>Pub/Sub</code>(Publish/Subscribe) 기능을 사용하는 방법은 비교적 간단합니다. 아래는 기본적인 사용 방법과 예제입니다.</p>
-<hr>
-<h2 id="-개념-요약">🧠 개념 요약</h2>
-<p>Redis Pub/Sub는 <strong>메시지 브로커</strong> 역할을 수행하여, 한 클라이언트가 메시지를 발행(Publish)하면, 해당 채널을 구독(Subscribe)하고 있는 다른 클라이언트들이 실시간으로 그 메시지를 받게 됩니다.</p>
-<ul>
-<li><strong>Publisher</strong>: 채널에 메시지를 발행하는 클라이언트</li>
-<li><strong>Subscriber</strong>: 특정 채널을 구독하고 메시지를 받는 클라이언트</li>
-</ul>
-<hr>
-<h2 id="-명령어">🛠 명령어</h2>
-<ul>
-<li><code>PUBLISH &lt;channel&gt; &lt;message&gt;</code>: 메시지를 발행</li>
-<li><code>SUBSCRIBE &lt;channel&gt; [&lt;channel&gt; ...]</code>: 채널 구독</li>
-<li><code>UNSUBSCRIBE [&lt;channel&gt; ...]</code>: 채널 구독 취소</li>
-</ul>
-<hr>
-<h2 id="-예제-cli-기준">💻 예제 (CLI 기준)</h2>
-<h3 id="터미널-1--subscriber">터미널 1 – Subscriber</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
-</span></span><span class="line"><span class="cl">&gt; SUBSCRIBE news
-</span></span></code></pre></div><h3 id="터미널-2--publisher">터미널 2 – Publisher</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
-</span></span><span class="line"><span class="cl">&gt; PUBLISH news <span class="s2">&#34;Hello from Redis!&#34;</span>
-</span></span></code></pre></div><p>Subscriber는 다음과 같은 응답을 받습니다:</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/infra/grafana_dashboard/">
-                    <span class="repo" title="Grafana DashBoard">Grafana DashBoard</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h1 id="grafana-dashboard-설정">Grafana Dashboard 설정</h1>
-<pre tabindex="0"><code>{
-  &#34;annotations&#34;: {
-    &#34;list&#34;: [
-      {
-        &#34;builtIn&#34;: 1,
-        &#34;datasource&#34;: {
-          &#34;type&#34;: &#34;grafana&#34;,
-          &#34;uid&#34;: &#34;-- Grafana --&#34;
-        },
-        &#34;enable&#34;: true,
-        &#34;hide&#34;: true,
-        &#34;iconColor&#34;: &#34;rgba(0, 211, 255, 1)&#34;,
-        &#34;name&#34;: &#34;Annotations &amp; Alerts&#34;,
-        &#34;type&#34;: &#34;dashboard&#34;
-      }
-    ]
-  },
-  &#34;editable&#34;: false,
-  &#34;fiscalYearStartMonth&#34;: 0,
-  &#34;graphTooltip&#34;: 0,
-  &#34;links&#34;: [],
-  &#34;liveNow&#34;: false,
-  &#34;panels&#34;: [
-    {
-      &#34;datasource&#34;: {
-        &#34;type&#34;: &#34;prometheus&#34;,
-        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-      },
-      &#34;gridPos&#34;: {
-        &#34;h&#34;: 3,
-        &#34;w&#34;: 24,
-        &#34;x&#34;: 0,
-        &#34;y&#34;: 0
-      },
-      &#34;id&#34;: 1,
-      &#34;targets&#34;: [
-        {
-          &#34;datasource&#34;: {
-            &#34;type&#34;: &#34;prometheus&#34;,
-            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-          },
-          &#34;refId&#34;: &#34;A&#34;
-        }
-      ],
-      &#34;type&#34;: &#34;welcome&#34;
-    },
-    {
-      &#34;datasource&#34;: {
-        &#34;type&#34;: &#34;prometheus&#34;,
-        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-      },
-      &#34;gridPos&#34;: {
-        &#34;h&#34;: 9,
-        &#34;w&#34;: 24,
-        &#34;x&#34;: 0,
-        &#34;y&#34;: 3
-      },
-      &#34;id&#34;: 123123,
-      &#34;targets&#34;: [
-        {
-          &#34;datasource&#34;: {
-            &#34;type&#34;: &#34;prometheus&#34;,
-            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-          },
-          &#34;refId&#34;: &#34;A&#34;
-        }
-      ],
-      &#34;type&#34;: &#34;gettingstarted&#34;
-    },
-    {
-      &#34;datasource&#34;: {
-        &#34;type&#34;: &#34;prometheus&#34;,
-        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-      },
-      &#34;gridPos&#34;: {
-        &#34;h&#34;: 15,
-        &#34;w&#34;: 12,
-        &#34;x&#34;: 0,
-        &#34;y&#34;: 12
-      },
-      &#34;id&#34;: 3,
-      &#34;links&#34;: [],
-      &#34;options&#34;: {
-        &#34;folderUID&#34;: &#34;&#34;,
-        &#34;includeVars&#34;: false,
-        &#34;keepTime&#34;: false,
-        &#34;maxItems&#34;: 30,
-        &#34;query&#34;: &#34;&#34;,
-        &#34;showHeadings&#34;: true,
-        &#34;showRecentlyViewed&#34;: true,
-        &#34;showSearch&#34;: false,
-        &#34;showStarred&#34;: true,
-        &#34;tags&#34;: []
-      },
-      &#34;pluginVersion&#34;: &#34;10.3.3&#34;,
-      &#34;targets&#34;: [
-        {
-          &#34;datasource&#34;: {
-            &#34;type&#34;: &#34;prometheus&#34;,
-            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-          },
-          &#34;refId&#34;: &#34;A&#34;
-        }
-      ],
-      &#34;title&#34;: &#34;Dashboards&#34;,
-      &#34;type&#34;: &#34;dashlist&#34;
-    },
-    {
-      &#34;datasource&#34;: {
-        &#34;type&#34;: &#34;prometheus&#34;,
-        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-      },
-      &#34;gridPos&#34;: {
-        &#34;h&#34;: 15,
-        &#34;w&#34;: 12,
-        &#34;x&#34;: 12,
-        &#34;y&#34;: 12
-      },
-      &#34;id&#34;: 4,
-      &#34;links&#34;: [],
-      &#34;options&#34;: {
-        &#34;feedUrl&#34;: &#34;https://grafana.com/blog/news.xml&#34;,
-        &#34;showImage&#34;: true
-      },
-      &#34;targets&#34;: [
-        {
-          &#34;datasource&#34;: {
-            &#34;type&#34;: &#34;prometheus&#34;,
-            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-          },
-          &#34;refId&#34;: &#34;A&#34;
-        }
-      ],
-      &#34;title&#34;: &#34;Latest from the blog&#34;,
-      &#34;type&#34;: &#34;news&#34;
-    }
-  ],
-  &#34;refresh&#34;: &#34;&#34;,
-  &#34;schemaVersion&#34;: 39,
-  &#34;tags&#34;: [],
-  &#34;templating&#34;: {
-    &#34;list&#34;: []
-  },
-  &#34;time&#34;: {
-    &#34;from&#34;: &#34;now-6h&#34;,
-    &#34;to&#34;: &#34;now&#34;
-  },
-  &#34;timepicker&#34;: {
-    &#34;hidden&#34;: true,
-    &#34;refresh_intervals&#34;: [
-      &#34;5s&#34;,
-      &#34;10s&#34;,
-      &#34;30s&#34;,
-      &#34;1m&#34;,
-      &#34;5m&#34;,
-      &#34;15m&#34;,
-      &#34;30m&#34;,
-      &#34;1h&#34;,
-      &#34;2h&#34;,
-      &#34;1d&#34;
-    ],
-    &#34;time_options&#34;: [
-      &#34;5m&#34;,
-      &#34;15m&#34;,
-      &#34;1h&#34;,
-      &#34;6h&#34;,
-      &#34;12h&#34;,
-      &#34;24h&#34;,
-      &#34;2d&#34;,
-      &#34;7d&#34;,
-      &#34;30d&#34;
-    ],
-    &#34;type&#34;: &#34;timepicker&#34;
-  },
-  &#34;timezone&#34;: &#34;browser&#34;,
-  &#34;title&#34;: &#34;Home&#34;,
-  &#34;version&#34;: 0,
-  &#34;weekStart&#34;: &#34;&#34;
-}
-</code></pre><p>이 JSON은 <strong>Grafana 대시보드 설정 파일</strong>입니다. 구체적으로는 Grafana에서 &ldquo;Home&quot;이라는 이름의 기본 대시보드를 정의한 구성입니다. 아래에 주요 항목들을 설명드리겠습니다.</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/infra/video_streaming_tool/">
-                    <span class="repo" title="동영상 스트리밍에 사용되는 주요 기술 및 툴">동영상 스트리밍에 사용되는 주요 기술 및 툴</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p>동영상 스트리밍에 사용되는 주요 기술 및 툴은 다양한 목적(예: 실시간 스트리밍, VOD, 콘텐츠 전송, 인코딩, 플레이어 구현 등)에 따라 구분됩니다. 아래에 주요 기술과 툴을 영역별로 정리해드릴게요.</p>
-<hr>
-<h3 id="1-비디오-인코딩-및-트랜스코딩">1. <strong>비디오 인코딩 및 트랜스코딩</strong></h3>
-<ul>
-<li><strong>FFmpeg</strong>: 오픈소스 멀티미디어 처리 도구. 인코딩, 디코딩, 트랜스코딩, 포맷 변경, 필터링 등에 사용.</li>
-<li><strong>x264 / x265</strong>: 각각 H.264, H.265 표준 인코딩 라이브러리.</li>
-<li><strong>AWS Elemental MediaConvert</strong>: AWS에서 제공하는 클라우드 기반 트랜스코딩 서비스.</li>
-</ul>
-<hr>
-<h3 id="2-스트리밍-프로토콜">2. <strong>스트리밍 프로토콜</strong></h3>
-<ul>
-<li><strong>HLS (HTTP Live Streaming)</strong>: 애플이 개발. 대부분의 플랫폼에서 지원되며, 세그먼트 방식.</li>
-<li><strong>DASH (Dynamic Adaptive Streaming over HTTP)</strong>: MPEG 표준 기반으로, HLS와 비슷하지만 플랫폼 독립적.</li>
-<li><strong>RTMP (Real-Time Messaging Protocol)</strong>: 주로 라이브 방송에 사용되며, YouTube Live, Twitch 등에서 여전히 활용.</li>
-<li><strong>WebRTC</strong>: 지연이 극히 낮은 실시간 양방향 통신에 최적화된 스트리밍 프로토콜.</li>
-</ul>
-<hr>
-<h3 id="3-콘텐츠-전송-네트워크-cdn">3. <strong>콘텐츠 전송 네트워크 (CDN)</strong></h3>
-<ul>
-<li><strong>Cloudflare Stream / CDN</strong>: 빠르고 안정적인 콘텐츠 전송을 위한 글로벌 네트워크.</li>
-<li><strong>AWS CloudFront</strong>, <strong>Akamai</strong>, <strong>Fastly</strong>: 대형 스트리밍 서비스에서 많이 사용.</li>
-</ul>
-<hr>
-<h3 id="4-플레이어-및-프론트엔드-도구">4. <strong>플레이어 및 프론트엔드 도구</strong></h3>
-<ul>
-<li><strong>Video.js</strong>: HTML5 기반의 오픈소스 비디오 플레이어.</li>
-<li><strong>Shaka Player</strong>: 구글이 만든 MPEG-DASH 및 HLS 지원 오픈소스 플레이어.</li>
-<li><strong>HLS.js</strong>: JavaScript 기반 HLS 재생 라이브러리.</li>
-<li><strong>ExoPlayer</strong> (Android), <strong>AVPlayer</strong> (iOS): 모바일 앱용 기본 플레이어 SDK.</li>
-</ul>
-<hr>
-<h3 id="5-라이브-스트리밍-플랫폼서비스">5. <strong>라이브 스트리밍 플랫폼/서비스</strong></h3>
-<ul>
-<li><strong>OBS Studio (Open Broadcaster Software)</strong>: 무료 라이브 방송 도구, Twitch, YouTube에 방송 가능.</li>
-<li><strong>StreamYard, Restream, Wirecast</strong>: 라이브 멀티플랫폼 스트리밍 툴.</li>
-<li><strong>Wowza Streaming Engine</strong>: 엔터프라이즈급 라이브 및 VOD 스트리밍 서버.</li>
-</ul>
-<hr>
-<h3 id="6-drm-디지털-저작권-관리-및-보안">6. <strong>DRM (디지털 저작권 관리) 및 보안</strong></h3>
-<ul>
-<li><strong>Widevine (Google)</strong>, <strong>PlayReady (Microsoft)</strong>, <strong>FairPlay (Apple)</strong>: 각 플랫폼용 DRM 시스템.</li>
-<li><strong>AES-128 Encryption</strong>: HLS와 함께 사용되는 콘텐츠 암호화 표준.</li>
-</ul>
-<hr>
-<h3 id="7-모니터링-및-분석">7. <strong>모니터링 및 분석</strong></h3>
-<ul>
-<li><strong>Mux</strong>, <strong>Conviva</strong>, <strong>Bitmovin Analytics</strong>: 사용자 경험, 버퍼링, 시청 행동 분석 등 제공.</li>
-<li><strong>Prometheus + Grafana</strong>: 서버 측 스트리밍 성능 및 지표 모니터링.</li>
-</ul>
-<hr>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "msa%ec%97%90%ec%84%9c%20%ed%8a%b8%eb%9e%9c%ec%9e%ad%ec%85%98%20%ec%b2%98%eb%a6%ac%20%ec%a0%95%ec%b1%85",
+  "link": "https://pink-spider.github.io/post/til/msa_trasaction/",
+  "publishDate": "2025-05-26%2020:20:45"
+},
+
+{
+  "title": "Singleton%20Pattern",
+  "link": "https://pink-spider.github.io/post/til/singleton_pattern/",
+  "publishDate": "2025-05-26%2020:20:45"
+},
+
+{
+  "title": "%eb%a9%b1%eb%93%b1%ec%84%b1%28Idempotence%29%ec%97%90%20%eb%8c%80%ed%95%98%ec%97%ac",
+  "link": "https://pink-spider.github.io/post/til/idempotence/",
+  "publishDate": "2025-05-26%2020:20:45"
+},
+
 {
   "title": "Object[]%20%ec%99%80%20ArrayList%3cObject%3e%20%ec%9d%98%20%ec%b0%a8%ec%9d%b4",
   "link": "https://pink-spider.github.io/post/spring/about_list/",

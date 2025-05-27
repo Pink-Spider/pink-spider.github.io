@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Object[] 와 ArrayList&lt;Object&gt; 의 차이 | Pink Spider
+    멱등성(Idempotence)에 대하여 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,23 +27,25 @@
   
   <meta
   name="description"
-  content="Object[] 와 ArrayList 의 차이 에를 들어 Partner라는 클래스가 있을 때 Partner[] p = new ArrayList와 같은 코드는 컴파일 에러가 발생합니다. 이유는 ArrayList는 Java의 컬렉션(List) 타입이고, Partner[]는 배열 타입이기 때문에 서로 호환되지 않는 타입입니다.
-🔍 정확한 차이점 Partner[] → 고정된 크기의 배열 ArrayList&lt;Partner&gt; → 가변 크기의 리스트 (배열 기반의 컬렉션) ✅ 올바른 사용법 1. ArrayList를 사용하고 싶을 때 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); p.add(new Partner(&#34;name1&#34;)); p.add(new Partner(&#34;name2&#34;)); 리스트로 선언하고 사용하는 것이 맞습니다. 이 방법이 대부분의 경우 더 유연하고 편리합니다. 2. ArrayList → Partner[]로 변환이 필요한 경우 List&lt;Partner&gt; pList = new ArrayList&lt;&gt;(); pList.add(new Partner(&#34;a&#34;)); pList.add(new Partner(&#34;b&#34;)); Partner[] pArray = pList.toArray(new Partner[0]); // 배열로 변환 ⚠️ 잘못된 예시 Partner[] p = new ArrayList&lt;&gt;(); // ❌ 컴파일 에러: incompatible types ✅ 요약 목적 코드 ArrayList 선언 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); 리스트 → 배열 변환 Partner[] pArray = pList.toArray(new Partner[0]); 배열보다 ArrayList를 사용하는 것이 일반적으로 더 안전하고 유연합니다. 다만 배열이 필요한 API와 호환하거나 성능상 이점이 필요한 경우 배열 변환을 사용하세요.
+  content="멱등성(Idempotence)은 컴퓨터 과학에서 자주 등장하는 중요한 개념입니다. 아래에 일반적인 의미와 API 개발과의 관련성을 나누어 자세히 설명드리겠습니다.
+💡 멱등성(Idempotence)이란? 멱등성이란 동일한 연산을 여러 번 수행해도 결과가 같아지는 성질을 말합니다. 수학에서 출발한 개념인데, 예를 들어 함수 f(x)가 있을 때 다음이 성립하면 멱등함수라고 합니다:
+f(f(x)) = f(x) 예시 (수학적 관점) 절댓값 함수: | |x|| = |x| 집합의 합집합 연산: A ∪ A = A 🌐 멱등성과 API 개발 웹 API 설계 시, 멱등성은 안정적이고 예측 가능한 API를 만들기 위해 매우 중요한 성질입니다. 특히 REST API에서는 각 HTTP 메서드가 멱등성을 가질지를 설계 시 명확히 고려해야 합니다.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/about_list/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/idempotence/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Object[] 와 ArrayList&lt;Object&gt; 의 차이 - Pink Spider"
+  content="멱등성(Idempotence)에 대하여 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="Object[] 와 ArrayList 의 차이 에를 들어 Partner라는 클래스가 있을 때 Partner[] p = new ArrayList와 같은 코드는 컴파일 에러가 발생합니다. 이유는 ArrayList는 Java의 컬렉션(List) 타입이고, Partner[]는 배열 타입이기 때문에 서로 호환되지 않는 타입입니다.
-🔍 정확한 차이점 Partner[] → 고정된 크기의 배열 ArrayList&lt;Partner&gt; → 가변 크기의 리스트 (배열 기반의 컬렉션) ✅ 올바른 사용법 1. ArrayList를 사용하고 싶을 때 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); p.add(new Partner(&#34;name1&#34;)); p.add(new Partner(&#34;name2&#34;)); 리스트로 선언하고 사용하는 것이 맞습니다. 이 방법이 대부분의 경우 더 유연하고 편리합니다. 2. ArrayList → Partner[]로 변환이 필요한 경우 List&lt;Partner&gt; pList = new ArrayList&lt;&gt;(); pList.add(new Partner(&#34;a&#34;)); pList.add(new Partner(&#34;b&#34;)); Partner[] pArray = pList.toArray(new Partner[0]); // 배열로 변환 ⚠️ 잘못된 예시 Partner[] p = new ArrayList&lt;&gt;(); // ❌ 컴파일 에러: incompatible types ✅ 요약 목적 코드 ArrayList 선언 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); 리스트 → 배열 변환 Partner[] pArray = pList.toArray(new Partner[0]); 배열보다 ArrayList를 사용하는 것이 일반적으로 더 안전하고 유연합니다. 다만 배열이 필요한 API와 호환하거나 성능상 이점이 필요한 경우 배열 변환을 사용하세요.
+  content="멱등성(Idempotence)은 컴퓨터 과학에서 자주 등장하는 중요한 개념입니다. 아래에 일반적인 의미와 API 개발과의 관련성을 나누어 자세히 설명드리겠습니다.
+💡 멱등성(Idempotence)이란? 멱등성이란 동일한 연산을 여러 번 수행해도 결과가 같아지는 성질을 말합니다. 수학에서 출발한 개념인데, 예를 들어 함수 f(x)가 있을 때 다음이 성립하면 멱등함수라고 합니다:
+f(f(x)) = f(x) 예시 (수학적 관점) 절댓값 함수: | |x|| = |x| 집합의 합집합 연산: A ∪ A = A 🌐 멱등성과 API 개발 웹 API 설계 시, 멱등성은 안정적이고 예측 가능한 API를 만들기 위해 매우 중요한 성질입니다. 특히 REST API에서는 각 HTTP 메서드가 멱등성을 가질지를 설계 시 명확히 고려해야 합니다.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -60,16 +62,17 @@
 />
 <meta
   property="og:title"
-  content="Object[] 와 ArrayList&lt;Object&gt; 의 차이 - Pink Spider"
+  content="멱등성(Idempotence)에 대하여 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="Object[] 와 ArrayList 의 차이 에를 들어 Partner라는 클래스가 있을 때 Partner[] p = new ArrayList와 같은 코드는 컴파일 에러가 발생합니다. 이유는 ArrayList는 Java의 컬렉션(List) 타입이고, Partner[]는 배열 타입이기 때문에 서로 호환되지 않는 타입입니다.
-🔍 정확한 차이점 Partner[] → 고정된 크기의 배열 ArrayList&lt;Partner&gt; → 가변 크기의 리스트 (배열 기반의 컬렉션) ✅ 올바른 사용법 1. ArrayList를 사용하고 싶을 때 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); p.add(new Partner(&#34;name1&#34;)); p.add(new Partner(&#34;name2&#34;)); 리스트로 선언하고 사용하는 것이 맞습니다. 이 방법이 대부분의 경우 더 유연하고 편리합니다. 2. ArrayList → Partner[]로 변환이 필요한 경우 List&lt;Partner&gt; pList = new ArrayList&lt;&gt;(); pList.add(new Partner(&#34;a&#34;)); pList.add(new Partner(&#34;b&#34;)); Partner[] pArray = pList.toArray(new Partner[0]); // 배열로 변환 ⚠️ 잘못된 예시 Partner[] p = new ArrayList&lt;&gt;(); // ❌ 컴파일 에러: incompatible types ✅ 요약 목적 코드 ArrayList 선언 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); 리스트 → 배열 변환 Partner[] pArray = pList.toArray(new Partner[0]); 배열보다 ArrayList를 사용하는 것이 일반적으로 더 안전하고 유연합니다. 다만 배열이 필요한 API와 호환하거나 성능상 이점이 필요한 경우 배열 변환을 사용하세요.
+  content="멱등성(Idempotence)은 컴퓨터 과학에서 자주 등장하는 중요한 개념입니다. 아래에 일반적인 의미와 API 개발과의 관련성을 나누어 자세히 설명드리겠습니다.
+💡 멱등성(Idempotence)이란? 멱등성이란 동일한 연산을 여러 번 수행해도 결과가 같아지는 성질을 말합니다. 수학에서 출발한 개념인데, 예를 들어 함수 f(x)가 있을 때 다음이 성립하면 멱등함수라고 합니다:
+f(f(x)) = f(x) 예시 (수학적 관점) 절댓값 함수: | |x|| = |x| 집합의 합집합 연산: A ∪ A = A 🌐 멱등성과 API 개발 웹 API 설계 시, 멱등성은 안정적이고 예측 가능한 API를 만들기 위해 매우 중요한 성질입니다. 특히 REST API에서는 각 HTTP 메서드가 멱등성을 가질지를 설계 시 명확히 고려해야 합니다.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/about_list/" />
-<meta property="og:site_name" content="Object[] 와 ArrayList&lt;Object&gt; 의 차이" />
+<meta property="og:url" content="https://pink-spider.github.io/post/til/idempotence/" />
+<meta property="og:site_name" content="멱등성(Idempotence)에 대하여" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -77,7 +80,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-05-21 19:20:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-05-26 20:20:45 &#43;0900 KST" />
 
 
 
@@ -287,18 +290,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/about_list/">Object[] 와 ArrayList&lt;Object&gt; 의 차이</a></strong>
+                      href="https://pink-spider.github.io/post/til/idempotence/">멱등성(Idempotence)에 대하여</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 21 May 2025 19:20:45 &#43;0900"
+                  Created <relative-time datetime="Mon, 26 May 2025 20:20:45 &#43;0900"
                     class="no-wrap">
-                    Wed, 21 May 2025 19:20:45 &#43;0900</relative-time>
+                    Mon, 26 May 2025 20:20:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 21 May 2025 13:17:09 &#43;0900"
+                  Modified <relative-time datetime="Tue, 27 May 2025 09:28:23 &#43;0900"
                     class="no-wrap">
-                    Wed, 21 May 2025 13:17:09 &#43;0900</relative-time>
+                    Tue, 27 May 2025 09:28:23 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -328,9 +331,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      399 Words
+                      1734 Words
                     <span class="file-info-divider"></span>
-                                        2 min
+                                        8 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -341,57 +344,240 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="object-와-arraylistobject-의-차이">Object[] 와 ArrayList<!-- raw HTML omitted --> 의 차이</h1>
-<p>에를 들어 Partner라는 클래스가 있을 때
-<code>Partner[] p = new ArrayList</code>와 같은 코드는 <strong>컴파일 에러</strong>가 발생합니다.
-이유는 <code>ArrayList</code>는 Java의 <strong>컬렉션(List)</strong> 타입이고, <code>Partner[]</code>는 <strong>배열</strong> 타입이기 때문에 <strong>서로 호환되지 않는 타입</strong>입니다.</p>
+                <article class="markdown-body entry-content container-lg"><p>멱등성(Idempotence)은 컴퓨터 과학에서 자주 등장하는 중요한 개념입니다. 아래에 일반적인 의미와 API 개발과의 관련성을 나누어 자세히 설명드리겠습니다.</p>
 <hr>
-<h2 id="-정확한-차이점">🔍 정확한 차이점</h2>
+<h2 id="-멱등성idempotence이란">💡 멱등성(Idempotence)이란?</h2>
+<p>멱등성이란 <strong>동일한 연산을 여러 번 수행해도 결과가 같아지는 성질</strong>을 말합니다. 수학에서 출발한 개념인데, 예를 들어 함수 <code>f(x)</code>가 있을 때 다음이 성립하면 멱등함수라고 합니다:</p>
+<pre tabindex="0"><code>f(f(x)) = f(x)
+</code></pre><h3 id="예시-수학적-관점">예시 (수학적 관점)</h3>
 <ul>
-<li><code>Partner[]</code> → 고정된 크기의 배열</li>
-<li><code>ArrayList&lt;Partner&gt;</code> → 가변 크기의 리스트 (배열 기반의 컬렉션)</li>
+<li>절댓값 함수: <code>| |x|| = |x|</code></li>
+<li>집합의 합집합 연산: <code>A ∪ A = A</code></li>
 </ul>
 <hr>
-<h2 id="-올바른-사용법">✅ 올바른 사용법</h2>
-<h3 id="1-arraylist를-사용하고-싶을-때">1. <code>ArrayList</code>를 사용하고 싶을 때</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Partner</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;name1&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;name2&#34;</span><span class="p">));</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>리스트로 선언하고 사용하는 것이 맞습니다.</li>
-<li>이 방법이 대부분의 경우 더 유연하고 편리합니다.</li>
-</ul>
-<h3 id="2-arraylist--partner로-변환이-필요한-경우">2. <code>ArrayList</code> → <code>Partner[]</code>로 변환이 필요한 경우</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Partner</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;b&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Partner</span><span class="o">[]</span><span class="w"> </span><span class="n">pArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pList</span><span class="p">.</span><span class="na">toArray</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">);</span><span class="w"> </span><span class="c1">// 배열로 변환</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-잘못된-예시">⚠️ 잘못된 예시</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Partner</span><span class="o">[]</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// ❌ 컴파일 에러: incompatible types</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-요약">✅ 요약</h2>
+<h2 id="-멱등성과-api-개발">🌐 멱등성과 API 개발</h2>
+<p>웹 API 설계 시, 멱등성은 <strong>안정적이고 예측 가능한 API</strong>를 만들기 위해 매우 중요한 성질입니다. 특히 REST API에서는 각 HTTP 메서드가 멱등성을 가질지를 설계 시 명확히 고려해야 합니다.</p>
+<h3 id="http-메서드와-멱등성">HTTP 메서드와 멱등성</h3>
 <table>
   <thead>
       <tr>
-          <th>목적</th>
-          <th>코드</th>
+          <th>HTTP 메서드</th>
+          <th>멱등성 여부</th>
+          <th>설명</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><code>ArrayList</code> 선언</td>
-          <td><code>List&lt;Partner&gt; p = new ArrayList&lt;&gt;();</code></td>
+          <td>GET</td>
+          <td>✅ 멱등성 O</td>
+          <td>같은 자원을 조회하기 때문에 여러 번 요청해도 결과는 동일</td>
       </tr>
       <tr>
-          <td>리스트 → 배열 변환</td>
-          <td><code>Partner[] pArray = pList.toArray(new Partner[0]);</code></td>
+          <td>PUT</td>
+          <td>✅ 멱등성 O</td>
+          <td>자원을 “덮어쓰기” 하기 때문에 같은 데이터로 요청하면 항상 동일한 상태 유지</td>
+      </tr>
+      <tr>
+          <td>DELETE</td>
+          <td>✅ 멱등성 O</td>
+          <td>이미 삭제된 자원을 다시 삭제 요청해도 에러는 없고, 상태는 동일</td>
+      </tr>
+      <tr>
+          <td>POST</td>
+          <td>❌ 멱등성 X</td>
+          <td>새로운 자원을 생성하므로 여러 번 호출하면 중복 생성될 수 있음</td>
+      </tr>
+      <tr>
+          <td>PATCH</td>
+          <td>❌ (보통은)</td>
+          <td>일부만 수정하므로, 같은 요청 반복 시 결과가 달라질 수 있음</td>
       </tr>
   </tbody>
 </table>
-<p>배열보다 <code>ArrayList</code>를 사용하는 것이 일반적으로 더 안전하고 유연합니다.
-다만 배열이 필요한 API와 호환하거나 성능상 이점이 필요한 경우 배열 변환을 사용하세요.</p>
+<hr>
+<h2 id="-예시를-통한-이해">🎯 예시를 통한 이해</h2>
+<h3 id="-멱등한-api-예제-put">✅ 멱등한 API 예제 (<code>PUT</code>)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">PUT /users/123
+</span></span></span><span class="line"><span class="cl"><span class="err">Body: {
+</span></span></span><span class="line"><span class="cl"><span class="err">  &#34;name&#34;: &#34;Alice&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="err">  &#34;email&#34;: &#34;alice@example.com&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">}
+</span></span></span></code></pre></div><ul>
+<li>같은 요청을 여러 번 보내도 사용자 123의 정보는 항상 위 내용으로 덮어쓰기 되므로 <strong>멱등성 O</strong></li>
+</ul>
+<h3 id="-멱등하지-않은-api-예제-post">❌ 멱등하지 않은 API 예제 (<code>POST</code>)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">POST /orders
+</span></span></span><span class="line"><span class="cl"><span class="err">Body: {
+</span></span></span><span class="line"><span class="cl"><span class="err">  &#34;item&#34;: &#34;book&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="err">  &#34;quantity&#34;: 1
+</span></span></span><span class="line"><span class="cl"><span class="err">}
+</span></span></span></code></pre></div><ul>
+<li>같은 요청을 여러 번 보내면 주문이 여러 개 생성될 수 있음 → <strong>멱등성 X</strong></li>
+</ul>
+<hr>
+<h2 id="-왜-멱등성이-중요한가">🛡️ 왜 멱등성이 중요한가?</h2>
+<ol>
+<li>
+<p><strong>재시도 로직에서 안전성 확보</strong></p>
+<ul>
+<li>네트워크 오류, 타임아웃으로 인한 재요청 시 멱등성이 보장되면 중복 요청으로 인한 문제를 방지할 수 있음.</li>
+</ul>
+</li>
+<li>
+<p><strong>클라이언트-서버 간 신뢰성 강화</strong></p>
+<ul>
+<li>어떤 요청을 여러 번 보냈을 때 항상 같은 결과라면 시스템의 신뢰성과 유지보수성이 향상됨.</li>
+</ul>
+</li>
+<li>
+<p><strong>Load Balancer / Proxy / Retry System에서 유리</strong></p>
+<ul>
+<li>중간 장비나 클라이언트가 자동 재시도를 수행할 때도, 멱등성 여부에 따라 부작용 여부가 결정됨.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-정리">📌 정리</h2>
+<ul>
+<li>멱등성은 &ldquo;동일한 연산을 여러 번 수행해도 결과가 같다&quot;는 개념.</li>
+<li>API 설계 시에는 HTTP 메서드의 특성과 멱등성 여부를 고려해야 함.</li>
+<li><strong>재시도 가능한 안정적인 API 설계</strong>에 있어 멱등성은 핵심 고려 요소 중 하나임.</li>
+</ul>
+<p>좋습니다! 멱등성을 고려한 API 설계 패턴과 <strong>재시도-safe한 시스템 구현 예제</strong>를 구체적으로 정리해드리겠습니다.</p>
+<hr>
+<h2 id="-1-멱등성을-고려한-api-설계-패턴">🧱 1. 멱등성을 고려한 API 설계 패턴</h2>
+<h3 id="-패턴-1-put-사용으로-자원-전체-덮어쓰기">✅ 패턴 1: <strong><code>PUT</code> 사용으로 자원 전체 덮어쓰기</strong></h3>
+<ul>
+<li>
+<p><strong>설명</strong>: 동일한 요청을 여러 번 보내도 항상 자원이 같은 상태로 유지됨.</p>
+</li>
+<li>
+<p><strong>예제</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">PUT /users/123
+</span></span></span><span class="line"><span class="cl"><span class="err">{
+</span></span></span><span class="line"><span class="cl"><span class="err">  &#34;name&#34;: &#34;Alice&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="err">  &#34;email&#34;: &#34;alice@example.com&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">}
+</span></span></span></code></pre></div><ul>
+<li>여러 번 호출해도 항상 동일한 상태 유지.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-패턴-2-클라이언트에서-idempotency-key-사용">✅ 패턴 2: <strong>클라이언트에서 <code>idempotency key</code> 사용</strong></h3>
+<ul>
+<li>
+<p><strong>설명</strong>: 중복 요청을 방지하기 위해 요청에 고유 식별자(예: UUID)를 함께 전송.</p>
+</li>
+<li>
+<p><strong>주로 사용하는 메서드</strong>: <code>POST</code> (비멱등 메서드에 멱등성을 부여)</p>
+</li>
+<li>
+<p><strong>헤더 예시</strong>:</p>
+<pre tabindex="0"><code>POST /payments
+Idempotency-Key: 123e4567-e89b-12d3-a456-426614174000
+Body: {
+  &#34;amount&#34;: 1000,
+  &#34;card&#34;: &#34;**** **** **** 1234&#34;
+}
+</code></pre></li>
+<li>
+<p><strong>서버 동작 방식</strong>:</p>
+<ul>
+<li>서버는 <code>Idempotency-Key</code>를 기준으로 요청 결과를 캐싱하거나 DB에 저장.</li>
+<li>같은 키로 요청이 오면 이전 응답을 그대로 반환 → 중복 처리 방지.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-패턴-3-서버-측-상태-저장-request-tracking-table">✅ 패턴 3: <strong>서버 측 상태 저장 (Request Tracking Table)</strong></h3>
+<ul>
+<li>
+<p><strong>설명</strong>: 처리된 요청을 기록하고, 동일 요청이 다시 들어오면 이전 응답을 반환하거나 무시.</p>
+</li>
+<li>
+<p><strong>예시</strong>: 주문, 결제, 송금 등에서 중복 요청 방지.</p>
+</li>
+<li>
+<p><strong>구현 방식</strong>:</p>
+<ul>
+<li>요청마다 고유 트랜잭션 ID (예: <code>transactionId</code>) 포함.</li>
+<li>DB에 트랜잭션 ID 저장 후 중복 여부 검사.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="-2-재시도-safe한-시스템-구현-예제">⚙️ 2. 재시도-safe한 시스템 구현 예제</h2>
+<h3 id="-예제-결제-처리-api-post-payments">💳 예제: 결제 처리 API (<code>POST /payments</code>)</h3>
+<h4 id="클라이언트-측-요청">클라이언트 측 요청</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">POST /payments
+</span></span></span><span class="line"><span class="cl"><span class="err">Headers:
+</span></span></span><span class="line"><span class="cl"><span class="err">  Idempotency-Key: d9f3e1ae-45b4-4f2f-b8d1-63e67256b9ea
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">Body:
+</span></span></span><span class="line"><span class="cl"><span class="err">{
+</span></span></span><span class="line"><span class="cl"><span class="err">  &#34;userId&#34;: 123,
+</span></span></span><span class="line"><span class="cl"><span class="err">  &#34;amount&#34;: 5000
+</span></span></span><span class="line"><span class="cl"><span class="err">}
+</span></span></span></code></pre></div><h4 id="서버-측-처리-로직-javaspring-기준-의사코드">서버 측 처리 로직 (Java/Spring 기준 의사코드)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">createPayment</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">idempotencyKey</span><span class="p">,</span><span class="w"> </span><span class="n">PaymentRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">PaymentLog</span><span class="o">&gt;</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paymentRepository</span><span class="p">.</span><span class="na">findByIdempotencyKey</span><span class="p">(</span><span class="n">idempotencyKey</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">existing</span><span class="p">.</span><span class="na">isPresent</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">existing</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">getResponse</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">PaymentResult</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paymentService</span><span class="p">.</span><span class="na">charge</span><span class="p">(</span><span class="n">request</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">PaymentLog</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PaymentLog</span><span class="p">(</span><span class="n">idempotencyKey</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">paymentRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">log</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h4 id="결과">결과:</h4>
+<ul>
+<li>같은 결제 요청을 재시도해도 <strong>중복 결제 없이</strong> 이전 결제 결과를 그대로 반환함.</li>
+<li><strong>결제 시스템, 주문 시스템, 계좌 이체</strong> 등에서 유용하게 사용됨.</li>
+</ul>
+<hr>
+<h2 id="-추가-설계-팁">📦 추가 설계 팁</h2>
+<h3 id="-재시도-가능-로직과-함께-사용할-수-있는-전략">🔁 재시도 가능 로직과 함께 사용할 수 있는 전략</h3>
+<ul>
+<li><strong>재시도 지연(backoff)</strong>: 네트워크 실패 등에서 지수적으로 요청 간 간격 증가.</li>
+<li><strong><code>Retry-After</code> 헤더</strong>: 서버가 일정 시간 이후 재시도를 유도.</li>
+<li><strong>Circuit Breaker 패턴</strong>: 실패율이 높은 경우 일시적으로 요청을 차단.</li>
+</ul>
+<h3 id="-재시도-시-주의사항">🛑 재시도 시 주의사항</h3>
+<table>
+  <thead>
+      <tr>
+          <th>상황</th>
+          <th>주의</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>재고 감소, 포인트 차감 등 가변 상태</td>
+          <td>멱등성 미보장 시 중복 차감 위험</td>
+      </tr>
+      <tr>
+          <td>외부 시스템 호출</td>
+          <td>외부 시스템이 멱등성을 제공하는지 확인 필수</td>
+      </tr>
+      <tr>
+          <td>DB 트랜잭션 처리</td>
+          <td>트랜잭션 ID를 활용한 안전한 중복 방지 로직 필요</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-정리-1">✅ 정리</h2>
+<ul>
+<li>멱등성은 <strong>요청 재시도와 장애 대응</strong>에서 핵심.</li>
+<li><code>PUT</code>, <code>DELETE</code>는 기본적으로 멱등, <code>POST</code>는 <code>Idempotency-Key</code> 등으로 보완.</li>
+<li>서버에서 <strong>요청 추적</strong>, <strong>응답 캐싱</strong>, <strong>DB 중복 검사</strong> 등을 통해 시스템적으로 멱등성을 구현할 수 있음.</li>
+</ul>
+<hr>
 </article>
               </div>
 
@@ -404,13 +590,13 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/idempotence/"> 멱등성(Idempotence)에 대하여</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/singleton_pattern/"> Singleton Pattern</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/redis/redis_pub_sub_stream/">Redis에서 pub/sub, 그리고 Redis Stream&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/about_list/">Object[] 와 ArrayList&lt;Object&gt; 의 차이&nbsp;</a><div> »</div>
           
         </div>
       </div>

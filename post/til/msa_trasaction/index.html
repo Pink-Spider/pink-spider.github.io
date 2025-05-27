@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Object[] 와 ArrayList&lt;Object&gt; 의 차이 | Pink Spider
+    msa에서 트랜잭션 처리 정책 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,23 +27,27 @@
   
   <meta
   name="description"
-  content="Object[] 와 ArrayList 의 차이 에를 들어 Partner라는 클래스가 있을 때 Partner[] p = new ArrayList와 같은 코드는 컴파일 에러가 발생합니다. 이유는 ArrayList는 Java의 컬렉션(List) 타입이고, Partner[]는 배열 타입이기 때문에 서로 호환되지 않는 타입입니다.
-🔍 정확한 차이점 Partner[] → 고정된 크기의 배열 ArrayList&lt;Partner&gt; → 가변 크기의 리스트 (배열 기반의 컬렉션) ✅ 올바른 사용법 1. ArrayList를 사용하고 싶을 때 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); p.add(new Partner(&#34;name1&#34;)); p.add(new Partner(&#34;name2&#34;)); 리스트로 선언하고 사용하는 것이 맞습니다. 이 방법이 대부분의 경우 더 유연하고 편리합니다. 2. ArrayList → Partner[]로 변환이 필요한 경우 List&lt;Partner&gt; pList = new ArrayList&lt;&gt;(); pList.add(new Partner(&#34;a&#34;)); pList.add(new Partner(&#34;b&#34;)); Partner[] pArray = pList.toArray(new Partner[0]); // 배열로 변환 ⚠️ 잘못된 예시 Partner[] p = new ArrayList&lt;&gt;(); // ❌ 컴파일 에러: incompatible types ✅ 요약 목적 코드 ArrayList 선언 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); 리스트 → 배열 변환 Partner[] pArray = pList.toArray(new Partner[0]); 배열보다 ArrayList를 사용하는 것이 일반적으로 더 안전하고 유연합니다. 다만 배열이 필요한 API와 호환하거나 성능상 이점이 필요한 경우 배열 변환을 사용하세요.
+  content="MSA(Microservices Architecture) 환경에서 서비스 간 호출 중 오류가 발생했을 때의 트랜잭션 처리 정책은 일반적으로 분산 트랜잭션 또는 사후 보상 트랜잭션(Compensating Transaction) 방식으로 구분되며, 다음과 같은 용어와 정책으로 설명됩니다.
+1. SAGA 패턴 정의: MSA에서 가장 널리 쓰이는 트랜잭션 처리 패턴으로, 각 서비스의 로컬 트랜잭션이 성공하면 다음 서비스를 호출하고, 중간에 실패 시 이전에 수행된 작업을 보상 작업(Compensation) 으로 되돌립니다.
+종류:
+Choreography 기반: 서비스들이 이벤트를 발행하고 서로 구독하면서 트랜잭션을 이어감. 오케스트레이터가 없음. Orchestration 기반: 중앙 컨트롤러(오케스트레이터)가 전체 트랜잭션 흐름을 제어. 예시: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/about_list/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/til/msa_trasaction/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Object[] 와 ArrayList&lt;Object&gt; 의 차이 - Pink Spider"
+  content="msa에서 트랜잭션 처리 정책 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="Object[] 와 ArrayList 의 차이 에를 들어 Partner라는 클래스가 있을 때 Partner[] p = new ArrayList와 같은 코드는 컴파일 에러가 발생합니다. 이유는 ArrayList는 Java의 컬렉션(List) 타입이고, Partner[]는 배열 타입이기 때문에 서로 호환되지 않는 타입입니다.
-🔍 정확한 차이점 Partner[] → 고정된 크기의 배열 ArrayList&lt;Partner&gt; → 가변 크기의 리스트 (배열 기반의 컬렉션) ✅ 올바른 사용법 1. ArrayList를 사용하고 싶을 때 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); p.add(new Partner(&#34;name1&#34;)); p.add(new Partner(&#34;name2&#34;)); 리스트로 선언하고 사용하는 것이 맞습니다. 이 방법이 대부분의 경우 더 유연하고 편리합니다. 2. ArrayList → Partner[]로 변환이 필요한 경우 List&lt;Partner&gt; pList = new ArrayList&lt;&gt;(); pList.add(new Partner(&#34;a&#34;)); pList.add(new Partner(&#34;b&#34;)); Partner[] pArray = pList.toArray(new Partner[0]); // 배열로 변환 ⚠️ 잘못된 예시 Partner[] p = new ArrayList&lt;&gt;(); // ❌ 컴파일 에러: incompatible types ✅ 요약 목적 코드 ArrayList 선언 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); 리스트 → 배열 변환 Partner[] pArray = pList.toArray(new Partner[0]); 배열보다 ArrayList를 사용하는 것이 일반적으로 더 안전하고 유연합니다. 다만 배열이 필요한 API와 호환하거나 성능상 이점이 필요한 경우 배열 변환을 사용하세요.
+  content="MSA(Microservices Architecture) 환경에서 서비스 간 호출 중 오류가 발생했을 때의 트랜잭션 처리 정책은 일반적으로 분산 트랜잭션 또는 사후 보상 트랜잭션(Compensating Transaction) 방식으로 구분되며, 다음과 같은 용어와 정책으로 설명됩니다.
+1. SAGA 패턴 정의: MSA에서 가장 널리 쓰이는 트랜잭션 처리 패턴으로, 각 서비스의 로컬 트랜잭션이 성공하면 다음 서비스를 호출하고, 중간에 실패 시 이전에 수행된 작업을 보상 작업(Compensation) 으로 되돌립니다.
+종류:
+Choreography 기반: 서비스들이 이벤트를 발행하고 서로 구독하면서 트랜잭션을 이어감. 오케스트레이터가 없음. Orchestration 기반: 중앙 컨트롤러(오케스트레이터)가 전체 트랜잭션 흐름을 제어. 예시: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -60,16 +64,18 @@
 />
 <meta
   property="og:title"
-  content="Object[] 와 ArrayList&lt;Object&gt; 의 차이 - Pink Spider"
+  content="msa에서 트랜잭션 처리 정책 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="Object[] 와 ArrayList 의 차이 에를 들어 Partner라는 클래스가 있을 때 Partner[] p = new ArrayList와 같은 코드는 컴파일 에러가 발생합니다. 이유는 ArrayList는 Java의 컬렉션(List) 타입이고, Partner[]는 배열 타입이기 때문에 서로 호환되지 않는 타입입니다.
-🔍 정확한 차이점 Partner[] → 고정된 크기의 배열 ArrayList&lt;Partner&gt; → 가변 크기의 리스트 (배열 기반의 컬렉션) ✅ 올바른 사용법 1. ArrayList를 사용하고 싶을 때 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); p.add(new Partner(&#34;name1&#34;)); p.add(new Partner(&#34;name2&#34;)); 리스트로 선언하고 사용하는 것이 맞습니다. 이 방법이 대부분의 경우 더 유연하고 편리합니다. 2. ArrayList → Partner[]로 변환이 필요한 경우 List&lt;Partner&gt; pList = new ArrayList&lt;&gt;(); pList.add(new Partner(&#34;a&#34;)); pList.add(new Partner(&#34;b&#34;)); Partner[] pArray = pList.toArray(new Partner[0]); // 배열로 변환 ⚠️ 잘못된 예시 Partner[] p = new ArrayList&lt;&gt;(); // ❌ 컴파일 에러: incompatible types ✅ 요약 목적 코드 ArrayList 선언 List&lt;Partner&gt; p = new ArrayList&lt;&gt;(); 리스트 → 배열 변환 Partner[] pArray = pList.toArray(new Partner[0]); 배열보다 ArrayList를 사용하는 것이 일반적으로 더 안전하고 유연합니다. 다만 배열이 필요한 API와 호환하거나 성능상 이점이 필요한 경우 배열 변환을 사용하세요.
+  content="MSA(Microservices Architecture) 환경에서 서비스 간 호출 중 오류가 발생했을 때의 트랜잭션 처리 정책은 일반적으로 분산 트랜잭션 또는 사후 보상 트랜잭션(Compensating Transaction) 방식으로 구분되며, 다음과 같은 용어와 정책으로 설명됩니다.
+1. SAGA 패턴 정의: MSA에서 가장 널리 쓰이는 트랜잭션 처리 패턴으로, 각 서비스의 로컬 트랜잭션이 성공하면 다음 서비스를 호출하고, 중간에 실패 시 이전에 수행된 작업을 보상 작업(Compensation) 으로 되돌립니다.
+종류:
+Choreography 기반: 서비스들이 이벤트를 발행하고 서로 구독하면서 트랜잭션을 이어감. 오케스트레이터가 없음. Orchestration 기반: 중앙 컨트롤러(오케스트레이터)가 전체 트랜잭션 흐름을 제어. 예시: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/about_list/" />
-<meta property="og:site_name" content="Object[] 와 ArrayList&lt;Object&gt; 의 차이" />
+<meta property="og:url" content="https://pink-spider.github.io/post/til/msa_trasaction/" />
+<meta property="og:site_name" content="msa에서 트랜잭션 처리 정책" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -77,7 +83,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-05-21 19:20:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-05-26 20:20:45 &#43;0900 KST" />
 
 
 
@@ -287,18 +293,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/about_list/">Object[] 와 ArrayList&lt;Object&gt; 의 차이</a></strong>
+                      href="https://pink-spider.github.io/post/til/msa_trasaction/">msa에서 트랜잭션 처리 정책</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 21 May 2025 19:20:45 &#43;0900"
+                  Created <relative-time datetime="Mon, 26 May 2025 20:20:45 &#43;0900"
                     class="no-wrap">
-                    Wed, 21 May 2025 19:20:45 &#43;0900</relative-time>
+                    Mon, 26 May 2025 20:20:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 21 May 2025 13:17:09 &#43;0900"
+                  Modified <relative-time datetime="Tue, 27 May 2025 09:31:41 &#43;0900"
                     class="no-wrap">
-                    Wed, 21 May 2025 13:17:09 &#43;0900</relative-time>
+                    Tue, 27 May 2025 09:31:41 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -328,9 +334,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      399 Words
+                      821 Words
                     <span class="file-info-divider"></span>
-                                        2 min
+                                        4 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -341,57 +347,92 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><h1 id="object-와-arraylistobject-의-차이">Object[] 와 ArrayList<!-- raw HTML omitted --> 의 차이</h1>
-<p>에를 들어 Partner라는 클래스가 있을 때
-<code>Partner[] p = new ArrayList</code>와 같은 코드는 <strong>컴파일 에러</strong>가 발생합니다.
-이유는 <code>ArrayList</code>는 Java의 <strong>컬렉션(List)</strong> 타입이고, <code>Partner[]</code>는 <strong>배열</strong> 타입이기 때문에 <strong>서로 호환되지 않는 타입</strong>입니다.</p>
+                <article class="markdown-body entry-content container-lg"><p>MSA(Microservices Architecture) 환경에서 서비스 간 호출 중 오류가 발생했을 때의 <strong>트랜잭션 처리 정책</strong>은 일반적으로 <strong>분산 트랜잭션</strong> 또는 <strong>사후 보상 트랜잭션</strong>(Compensating Transaction) 방식으로 구분되며, 다음과 같은 용어와 정책으로 설명됩니다.</p>
 <hr>
-<h2 id="-정확한-차이점">🔍 정확한 차이점</h2>
+<h3 id="1-saga-패턴">1. <strong>SAGA 패턴</strong></h3>
 <ul>
-<li><code>Partner[]</code> → 고정된 크기의 배열</li>
-<li><code>ArrayList&lt;Partner&gt;</code> → 가변 크기의 리스트 (배열 기반의 컬렉션)</li>
+<li>
+<p><strong>정의</strong>: MSA에서 가장 널리 쓰이는 트랜잭션 처리 패턴으로, 각 서비스의 로컬 트랜잭션이 성공하면 다음 서비스를 호출하고, 중간에 실패 시 이전에 수행된 작업을 <strong>보상 작업(Compensation)</strong> 으로 되돌립니다.</p>
+</li>
+<li>
+<p><strong>종류</strong>:</p>
+<ul>
+<li><strong>Choreography 기반</strong>: 서비스들이 이벤트를 발행하고 서로 구독하면서 트랜잭션을 이어감. 오케스트레이터가 없음.</li>
+<li><strong>Orchestration 기반</strong>: 중앙 컨트롤러(오케스트레이터)가 전체 트랜잭션 흐름을 제어.</li>
+</ul>
+</li>
+<li>
+<p><strong>예시</strong>: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.</p>
+</li>
 </ul>
 <hr>
-<h2 id="-올바른-사용법">✅ 올바른 사용법</h2>
-<h3 id="1-arraylist를-사용하고-싶을-때">1. <code>ArrayList</code>를 사용하고 싶을 때</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Partner</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;name1&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;name2&#34;</span><span class="p">));</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>리스트로 선언하고 사용하는 것이 맞습니다.</li>
-<li>이 방법이 대부분의 경우 더 유연하고 편리합니다.</li>
+<h3 id="2-2pc-two-phase-commit">2. <strong>2PC (Two Phase Commit)</strong></h3>
+<ul>
+<li><strong>정의</strong>: 전통적인 분산 트랜잭션 처리 방식으로, 참여하는 모든 서비스가 준비되었는지 확인하고(commit 준비 단계), 그 후 실제 커밋을 실행함.</li>
+<li><strong>단점</strong>: 성능 저하, 복잡성, 다양한 DB나 시스템 환경에서는 사용이 어려움.</li>
+<li><strong>MSA에서 잘 쓰이지 않는 이유</strong>: 마이크로서비스의 자율성과 독립성을 해치고, 시스템 결합도를 높이기 때문.</li>
 </ul>
-<h3 id="2-arraylist--partner로-변환이-필요한-경우">2. <code>ArrayList</code> → <code>Partner[]</code>로 변환이 필요한 경우</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Partner</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;b&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Partner</span><span class="o">[]</span><span class="w"> </span><span class="n">pArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pList</span><span class="p">.</span><span class="na">toArray</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">);</span><span class="w"> </span><span class="c1">// 배열로 변환</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-잘못된-예시">⚠️ 잘못된 예시</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Partner</span><span class="o">[]</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// ❌ 컴파일 에러: incompatible types</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-요약">✅ 요약</h2>
+<hr>
+<h3 id="3-보상-트랜잭션-compensating-transaction">3. <strong>보상 트랜잭션 (Compensating Transaction)</strong></h3>
+<ul>
+<li><strong>정의</strong>: 트랜잭션이 중간에 실패했을 때, 앞서 성공한 작업들을 <strong>논리적으로 되돌리는 작업</strong>을 별도로 정의해서 실행.</li>
+<li><strong>SAGA 패턴의 핵심 개념</strong>이기도 함.</li>
+<li><strong>예시</strong>: 호텔 예약 후 항공 예약에 실패하면, 호텔 예약을 취소하는 별도의 API 호출.</li>
+</ul>
+<hr>
+<h3 id="4-idempotency--retry-정책">4. <strong>Idempotency &amp; Retry 정책</strong></h3>
+<ul>
+<li>서비스 간 호출 중 네트워크 장애 등으로 인해 중복 호출이 발생할 수 있으므로, <strong>멱등성</strong>을 보장하거나 <strong>재시도 전략</strong>을 적용하는 것이 중요합니다.</li>
+</ul>
+<hr>
+<h3 id="5-circuit-breaker--timeouts--fallback">5. <strong>Circuit Breaker / Timeouts / Fallback</strong></h3>
+<ul>
+<li>
+<p><strong>에러 상황 관리</strong>를 위한 별도 패턴들:</p>
+<ul>
+<li><strong>Circuit Breaker</strong>: 장애가 자주 발생하는 서비스와의 연결을 임시로 차단.</li>
+<li><strong>Timeouts</strong>: 일정 시간 응답 없으면 실패로 간주.</li>
+<li><strong>Fallback</strong>: 대체 동작이나 기본 응답 제공.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="정리-msa-트랜잭션-처리-핵심-용어">정리: MSA 트랜잭션 처리 핵심 용어</h3>
 <table>
   <thead>
       <tr>
-          <th>목적</th>
-          <th>코드</th>
+          <th>정책/패턴</th>
+          <th>설명</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><code>ArrayList</code> 선언</td>
-          <td><code>List&lt;Partner&gt; p = new ArrayList&lt;&gt;();</code></td>
+          <td>SAGA</td>
+          <td>서비스 간의 보상 트랜잭션 기반 흐름 제어</td>
       </tr>
       <tr>
-          <td>리스트 → 배열 변환</td>
-          <td><code>Partner[] pArray = pList.toArray(new Partner[0]);</code></td>
+          <td>Compensating Tx</td>
+          <td>실패시 이전 작업을 롤백하는 별도 API 정의</td>
+      </tr>
+      <tr>
+          <td>2PC</td>
+          <td>고전적인 분산 트랜잭션, MSA에는 부적합</td>
+      </tr>
+      <tr>
+          <td>Circuit Breaker</td>
+          <td>장애 서비스와의 호출 차단</td>
+      </tr>
+      <tr>
+          <td>Timeout / Retry</td>
+          <td>호출 실패에 대한 방어적 전략</td>
+      </tr>
+      <tr>
+          <td>Idempotency</td>
+          <td>중복 호출에도 안전한 API 설계</td>
       </tr>
   </tbody>
 </table>
-<p>배열보다 <code>ArrayList</code>를 사용하는 것이 일반적으로 더 안전하고 유연합니다.
-다만 배열이 필요한 API와 호환하거나 성능상 이점이 필요한 경우 배열 변환을 사용하세요.</p>
+<hr>
 </article>
               </div>
 
@@ -404,13 +445,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/idempotence/"> 멱등성(Idempotence)에 대하여</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/redis/redis_pub_sub_stream/">Redis에서 pub/sub, 그리고 Redis Stream&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/singleton_pattern/">Singleton Pattern&nbsp;</a><div> »</div>
           
         </div>
       </div>
