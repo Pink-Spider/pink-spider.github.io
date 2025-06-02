@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 27 May 2025 09:32:30 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 02 Jun 2025 15:58:33 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>H2에서 mysql function 쓰려면</title>
+      <link>https://pink-spider.github.io/post/spring/h2_mysql_function/</link>
+      <pubDate>Sun, 01 Jun 2025 20:20:45 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/spring/h2_mysql_function/</guid>
+      <description>&lt;h1 id=&#34;배경&#34;&gt;배경&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;local, dev, prod 등 프로파일에선 mysql 셋팅&lt;/li&gt;&#xA;&lt;li&gt;test 프로파일은 h2에 schema.sql, data.sql로 데이터 셋팅&lt;/li&gt;&#xA;&lt;li&gt;nativeQuery를 사용하는 경우 DATE_FORMAT 같은 mysql 함수 사용.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;spring:&#xA;  datasource:&#xA;    url: jdbc:h2:mem:testdb;MODE=MYSQL;DB_CLOSE_DELAY=-1&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;date_format-대체&#34;&gt;DATE_FORMAT 대체&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class H2Functions {&#xA;    public static String formatDate(java.sql.Timestamp timestamp, String format) {&#xA;        return new java.text.SimpleDateFormat(format).format(timestamp);&#xA;    }&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;schemasql&#34;&gt;schema.sql&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;CREATE ALIAS IF NOT EXISTS DATE_FORMAT FOR &amp;#34;com.example.H2Functions.formatDate&amp;#34;;&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;repository&#34;&gt;Repository&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@Query(value = &amp;#34;SELECT DATE_FORMAT(order_date, &amp;#39;yyyy-MM-dd&amp;#39;) AS formatted_date, COUNT(*) &amp;#34; +&#xA;               &amp;#34;FROM orders GROUP BY formatted_date&amp;#34;, nativeQuery = true)&#xA;List&amp;lt;Object[]&amp;gt; findOrderCountGroupedByDate();&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위의 코드는 예시이며, 실제로는 h2와 mysql에서 format으로 넘겨주는 형태가 다릅니다.&#xA;mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &amp;lsquo;MMdd&amp;rsquo;, &amp;lsquo;yyyy&amp;rsquo; 등을 사용합니다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>MySql Slow Query 모니터링</title>
       <link>https://pink-spider.github.io/post/infra/db/mysql_slow_query/</link>

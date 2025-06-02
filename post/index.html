@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">72</span>
+              <span class="Counter">73</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">72</span>
+      <span class="Counter ">73</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,54 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/h2_mysql_function/">H2에서 mysql function 쓰려면</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="배경">배경</h1>
+<ul>
+<li>local, dev, prod 등 프로파일에선 mysql 셋팅</li>
+<li>test 프로파일은 h2에 schema.sql, data.sql로 데이터 셋팅</li>
+<li>nativeQuery를 사용하는 경우 DATE_FORMAT 같은 mysql 함수 사용.</li>
+</ul>
+<pre tabindex="0"><code>spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MYSQL;DB_CLOSE_DELAY=-1
+</code></pre><h2 id="date_format-대체">DATE_FORMAT 대체</h2>
+<pre tabindex="0"><code>public class H2Functions {
+    public static String formatDate(java.sql.Timestamp timestamp, String format) {
+        return new java.text.SimpleDateFormat(format).format(timestamp);
+    }
+}
+</code></pre><h3 id="schemasql">schema.sql</h3>
+<pre tabindex="0"><code>CREATE ALIAS IF NOT EXISTS DATE_FORMAT FOR &#34;com.example.H2Functions.formatDate&#34;;
+</code></pre><h2 id="repository">Repository</h2>
+<pre tabindex="0"><code>@Query(value = &#34;SELECT DATE_FORMAT(order_date, &#39;yyyy-MM-dd&#39;) AS formatted_date, COUNT(*) &#34; +
+               &#34;FROM orders GROUP BY formatted_date&#34;, nativeQuery = true)
+List&lt;Object[]&gt; findOrderCountGroupedByDate();
+</code></pre><p>위의 코드는 예시이며, 실제로는 h2와 mysql에서 format으로 넘겨주는 형태가 다릅니다.
+mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &lsquo;MMdd&rsquo;, &lsquo;yyyy&rsquo; 등을 사용합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sun, 01 Jun 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Sun, 01 Jun 2025 20:20:45 &#43;0900">
+                Sun, 01 Jun 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -853,55 +901,6 @@
               <relative-time datetime=" Wed, 21 May 2025 19:20:45 &#43;0900" class="no-wrap"
                 title=" Wed, 21 May 2025 19:20:45 &#43;0900">
                 Wed, 21 May 2025 19:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/redis/redis_pub_sub_stream/">Redis에서 pub/sub, 그리고 Redis Stream</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Redis에서 <code>Pub/Sub</code>(Publish/Subscribe) 기능을 사용하는 방법은 비교적 간단합니다. 아래는 기본적인 사용 방법과 예제입니다.</p>
-<hr>
-<h2 id="-개념-요약">🧠 개념 요약</h2>
-<p>Redis Pub/Sub는 <strong>메시지 브로커</strong> 역할을 수행하여, 한 클라이언트가 메시지를 발행(Publish)하면, 해당 채널을 구독(Subscribe)하고 있는 다른 클라이언트들이 실시간으로 그 메시지를 받게 됩니다.</p>
-<ul>
-<li><strong>Publisher</strong>: 채널에 메시지를 발행하는 클라이언트</li>
-<li><strong>Subscriber</strong>: 특정 채널을 구독하고 메시지를 받는 클라이언트</li>
-</ul>
-<hr>
-<h2 id="-명령어">🛠 명령어</h2>
-<ul>
-<li><code>PUBLISH &lt;channel&gt; &lt;message&gt;</code>: 메시지를 발행</li>
-<li><code>SUBSCRIBE &lt;channel&gt; [&lt;channel&gt; ...]</code>: 채널 구독</li>
-<li><code>UNSUBSCRIBE [&lt;channel&gt; ...]</code>: 채널 구독 취소</li>
-</ul>
-<hr>
-<h2 id="-예제-cli-기준">💻 예제 (CLI 기준)</h2>
-<h3 id="터미널-1--subscriber">터미널 1 – Subscriber</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
-</span></span><span class="line"><span class="cl">&gt; SUBSCRIBE news
-</span></span></code></pre></div><h3 id="터미널-2--publisher">터미널 2 – Publisher</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
-</span></span><span class="line"><span class="cl">&gt; PUBLISH news <span class="s2">&#34;Hello from Redis!&#34;</span>
-</span></span></code></pre></div><p>Subscriber는 다음과 같은 응답을 받습니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 21 May 2025 14:20:45 &#43;0900" class="no-wrap"
-                title=" Wed, 21 May 2025 14:20:45 &#43;0900">
-                Wed, 21 May 2025 14:20:45 &#43;0900
               </relative-time>
             </div>
           </div>
