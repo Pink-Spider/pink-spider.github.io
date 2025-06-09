@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">73</span>
+              <span class="Counter">74</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">73</span>
+      <span class="Counter ">74</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,50 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/db_shading/">DB Shading</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>데이터베이스(DB) 샤딩(DB Sharding)이란 대용량 데이터를 효율적으로 분산·관리하기 위해 하나의 거대한 데이터베이스를 여러 개의 작은 조각(샤드, shard)으로 나누어 각각을 별도의 서버에 분산 저장하고 처리하는 기법을 말합니다.</p>
+<hr>
+<h2 id="1-왜-샤딩이-필요한가">1. 왜 샤딩이 필요한가?</h2>
+<ul>
+<li>
+<p><strong>성능 확장성(Scalability)</strong></p>
+<ul>
+<li>단일 서버에 모든 데이터를 저장하면 저장 용량·처리 능력이 한계에 부딪힙니다.</li>
+<li>데이터와 트래픽이 늘어날수록 로드가 집중되어 응답 지연(latency)이나 병목(bottleneck)이 발생합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>고가용성(High Availability)</strong></p>
+<ul>
+<li>각 샤드를 독립된 노드에 두면, 일부 노드 장애 시에도 전체 시스템이 완전히 다운되지 않고 가용성을 유지할 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>관리 용이성</strong></p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 10 Jun 2025 08:44:58 &#43;0900" class="no-wrap"
+                title=" Tue, 10 Jun 2025 08:44:58 &#43;0900">
+                Tue, 10 Jun 2025 08:44:58 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -825,82 +869,6 @@ mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &lsquo;MMdd&rsquo;, &lsquo;yyy
               <relative-time datetime=" Mon, 26 May 2025 20:20:45 &#43;0900" class="no-wrap"
                 title=" Mon, 26 May 2025 20:20:45 &#43;0900">
                 Mon, 26 May 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/about_list/">Object[] 와 ArrayList&lt;Object&gt; 의 차이</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="object-와-arraylistobject-의-차이">Object[] 와 ArrayList<!-- raw HTML omitted --> 의 차이</h1>
-<p>에를 들어 Partner라는 클래스가 있을 때
-<code>Partner[] p = new ArrayList</code>와 같은 코드는 <strong>컴파일 에러</strong>가 발생합니다.
-이유는 <code>ArrayList</code>는 Java의 <strong>컬렉션(List)</strong> 타입이고, <code>Partner[]</code>는 <strong>배열</strong> 타입이기 때문에 <strong>서로 호환되지 않는 타입</strong>입니다.</p>
-<hr>
-<h2 id="-정확한-차이점">🔍 정확한 차이점</h2>
-<ul>
-<li><code>Partner[]</code> → 고정된 크기의 배열</li>
-<li><code>ArrayList&lt;Partner&gt;</code> → 가변 크기의 리스트 (배열 기반의 컬렉션)</li>
-</ul>
-<hr>
-<h2 id="-올바른-사용법">✅ 올바른 사용법</h2>
-<h3 id="1-arraylist를-사용하고-싶을-때">1. <code>ArrayList</code>를 사용하고 싶을 때</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Partner</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;name1&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;name2&#34;</span><span class="p">));</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>리스트로 선언하고 사용하는 것이 맞습니다.</li>
-<li>이 방법이 대부분의 경우 더 유연하고 편리합니다.</li>
-</ul>
-<h3 id="2-arraylist--partner로-변환이-필요한-경우">2. <code>ArrayList</code> → <code>Partner[]</code>로 변환이 필요한 경우</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Partner</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">pList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="p">(</span><span class="s">&#34;b&#34;</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Partner</span><span class="o">[]</span><span class="w"> </span><span class="n">pArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pList</span><span class="p">.</span><span class="na">toArray</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Partner</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">);</span><span class="w"> </span><span class="c1">// 배열로 변환</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-잘못된-예시">⚠️ 잘못된 예시</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Partner</span><span class="o">[]</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span><span class="c1">// ❌ 컴파일 에러: incompatible types</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-요약">✅ 요약</h2>
-<table>
-  <thead>
-      <tr>
-          <th>목적</th>
-          <th>코드</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>ArrayList</code> 선언</td>
-          <td><code>List&lt;Partner&gt; p = new ArrayList&lt;&gt;();</code></td>
-      </tr>
-      <tr>
-          <td>리스트 → 배열 변환</td>
-          <td><code>Partner[] pArray = pList.toArray(new Partner[0]);</code></td>
-      </tr>
-  </tbody>
-</table>
-<p>배열보다 <code>ArrayList</code>를 사용하는 것이 일반적으로 더 안전하고 유연합니다.
-다만 배열이 필요한 API와 호환하거나 성능상 이점이 필요한 경우 배열 변환을 사용하세요.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 21 May 2025 19:20:45 &#43;0900" class="no-wrap"
-                title=" Wed, 21 May 2025 19:20:45 &#43;0900">
-                Wed, 21 May 2025 19:20:45 &#43;0900
               </relative-time>
             </div>
           </div>

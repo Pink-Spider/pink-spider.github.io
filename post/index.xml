@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 02 Jun 2025 15:58:33 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 10 Jun 2025 08:45:03 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DB Shading</title>
+      <link>https://pink-spider.github.io/post/til/db_shading/</link>
+      <pubDate>Tue, 10 Jun 2025 08:44:58 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/til/db_shading/</guid>
+      <description>&lt;p&gt;데이터베이스(DB) 샤딩(DB Sharding)이란 대용량 데이터를 효율적으로 분산·관리하기 위해 하나의 거대한 데이터베이스를 여러 개의 작은 조각(샤드, shard)으로 나누어 각각을 별도의 서버에 분산 저장하고 처리하는 기법을 말합니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-왜-샤딩이-필요한가&#34;&gt;1. 왜 샤딩이 필요한가?&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;성능 확장성(Scalability)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;단일 서버에 모든 데이터를 저장하면 저장 용량·처리 능력이 한계에 부딪힙니다.&lt;/li&gt;&#xA;&lt;li&gt;데이터와 트래픽이 늘어날수록 로드가 집중되어 응답 지연(latency)이나 병목(bottleneck)이 발생합니다.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;고가용성(High Availability)&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;각 샤드를 독립된 노드에 두면, 일부 노드 장애 시에도 전체 시스템이 완전히 다운되지 않고 가용성을 유지할 수 있습니다.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;관리 용이성&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>H2에서 mysql function 쓰려면</title>
       <link>https://pink-spider.github.io/post/spring/h2_mysql_function/</link>
