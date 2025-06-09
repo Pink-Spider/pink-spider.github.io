@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">74</span>
+              <span class="Counter">75</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">74</span>
+      <span class="Counter ">75</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,57 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/til/shading_in_boot/">
+                    <span class="repo" title="Boot에서 샤딩된 DB 사용하려면">Boot에서 샤딩된 DB 사용하려면</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>스프링 부트 애플리케이션 입장에서 샤딩된 DB를 쓰기 위해서 직접 “복잡한” 코드를 많이 짤 필요는 없습니다. 대신, 주로 다음 두 가지 레벨 중 하나의 방식으로 샤딩을 처리하게 됩니다.</p>
+<hr>
+<h2 id="1-외부-프록시미들웨어-사용-mycat-vitess-proxysql-등">1. 외부 프록시/미들웨어 사용 (Mycat, Vitess, ProxySQL 등)</h2>
+<ul>
+<li>
+<p><strong>애플리케이션 변경 제로 또는 최소화</strong></p>
+<ul>
+<li>샤드별 DB URL(호스트/포트) 대신, 프록시의 단일 접점(가상 호스트/포트)을 <code>spring.datasource.url</code>에 지정</li>
+<li>트래픽·샤드 키 기반 분기 로직은 프록시가 대신 수행</li>
+</ul>
+</li>
+<li>
+<p><strong>구현 사항</strong></p>
+<ol>
+<li>
+<p><code>application.yml</code>에 한번만 프록시 접점 정보 등록</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://proxy.example.com:3306/app_db</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>필요 시 트랜잭션 격리, 커넥션 풀, 리플리카 읽기 전용 설정 등 추가 구성</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -766,55 +817,18 @@ mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &lsquo;MMdd&rsquo;, &lsquo;yyy
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/til/msa_trasaction/">
-                    <span class="repo" title="msa에서 트랜잭션 처리 정책">msa에서 트랜잭션 처리 정책</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p>MSA(Microservices Architecture) 환경에서 서비스 간 호출 중 오류가 발생했을 때의 <strong>트랜잭션 처리 정책</strong>은 일반적으로 <strong>분산 트랜잭션</strong> 또는 <strong>사후 보상 트랜잭션</strong>(Compensating Transaction) 방식으로 구분되며, 다음과 같은 용어와 정책으로 설명됩니다.</p>
-<hr>
-<h3 id="1-saga-패턴">1. <strong>SAGA 패턴</strong></h3>
-<ul>
-<li>
-<p><strong>정의</strong>: MSA에서 가장 널리 쓰이는 트랜잭션 처리 패턴으로, 각 서비스의 로컬 트랜잭션이 성공하면 다음 서비스를 호출하고, 중간에 실패 시 이전에 수행된 작업을 <strong>보상 작업(Compensation)</strong> 으로 되돌립니다.</p>
-</li>
-<li>
-<p><strong>종류</strong>:</p>
-<ul>
-<li><strong>Choreography 기반</strong>: 서비스들이 이벤트를 발행하고 서로 구독하면서 트랜잭션을 이어감. 오케스트레이터가 없음.</li>
-<li><strong>Orchestration 기반</strong>: 중앙 컨트롤러(오케스트레이터)가 전체 트랜잭션 흐름을 제어.</li>
-</ul>
-</li>
-<li>
-<p><strong>예시</strong>: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "Boot%ec%97%90%ec%84%9c%20%ec%83%a4%eb%94%a9%eb%90%9c%20DB%20%ec%82%ac%ec%9a%a9%ed%95%98%eb%a0%a4%eb%a9%b4",
+  "link": "https://pink-spider.github.io/post/til/shading_in_boot/",
+  "publishDate": "2025-06-10%2008:49:58"
+},
+
 {
   "title": "DB%20Shading",
   "link": "https://pink-spider.github.io/post/til/db_shading/",
