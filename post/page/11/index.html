@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">75</span>
+              <span class="Counter">76</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">75</span>
+      <span class="Counter ">76</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,53 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/dispatcher/">DispatcherServlet 초기화 과정</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <hr>
+<h2 id="-dispatcherservlet-초기화-과정">🚀 DispatcherServlet 초기화 과정</h2>
+<h3 id="1-servletcontainer가-dispatcherservlet을-로딩">1. <strong>ServletContainer가 DispatcherServlet을 로딩</strong></h3>
+<p>Spring Boot 앱을 실행하면, 내장 톰캣이 뜨고 아래 과정이 시작돼요:</p>
+<ul>
+<li>Spring Boot가 자동으로 <code>DispatcherServlet</code>을 <strong>서블릿으로 등록</strong>함 (<code>/</code> 매핑)</li>
+<li><code>DispatcherServlet</code>은 사실 <code>HttpServlet</code>을 상속받은 클래스</li>
+<li>이때 호출되는 메서드가 → <code>init()</code> → 그 안에서 <code>initServletBean()</code> 실행됨</li>
+</ul>
+<hr>
+<h3 id="2-webapplicationcontext-생성-및-초기화">2. <strong>WebApplicationContext 생성 및 초기화</strong></h3>
+<ul>
+<li><code>DispatcherServlet</code>은 자신의 <strong>Spring WebApplicationContext</strong>를 가지고 있음</li>
+<li>이 WebApplicationContext는 <code>@Controller</code>, <code>@RestController</code>, <code>@Service</code>, <code>@Repository</code> 등이 등록된 공간</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">GenericWebApplicationContext
+</span></span><span class="line"><span class="cl">      ↑
+</span></span><span class="line"><span class="cl">AnnotationConfigWebApplicationContext
+</span></span><span class="line"><span class="cl">      ↑
+</span></span><span class="line"><span class="cl">WebApplicationContext ← DispatcherServlet이 사용
+</span></span></code></pre></div><blockquote>
+<p><code>DispatcherServlet</code>은 이 context를 통해 빈을 찾고, 라우팅을 수행함</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 08:20:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 08:20:45 &#43;0900">
+                Wed, 26 Mar 2025 08:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -949,50 +996,6 @@
               <relative-time datetime=" Sat, 22 Mar 2025 20:16:08 &#43;0900" class="no-wrap"
                 title=" Sat, 22 Mar 2025 20:16:08 &#43;0900">
                 Sat, 22 Mar 2025 20:16:08 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/aes/about_aes/">About AES</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="aes-암복호화를-위한-key생성-코드로-만들기">AES 암복호화를 위한 key생성 코드로 만들기</h1>
-<h2 id="contents">Contents</h2>
-<h3 id="aes-암호화-알고리즘에-대하여">AES 암호화 알고리즘에 대하여.</h3>
-<ul>
-<li>암복호화가 가능한 대표적인 양방향 알고리즘입니다.</li>
-<li>자료상으로 찾아보면 AES(Advanced Encryption Standard)는 대칭 키 암호화 방식의 대표적인 알고리즘으로, 미국 국립표준기술연구소(NIST)에 의해 2001년 표준으로 채택되었습니다. Rijndael 알고리즘을 기반으로 설계되었으며, 높은 보안성과 빠른 성능 덕분에 다양한 보안 애플리케이션에서 널리 사용되고 있습니다.</li>
-</ul>
-<h4 id="aes-특징">AES 특징</h4>
-<ul>
-<li>대칭 키 암호화: 동일한 키를 사용하여 데이터를 암호화 및 복호화합니다.</li>
-<li>고정된 블록 크기: AES는 128비트 블록 크기를 사용합니다.</li>
-<li>다양한 키 길이 지원: 128비트, 192비트, 256비트 키 길이를 제공합니다.</li>
-<li>보안성: 기존의 DES(Data Encryption Standard)보다 강력한 보안성을 자랑합니다.</li>
-<li>빠른 속도: 소프트웨어 및 하드웨어에서 효율적으로 동작합니다.</li>
-</ul>
-<h4 id="aes-암호화-과정">AES 암호화 과정</h4>
-<ul>
-<li>
-<p>AES 암호화는 여러 라운드(Round)의 연산을 통해 이루어집니다. 사용되는 키 길이에 따라 라운드 수가 달라집니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 20 Mar 2025 16:18:45 &#43;0900" class="no-wrap"
-                title=" Thu, 20 Mar 2025 16:18:45 &#43;0900">
-                Thu, 20 Mar 2025 16:18:45 &#43;0900
               </relative-time>
             </div>
           </div>

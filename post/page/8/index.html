@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">75</span>
+              <span class="Counter">76</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">75</span>
+      <span class="Counter ">76</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,92 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/memory/cacheable/">Cacheable 어노테이션에 대해서</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><code>@Cacheable</code> 어노테이션은 Spring Framework에서 <strong>메서드의 반환값을 캐시에 저장</strong>하여, <strong>같은 인자가 들어올 경우 캐시된 값을 재사용</strong>하도록 하는 기능을 제공합니다. 즉, 메서드를 반복적으로 호출하더라도 실제로는 <strong>처음 한 번만 실행되고</strong>, 이후 호출은 캐시된 결과를 반환하게 됩니다.</p>
+<hr>
+<h3 id="-주요-역할-요약">📌 주요 역할 요약</h3>
+<ul>
+<li><strong>중복 호출 방지</strong>: 동일한 입력값에 대해 메서드를 반복 호출하면, 캐시된 결과를 반환해 성능 향상.</li>
+<li><strong>결과 저장</strong>: 메서드 실행 결과를 캐시에 저장.</li>
+<li><strong>조건부 캐싱</strong>: 특정 조건에 따라 캐싱 여부 제어 가능.</li>
+</ul>
+<hr>
+<h3 id="-기본-사용-예시">✅ 기본 사용 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="s">&#34;users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">findUserById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 실제로는 DB나 외부 API 호출</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li>위 메서드는 <code>users</code>라는 캐시 이름으로 결과를 저장합니다.</li>
+<li><code>id</code>가 동일한 경우, 이후 호출은 캐시된 <code>User</code> 객체를 반환합니다.</li>
+</ul>
+<hr>
+<h3 id="-주요-속성">🔧 주요 속성</h3>
+<table>
+  <thead>
+      <tr>
+          <th>속성</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>value</code> 또는 <code>cacheNames</code></td>
+          <td>사용할 캐시 이름 지정</td>
+      </tr>
+      <tr>
+          <td><code>key</code></td>
+          <td>캐시 키를 지정 (SpEL 표현식 사용 가능)</td>
+      </tr>
+      <tr>
+          <td><code>condition</code></td>
+          <td>캐싱할 조건 지정 (SpEL)</td>
+      </tr>
+      <tr>
+          <td><code>unless</code></td>
+          <td>결과를 저장하지 않을 조건 (SpEL)</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="예시">예시:</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;books&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#isbn&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">unless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#result == null&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Book</span><span class="w"> </span><span class="nf">findBook</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">isbn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bookRepository</span><span class="p">.</span><span class="na">findByIsbn</span><span class="p">(</span><span class="n">isbn</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-함께-알아두면-좋은-어노테이션">🧠 함께 알아두면 좋은 어노테이션</h3>
+<ul>
+<li><code>@CachePut</code> : 캐시를 <strong>강제로 업데이트</strong>할 때 사용</li>
+<li><code>@CacheEvict</code> : 캐시를 <strong>삭제</strong>할 때 사용</li>
+<li><code>@Caching</code> : 여러 캐시 어노테이션을 함께 사용할 때</li>
+</ul>
+<hr>
+<p>필요하다면 Redis나 Caffeine 같은 캐시 스토어와 함께 연동도 가능합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 01 Apr 2025 11:34:10 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 11:34:10 &#43;0900">
+                Tue, 01 Apr 2025 11:34:10 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -979,40 +1065,6 @@ public class CorsProperties {
               <relative-time datetime=" Fri, 28 Mar 2025 13:25:03 &#43;0900" class="no-wrap"
                 title=" Fri, 28 Mar 2025 13:25:03 &#43;0900">
                 Fri, 28 Mar 2025 13:25:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/gateway_cors/">Spring Gateway Cors 설장하기</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="spring-cloud-gateway에서-globalcors-설정">Spring Cloud Gateway에서 globalcors 설정</h1>
-<ul>
-<li>특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, 설정한 cors-configurations 키의 패턴을 세분화하면 됩니다. <!-- raw HTML omitted --></li>
-<li>현재는 &lsquo;/**&lsquo;로 모든 경로에 대해 허용하고 있으므로, 이를 제한하려면 예를 들어 /api/public/** 처럼 특정 경로로 좁혀주면 됩니다.</li>
-</ul>
-<p>Spring Cloud Gateway에서 <code>globalcors</code> 설정을 사용할 때 특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, <!-- raw HTML omitted -->
-설정한 <code>cors-configurations</code> 키의 패턴을 세분화하면 됩니다. <!-- raw HTML omitted -->
-현재는 <code>'/\*\*'</code>로 모든 경로에 대해 허용하고 있으므로, <!-- raw HTML omitted -->
-이를 제한하려면 예를 들어 <code>/api/public/**</code> 처럼 특정 경로로 좁혀주면 됩니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Fri, 28 Mar 2025 11:41:41 &#43;0900" class="no-wrap"
-                title=" Fri, 28 Mar 2025 11:41:41 &#43;0900">
-                Fri, 28 Mar 2025 11:41:41 &#43;0900
               </relative-time>
             </div>
           </div>

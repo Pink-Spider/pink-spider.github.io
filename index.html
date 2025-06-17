@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">75</span>
+              <span class="Counter">76</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">75</span>
+      <span class="Counter ">76</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,252 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/httpapicachingfilter/">
+                    <span class="repo" title="Boot에서 샤딩된 DB 사용하려면">Boot에서 샤딩된 DB 사용하려면</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <h1 id="httpapicachingfilter-와-cachedhttpservletrequestwrapper">HttpApiCachingFilter 와 CachedHttpServletRequestWrapper</h1>
+<ul>
+<li>json과 multipart 외 form-urlencoded의 경우도 허용하면서 logging 정보 남기는 filter 구현 예시</li>
+<li>request 의 inputStream을 한번 읽으면 휘발되기 때문에 이를 방지하는 로직이 중요합니다.</li>
+</ul>
+<h2 id="httpapicachingfilter">HttpApiCachingFilter</h2>
+<pre tabindex="0"><code>@Component
+@Order(value = Ordered.HIGHEST_PRECEDENCE)
+@WebFilter(filterName = &#34;HttpApiCachingFilter&#34;, urlPatterns = &#34;/*&#34;)
+@Slf4j
+public class HttpApiCachingFilter extends OncePerRequestFilter {
+
+    private static String APPLICATION_NAME;
+
+    @Value(&#34;${spring.application.name}&#34;)
+    private void setApplicationName(String value) {
+        APPLICATION_NAME = value;
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+        throws ServletException, IOException {
+        if (isAsyncDispatch(request)) {
+            filterChain.doFilter(request, response);
+        } else if (isMultipartRequest(request)) {
+            doFilterWrapped(new StandardMultipartHttpServletRequest(request), new CachedHttpServletResponseWrapper(response), filterChain);
+        } else {
+            doFilterWrapped(new CachedHttpServletRequestWrapper(request), new CachedHttpServletResponseWrapper(response), filterChain);
+        }
+    }
+
+    protected void doFilterWrapped(HttpServletRequestWrapper request, ContentCachingResponseWrapper response, FilterChain filterChain)
+        throws ServletException, IOException {
+        try {
+            logRequestHeader(request);
+            logRequest(request);
+            filterChain.doFilter(request, response);
+        } finally {
+            logResponseHeader(response);
+            logResponse(response);
+            response.copyBodyToResponse();
+        }
+    }
+
+    private static void logRequestHeader(HttpServletRequestWrapper request) {
+        Enumeration&lt;String&gt; headerNames = request.getHeaderNames();
+        if (headerNames != null) {
+            Collections.list(headerNames).forEach(headersName -&gt; {
+                String headerValue = request.getHeader(headersName);
+                log.info(&#34;Request Header {}: {}&#34;, headersName, headerValue);
+            });
+        }
+    }
+
+    private static void logRequest(HttpServletRequestWrapper request) throws IOException {
+        String contentType = request.getContentType();
+
+        log.info(&#34;Request body: {} uri=[{}] content-type=[{}]&#34;, request.getMethod(),
+            request.getRequestURI(), contentType);
+
+        if (contentType != null &amp;&amp; contentType.startsWith(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
+            Map&lt;String, String[]&gt; paramMap = request.getParameterMap();
+            paramMap.forEach((key, values) -&gt; {
+                for (String value : values) {
+                    log.info(&#34;REQUEST Param: {} = {}&#34;, key, value);
+                }
+            });
+        } else {
+            logPayload(&#34;REQUEST&#34;, contentType, request.getInputStream(), request.getRequestURI());
+        }
+    }
+
+    private static void logResponseHeader(ContentCachingResponseWrapper response) {
+        Collection&lt;String&gt; headerNames = response.getHeaderNames();
+        for (String headerName : headerNames) {
+            for (String value : response.getHeaders(headerName)) {
+                log.info(&#34;Response Header {}: {}&#34;, headerName, value);
+            }
+        }
+    }
+
+    private static void logResponse(ContentCachingResponseWrapper response) throws IOException {
+        logPayload(&#34;RESPONSE&#34;, response.getContentType(), response.getContentInputStream(), null);
+    }
+
+    private static void logPayload(String direction,
+                                   String contentType,
+                                   InputStream inputStream,
+                                   String targetUri
+    ) throws IOException {
+        boolean visible = isVisible(MediaType.valueOf(contentType == null ? &#34;application/json&#34; : contentType));
+        if (visible) {
+            byte[] content = StreamUtils.copyToByteArray(inputStream);
+            if (content.length &gt; 0) {
+                String contentString = new String(content);
+                log.info(&#34;{} Payload: {}&#34;, direction, contentString);
+            }
+        } else {
+            log.info(&#34;{} Payload: Binary Content&#34;, direction);
+        }
+    }
+
+    private static boolean isVisible(MediaType mediaType) {
+        final List&lt;MediaType&gt; VISIBLE_TYPES = Arrays.asList(MediaType.valueOf(&#34;text/*&#34;),
+            MediaType.APPLICATION_FORM_URLENCODED,
+            MediaType.APPLICATION_JSON,
+            MediaType.APPLICATION_XML,
+            MediaType.valueOf(&#34;application/*+json&#34;),
+            MediaType.valueOf(&#34;application/*+xml&#34;),
+            MediaType.MULTIPART_FORM_DATA);
+        return VISIBLE_TYPES.stream().anyMatch(visibleType -&gt; visibleType.includes(mediaType));
+    }
+
+    private boolean isMultipartRequest(HttpServletRequest request) {
+        String contentType = request.getContentType();
+        return request.getMethod().equalsIgnoreCase(&#34;POST&#34;)
+            &amp;&amp; contentType != null
+            &amp;&amp; contentType.startsWith(&#34;multipart/form-data&#34;);
+    }
+}
+</code></pre><h2 id="cachedhttpservletrequestwrapperjava">CachedHttpServletRequestWrapper.java</h2>
+<pre tabindex="0"><code>public class CachedHttpServletRequestWrapper extends HttpServletRequestWrapper {
+
+    private final byte[] cachedBody;
+    private Map&lt;String, String[]&gt; parameterMap;
+
+    public CachedHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
+        super(request);
+        this.cachedBody = request.getInputStream().readAllBytes();
+
+        // form-urlencoded 타입일 때만 파라미터 파싱
+        String contentType = request.getContentType();
+        if (contentType != null &amp;&amp; contentType.startsWith(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
+            String encoding = request.getCharacterEncoding();
+            if (encoding == null) {
+                encoding = StandardCharsets.UTF_8.name();
+            }
+            this.parameterMap = parseFormParameters(new String(this.cachedBody, encoding));
+        } else {
+            // 원본 request의 파라미터 맵 사용
+            this.parameterMap = super.getParameterMap();
+        }
+    }
+
+    @Override
+    public ServletInputStream getInputStream() {
+        ByteArrayInputStream bais = new ByteArrayInputStream(cachedBody);
+
+        return new ServletInputStream() {
+            @Override
+            public int read() {
+                return bais.read();
+            }
+
+            @Override
+            public boolean isFinished() {
+                return bais.available() == 0;
+            }
+
+            @Override
+            public boolean isReady() {
+                return true;
+            }
+
+            @Override
+            public void setReadListener(ReadListener listener) {
+            }
+        };
+    }
+
+    @Override
+    public Map&lt;String, String[]&gt; getParameterMap() {
+        return this.parameterMap;
+    }
+
+    @Override
+    public BufferedReader getReader() {
+        String encoding = getCharacterEncoding();
+        if (encoding == null) {
+            encoding = StandardCharsets.UTF_8.name();
+        }
+        return new BufferedReader(new InputStreamReader(getInputStream(), Charset.forName(encoding)));
+    }
+
+    private Map&lt;String, String[]&gt; parseFormParameters(String body) throws UnsupportedEncodingException {
+        Map&lt;String, List&lt;String&gt;&gt; tempMap = new LinkedHashMap&lt;&gt;();
+
+        // 빈 바디 처리
+        if (body == null || body.trim().isEmpty()) {
+            return new LinkedHashMap&lt;&gt;();
+        }
+
+        for (String pair : body.split(&#34;&amp;&#34;)) {
+            if (pair.trim().isEmpty()) {
+                continue; // 빈 pair 건너뛰기
+            }
+
+            String[] parts = pair.split(&#34;=&#34;, 2);
+            if (parts.length == 0) {
+                continue;
+            }
+
+            String key = URLDecoder.decode(parts[0], StandardCharsets.UTF_8);
+            String value = parts.length &gt; 1 ? URLDecoder.decode(parts[1], StandardCharsets.UTF_8) : &#34;&#34;;
+            tempMap.computeIfAbsent(key, k -&gt; new ArrayList&lt;&gt;()).add(value);
+        }
+
+        return tempMap.entrySet().stream()
+            .collect(Collectors.toMap(Map.Entry::getKey, e -&gt; e.getValue().toArray(new String[0])));
+    }
+}
+</code></pre><h2 id="cachedhttpservletresponsewrapperjava">CachedHttpServletResponseWrapper.java</h2>
+<pre tabindex="0"><code>public class CachedHttpServletResponseWrapper extends ContentCachingResponseWrapper {
+
+    public CachedHttpServletResponseWrapper(HttpServletResponse response) {
+        super(response);
+    }
+}
+</code></pre>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -773,56 +1019,18 @@ mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &lsquo;MMdd&rsquo;, &lsquo;yyy
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/infra/db/mysql_slow_query/">
-                    <span class="repo" title="MySql Slow Query 모니터링">MySql Slow Query 모니터링</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p>MySQL에서 <strong>Slow Query(슬로우 쿼리)</strong> 를 모니터링하는 것은 성능 최적화를 위한 중요한 작업입니다. 다음은 슬로우 쿼리를 모니터링하는 일반적인 방법들입니다:</p>
-<hr>
-<h3 id="1-슬로우-쿼리-로그-활성화하기">1. <strong>슬로우 쿼리 로그 활성화하기</strong></h3>
-<p>슬로우 쿼리를 기록하기 위해 MySQL 설정을 조정합니다.</p>
-<h4 id="방법-1-mycnf-또는-myini-파일-수정">방법 1: <code>my.cnf</code> 또는 <code>my.ini</code> 파일 수정</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[mysqld]</span>
-</span></span><span class="line"><span class="cl"><span class="na">slow_query_log</span> <span class="o">=</span> <span class="s">1</span>
-</span></span><span class="line"><span class="cl"><span class="na">slow_query_log_file</span> <span class="o">=</span> <span class="s">/var/log/mysql/slow.log</span>
-</span></span><span class="line"><span class="cl"><span class="na">long_query_time</span> <span class="o">=</span> <span class="s">1</span>
-</span></span><span class="line"><span class="cl"><span class="na">log_queries_not_using_indexes</span> <span class="o">=</span> <span class="s">1</span>
-</span></span></code></pre></div><ul>
-<li><code>slow_query_log</code>: 슬로우 쿼리 로그 기능 활성화</li>
-<li><code>slow_query_log_file</code>: 로그 파일 위치</li>
-<li><code>long_query_time</code>: 몇 초 이상 걸리는 쿼리를 느린 쿼리로 간주할지 설정 (초 단위)</li>
-<li><code>log_queries_not_using_indexes</code>: 인덱스를 사용하지 않는 쿼리도 로그에 기록</li>
-</ul>
-<p>설정 후 MySQL을 재시작해야 반영됩니다.</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "Boot%ec%97%90%ec%84%9c%20%ec%83%a4%eb%94%a9%eb%90%9c%20DB%20%ec%82%ac%ec%9a%a9%ed%95%98%eb%a0%a4%eb%a9%b4",
+  "link": "https://pink-spider.github.io/post/spring/httpapicachingfilter/",
+  "publishDate": "2025-06-16%2020:49:58"
+},
+
 {
   "title": "Boot%ec%97%90%ec%84%9c%20%ec%83%a4%eb%94%a9%eb%90%9c%20DB%20%ec%82%ac%ec%9a%a9%ed%95%98%eb%a0%a4%eb%a9%b4",
   "link": "https://pink-spider.github.io/post/til/shading_in_boot/",

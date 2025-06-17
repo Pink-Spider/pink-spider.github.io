@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">75</span>
+              <span class="Counter">76</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">75</span>
+      <span class="Counter ">76</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,40 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/gateway_cors/">Spring Gateway Cors 설장하기</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="spring-cloud-gateway에서-globalcors-설정">Spring Cloud Gateway에서 globalcors 설정</h1>
+<ul>
+<li>특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, 설정한 cors-configurations 키의 패턴을 세분화하면 됩니다. <!-- raw HTML omitted --></li>
+<li>현재는 &lsquo;/**&lsquo;로 모든 경로에 대해 허용하고 있으므로, 이를 제한하려면 예를 들어 /api/public/** 처럼 특정 경로로 좁혀주면 됩니다.</li>
+</ul>
+<p>Spring Cloud Gateway에서 <code>globalcors</code> 설정을 사용할 때 특정 URI 패턴에 대해서만 CORS를 허용하고 싶다면, <!-- raw HTML omitted -->
+설정한 <code>cors-configurations</code> 키의 패턴을 세분화하면 됩니다. <!-- raw HTML omitted -->
+현재는 <code>'/\*\*'</code>로 모든 경로에 대해 허용하고 있으므로, <!-- raw HTML omitted -->
+이를 제한하려면 예를 들어 <code>/api/public/**</code> 처럼 특정 경로로 좁혀주면 됩니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Fri, 28 Mar 2025 11:41:41 &#43;0900" class="no-wrap"
+                title=" Fri, 28 Mar 2025 11:41:41 &#43;0900">
+                Fri, 28 Mar 2025 11:41:41 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -920,78 +954,6 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
               <relative-time datetime=" Wed, 26 Mar 2025 11:30:45 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 11:30:45 &#43;0900">
                 Wed, 26 Mar 2025 11:30:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/memory/spring-%EC%8B%9C%EC%9E%91%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%84%A4%EC%A0%95/">Spring 시작시 메모리 설정 차이</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java 애플리케이션을 실행할 때 <code>-Xmx512m</code>과 <code>-XX:MaxRAM=512m</code>는 모두 최대 메모리 사용량을 제한하는 옵션이지만, 동작 방식에 차이가 있습니다.</p>
-<h3 id="1--xmx512m">1. <code>-Xmx512m</code></h3>
-<ul>
-<li>힙(Heap) 메모리의 최대 크기를 512MB로 설정합니다.</li>
-<li>예제:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -Xmx512m -jar myapp.jar
-</span></span></code></pre></div></li>
-<li>이 설정은 Java 힙 메모리만 제한하며, 전체 프로세스의 메모리 사용량을 제한하는 것은 아닙니다.</li>
-<li>즉, 힙 외의 메모리(메타스페이스, 스택, 네이티브 메모리 등)는 따로 제한되지 않습니다.</li>
-</ul>
-<h3 id="2--xxmaxram512m">2. <code>-XX:MaxRAM=512m</code></h3>
-<ul>
-<li>JVM이 사용할 수 있는 <strong>전체 메모리(힙 + 메타스페이스 + 기타 네이티브 메모리)</strong> 를 512MB로 제한합니다.</li>
-<li>예제:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">java -XX:MaxRAM<span class="o">=</span>512m -jar myapp.jar
-</span></span></code></pre></div></li>
-<li><code>-XX:MaxRAM</code>을 설정하면 <code>-Xmx</code>의 기본값이 달라질 수 있습니다.
-<ul>
-<li>일반적으로 <code>-Xmx</code>의 기본값은 <code>MaxRAM</code> 값의 25~50% 정도로 설정됩니다(JVM 버전에 따라 다름).</li>
-</ul>
-</li>
-<li>이 설정은 <strong>컨테이너 환경(Docker, Kubernetes)</strong> 에서 JVM이 사용할 수 있는 메모리를 제어하는 데 유용합니다.</li>
-</ul>
-<h3 id="차이점-요약">차이점 요약</h3>
-<table>
-  <thead>
-      <tr>
-          <th>옵션</th>
-          <th>대상</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>-Xmx512m</code></td>
-          <td>힙(Heap) 메모리</td>
-          <td>힙 메모리의 최대 크기만 제한</td>
-      </tr>
-      <tr>
-          <td><code>-XX:MaxRAM=512m</code></td>
-          <td>전체 JVM 메모리</td>
-          <td>힙 + 메타스페이스 + 네이티브 메모리를 포함한 JVM 전체 메모리 제한</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="함께-사용하면">함께 사용하면?</h3>
-<p>두 옵션을 함께 사용할 수도 있습니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:26:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:26:45 &#43;0900">
-                Wed, 26 Mar 2025 11:26:45 &#43;0900
               </relative-time>
             </div>
           </div>

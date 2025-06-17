@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">75</span>
+              <span class="Counter">76</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">75</span>
+      <span class="Counter ">76</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,50 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/aes/about_aes/">About AES</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="aes-암복호화를-위한-key생성-코드로-만들기">AES 암복호화를 위한 key생성 코드로 만들기</h1>
+<h2 id="contents">Contents</h2>
+<h3 id="aes-암호화-알고리즘에-대하여">AES 암호화 알고리즘에 대하여.</h3>
+<ul>
+<li>암복호화가 가능한 대표적인 양방향 알고리즘입니다.</li>
+<li>자료상으로 찾아보면 AES(Advanced Encryption Standard)는 대칭 키 암호화 방식의 대표적인 알고리즘으로, 미국 국립표준기술연구소(NIST)에 의해 2001년 표준으로 채택되었습니다. Rijndael 알고리즘을 기반으로 설계되었으며, 높은 보안성과 빠른 성능 덕분에 다양한 보안 애플리케이션에서 널리 사용되고 있습니다.</li>
+</ul>
+<h4 id="aes-특징">AES 특징</h4>
+<ul>
+<li>대칭 키 암호화: 동일한 키를 사용하여 데이터를 암호화 및 복호화합니다.</li>
+<li>고정된 블록 크기: AES는 128비트 블록 크기를 사용합니다.</li>
+<li>다양한 키 길이 지원: 128비트, 192비트, 256비트 키 길이를 제공합니다.</li>
+<li>보안성: 기존의 DES(Data Encryption Standard)보다 강력한 보안성을 자랑합니다.</li>
+<li>빠른 속도: 소프트웨어 및 하드웨어에서 효율적으로 동작합니다.</li>
+</ul>
+<h4 id="aes-암호화-과정">AES 암호화 과정</h4>
+<ul>
+<li>
+<p>AES 암호화는 여러 라운드(Round)의 연산을 통해 이루어집니다. 사용되는 키 길이에 따라 라운드 수가 달라집니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 20 Mar 2025 16:18:45 &#43;0900" class="no-wrap"
+                title=" Thu, 20 Mar 2025 16:18:45 &#43;0900">
+                Thu, 20 Mar 2025 16:18:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -928,106 +972,6 @@ public class SomeComponentClass {
               <relative-time datetime=" Sat, 11 Jan 2025 16:11:03 &#43;0900" class="no-wrap"
                 title=" Sat, 11 Jan 2025 16:11:03 &#43;0900">
                 Sat, 11 Jan 2025 16:11:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git/git_tag/">git에서 tag의 활용</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="git-에서-tag는-언제-쓰고-어떻게-쓸까">git 에서 tag는 언제 쓰고 어떻게 쓸까?</h1>
-<ul>
-<li>Git에서 **tag(태그)**는 특정 커밋에 이름을 붙여서 식별하기 쉽게 만드는 기능입니다. <!-- raw HTML omitted --></li>
-<li>일반적으로 릴리즈 버전을 표시할 때 많이 사용되며, 특정 시점의 스냅샷을 의미합니다.</li>
-</ul>
-<h2 id="-태그의-주요-역할">🎯 태그의 주요 역할</h2>
-<ol>
-<li>
-<p>릴리즈 마킹</p>
-<ul>
-<li>예: v1.0.0, v2.1.3</li>
-<li>배포한 버전이 어떤 커밋인지 명확하게 추적할 수 있습니다.</li>
-</ul>
-</li>
-<li>
-<p>스냅샷 저장</p>
-<ul>
-<li>특정 커밋에 중요한 의미를 부여하고 싶을 때 (예: 첫 배포, 테스트 완료 지점 등)</li>
-</ul>
-</li>
-<li>
-<p>CI/CD 트리거용</p>
-<ul>
-<li>태그가 push될 때 자동 배포되도록 CI 파이프라인 설정이 가능</li>
-</ul>
-</li>
-</ol>
-<h2 id="-태그의-종류">🛠️ 태그의 종류</h2>
-<ol>
-<li>Lightweight Tag (가벼운 태그)
-<ul>
-<li>단순히 커밋을 가리키는 포인터</li>
-<li>Git 내부적으로는 브랜치와 유사한 구조</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git tag v1.0.0
-</span></span></code></pre></div></li>
-<li>Annotated Tag (주석이 있는 태그)
-<ul>
-<li>태그 생성자 정보, 날짜, 메시지 등을 포함</li>
-<li>릴리즈에는 보통 이걸 사용</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git tag -a v1.0.0 -m <span class="s2">&#34;Release version 1.0.0&#34;</span>
-</span></span></code></pre></div></li>
-</ol>
-<h3 id="-태그-푸시-및-공유">📤 태그 푸시 및 공유</h3>
-<ul>
-<li>태그는 기본적으로 git push로 자동 푸시되지 않음. 명시적으로 푸시해야 함:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 특정 태그 푸시</span>
-</span></span><span class="line"><span class="cl">git push origin v1.0.0
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 모든 태그 푸시</span>
-</span></span><span class="line"><span class="cl">git push origin --tags
-</span></span></code></pre></div></li>
-</ul>
-<h3 id="-태그-확인">🔍 태그 확인</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 로컬 태그 목록</span>
-</span></span><span class="line"><span class="cl">git tag
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 특정 태그가 가리키는 커밋 보기</span>
-</span></span><span class="line"><span class="cl">git show v1.0.0
-</span></span></code></pre></div><h3 id="-태그-삭제">🧽 태그 삭제</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 로컬 태그 삭제</span>
-</span></span><span class="line"><span class="cl">git tag -d v1.0.0
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 원격 태그 삭제</span>
-</span></span><span class="line"><span class="cl">git push origin --delete v1.0.0
-</span></span></code></pre></div><h3 id="-활용-예시-릴리즈-관리">📦 활용 예시 (릴리즈 관리)</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 코드가 안정화된 시점</span>
-</span></span><span class="line"><span class="cl">git checkout main
-</span></span><span class="line"><span class="cl">git pull
-</span></span><span class="line"><span class="cl">git tag -a v1.0.0 -m <span class="s2">&#34;First stable release&#34;</span>
-</span></span><span class="line"><span class="cl">git push origin v1.0.0
-</span></span></code></pre></div><ul>
-<li>CI/CD 도구(GitHub Actions, Jenkins 등)는 이 태그를 감지해서 v1.0.0을 자동으로 배포하게 할 수 있습니다.</li>
-</ul>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sat, 04 Jan 2025 13:18:03 &#43;0900" class="no-wrap"
-                title=" Sat, 04 Jan 2025 13:18:03 &#43;0900">
-                Sat, 04 Jan 2025 13:18:03 &#43;0900
               </relative-time>
             </div>
           </div>
