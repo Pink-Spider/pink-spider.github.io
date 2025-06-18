@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">76</span>
+              <span class="Counter">77</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">76</span>
+      <span class="Counter ">77</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,76 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/servlet/">servlet이란?</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="servlet이란">Servlet이란?</h1>
+<p><strong>Servlet</strong>은 <strong>Java</strong>를 기반으로 작성된 서버 측 프로그램으로, <strong>클라이언트(주로 웹 브라우저)의 요청을 처리하고, 응답을 생성하는 역할</strong>을 합니다. 주로 <strong>HTTP 요청과 응답</strong>을 처리하기 위해 사용되며, Java EE (이후 Jakarta EE로 이름 변경) 스펙의 일부입니다.</p>
+<p>Servlet은 기본적으로 <strong>웹 애플리케이션 서버</strong>(Tomcat, Jetty 등) 위에서 동작하며, 웹 서버와 클라이언트 간의 중간 처리자로 기능합니다.</p>
+<hr>
+<h1 id="servlet의-주요-특징">Servlet의 주요 특징</h1>
+<ul>
+<li><strong>Java 언어 기반</strong>: 플랫폼 독립적이며 객체 지향 프로그래밍의 장점을 가집니다.</li>
+<li><strong>요청-응답 처리</strong>: HTTP 요청(<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code> 등)을 받아서 필요한 비즈니스 로직을 수행하고, 결과를 다시 클라이언트에 전송합니다.</li>
+<li><strong>확장성</strong>: 추가 설정과 라이프사이클 관리가 가능해 복잡한 웹 애플리케이션 개발이 가능합니다.</li>
+<li><strong>스레드 기반</strong>: 하나의 Servlet 인스턴스가 다수의 요청을 처리하기 위해 여러 스레드와 함께 동작합니다.</li>
+<li><strong>라이프사이클 관리</strong>: <code>init()</code>, <code>service()</code>, <code>destroy()</code> 메서드를 통해 생명주기를 관리합니다.</li>
+</ul>
+<hr>
+<h1 id="servlet의-동작-방식">Servlet의 동작 방식</h1>
+<ol>
+<li><strong>클라이언트 요청</strong>: 사용자가 브라우저를 통해 서버로 요청을 보냅니다.</li>
+<li><strong>웹 서버 전달</strong>: 요청은 웹 서버(Tomcat 등)에 의해 해당 Servlet에 전달됩니다.</li>
+<li><strong>Servlet 요청 처리</strong>:
+<ul>
+<li><code>service()</code> 메서드가 호출되어 요청을 처리합니다.</li>
+<li>요청 방식에 따라 <code>doGet()</code>, <code>doPost()</code> 등의 메서드가 실행됩니다.</li>
+</ul>
+</li>
+<li><strong>응답 생성</strong>: 처리 결과를 <code>HttpServletResponse</code> 객체를 통해 클라이언트로 반환합니다.</li>
+<li><strong>라이프사이클 종료</strong>: 서버가 내려가거나 특정 상황에서 <code>destroy()</code>가 호출되어 정리 작업을 합니다.</li>
+</ol>
+<hr>
+<h1 id="servlet의-기본-구조-예제">Servlet의 기본 구조 (예제)</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.ServletException</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.annotation.WebServlet</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServlet</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletRequest</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletResponse</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="s">&#34;text/html&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">resp</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">write</span><span class="p">(</span><span class="s">&#34;&lt;h1&gt;Hello, Servlet!&lt;/h1&gt;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>이 코드는 <code>/hello</code> 경로로 요청이 오면 <strong>&ldquo;Hello, Servlet!&rdquo;</strong> 이라는 HTML을 클라이언트에 반환합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 29 Apr 2025 20:19:45 &#43;0900" class="no-wrap"
+                title=" Tue, 29 Apr 2025 20:19:45 &#43;0900">
+                Tue, 29 Apr 2025 20:19:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1011,46 +1081,6 @@ class Solution {
               <relative-time datetime=" Wed, 23 Apr 2025 20:48:45 &#43;0900" class="no-wrap"
                 title=" Wed, 23 Apr 2025 20:48:45 &#43;0900">
                 Wed, 23 Apr 2025 20:48:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/maptoint/">mapToInt</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>stream().mapToInt()</code>는 Java Stream API에서 사용되는 메서드 중 하나로, <strong>Stream의 요소를 <code>int</code>형 정수로 변환하여 <code>IntStream</code>을 생성</strong>하는 역할을 합니다.</p>
-<h3 id="-사용-목적">💡 사용 목적</h3>
-<p><code>mapToInt()</code>는 주로 <strong>객체 스트림에서 정수값을 추출하고자 할 때</strong> 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.</p>
-<hr>
-<h3 id="-기본-구조">📌 기본 구조</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">IntStream</span><span class="w"> </span><span class="n">intStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">element</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">변환할</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">값</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-예시">✅ 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">parseInt</span><span class="p">)</span><span class="w">  </span><span class="c1">// String → int</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">sum</span><span class="p">();</span><span class="w">                       </span><span class="c1">// IntStream 연산 사용</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w"> </span><span class="c1">// 출력: 6</span><span class="w">
-</span></span></span></code></pre></div><p>위 코드에서:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 23 Apr 2025 13:48:45 &#43;0900" class="no-wrap"
-                title=" Wed, 23 Apr 2025 13:48:45 &#43;0900">
-                Wed, 23 Apr 2025 13:48:45 &#43;0900
               </relative-time>
             </div>
           </div>

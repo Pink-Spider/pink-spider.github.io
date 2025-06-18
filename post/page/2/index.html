@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">76</span>
+              <span class="Counter">77</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">76</span>
+      <span class="Counter ">77</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,47 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/msa_trasaction/">msa에서 트랜잭션 처리 정책</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MSA(Microservices Architecture) 환경에서 서비스 간 호출 중 오류가 발생했을 때의 <strong>트랜잭션 처리 정책</strong>은 일반적으로 <strong>분산 트랜잭션</strong> 또는 <strong>사후 보상 트랜잭션</strong>(Compensating Transaction) 방식으로 구분되며, 다음과 같은 용어와 정책으로 설명됩니다.</p>
+<hr>
+<h3 id="1-saga-패턴">1. <strong>SAGA 패턴</strong></h3>
+<ul>
+<li>
+<p><strong>정의</strong>: MSA에서 가장 널리 쓰이는 트랜잭션 처리 패턴으로, 각 서비스의 로컬 트랜잭션이 성공하면 다음 서비스를 호출하고, 중간에 실패 시 이전에 수행된 작업을 <strong>보상 작업(Compensation)</strong> 으로 되돌립니다.</p>
+</li>
+<li>
+<p><strong>종류</strong>:</p>
+<ul>
+<li><strong>Choreography 기반</strong>: 서비스들이 이벤트를 발행하고 서로 구독하면서 트랜잭션을 이어감. 오케스트레이터가 없음.</li>
+<li><strong>Orchestration 기반</strong>: 중앙 컨트롤러(오케스트레이터)가 전체 트랜잭션 흐름을 제어.</li>
+</ul>
+</li>
+<li>
+<p><strong>예시</strong>: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 26 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Mon, 26 May 2025 20:20:45 &#43;0900">
+                Mon, 26 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1025,81 +1066,6 @@
               <relative-time datetime=" Tue, 20 May 2025 20:20:45 &#43;0900" class="no-wrap"
                 title=" Tue, 20 May 2025 20:20:45 &#43;0900">
                 Tue, 20 May 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/video_streaming_tool/">동영상 스트리밍에 사용되는 주요 기술 및 툴</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>동영상 스트리밍에 사용되는 주요 기술 및 툴은 다양한 목적(예: 실시간 스트리밍, VOD, 콘텐츠 전송, 인코딩, 플레이어 구현 등)에 따라 구분됩니다. 아래에 주요 기술과 툴을 영역별로 정리해드릴게요.</p>
-<hr>
-<h3 id="1-비디오-인코딩-및-트랜스코딩">1. <strong>비디오 인코딩 및 트랜스코딩</strong></h3>
-<ul>
-<li><strong>FFmpeg</strong>: 오픈소스 멀티미디어 처리 도구. 인코딩, 디코딩, 트랜스코딩, 포맷 변경, 필터링 등에 사용.</li>
-<li><strong>x264 / x265</strong>: 각각 H.264, H.265 표준 인코딩 라이브러리.</li>
-<li><strong>AWS Elemental MediaConvert</strong>: AWS에서 제공하는 클라우드 기반 트랜스코딩 서비스.</li>
-</ul>
-<hr>
-<h3 id="2-스트리밍-프로토콜">2. <strong>스트리밍 프로토콜</strong></h3>
-<ul>
-<li><strong>HLS (HTTP Live Streaming)</strong>: 애플이 개발. 대부분의 플랫폼에서 지원되며, 세그먼트 방식.</li>
-<li><strong>DASH (Dynamic Adaptive Streaming over HTTP)</strong>: MPEG 표준 기반으로, HLS와 비슷하지만 플랫폼 독립적.</li>
-<li><strong>RTMP (Real-Time Messaging Protocol)</strong>: 주로 라이브 방송에 사용되며, YouTube Live, Twitch 등에서 여전히 활용.</li>
-<li><strong>WebRTC</strong>: 지연이 극히 낮은 실시간 양방향 통신에 최적화된 스트리밍 프로토콜.</li>
-</ul>
-<hr>
-<h3 id="3-콘텐츠-전송-네트워크-cdn">3. <strong>콘텐츠 전송 네트워크 (CDN)</strong></h3>
-<ul>
-<li><strong>Cloudflare Stream / CDN</strong>: 빠르고 안정적인 콘텐츠 전송을 위한 글로벌 네트워크.</li>
-<li><strong>AWS CloudFront</strong>, <strong>Akamai</strong>, <strong>Fastly</strong>: 대형 스트리밍 서비스에서 많이 사용.</li>
-</ul>
-<hr>
-<h3 id="4-플레이어-및-프론트엔드-도구">4. <strong>플레이어 및 프론트엔드 도구</strong></h3>
-<ul>
-<li><strong>Video.js</strong>: HTML5 기반의 오픈소스 비디오 플레이어.</li>
-<li><strong>Shaka Player</strong>: 구글이 만든 MPEG-DASH 및 HLS 지원 오픈소스 플레이어.</li>
-<li><strong>HLS.js</strong>: JavaScript 기반 HLS 재생 라이브러리.</li>
-<li><strong>ExoPlayer</strong> (Android), <strong>AVPlayer</strong> (iOS): 모바일 앱용 기본 플레이어 SDK.</li>
-</ul>
-<hr>
-<h3 id="5-라이브-스트리밍-플랫폼서비스">5. <strong>라이브 스트리밍 플랫폼/서비스</strong></h3>
-<ul>
-<li><strong>OBS Studio (Open Broadcaster Software)</strong>: 무료 라이브 방송 도구, Twitch, YouTube에 방송 가능.</li>
-<li><strong>StreamYard, Restream, Wirecast</strong>: 라이브 멀티플랫폼 스트리밍 툴.</li>
-<li><strong>Wowza Streaming Engine</strong>: 엔터프라이즈급 라이브 및 VOD 스트리밍 서버.</li>
-</ul>
-<hr>
-<h3 id="6-drm-디지털-저작권-관리-및-보안">6. <strong>DRM (디지털 저작권 관리) 및 보안</strong></h3>
-<ul>
-<li><strong>Widevine (Google)</strong>, <strong>PlayReady (Microsoft)</strong>, <strong>FairPlay (Apple)</strong>: 각 플랫폼용 DRM 시스템.</li>
-<li><strong>AES-128 Encryption</strong>: HLS와 함께 사용되는 콘텐츠 암호화 표준.</li>
-</ul>
-<hr>
-<h3 id="7-모니터링-및-분석">7. <strong>모니터링 및 분석</strong></h3>
-<ul>
-<li><strong>Mux</strong>, <strong>Conviva</strong>, <strong>Bitmovin Analytics</strong>: 사용자 경험, 버퍼링, 시청 행동 분석 등 제공.</li>
-<li><strong>Prometheus + Grafana</strong>: 서버 측 스트리밍 성능 및 지표 모니터링.</li>
-</ul>
-<hr>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sun, 18 May 2025 20:20:45 &#43;0900" class="no-wrap"
-                title=" Sun, 18 May 2025 20:20:45 &#43;0900">
-                Sun, 18 May 2025 20:20:45 &#43;0900
               </relative-time>
             </div>
           </div>
