@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    All About Join | Pink Spider
+    JS에서 클로저(closure)란... | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,25 +27,25 @@
   
   <meta
   name="description"
-  content="MySQL을 비롯한 대부분의 관계형 데이터베이스에서 사용되는 JOIN은 여러 테이블의 데이터를 조합해 하나의 결과로 만드는 데 사용됩니다. 아래는 대표적인 JOIN 종류와 각각의 설명, 예제를 포함한 정리입니다.
-🔗 1. INNER JOIN ✅ 정의 두 테이블에서 공통된 값이 존재하는 행만 반환합니다.
-🧪 예시 SELECT a.id, a.name, b.order_date FROM customers a INNER JOIN orders b ON a.id = b.customer_id; 📌 특징 가장 일반적인 JOIN 방식 양쪽 모두 일치하는 값이 있어야 결과에 포함됨 🔗 2. LEFT JOIN (또는 LEFT OUTER JOIN) ✅ 정의 왼쪽 테이블의 모든 행을 반환하며, 오른쪽 테이블에 일치하는 값이 없으면 NULL로 채워집니다.
+  content="JavaScript에서 **클로저(Closure)**는 함수와 그 함수가 선언된 어휘적 환경(Lexical Environment)의 조합을 말합니다. 즉, 함수가 외부 스코프의 변수에 접근할 수 있는 기능을 의미합니다.
+📌 기본 개념 클로저는 다음과 같은 조건에서 생성됩니다:
+함수 안에 함수가 정의되어 있고, 내부 함수가 외부 함수의 변수에 접근할 수 있으며, 외부 함수의 실행이 끝난 뒤에도 내부 함수가 여전히 그 변수에 접근할 수 있을 때 클로저가 됩니다. function outer() { let count = 0; return function inner() { count&#43;&#43;; console.log(count); } } const counter = outer(); counter(); // 1 counter(); // 2 위 예제에서 inner() 함수는 outer()의 지역 변수 count에 접근합니다. outer()의 실행이 끝났음에도 counter()가 count에 계속 접근할 수 있는 이유는 클로저 때문입니다.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/infra/db/all_about_join/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/js/about_closure/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="All About Join - Pink Spider"
+  content="JS에서 클로저(closure)란... - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="MySQL을 비롯한 대부분의 관계형 데이터베이스에서 사용되는 JOIN은 여러 테이블의 데이터를 조합해 하나의 결과로 만드는 데 사용됩니다. 아래는 대표적인 JOIN 종류와 각각의 설명, 예제를 포함한 정리입니다.
-🔗 1. INNER JOIN ✅ 정의 두 테이블에서 공통된 값이 존재하는 행만 반환합니다.
-🧪 예시 SELECT a.id, a.name, b.order_date FROM customers a INNER JOIN orders b ON a.id = b.customer_id; 📌 특징 가장 일반적인 JOIN 방식 양쪽 모두 일치하는 값이 있어야 결과에 포함됨 🔗 2. LEFT JOIN (또는 LEFT OUTER JOIN) ✅ 정의 왼쪽 테이블의 모든 행을 반환하며, 오른쪽 테이블에 일치하는 값이 없으면 NULL로 채워집니다.
+  content="JavaScript에서 **클로저(Closure)**는 함수와 그 함수가 선언된 어휘적 환경(Lexical Environment)의 조합을 말합니다. 즉, 함수가 외부 스코프의 변수에 접근할 수 있는 기능을 의미합니다.
+📌 기본 개념 클로저는 다음과 같은 조건에서 생성됩니다:
+함수 안에 함수가 정의되어 있고, 내부 함수가 외부 함수의 변수에 접근할 수 있으며, 외부 함수의 실행이 끝난 뒤에도 내부 함수가 여전히 그 변수에 접근할 수 있을 때 클로저가 됩니다. function outer() { let count = 0; return function inner() { count&#43;&#43;; console.log(count); } } const counter = outer(); counter(); // 1 counter(); // 2 위 예제에서 inner() 함수는 outer()의 지역 변수 count에 접근합니다. outer()의 실행이 끝났음에도 counter()가 count에 계속 접근할 수 있는 이유는 클로저 때문입니다.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -62,17 +62,17 @@
 />
 <meta
   property="og:title"
-  content="All About Join - Pink Spider"
+  content="JS에서 클로저(closure)란... - Pink Spider"
 />
 <meta
   property="og:description"
-  content="MySQL을 비롯한 대부분의 관계형 데이터베이스에서 사용되는 JOIN은 여러 테이블의 데이터를 조합해 하나의 결과로 만드는 데 사용됩니다. 아래는 대표적인 JOIN 종류와 각각의 설명, 예제를 포함한 정리입니다.
-🔗 1. INNER JOIN ✅ 정의 두 테이블에서 공통된 값이 존재하는 행만 반환합니다.
-🧪 예시 SELECT a.id, a.name, b.order_date FROM customers a INNER JOIN orders b ON a.id = b.customer_id; 📌 특징 가장 일반적인 JOIN 방식 양쪽 모두 일치하는 값이 있어야 결과에 포함됨 🔗 2. LEFT JOIN (또는 LEFT OUTER JOIN) ✅ 정의 왼쪽 테이블의 모든 행을 반환하며, 오른쪽 테이블에 일치하는 값이 없으면 NULL로 채워집니다.
+  content="JavaScript에서 **클로저(Closure)**는 함수와 그 함수가 선언된 어휘적 환경(Lexical Environment)의 조합을 말합니다. 즉, 함수가 외부 스코프의 변수에 접근할 수 있는 기능을 의미합니다.
+📌 기본 개념 클로저는 다음과 같은 조건에서 생성됩니다:
+함수 안에 함수가 정의되어 있고, 내부 함수가 외부 함수의 변수에 접근할 수 있으며, 외부 함수의 실행이 끝난 뒤에도 내부 함수가 여전히 그 변수에 접근할 수 있을 때 클로저가 됩니다. function outer() { let count = 0; return function inner() { count&#43;&#43;; console.log(count); } } const counter = outer(); counter(); // 1 counter(); // 2 위 예제에서 inner() 함수는 outer()의 지역 변수 count에 접근합니다. outer()의 실행이 끝났음에도 counter()가 count에 계속 접근할 수 있는 이유는 클로저 때문입니다.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/infra/db/all_about_join/" />
-<meta property="og:site_name" content="All About Join" />
+<meta property="og:url" content="https://pink-spider.github.io/post/js/about_closure/" />
+<meta property="og:site_name" content="JS에서 클로저(closure)란..." />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -80,7 +80,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-06-18 11:27:58 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-06-20 14:06:17 &#43;0900 KST" />
 
 
 
@@ -290,18 +290,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/infra/db/all_about_join/">All About Join</a></strong>
+                      href="https://pink-spider.github.io/post/js/about_closure/">JS에서 클로저(closure)란...</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 18 Jun 2025 11:27:58 &#43;0900"
+                  Created <relative-time datetime="Fri, 20 Jun 2025 14:06:17 &#43;0900"
                     class="no-wrap">
-                    Wed, 18 Jun 2025 11:27:58 &#43;0900</relative-time>
+                    Fri, 20 Jun 2025 14:06:17 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 18 Jun 2025 12:44:45 &#43;0900"
+                  Modified <relative-time datetime="Fri, 20 Jun 2025 14:06:50 &#43;0900"
                     class="no-wrap">
-                    Wed, 18 Jun 2025 12:44:45 &#43;0900</relative-time>
+                    Fri, 20 Jun 2025 14:06:50 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -331,9 +331,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      910 Words
+                      667 Words
                     <span class="file-info-divider"></span>
-                                        4 min
+                                        3 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -344,133 +344,74 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>MySQL을 비롯한 대부분의 관계형 데이터베이스에서 사용되는 <strong>JOIN</strong>은 여러 테이블의 데이터를 조합해 하나의 결과로 만드는 데 사용됩니다. 아래는 대표적인 JOIN 종류와 각각의 설명, 예제를 포함한 정리입니다.</p>
+                <article class="markdown-body entry-content container-lg"><p>JavaScript에서 **클로저(Closure)**는 함수와 그 함수가 선언된 어휘적 환경(Lexical Environment)의 조합을 말합니다. 즉, <strong>함수가 외부 스코프의 변수에 접근할 수 있는 기능</strong>을 의미합니다.</p>
 <hr>
-<h2 id="-1-inner-join">🔗 1. INNER JOIN</h2>
-<h3 id="-정의">✅ 정의</h3>
-<p>두 테이블에서 <strong>공통된 값이 존재하는 행만</strong> 반환합니다.</p>
-<h3 id="-예시">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">order_date</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징">📌 특징</h3>
+<h2 id="-기본-개념">📌 기본 개념</h2>
+<p>클로저는 다음과 같은 조건에서 생성됩니다:</p>
+<ol>
+<li><strong>함수 안에 함수가 정의되어 있고</strong>,</li>
+<li>내부 함수가 외부 함수의 변수에 접근할 수 있으며,</li>
+<li><strong>외부 함수의 실행이 끝난 뒤에도 내부 함수가 여전히 그 변수에 접근할 수 있을 때</strong> 클로저가 됩니다.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">outer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">counter</span> <span class="o">=</span> <span class="nx">outer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">counter</span><span class="p">();</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">counter</span><span class="p">();</span> <span class="c1">// 2
+</span></span></span></code></pre></div><p>위 예제에서 <code>inner()</code> 함수는 <code>outer()</code>의 지역 변수 <code>count</code>에 접근합니다. <code>outer()</code>의 실행이 끝났음에도 <code>counter()</code>가 <code>count</code>에 계속 접근할 수 있는 이유는 클로저 때문입니다.</p>
+<hr>
+<h2 id="-클로저의-활용-예시">📦 클로저의 활용 예시</h2>
+<h3 id="1-데이터-은닉과-캡슐화">1. <strong>데이터 은닉과 캡슐화</strong></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">createCounter</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">increment</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="o">++</span><span class="nx">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">decrement</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="o">--</span><span class="nx">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">getValue</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">value</span>
+</span></span><span class="line"><span class="cl">  <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">counter</span> <span class="o">=</span> <span class="nx">createCounter</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">counter</span><span class="p">.</span><span class="nx">increment</span><span class="p">());</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">counter</span><span class="p">.</span><span class="nx">increment</span><span class="p">());</span> <span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">counter</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span>  <span class="c1">// 2
+</span></span></span></code></pre></div><p>→ 외부에서는 <code>value</code>를 직접 접근할 수 없고, <code>increment/decrement</code> 같은 함수만 통해 제어할 수 있습니다.</p>
+<hr>
+<h3 id="2-콜백이나-비동기-처리에서의-변수-보존">2. <strong>콜백이나 비동기 처리에서의 변수 보존</strong></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span> <span class="c1">// 항상 3 출력
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>→ <code>var</code>는 함수 스코프라서 클로저가 <code>i</code>의 동일한 참조를 유지하기 때문에 3이 반복됨.</p>
+<p>해결하려면:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span> <span class="c1">// 0, 1, 2 출력
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>→ <code>let</code>은 블록 스코프라 클로저가 각각의 <code>i</code>를 따로 캡처함.</p>
+<hr>
+<h2 id="-클로저가-유용한-이유">🧠 클로저가 유용한 이유</h2>
 <ul>
-<li>가장 일반적인 JOIN 방식</li>
-<li>양쪽 모두 일치하는 값이 있어야 결과에 포함됨</li>
+<li>상태를 은닉하면서 유지할 수 있음</li>
+<li>함수형 프로그래밍에서 고차 함수 구현에 필수</li>
+<li>이벤트 핸들러나 비동기 로직에서 변수 유지</li>
+<li>모듈화와 캡슐화 구현에 핵심 도구</li>
 </ul>
 <hr>
-<h2 id="-2-left-join-또는-left-outer-join">🔗 2. LEFT JOIN (또는 LEFT OUTER JOIN)</h2>
-<h3 id="-정의-1">✅ 정의</h3>
-<p>왼쪽 테이블의 모든 행을 반환하며, 오른쪽 테이블에 일치하는 값이 없으면 <code>NULL</code>로 채워집니다.</p>
-<h3 id="-예시-1">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">order_date</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-1">📌 특징</h3>
+<h2 id="-주의할-점">⚠️ 주의할 점</h2>
 <ul>
-<li>고객 중 주문 이력이 없는 사람도 포함됨</li>
-<li>&ldquo;왼쪽 기준&rdquo; 전체 목록이 필요할 때 유용</li>
+<li><strong>메모리 누수</strong>: 클로저는 외부 변수를 참조하므로, 예상보다 오래 메모리에 남아 있을 수 있음</li>
+<li><strong>과도한 남용</strong>은 코드 복잡도를 높임</li>
 </ul>
 <hr>
-<h2 id="-3-right-join-또는-right-outer-join">🔗 3. RIGHT JOIN (또는 RIGHT OUTER JOIN)</h2>
-<h3 id="-정의-2">✅ 정의</h3>
-<p>오른쪽 테이블의 모든 행을 반환하며, 왼쪽 테이블에 일치하는 값이 없으면 <code>NULL</code>로 채워집니다.</p>
-<h3 id="-예시-2">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">order_date</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">RIGHT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-2">📌 특징</h3>
-<ul>
-<li>주문은 존재하지만 고객 테이블에 정보가 없을 경우에도 포함됨 (예: 삭제된 고객)</li>
-</ul>
-<hr>
-<h2 id="-4-full-outer-join-mysql은-직접-지원하지-않음">🔗 4. FULL OUTER JOIN (MySQL은 직접 지원하지 않음)</h2>
-<h3 id="-정의-3">✅ 정의</h3>
-<p><strong>양쪽 테이블의 모든 행을 반환</strong>하며, 일치하지 않는 경우 <code>NULL</code>로 표시합니다.</p>
-<h3 id="-대안-예시-mysql에서-시뮬레이션-방식">🧪 대안 예시 (MySQL에서 시뮬레이션 방식)</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UNION</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">RIGHT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-3">📌 특징</h3>
-<ul>
-<li><strong>LEFT + RIGHT</strong>를 합친 개념</li>
-<li>MySQL에서는 직접 지원하지 않으므로 <code>UNION</code>을 통해 흉내냄</li>
-</ul>
-<hr>
-<h2 id="-5-cross-join">🔗 5. CROSS JOIN</h2>
-<h3 id="-정의-4">✅ 정의</h3>
-<p><strong>모든 조합(Cartesian Product)</strong> 을 반환합니다.
-예: A(3개 행) × B(2개 행) = 6개 행</p>
-<h3 id="-예시-3">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">product</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-4">📌 특징</h3>
-<ul>
-<li>조합 생성에 유용 (예: 옵션, 요일, 좌석)</li>
-<li>실수로 사용 시 폭발적인 데이터 양 초래 가능</li>
-</ul>
-<hr>
-<h2 id="-6-self-join">🔗 6. SELF JOIN</h2>
-<h3 id="-정의-5">✅ 정의</h3>
-<p>자기 자신 테이블과의 JOIN입니다. 계층 구조나 상호 관계 표현에 사용됩니다.</p>
-<h3 id="-예시-4">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">employee</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">manager</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">manager_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-5">📌 특징</h3>
-<ul>
-<li>조직도나 트리 구조에서 자주 사용</li>
-</ul>
-<hr>
-<h2 id="-요약표">✅ 요약표</h2>
-<table>
-  <thead>
-      <tr>
-          <th>JOIN 종류</th>
-          <th>설명</th>
-          <th>포함 행 수</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>INNER JOIN</td>
-          <td>양쪽 일치하는 행만</td>
-          <td>교집합</td>
-      </tr>
-      <tr>
-          <td>LEFT JOIN</td>
-          <td>왼쪽 + 오른쪽 일치하는 행</td>
-          <td>왼쪽 기준 전체</td>
-      </tr>
-      <tr>
-          <td>RIGHT JOIN</td>
-          <td>오른쪽 + 왼쪽 일치하는 행</td>
-          <td>오른쪽 기준 전체</td>
-      </tr>
-      <tr>
-          <td>FULL OUTER JOIN</td>
-          <td>양쪽 전체 + 일치하지 않으면 NULL</td>
-          <td>합집합 (MySQL에서는 UNION 필요)</td>
-      </tr>
-      <tr>
-          <td>CROSS JOIN</td>
-          <td>두 테이블의 모든 조합</td>
-          <td>곱집합 (N × M)</td>
-      </tr>
-      <tr>
-          <td>SELF JOIN</td>
-          <td>같은 테이블끼리 JOIN</td>
-          <td>자기 자신과 비교 필요 시</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<p>필요하시면 각 JOIN의 시각화 도표, 성능 튜닝 팁, 또는 쿼리 최적화 예제도 도와드릴 수 있습니다.</p>
 </article>
               </div>
 
@@ -483,13 +424,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/js/about_closure/"> JS에서 클로저(closure)란...</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/httpapicachingfilter/">HttpApiCachingFilter...&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/db/all_about_join/">All About Join&nbsp;</a><div> »</div>
           
         </div>
       </div>
