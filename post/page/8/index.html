@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">78</span>
+              <span class="Counter">80</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">78</span>
+      <span class="Counter ">80</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,243 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/tdd/test_double/">Test Double</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="테스트-더블test-double-용어-정리">테스트 더블(Test Double) 용어 정리</h1>
+<ul>
+<li>아래는 <strong>테스트에서 자주 쓰이는 5가지 테스트 대역</strong>입니다:</li>
+</ul>
+<hr>
+<h2 id="-테스트-더블test-double-종류-요약">🧪 테스트 더블(Test Double) 종류 요약</h2>
+<table>
+  <thead>
+      <tr>
+          <th>타입</th>
+          <th>설명</th>
+          <th>주로 하는 일</th>
+          <th>대표 예시</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Dummy</strong></td>
+          <td>값이 필요하지만 <strong>아무 역할도 하지 않는 객체</strong></td>
+          <td>메서드 시그니처 채우기 용</td>
+          <td><code>new User(null)</code>처럼 값만 채움</td>
+      </tr>
+      <tr>
+          <td><strong>Fake</strong></td>
+          <td>실제 구현에 가까우나, <strong>단순하거나 in-memory 기반</strong></td>
+          <td>간단한 대체 구현</td>
+          <td>InMemory DB, FakeEmailSender</td>
+      </tr>
+      <tr>
+          <td><strong>Stub</strong></td>
+          <td><strong>고정된 응답을 리턴</strong>하는 객체</td>
+          <td>상태 기반 테스트</td>
+          <td><code>when(repo.findById()).thenReturn()</code></td>
+      </tr>
+      <tr>
+          <td><strong>Mock</strong></td>
+          <td>행위 기반, <strong>호출 여부나 순서 검증이 가능한 객체</strong></td>
+          <td>행위 기반 테스트</td>
+          <td><code>verify(repo).save()</code></td>
+      </tr>
+      <tr>
+          <td><strong>Spy</strong></td>
+          <td>실제 객체를 감싸면서, <strong>부분적으로 mock 가능</strong></td>
+          <td>실제 동작 + 호출 감시</td>
+          <td><code>spy(new UserService(...))</code></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="1--dummy">1. 🐣 Dummy</h2>
+<ul>
+<li>가장 단순한 형태.</li>
+<li>아무 일도 하지 않고, <strong>값만 채우는 용도</strong>.</li>
+<li>테스트에 직접적 의미 없음. 없어도 테스트 통과 가능.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">User</span><span class="w"> </span><span class="n">dummyUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w"> </span><span class="c1">// 생성자 매개변수 맞추려고 넣는 용도</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="2--stub">2. 🧪 Stub</h2>
+<ul>
+<li>호출하면 <strong>정해진 값을 리턴</strong>함.</li>
+<li>동작 자체는 단순하고 검증 로직은 없음.</li>
+<li>상태 기반 테스트에 사용됨.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">)));</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="3--mock">3. 🤖 Mock</h2>
+<ul>
+<li>Stub처럼 리턴값을 줄 수 있지만, <strong>추가로 호출 여부도 검증</strong>함.</li>
+<li>테스트의 **행위 검증(Behavior Verification)**에 초점.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">save</span><span class="p">(</span><span class="n">any</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="4--spy">4. 🕵️ Spy</h2>
+<ul>
+<li><strong>실제 객체를 감싸면서</strong>, 필요한 부분만 mock 처리 가능.</li>
+<li>일부 메서드는 진짜 실행, 일부는 stub/mock 가능.</li>
+<li>사용 시 조심: 진짜 의존성이 따라올 수 있음.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">UserService</span><span class="w"> </span><span class="n">spyService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spy</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserService</span><span class="p">(</span><span class="n">realRepository</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">doReturn</span><span class="p">(</span><span class="s">&#34;fakeName&#34;</span><span class="p">).</span><span class="na">when</span><span class="p">(</span><span class="n">spyService</span><span class="p">).</span><span class="na">getUserName</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="5--fake">5. 🧩 Fake</h2>
+<ul>
+<li>진짜 구현체는 아니지만, <strong>실제로 동작하는 간단한 구현</strong>.</li>
+<li>테스트용으로 가볍게 만든 <strong>진짜 비즈니스 로직을 흉내</strong>낸 것.</li>
+<li>예: InMemory DB, 테스트용 메시지 큐 등</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">InMemoryUserRepository</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Optional</span><span class="p">.</span><span class="na">ofNullable</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">id</span><span class="p">));</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-어떤-걸-언제-써야-할까">🎯 어떤 걸 언제 써야 할까?</h2>
+<table>
+  <thead>
+      <tr>
+          <th>테스트 목적</th>
+          <th>적합한 더블</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>파라미터 채우기만 하면 됨</td>
+          <td>Dummy</td>
+      </tr>
+      <tr>
+          <td>고정된 값 리턴만 필요</td>
+          <td>Stub</td>
+      </tr>
+      <tr>
+          <td>호출 여부/횟수 검증</td>
+          <td>Mock</td>
+      </tr>
+      <tr>
+          <td>실제 객체 + 일부 mocking</td>
+          <td>Spy</td>
+      </tr>
+      <tr>
+          <td>실제 구현 비슷한 동작 필요</td>
+          <td>Fake</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="fake-repository-예시">Fake Repository 예시</h1>
+<p>Spring 환경에서 자주 쓰이는 <strong>Fake Repository</strong> 예제를 보여드릴게요.<br>
+단위 테스트에서 JPA 같은 실제 DB 연결 없이도 로직을 검증하고 싶을 때 아주 유용합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
+                Thu, 03 Apr 2025 15:57:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/msa/msa_traceid_spanid/">MSA에서 traceId 와 spanId 란?</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
+<hr>
+<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
+<ul>
+<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
+<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
+<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
+</ul>
+<hr>
+<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
+<ul>
+<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
+<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
+<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
+</ul>
+<hr>
+<h3 id="구조-예시">구조 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
+</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
+</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
+</span></span><span class="line"><span class="cl">                                           ▼
+</span></span><span class="line"><span class="cl">                                   ┌────────────┐
+</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
+</span></span><span class="line"><span class="cl">                                   └────────────┘   │
+</span></span><span class="line"><span class="cl">                                                    ▼
+</span></span><span class="line"><span class="cl">                                            ┌────────────┐
+</span></span><span class="line"><span class="cl">                                            │ Service B  │
+</span></span><span class="line"><span class="cl">                                            └────────────┘
+</span></span></code></pre></div><ul>
+<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
+<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
+</ul>
+<hr>
+<h3 id="요약">요약</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Trace ID</td>
+          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
+      </tr>
+      <tr>
+          <td>Span ID</td>
+          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="첨언">첨언</h3>
+<ul>
+<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
+<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
+</ul>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 02 Apr 2025 10:50:33 &#43;0900" class="no-wrap"
+                title=" Wed, 02 Apr 2025 10:50:33 &#43;0900">
+                Wed, 02 Apr 2025 10:50:33 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -848,170 +1085,6 @@
               <relative-time datetime=" Tue, 01 Apr 2025 11:25:45 &#43;0900" class="no-wrap"
                 title=" Tue, 01 Apr 2025 11:25:45 &#43;0900">
                 Tue, 01 Apr 2025 11:25:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/k8s/k8s/">About k8s</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="k8s란">k8s란?</h1>
-<p>**Kubernetes (k8s)**는 컨테이너화된 애플리케이션을 자동으로 <strong>배포, 확장, 관리</strong>해주는 <strong>오픈소스 컨테이너 오케스트레이션 플랫폼</strong>입니다.<!-- raw HTML omitted -->
-구글에서 개발한 기술을 기반으로 CNCF(Cloud Native Computing Foundation)에 기부되었고, 현재는 클라우드 환경에서 가장 널리 사용되는 컨테이너 관리 시스템이에요.</p>
-<hr>
-<h3 id="핵심-개념-정리">핵심 개념 정리</h3>
-<ul>
-<li><strong>컨테이너(Container)</strong>: 애플리케이션과 그 실행 환경을 패키징한 단위 (주로 Docker 사용)</li>
-<li><strong>Pod</strong>: Kubernetes의 가장 작은 배포 단위. 하나 이상의 컨테이너를 포함할 수 있어요.</li>
-<li><strong>Node</strong>: 컨테이너가 실제로 실행되는 물리/가상 머신</li>
-<li><strong>Cluster</strong>: 여러 노드로 구성된 Kubernetes의 전체 인프라</li>
-<li><strong>Deployment</strong>: 애플리케이션의 원하는 상태(예: 몇 개의 복제본 유지 등)를 정의하고 관리</li>
-<li><strong>Service</strong>: Pod에 접근할 수 있는 안정적인 네트워크 주소를 제공 (LoadBalancer, ClusterIP, NodePort 등)</li>
-<li><strong>Ingress</strong>: 외부 트래픽을 내부 서비스로 라우팅해주는 HTTP(S) 레벨 라우터</li>
-<li><strong>ConfigMap / Secret</strong>: 애플리케이션 설정 값이나 민감한 정보를 외부에서 주입</li>
-</ul>
-<hr>
-<h3 id="kubernetes의-장점">Kubernetes의 장점</h3>
-<ul>
-<li><strong>자동화된 배포 및 롤백</strong>: 애플리케이션을 손쉽게 배포/업데이트하고, 문제 발생 시 자동으로 이전 버전으로 롤백 가능</li>
-<li><strong>자동 스케일링</strong>: 트래픽에 따라 Pod 수를 자동 조절 가능</li>
-<li><strong>자가 치유(Self-healing)</strong>: 장애 난 컨테이너는 자동으로 다시 생성</li>
-<li><strong>서비스 디스커버리 및 로드 밸런싱</strong>: Pod 간 통신을 쉽게 할 수 있게 도와줌</li>
-</ul>
-<hr>
-<h3 id="간단한-동작-흐름">간단한 동작 흐름</h3>
-<ol>
-<li>사용자는 애플리케이션을 컨테이너(Docker)로 패키징</li>
-<li>이를 Kubernetes 클러스터에 배포</li>
-<li>Kubernetes가 이를 적절한 Node에 스케줄링하고 실행</li>
-<li>서비스나 Ingress를 통해 외부 접근 가능</li>
-</ol>
-<hr>
-<h1 id="helm-이란">helm 이란?</h1>
-<p><strong>Helm</strong>은 Kubernetes의 <strong>패키지 관리자</strong>입니다.<!-- raw HTML omitted -->
-쉽게 말해서, Kubernetes에서 애플리케이션을 <strong>더 쉽고, 재사용 가능하게 배포</strong>할 수 있도록 도와주는 도구입니다.<!-- raw HTML omitted -->
-마치 <code>apt</code>(Ubuntu), <code>brew</code>(macOS), <code>npm</code>(Node.js) 같은 느낌.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 31 Mar 2025 12:48:01 &#43;0900" class="no-wrap"
-                title=" Mon, 31 Mar 2025 12:48:01 &#43;0900">
-                Mon, 31 Mar 2025 12:48:01 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/msa/preflightcorsconfig_example/">PreFlightCorsConfig_example</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="preflightcorsconfig-example">PreFlightCorsConfig example</h1>
-<pre tabindex="0"><code>@Configuration
-public class PreFlightCorsConfig {
-
-    private final CorsProperties corsProperties;
-
-    public PreFlightCorsConfig(CorsProperties corsProperties) {
-        this.corsProperties = corsProperties;
-    }
-
-    private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;;
-
-    private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;;
-
-    private static final String ALLOWED_CREDENTIALS = &#34;true&#34;;
-
-    // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함
-    private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;;
-
-    private static final String MAX_AGE = &#34;3600&#34;;
-
-    @Bean
-    public WebFilter corsFilter() {
-        return (ServerWebExchange ctx, WebFilterChain chain) -&gt; {
-            ServerHttpRequest request = ctx.getRequest();
-            String requestOrigin = request.getHeaders().getOrigin();
-
-            if (CorsUtils.isPreFlightRequest(request)) {
-                ServerHttpResponse response = ctx.getResponse();
-                HttpHeaders headers = response.getHeaders();
-
-                if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) {
-                    headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin);
-                }
-
-                headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS);
-                headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE);
-                headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS);
-                headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS);
-                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
-
-                // 프론트에서 해당 헤더를 확인할수잇게 허가해줌
-                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
-                if (request.getMethod() == HttpMethod.OPTIONS) {
-                    response.setStatusCode(HttpStatus.OK);
-                    return Mono.empty();
-                }
-            }
-
-            return chain.filter(ctx);
-        };
-    }
-}
-</code></pre><h1 id="corsproperties">CorsProperties</h1>
-<pre tabindex="0"><code>@Component
-@Getter
-@Setter
-@ConfigurationProperties(prefix = &#34;app.cors&#34;)
-public class CorsProperties {
-
-    private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;();
-}
-</code></pre><h1 id="설정">설정</h1>
-<ul>
-<li>dev, prod profile 별로 다르게 설정하는 게 일반적</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-dev.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://localhost:3000&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://127.0.0.1:3000&#34;</span><span class="w">
-</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-prod.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://example.com&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://another-domain.com&#34;</span><span class="w">
-</span></span></span></code></pre></div><h1 id="spspring-cloud-starter-gateway-사용시">spspring-cloud-starter-gateway 사용시</h1>
-<p>Spring Cloud Gateway를 사용하고 있다면 <code>PreFlightCorsConfig</code> 같은 별도의 Java Config 없이도 <code>application.yml</code>에 설정만으로 CORS 처리가 가능합니다.**</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 31 Mar 2025 00:49:17 &#43;0900" class="no-wrap"
-                title=" Mon, 31 Mar 2025 00:49:17 &#43;0900">
-                Mon, 31 Mar 2025 00:49:17 &#43;0900
               </relative-time>
             </div>
           </div>

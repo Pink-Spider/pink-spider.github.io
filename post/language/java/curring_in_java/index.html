@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    Curring in Java | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="1. 함수형 인터페이스 사용 (Java 8&#43;) 기본적인 커링 구현 import java.util.function.Function; public class CurryingExample { // 3개 인자를 받는 함수를 커링 public static Function&lt;Integer, Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt;&gt; curriedAdd() { return a -&gt; b -&gt; c -&gt; a &#43; b &#43; c; } public static void main(String[] args) { // 사용 예 Function&lt;Integer, Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt;&gt; add = curriedAdd(); int result1 = add.apply(1).apply(2).apply(3); // 6 System.out.println(result1); // 부분 적용 Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt; add5 = add.apply(5); Function&lt;Integer, Integer&gt; add5And3 = add5.apply(3); int result2 = add5And3.apply(2); // 10 System.out.println(result2); } } 더 복잡한 예제 - 문자열 처리 import java.util.function.Function; import java.util.Arrays; import java.util.List; import java.util.stream.Collectors; public class StringCurrying { // 문자열 포함 검사 함수 public static Function&lt;String, Function&lt;String, Boolean&gt;&gt; contains() { return substring -&gt; str -&gt; str.contains(substring); } // 문자열 변환 함수 public static Function&lt;String, Function&lt;String, String&gt;&gt; replace() { return target -&gt; replacement -&gt; str -&gt; str.replace(target, replacement); } public static void main(String[] args) { List&lt;String&gt; frameworks = Arrays.asList(&#34;React&#34;, &#34;Angular&#34;, &#34;Vue&#34;, &#34;Svelte&#34;); // 부분 적용된 함수 생성 Function&lt;String, Boolean&gt; hasReact = contains().apply(&#34;React&#34;); // 스트림과 함께 사용 List&lt;String&gt; reactItems = frameworks.stream() .filter(hasReact::apply) .collect(Collectors.toList()); System.out.println(reactItems); // [React] // 문자열 치환 Function&lt;String, String&gt; replaceJavaWithKotlin = replace().apply(&#34;Java&#34;).apply(&#34;Kotlin&#34;); String result = replaceJavaWithKotlin.apply(&#34;I love Java programming&#34;); System.out.println(result); // I love Kotlin programming } } 2. 제네릭을 활용한 범용 커링 유틸리티 import java.util.function.*; public class CurryUtil { // 2개 인자 함수 커링 public static &lt;A, B, R&gt; Function&lt;A, Function&lt;B, R&gt;&gt; curry(BiFunction&lt;A, B, R&gt; function) { return a -&gt; b -&gt; function.apply(a, b); } // 3개 인자 함수를 위한 함수형 인터페이스 @FunctionalInterface public interface TriFunction&lt;A, B, C, R&gt; { R apply(A a, B b, C c); } // 3개 인자 함수 커링 public static &lt;A, B, C, R&gt; Function&lt;A, Function&lt;B, Function&lt;C, R&gt;&gt;&gt; curry(TriFunction&lt;A, B, C, R&gt; function) { return a -&gt; b -&gt; c -&gt; function.apply(a, b, c); } public static void main(String[] args) { // BiFunction 커링 BiFunction&lt;Integer, Integer, Integer&gt; multiply = (a, b) -&gt; a * b; Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt; curriedMultiply = curry(multiply); Function&lt;Integer, Integer&gt; double_ = curriedMultiply.apply(2); System.out.println(double_.apply(5)); // 10 // TriFunction 커링 TriFunction&lt;Integer, Integer, Integer, Integer&gt; add3 = (a, b, c) -&gt; a &#43; b &#43; c; Function&lt;Integer, Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt;&gt; curriedAdd3 = curry(add3); int result = curriedAdd3.apply(1).apply(2).apply(3); System.out.println(result); // 6 } } 3. 클래스 기반 구현 public class MathOperations { public static class CurriedAdd { private final int first; private CurriedAdd(int first) { this.first = first; } public static CurriedAdd of(int first) { return new CurriedAdd(first); } public CurriedAddSecond with(int second) { return new CurriedAddSecond(first, second); } public class CurriedAddSecond { private final int second; private CurriedAddSecond(int first, int second) { this.second = second; } public int and(int third) { return first &#43; second &#43; third; } } } public static void main(String[] args) { int result = CurriedAdd.of(1).with(2).and(3); // 6 System.out.println(result); // 부분 적용 CurriedAdd add5 = CurriedAdd.of(5); CurriedAdd.CurriedAddSecond add5And3 = add5.with(3); int result2 = add5And3.and(2); // 10 System.out.println(result2); } } 4. 실용적인 예제 - HTTP 클라이언트 import java.util.function.Function; import java.net.http.HttpClient; import java.net.http.HttpRequest; import java.net.http.HttpResponse; import java.net.URI; public class CurriedHttpClient { public static Function&lt;String, Function&lt;String, Function&lt;String, HttpRequest&gt;&gt;&gt; httpRequest() { return method -&gt; url -&gt; body -&gt; { HttpRequest.Builder builder = HttpRequest.newBuilder() .uri(URI.create(url)); switch (method.toUpperCase()) { case &#34;GET&#34;: builder.GET(); break; case &#34;POST&#34;: builder.POST(HttpRequest.BodyPublishers.ofString(body)); break; case &#34;PUT&#34;: builder.PUT(HttpRequest.BodyPublishers.ofString(body)); break; } return builder.build(); }; } public static void main(String[] args) { // 부분 적용된 함수들 생성 Function&lt;String, Function&lt;String, HttpRequest&gt;&gt; get = httpRequest().apply(&#34;GET&#34;); Function&lt;String, Function&lt;String, HttpRequest&gt;&gt; post = httpRequest().apply(&#34;POST&#34;); // 사용 HttpRequest getRequest = get.apply(&#34;https://api.example.com/users&#34;).apply(&#34;&#34;); HttpRequest postRequest = post.apply(&#34;https://api.example.com/users&#34;) .apply(&#34;{\&#34;name\&#34;:\&#34;김철수\&#34;}&#34;); System.out.println(&#34;GET: &#34; &#43; getRequest.uri()); System.out.println(&#34;POST: &#34; &#43; postRequest.uri()); } } 5. Vavr 라이브러리 사용 Vavr(이전 Javaslang)는 자바에서 함수형 프로그래밍을 더 쉽게 할 수 있게 해주는 라이브러리입니다:
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/language/java/curring_in_java/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Curring in Java - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="1. 함수형 인터페이스 사용 (Java 8&#43;) 기본적인 커링 구현 import java.util.function.Function; public class CurryingExample { // 3개 인자를 받는 함수를 커링 public static Function&lt;Integer, Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt;&gt; curriedAdd() { return a -&gt; b -&gt; c -&gt; a &#43; b &#43; c; } public static void main(String[] args) { // 사용 예 Function&lt;Integer, Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt;&gt; add = curriedAdd(); int result1 = add.apply(1).apply(2).apply(3); // 6 System.out.println(result1); // 부분 적용 Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt; add5 = add.apply(5); Function&lt;Integer, Integer&gt; add5And3 = add5.apply(3); int result2 = add5And3.apply(2); // 10 System.out.println(result2); } } 더 복잡한 예제 - 문자열 처리 import java.util.function.Function; import java.util.Arrays; import java.util.List; import java.util.stream.Collectors; public class StringCurrying { // 문자열 포함 검사 함수 public static Function&lt;String, Function&lt;String, Boolean&gt;&gt; contains() { return substring -&gt; str -&gt; str.contains(substring); } // 문자열 변환 함수 public static Function&lt;String, Function&lt;String, String&gt;&gt; replace() { return target -&gt; replacement -&gt; str -&gt; str.replace(target, replacement); } public static void main(String[] args) { List&lt;String&gt; frameworks = Arrays.asList(&#34;React&#34;, &#34;Angular&#34;, &#34;Vue&#34;, &#34;Svelte&#34;); // 부분 적용된 함수 생성 Function&lt;String, Boolean&gt; hasReact = contains().apply(&#34;React&#34;); // 스트림과 함께 사용 List&lt;String&gt; reactItems = frameworks.stream() .filter(hasReact::apply) .collect(Collectors.toList()); System.out.println(reactItems); // [React] // 문자열 치환 Function&lt;String, String&gt; replaceJavaWithKotlin = replace().apply(&#34;Java&#34;).apply(&#34;Kotlin&#34;); String result = replaceJavaWithKotlin.apply(&#34;I love Java programming&#34;); System.out.println(result); // I love Kotlin programming } } 2. 제네릭을 활용한 범용 커링 유틸리티 import java.util.function.*; public class CurryUtil { // 2개 인자 함수 커링 public static &lt;A, B, R&gt; Function&lt;A, Function&lt;B, R&gt;&gt; curry(BiFunction&lt;A, B, R&gt; function) { return a -&gt; b -&gt; function.apply(a, b); } // 3개 인자 함수를 위한 함수형 인터페이스 @FunctionalInterface public interface TriFunction&lt;A, B, C, R&gt; { R apply(A a, B b, C c); } // 3개 인자 함수 커링 public static &lt;A, B, C, R&gt; Function&lt;A, Function&lt;B, Function&lt;C, R&gt;&gt;&gt; curry(TriFunction&lt;A, B, C, R&gt; function) { return a -&gt; b -&gt; c -&gt; function.apply(a, b, c); } public static void main(String[] args) { // BiFunction 커링 BiFunction&lt;Integer, Integer, Integer&gt; multiply = (a, b) -&gt; a * b; Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt; curriedMultiply = curry(multiply); Function&lt;Integer, Integer&gt; double_ = curriedMultiply.apply(2); System.out.println(double_.apply(5)); // 10 // TriFunction 커링 TriFunction&lt;Integer, Integer, Integer, Integer&gt; add3 = (a, b, c) -&gt; a &#43; b &#43; c; Function&lt;Integer, Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt;&gt; curriedAdd3 = curry(add3); int result = curriedAdd3.apply(1).apply(2).apply(3); System.out.println(result); // 6 } } 3. 클래스 기반 구현 public class MathOperations { public static class CurriedAdd { private final int first; private CurriedAdd(int first) { this.first = first; } public static CurriedAdd of(int first) { return new CurriedAdd(first); } public CurriedAddSecond with(int second) { return new CurriedAddSecond(first, second); } public class CurriedAddSecond { private final int second; private CurriedAddSecond(int first, int second) { this.second = second; } public int and(int third) { return first &#43; second &#43; third; } } } public static void main(String[] args) { int result = CurriedAdd.of(1).with(2).and(3); // 6 System.out.println(result); // 부분 적용 CurriedAdd add5 = CurriedAdd.of(5); CurriedAdd.CurriedAddSecond add5And3 = add5.with(3); int result2 = add5And3.and(2); // 10 System.out.println(result2); } } 4. 실용적인 예제 - HTTP 클라이언트 import java.util.function.Function; import java.net.http.HttpClient; import java.net.http.HttpRequest; import java.net.http.HttpResponse; import java.net.URI; public class CurriedHttpClient { public static Function&lt;String, Function&lt;String, Function&lt;String, HttpRequest&gt;&gt;&gt; httpRequest() { return method -&gt; url -&gt; body -&gt; { HttpRequest.Builder builder = HttpRequest.newBuilder() .uri(URI.create(url)); switch (method.toUpperCase()) { case &#34;GET&#34;: builder.GET(); break; case &#34;POST&#34;: builder.POST(HttpRequest.BodyPublishers.ofString(body)); break; case &#34;PUT&#34;: builder.PUT(HttpRequest.BodyPublishers.ofString(body)); break; } return builder.build(); }; } public static void main(String[] args) { // 부분 적용된 함수들 생성 Function&lt;String, Function&lt;String, HttpRequest&gt;&gt; get = httpRequest().apply(&#34;GET&#34;); Function&lt;String, Function&lt;String, HttpRequest&gt;&gt; post = httpRequest().apply(&#34;POST&#34;); // 사용 HttpRequest getRequest = get.apply(&#34;https://api.example.com/users&#34;).apply(&#34;&#34;); HttpRequest postRequest = post.apply(&#34;https://api.example.com/users&#34;) .apply(&#34;{\&#34;name\&#34;:\&#34;김철수\&#34;}&#34;); System.out.println(&#34;GET: &#34; &#43; getRequest.uri()); System.out.println(&#34;POST: &#34; &#43; postRequest.uri()); } } 5. Vavr 라이브러리 사용 Vavr(이전 Javaslang)는 자바에서 함수형 프로그래밍을 더 쉽게 할 수 있게 해주는 라이브러리입니다:
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Curring in Java - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="1. 함수형 인터페이스 사용 (Java 8&#43;) 기본적인 커링 구현 import java.util.function.Function; public class CurryingExample { // 3개 인자를 받는 함수를 커링 public static Function&lt;Integer, Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt;&gt; curriedAdd() { return a -&gt; b -&gt; c -&gt; a &#43; b &#43; c; } public static void main(String[] args) { // 사용 예 Function&lt;Integer, Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt;&gt; add = curriedAdd(); int result1 = add.apply(1).apply(2).apply(3); // 6 System.out.println(result1); // 부분 적용 Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt; add5 = add.apply(5); Function&lt;Integer, Integer&gt; add5And3 = add5.apply(3); int result2 = add5And3.apply(2); // 10 System.out.println(result2); } } 더 복잡한 예제 - 문자열 처리 import java.util.function.Function; import java.util.Arrays; import java.util.List; import java.util.stream.Collectors; public class StringCurrying { // 문자열 포함 검사 함수 public static Function&lt;String, Function&lt;String, Boolean&gt;&gt; contains() { return substring -&gt; str -&gt; str.contains(substring); } // 문자열 변환 함수 public static Function&lt;String, Function&lt;String, String&gt;&gt; replace() { return target -&gt; replacement -&gt; str -&gt; str.replace(target, replacement); } public static void main(String[] args) { List&lt;String&gt; frameworks = Arrays.asList(&#34;React&#34;, &#34;Angular&#34;, &#34;Vue&#34;, &#34;Svelte&#34;); // 부분 적용된 함수 생성 Function&lt;String, Boolean&gt; hasReact = contains().apply(&#34;React&#34;); // 스트림과 함께 사용 List&lt;String&gt; reactItems = frameworks.stream() .filter(hasReact::apply) .collect(Collectors.toList()); System.out.println(reactItems); // [React] // 문자열 치환 Function&lt;String, String&gt; replaceJavaWithKotlin = replace().apply(&#34;Java&#34;).apply(&#34;Kotlin&#34;); String result = replaceJavaWithKotlin.apply(&#34;I love Java programming&#34;); System.out.println(result); // I love Kotlin programming } } 2. 제네릭을 활용한 범용 커링 유틸리티 import java.util.function.*; public class CurryUtil { // 2개 인자 함수 커링 public static &lt;A, B, R&gt; Function&lt;A, Function&lt;B, R&gt;&gt; curry(BiFunction&lt;A, B, R&gt; function) { return a -&gt; b -&gt; function.apply(a, b); } // 3개 인자 함수를 위한 함수형 인터페이스 @FunctionalInterface public interface TriFunction&lt;A, B, C, R&gt; { R apply(A a, B b, C c); } // 3개 인자 함수 커링 public static &lt;A, B, C, R&gt; Function&lt;A, Function&lt;B, Function&lt;C, R&gt;&gt;&gt; curry(TriFunction&lt;A, B, C, R&gt; function) { return a -&gt; b -&gt; c -&gt; function.apply(a, b, c); } public static void main(String[] args) { // BiFunction 커링 BiFunction&lt;Integer, Integer, Integer&gt; multiply = (a, b) -&gt; a * b; Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt; curriedMultiply = curry(multiply); Function&lt;Integer, Integer&gt; double_ = curriedMultiply.apply(2); System.out.println(double_.apply(5)); // 10 // TriFunction 커링 TriFunction&lt;Integer, Integer, Integer, Integer&gt; add3 = (a, b, c) -&gt; a &#43; b &#43; c; Function&lt;Integer, Function&lt;Integer, Function&lt;Integer, Integer&gt;&gt;&gt; curriedAdd3 = curry(add3); int result = curriedAdd3.apply(1).apply(2).apply(3); System.out.println(result); // 6 } } 3. 클래스 기반 구현 public class MathOperations { public static class CurriedAdd { private final int first; private CurriedAdd(int first) { this.first = first; } public static CurriedAdd of(int first) { return new CurriedAdd(first); } public CurriedAddSecond with(int second) { return new CurriedAddSecond(first, second); } public class CurriedAddSecond { private final int second; private CurriedAddSecond(int first, int second) { this.second = second; } public int and(int third) { return first &#43; second &#43; third; } } } public static void main(String[] args) { int result = CurriedAdd.of(1).with(2).and(3); // 6 System.out.println(result); // 부분 적용 CurriedAdd add5 = CurriedAdd.of(5); CurriedAdd.CurriedAddSecond add5And3 = add5.with(3); int result2 = add5And3.and(2); // 10 System.out.println(result2); } } 4. 실용적인 예제 - HTTP 클라이언트 import java.util.function.Function; import java.net.http.HttpClient; import java.net.http.HttpRequest; import java.net.http.HttpResponse; import java.net.URI; public class CurriedHttpClient { public static Function&lt;String, Function&lt;String, Function&lt;String, HttpRequest&gt;&gt;&gt; httpRequest() { return method -&gt; url -&gt; body -&gt; { HttpRequest.Builder builder = HttpRequest.newBuilder() .uri(URI.create(url)); switch (method.toUpperCase()) { case &#34;GET&#34;: builder.GET(); break; case &#34;POST&#34;: builder.POST(HttpRequest.BodyPublishers.ofString(body)); break; case &#34;PUT&#34;: builder.PUT(HttpRequest.BodyPublishers.ofString(body)); break; } return builder.build(); }; } public static void main(String[] args) { // 부분 적용된 함수들 생성 Function&lt;String, Function&lt;String, HttpRequest&gt;&gt; get = httpRequest().apply(&#34;GET&#34;); Function&lt;String, Function&lt;String, HttpRequest&gt;&gt; post = httpRequest().apply(&#34;POST&#34;); // 사용 HttpRequest getRequest = get.apply(&#34;https://api.example.com/users&#34;).apply(&#34;&#34;); HttpRequest postRequest = post.apply(&#34;https://api.example.com/users&#34;) .apply(&#34;{\&#34;name\&#34;:\&#34;김철수\&#34;}&#34;); System.out.println(&#34;GET: &#34; &#43; getRequest.uri()); System.out.println(&#34;POST: &#34; &#43; postRequest.uri()); } } 5. Vavr 라이브러리 사용 Vavr(이전 Javaslang)는 자바에서 함수형 프로그래밍을 더 쉽게 할 수 있게 해주는 라이브러리입니다:
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/language/java/curring_in_java/" />
+<meta property="og:site_name" content="Curring in Java" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2025-06-20 14:11:00 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/language/java/curring_in_java/">Curring in Java</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Fri, 20 Jun 2025 14:11:00 &#43;0900"
+                    class="no-wrap">
+                    Fri, 20 Jun 2025 14:11:00 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Fri, 20 Jun 2025 14:13:33 &#43;0900"
+                    class="no-wrap">
+                    Fri, 20 Jun 2025 14:13:33 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1102 Words
+                    <span class="file-info-divider"></span>
+                                        5 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h2 id="1-함수형-인터페이스-사용-java-8">1. 함수형 인터페이스 사용 (Java 8+)</h2>
+<h3 id="기본적인-커링-구현">기본적인 커링 구현</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.function.Function</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CurryingExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 3개 인자를 받는 함수를 커링</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;&gt;&gt;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="nf">curriedAdd</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 사용 예</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curriedAdd</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">1</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="n">2</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// 6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 부분 적용</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">add5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">5</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add5And3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add5</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add5And3</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// 10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h3 id="더-복잡한-예제---문자열-처리">더 복잡한 예제 - 문자열 처리</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.function.Function</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Arrays</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.stream.Collectors</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StringCurrying</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 문자열 포함 검사 함수</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">contains</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">substring</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">substring</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 문자열 변환 함수</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">replace</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">replacement</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">str</span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">replacement</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">frameworks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&#34;React&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Angular&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Vue&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Svelte&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 부분 적용된 함수 생성</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hasReact</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contains</span><span class="p">().</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;React&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 스트림과 함께 사용</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reactItems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">frameworks</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">hasReact</span><span class="p">::</span><span class="n">apply</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">reactItems</span><span class="p">);</span><span class="w"> </span><span class="c1">// [React]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 문자열 치환</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">replaceJavaWithKotlin</span><span class="w"> </span><span class="o">=</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">replace</span><span class="p">().</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;Java&#34;</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;Kotlin&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">replaceJavaWithKotlin</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;I love Java programming&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w"> </span><span class="c1">// I love Kotlin programming</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="2-제네릭을-활용한-범용-커링-유틸리티">2. 제네릭을 활용한 범용 커링 유틸리티</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.function.*</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CurryUtil</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 2개 인자 함수 커링</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;&gt;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="nf">curry</span><span class="p">(</span><span class="n">BiFunction</span><span class="o">&lt;</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">function</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">function</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 3개 인자 함수를 위한 함수형 인터페이스</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@FunctionalInterface</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">TriFunction</span><span class="o">&lt;</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">R</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 3개 인자 함수 커링</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;&gt;&gt;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="nf">curry</span><span class="p">(</span><span class="n">TriFunction</span><span class="o">&lt;</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">function</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">function</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// BiFunction 커링</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">BiFunction</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">multiply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">curriedMultiply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curry</span><span class="p">(</span><span class="n">multiply</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">double_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curriedMultiply</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">double_</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">5</span><span class="p">));</span><span class="w"> </span><span class="c1">// 10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// TriFunction 커링</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">TriFunction</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">curriedAdd3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curry</span><span class="p">(</span><span class="n">add3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curriedAdd3</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">1</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="n">2</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w"> </span><span class="c1">// 6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="3-클래스-기반-구현">3. 클래스 기반 구현</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MathOperations</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CurriedAdd</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">first</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="nf">CurriedAdd</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">first</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="na">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">CurriedAdd</span><span class="w"> </span><span class="nf">of</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">first</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CurriedAdd</span><span class="p">(</span><span class="n">first</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">CurriedAddSecond</span><span class="w"> </span><span class="nf">with</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CurriedAddSecond</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="n">second</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CurriedAddSecond</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">second</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">private</span><span class="w"> </span><span class="nf">CurriedAddSecond</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="na">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">second</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">and</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">third</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">second</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">third</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CurriedAdd</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">1</span><span class="p">).</span><span class="na">with</span><span class="p">(</span><span class="n">2</span><span class="p">).</span><span class="na">and</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// 6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 부분 적용</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CurriedAdd</span><span class="w"> </span><span class="n">add5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CurriedAdd</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">5</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CurriedAdd</span><span class="p">.</span><span class="na">CurriedAddSecond</span><span class="w"> </span><span class="n">add5And3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add5</span><span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add5And3</span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="n">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// 10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="4-실용적인-예제---http-클라이언트">4. 실용적인 예제 - HTTP 클라이언트</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.function.Function</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpClient</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpRequest</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpResponse</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CurriedHttpClient</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">HttpRequest</span><span class="o">&gt;&gt;&gt;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">           </span><span class="nf">httpRequest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">HttpRequest</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpRequest</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">url</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">method</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="s">&#34;GET&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">builder</span><span class="p">.</span><span class="na">GET</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="s">&#34;POST&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">builder</span><span class="p">.</span><span class="na">POST</span><span class="p">(</span><span class="n">HttpRequest</span><span class="p">.</span><span class="na">BodyPublishers</span><span class="p">.</span><span class="na">ofString</span><span class="p">(</span><span class="n">body</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="s">&#34;PUT&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="n">builder</span><span class="p">.</span><span class="na">PUT</span><span class="p">(</span><span class="n">HttpRequest</span><span class="p">.</span><span class="na">BodyPublishers</span><span class="p">.</span><span class="na">ofString</span><span class="p">(</span><span class="n">body</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                    </span><span class="k">break</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">build</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 부분 적용된 함수들 생성</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">HttpRequest</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="o">=</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">httpRequest</span><span class="p">().</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;GET&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Function</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">HttpRequest</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">post</span><span class="w"> </span><span class="o">=</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">httpRequest</span><span class="p">().</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;POST&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 사용</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">getRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;https://api.example.com/users&#34;</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">postRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">post</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;https://api.example.com/users&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="s">&#34;{\&#34;name\&#34;:\&#34;김철수\&#34;}&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;GET: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">getRequest</span><span class="p">.</span><span class="na">uri</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;POST: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">postRequest</span><span class="p">.</span><span class="na">uri</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="5-vavr-라이브러리-사용">5. Vavr 라이브러리 사용</h2>
+<p>Vavr(이전 Javaslang)는 자바에서 함수형 프로그래밍을 더 쉽게 할 수 있게 해주는 라이브러리입니다:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// Maven 의존성 필요: io.vavr:vavr:0.10.4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">io.vavr.Function2</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">io.vavr.Function3</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VavrCurrying</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Function2 커링</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function2</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function1</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function1</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">curriedAdd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">.</span><span class="na">curried</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curriedAdd</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">5</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// 8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// Function3 커링</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function3</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Function1</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function1</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Function1</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">curriedAdd3</span><span class="w"> </span><span class="o">=</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">add3</span><span class="p">.</span><span class="na">curried</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curriedAdd3</span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">1</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="n">2</span><span class="p">).</span><span class="na">apply</span><span class="p">(</span><span class="n">3</span><span class="p">);</span><span class="w"> </span><span class="c1">// 6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result1</span><span class="p">);</span><span class="w"> </span><span class="c1">// 8</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">result2</span><span class="p">);</span><span class="w"> </span><span class="c1">// 6</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h2 id="자바-커링의-한계와-특징">자바 커링의 한계와 특징</h2>
+<p><strong>장점:</strong></p>
+<ul>
+<li>Java 8+ 람다와 함수형 인터페이스로 구현 가능</li>
+<li>타입 안정성 보장</li>
+<li>부분 적용을 통한 코드 재사용성 향상</li>
+</ul>
+<p><strong>단점:</strong></p>
+<ul>
+<li>JavaScript에 비해 문법이 복잡하고 장황함</li>
+<li>제네릭 타입 선언이 복잡해질 수 있음</li>
+<li>함수 체이닝이 길어지면 가독성이 떨어질 수 있음</li>
+<li>성능 오버헤드 (객체 생성, 메서드 호출 증가)</li>
+</ul>
+<p>자바에서 커링은 가능하지만, 언어의 특성상 JavaScript만큼 자연스럽지는 않습니다. 하지만 함수형 프로그래밍 패러다임을 적용하고 코드의 재사용성을 높이는 데는 유용한 기법입니다.</p>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/js/about_curring/"> About curring</a>
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/js/about_closure/">JS에서 클로저(closure)란...&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>
