@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">81</span>
+              <span class="Counter">82</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">81</span>
+      <span class="Counter ">82</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,250 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/httpapicachingfilter/">HttpApiCachingFilter 와 CachedHttpServletRequestWrapper 구현 예시</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="httpapicachingfilter-와-cachedhttpservletrequestwrapper">HttpApiCachingFilter 와 CachedHttpServletRequestWrapper</h1>
+<ul>
+<li>json과 multipart 외 form-urlencoded의 경우도 허용하면서 logging 정보 남기는 filter 구현 예시</li>
+<li>request 의 inputStream을 한번 읽으면 휘발되기 때문에 이를 방지하는 로직이 중요합니다.</li>
+</ul>
+<h2 id="httpapicachingfilter">HttpApiCachingFilter</h2>
+<pre tabindex="0"><code>@Component
+@Order(value = Ordered.HIGHEST_PRECEDENCE)
+@WebFilter(filterName = &#34;HttpApiCachingFilter&#34;, urlPatterns = &#34;/*&#34;)
+@Slf4j
+public class HttpApiCachingFilter extends OncePerRequestFilter {
+
+    private static String APPLICATION_NAME;
+
+    @Value(&#34;${spring.application.name}&#34;)
+    private void setApplicationName(String value) {
+        APPLICATION_NAME = value;
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+        throws ServletException, IOException {
+        if (isAsyncDispatch(request)) {
+            filterChain.doFilter(request, response);
+        } else if (isMultipartRequest(request)) {
+            doFilterWrapped(new StandardMultipartHttpServletRequest(request), new CachedHttpServletResponseWrapper(response), filterChain);
+        } else {
+            doFilterWrapped(new CachedHttpServletRequestWrapper(request), new CachedHttpServletResponseWrapper(response), filterChain);
+        }
+    }
+
+    protected void doFilterWrapped(HttpServletRequestWrapper request, ContentCachingResponseWrapper response, FilterChain filterChain)
+        throws ServletException, IOException {
+        try {
+            logRequestHeader(request);
+            logRequest(request);
+            filterChain.doFilter(request, response);
+        } finally {
+            logResponseHeader(response);
+            logResponse(response);
+            response.copyBodyToResponse();
+        }
+    }
+
+    private static void logRequestHeader(HttpServletRequestWrapper request) {
+        Enumeration&lt;String&gt; headerNames = request.getHeaderNames();
+        if (headerNames != null) {
+            Collections.list(headerNames).forEach(headersName -&gt; {
+                String headerValue = request.getHeader(headersName);
+                log.info(&#34;Request Header {}: {}&#34;, headersName, headerValue);
+            });
+        }
+    }
+
+    private static void logRequest(HttpServletRequestWrapper request) throws IOException {
+        String contentType = request.getContentType();
+
+        log.info(&#34;Request body: {} uri=[{}] content-type=[{}]&#34;, request.getMethod(),
+            request.getRequestURI(), contentType);
+
+        if (contentType != null &amp;&amp; contentType.startsWith(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
+            Map&lt;String, String[]&gt; paramMap = request.getParameterMap();
+            paramMap.forEach((key, values) -&gt; {
+                for (String value : values) {
+                    log.info(&#34;REQUEST Param: {} = {}&#34;, key, value);
+                }
+            });
+        } else {
+            logPayload(&#34;REQUEST&#34;, contentType, request.getInputStream(), request.getRequestURI());
+        }
+    }
+
+    private static void logResponseHeader(ContentCachingResponseWrapper response) {
+        Collection&lt;String&gt; headerNames = response.getHeaderNames();
+        for (String headerName : headerNames) {
+            for (String value : response.getHeaders(headerName)) {
+                log.info(&#34;Response Header {}: {}&#34;, headerName, value);
+            }
+        }
+    }
+
+    private static void logResponse(ContentCachingResponseWrapper response) throws IOException {
+        logPayload(&#34;RESPONSE&#34;, response.getContentType(), response.getContentInputStream(), null);
+    }
+
+    private static void logPayload(String direction,
+                                   String contentType,
+                                   InputStream inputStream,
+                                   String targetUri
+    ) throws IOException {
+        boolean visible = isVisible(MediaType.valueOf(contentType == null ? &#34;application/json&#34; : contentType));
+        if (visible) {
+            byte[] content = StreamUtils.copyToByteArray(inputStream);
+            if (content.length &gt; 0) {
+                String contentString = new String(content);
+                log.info(&#34;{} Payload: {}&#34;, direction, contentString);
+            }
+        } else {
+            log.info(&#34;{} Payload: Binary Content&#34;, direction);
+        }
+    }
+
+    private static boolean isVisible(MediaType mediaType) {
+        final List&lt;MediaType&gt; VISIBLE_TYPES = Arrays.asList(MediaType.valueOf(&#34;text/*&#34;),
+            MediaType.APPLICATION_FORM_URLENCODED,
+            MediaType.APPLICATION_JSON,
+            MediaType.APPLICATION_XML,
+            MediaType.valueOf(&#34;application/*+json&#34;),
+            MediaType.valueOf(&#34;application/*+xml&#34;),
+            MediaType.MULTIPART_FORM_DATA);
+        return VISIBLE_TYPES.stream().anyMatch(visibleType -&gt; visibleType.includes(mediaType));
+    }
+
+    private boolean isMultipartRequest(HttpServletRequest request) {
+        String contentType = request.getContentType();
+        return request.getMethod().equalsIgnoreCase(&#34;POST&#34;)
+            &amp;&amp; contentType != null
+            &amp;&amp; contentType.startsWith(&#34;multipart/form-data&#34;);
+    }
+}
+</code></pre><h2 id="cachedhttpservletrequestwrapperjava">CachedHttpServletRequestWrapper.java</h2>
+<pre tabindex="0"><code>public class CachedHttpServletRequestWrapper extends HttpServletRequestWrapper {
+
+    private final byte[] cachedBody;
+    private Map&lt;String, String[]&gt; parameterMap;
+
+    public CachedHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
+        super(request);
+        this.cachedBody = request.getInputStream().readAllBytes();
+
+        // form-urlencoded 타입일 때만 파라미터 파싱
+        String contentType = request.getContentType();
+        if (contentType != null &amp;&amp; contentType.startsWith(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
+            String encoding = request.getCharacterEncoding();
+            if (encoding == null) {
+                encoding = StandardCharsets.UTF_8.name();
+            }
+            this.parameterMap = parseFormParameters(new String(this.cachedBody, encoding));
+        } else {
+            // 원본 request의 파라미터 맵 사용
+            this.parameterMap = super.getParameterMap();
+        }
+    }
+
+    @Override
+    public ServletInputStream getInputStream() {
+        ByteArrayInputStream bais = new ByteArrayInputStream(cachedBody);
+
+        return new ServletInputStream() {
+            @Override
+            public int read() {
+                return bais.read();
+            }
+
+            @Override
+            public boolean isFinished() {
+                return bais.available() == 0;
+            }
+
+            @Override
+            public boolean isReady() {
+                return true;
+            }
+
+            @Override
+            public void setReadListener(ReadListener listener) {
+            }
+        };
+    }
+
+    @Override
+    public Map&lt;String, String[]&gt; getParameterMap() {
+        return this.parameterMap;
+    }
+
+    @Override
+    public BufferedReader getReader() {
+        String encoding = getCharacterEncoding();
+        if (encoding == null) {
+            encoding = StandardCharsets.UTF_8.name();
+        }
+        return new BufferedReader(new InputStreamReader(getInputStream(), Charset.forName(encoding)));
+    }
+
+    private Map&lt;String, String[]&gt; parseFormParameters(String body) throws UnsupportedEncodingException {
+        Map&lt;String, List&lt;String&gt;&gt; tempMap = new LinkedHashMap&lt;&gt;();
+
+        // 빈 바디 처리
+        if (body == null || body.trim().isEmpty()) {
+            return new LinkedHashMap&lt;&gt;();
+        }
+
+        for (String pair : body.split(&#34;&amp;&#34;)) {
+            if (pair.trim().isEmpty()) {
+                continue; // 빈 pair 건너뛰기
+            }
+
+            String[] parts = pair.split(&#34;=&#34;, 2);
+            if (parts.length == 0) {
+                continue;
+            }
+
+            String key = URLDecoder.decode(parts[0], StandardCharsets.UTF_8);
+            String value = parts.length &gt; 1 ? URLDecoder.decode(parts[1], StandardCharsets.UTF_8) : &#34;&#34;;
+            tempMap.computeIfAbsent(key, k -&gt; new ArrayList&lt;&gt;()).add(value);
+        }
+
+        return tempMap.entrySet().stream()
+            .collect(Collectors.toMap(Map.Entry::getKey, e -&gt; e.getValue().toArray(new String[0])));
+    }
+}
+</code></pre><h2 id="cachedhttpservletresponsewrapperjava">CachedHttpServletResponseWrapper.java</h2>
+<pre tabindex="0"><code>public class CachedHttpServletResponseWrapper extends ContentCachingResponseWrapper {
+
+    public CachedHttpServletResponseWrapper(HttpServletResponse response) {
+        super(response);
+    }
+}
+</code></pre>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 16 Jun 2025 20:49:58 &#43;0900" class="no-wrap"
+                title=" Mon, 16 Jun 2025 20:49:58 &#43;0900">
+                Mon, 16 Jun 2025 20:49:58 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -814,62 +1058,6 @@ mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &lsquo;MMdd&rsquo;, &lsquo;yyy
 </li>
 <li>
 <p><strong>예시</strong>: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 26 May 2025 20:20:45 &#43;0900" class="no-wrap"
-                title=" Mon, 26 May 2025 20:20:45 &#43;0900">
-                Mon, 26 May 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/singleton_pattern/">Singleton Pattern</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>자바(Java)에서 **싱글톤 패턴(Singleton Pattern)**은 특정 클래스의 인스턴스를 <strong>하나만 생성</strong>하고, <strong>전체 애플리케이션에서 공유</strong>할 수 있도록 보장하는 디자인 패턴입니다. 주로 <strong>공통된 설정, 로깅, 스레드 풀, 캐시, DB 연결 관리</strong> 등에 사용됩니다.</p>
-<hr>
-<h2 id="-싱글톤-패턴의-핵심-개념">✅ 싱글톤 패턴의 핵심 개념</h2>
-<ul>
-<li>클래스의 <strong>인스턴스를 하나만 생성</strong>.</li>
-<li><strong>전역 접근점(Global Access Point)</strong> 제공.</li>
-<li><strong>생성자를 <code>private</code>으로</strong> 숨김.</li>
-<li><strong>정적 메서드로 인스턴스를 반환</strong>.</li>
-</ul>
-<hr>
-<h2 id="-싱글톤-패턴-구현-예제">📦 싱글톤 패턴 구현 예제</h2>
-<h3 id="1-기본-싱글톤-lazy-initialization">1. <strong>기본 싱글톤 (Lazy Initialization)</strong></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Singleton</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 생성자를 private으로 설정하여 외부에서 new로 인스턴스 생성하지 못하도록 함</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">Singleton</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 인스턴스를 필요할 때 생성</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Singleton</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">showMessage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello from Singleton!&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p><strong>사용 예시:</strong></p>
               </div>
             </div>
 

@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">81</span>
+              <span class="Counter">82</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">81</span>
+      <span class="Counter ">82</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,48 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/mysql_slow_query/">MySql slow query 모니터링</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MySQL에서 <strong>Slow Query(슬로우 쿼리)</strong> 를 모니터링하는 것은 성능 최적화를 위한 중요한 작업입니다. 다음은 슬로우 쿼리를 모니터링하는 일반적인 방법들입니다:</p>
+<hr>
+<h3 id="1-슬로우-쿼리-로그-활성화하기">1. <strong>슬로우 쿼리 로그 활성화하기</strong></h3>
+<p>슬로우 쿼리를 기록하기 위해 MySQL 설정을 조정합니다.</p>
+<h4 id="방법-1-mycnf-또는-myini-파일-수정">방법 1: <code>my.cnf</code> 또는 <code>my.ini</code> 파일 수정</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[mysqld]</span>
+</span></span><span class="line"><span class="cl"><span class="na">slow_query_log</span> <span class="o">=</span> <span class="s">1</span>
+</span></span><span class="line"><span class="cl"><span class="na">slow_query_log_file</span> <span class="o">=</span> <span class="s">/var/log/mysql/slow.log</span>
+</span></span><span class="line"><span class="cl"><span class="na">long_query_time</span> <span class="o">=</span> <span class="s">1</span>
+</span></span><span class="line"><span class="cl"><span class="na">log_queries_not_using_indexes</span> <span class="o">=</span> <span class="s">1</span>
+</span></span></code></pre></div><ul>
+<li><code>slow_query_log</code>: 슬로우 쿼리 로그 기능 활성화</li>
+<li><code>slow_query_log_file</code>: 로그 파일 위치</li>
+<li><code>long_query_time</code>: 몇 초 이상 걸리는 쿼리를 느린 쿼리로 간주할지 설정 (초 단위)</li>
+<li><code>log_queries_not_using_indexes</code>: 인덱스를 사용하지 않는 쿼리도 로그에 기록</li>
+</ul>
+<p>설정 후 MySQL을 재시작해야 반영됩니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 13 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Tue, 13 May 2025 20:20:45 &#43;0900">
+                Tue, 13 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -922,104 +964,6 @@
               <relative-time datetime=" Tue, 29 Apr 2025 20:19:45 &#43;0900" class="no-wrap"
                 title=" Tue, 29 Apr 2025 20:19:45 &#43;0900">
                 Tue, 29 Apr 2025 20:19:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/abstract_interface/">abstract class 와 interface</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java에서 <code>abstract class</code>와 <code>interface</code>는 둘 다 **추상화(abstraction)**를 위한 수단이지만, 설계 목적과 사용 방식에 중요한 차이가 있습니다. 아래에 그 차이점을 정리해 드릴게요.</p>
-<hr>
-<h2 id="-공통점">✅ 공통점</h2>
-<ul>
-<li>둘 다 <strong>인스턴스화할 수 없음</strong></li>
-<li>둘 다 <strong>메서드 시그니처만 선언</strong>하고, 구현은 하위 클래스(또는 구현 클래스)에서 담당</li>
-<li>둘 다 **다형성(polymorphism)**을 위한 수단</li>
-</ul>
-<hr>
-<h2 id="-주요-차이점">🔍 주요 차이점</h2>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th><code>abstract class</code></th>
-          <th><code>interface</code></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>키워드</td>
-          <td><code>abstract class ClassName</code></td>
-          <td><code>interface InterfaceName</code></td>
-      </tr>
-      <tr>
-          <td>다중 상속</td>
-          <td><strong>불가</strong> (단일 상속만 가능)</td>
-          <td><strong>가능</strong> (여러 인터페이스 구현 가능)</td>
-      </tr>
-      <tr>
-          <td>생성자</td>
-          <td>생성자 정의 가능</td>
-          <td>생성자 없음</td>
-      </tr>
-      <tr>
-          <td>필드</td>
-          <td>인스턴스 변수, 정적 변수 가능</td>
-          <td><code>public static final</code> 상수만 선언 가능 (Java 8 이전 기준)</td>
-      </tr>
-      <tr>
-          <td>메서드 구현</td>
-          <td>일부 메서드 구현 가능</td>
-          <td>Java 8부터는 <code>default</code>, <code>static</code> 메서드 구현 가능</td>
-      </tr>
-      <tr>
-          <td>접근 제어자</td>
-          <td>다양한 접근 제어자(<code>private</code>, <code>protected</code>, <code>public</code>) 사용 가능</td>
-          <td>모든 메서드는 기본적으로 <code>public abstract</code> (Java 9 이후 <code>private</code> 메서드도 가능)</td>
-      </tr>
-      <tr>
-          <td>목적</td>
-          <td><strong>&ldquo;IS-A&rdquo; 관계 (상속 기반의 계층화)</strong></td>
-          <td><strong>기능 정의용, 계약 기반 구조 (다형성, 플러그인)</strong></td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="-java-8-이후-달라진-점">✨ Java 8+ 이후 달라진 점</h2>
-<ul>
-<li>Java 8부터 인터페이스에 <code>default</code> 메서드와 <code>static</code> 메서드 추가 가능
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">interface</span> <span class="nc">Vehicle</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Starting...&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div></li>
-<li>Java 9부터는 <code>private</code> 메서드도 인터페이스 내부에서 선언 가능</li>
-</ul>
-<hr>
-<h2 id="-언제-어떤-걸-써야-할까">✅ 언제 어떤 걸 써야 할까?</h2>
-<ul>
-<li>
-<p><code>abstract class</code>가 적합한 경우:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 24 Apr 2025 21:48:45 &#43;0900" class="no-wrap"
-                title=" Thu, 24 Apr 2025 21:48:45 &#43;0900">
-                Thu, 24 Apr 2025 21:48:45 &#43;0900
               </relative-time>
             </div>
           </div>

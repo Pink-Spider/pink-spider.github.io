@@ -3,10 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://pink-spider.github.io/</loc>
-    <lastmod>2025-06-23T10:14:45+09:00</lastmod>
+    <lastmod>2025-06-27T10:19:02+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/</loc>
-    <lastmod>2025-06-23T10:14:45+09:00</lastmod>
+    <lastmod>2025-06-27T10:19:02+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/spring/pbt/</loc>
+    <lastmod>2025-06-27T10:19:02+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/post/infra/db/ubuntu_postgresql/</loc>
     <lastmod>2025-06-23T10:14:45+09:00</lastmod>
