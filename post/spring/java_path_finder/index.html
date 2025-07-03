@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Property-Based Testing(PBT) 와 jqwik | Pink Spider
+    Java Pathfinder 사용법 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,23 +27,29 @@
   
   <meta
   name="description"
-  content="**Property-Based Testing(PBT)**은 입력과 결과 간의 **일반적인 속성(Property)**을 정의하고, 테스트 프레임워크가 그 속성을 충족하는지를 무작위로 생성된 다양한 입력값에 대해 확인하는 방식의 테스트입니다. 단위 테스트처럼 특정 입력값만 확인하는 것이 아니라, 수천 개의 입력 조합을 자동으로 검사할 수 있다는 점에서 매우 강력합니다.
-🔍 Property-Based Testing이란? ✅ 핵심 개념 속성(Property): 테스트 대상 함수나 로직이 항상 만족해야 하는 일반적인 법칙 또는 규칙. 입력값 자동 생성: PBT 프레임워크가 다양한 입력값을 무작위로 생성. Fail case 축소(Shrinking): 실패한 입력값이 발생했을 때, 실패를 재현할 수 있는 최소 입력값으로 줄여서 디버깅을 쉽게 함. 🆚 단위 테스트와의 비교 항목 단위 테스트 (Example-based) 속성 기반 테스트 (Property-based) 입력값 고정된 사례 수동 지정 자동 생성된 다양한 값 테스트 범위 제한적 매우 광범위 유지보수 로직 변경 시 테스트 추가 필요 Property만 잘 정의하면 자동 적용 실패 시 디버깅 명확한 입력값 축소 과정 필요 🧪 Spring Boot에서 Property-Based Test 사용하는 방법 Spring Boot 자체는 JUnit을 기반으로 한 단위 테스트가 기본이며, PBT는 외부 라이브러리를 사용해서 통합하는 것이 일반적입니다. 가장 널리 쓰이는 Java 기반 라이브러리는 다음과 같습니다:
+  content="아래에 Java Pathfinder (JPF) 사용하는 방법을 자세히 안내드립니다. Java Pathfinder는 자바 프로그램의 모델 체킹(model checking) 도구로, 프로그램의 상태 공간을 탐색하여 버그나 데드락 등을 찾는 데 활용됩니다.
+아래 내용을 단계별로 설명드릴게요.
+🧭 1. Java Pathfinder(JPF)란? **Java Pathfinder (JPF)**는 자바 프로그램을 실행하며 상태공간을 체계적으로 탐색하는 툴입니다.
+주요 기능
+멀티스레딩 버그 탐지 Assertion 위반 검출 Deadlock 탐지 Non-deterministic 동작 검증 Symbolic execution (jpf-symbc) 지원 ⚙️ 2. 설치 JPF는 GitHub 저장소에서 직접 빌드하는 것이 일반적입니다.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/pbt/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/java_path_finder/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Property-Based Testing(PBT) 와 jqwik - Pink Spider"
+  content="Java Pathfinder 사용법 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="**Property-Based Testing(PBT)**은 입력과 결과 간의 **일반적인 속성(Property)**을 정의하고, 테스트 프레임워크가 그 속성을 충족하는지를 무작위로 생성된 다양한 입력값에 대해 확인하는 방식의 테스트입니다. 단위 테스트처럼 특정 입력값만 확인하는 것이 아니라, 수천 개의 입력 조합을 자동으로 검사할 수 있다는 점에서 매우 강력합니다.
-🔍 Property-Based Testing이란? ✅ 핵심 개념 속성(Property): 테스트 대상 함수나 로직이 항상 만족해야 하는 일반적인 법칙 또는 규칙. 입력값 자동 생성: PBT 프레임워크가 다양한 입력값을 무작위로 생성. Fail case 축소(Shrinking): 실패한 입력값이 발생했을 때, 실패를 재현할 수 있는 최소 입력값으로 줄여서 디버깅을 쉽게 함. 🆚 단위 테스트와의 비교 항목 단위 테스트 (Example-based) 속성 기반 테스트 (Property-based) 입력값 고정된 사례 수동 지정 자동 생성된 다양한 값 테스트 범위 제한적 매우 광범위 유지보수 로직 변경 시 테스트 추가 필요 Property만 잘 정의하면 자동 적용 실패 시 디버깅 명확한 입력값 축소 과정 필요 🧪 Spring Boot에서 Property-Based Test 사용하는 방법 Spring Boot 자체는 JUnit을 기반으로 한 단위 테스트가 기본이며, PBT는 외부 라이브러리를 사용해서 통합하는 것이 일반적입니다. 가장 널리 쓰이는 Java 기반 라이브러리는 다음과 같습니다:
+  content="아래에 Java Pathfinder (JPF) 사용하는 방법을 자세히 안내드립니다. Java Pathfinder는 자바 프로그램의 모델 체킹(model checking) 도구로, 프로그램의 상태 공간을 탐색하여 버그나 데드락 등을 찾는 데 활용됩니다.
+아래 내용을 단계별로 설명드릴게요.
+🧭 1. Java Pathfinder(JPF)란? **Java Pathfinder (JPF)**는 자바 프로그램을 실행하며 상태공간을 체계적으로 탐색하는 툴입니다.
+주요 기능
+멀티스레딩 버그 탐지 Assertion 위반 검출 Deadlock 탐지 Non-deterministic 동작 검증 Symbolic execution (jpf-symbc) 지원 ⚙️ 2. 설치 JPF는 GitHub 저장소에서 직접 빌드하는 것이 일반적입니다.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -60,16 +66,19 @@
 />
 <meta
   property="og:title"
-  content="Property-Based Testing(PBT) 와 jqwik - Pink Spider"
+  content="Java Pathfinder 사용법 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="**Property-Based Testing(PBT)**은 입력과 결과 간의 **일반적인 속성(Property)**을 정의하고, 테스트 프레임워크가 그 속성을 충족하는지를 무작위로 생성된 다양한 입력값에 대해 확인하는 방식의 테스트입니다. 단위 테스트처럼 특정 입력값만 확인하는 것이 아니라, 수천 개의 입력 조합을 자동으로 검사할 수 있다는 점에서 매우 강력합니다.
-🔍 Property-Based Testing이란? ✅ 핵심 개념 속성(Property): 테스트 대상 함수나 로직이 항상 만족해야 하는 일반적인 법칙 또는 규칙. 입력값 자동 생성: PBT 프레임워크가 다양한 입력값을 무작위로 생성. Fail case 축소(Shrinking): 실패한 입력값이 발생했을 때, 실패를 재현할 수 있는 최소 입력값으로 줄여서 디버깅을 쉽게 함. 🆚 단위 테스트와의 비교 항목 단위 테스트 (Example-based) 속성 기반 테스트 (Property-based) 입력값 고정된 사례 수동 지정 자동 생성된 다양한 값 테스트 범위 제한적 매우 광범위 유지보수 로직 변경 시 테스트 추가 필요 Property만 잘 정의하면 자동 적용 실패 시 디버깅 명확한 입력값 축소 과정 필요 🧪 Spring Boot에서 Property-Based Test 사용하는 방법 Spring Boot 자체는 JUnit을 기반으로 한 단위 테스트가 기본이며, PBT는 외부 라이브러리를 사용해서 통합하는 것이 일반적입니다. 가장 널리 쓰이는 Java 기반 라이브러리는 다음과 같습니다:
+  content="아래에 Java Pathfinder (JPF) 사용하는 방법을 자세히 안내드립니다. Java Pathfinder는 자바 프로그램의 모델 체킹(model checking) 도구로, 프로그램의 상태 공간을 탐색하여 버그나 데드락 등을 찾는 데 활용됩니다.
+아래 내용을 단계별로 설명드릴게요.
+🧭 1. Java Pathfinder(JPF)란? **Java Pathfinder (JPF)**는 자바 프로그램을 실행하며 상태공간을 체계적으로 탐색하는 툴입니다.
+주요 기능
+멀티스레딩 버그 탐지 Assertion 위반 검출 Deadlock 탐지 Non-deterministic 동작 검증 Symbolic execution (jpf-symbc) 지원 ⚙️ 2. 설치 JPF는 GitHub 저장소에서 직접 빌드하는 것이 일반적입니다.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/pbt/" />
-<meta property="og:site_name" content="Property-Based Testing(PBT) 와 jqwik" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/java_path_finder/" />
+<meta property="og:site_name" content="Java Pathfinder 사용법" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -77,7 +86,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-06-27 10:18:03 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-07-03 10:49:24 &#43;0900 KST" />
 
 
 
@@ -287,18 +296,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/pbt/">Property-Based Testing(PBT) 와 jqwik</a></strong>
+                      href="https://pink-spider.github.io/post/spring/java_path_finder/">Java Pathfinder 사용법</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Fri, 27 Jun 2025 10:18:03 &#43;0900"
+                  Created <relative-time datetime="Thu, 03 Jul 2025 10:49:24 &#43;0900"
                     class="no-wrap">
-                    Fri, 27 Jun 2025 10:18:03 &#43;0900</relative-time>
+                    Thu, 03 Jul 2025 10:49:24 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Fri, 27 Jun 2025 10:19:02 &#43;0900"
+                  Modified <relative-time datetime="Thu, 03 Jul 2025 10:49:26 &#43;0900"
                     class="no-wrap">
-                    Fri, 27 Jun 2025 10:19:02 &#43;0900</relative-time>
+                    Thu, 03 Jul 2025 10:49:26 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -328,9 +337,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      1001 Words
+                      886 Words
                     <span class="file-info-divider"></span>
-                                        5 min
+                                        4 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -341,93 +350,154 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>**Property-Based Testing(PBT)**은 입력과 결과 간의 **일반적인 속성(Property)**을 정의하고, 테스트 프레임워크가 그 속성을 충족하는지를 무작위로 생성된 다양한 입력값에 대해 확인하는 방식의 테스트입니다. 단위 테스트처럼 특정 입력값만 확인하는 것이 아니라, <strong>수천 개의 입력 조합을 자동으로 검사할 수 있다는 점에서 매우 강력</strong>합니다.</p>
+                <article class="markdown-body entry-content container-lg"><p>아래에 <strong>Java Pathfinder (JPF)</strong> 사용하는 방법을 자세히 안내드립니다.
+Java Pathfinder는 <strong>자바 프로그램의 모델 체킹(model checking) 도구</strong>로, 프로그램의 상태 공간을 탐색하여 버그나 데드락 등을 찾는 데 활용됩니다.</p>
+<p>아래 내용을 단계별로 설명드릴게요.</p>
 <hr>
-<h2 id="-property-based-testing이란">🔍 Property-Based Testing이란?</h2>
-<h3 id="-핵심-개념">✅ 핵심 개념</h3>
+<h2 id="-1-java-pathfinderjpf란">🧭 1. Java Pathfinder(JPF)란?</h2>
+<p>**Java Pathfinder (JPF)**는 자바 프로그램을 실행하며 상태공간을 체계적으로 탐색하는 툴입니다.</p>
+<p><strong>주요 기능</strong></p>
 <ul>
-<li><strong>속성(Property)</strong>: 테스트 대상 함수나 로직이 항상 만족해야 하는 일반적인 법칙 또는 규칙.</li>
-<li><strong>입력값 자동 생성</strong>: PBT 프레임워크가 다양한 입력값을 무작위로 생성.</li>
-<li><strong>Fail case 축소(Shrinking)</strong>: 실패한 입력값이 발생했을 때, 실패를 재현할 수 있는 최소 입력값으로 줄여서 디버깅을 쉽게 함.</li>
+<li>멀티스레딩 버그 탐지</li>
+<li>Assertion 위반 검출</li>
+<li>Deadlock 탐지</li>
+<li>Non-deterministic 동작 검증</li>
+<li>Symbolic execution (jpf-symbc) 지원</li>
 </ul>
-<h3 id="-단위-테스트와의-비교">🆚 단위 테스트와의 비교</h3>
+<hr>
+<h2 id="-2-설치">⚙️ 2. 설치</h2>
+<p>JPF는 GitHub 저장소에서 직접 빌드하는 것이 일반적입니다.</p>
+<h3 id="21-git-설치">2.1 Git 설치</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/javapathfinder/jpf-core.git
+</span></span></code></pre></div><h3 id="22-환경-변수-설정">2.2 환경 변수 설정</h3>
+<p>예: <code>~/.bashrc</code> 또는 <code>~/.zshrc</code>에 추가</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">JPF_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/jpf-core
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JPF_HOME</span>/bin
+</span></span></code></pre></div><p>적용:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> ~/.bashrc
+</span></span></code></pre></div><h3 id="23-빌드">2.3 빌드</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$JPF_HOME</span>
+</span></span><span class="line"><span class="cl">ant
+</span></span></code></pre></div><p>빌드가 성공하면 <code>bin</code> 디렉토리에 실행 스크립트들이 생성됩니다.</p>
+<hr>
+<h2 id="-3-jpf-구성-및-실행">🛠️ 3. JPF 구성 및 실행</h2>
+<p>JPF는 **설정 파일 (.jpf)**로 분석 대상을 정의합니다.</p>
+<p>아래에 샘플 예제를 보여드리겠습니다.</p>
+<h3 id="31-예제-java-클래스">3.1 예제 Java 클래스</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestAssertion</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">42</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">assert</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">43</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&#34;x must be 43!&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>이 코드는 AssertionError가 발생할 수 있습니다.</p>
+<h3 id="32-jpf-설정-파일testjpf">3.2 JPF 설정 파일(test.jpf)</h3>
+<p><code>test.jpf</code>를 프로젝트 루트에 작성:</p>
+<pre tabindex="0"><code>target=TestAssertion
+classpath=.
+</code></pre><p><strong>설명</strong></p>
+<ul>
+<li><code>target</code>: main 메서드를 가진 클래스 이름</li>
+<li><code>classpath</code>: 클래스 경로(컴파일된 .class 파일이 위치한 곳)</li>
+</ul>
+<hr>
+<h2 id="-33-실행">▶️ 3.3 실행</h2>
+<p>다음 명령어로 실행:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">jpf test.jpf
+</span></span></code></pre></div><p>출력 예시:</p>
+<pre tabindex="0"><code>====================================================== error  #1
+gov.nasa.jpf.vm.NoUncaughtExceptionProperty
+java.lang.AssertionError: x must be 43!
+</code></pre><p>즉, AssertionError를 탐지합니다.</p>
+<hr>
+<h2 id="-4-동시성-버그-탐지-예제">🧩 4. 동시성 버그 탐지 예제</h2>
+<p>멀티스레딩 문제 예제를 보겠습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestRace</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">shared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">shared</span><span class="o">++</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">shared</span><span class="o">--</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>이 경우에도 race condition 가능성이 있습니다.</p>
+<p>설정 파일 <code>race.jpf</code>:</p>
+<pre tabindex="0"><code>target=TestRace
+classpath=.
+</code></pre><p>실행:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">jpf race.jpf
+</span></span></code></pre></div><p>이렇게 하면 다양한 스케줄링 시나리오를 시도하여 동시성 문제를 탐색합니다.</p>
+<hr>
+<h2 id="-5-symbolic-executionjpf-symbc">🧠 5. Symbolic Execution(jpf-symbc)</h2>
+<p>심볼릭 실행을 통해 프로그램 입력 공간을 검증할 수도 있습니다.</p>
+<p>설치:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/javapathfinder/jpf-symbc.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> jpf-symbc
+</span></span><span class="line"><span class="cl">ant
+</span></span></code></pre></div><p><code>jpf.properties</code>에 <code>extensions</code> 설정 추가:</p>
+<pre tabindex="0"><code>extensions=gov.nasa.jpf.symbc.SymbolicListener
+</code></pre><p>이후, 심볼릭 분석을 위한 옵션을 <code>.jpf</code> 파일에 추가할 수 있습니다.</p>
+<hr>
+<h2 id="-6-주요-옵션-정리">📂 6. 주요 옵션 정리</h2>
+<p><code>*.jpf</code> 설정 파일에서 자주 쓰는 옵션:</p>
 <table>
   <thead>
       <tr>
-          <th>항목</th>
-          <th>단위 테스트 (Example-based)</th>
-          <th>속성 기반 테스트 (Property-based)</th>
+          <th>옵션</th>
+          <th>설명</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>입력값</td>
-          <td>고정된 사례 수동 지정</td>
-          <td>자동 생성된 다양한 값</td>
+          <td><code>target</code></td>
+          <td>메인 클래스 이름</td>
       </tr>
       <tr>
-          <td>테스트 범위</td>
-          <td>제한적</td>
-          <td>매우 광범위</td>
+          <td><code>classpath</code></td>
+          <td>클래스 경로</td>
       </tr>
       <tr>
-          <td>유지보수</td>
-          <td>로직 변경 시 테스트 추가 필요</td>
-          <td>Property만 잘 정의하면 자동 적용</td>
+          <td><code>listener</code></td>
+          <td>실행 시 이벤트 리스너 지정 (예: deadlock 검출)</td>
       </tr>
       <tr>
-          <td>실패 시 디버깅</td>
-          <td>명확한 입력값</td>
-          <td>축소 과정 필요</td>
+          <td><code>search.class</code></td>
+          <td>탐색 알고리즘 (예: <code>*.DFSearch</code>, <code>*.DFSHeuristic</code>)</td>
+      </tr>
+      <tr>
+          <td><code>report.console.property_violation</code></td>
+          <td>콘솔에 위반사항 출력 여부</td>
+      </tr>
+      <tr>
+          <td><code>vm.storage.class</code></td>
+          <td>상태 저장 방식</td>
+      </tr>
+      <tr>
+          <td><code>symbolic.method</code></td>
+          <td>심볼릭 실행 대상 메서드</td>
+      </tr>
+      <tr>
+          <td><code>symbolic.debug</code></td>
+          <td>심볼릭 실행 디버깅 활성화</td>
       </tr>
   </tbody>
 </table>
 <hr>
-<h2 id="-spring-boot에서-property-based-test-사용하는-방법">🧪 Spring Boot에서 Property-Based Test 사용하는 방법</h2>
-<p>Spring Boot 자체는 JUnit을 기반으로 한 단위 테스트가 기본이며, <strong>PBT는 외부 라이브러리를 사용해서 통합</strong>하는 것이 일반적입니다. 가장 널리 쓰이는 Java 기반 라이브러리는 다음과 같습니다:</p>
-<h3 id="1-jqwikhttpsjqwiknet-사용">1. <strong><a href="https://jqwik.net/">jqwik</a></strong> 사용</h3>
-<p><code>jqwik</code>은 Java와 JUnit 5를 기반으로 한 property-based 테스트 프레임워크입니다.</p>
-<h4 id="-maven-의존성-추가">🔧 Maven 의존성 추가:</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;dependency&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;groupId&gt;</span>net.jqwik<span class="nt">&lt;/groupId&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;artifactId&gt;</span>jqwik<span class="nt">&lt;/artifactId&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;version&gt;</span>1.8.0<span class="nt">&lt;/version&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dependency&gt;</span>
-</span></span></code></pre></div><h4 id="-예시-코드">✍️ 예시 코드:</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">net.jqwik.api.*</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">StringProperties</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Property</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">reverseOfReverseIsOriginal</span><span class="p">(</span><span class="nd">@ForAll</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">(</span><span class="n">input</span><span class="p">).</span><span class="na">reverse</span><span class="p">().</span><span class="na">toString</span><span class="p">()).</span><span class="na">reverse</span><span class="p">().</span><span class="na">toString</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">input</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Property</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">lengthIsNonNegative</span><span class="p">(</span><span class="nd">@ForAll</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h4 id="-spring과-함께-사용하기">➕ Spring과 함께 사용하기:</h4>
-<p>Spring Boot 테스트와 <code>@SpringBootTest</code>를 섞을 수도 있지만, 일반적으로 <strong>Pure Function</strong>, 즉 순수 함수 테스트에 주로 사용되므로, Spring Context를 불러오지 않고 테스트하는 것이 일반적입니다.</p>
-<h3 id="2-quicktheories-또는-junit-quickcheck도-있음">2. <strong>QuickTheories</strong> 또는 <strong>JUnit-Quickcheck</strong>도 있음</h3>
-<p>하지만 jqwik은 JUnit5와의 통합성이 좋아 요즘 가장 많이 사용됩니다.</p>
-<hr>
-<h2 id="-언제-property-based-testing을-도입하면-좋을까">💡 언제 Property-Based Testing을 도입하면 좋을까?</h2>
+<h2 id="-7-참고-리소스">💡 7. 참고 리소스</h2>
 <ul>
-<li>복잡한 입력 조합이 가능한 알고리즘 (ex. 정렬, 수학 연산, 시리얼라이저 등)</li>
-<li>다양한 경계 조건을 확인하고 싶은 경우</li>
-<li>입력의 범위가 넓고, 오류가 특정한 조건에서만 발생하는 경우</li>
-<li>예시 기반 테스트로 커버되지 않는 잠재적 버그를 잡고 싶을 때</li>
+<li><a href="https://github.com/javapathfinder/jpf-core">JPF GitHub</a></li>
+<li><a href="https://github.com/javapathfinder/jpf-core/wiki">JPF 사용 가이드</a></li>
+<li><a href="https://babelfish.arc.nasa.gov/trac/jpf">NASA JPF 홈페이지</a></li>
 </ul>
 <hr>
-<h2 id="-정리">📌 정리</h2>
-<ul>
-<li><strong>Property-Based Testing</strong>은 다양한 자동 생성된 입력값에 대해 “항상 성립해야 하는 속성”을 검증하는 테스트 방식입니다.</li>
-<li>Spring Boot에서는 주로 <strong>jqwik</strong>과 같은 외부 라이브러리를 통해 사용하며, JUnit5와 잘 통합됩니다.</li>
-<li>시스템의 복잡한 로직이나 입력 조합에 대한 <strong>강건성을 확보하고 싶을 때 매우 유용</strong>합니다.</li>
-</ul>
 </article>
               </div>
 
@@ -440,13 +510,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/db_ssh_tunnel/"> boot3 에서 postgresql에 직접 접속이 아닌 ssh tunnel 로 접속하는 방...</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/db/ubuntu_postgresql/">우분투에 postgresql 설치하기&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/pitest_mutation_test/">Mutation Testing in Java, Pittest&nbsp;</a><div> »</div>
           
         </div>
       </div>

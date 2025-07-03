@@ -609,72 +609,23 @@
           <div class="col-12 d-inline-block">
             <div class="d-inline-block mb-1">
               <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/msa/msa_traceid_spanid/">MSA에서 traceId 와 spanId 란?</a>
+                <a href="https://pink-spider.github.io/post/book/clean_code/clean_code_intro/">Clean Code 서론</a>
               </h3>
             </div>
 
             <div>
               <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
-<hr>
-<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
-<ul>
-<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
-<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
-<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
-</ul>
-<hr>
-<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
-<ul>
-<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
-<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
-<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
-</ul>
-<hr>
-<h3 id="구조-예시">구조 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
-</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
-</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
-</span></span><span class="line"><span class="cl">                                           ▼
-</span></span><span class="line"><span class="cl">                                   ┌────────────┐
-</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
-</span></span><span class="line"><span class="cl">                                   └────────────┘   │
-</span></span><span class="line"><span class="cl">                                                    ▼
-</span></span><span class="line"><span class="cl">                                            ┌────────────┐
-</span></span><span class="line"><span class="cl">                                            │ Service B  │
-</span></span><span class="line"><span class="cl">                                            └────────────┘
-</span></span></code></pre></div><ul>
-<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
-<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
-</ul>
-<hr>
-<h3 id="요약">요약</h3>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Trace ID</td>
-          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
-      </tr>
-      <tr>
-          <td>Span ID</td>
-          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h3 id="첨언">첨언</h3>
-<ul>
-<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
-<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
-</ul>
+                <p><a href=""><img src="https://img.shields.io/badge/book-green" alt="GoDoc"></a>
+<a href=""><img src="https://img.shields.io/badge/clean-code-green" alt="GoDoc"></a></p>
+<h1 id="clean-code-서론">Clean Code 서론</h1>
+<h2 id="abstract">Abstract</h2>
+<p>주니어 개발자일수록 일단 기능 구현을 우선으로 생각한다.<!-- raw HTML omitted -->
+다시 말해서 대체로 코드의 퀄리티는 뒷전이고 생각한 기능대로 돌아가는 코드로 작성하면 할 일을 다했다고 생각한다.<!-- raw HTML omitted -->
+아니, 비단 주니어 개발자만의 문제는 아닐 수도 있다.<!-- raw HTML omitted -->
+업계에 있으면서 보아온 많은 개발자들을 돌아봤을 때, 코드 품질을 생각하는 개발자는 그리 많지 않았다.<!-- raw HTML omitted -->
+심지어 Clean Code가 뭔지 모르는 사람도 많다.<!-- raw HTML omitted -->
+하지만 코드에도 <!-- raw HTML omitted -->품질<!-- raw HTML omitted -->이라는 것은 분명히 존재하며, 개발자가 작성한 코드가 어느 정도의 품질 수준을 갖추었는가는 객관적으로 평가되는 것이 좋다.
+모든 개발자는 dirty 하지 않은 clean한 코드를 작성하기 위해 계속 노력해야 한다.</p>
               </div>
             </div>
 
@@ -682,318 +633,9 @@
               
 
               Created
-              <relative-time datetime=" Wed, 02 Apr 2025 10:50:33 &#43;0900" class="no-wrap"
-                title=" Wed, 02 Apr 2025 10:50:33 &#43;0900">
-                Wed, 02 Apr 2025 10:50:33 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/memory/jvm_stack/">JVM 에서 쓰이는 stack 의 종류</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>JVM(Java Virtual Machine)에서는 내부적으로 여러 종류의 <strong>스택(stack)</strong> 을 사용합니다. <!-- raw HTML omitted -->
-각각의 스택은 JVM의 실행 및 메모리 관리 등에서 중요한 역할을 합니다. 주요 스택 종류는 다음과 같습니다:</p>
-<hr>
-<h3 id="-1-java-virtual-machine-stack-또는-thread-stack">🧠 1. <strong>Java Virtual Machine Stack (또는 Thread Stack)</strong></h3>
-<ul>
-<li><strong>설명</strong>: 각 <strong>스레드(thread)</strong> 마다 하나씩 존재하는 스택입니다.</li>
-<li><strong>역할</strong>: 메서드 호출 시 생성되는 <strong>스택 프레임(stack frame)</strong> 을 저장합니다. 각 프레임에는:
-<ul>
-<li>지역 변수(Local Variables)</li>
-<li>피연산자 스택(Operand Stack)</li>
-<li>메서드 반환 주소 등이 포함됨</li>
-</ul>
-</li>
-<li><strong>예외</strong>: 스택 오버플로우 발생 시 <code>StackOverflowError</code> 발생</li>
-</ul>
-<hr>
-<h3 id="-2-native-method-stack">🔁 2. <strong>Native Method Stack</strong></h3>
-<ul>
-<li><strong>설명</strong>: 네이티브 메서드(C로 구현된 JNI 메서드 등) 호출 시 사용되는 스택입니다.</li>
-<li><strong>역할</strong>: C/C++ 등 JVM 외부 언어로 구현된 메서드에서 필요한 데이터를 저장</li>
-<li><strong>특이사항</strong>: 일부 JVM 구현에서는 Java 스택과 통합되기도 함</li>
-</ul>
-<hr>
-<h3 id="-3-operand-stack-피연산자-스택">💾 3. <strong>Operand Stack (피연산자 스택)</strong></h3>
-<ul>
-<li><strong>설명</strong>: 위의 JVM Stack의 <strong>각 스택 프레임 내</strong>에 존재하는 스택입니다.</li>
-<li><strong>역할</strong>: 바이트코드 명령어가 실행 중인 <strong>중간 연산 결과</strong>를 임시로 저장</li>
-<li><strong>예시</strong>: <code>iadd</code>, <code>imul</code> 같은 바이트코드 명령은 이 스택에서 피연산자를 꺼내 계산</li>
-</ul>
-<hr>
-<h3 id="-4-call-stack-호출-스택">🧱 4. <strong>Call Stack (호출 스택)</strong></h3>
-<ul>
-<li><strong>설명</strong>: JVM Stack의 구조적인 측면을 지칭하는 용어로, 메서드 호출의 흐름을 나타냅니다.</li>
-<li><strong>역할</strong>: 현재 실행 중인 메서드부터 시작해 호출된 메서드들이 차곡차곡 쌓여 있음</li>
-<li><strong>특징</strong>: 디버깅 시 &ldquo;Stack Trace&quot;로 확인 가능</li>
-</ul>
-<hr>
-<p>추가로 JVM에는 스택 이외에도 다음과 같은 메모리 영역이 있습니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 01 Apr 2025 15:44:09 &#43;0900" class="no-wrap"
-                title=" Tue, 01 Apr 2025 15:44:09 &#43;0900">
-                Tue, 01 Apr 2025 15:44:09 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/memory/heap_gc/">JVM에서 Heap 메모리의 용도와 GC 튜닝</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>JVM(Java Virtual Machine)에서 <strong>heap 메모리</strong>는 자바 애플리케이션이 <strong>런타임 시 동적으로 생성하는 객체들이 저장되는 영역</strong>입니다. 즉, <code>new</code> 키워드를 사용해서 생성하는 대부분의 객체들이 이 영역에 저장됩니다.</p>
-<hr>
-<h3 id="-heap-메모리-구성">📌 Heap 메모리 구성</h3>
-<p>Heap은 크게 다음 두 영역으로 나뉩니다:</p>
-<ul>
-<li><strong>Young Generation (Young Gen)</strong>: 새로 생성된 객체가 저장되는 곳.
-<ul>
-<li><strong>Eden</strong>: 대부분의 새 객체가 여기에 생성됨.</li>
-<li><strong>Survivor</strong>: Eden에서 살아남은 객체들이 이동.</li>
-</ul>
-</li>
-<li><strong>Old Generation (Tenured Gen)</strong>: Young Gen을 거쳐 오래 살아남은 객체들이 이동하는 공간.</li>
-</ul>
-<p>Garbage Collector(GC)는 이 heap 영역의 객체들을 주기적으로 검사해서 <strong>더 이상 참조되지 않는 객체는 메모리에서 제거</strong>합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 01 Apr 2025 13:59:38 &#43;0900" class="no-wrap"
-                title=" Tue, 01 Apr 2025 13:59:38 &#43;0900">
-                Tue, 01 Apr 2025 13:59:38 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/memory/cacheable/">Cacheable 어노테이션에 대해서</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>@Cacheable</code> 어노테이션은 Spring Framework에서 <strong>메서드의 반환값을 캐시에 저장</strong>하여, <strong>같은 인자가 들어올 경우 캐시된 값을 재사용</strong>하도록 하는 기능을 제공합니다. 즉, 메서드를 반복적으로 호출하더라도 실제로는 <strong>처음 한 번만 실행되고</strong>, 이후 호출은 캐시된 결과를 반환하게 됩니다.</p>
-<hr>
-<h3 id="-주요-역할-요약">📌 주요 역할 요약</h3>
-<ul>
-<li><strong>중복 호출 방지</strong>: 동일한 입력값에 대해 메서드를 반복 호출하면, 캐시된 결과를 반환해 성능 향상.</li>
-<li><strong>결과 저장</strong>: 메서드 실행 결과를 캐시에 저장.</li>
-<li><strong>조건부 캐싱</strong>: 특정 조건에 따라 캐싱 여부 제어 가능.</li>
-</ul>
-<hr>
-<h3 id="-기본-사용-예시">✅ 기본 사용 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="s">&#34;users&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">findUserById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 실제로는 DB나 외부 API 호출</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>위 메서드는 <code>users</code>라는 캐시 이름으로 결과를 저장합니다.</li>
-<li><code>id</code>가 동일한 경우, 이후 호출은 캐시된 <code>User</code> 객체를 반환합니다.</li>
-</ul>
-<hr>
-<h3 id="-주요-속성">🔧 주요 속성</h3>
-<table>
-  <thead>
-      <tr>
-          <th>속성</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>value</code> 또는 <code>cacheNames</code></td>
-          <td>사용할 캐시 이름 지정</td>
-      </tr>
-      <tr>
-          <td><code>key</code></td>
-          <td>캐시 키를 지정 (SpEL 표현식 사용 가능)</td>
-      </tr>
-      <tr>
-          <td><code>condition</code></td>
-          <td>캐싱할 조건 지정 (SpEL)</td>
-      </tr>
-      <tr>
-          <td><code>unless</code></td>
-          <td>결과를 저장하지 않을 조건 (SpEL)</td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="예시">예시:</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;books&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#isbn&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">unless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#result == null&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Book</span><span class="w"> </span><span class="nf">findBook</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">isbn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bookRepository</span><span class="p">.</span><span class="na">findByIsbn</span><span class="p">(</span><span class="n">isbn</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-함께-알아두면-좋은-어노테이션">🧠 함께 알아두면 좋은 어노테이션</h3>
-<ul>
-<li><code>@CachePut</code> : 캐시를 <strong>강제로 업데이트</strong>할 때 사용</li>
-<li><code>@CacheEvict</code> : 캐시를 <strong>삭제</strong>할 때 사용</li>
-<li><code>@Caching</code> : 여러 캐시 어노테이션을 함께 사용할 때</li>
-</ul>
-<hr>
-<p>필요하다면 Redis나 Caffeine 같은 캐시 스토어와 함께 연동도 가능합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 01 Apr 2025 11:34:10 &#43;0900" class="no-wrap"
-                title=" Tue, 01 Apr 2025 11:34:10 &#43;0900">
-                Tue, 01 Apr 2025 11:34:10 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git/git_submodule_reset/">서브모듈 완전히 초기화하고 다시 셋팅</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h2 id="-서브모듈-완전히-초기화하고-다시-셋팅">✅ 서브모듈 완전히 초기화하고 다시 셋팅</h2>
-<ol>
-<li>
-<p><strong>서브모듈을 Git에서 먼저 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule deinit -f .
-</span></span></code></pre></div></li>
-<li>
-<p><strong>서브모듈 디렉토리를 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf .git/modules/&lt;서브모듈_이름&gt;
-</span></span><span class="line"><span class="cl">rm -rf &lt;서브모듈_디렉토리&gt;
-</span></span></code></pre></div></li>
-<li>
-<p><strong><code>.gitmodules</code> 파일 삭제</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .gitmodules
-</span></span></code></pre></div></li>
-<li>
-<p><strong>인덱스에서 서브모듈 흔적 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rm --cached &lt;서브모듈_디렉토리&gt;
-</span></span></code></pre></div></li>
-<li>
-<p><strong>커밋</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Remove submodule completely&#34;</span>
-</span></span></code></pre></div></li>
-<li>
-<p><strong>새로운 서브모듈 추가 (필요한 경우)</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add &lt;repo-url&gt; &lt;path&gt;
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Add submodule&#34;</span>
-</span></span></code></pre></div></li>
-</ol>
-<hr>
-<h2 id="-정리하자면">🧠 정리하자면:</h2>
-<ul>
-<li>단순히 <code>.gitmodules</code> 파일만 지우면 안 되고,</li>
-<li>Git 내부의 서브모듈 정보 (<code>.git/modules</code>, 인덱스 등)도 같이 정리해줘야 해요.</li>
-</ul>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 01 Apr 2025 11:25:45 &#43;0900" class="no-wrap"
-                title=" Tue, 01 Apr 2025 11:25:45 &#43;0900">
-                Tue, 01 Apr 2025 11:25:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/k8s/k8s/">About k8s</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="k8s란">k8s란?</h1>
-<p>**Kubernetes (k8s)**는 컨테이너화된 애플리케이션을 자동으로 <strong>배포, 확장, 관리</strong>해주는 <strong>오픈소스 컨테이너 오케스트레이션 플랫폼</strong>입니다.<!-- raw HTML omitted -->
-구글에서 개발한 기술을 기반으로 CNCF(Cloud Native Computing Foundation)에 기부되었고, 현재는 클라우드 환경에서 가장 널리 사용되는 컨테이너 관리 시스템이에요.</p>
-<hr>
-<h3 id="핵심-개념-정리">핵심 개념 정리</h3>
-<ul>
-<li><strong>컨테이너(Container)</strong>: 애플리케이션과 그 실행 환경을 패키징한 단위 (주로 Docker 사용)</li>
-<li><strong>Pod</strong>: Kubernetes의 가장 작은 배포 단위. 하나 이상의 컨테이너를 포함할 수 있어요.</li>
-<li><strong>Node</strong>: 컨테이너가 실제로 실행되는 물리/가상 머신</li>
-<li><strong>Cluster</strong>: 여러 노드로 구성된 Kubernetes의 전체 인프라</li>
-<li><strong>Deployment</strong>: 애플리케이션의 원하는 상태(예: 몇 개의 복제본 유지 등)를 정의하고 관리</li>
-<li><strong>Service</strong>: Pod에 접근할 수 있는 안정적인 네트워크 주소를 제공 (LoadBalancer, ClusterIP, NodePort 등)</li>
-<li><strong>Ingress</strong>: 외부 트래픽을 내부 서비스로 라우팅해주는 HTTP(S) 레벨 라우터</li>
-<li><strong>ConfigMap / Secret</strong>: 애플리케이션 설정 값이나 민감한 정보를 외부에서 주입</li>
-</ul>
-<hr>
-<h3 id="kubernetes의-장점">Kubernetes의 장점</h3>
-<ul>
-<li><strong>자동화된 배포 및 롤백</strong>: 애플리케이션을 손쉽게 배포/업데이트하고, 문제 발생 시 자동으로 이전 버전으로 롤백 가능</li>
-<li><strong>자동 스케일링</strong>: 트래픽에 따라 Pod 수를 자동 조절 가능</li>
-<li><strong>자가 치유(Self-healing)</strong>: 장애 난 컨테이너는 자동으로 다시 생성</li>
-<li><strong>서비스 디스커버리 및 로드 밸런싱</strong>: Pod 간 통신을 쉽게 할 수 있게 도와줌</li>
-</ul>
-<hr>
-<h3 id="간단한-동작-흐름">간단한 동작 흐름</h3>
-<ol>
-<li>사용자는 애플리케이션을 컨테이너(Docker)로 패키징</li>
-<li>이를 Kubernetes 클러스터에 배포</li>
-<li>Kubernetes가 이를 적절한 Node에 스케줄링하고 실행</li>
-<li>서비스나 Ingress를 통해 외부 접근 가능</li>
-</ol>
-<hr>
-<h1 id="helm-이란">helm 이란?</h1>
-<p><strong>Helm</strong>은 Kubernetes의 <strong>패키지 관리자</strong>입니다.<!-- raw HTML omitted -->
-쉽게 말해서, Kubernetes에서 애플리케이션을 <strong>더 쉽고, 재사용 가능하게 배포</strong>할 수 있도록 도와주는 도구입니다.<!-- raw HTML omitted -->
-마치 <code>apt</code>(Ubuntu), <code>brew</code>(macOS), <code>npm</code>(Node.js) 같은 느낌.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 31 Mar 2025 12:48:01 &#43;0900" class="no-wrap"
-                title=" Mon, 31 Mar 2025 12:48:01 &#43;0900">
-                Mon, 31 Mar 2025 12:48:01 &#43;0900
+              <relative-time datetime=" Wed, 27 Nov 2024 17:14:05 &#43;0900" class="no-wrap"
+                title=" Wed, 27 Nov 2024 17:14:05 &#43;0900">
+                Wed, 27 Nov 2024 17:14:05 &#43;0900
               </relative-time>
             </div>
           </div>
@@ -1003,10 +645,10 @@
       <div class="paginate-container">
         <div class="BtnGroup">
           
-          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/page/8/">Previous</a>
+          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/page/14/">Previous</a>
           
           
-          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/page/10/">Next</a>
+          <button class="btn btn-outline BtnGroup-item" disabled="disabled">Next</button>
           
         </div>
       </div>

@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">82</span>
+              <span class="Counter">85</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">82</span>
+      <span class="Counter ">85</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,219 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/hashmap_linkedhashmap/">Java에서 Hashmap과 LinkedHashMap의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><code>HashMap</code>과 <code>LinkedHashMap</code>은 둘 다 Java에서 제공하는 Map 인터페이스의 구현체이지만, <strong>동작 방식과 특징에 몇 가지 중요한 차이점</strong>이 있습니다:</p>
+<hr>
+<h3 id="-1-저장-순서-유지-여부">🔹 1. <strong>저장 순서 유지 여부</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>특징</th>
+          <th><code>HashMap</code></th>
+          <th><code>LinkedHashMap</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>순서 유지</td>
+          <td>❌ 저장 순서 보장 안 됨</td>
+          <td>✅ 입력 순서(또는 접근 순서) 유지</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li><code>HashMap</code>은 내부적으로 순서를 신경 쓰지 않기 때문에, 데이터를 삽입한 순서와 꺼낼 때 순서가 다를 수 있음.</li>
+<li><code>LinkedHashMap</code>은 이중 연결 리스트를 사용해 데이터를 저장한 순서를 기억함.</li>
+</ul>
+<hr>
+<h3 id="-2-성능">🔹 2. <strong>성능</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>성능</th>
+          <th><code>HashMap</code></th>
+          <th><code>LinkedHashMap</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>일반적으로 더 빠름</td>
+          <td>✅</td>
+          <td>❌ (조금 느림)</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li><code>LinkedHashMap</code>은 연결 리스트를 유지해야 하므로 약간의 오버헤드가 있음.</li>
+</ul>
+<hr>
+<h3 id="-3-null-허용-여부">🔹 3. <strong>null 허용 여부</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>요소</th>
+          <th><code>HashMap</code></th>
+          <th><code>LinkedHashMap</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>null</code> 키 허용</td>
+          <td>1개 가능</td>
+          <td>1개 가능</td>
+      </tr>
+      <tr>
+          <td><code>null</code> 값 허용</td>
+          <td>여러 개 가능</td>
+          <td>여러 개 가능</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>둘 다 <code>null</code> 키 하나와 <code>null</code> 값 여러 개 허용함.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sun, 20 Apr 2025 11:15:45 &#43;0900" class="no-wrap"
+                title=" Sun, 20 Apr 2025 11:15:45 &#43;0900">
+                Sun, 20 Apr 2025 11:15:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/ddd/about_ddd/">Feign Timecheck</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>DDD(Domain-Driven Design, 도메인 주도 설계)는 복잡한 소프트웨어 시스템을 설계할 때 <strong>비즈니스 도메인(업무 영역)</strong> 을 중심에 두고 개발하는 방법론이에요. 에릭 에반스(Eric Evans)의 책 *&ldquo;Domain-Driven Design: Tackling Complexity in the Heart of Software&rdquo;*에서 처음 제안되었고, 특히 <strong>도메인 복잡성이 높은 시스템</strong>에서 강력한 효과를 발휘합니다.</p>
+<hr>
+<h3 id="-ddd란">✅ DDD란?</h3>
+<p>간단히 말해 DDD는:</p>
+<ul>
+<li><strong>비즈니스의 핵심 로직(도메인)</strong> 을 가장 중요한 것으로 보고,</li>
+<li><strong>도메인 전문가와 개발자가 협력</strong>하여,</li>
+<li>소프트웨어 모델을 <strong>업무 용어와 일치</strong>시키고,</li>
+<li>유지보수 가능하고 유연한 설계를 만드는 것을 목표로 해요.</li>
+</ul>
+<hr>
+<h3 id="-ddd의-핵심-개념">✅ DDD의 핵심 개념</h3>
+<table>
+  <thead>
+      <tr>
+          <th>개념</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Entity</strong></td>
+          <td>식별자가 있어 고유하게 구분되는 객체 (ex. <code>Order</code>, <code>User</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Value Object</strong></td>
+          <td>식별자 없이 값 자체로 의미가 있는 객체 (ex. <code>Address</code>, <code>Money</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Aggregate</strong></td>
+          <td>도메인 객체들의 군집. 하나의 루트 엔티티(Aggregate Root)가 존재</td>
+      </tr>
+      <tr>
+          <td><strong>Repository</strong></td>
+          <td>도메인 객체를 저장하고 조회하는 인터페이스 (<code>findById</code>, <code>save</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Service (도메인 서비스)</strong></td>
+          <td>특정 엔티티에 속하지 않는 비즈니스 로직 담당</td>
+      </tr>
+      <tr>
+          <td><strong>Factory</strong></td>
+          <td>복잡한 객체 생성 로직 담당</td>
+      </tr>
+      <tr>
+          <td><strong>Bounded Context</strong></td>
+          <td>특정 도메인 모델이 적용되는 명확한 경계</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="-spring-boot에서-ddd-코드상-특징">✅ Spring Boot에서 DDD 코드상 특징</h3>
+<p>Spring Boot에서 DDD를 적용하면 다음과 같은 <strong>패키지 구조 및 역할 분리</strong>가 나타납니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 17 Apr 2025 18:54:11 &#43;0900" class="no-wrap"
+                title=" Thu, 17 Apr 2025 18:54:11 &#43;0900">
+                Thu, 17 Apr 2025 18:54:11 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/finance/portpolio/">포트폴리오 이론</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>**공분산(Covariance)**은 두 변수 간의 관계를 측정하는 통계적 개념으로, 한 변수의 변화가 다른 변수의 변화와 어떻게 연관되어 있는지를 나타냅니다. 공분산은 변수 간의 <strong>방향성과 크기</strong>를 설명합니다.</p>
+<h3 id="공분산의-정의">공분산의 정의</h3>
+<p>공분산은 두 변수 (X)와 (Y)의 값들이 각각 평균에서 벗어난 정도를 곱한 값의 평균으로 계산됩니다.<br>
+수식으로는 다음과 같습니다:</p>
+<p>[
+\text{Cov}(X, Y) = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})}{n}
+]</p>
+<ul>
+<li>(X_i, Y_i): 각 변수 (X)와 (Y)의 관측값</li>
+<li>(\bar{X}, \bar{Y}): 변수 (X)와 (Y)의 평균값</li>
+<li>(n): 관측값의 개수</li>
+</ul>
+<h3 id="공분산의-특징">공분산의 특징</h3>
+<ol>
+<li>
+<p><strong>양수(Positive):</strong></p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 14 Apr 2025 09:10:45 &#43;0900" class="no-wrap"
+                title=" Mon, 14 Apr 2025 09:10:45 &#43;0900">
+                Mon, 14 Apr 2025 09:10:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -734,151 +947,6 @@
               <relative-time datetime=" Fri, 11 Apr 2025 18:54:11 &#43;0900" class="no-wrap"
                 title=" Fri, 11 Apr 2025 18:54:11 &#43;0900">
                 Fri, 11 Apr 2025 18:54:11 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/jsonignore_include/">@JsonIgnore 와 JsonInclude</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>@JsonIgnore</code>를 붙이면 <strong>해당 필드는 JSON 변환 시 무조건 제외</strong>됩니다. <!-- raw HTML omitted -->
-즉, <strong>값이 있든 없든 관계없이</strong> JSON 결과에 <strong>필드 자체가 포함되지 않습니다.</strong></p>
-<p>예시로 보면:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@JsonIgnore</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// getters/setters</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>위 객체를 JSON으로 변환하면 (예: <code>name=&quot;Alice&quot;</code>, <code>password=&quot;secret&quot;</code>이더라도):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Alice&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p><code>password</code> 필드는 무조건 빠집니다.</p>
-<hr>
-<p>반면, <strong>값이 없을 때만 필드를 제외하고 싶다면</strong> <code>@JsonInclude</code>를 사용해야 합니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 08 Apr 2025 17:42:13 &#43;0900" class="no-wrap"
-                title=" Tue, 08 Apr 2025 17:42:13 &#43;0900">
-                Tue, 08 Apr 2025 17:42:13 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/basic_theory/restapi/">REST API</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="rest-api란-무엇이며-restful-하다는-건-어떤-의미인가">Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가?</h1>
-<p>REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.</p>
-<hr>
-<h3 id="-rest-api란">🔹 REST API란?</h3>
-<p><strong>REST</strong>는 &ldquo;<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer&quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 <strong>웹 아키텍처 스타일</strong> 중 하나죠.</p>
-<p>즉, <strong>REST API</strong>는 이 REST 원칙에 따라 설계된 <strong>웹 API</strong>를 말해요.</p>
-<hr>
-<h3 id="-rest의-핵심-개념">🔹 REST의 핵심 개념</h3>
-<p>REST는 다음의 6가지 제약 조건을 기반으로 해요:</p>
-<ol>
-<li>
-<p><strong>클라이언트-서버 구조</strong></p>
-<ul>
-<li>클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔.</li>
-</ul>
-</li>
-<li>
-<p><strong>무상태성 (Stateless)</strong></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 03 Apr 2025 18:02:29 &#43;0900" class="no-wrap"
-                title=" Thu, 03 Apr 2025 18:02:29 &#43;0900">
-                Thu, 03 Apr 2025 18:02:29 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/tdd/mock_mockbean/">@Mock @MockBean 의 차이</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h2 id="mock과-mockbean은-둘-다-테스트에서-mock-객체를-만들기-위한-어노테이션이지만-쓰이는-환경과-역할이-조금-달라요-간단히-차이부터-요약하면"><code>@Mock</code>과 <code>@MockBean</code>은 둘 다 테스트에서 <strong>Mock 객체</strong>를 만들기 위한 어노테이션이지만, <strong>쓰이는 환경과 역할</strong>이 조금 달라요. 간단히 차이부터 요약하면:</h2>
-<hr>
-<h3 id="-mock-from-mockito">🔹 <code>@Mock</code> (from Mockito)</h3>
-<ul>
-<li><strong>Mockito에서 제공</strong>하는 어노테이션</li>
-<li>**순수 단위 테스트(Unit Test)**에 사용</li>
-<li>Spring Context와는 무관</li>
-<li>테스트 클래스 내에서 <strong>의존성을 Mock</strong>으로 주입하고 싶을 때 사용</li>
-<li><code>MockitoAnnotations.openMocks(this)</code> 또는 <code>@ExtendWith(MockitoExtension.class)</code> 와 함께 사용해야 함</li>
-</ul>
-<p><strong>예시:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyServiceTest</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Mock</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@InjectMocks</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myRepository는 mock 객체</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-mockbean-from-spring-boot">🔸 <code>@MockBean</code> (from Spring Boot)</h3>
-<ul>
-<li><strong>Spring Boot Test에서 제공</strong>하는 어노테이션</li>
-<li><strong>통합 테스트(Integration Test)</strong> 시 사용</li>
-<li><strong>Spring ApplicationContext에 등록된 Bean을 Mock으로 교체</strong></li>
-<li><code>@SpringBootTest</code>, <code>@WebMvcTest</code>, <code>@DataJpaTest</code> 같은 Spring 기반 테스트 환경에서 사용</li>
-</ul>
-<p><strong>예시:</strong></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
-                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
-                Thu, 03 Apr 2025 15:57:29 &#43;0900
               </relative-time>
             </div>
           </div>

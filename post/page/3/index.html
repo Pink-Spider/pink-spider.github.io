@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">82</span>
+              <span class="Counter">85</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">82</span>
+      <span class="Counter ">85</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,137 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/h2_mysql_function/">H2에서 mysql function 쓰려면</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="배경">배경</h1>
+<ul>
+<li>local, dev, prod 등 프로파일에선 mysql 셋팅</li>
+<li>test 프로파일은 h2에 schema.sql, data.sql로 데이터 셋팅</li>
+<li>nativeQuery를 사용하는 경우 DATE_FORMAT 같은 mysql 함수 사용.</li>
+</ul>
+<pre tabindex="0"><code>spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MYSQL;DB_CLOSE_DELAY=-1
+</code></pre><h2 id="date_format-대체">DATE_FORMAT 대체</h2>
+<pre tabindex="0"><code>public class H2Functions {
+    public static String formatDate(java.sql.Timestamp timestamp, String format) {
+        return new java.text.SimpleDateFormat(format).format(timestamp);
+    }
+}
+</code></pre><h3 id="schemasql">schema.sql</h3>
+<pre tabindex="0"><code>CREATE ALIAS IF NOT EXISTS DATE_FORMAT FOR &#34;com.example.H2Functions.formatDate&#34;;
+</code></pre><h2 id="repository">Repository</h2>
+<pre tabindex="0"><code>@Query(value = &#34;SELECT DATE_FORMAT(order_date, &#39;yyyy-MM-dd&#39;) AS formatted_date, COUNT(*) &#34; +
+               &#34;FROM orders GROUP BY formatted_date&#34;, nativeQuery = true)
+List&lt;Object[]&gt; findOrderCountGroupedByDate();
+</code></pre><p>위의 코드는 예시이며, 실제로는 h2와 mysql에서 format으로 넘겨주는 형태가 다릅니다.
+mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &lsquo;MMdd&rsquo;, &lsquo;yyyy&rsquo; 등을 사용합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sun, 01 Jun 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Sun, 01 Jun 2025 20:20:45 &#43;0900">
+                Sun, 01 Jun 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/db/mysql_slow_query/">MySql Slow Query 모니터링</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MySQL에서 <strong>Slow Query(슬로우 쿼리)</strong> 를 모니터링하는 것은 성능 최적화를 위한 중요한 작업입니다. 다음은 슬로우 쿼리를 모니터링하는 일반적인 방법들입니다:</p>
+<hr>
+<h3 id="1-슬로우-쿼리-로그-활성화하기">1. <strong>슬로우 쿼리 로그 활성화하기</strong></h3>
+<p>슬로우 쿼리를 기록하기 위해 MySQL 설정을 조정합니다.</p>
+<h4 id="방법-1-mycnf-또는-myini-파일-수정">방법 1: <code>my.cnf</code> 또는 <code>my.ini</code> 파일 수정</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[mysqld]</span>
+</span></span><span class="line"><span class="cl"><span class="na">slow_query_log</span> <span class="o">=</span> <span class="s">1</span>
+</span></span><span class="line"><span class="cl"><span class="na">slow_query_log_file</span> <span class="o">=</span> <span class="s">/var/log/mysql/slow.log</span>
+</span></span><span class="line"><span class="cl"><span class="na">long_query_time</span> <span class="o">=</span> <span class="s">1</span>
+</span></span><span class="line"><span class="cl"><span class="na">log_queries_not_using_indexes</span> <span class="o">=</span> <span class="s">1</span>
+</span></span></code></pre></div><ul>
+<li><code>slow_query_log</code>: 슬로우 쿼리 로그 기능 활성화</li>
+<li><code>slow_query_log_file</code>: 로그 파일 위치</li>
+<li><code>long_query_time</code>: 몇 초 이상 걸리는 쿼리를 느린 쿼리로 간주할지 설정 (초 단위)</li>
+<li><code>log_queries_not_using_indexes</code>: 인덱스를 사용하지 않는 쿼리도 로그에 기록</li>
+</ul>
+<p>설정 후 MySQL을 재시작해야 반영됩니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 29 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Thu, 29 May 2025 20:20:45 &#43;0900">
+                Thu, 29 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/msa_trasaction/">msa에서 트랜잭션 처리 정책</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MSA(Microservices Architecture) 환경에서 서비스 간 호출 중 오류가 발생했을 때의 <strong>트랜잭션 처리 정책</strong>은 일반적으로 <strong>분산 트랜잭션</strong> 또는 <strong>사후 보상 트랜잭션</strong>(Compensating Transaction) 방식으로 구분되며, 다음과 같은 용어와 정책으로 설명됩니다.</p>
+<hr>
+<h3 id="1-saga-패턴">1. <strong>SAGA 패턴</strong></h3>
+<ul>
+<li>
+<p><strong>정의</strong>: MSA에서 가장 널리 쓰이는 트랜잭션 처리 패턴으로, 각 서비스의 로컬 트랜잭션이 성공하면 다음 서비스를 호출하고, 중간에 실패 시 이전에 수행된 작업을 <strong>보상 작업(Compensation)</strong> 으로 되돌립니다.</p>
+</li>
+<li>
+<p><strong>종류</strong>:</p>
+<ul>
+<li><strong>Choreography 기반</strong>: 서비스들이 이벤트를 발행하고 서로 구독하면서 트랜잭션을 이어감. 오케스트레이터가 없음.</li>
+<li><strong>Orchestration 기반</strong>: 중앙 컨트롤러(오케스트레이터)가 전체 트랜잭션 흐름을 제어.</li>
+</ul>
+</li>
+<li>
+<p><strong>예시</strong>: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 26 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Mon, 26 May 2025 20:20:45 &#43;0900">
+                Mon, 26 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -770,336 +901,6 @@
               <relative-time datetime=" Wed, 21 May 2025 19:20:45 &#43;0900" class="no-wrap"
                 title=" Wed, 21 May 2025 19:20:45 &#43;0900">
                 Wed, 21 May 2025 19:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/redis/redis_pub_sub_stream/">Redis에서 pub/sub, 그리고 Redis Stream</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Redis에서 <code>Pub/Sub</code>(Publish/Subscribe) 기능을 사용하는 방법은 비교적 간단합니다. 아래는 기본적인 사용 방법과 예제입니다.</p>
-<hr>
-<h2 id="-개념-요약">🧠 개념 요약</h2>
-<p>Redis Pub/Sub는 <strong>메시지 브로커</strong> 역할을 수행하여, 한 클라이언트가 메시지를 발행(Publish)하면, 해당 채널을 구독(Subscribe)하고 있는 다른 클라이언트들이 실시간으로 그 메시지를 받게 됩니다.</p>
-<ul>
-<li><strong>Publisher</strong>: 채널에 메시지를 발행하는 클라이언트</li>
-<li><strong>Subscriber</strong>: 특정 채널을 구독하고 메시지를 받는 클라이언트</li>
-</ul>
-<hr>
-<h2 id="-명령어">🛠 명령어</h2>
-<ul>
-<li><code>PUBLISH &lt;channel&gt; &lt;message&gt;</code>: 메시지를 발행</li>
-<li><code>SUBSCRIBE &lt;channel&gt; [&lt;channel&gt; ...]</code>: 채널 구독</li>
-<li><code>UNSUBSCRIBE [&lt;channel&gt; ...]</code>: 채널 구독 취소</li>
-</ul>
-<hr>
-<h2 id="-예제-cli-기준">💻 예제 (CLI 기준)</h2>
-<h3 id="터미널-1--subscriber">터미널 1 – Subscriber</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
-</span></span><span class="line"><span class="cl">&gt; SUBSCRIBE news
-</span></span></code></pre></div><h3 id="터미널-2--publisher">터미널 2 – Publisher</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
-</span></span><span class="line"><span class="cl">&gt; PUBLISH news <span class="s2">&#34;Hello from Redis!&#34;</span>
-</span></span></code></pre></div><p>Subscriber는 다음과 같은 응답을 받습니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 21 May 2025 14:20:45 &#43;0900" class="no-wrap"
-                title=" Wed, 21 May 2025 14:20:45 &#43;0900">
-                Wed, 21 May 2025 14:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/grafana_dashboard/">Grafana DashBoard</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="grafana-dashboard-설정">Grafana Dashboard 설정</h1>
-<pre tabindex="0"><code>{
-  &#34;annotations&#34;: {
-    &#34;list&#34;: [
-      {
-        &#34;builtIn&#34;: 1,
-        &#34;datasource&#34;: {
-          &#34;type&#34;: &#34;grafana&#34;,
-          &#34;uid&#34;: &#34;-- Grafana --&#34;
-        },
-        &#34;enable&#34;: true,
-        &#34;hide&#34;: true,
-        &#34;iconColor&#34;: &#34;rgba(0, 211, 255, 1)&#34;,
-        &#34;name&#34;: &#34;Annotations &amp; Alerts&#34;,
-        &#34;type&#34;: &#34;dashboard&#34;
-      }
-    ]
-  },
-  &#34;editable&#34;: false,
-  &#34;fiscalYearStartMonth&#34;: 0,
-  &#34;graphTooltip&#34;: 0,
-  &#34;links&#34;: [],
-  &#34;liveNow&#34;: false,
-  &#34;panels&#34;: [
-    {
-      &#34;datasource&#34;: {
-        &#34;type&#34;: &#34;prometheus&#34;,
-        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-      },
-      &#34;gridPos&#34;: {
-        &#34;h&#34;: 3,
-        &#34;w&#34;: 24,
-        &#34;x&#34;: 0,
-        &#34;y&#34;: 0
-      },
-      &#34;id&#34;: 1,
-      &#34;targets&#34;: [
-        {
-          &#34;datasource&#34;: {
-            &#34;type&#34;: &#34;prometheus&#34;,
-            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-          },
-          &#34;refId&#34;: &#34;A&#34;
-        }
-      ],
-      &#34;type&#34;: &#34;welcome&#34;
-    },
-    {
-      &#34;datasource&#34;: {
-        &#34;type&#34;: &#34;prometheus&#34;,
-        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-      },
-      &#34;gridPos&#34;: {
-        &#34;h&#34;: 9,
-        &#34;w&#34;: 24,
-        &#34;x&#34;: 0,
-        &#34;y&#34;: 3
-      },
-      &#34;id&#34;: 123123,
-      &#34;targets&#34;: [
-        {
-          &#34;datasource&#34;: {
-            &#34;type&#34;: &#34;prometheus&#34;,
-            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-          },
-          &#34;refId&#34;: &#34;A&#34;
-        }
-      ],
-      &#34;type&#34;: &#34;gettingstarted&#34;
-    },
-    {
-      &#34;datasource&#34;: {
-        &#34;type&#34;: &#34;prometheus&#34;,
-        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-      },
-      &#34;gridPos&#34;: {
-        &#34;h&#34;: 15,
-        &#34;w&#34;: 12,
-        &#34;x&#34;: 0,
-        &#34;y&#34;: 12
-      },
-      &#34;id&#34;: 3,
-      &#34;links&#34;: [],
-      &#34;options&#34;: {
-        &#34;folderUID&#34;: &#34;&#34;,
-        &#34;includeVars&#34;: false,
-        &#34;keepTime&#34;: false,
-        &#34;maxItems&#34;: 30,
-        &#34;query&#34;: &#34;&#34;,
-        &#34;showHeadings&#34;: true,
-        &#34;showRecentlyViewed&#34;: true,
-        &#34;showSearch&#34;: false,
-        &#34;showStarred&#34;: true,
-        &#34;tags&#34;: []
-      },
-      &#34;pluginVersion&#34;: &#34;10.3.3&#34;,
-      &#34;targets&#34;: [
-        {
-          &#34;datasource&#34;: {
-            &#34;type&#34;: &#34;prometheus&#34;,
-            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-          },
-          &#34;refId&#34;: &#34;A&#34;
-        }
-      ],
-      &#34;title&#34;: &#34;Dashboards&#34;,
-      &#34;type&#34;: &#34;dashlist&#34;
-    },
-    {
-      &#34;datasource&#34;: {
-        &#34;type&#34;: &#34;prometheus&#34;,
-        &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-      },
-      &#34;gridPos&#34;: {
-        &#34;h&#34;: 15,
-        &#34;w&#34;: 12,
-        &#34;x&#34;: 12,
-        &#34;y&#34;: 12
-      },
-      &#34;id&#34;: 4,
-      &#34;links&#34;: [],
-      &#34;options&#34;: {
-        &#34;feedUrl&#34;: &#34;https://grafana.com/blog/news.xml&#34;,
-        &#34;showImage&#34;: true
-      },
-      &#34;targets&#34;: [
-        {
-          &#34;datasource&#34;: {
-            &#34;type&#34;: &#34;prometheus&#34;,
-            &#34;uid&#34;: &#34;d594a822-806b-41e9-8c74-135eb41505a2&#34;
-          },
-          &#34;refId&#34;: &#34;A&#34;
-        }
-      ],
-      &#34;title&#34;: &#34;Latest from the blog&#34;,
-      &#34;type&#34;: &#34;news&#34;
-    }
-  ],
-  &#34;refresh&#34;: &#34;&#34;,
-  &#34;schemaVersion&#34;: 39,
-  &#34;tags&#34;: [],
-  &#34;templating&#34;: {
-    &#34;list&#34;: []
-  },
-  &#34;time&#34;: {
-    &#34;from&#34;: &#34;now-6h&#34;,
-    &#34;to&#34;: &#34;now&#34;
-  },
-  &#34;timepicker&#34;: {
-    &#34;hidden&#34;: true,
-    &#34;refresh_intervals&#34;: [
-      &#34;5s&#34;,
-      &#34;10s&#34;,
-      &#34;30s&#34;,
-      &#34;1m&#34;,
-      &#34;5m&#34;,
-      &#34;15m&#34;,
-      &#34;30m&#34;,
-      &#34;1h&#34;,
-      &#34;2h&#34;,
-      &#34;1d&#34;
-    ],
-    &#34;time_options&#34;: [
-      &#34;5m&#34;,
-      &#34;15m&#34;,
-      &#34;1h&#34;,
-      &#34;6h&#34;,
-      &#34;12h&#34;,
-      &#34;24h&#34;,
-      &#34;2d&#34;,
-      &#34;7d&#34;,
-      &#34;30d&#34;
-    ],
-    &#34;type&#34;: &#34;timepicker&#34;
-  },
-  &#34;timezone&#34;: &#34;browser&#34;,
-  &#34;title&#34;: &#34;Home&#34;,
-  &#34;version&#34;: 0,
-  &#34;weekStart&#34;: &#34;&#34;
-}
-</code></pre><p>이 JSON은 <strong>Grafana 대시보드 설정 파일</strong>입니다. 구체적으로는 Grafana에서 &ldquo;Home&quot;이라는 이름의 기본 대시보드를 정의한 구성입니다. 아래에 주요 항목들을 설명드리겠습니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 20 May 2025 20:20:45 &#43;0900" class="no-wrap"
-                title=" Tue, 20 May 2025 20:20:45 &#43;0900">
-                Tue, 20 May 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/video_streaming_tool/">동영상 스트리밍에 사용되는 주요 기술 및 툴</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>동영상 스트리밍에 사용되는 주요 기술 및 툴은 다양한 목적(예: 실시간 스트리밍, VOD, 콘텐츠 전송, 인코딩, 플레이어 구현 등)에 따라 구분됩니다. 아래에 주요 기술과 툴을 영역별로 정리해드릴게요.</p>
-<hr>
-<h3 id="1-비디오-인코딩-및-트랜스코딩">1. <strong>비디오 인코딩 및 트랜스코딩</strong></h3>
-<ul>
-<li><strong>FFmpeg</strong>: 오픈소스 멀티미디어 처리 도구. 인코딩, 디코딩, 트랜스코딩, 포맷 변경, 필터링 등에 사용.</li>
-<li><strong>x264 / x265</strong>: 각각 H.264, H.265 표준 인코딩 라이브러리.</li>
-<li><strong>AWS Elemental MediaConvert</strong>: AWS에서 제공하는 클라우드 기반 트랜스코딩 서비스.</li>
-</ul>
-<hr>
-<h3 id="2-스트리밍-프로토콜">2. <strong>스트리밍 프로토콜</strong></h3>
-<ul>
-<li><strong>HLS (HTTP Live Streaming)</strong>: 애플이 개발. 대부분의 플랫폼에서 지원되며, 세그먼트 방식.</li>
-<li><strong>DASH (Dynamic Adaptive Streaming over HTTP)</strong>: MPEG 표준 기반으로, HLS와 비슷하지만 플랫폼 독립적.</li>
-<li><strong>RTMP (Real-Time Messaging Protocol)</strong>: 주로 라이브 방송에 사용되며, YouTube Live, Twitch 등에서 여전히 활용.</li>
-<li><strong>WebRTC</strong>: 지연이 극히 낮은 실시간 양방향 통신에 최적화된 스트리밍 프로토콜.</li>
-</ul>
-<hr>
-<h3 id="3-콘텐츠-전송-네트워크-cdn">3. <strong>콘텐츠 전송 네트워크 (CDN)</strong></h3>
-<ul>
-<li><strong>Cloudflare Stream / CDN</strong>: 빠르고 안정적인 콘텐츠 전송을 위한 글로벌 네트워크.</li>
-<li><strong>AWS CloudFront</strong>, <strong>Akamai</strong>, <strong>Fastly</strong>: 대형 스트리밍 서비스에서 많이 사용.</li>
-</ul>
-<hr>
-<h3 id="4-플레이어-및-프론트엔드-도구">4. <strong>플레이어 및 프론트엔드 도구</strong></h3>
-<ul>
-<li><strong>Video.js</strong>: HTML5 기반의 오픈소스 비디오 플레이어.</li>
-<li><strong>Shaka Player</strong>: 구글이 만든 MPEG-DASH 및 HLS 지원 오픈소스 플레이어.</li>
-<li><strong>HLS.js</strong>: JavaScript 기반 HLS 재생 라이브러리.</li>
-<li><strong>ExoPlayer</strong> (Android), <strong>AVPlayer</strong> (iOS): 모바일 앱용 기본 플레이어 SDK.</li>
-</ul>
-<hr>
-<h3 id="5-라이브-스트리밍-플랫폼서비스">5. <strong>라이브 스트리밍 플랫폼/서비스</strong></h3>
-<ul>
-<li><strong>OBS Studio (Open Broadcaster Software)</strong>: 무료 라이브 방송 도구, Twitch, YouTube에 방송 가능.</li>
-<li><strong>StreamYard, Restream, Wirecast</strong>: 라이브 멀티플랫폼 스트리밍 툴.</li>
-<li><strong>Wowza Streaming Engine</strong>: 엔터프라이즈급 라이브 및 VOD 스트리밍 서버.</li>
-</ul>
-<hr>
-<h3 id="6-drm-디지털-저작권-관리-및-보안">6. <strong>DRM (디지털 저작권 관리) 및 보안</strong></h3>
-<ul>
-<li><strong>Widevine (Google)</strong>, <strong>PlayReady (Microsoft)</strong>, <strong>FairPlay (Apple)</strong>: 각 플랫폼용 DRM 시스템.</li>
-<li><strong>AES-128 Encryption</strong>: HLS와 함께 사용되는 콘텐츠 암호화 표준.</li>
-</ul>
-<hr>
-<h3 id="7-모니터링-및-분석">7. <strong>모니터링 및 분석</strong></h3>
-<ul>
-<li><strong>Mux</strong>, <strong>Conviva</strong>, <strong>Bitmovin Analytics</strong>: 사용자 경험, 버퍼링, 시청 행동 분석 등 제공.</li>
-<li><strong>Prometheus + Grafana</strong>: 서버 측 스트리밍 성능 및 지표 모니터링.</li>
-</ul>
-<hr>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sun, 18 May 2025 20:20:45 &#43;0900" class="no-wrap"
-                title=" Sun, 18 May 2025 20:20:45 &#43;0900">
-                Sun, 18 May 2025 20:20:45 &#43;0900
               </relative-time>
             </div>
           </div>
