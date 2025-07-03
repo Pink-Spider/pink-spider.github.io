@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 03 Jul 2025 10:49:26 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 03 Jul 2025 10:50:36 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Java Pathfinder 사용법</title>
@@ -16,7 +16,7 @@
       <description>&lt;p&gt;아래에 &lt;strong&gt;Java Pathfinder (JPF)&lt;/strong&gt; 사용하는 방법을 자세히 안내드립니다.&#xA;Java Pathfinder는 &lt;strong&gt;자바 프로그램의 모델 체킹(model checking) 도구&lt;/strong&gt;로, 프로그램의 상태 공간을 탐색하여 버그나 데드락 등을 찾는 데 활용됩니다.&lt;/p&gt;&#xA;&lt;p&gt;아래 내용을 단계별로 설명드릴게요.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-1-java-pathfinderjpf란&#34;&gt;🧭 1. Java Pathfinder(JPF)란?&lt;/h2&gt;&#xA;&lt;p&gt;**Java Pathfinder (JPF)**는 자바 프로그램을 실행하며 상태공간을 체계적으로 탐색하는 툴입니다.&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;주요 기능&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;멀티스레딩 버그 탐지&lt;/li&gt;&#xA;&lt;li&gt;Assertion 위반 검출&lt;/li&gt;&#xA;&lt;li&gt;Deadlock 탐지&lt;/li&gt;&#xA;&lt;li&gt;Non-deterministic 동작 검증&lt;/li&gt;&#xA;&lt;li&gt;Symbolic execution (jpf-symbc) 지원&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-2-설치&#34;&gt;⚙️ 2. 설치&lt;/h2&gt;&#xA;&lt;p&gt;JPF는 GitHub 저장소에서 직접 빌드하는 것이 일반적입니다.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Mutation Testing in Java, Pittest</title>
+      <title>Mutation Testing in Java, Pitest</title>
       <link>https://pink-spider.github.io/post/spring/pitest_mutation_test/</link>
       <pubDate>Thu, 03 Jul 2025 10:44:24 +0900</pubDate>
       <guid>https://pink-spider.github.io/post/spring/pitest_mutation_test/</guid>
