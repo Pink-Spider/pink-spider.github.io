@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">85</span>
+              <span class="Counter">86</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">85</span>
+      <span class="Counter ">86</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,80 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/filter_interceptor/">Boot에서 filter와 interceptor의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Spring Boot에서 <strong>Filter</strong>와 <strong>Interceptor</strong>는 모두 요청(Request)과 응답(Response)을 가로채서 처리할 수 있게 해주는 기능이지만, <strong>역할, 실행 시점, 적용 범위</strong>에서 차이가 있습니다. 아래에서 간단 + 예시와 함께 정리해볼게요.</p>
+<hr>
+<h2 id="-1-filter-서블릿-필터">🔹 1. Filter (서블릿 필터)</h2>
+<h3 id="-개요">✅ 개요</h3>
+<ul>
+<li><strong>Servlet 스펙에 정의된 기능</strong></li>
+<li>Spring보다 더 <strong>하위 레벨</strong></li>
+<li>DispatcherServlet 이전에 실행됨</li>
+</ul>
+<h3 id="-사용-예시">✅ 사용 예시</h3>
+<ul>
+<li>인증, 인코딩, 로깅, XSS 방어</li>
+<li>공통 전처리/후처리</li>
+</ul>
+<h3 id="-예제">✅ 예제</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Filter: 요청 전&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">chain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Filter: 응답 후&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-2-interceptor-스프링-인터셉터">🔹 2. Interceptor (스프링 인터셉터)</h2>
+<h3 id="-개요-1">✅ 개요</h3>
+<ul>
+<li><strong>Spring MVC의 기능</strong></li>
+<li>DispatcherServlet 이후에 동작</li>
+<li>주로 <strong>컨트롤러 진입 전/후</strong>에 로직 적용</li>
+</ul>
+<h3 id="-사용-예시-1">✅ 사용 예시</h3>
+<ul>
+<li>로그인 체크</li>
+<li>권한 검사</li>
+<li>요청 로깅</li>
+<li>공통 응답 가공</li>
+</ul>
+<h3 id="-예제-1">✅ 예제</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyInterceptor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">HandlerInterceptor</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">preHandle</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Interceptor: 컨트롤러 호출 전&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// false면 컨트롤러로 안 넘어감</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>그리고 등록은 이렇게 해야 해요:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 08:15:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 08:15:45 &#43;0900">
+                Wed, 26 Mar 2025 08:15:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1004,59 +1078,6 @@ key, iv를 만드는 방법도 다양했습니다.</li>
               <relative-time datetime=" Thu, 20 Mar 2025 16:18:45 &#43;0900" class="no-wrap"
                 title=" Thu, 20 Mar 2025 16:18:45 &#43;0900">
                 Thu, 20 Mar 2025 16:18:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/network/ssl/">내 우분투 서버에 SSL 무료 설치하기</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><a href="https://zerossl.com"><img src="https://img.shields.io/badge/ssl-free-lightgreen" alt="GoDoc"></a></p>
-<h1 id="내-우분투-서버에-ssl-무료-설치하기">내 우분투 서버에 SSL 무료 설치하기</h1>
-<ul>
-<li>SSL 발급 사이트 : <a href="https://zerossl.com/">https://zerossl.com/</a>  다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다..</li>
-<li>내가 쓰는 도메인 서비스 업체 : whois</li>
-</ul>
-<h2 id="ssl-설치-절차">SSL 설치 절차</h2>
-<ul>
-<li>무료 SSL의 제약사항은 별도로 알아보기로 하고</li>
-<li>기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 <!-- raw HTML omitted -->
-인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다..</li>
-<li>이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다.</li>
-</ul>
-<h3 id="도메인-소유주임을-확인-받기">도메인 소유주임을 확인 받기</h3>
-<ol>
-<li>ZeroSSL에 회원가입
-<img src="./images/ssl/zerossl_dashboard.png" alt="image">
-<!-- raw HTML omitted --></li>
-<li>SSL Certificate Setup 에서 각 항목 채워줍니다.</li>
-</ol>
-<ul>
-<li>Domains</li>
-<li>Validity : 90-Day Certificate 로 해야 무료</li>
-<li>Add-Ons : 아무것도 선택하지 않아야 무료 가능</li>
-<li>CSR &amp; Contact : Auto-Generate CSR 활성화</li>
-<li>Finalize Your Order: Free 선택</li>
-</ul>
-<p><img src="./images/ssl/zero_new_certificate.png" alt="image"></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Sat, 01 Mar 2025 15:19:58 &#43;0900" class="no-wrap"
-                title=" Sat, 01 Mar 2025 15:19:58 &#43;0900">
-                Sat, 01 Mar 2025 15:19:58 &#43;0900
               </relative-time>
             </div>
           </div>

@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">85</span>
+              <span class="Counter">86</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">85</span>
+      <span class="Counter ">86</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,113 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/cqrs/">CQRS</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>CQRS (Command Query Responsibility Segregation)는 **명령(Command)**과 **조회(Query)**의 책임을 분리하는 소프트웨어 아키텍처 패턴입니다. 이 패턴은 <strong>읽기와 쓰기의 모델을 분리함으로써 확장성과 유지보수성을 향상</strong>시키는 데 목적이 있습니다.</p>
+<hr>
+<h2 id="-핵심-개념">🔹 핵심 개념</h2>
+<ol>
+<li>
+<p><strong>Command (명령)</strong></p>
+<ul>
+<li>데이터를 변경하는 요청 (예: 생성, 수정, 삭제)</li>
+<li>예: <code>createUser()</code>, <code>updateOrderStatus()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Query (조회)</strong></p>
+<ul>
+<li>데이터를 조회하는 요청 (단순히 읽기만 함, 변경 X)</li>
+<li>예: <code>getUserById()</code>, <code>getOrderListByUser()</code></li>
+</ul>
+</li>
+<li>
+<p><strong>책임 분리</strong></p>
+<ul>
+<li><strong>쓰기 모델(Command Model)</strong>: 도메인 로직과 유효성 검사를 포함</li>
+<li><strong>읽기 모델(Query Model)</strong>: 주로 DTO로 구성되며, 성능 최적화를 위한 전용 구조를 가짐 (예: denormalized view)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-전통적인-crud-방식과의-차이점">🔹 전통적인 CRUD 방식과의 차이점</h2>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>전통적 CRUD</th>
+          <th>CQRS</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>모델 공유</td>
+          <td>읽기/쓰기 동일한 모델 사용</td>
+          <td>읽기와 쓰기 모델 분리</td>
+      </tr>
+      <tr>
+          <td>확장성</td>
+          <td>제한적</td>
+          <td>읽기/쓰기 각각 확장 가능</td>
+      </tr>
+      <tr>
+          <td>복잡도</td>
+          <td>낮음</td>
+          <td>상대적으로 높음</td>
+      </tr>
+      <tr>
+          <td>성능 최적화</td>
+          <td>어렵다</td>
+          <td>읽기에 최적화된 구조 가능</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-사용-예시">🔹 사용 예시</h2>
+<ul>
+<li><strong>이커머스 시스템</strong>: 주문은 복잡한 비즈니스 로직이 많고, 주문 내역 조회는 빠른 응답이 중요할 때</li>
+<li><strong>마이크로서비스</strong>: 서비스별 책임 분리를 할 때 Command/Query 모델을 각각 다른 서비스로 분리 가능</li>
+</ul>
+<hr>
+<h2 id="-장점">🔹 장점</h2>
+<ul>
+<li><strong>확장성 향상</strong>: 읽기와 쓰기를 독립적으로 확장 가능</li>
+<li><strong>성능 최적화 용이</strong>: 조회 전용 모델을 캐시나 비정규화된 DB로 구성 가능</li>
+<li><strong>복잡한 도메인 모델의 단순화</strong>: Command 모델에만 복잡한 도메인 규칙을 적용 가능</li>
+</ul>
+<hr>
+<h2 id="-단점">🔹 단점</h2>
+<ul>
+<li><strong>복잡도 증가</strong>: 코드 구조와 운영 환경이 복잡해짐</li>
+<li><strong>데이터 일관성 처리 필요</strong>: Command/Query 모델 간 동기화 필요 (이벤트 기반 처리 등)</li>
+<li><strong>러닝 커브</strong>: 도입 시 개발자의 이해도 요구</li>
+</ul>
+<hr>
+<h2 id="-cqrs와-event-sourcing의-조합">🔹 CQRS와 Event Sourcing의 조합</h2>
+<p>CQRS는 종종 <strong>Event Sourcing</strong>과 함께 사용됩니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Fri, 09 May 2025 09:20:45 &#43;0900" class="no-wrap"
+                title=" Fri, 09 May 2025 09:20:45 &#43;0900">
+                Fri, 09 May 2025 09:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1033,90 +1140,6 @@ class Solution {
               <relative-time datetime=" Thu, 24 Apr 2025 20:48:45 &#43;0900" class="no-wrap"
                 title=" Thu, 24 Apr 2025 20:48:45 &#43;0900">
                 Thu, 24 Apr 2025 20:48:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/virtual_thread/">Virtual Thread</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><strong>Virtual Thread</strong>는 Java 19부터 도입되고 Java 21에서 정식으로 안정화된 <strong>Project Loom</strong>의 핵심 기능 중 하나로, 기존의 Java 플랫폼에서 사용되던 <strong>platform thread</strong>(또는 OS thread)와는 다른 개념입니다. Virtual thread는 **경량 스레드(lightweight thread)**로서, 수십만 개의 스레드를 동시에 실행할 수 있도록 설계되었습니다.</p>
-<hr>
-<h2 id="1-virtual-thread의-핵심-개념">1. Virtual Thread의 핵심 개념</h2>
-<h3 id="기존-platform-thread-vs-virtual-thread">기존 Platform Thread vs Virtual Thread</h3>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>Platform Thread</th>
-          <th>Virtual Thread</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>구현</td>
-          <td>OS 레벨에서 관리</td>
-          <td>JVM에서 직접 관리</td>
-      </tr>
-      <tr>
-          <td>생성 비용</td>
-          <td>무겁고 리소스 많이 사용</td>
-          <td>가볍고 거의 무제한 생성 가능</td>
-      </tr>
-      <tr>
-          <td>컨텍스트 스위칭</td>
-          <td>OS 스케줄러에 의존</td>
-          <td>JVM 스케줄러 사용 (빠름)</td>
-      </tr>
-      <tr>
-          <td>동시성 처리</td>
-          <td>제한적인 동시성</td>
-          <td>고밀도 동시성 처리 가능</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="2-주요-특징">2. 주요 특징</h2>
-<h3 id="경량-스레드">경량 스레드</h3>
-<ul>
-<li>Virtual thread는 메모리 사용량이 훨씬 적고 생성 속도도 빠릅니다.</li>
-<li>1:1 매핑이 아닌 M:N 구조로, 여러 virtual thread가 하나의 OS thread를 공유합니다.</li>
-</ul>
-<h3 id="차단-io와의-통합">차단 I/O와의 통합</h3>
-<ul>
-<li>기존에는 <code>Thread.sleep()</code>이나 <code>InputStream.read()</code> 같은 blocking I/O 호출이 OS thread를 점유하여 비효율적이었음.</li>
-<li>Virtual thread에서는 이러한 호출이 발생하면 JVM이 해당 virtual thread를 <strong>parking</strong>하고, 다른 작업을 실행시켜 병목을 피함.</li>
-</ul>
-<h3 id="코드-스타일-유지">코드 스타일 유지</h3>
-<ul>
-<li>기존의 <code>CompletableFuture</code>, <code>Reactive</code> API 없이도 <strong>전통적인 동기 코드 스타일</strong>을 유지하면서도 고성능 비동기 처리가 가능.</li>
-</ul>
-<hr>
-<h2 id="3-사용-예시">3. 사용 예시</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello from &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Thread</span><span class="w"> </span><span class="n">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Thread</span><span class="p">.</span><span class="na">ofVirtual</span><span class="p">().</span><span class="na">start</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><p>혹은 <code>Executors</code>를 통해 수많은 스레드 처리도 가능:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 24 Apr 2025 11:26:42 &#43;0900" class="no-wrap"
-                title=" Thu, 24 Apr 2025 11:26:42 &#43;0900">
-                Thu, 24 Apr 2025 11:26:42 &#43;0900
               </relative-time>
             </div>
           </div>

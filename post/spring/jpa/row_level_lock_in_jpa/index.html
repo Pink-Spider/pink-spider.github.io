@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Java Pathfinder 사용법 | Pink Spider
+    JPA사용시 row level lock 적용 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,29 +27,27 @@
   
   <meta
   name="description"
-  content="아래에 Java Pathfinder (JPF) 사용하는 방법을 자세히 안내드립니다. Java Pathfinder는 자바 프로그램의 모델 체킹(model checking) 도구로, 프로그램의 상태 공간을 탐색하여 버그나 데드락 등을 찾는 데 활용됩니다.
-아래 내용을 단계별로 설명드릴게요.
-🧭 1. Java Pathfinder(JPF)란? **Java Pathfinder (JPF)**는 자바 프로그램을 실행하며 상태공간을 체계적으로 탐색하는 툴입니다.
-주요 기능
-멀티스레딩 버그 탐지 Assertion 위반 검출 Deadlock 탐지 Non-deterministic 동작 검증 Symbolic execution (jpf-symbc) 지원 ⚙️ 2. 설치 JPF는 GitHub 저장소에서 직접 빌드하는 것이 일반적입니다.
+  content="Spring Boot 3 &#43; JPA &#43; MySQL 환경에서 특정 테이블에 대해 find 및 save 작업 시 row-level lock만 사용하고 table-level lock을 피하고 싶을 경우, 다음과 같은 전략을 사용할 수 있습니다.
+✅ 핵심 개념 요약 MySQL InnoDB 스토리지 엔진은 기본적으로 row-level lock을 지원하며, JPA의 기본 동작은 row-level lock을 사용합니다.
+그러나 다음 조건을 만족하지 않으면 innoDB라도 table lock이 발생할 수 있습니다:
+WHERE 절에 인덱스를 잘 사용하지 못하거나 락 모드가 명시되지 않았거나 UPDATE나 SELECT ... FOR UPDATE에서 범위 검색을 제대로 구성하지 않았거나 ✅ 전제 조건: 테이블이 InnoDB 엔진인지 확인 SHOW TABLE STATUS WHERE Name = &#39;your_table_name&#39;; Engine 컬럼이 InnoDB여야 row-level lock이 적용됩니다. 만약 MyISAM이면 row-level lock이 불가능하므로 반드시 InnoDB로 변경해야 합니다: ALTER TABLE your_table_name ENGINE = InnoDB; ✅ JPA에서 row-level locking만 적용하기 1. @Lock(LockModeType.PESSIMISTIC_WRITE) 또는 @Lock(LockModeType.PESSIMISTIC_READ) @Repository public interface OrderRepository extends JpaRepository&lt;Order, Long&gt; { @Lock(LockModeType.PESSIMISTIC_WRITE) @Query(&#34;SELECT o FROM Order o WHERE o.id = :id&#34;) Optional&lt;Order&gt; findByIdForUpdate(@Param(&#34;id&#34;) Long id); } PESSIMISTIC_WRITE는 SELECT ... FOR UPDATE를 실행하여 row-level exclusive lock을 겁니다. 이 쿼리는 해당 row를 다른 트랜잭션에서 변경하지 못하게 막습니다. PESSIMISTIC_READ는 공유락을 걸며 읽기는 허용하되 쓰기는 막습니다. ⚠️ 주의: 이 방법은 반드시 트랜잭션(@Transactional) 안에서 사용되어야 실제로 락이 적용됩니다.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/java_path_finder/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/jpa/row_level_lock_in_jpa/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Java Pathfinder 사용법 - Pink Spider"
+  content="JPA사용시 row level lock 적용 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="아래에 Java Pathfinder (JPF) 사용하는 방법을 자세히 안내드립니다. Java Pathfinder는 자바 프로그램의 모델 체킹(model checking) 도구로, 프로그램의 상태 공간을 탐색하여 버그나 데드락 등을 찾는 데 활용됩니다.
-아래 내용을 단계별로 설명드릴게요.
-🧭 1. Java Pathfinder(JPF)란? **Java Pathfinder (JPF)**는 자바 프로그램을 실행하며 상태공간을 체계적으로 탐색하는 툴입니다.
-주요 기능
-멀티스레딩 버그 탐지 Assertion 위반 검출 Deadlock 탐지 Non-deterministic 동작 검증 Symbolic execution (jpf-symbc) 지원 ⚙️ 2. 설치 JPF는 GitHub 저장소에서 직접 빌드하는 것이 일반적입니다.
+  content="Spring Boot 3 &#43; JPA &#43; MySQL 환경에서 특정 테이블에 대해 find 및 save 작업 시 row-level lock만 사용하고 table-level lock을 피하고 싶을 경우, 다음과 같은 전략을 사용할 수 있습니다.
+✅ 핵심 개념 요약 MySQL InnoDB 스토리지 엔진은 기본적으로 row-level lock을 지원하며, JPA의 기본 동작은 row-level lock을 사용합니다.
+그러나 다음 조건을 만족하지 않으면 innoDB라도 table lock이 발생할 수 있습니다:
+WHERE 절에 인덱스를 잘 사용하지 못하거나 락 모드가 명시되지 않았거나 UPDATE나 SELECT ... FOR UPDATE에서 범위 검색을 제대로 구성하지 않았거나 ✅ 전제 조건: 테이블이 InnoDB 엔진인지 확인 SHOW TABLE STATUS WHERE Name = &#39;your_table_name&#39;; Engine 컬럼이 InnoDB여야 row-level lock이 적용됩니다. 만약 MyISAM이면 row-level lock이 불가능하므로 반드시 InnoDB로 변경해야 합니다: ALTER TABLE your_table_name ENGINE = InnoDB; ✅ JPA에서 row-level locking만 적용하기 1. @Lock(LockModeType.PESSIMISTIC_WRITE) 또는 @Lock(LockModeType.PESSIMISTIC_READ) @Repository public interface OrderRepository extends JpaRepository&lt;Order, Long&gt; { @Lock(LockModeType.PESSIMISTIC_WRITE) @Query(&#34;SELECT o FROM Order o WHERE o.id = :id&#34;) Optional&lt;Order&gt; findByIdForUpdate(@Param(&#34;id&#34;) Long id); } PESSIMISTIC_WRITE는 SELECT ... FOR UPDATE를 실행하여 row-level exclusive lock을 겁니다. 이 쿼리는 해당 row를 다른 트랜잭션에서 변경하지 못하게 막습니다. PESSIMISTIC_READ는 공유락을 걸며 읽기는 허용하되 쓰기는 막습니다. ⚠️ 주의: 이 방법은 반드시 트랜잭션(@Transactional) 안에서 사용되어야 실제로 락이 적용됩니다.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -66,19 +64,18 @@
 />
 <meta
   property="og:title"
-  content="Java Pathfinder 사용법 - Pink Spider"
+  content="JPA사용시 row level lock 적용 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="아래에 Java Pathfinder (JPF) 사용하는 방법을 자세히 안내드립니다. Java Pathfinder는 자바 프로그램의 모델 체킹(model checking) 도구로, 프로그램의 상태 공간을 탐색하여 버그나 데드락 등을 찾는 데 활용됩니다.
-아래 내용을 단계별로 설명드릴게요.
-🧭 1. Java Pathfinder(JPF)란? **Java Pathfinder (JPF)**는 자바 프로그램을 실행하며 상태공간을 체계적으로 탐색하는 툴입니다.
-주요 기능
-멀티스레딩 버그 탐지 Assertion 위반 검출 Deadlock 탐지 Non-deterministic 동작 검증 Symbolic execution (jpf-symbc) 지원 ⚙️ 2. 설치 JPF는 GitHub 저장소에서 직접 빌드하는 것이 일반적입니다.
+  content="Spring Boot 3 &#43; JPA &#43; MySQL 환경에서 특정 테이블에 대해 find 및 save 작업 시 row-level lock만 사용하고 table-level lock을 피하고 싶을 경우, 다음과 같은 전략을 사용할 수 있습니다.
+✅ 핵심 개념 요약 MySQL InnoDB 스토리지 엔진은 기본적으로 row-level lock을 지원하며, JPA의 기본 동작은 row-level lock을 사용합니다.
+그러나 다음 조건을 만족하지 않으면 innoDB라도 table lock이 발생할 수 있습니다:
+WHERE 절에 인덱스를 잘 사용하지 못하거나 락 모드가 명시되지 않았거나 UPDATE나 SELECT ... FOR UPDATE에서 범위 검색을 제대로 구성하지 않았거나 ✅ 전제 조건: 테이블이 InnoDB 엔진인지 확인 SHOW TABLE STATUS WHERE Name = &#39;your_table_name&#39;; Engine 컬럼이 InnoDB여야 row-level lock이 적용됩니다. 만약 MyISAM이면 row-level lock이 불가능하므로 반드시 InnoDB로 변경해야 합니다: ALTER TABLE your_table_name ENGINE = InnoDB; ✅ JPA에서 row-level locking만 적용하기 1. @Lock(LockModeType.PESSIMISTIC_WRITE) 또는 @Lock(LockModeType.PESSIMISTIC_READ) @Repository public interface OrderRepository extends JpaRepository&lt;Order, Long&gt; { @Lock(LockModeType.PESSIMISTIC_WRITE) @Query(&#34;SELECT o FROM Order o WHERE o.id = :id&#34;) Optional&lt;Order&gt; findByIdForUpdate(@Param(&#34;id&#34;) Long id); } PESSIMISTIC_WRITE는 SELECT ... FOR UPDATE를 실행하여 row-level exclusive lock을 겁니다. 이 쿼리는 해당 row를 다른 트랜잭션에서 변경하지 못하게 막습니다. PESSIMISTIC_READ는 공유락을 걸며 읽기는 허용하되 쓰기는 막습니다. ⚠️ 주의: 이 방법은 반드시 트랜잭션(@Transactional) 안에서 사용되어야 실제로 락이 적용됩니다.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/java_path_finder/" />
-<meta property="og:site_name" content="Java Pathfinder 사용법" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/jpa/row_level_lock_in_jpa/" />
+<meta property="og:site_name" content="JPA사용시 row level lock 적용" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -86,7 +83,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-07-03 10:49:24 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-07-24 10:07:45 &#43;0900 KST" />
 
 
 
@@ -296,18 +293,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/java_path_finder/">Java Pathfinder 사용법</a></strong>
+                      href="https://pink-spider.github.io/post/spring/jpa/row_level_lock_in_jpa/">JPA사용시 row level lock 적용</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Thu, 03 Jul 2025 10:49:24 &#43;0900"
+                  Created <relative-time datetime="Thu, 24 Jul 2025 10:07:45 &#43;0900"
                     class="no-wrap">
-                    Thu, 03 Jul 2025 10:49:24 &#43;0900</relative-time>
+                    Thu, 24 Jul 2025 10:07:45 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Thu, 03 Jul 2025 10:49:26 &#43;0900"
+                  Modified <relative-time datetime="Thu, 24 Jul 2025 10:21:00 &#43;0900"
                     class="no-wrap">
-                    Thu, 03 Jul 2025 10:49:26 &#43;0900</relative-time>
+                    Thu, 24 Jul 2025 10:21:00 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -337,7 +334,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      886 Words
+                      925 Words
                     <span class="file-info-divider"></span>
                                         4 min
 
@@ -350,153 +347,117 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>아래에 <strong>Java Pathfinder (JPF)</strong> 사용하는 방법을 자세히 안내드립니다.
-Java Pathfinder는 <strong>자바 프로그램의 모델 체킹(model checking) 도구</strong>로, 프로그램의 상태 공간을 탐색하여 버그나 데드락 등을 찾는 데 활용됩니다.</p>
-<p>아래 내용을 단계별로 설명드릴게요.</p>
+                <article class="markdown-body entry-content container-lg"><p>Spring Boot 3 + JPA + MySQL 환경에서 특정 테이블에 대해 <code>find</code> 및 <code>save</code> 작업 시 <strong>row-level lock만 사용</strong>하고 <strong>table-level lock을 피하고 싶을 경우</strong>, 다음과 같은 전략을 사용할 수 있습니다.</p>
 <hr>
-<h2 id="-1-java-pathfinderjpf란">🧭 1. Java Pathfinder(JPF)란?</h2>
-<p>**Java Pathfinder (JPF)**는 자바 프로그램을 실행하며 상태공간을 체계적으로 탐색하는 툴입니다.</p>
-<p><strong>주요 기능</strong></p>
+<h2 id="-핵심-개념-요약">✅ 핵심 개념 요약</h2>
 <ul>
-<li>멀티스레딩 버그 탐지</li>
-<li>Assertion 위반 검출</li>
-<li>Deadlock 탐지</li>
-<li>Non-deterministic 동작 검증</li>
-<li>Symbolic execution (jpf-symbc) 지원</li>
+<li>
+<p><strong>MySQL InnoDB 스토리지 엔진</strong>은 기본적으로 <strong>row-level lock</strong>을 지원하며, <strong>JPA의 기본 동작은 row-level lock을 사용</strong>합니다.</p>
+</li>
+<li>
+<p>그러나 다음 조건을 만족하지 않으면 <strong>innoDB라도 table lock이 발생</strong>할 수 있습니다:</p>
+<ul>
+<li>WHERE 절에 인덱스를 잘 사용하지 못하거나</li>
+<li>락 모드가 명시되지 않았거나</li>
+<li><code>UPDATE</code>나 <code>SELECT ... FOR UPDATE</code>에서 범위 검색을 제대로 구성하지 않았거나</li>
+</ul>
+</li>
 </ul>
 <hr>
-<h2 id="-2-설치">⚙️ 2. 설치</h2>
-<p>JPF는 GitHub 저장소에서 직접 빌드하는 것이 일반적입니다.</p>
-<h3 id="21-git-설치">2.1 Git 설치</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/javapathfinder/jpf-core.git
-</span></span></code></pre></div><h3 id="22-환경-변수-설정">2.2 환경 변수 설정</h3>
-<p>예: <code>~/.bashrc</code> 또는 <code>~/.zshrc</code>에 추가</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">JPF_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/jpf-core
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JPF_HOME</span>/bin
-</span></span></code></pre></div><p>적용:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">source</span> ~/.bashrc
-</span></span></code></pre></div><h3 id="23-빌드">2.3 빌드</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> <span class="nv">$JPF_HOME</span>
-</span></span><span class="line"><span class="cl">ant
-</span></span></code></pre></div><p>빌드가 성공하면 <code>bin</code> 디렉토리에 실행 스크립트들이 생성됩니다.</p>
+<h2 id="-전제-조건-테이블이-innodb-엔진인지-확인">✅ 전제 조건: 테이블이 InnoDB 엔진인지 확인</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SHOW</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">STATUS</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;your_table_name&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li><code>Engine</code> 컬럼이 <code>InnoDB</code>여야 row-level lock이 적용됩니다.</li>
+<li>만약 <code>MyISAM</code>이면 <strong>row-level lock이 불가능</strong>하므로 반드시 InnoDB로 변경해야 합니다:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">your_table_name</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InnoDB</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-jpa에서-row-level-locking만-적용하기">✅ JPA에서 row-level locking만 적용하기</h2>
+<h3 id="1-locklockmodetypepessimistic_write-또는-locklockmodetypepessimistic_read">1. <code>@Lock(LockModeType.PESSIMISTIC_WRITE)</code> 또는 <code>@Lock(LockModeType.PESSIMISTIC_READ)</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Repository</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">OrderRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Order</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Lock</span><span class="p">(</span><span class="n">LockModeType</span><span class="p">.</span><span class="na">PESSIMISTIC_WRITE</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&#34;SELECT o FROM Order o WHERE o.id = :id&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByIdForUpdate</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li><code>PESSIMISTIC_WRITE</code>는 <code>SELECT ... FOR UPDATE</code>를 실행하여 row-level exclusive lock을 겁니다.</li>
+<li>이 쿼리는 해당 row를 다른 트랜잭션에서 변경하지 못하게 막습니다.</li>
+<li><code>PESSIMISTIC_READ</code>는 공유락을 걸며 읽기는 허용하되 쓰기는 막습니다.</li>
+</ul>
+<blockquote>
+<p>⚠️ 주의: 이 방법은 반드시 <strong>트랜잭션(@Transactional)</strong> 안에서 사용되어야 실제로 락이 적용됩니다.</p></blockquote>
 <hr>
-<h2 id="-3-jpf-구성-및-실행">🛠️ 3. JPF 구성 및 실행</h2>
-<p>JPF는 **설정 파일 (.jpf)**로 분석 대상을 정의합니다.</p>
-<p>아래에 샘플 예제를 보여드리겠습니다.</p>
-<h3 id="31-예제-java-클래스">3.1 예제 Java 클래스</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestAssertion</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">42</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">assert</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">43</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&#34;x must be 43!&#34;</span><span class="p">;</span><span class="w">
+<h3 id="2-트랜잭션-범위-명확하게-잡기">2. 트랜잭션 범위 명확하게 잡기</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">updateOrder</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">orderId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orderRepository</span><span class="p">.</span><span class="na">findByIdForUpdate</span><span class="p">(</span><span class="n">orderId</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                                     </span><span class="p">.</span><span class="na">orElseThrow</span><span class="p">(...);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">order</span><span class="p">.</span><span class="na">setStatus</span><span class="p">(</span><span class="s">&#34;SHIPPED&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">orderRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">order</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>이 코드는 AssertionError가 발생할 수 있습니다.</p>
-<h3 id="32-jpf-설정-파일testjpf">3.2 JPF 설정 파일(test.jpf)</h3>
-<p><code>test.jpf</code>를 프로젝트 루트에 작성:</p>
-<pre tabindex="0"><code>target=TestAssertion
-classpath=.
-</code></pre><p><strong>설명</strong></p>
-<ul>
-<li><code>target</code>: main 메서드를 가진 클래스 이름</li>
-<li><code>classpath</code>: 클래스 경로(컴파일된 .class 파일이 위치한 곳)</li>
+</span></span></span></code></pre></div><ul>
+<li>트랜잭션 안에서 find + update 작업을 하면 row-level lock이 보장됩니다.</li>
+<li>여러 row를 다루더라도, 쿼리가 적절한 인덱스를 사용하면 table lock 없이 작동합니다.</li>
 </ul>
 <hr>
-<h2 id="-33-실행">▶️ 3.3 실행</h2>
-<p>다음 명령어로 실행:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">jpf test.jpf
-</span></span></code></pre></div><p>출력 예시:</p>
-<pre tabindex="0"><code>====================================================== error  #1
-gov.nasa.jpf.vm.NoUncaughtExceptionProperty
-java.lang.AssertionError: x must be 43!
-</code></pre><p>즉, AssertionError를 탐지합니다.</p>
+<h2 id="-row-level-lock만-보장되도록-주의할-점">✅ row-level lock만 보장되도록 주의할 점</h2>
+<h3 id="-인덱스를-반드시-활용하라">📌 인덱스를 반드시 활용하라</h3>
+<ul>
+<li>WHERE 조건에 <strong>Primary Key</strong> 또는 <strong>Unique Index</strong>를 활용하지 않으면 MySQL이 full table scan 후 table-level lock을 걸 수도 있습니다.</li>
+</ul>
+<h3 id="-범위-검색시-for-update-주의">📌 범위 검색시 <code>FOR UPDATE</code> 주의</h3>
+<ul>
+<li><code>BETWEEN</code>, <code>&lt;</code>, <code>&gt;</code> 등의 조건이 있을 경우 MySQL이 <strong>gap lock</strong> 또는 <strong>next-key lock</strong>을 걸어버릴 수 있습니다.</li>
+<li>이를 피하려면 <code>SELECT ... FOR UPDATE</code>에서 <strong>정확한 key 조건</strong>을 사용하세요.</li>
+</ul>
 <hr>
-<h2 id="-4-동시성-버그-탐지-예제">🧩 4. 동시성 버그 탐지 예제</h2>
-<p>멀티스레딩 문제 예제를 보겠습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestRace</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">shared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+<h2 id="-참고-optimistic-lock-vs-pessimistic-lock">✅ 참고: Optimistic Lock vs Pessimistic Lock</h2>
+<ul>
+<li><strong>Optimistic Lock</strong>: <code>@Version</code> 필드를 이용, 충돌시 예외 발생. 락 자체는 없음.</li>
+<li><strong>Pessimistic Lock</strong>: 위에서 설명한 <code>@Lock(LockModeType.XXX)</code> 방식. row에 DB 락이 걸림.</li>
+</ul>
+<hr>
+<h2 id="-예시-entity">🧪 예시 Entity</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Entity</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Order</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Id</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">shared</span><span class="o">++</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">shared</span><span class="o">--</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Version</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">version</span><span class="p">;</span><span class="w"> </span><span class="c1">// Optimistic Lock용</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>이 경우에도 race condition 가능성이 있습니다.</p>
-<p>설정 파일 <code>race.jpf</code>:</p>
-<pre tabindex="0"><code>target=TestRace
-classpath=.
-</code></pre><p>실행:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">jpf race.jpf
-</span></span></code></pre></div><p>이렇게 하면 다양한 스케줄링 시나리오를 시도하여 동시성 문제를 탐색합니다.</p>
-<hr>
-<h2 id="-5-symbolic-executionjpf-symbc">🧠 5. Symbolic Execution(jpf-symbc)</h2>
-<p>심볼릭 실행을 통해 프로그램 입력 공간을 검증할 수도 있습니다.</p>
-<p>설치:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/javapathfinder/jpf-symbc.git
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> jpf-symbc
-</span></span><span class="line"><span class="cl">ant
-</span></span></code></pre></div><p><code>jpf.properties</code>에 <code>extensions</code> 설정 추가:</p>
-<pre tabindex="0"><code>extensions=gov.nasa.jpf.symbc.SymbolicListener
-</code></pre><p>이후, 심볼릭 분석을 위한 옵션을 <code>.jpf</code> 파일에 추가할 수 있습니다.</p>
-<hr>
-<h2 id="-6-주요-옵션-정리">📂 6. 주요 옵션 정리</h2>
-<p><code>*.jpf</code> 설정 파일에서 자주 쓰는 옵션:</p>
+</span></span></span></code></pre></div><hr>
+<h2 id="-요약">✅ 요약</h2>
 <table>
   <thead>
       <tr>
-          <th>옵션</th>
-          <th>설명</th>
+          <th>목적</th>
+          <th>적용 방식</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><code>target</code></td>
-          <td>메인 클래스 이름</td>
+          <td>row-level lock만 사용</td>
+          <td>JPA에서 <code>@Lock(LockModeType.PESSIMISTIC_WRITE)</code> + <code>@Transactional</code> 사용</td>
       </tr>
       <tr>
-          <td><code>classpath</code></td>
-          <td>클래스 경로</td>
+          <td>table-level lock 방지</td>
+          <td>InnoDB 사용 + PK 또는 인덱스를 통한 WHERE 조건 구성</td>
       </tr>
       <tr>
-          <td><code>listener</code></td>
-          <td>실행 시 이벤트 리스너 지정 (예: deadlock 검출)</td>
-      </tr>
-      <tr>
-          <td><code>search.class</code></td>
-          <td>탐색 알고리즘 (예: <code>*.DFSearch</code>, <code>*.DFSHeuristic</code>)</td>
-      </tr>
-      <tr>
-          <td><code>report.console.property_violation</code></td>
-          <td>콘솔에 위반사항 출력 여부</td>
-      </tr>
-      <tr>
-          <td><code>vm.storage.class</code></td>
-          <td>상태 저장 방식</td>
-      </tr>
-      <tr>
-          <td><code>symbolic.method</code></td>
-          <td>심볼릭 실행 대상 메서드</td>
-      </tr>
-      <tr>
-          <td><code>symbolic.debug</code></td>
-          <td>심볼릭 실행 디버깅 활성화</td>
+          <td>락 충돌 방지</td>
+          <td>비즈니스 요구에 따라 Pessimistic 또는 Optimistic Lock 병행 고려</td>
       </tr>
   </tbody>
 </table>
-<hr>
-<h2 id="-7-참고-리소스">💡 7. 참고 리소스</h2>
-<ul>
-<li><a href="https://github.com/javapathfinder/jpf-core">JPF GitHub</a></li>
-<li><a href="https://github.com/javapathfinder/jpf-core/wiki">JPF 사용 가이드</a></li>
-<li><a href="https://babelfish.arc.nasa.gov/trac/jpf">NASA JPF 홈페이지</a></li>
-</ul>
 <hr>
 </article>
               </div>
@@ -510,13 +471,11 @@ classpath=.
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jpa/row_level_lock_in_jpa/"> JPA사용시 row level lock 적용</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/pitest_mutation_test/">Mutation Testing in Java, Pitest&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/java_path_finder/">Java Pathfinder 사용법&nbsp;</a><div> »</div>
           
         </div>
       </div>
