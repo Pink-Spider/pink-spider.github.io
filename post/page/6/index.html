@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">86</span>
+              <span class="Counter">87</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">86</span>
+      <span class="Counter ">87</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,163 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/3/">코딩 테스트 합격자 되기 정리 #3</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="모의-테스트">모의 테스트</h1>
+<h2 id="두개-뽑아서-더하기">두개 뽑아서 더하기</h2>
+<pre tabindex="0"><code>public static int[] solution_03(int[] numbers) {
+    TreeSet&lt;Integer&gt; result = new TreeSet&lt;&gt;();
+
+    for (int i = 0; i &lt; numbers.length - 1; i++) {
+        for (int j = i + 1; j &lt; numbers.length; j++) {
+            result.add(numbers[i] + numbers[j]);
+        }
+    }
+
+    return result.stream().sorted().mapToInt(Integer::intValue).toArray();
+}
+</code></pre><ul>
+<li>stream 사용법</li>
+</ul>
+<h2 id="모의고사-수포자">모의고사 (수포자)</h2>
+<pre tabindex="0"><code>public static int[] solution_04(int[] answers) {
+    int[] pattern1 = {1, 2, 3, 4, 5};
+    int[] pattern2 = {2, 1, 2, 3, 2, 4, 2, 5};
+    int[] pattern3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+
+    int[] scores = new int[3];
+
+    for (int i = 0; i &lt; answers.length; i++) {
+        scores[0] += answers[i] == pattern1[i % pattern1.length % pattern1.length] ? 1 : 0;
+        scores[1] += answers[i] == pattern2[i % pattern2.length % pattern2.length] ? 1 : 0;
+        scores[2] += answers[i] == pattern3[i % pattern3.length % pattern3.length] ? 1 : 0;
+    }
+
+    int maxScore = Arrays.stream(scores).max().getAsInt();
+
+    ArrayList&lt;Integer&gt; answer = new ArrayList&lt;&gt;();
+    for (int i = 0; i &lt; scores.length; i++) {
+        if (scores[i] == maxScore) {
+            answer.add(i + 1);
+        }
+    }
+    return answer.stream().mapToInt(Integer::intValue).toArray();
+}
+</code></pre><ul>
+<li>패턴 파악, maxScore 구하는 방법 .max().getAsInt()</li>
+</ul>
+<h2 id="행렬의-곱셉">행렬의 곱셉</h2>
+<pre tabindex="0"><code>public static int[][] solution_05(int[][] arr1, int[][] arr2) {
+    int[][] answer = new int[arr1.length][arr2[0].length];
+
+    for (int i = 0; i &lt; arr1.length; i++) {
+        for (int j = 0; j &lt; arr2[0].length; j++) {
+            for (int k = 0; k &lt; arr1[0].length; k++) {
+                answer[i][j] += arr1[i][k] * arr2[k][j];
+            }
+        }
+    }
+    return answer;
+}
+</code></pre><ul>
+<li>O(N^3) 의 index 유의</li>
+</ul>
+<h2 id="실패율">실패율</h2>
+<pre tabindex="0"><code>public static int[] solution_06(int N, int[] stages) {
+
+    int[] challenger = new int[N+2];
+    Arrays.stream(stages).forEach(stage -&gt; challenger[stage]++);
+
+    HashMap&lt;Integer, Double&gt; fails = new HashMap&lt;&gt;();
+    double totalPlayer = stages.length;
+
+    for( int i = 1; i &lt;= N; i++) {
+        if(challenger[i] == 0) {
+            fails.put(i, 0.0);
+        }else {
+            fails.put(i, (double)challenger[i]/totalPlayer);
+            totalPlayer -= challenger[i];
+        }
+    }
+
+    return fails.entrySet().stream()
+        .sorted((o1, o2) -&gt; Double.compare(o2.getValue(), o1.getValue()))
+        .mapToInt(HashMap.Entry::getKey).toArray();
+}
+</code></pre><ul>
+<li>challenger 을 [N+2] 개로 잡는 이유</li>
+<li>for문에서 totalPlayer -= challenger[i];</li>
+<li>HashMap의 entrySet 사용 요령 기억하기</li>
+</ul>
+<h2 id="방문-길이">방문 길이</h2>
+<pre tabindex="0"><code>import java.util.HashMap;
+import java.util.HashSet;
+
+class Solution {
+
+    private static HashMap&lt;Character, int[]&gt; location = new HashMap&lt;&gt;();
+
+    private static void initLocation() {
+        location.put(&#39;U&#39;, new int[]{0, 1});
+        location.put(&#39;D&#39;, new int[]{0, -1});
+        location.put(&#39;L&#39;, new int[]{-1, 0});
+        location.put(&#39;R&#39;, new int[]{1, 0});
+    }
+
+    public int solution(String dirs) {
+        initLocation();
+        int x = 5, y = 5;
+
+        HashSet&lt;String&gt; answer = new HashSet&lt;&gt;();
+
+        for (int i = 0; i &lt; dirs.length(); i++) {
+            int[] move = location.get(dirs.charAt(i));
+            int nx = x + move[0];
+            int ny = y + move[1];
+
+            if (!isValidMove(nx, ny)) {
+                continue;
+            }
+            answer.add(x + &#34; &#34; + y + &#34; &#34; + nx + &#34; &#34; + ny);
+            answer.add(nx + &#34; &#34; + ny + &#34; &#34; + x + &#34; &#34; + y);
+
+            x = nx;
+            y = ny;
+        }
+
+        return answer.size() / 2;
+    }
+
+    private static boolean isValidMove(int nx, int ny) {
+        return nx &lt; 11 &amp;&amp; nx &gt;= 0 &amp;&amp; ny &lt; 11 &amp;&amp; ny &gt;= 0;
+    }
+}
+</code></pre><ul>
+<li>A-&gt;B, B-&gt;A 도 하나의 이동경로로 파악되는 점 유의 answer.size() / 2 (문제에는 상세 설명이 없음)</li>
+</ul>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 24 Apr 2025 20:48:45 &#43;0900" class="no-wrap"
+                title=" Thu, 24 Apr 2025 20:48:45 &#43;0900">
+                Thu, 24 Apr 2025 20:48:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -921,165 +1078,6 @@ for(int i = 0; i &lt; result.length; i++) {
               <relative-time datetime=" Tue, 22 Apr 2025 20:48:45 &#43;0900" class="no-wrap"
                 title=" Tue, 22 Apr 2025 20:48:45 &#43;0900">
                 Tue, 22 Apr 2025 20:48:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/1/">코딩 테스트 합격자 되기 정리 #1</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="코딩-테스트-합격자-되기-정리-1">코딩 테스트 합격자 되기 정리 #1</h1>
-<h2 id="사전-준비">사전 준비</h2>
-<ul>
-<li>분석 먼저</li>
-<li>예외 테스트 케이스</li>
-<li>기록 - 못푼것도 기록은 해두자</li>
-<li>나만의 언어로 요약</li>
-</ul>
-<h2 id="문제-분석">문제 분석</h2>
-<ul>
-<li>문제를 쪼개서 분석</li>
-<li>제약사항과 테스트 케이스</li>
-<li>입력값 분석하고 알고리즘 설정</li>
-<li>greedy, 완전 탐색 뭘로 할지</li>
-<li>데이터 흐름과 구성 파악</li>
-<li>의사 코드로 설계</li>
-</ul>
-<h2 id="채점기준">채점기준</h2>
-<ul>
-<li>정확성 테스트</li>
-<li>효율성 테스트</li>
-</ul>
-<h2 id="시간복잡도">시간복잡도</h2>
-<ul>
-<li>O(N) 허용 연산 횟수는 2000만</li>
-<li>초당 연산 최대 횟수는 1억번, 제한시간이 1초면 연산 횟수가 3000만이 안넘도록</li>
-<li>지수함수, 다항함수, 로그함수</li>
-<li>입력 크기에 따른 연산 횟수의 추이를 활용해서 시간복잡도를 표현하는 방법 - 점근적 표기법</li>
-<li>특정값을 계속 반으로 줄이는 동작을 한다면 O(logN)</li>
-</ul>
-<h2 id="코딩-테스트-필수-문법">코딩 테스트 필수 문법</h2>
-<h3 id="프리미티브-타입--레퍼런스-타입">프리미티브 타입 / 레퍼런스 타입</h3>
-<ul>
-<li>int, long, float, double</li>
-<li>Integer, Long, Float, Double - 연산 속도는 느림</li>
-<li>엡실론 epsilon - 부동소수형 데이터를 이진법으로 표현해서 생기는 오차</li>
-<li>비트연산</li>
-</ul>
-<pre tabindex="0"><code>&amp;, |, ^ XOR, ~ NOT, &lt;&lt;, &gt;&gt;
-</code></pre><ul>
-<li>논리연산</li>
-</ul>
-<pre tabindex="0"><code>&amp;&amp;, ||, !(x&gt;y)
-</code></pre><h2 id="컬렉션-프레임워크">컬렉션 프레임워크</h2>
-<h3 id="배열">배열</h3>
-<ul>
-<li>연속된 메모리 공간</li>
-<li>생성이후 크기 변경 불가, 새 데이터를 삽입,삭제 불가. 변경만 가능</li>
-<li>index로 요소 접근 - index를 알고 있다면 접근,변경은 O(1)</li>
-</ul>
-<pre tabindex="0"><code>int[] array = {1,2,3,4,5};
-int[] array2 = new int[]{1,3,5,7,9};
-int[] array3 = new int[5];
-</code></pre><h3 id="리스트-arraylist-사실-linkedlist-도-있음">리스트 ArrayList (사실 LinkedList 도 있음)</h3>
-<ul>
-<li>가변 크기</li>
-<li>맨 뒤 추가시 O(1), 삭제나 중간 삽입은 O(N)</li>
-</ul>
-<h3 id="해시맵-hashmap">해시맵 hashmap</h3>
-<ul>
-<li>key, value</li>
-</ul>
-<pre tabindex="0"><code>// Integer = 32bit = 4byte
-HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
-
-// 삽입 
-map.put(&#34;apple&#34;, 1);
-
-// 검색
-if(map.containsKey(key)) { ... }
-
-map.get(key);
-
-// 삭제
-map.remove(key);
-</code></pre><h3 id="문자열">문자열</h3>
-<ul>
-<li>immutable 객체 - 값을 변경할 수 없는 객체, 시간 복잡도 관점에서도 주의</li>
-<li>추가, 삭제시 기존 객체를 수정하는 것이 아니라 새로운 객체를 반환한다.</li>
-<li>수정</li>
-</ul>
-<pre tabindex="0"><code>.replace(&#34;a&#34;, &#34;&#34;);
-</code></pre><h4 id="stringbuffer-stringbuilder">StringBuffer, StringBuilder</h4>
-<pre tabindex="0"><code>Sytem.out.println(System.identityHashCode(s));
-</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Java" data-lang="Java"><span class="line"><span class="cl"><span class="kt">long</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">StringBuilder</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;=</span><span class="n">100_000</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">long</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(((</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="n">1000</span><span class="p">.</span><span class="na">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&#34;초&#34;</span><span class="p">);</span><span class="w"> 
-</span></span></span></code></pre></div><ul>
-<li>차이 StringBuffer 는 Thread-Safe (코딩테스트에서는 거의 안씀)</li>
-<li>속도면에서 StringBuilder 가 조금 더 빠름(코딩테스크 기준 권장)</li>
-</ul>
-<pre tabindex="0"><code>sb.deleteCharAt(index)
-sb.insert(index, 문자);
-</code></pre><h3 id="stack">Stack</h3>
-<h3 id="queue">Queue</h3>
-<h3 id="arraydeque-덱-혹은-데크-라고-읽음">ArrayDeque (덱 혹은 데크 라고 읽음)</h3>
-<ul>
-<li>양방향 queue, 즉 앞쪽, 뒤쪽에서 pop 가능</li>
-</ul>
-<h2 id="메서드">메서드</h2>
-<ul>
-<li>람다식 / 익명함수 - 한번만 사용하거나 함수자체를 다른 함수의 인자로 전달(고차함수)</li>
-</ul>
-<pre tabindex="0"><code>Node[] nodes = new Node[5];
-Arrays.sort(nodes, (o1,o2) -&gt; Integer.compare(o1.cost, o2.cost));
-
-
-Arrays.sort(nodes, new Comparator&lt;Node&gt;() {
-    @Override
-    public int compare(Node o1, Node o2) {
-        return Integer.compare(o1.cost, o2.cost);
-    } 
-}
-</code></pre><ul>
-<li>Integer.compare(int x, int y) 는 x&lt;y면 -1, x&gt;y면 1, x=y면 0</li>
-</ul>
-<h2 id="코드-구현-노하우">코드 구현 노하우</h2>
-<ul>
-<li>조기 반환</li>
-<li>보호 구문</li>
-</ul>
-<pre tabindex="0"><code>List&lt;Integer&gt; numbers
-...
-int total = numbers.stream().mapToInt(i-&gt;i).sum();
-</code></pre><ul>
-<li>제네릭</li>
-</ul>
-<pre tabindex="0"><code>List&lt;Integer&gt; genericList = new ArrayList&lt;&gt;();
-// 빌드 레벨에서 타입체크하여 타입 강제
-</code></pre>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 22 Apr 2025 17:48:45 &#43;0900" class="no-wrap"
-                title=" Tue, 22 Apr 2025 17:48:45 &#43;0900">
-                Tue, 22 Apr 2025 17:48:45 &#43;0900
               </relative-time>
             </div>
           </div>

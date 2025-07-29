@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">86</span>
+              <span class="Counter">87</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">86</span>
+      <span class="Counter ">87</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,46 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/spring/reflection/">
+                    <span class="repo" title="Java Spring에서 &#34;reflection(리플렉션)&#34;">Java Spring에서 &#34;reflection(리플렉션)&#34;</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>Java Spring에서 &ldquo;reflection(리플렉션)&ldquo;은 <strong>Java의 런타임 시점에 클래스, 메서드, 필드 등에 접근하고 조작할 수 있는 기능</strong>을 의미합니다. 일반적인 컴파일 시점이 아닌, 실행 중인 애플리케이션의 구조를 동적으로 분석하거나 변경하는 데 활용됩니다.</p>
+<hr>
+<h2 id="-리플렉션이란">💡 리플렉션이란?</h2>
+<p>Java 리플렉션 API는 <code>java.lang.reflect</code> 패키지를 통해 제공되며, 다음과 같은 기능을 제공합니다:</p>
+<ul>
+<li>클래스 이름으로 <code>Class</code> 객체를 얻기</li>
+<li>클래스의 생성자, 메서드, 필드 정보 조회</li>
+<li>메서드 호출, 필드 값 읽기/쓰기 등 동적 조작</li>
+<li>접근 제한자(private 등) 무시하고 접근 (<code>setAccessible(true)</code>)</li>
+</ul>
+<hr>
+<h2 id="-spring에서-리플렉션이-쓰이는-주요-예">🛠 Spring에서 리플렉션이 쓰이는 주요 예</h2>
+<p>Spring 프레임워크는 내부적으로 리플렉션을 매우 광범위하게 사용합니다:</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -790,250 +830,18 @@ Java Pathfinder는 <strong>자바 프로그램의 모델 체킹(model checking) 
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/til/db_ssh_tunnel/">
-                    <span class="repo" title="boot3 에서 postgresql에 직접 접속이 아닌 ssh tunnel 로 접속하는 방법">boot3 에서 postgresql에 직접 접속이 아닌 ssh tunnel 로 접속하는 방법</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <p>Spring Boot 3에서 SSH 터널을 통한 PostgreSQL 연결을 위한 설정 방법을 알려드리겠습니다.</p>
-<h2 id="1-applicationyml-설정">1. application.yml 설정</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:postgresql://localhost:5433/your_database_name</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">your_db_username</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">your_db_password</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">driver-class-name</span><span class="p">:</span><span class="w"> </span><span class="l">org.postgresql.Driver</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">jpa</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hibernate</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ddl-auto</span><span class="p">:</span><span class="w"> </span><span class="l">validate</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">show-sql</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hibernate</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">dialect</span><span class="p">:</span><span class="w"> </span><span class="l">org.hibernate.dialect.PostgreSQLDialect</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">format_sql</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># SSH 터널 설정 (커스텀 프로퍼티)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">app</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ssh</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tunnel</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">your-ssh-server.com</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">22</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">ssh_username</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">private-key-path</span><span class="p">:</span><span class="w"> </span><span class="l">~/.ssh/id_rsa</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">local-port</span><span class="p">:</span><span class="w"> </span><span class="m">5433</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">remote-host</span><span class="p">:</span><span class="w"> </span><span class="l">localhost </span><span class="w"> </span><span class="c"># SSH 서버에서 본 DB 호스트</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">remote-port</span><span class="p">:</span><span class="w"> </span><span class="m">5432</span><span class="w">       </span><span class="c"># 실제 PostgreSQL 포트</span><span class="w">
-</span></span></span></code></pre></div><h2 id="2-ssh-터널-자동-연결을-위한-configuration-클래스-3-필요한-의존성-추가-buildgradle">2. SSH 터널 자동 연결을 위한 Configuration 클래스## 3. 필요한 의존성 추가 (build.gradle)</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">dependencies</span> <span class="o">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s1">&#39;org.springframework.boot:spring-boot-starter-data-jpa&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s1">&#39;org.postgresql:postgresql&#39;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">implementation</span> <span class="s1">&#39;com.github.mwiede:jsch:0.2.17&#39;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 기타 필요한 의존성들...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">}</span>
-</span></span></code></pre></div><h2 id="3-ssh-key-만들기-예시">3. ssh key 만들기 예시</h2>
-<pre tabindex="0"><code>ssh-keygen -t rsa -b 4096 -m PEM -f ~/.ssh/id_rsa -C &#34;ceo@pink-spider.io&#34;
-</code></pre><ul>
-<li>DB가 설치된 서버에 ~/.ssh 등에 authorized_keys (권한 644) 파일에 id_rsa.pub 내용 추가해야 됩니다.</li>
-<li>rsa가 아닌 OpenSSh로 keygen 했을 경우 com.github.mwiede:jsch 가 아닌 다른 라이브러리를 써야 됩니다.</li>
-</ul>
-<h2 id="sshtunnelconfig">SshTunnelConfig</h2>
-<pre tabindex="0"><code>
-@Configuration
-@Slf4j
-@Profile({&#34;local&#34;, &#34;dev&#34;, &#34;stage&#34;, &#34;prod&#34;})
-public class SshTunnelConfig {
-
-    @Value(&#34;${app.ssh.tunnel.host}&#34;)
-    private String sshHost;
-
-    @Value(&#34;${app.ssh.tunnel.port}&#34;)
-    private int sshPort;
-
-    @Value(&#34;${app.ssh.tunnel.username}&#34;)
-    private String sshUsername;
-
-    @Value(&#34;${app.ssh.tunnel.private-key-path}&#34;)
-    private String privateKeyPath;
-
-    @Value(&#34;${app.ssh.tunnel.local-port}&#34;)
-    private int localPort;
-
-    @Value(&#34;${app.ssh.tunnel.remote-host}&#34;)
-    private String remoteHost;
-
-    @Value(&#34;${app.ssh.tunnel.remote-port}&#34;)
-    private int remotePort;
-
-    @Value(&#34;${app.ssh.tunnel.passphrase:}&#34;)
-    private String passphrase;
-
-    private Session session;
-
-    @PostConstruct
-    public void createSshTunnel() {
-        try {
-            log.info(&#34;JSch SSH 터널 연결 시작...&#34;);
-
-            // 로컬 포트가 사용 가능한지 확인
-            if (!isPortAvailable(localPort)) {
-                throw new RuntimeException(&#34;로컬 포트 &#34; + localPort + &#34;가 이미 사용 중입니다.&#34;);
-            }
-
-            JSch jsch = new JSch();
-
-            // 개인키 파일 경로 처리
-            String keyPath = privateKeyPath;
-            if (keyPath.startsWith(&#34;~/&#34;)) {
-                keyPath = System.getProperty(&#34;user.home&#34;) + keyPath.substring(1);
-            }
-
-            // 파일 존재 및 읽기 권한 확인
-            File keyFile = new File(keyPath);
-            if (!keyFile.exists()) {
-                throw new RuntimeException(&#34;SSH 개인키 파일을 찾을 수 없습니다: &#34; + keyPath);
-            }
-
-            if (!keyFile.canRead()) {
-                throw new RuntimeException(&#34;SSH 개인키 파일을 읽을 수 없습니다. 파일 권한을 확인하세요: &#34; + keyPath);
-            }
-
-            log.info(&#34;SSH 개인키 파일: {}&#34;, keyPath);
-
-            // 키 형식 확인 (RSA 형식인지 체크)
-            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(keyFile))) {
-                String firstLine = reader.readLine();
-                log.info(&#34;키 파일 형식: {}&#34;, firstLine);
-
-                if (firstLine != null &amp;&amp; !firstLine.contains(&#34;BEGIN RSA PRIVATE KEY&#34;)) {
-                    log.warn(&#34;RSA 형식이 아닌 키가 감지되었습니다: {}&#34;, firstLine);
-                    log.warn(&#34;RSA 형식 키를 생성하려면: ssh-keygen -t rsa -b 4096 -m PEM -f {}&#34;, keyPath);
-                }
-            }
-
-            // 개인키 추가
-            if (passphrase != null &amp;&amp; !passphrase.trim().isEmpty()) {
-                jsch.addIdentity(keyPath, passphrase);
-                log.info(&#34;패스프레이즈와 함께 개인키 로드 완료&#34;);
-            } else {
-                jsch.addIdentity(keyPath);
-                log.info(&#34;개인키 로드 완료&#34;);
-            }
-
-            // SSH 세션 생성
-            session = jsch.getSession(sshUsername, sshHost, sshPort);
-            session.setConfig(&#34;StrictHostKeyChecking&#34;, &#34;no&#34;);
-            session.setConfig(&#34;PreferredAuthentications&#34;, &#34;publickey&#34;);
-            session.setTimeout(30000);
-
-            log.info(&#34;SSH 서버 연결 시도: {}@{}:{}&#34;, sshUsername, sshHost, sshPort);
-            session.connect();
-            log.info(&#34;SSH 연결 성공&#34;);
-
-            // 포트 포워딩 설정
-            session.setPortForwardingL(localPort, remoteHost, remotePort);
-
-            // 포트가 열릴 때까지 대기
-            waitForPortToOpen(localPort, 10000);
-
-            log.info(&#34;SSH 터널이 성공적으로 생성되었습니다: localhost:{} -&gt; {}:{}:{}&#34;,
-                localPort, sshHost, remoteHost, remotePort);
-
-        } catch (JSchException e) {
-            log.error(&#34;SSH 터널 생성 실패: {}&#34;, e.getMessage(), e);
-
-            // 구체적인 에러 메시지 제공
-            if (e.getMessage().contains(&#34;invalid privatekey&#34;)) {
-                log.error(&#34;개인키 형식이 잘못되었습니다. RSA 형식 키를 사용하세요.&#34;);
-                log.error(&#34;새 RSA 키 생성: ssh-keygen -t rsa -b 4096 -m PEM -f ~/.ssh/level_up_rsa&#34;);
-            } else if (e.getMessage().contains(&#34;Auth fail&#34;)) {
-                log.error(&#34;인증에 실패했습니다. 공개키가 서버에 등록되어 있는지 확인하세요.&#34;);
-                log.error(&#34;공개키 등록: ssh-copy-id -i {} {}@{}&#34;, privateKeyPath + &#34;.pub&#34;, sshUsername, sshHost);
-            } else if (e.getMessage().contains(&#34;Connection refused&#34;)) {
-                log.error(&#34;서버 연결이 거부되었습니다. 호스트와 포트를 확인하세요.&#34;);
-            }
-
-            cleanupResources();
-            throw new RuntimeException(&#34;SSH 터널 연결에 실패했습니다: &#34; + e.getMessage(), e);
-        } catch (Exception e) {
-            log.error(&#34;예상치 못한 오류: {}&#34;, e.getMessage(), e);
-            cleanupResources();
-            throw new RuntimeException(&#34;SSH 터널 설정 중 오류가 발생했습니다: &#34; + e.getMessage(), e);
-        }
-    }
-
-    @PreDestroy
-    @EventListener(ContextClosedEvent.class)
-    public void closeSshTunnel() {
-        log.info(&#34;SSH 터널 종료 시작...&#34;);
-        cleanupResources();
-        log.info(&#34;SSH 터널 종료 완료&#34;);
-    }
-
-    private void cleanupResources() {
-        if (session != null &amp;&amp; session.isConnected()) {
-            try {
-                session.disconnect();
-                log.info(&#34;SSH 세션이 종료되었습니다.&#34;);
-            } catch (Exception e) {
-                log.warn(&#34;SSH 세션 종료 중 오류: {}&#34;, e.getMessage());
-            }
-        }
-    }
-
-    private boolean isPortAvailable(int port) {
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private void waitForPortToOpen(int port, long timeoutMillis) throws InterruptedException {
-        long startTime = System.currentTimeMillis();
-        while (System.currentTimeMillis() - startTime &lt; timeoutMillis) {
-            try (java.net.Socket socket = new java.net.Socket()) {
-                socket.connect(new java.net.InetSocketAddress(&#34;localhost&#34;, port), 1000);
-                log.info(&#34;포트 {}가 성공적으로 열렸습니다.&#34;, port);
-                return;
-            } catch (Exception e) {
-                // 포트가 아직 열리지 않음, 재시도
-                Thread.sleep(500);
-            }
-        }
-        log.warn(&#34;포트 {}가 {}ms 내에 열리지 않았습니다.&#34;, port, timeoutMillis);
-    }
-}
-</code></pre>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "Java%20Spring%ec%97%90%ec%84%9c%20%22reflection%28%eb%a6%ac%ed%94%8c%eb%a0%89%ec%85%98%29%22",
+  "link": "https://pink-spider.github.io/post/spring/reflection/",
+  "publishDate": "2025-07-29%2014:07:45"
+},
+
 {
   "title": "JPA%ec%82%ac%ec%9a%a9%ec%8b%9c%20row%20level%20lock%20%ec%a0%81%ec%9a%a9",
   "link": "https://pink-spider.github.io/post/spring/jpa/row_level_lock_in_jpa/",

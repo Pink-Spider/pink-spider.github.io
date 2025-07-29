@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">86</span>
+              <span class="Counter">87</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">86</span>
+      <span class="Counter ">87</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,55 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/shading_in_boot/">Boot에서 샤딩된 DB 사용하려면</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>스프링 부트 애플리케이션 입장에서 샤딩된 DB를 쓰기 위해서 직접 “복잡한” 코드를 많이 짤 필요는 없습니다. 대신, 주로 다음 두 가지 레벨 중 하나의 방식으로 샤딩을 처리하게 됩니다.</p>
+<hr>
+<h2 id="1-외부-프록시미들웨어-사용-mycat-vitess-proxysql-등">1. 외부 프록시/미들웨어 사용 (Mycat, Vitess, ProxySQL 등)</h2>
+<ul>
+<li>
+<p><strong>애플리케이션 변경 제로 또는 최소화</strong></p>
+<ul>
+<li>샤드별 DB URL(호스트/포트) 대신, 프록시의 단일 접점(가상 호스트/포트)을 <code>spring.datasource.url</code>에 지정</li>
+<li>트래픽·샤드 키 기반 분기 로직은 프록시가 대신 수행</li>
+</ul>
+</li>
+<li>
+<p><strong>구현 사항</strong></p>
+<ol>
+<li>
+<p><code>application.yml</code>에 한번만 프록시 접점 정보 등록</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://proxy.example.com:3306/app_db</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>필요 시 트랜잭션 격리, 커넥션 풀, 리플리카 읽기 전용 설정 등 추가 구성</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 10 Jun 2025 08:49:58 &#43;0900" class="no-wrap"
+                title=" Tue, 10 Jun 2025 08:49:58 &#43;0900">
+                Tue, 10 Jun 2025 08:49:58 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -821,44 +870,6 @@ mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &lsquo;MMdd&rsquo;, &lsquo;yyy
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></div><p><strong>사용 예시:</strong></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 26 May 2025 20:20:45 &#43;0900" class="no-wrap"
-                title=" Mon, 26 May 2025 20:20:45 &#43;0900">
-                Mon, 26 May 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/idempotence/">멱등성(Idempotence)에 대하여</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>멱등성(Idempotence)은 컴퓨터 과학에서 자주 등장하는 중요한 개념입니다. 아래에 일반적인 의미와 API 개발과의 관련성을 나누어 자세히 설명드리겠습니다.</p>
-<hr>
-<h2 id="-멱등성idempotence이란">💡 멱등성(Idempotence)이란?</h2>
-<p>멱등성이란 <strong>동일한 연산을 여러 번 수행해도 결과가 같아지는 성질</strong>을 말합니다. 수학에서 출발한 개념인데, 예를 들어 함수 <code>f(x)</code>가 있을 때 다음이 성립하면 멱등함수라고 합니다:</p>
-<pre tabindex="0"><code>f(f(x)) = f(x)
-</code></pre><h3 id="예시-수학적-관점">예시 (수학적 관점)</h3>
-<ul>
-<li>절댓값 함수: <code>| |x|| = |x|</code></li>
-<li>집합의 합집합 연산: <code>A ∪ A = A</code></li>
-</ul>
-<hr>
-<h2 id="-멱등성과-api-개발">🌐 멱등성과 API 개발</h2>
-<p>웹 API 설계 시, 멱등성은 <strong>안정적이고 예측 가능한 API</strong>를 만들기 위해 매우 중요한 성질입니다. 특히 REST API에서는 각 HTTP 메서드가 멱등성을 가질지를 설계 시 명확히 고려해야 합니다.</p>
               </div>
             </div>
 

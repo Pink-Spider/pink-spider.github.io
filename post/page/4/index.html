@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">86</span>
+              <span class="Counter">87</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">86</span>
+      <span class="Counter ">87</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,44 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/idempotence/">멱등성(Idempotence)에 대하여</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>멱등성(Idempotence)은 컴퓨터 과학에서 자주 등장하는 중요한 개념입니다. 아래에 일반적인 의미와 API 개발과의 관련성을 나누어 자세히 설명드리겠습니다.</p>
+<hr>
+<h2 id="-멱등성idempotence이란">💡 멱등성(Idempotence)이란?</h2>
+<p>멱등성이란 <strong>동일한 연산을 여러 번 수행해도 결과가 같아지는 성질</strong>을 말합니다. 수학에서 출발한 개념인데, 예를 들어 함수 <code>f(x)</code>가 있을 때 다음이 성립하면 멱등함수라고 합니다:</p>
+<pre tabindex="0"><code>f(f(x)) = f(x)
+</code></pre><h3 id="예시-수학적-관점">예시 (수학적 관점)</h3>
+<ul>
+<li>절댓값 함수: <code>| |x|| = |x|</code></li>
+<li>집합의 합집합 연산: <code>A ∪ A = A</code></li>
+</ul>
+<hr>
+<h2 id="-멱등성과-api-개발">🌐 멱등성과 API 개발</h2>
+<p>웹 API 설계 시, 멱등성은 <strong>안정적이고 예측 가능한 API</strong>를 만들기 위해 매우 중요한 성질입니다. 특히 REST API에서는 각 HTTP 메서드가 멱등성을 가질지를 설계 시 명확히 고려해야 합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 26 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Mon, 26 May 2025 20:20:45 &#43;0900">
+                Mon, 26 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1048,43 +1086,6 @@
               <relative-time datetime=" Tue, 13 May 2025 20:20:45 &#43;0900" class="no-wrap"
                 title=" Tue, 13 May 2025 20:20:45 &#43;0900">
                 Tue, 13 May 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/gpt_temperature_top-p/">Chat GPT 기능설정값 temperature, top-p</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>temperature</code>와 <code>top-p</code>(또는 <strong>nucleus sampling</strong>)는 <strong>자연어 생성 모델</strong>이 출력할 단어를 선택할 때의 <strong>랜덤성 조절 파라미터</strong>입니다. 두 개념은 유사한 역할을 하지만 <strong>작동 방식이 다릅니다</strong>. 아래에 각 개념에 대한 자세한 설명과 예제를 제공하겠습니다.</p>
-<hr>
-<h2 id="-temperature-선택의-확률을-부드럽게-조정">🔥 Temperature: &ldquo;선택의 확률을 부드럽게 조정&rdquo;</h2>
-<h3 id="개념">개념</h3>
-<ul>
-<li><code>temperature</code>는 <strong>모델이 다음 단어를 선택할 때의 확률 분포를 얼마나 평탄하게 만들지</strong>를 결정합니다.</li>
-<li>기본값은 <code>1.0</code>이며, 이 값을 <strong>낮추면 더 결정론적(deterministic)</strong>, **높이면 더 창의적(random)**이 됩니다.</li>
-</ul>
-<h3 id="작동-방식">작동 방식</h3>
-<ul>
-<li>
-<p>모델이 생성 가능한 단어에 대해 logit(점수)을 부여한 후 softmax 함수를 통해 확률을 만듭니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 13 May 2025 18:20:45 &#43;0900" class="no-wrap"
-                title=" Tue, 13 May 2025 18:20:45 &#43;0900">
-                Tue, 13 May 2025 18:20:45 &#43;0900
               </relative-time>
             </div>
           </div>

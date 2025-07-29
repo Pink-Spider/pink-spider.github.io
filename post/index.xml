@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 24 Jul 2025 10:21:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 29 Jul 2025 14:39:05 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java Spring에서 &#34;reflection(리플렉션)&#34;</title>
+      <link>https://pink-spider.github.io/post/spring/reflection/</link>
+      <pubDate>Tue, 29 Jul 2025 14:07:45 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/spring/reflection/</guid>
+      <description>&lt;p&gt;Java Spring에서 &amp;ldquo;reflection(리플렉션)&amp;ldquo;은 &lt;strong&gt;Java의 런타임 시점에 클래스, 메서드, 필드 등에 접근하고 조작할 수 있는 기능&lt;/strong&gt;을 의미합니다. 일반적인 컴파일 시점이 아닌, 실행 중인 애플리케이션의 구조를 동적으로 분석하거나 변경하는 데 활용됩니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-리플렉션이란&#34;&gt;💡 리플렉션이란?&lt;/h2&gt;&#xA;&lt;p&gt;Java 리플렉션 API는 &lt;code&gt;java.lang.reflect&lt;/code&gt; 패키지를 통해 제공되며, 다음과 같은 기능을 제공합니다:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;클래스 이름으로 &lt;code&gt;Class&lt;/code&gt; 객체를 얻기&lt;/li&gt;&#xA;&lt;li&gt;클래스의 생성자, 메서드, 필드 정보 조회&lt;/li&gt;&#xA;&lt;li&gt;메서드 호출, 필드 값 읽기/쓰기 등 동적 조작&lt;/li&gt;&#xA;&lt;li&gt;접근 제한자(private 등) 무시하고 접근 (&lt;code&gt;setAccessible(true)&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-spring에서-리플렉션이-쓰이는-주요-예&#34;&gt;🛠 Spring에서 리플렉션이 쓰이는 주요 예&lt;/h2&gt;&#xA;&lt;p&gt;Spring 프레임워크는 내부적으로 리플렉션을 매우 광범위하게 사용합니다:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>JPA사용시 row level lock 적용</title>
       <link>https://pink-spider.github.io/post/spring/jpa/row_level_lock_in_jpa/</link>
