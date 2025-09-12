@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">88</span>
+              <span class="Counter">89</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">88</span>
+      <span class="Counter ">89</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,49 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/db/all_about_join/">All About Join</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MySQL을 비롯한 대부분의 관계형 데이터베이스에서 사용되는 <strong>JOIN</strong>은 여러 테이블의 데이터를 조합해 하나의 결과로 만드는 데 사용됩니다. 아래는 대표적인 JOIN 종류와 각각의 설명, 예제를 포함한 정리입니다.</p>
+<hr>
+<h2 id="-1-inner-join">🔗 1. INNER JOIN</h2>
+<h3 id="-정의">✅ 정의</h3>
+<p>두 테이블에서 <strong>공통된 값이 존재하는 행만</strong> 반환합니다.</p>
+<h3 id="-예시">🧪 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">order_date</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><h3 id="-특징">📌 특징</h3>
+<ul>
+<li>가장 일반적인 JOIN 방식</li>
+<li>양쪽 모두 일치하는 값이 있어야 결과에 포함됨</li>
+</ul>
+<hr>
+<h2 id="-2-left-join-또는-left-outer-join">🔗 2. LEFT JOIN (또는 LEFT OUTER JOIN)</h2>
+<h3 id="-정의-1">✅ 정의</h3>
+<p>왼쪽 테이블의 모든 행을 반환하며, 오른쪽 테이블에 일치하는 값이 없으면 <code>NULL</code>로 채워집니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 18 Jun 2025 11:27:58 &#43;0900" class="no-wrap"
+                title=" Wed, 18 Jun 2025 11:27:58 &#43;0900">
+                Wed, 18 Jun 2025 11:27:58 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1027,47 +1070,6 @@ mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &lsquo;MMdd&rsquo;, &lsquo;yyy
               <relative-time datetime=" Thu, 29 May 2025 20:20:45 &#43;0900" class="no-wrap"
                 title=" Thu, 29 May 2025 20:20:45 &#43;0900">
                 Thu, 29 May 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/msa_trasaction/">msa에서 트랜잭션 처리 정책</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>MSA(Microservices Architecture) 환경에서 서비스 간 호출 중 오류가 발생했을 때의 <strong>트랜잭션 처리 정책</strong>은 일반적으로 <strong>분산 트랜잭션</strong> 또는 <strong>사후 보상 트랜잭션</strong>(Compensating Transaction) 방식으로 구분되며, 다음과 같은 용어와 정책으로 설명됩니다.</p>
-<hr>
-<h3 id="1-saga-패턴">1. <strong>SAGA 패턴</strong></h3>
-<ul>
-<li>
-<p><strong>정의</strong>: MSA에서 가장 널리 쓰이는 트랜잭션 처리 패턴으로, 각 서비스의 로컬 트랜잭션이 성공하면 다음 서비스를 호출하고, 중간에 실패 시 이전에 수행된 작업을 <strong>보상 작업(Compensation)</strong> 으로 되돌립니다.</p>
-</li>
-<li>
-<p><strong>종류</strong>:</p>
-<ul>
-<li><strong>Choreography 기반</strong>: 서비스들이 이벤트를 발행하고 서로 구독하면서 트랜잭션을 이어감. 오케스트레이터가 없음.</li>
-<li><strong>Orchestration 기반</strong>: 중앙 컨트롤러(오케스트레이터)가 전체 트랜잭션 흐름을 제어.</li>
-</ul>
-</li>
-<li>
-<p><strong>예시</strong>: 주문 → 결제 → 배송 순서에서 결제 실패 시, 주문을 취소하는 보상 트랜잭션 수행.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 26 May 2025 20:20:45 &#43;0900" class="no-wrap"
-                title=" Mon, 26 May 2025 20:20:45 &#43;0900">
-                Mon, 26 May 2025 20:20:45 &#43;0900
               </relative-time>
             </div>
           </div>

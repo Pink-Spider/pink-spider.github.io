@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">88</span>
+              <span class="Counter">89</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">88</span>
+      <span class="Counter ">89</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,45 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/memory/heap_gc/">JVM에서 Heap 메모리의 용도와 GC 튜닝</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>JVM(Java Virtual Machine)에서 <strong>heap 메모리</strong>는 자바 애플리케이션이 <strong>런타임 시 동적으로 생성하는 객체들이 저장되는 영역</strong>입니다. 즉, <code>new</code> 키워드를 사용해서 생성하는 대부분의 객체들이 이 영역에 저장됩니다.</p>
+<hr>
+<h3 id="-heap-메모리-구성">📌 Heap 메모리 구성</h3>
+<p>Heap은 크게 다음 두 영역으로 나뉩니다:</p>
+<ul>
+<li><strong>Young Generation (Young Gen)</strong>: 새로 생성된 객체가 저장되는 곳.
+<ul>
+<li><strong>Eden</strong>: 대부분의 새 객체가 여기에 생성됨.</li>
+<li><strong>Survivor</strong>: Eden에서 살아남은 객체들이 이동.</li>
+</ul>
+</li>
+<li><strong>Old Generation (Tenured Gen)</strong>: Young Gen을 거쳐 오래 살아남은 객체들이 이동하는 공간.</li>
+</ul>
+<p>Garbage Collector(GC)는 이 heap 영역의 객체들을 주기적으로 검사해서 <strong>더 이상 참조되지 않는 객체는 메모리에서 제거</strong>합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 01 Apr 2025 13:59:38 &#43;0900" class="no-wrap"
+                title=" Tue, 01 Apr 2025 13:59:38 &#43;0900">
+                Tue, 01 Apr 2025 13:59:38 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1019,52 +1058,6 @@ public class CorsProperties {
               <relative-time datetime=" Sun, 30 Mar 2025 17:14:05 &#43;0900" class="no-wrap"
                 title=" Sun, 30 Mar 2025 17:14:05 &#43;0900">
                 Sun, 30 Mar 2025 17:14:05 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/jpa/jpa_log_yml/">Jpa관련 log설정 yml</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="jpa쿼리를-로그로-출력하기-위한-yml-설정">JPA쿼리를 로그로 출력하기 위한 yml 설정</h1>
-<p>Spring Boot에서 JPA 쿼리를 로그로 출력하고 싶다면 <code>application.yml</code> 파일에 다음과 같은 설정을 추가하면 됩니다:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">jpa</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">show-sql</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># SQL 쿼리를 콘솔에 출력</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">properties</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hibernate</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">format_sql</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># SQL 쿼리를 보기 좋게 포맷</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">logging</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">org.hibernate.SQL</span><span class="p">:</span><span class="w"> </span><span class="l">debug        </span><span class="w"> </span><span class="c"># 실행되는 SQL 로그</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">org.hibernate.type.descriptor.sql.BasicBinder</span><span class="p">:</span><span class="w"> </span><span class="l">trace</span><span class="w"> </span><span class="c"># 바인딩되는 파라미터 값 로그</span><span class="w">
-</span></span></span></code></pre></div><h3 id="설명">설명:</h3>
-<ul>
-<li><code>show-sql</code>: Hibernate가 실행하는 SQL을 표준 출력으로 보여줌 (간단한 로그).</li>
-<li><code>format_sql</code>: SQL 쿼리를 읽기 쉽게 줄바꿈 및 들여쓰기.</li>
-<li><code>logging.level.org.hibernate.SQL</code>: 더 상세한 SQL 로그 (로깅 프레임워크 통해 출력).</li>
-<li><code>logging.level.org.hibernate.type.descriptor.sql.BasicBinder</code>: SQL에 바인딩되는 파라미터까지 출력하고 싶을 때 사용.</li>
-</ul>
-<blockquote>
-<p>💡 파라미터 로그는 민감 정보가 노출될 수 있으니 운영 환경에서는 주의해서 사용하세요.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Fri, 28 Mar 2025 13:25:03 &#43;0900" class="no-wrap"
-                title=" Fri, 28 Mar 2025 13:25:03 &#43;0900">
-                Fri, 28 Mar 2025 13:25:03 &#43;0900
               </relative-time>
             </div>
           </div>
