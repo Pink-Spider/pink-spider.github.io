@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">89</span>
+              <span class="Counter">90</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">89</span>
+      <span class="Counter ">90</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,52 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/js/about_closure/">JS에서 클로저(closure)란...</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>JavaScript에서 **클로저(Closure)**는 함수와 그 함수가 선언된 어휘적 환경(Lexical Environment)의 조합을 말합니다. 즉, <strong>함수가 외부 스코프의 변수에 접근할 수 있는 기능</strong>을 의미합니다.</p>
+<hr>
+<h2 id="-기본-개념">📌 기본 개념</h2>
+<p>클로저는 다음과 같은 조건에서 생성됩니다:</p>
+<ol>
+<li><strong>함수 안에 함수가 정의되어 있고</strong>,</li>
+<li>내부 함수가 외부 함수의 변수에 접근할 수 있으며,</li>
+<li><strong>외부 함수의 실행이 끝난 뒤에도 내부 함수가 여전히 그 변수에 접근할 수 있을 때</strong> 클로저가 됩니다.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">outer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">counter</span> <span class="o">=</span> <span class="nx">outer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">counter</span><span class="p">();</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">counter</span><span class="p">();</span> <span class="c1">// 2
+</span></span></span></code></pre></div><p>위 예제에서 <code>inner()</code> 함수는 <code>outer()</code>의 지역 변수 <code>count</code>에 접근합니다. <code>outer()</code>의 실행이 끝났음에도 <code>counter()</code>가 <code>count</code>에 계속 접근할 수 있는 이유는 클로저 때문입니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Fri, 20 Jun 2025 14:06:17 &#43;0900" class="no-wrap"
+                title=" Fri, 20 Jun 2025 14:06:17 &#43;0900">
+                Fri, 20 Jun 2025 14:06:17 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1028,48 +1074,6 @@ mysql에서는 %m%d, %Y 등으로 쓰고 h2에선 &lsquo;MMdd&rsquo;, &lsquo;yyy
               <relative-time datetime=" Sun, 01 Jun 2025 20:20:45 &#43;0900" class="no-wrap"
                 title=" Sun, 01 Jun 2025 20:20:45 &#43;0900">
                 Sun, 01 Jun 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/db/mysql_slow_query/">MySql Slow Query 모니터링</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>MySQL에서 <strong>Slow Query(슬로우 쿼리)</strong> 를 모니터링하는 것은 성능 최적화를 위한 중요한 작업입니다. 다음은 슬로우 쿼리를 모니터링하는 일반적인 방법들입니다:</p>
-<hr>
-<h3 id="1-슬로우-쿼리-로그-활성화하기">1. <strong>슬로우 쿼리 로그 활성화하기</strong></h3>
-<p>슬로우 쿼리를 기록하기 위해 MySQL 설정을 조정합니다.</p>
-<h4 id="방법-1-mycnf-또는-myini-파일-수정">방법 1: <code>my.cnf</code> 또는 <code>my.ini</code> 파일 수정</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[mysqld]</span>
-</span></span><span class="line"><span class="cl"><span class="na">slow_query_log</span> <span class="o">=</span> <span class="s">1</span>
-</span></span><span class="line"><span class="cl"><span class="na">slow_query_log_file</span> <span class="o">=</span> <span class="s">/var/log/mysql/slow.log</span>
-</span></span><span class="line"><span class="cl"><span class="na">long_query_time</span> <span class="o">=</span> <span class="s">1</span>
-</span></span><span class="line"><span class="cl"><span class="na">log_queries_not_using_indexes</span> <span class="o">=</span> <span class="s">1</span>
-</span></span></code></pre></div><ul>
-<li><code>slow_query_log</code>: 슬로우 쿼리 로그 기능 활성화</li>
-<li><code>slow_query_log_file</code>: 로그 파일 위치</li>
-<li><code>long_query_time</code>: 몇 초 이상 걸리는 쿼리를 느린 쿼리로 간주할지 설정 (초 단위)</li>
-<li><code>log_queries_not_using_indexes</code>: 인덱스를 사용하지 않는 쿼리도 로그에 기록</li>
-</ul>
-<p>설정 후 MySQL을 재시작해야 반영됩니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 29 May 2025 20:20:45 &#43;0900" class="no-wrap"
-                title=" Thu, 29 May 2025 20:20:45 &#43;0900">
-                Thu, 29 May 2025 20:20:45 &#43;0900
               </relative-time>
             </div>
           </div>

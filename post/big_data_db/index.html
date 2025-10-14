@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Access Token을 http header에 보내는 것과 body에 보내는 것의 차이 | Pink Spider
+     | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,23 +27,21 @@
   
   <meta
   name="description"
-  content="HTTP API 호출 시 access token을 헤더와 바디에 보내는 것 사이에는 몇 가지 중요한 보안상 차이점이 있습니다:
-주요 보안 차이점 1. 로깅 및 모니터링 헤더: 대부분의 웹 서버와 프록시는 기본적으로 Authorization 헤더를 로그에서 마스킹하거나 제외합니다 바디: 요청 바디는 디버깅 목적으로 로그에 기록될 가능성이 높아 토큰이 평문으로 노출될 위험이 있습니다 2. 캐싱 동작 헤더: HTTP 캐시는 Authorization 헤더가 있는 요청을 기본적으로 캐시하지 않습니다 바디: 바디에 토큰이 있어도 캐시 정책에 따라 응답이 캐시될 수 있어, 의도치 않은 토큰 노출 위험이 있습니다 3. 프록시 및 미들웨어 처리 헤더: 표준 인증 헤더로 인식되어 보안 미들웨어에서 적절히 처리됩니다 바디: 일반 데이터로 취급되어 보안 처리가 누락될 수 있습니다 4. 브라우저 개발자 도구 헤더: 네트워크 탭에서 볼 수는 있지만, Authorization 헤더임을 명확히 인식할 수 있습니다 바디: 일반 데이터처럼 보여 개발자가 민감한 정보임을 놓칠 수 있습니다 권장사항 // ✅ 권장: Authorization 헤더 사용 fetch(&#39;/api/data&#39;, { headers: { &#39;Authorization&#39;: &#39;Bearer &#39; &#43; accessToken, &#39;Content-Type&#39;: &#39;application/json&#39; } }); // ❌ 비권장: 바디에 토큰 포함 fetch(&#39;/api/data&#39;, { method: &#39;POST&#39;, headers: { &#39;Content-Type&#39;: &#39;application/json&#39; }, body: JSON.stringify({ accessToken: accessToken, otherData: data }) }); 결론: Authorization 헤더를 사용하는 것이 보안상 더 안전하며, HTTP 표준을 준수하는 방법입니다. 대부분의 보안 도구와 인프라가 이를 전제로 설계되어 있어 더 나은 보안 보장을 제공합니다.
+  content="DB의 테이블의 row가 너무 많아질떄 (예 하루에 10만건씩 누적), 대처 방법 “하루 10만 건씩 계속 누적”이면 1년에 3,650만 건입니다. 초반엔 버티지만, 몇 달만 지나도 쿼리·백업·VACUUM/OPTIMIZE 비용이 급증하죠. 아래 순서대로 적용해보세요. 1) 먼저 결정할 것 (운영 정책) 보존 기간: 예) “6개월은 온라인(핫), 2년은 아카이브(콜드), 그 외 삭제” 주요 조회 패턴: 최근 N일만 조회? 특정 사용자/키 기준 조회? 집계 위주? SLA/성능: p95 응답시간, 허용 가능한 쓰기 지연 2) 즉시 효과 (스키마/인덱스/쓰기) 인덱스 슬림화: 실제 조건/정렬에 쓰는 컬럼만 인덱스. 불필요한 복합 인덱스 제거.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/jwt_http_header_body/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/big_data_db/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Access Token을 http header에 보내는 것과 body에 보내는 것의 차이 - Pink Spider"
+  content=" - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="HTTP API 호출 시 access token을 헤더와 바디에 보내는 것 사이에는 몇 가지 중요한 보안상 차이점이 있습니다:
-주요 보안 차이점 1. 로깅 및 모니터링 헤더: 대부분의 웹 서버와 프록시는 기본적으로 Authorization 헤더를 로그에서 마스킹하거나 제외합니다 바디: 요청 바디는 디버깅 목적으로 로그에 기록될 가능성이 높아 토큰이 평문으로 노출될 위험이 있습니다 2. 캐싱 동작 헤더: HTTP 캐시는 Authorization 헤더가 있는 요청을 기본적으로 캐시하지 않습니다 바디: 바디에 토큰이 있어도 캐시 정책에 따라 응답이 캐시될 수 있어, 의도치 않은 토큰 노출 위험이 있습니다 3. 프록시 및 미들웨어 처리 헤더: 표준 인증 헤더로 인식되어 보안 미들웨어에서 적절히 처리됩니다 바디: 일반 데이터로 취급되어 보안 처리가 누락될 수 있습니다 4. 브라우저 개발자 도구 헤더: 네트워크 탭에서 볼 수는 있지만, Authorization 헤더임을 명확히 인식할 수 있습니다 바디: 일반 데이터처럼 보여 개발자가 민감한 정보임을 놓칠 수 있습니다 권장사항 // ✅ 권장: Authorization 헤더 사용 fetch(&#39;/api/data&#39;, { headers: { &#39;Authorization&#39;: &#39;Bearer &#39; &#43; accessToken, &#39;Content-Type&#39;: &#39;application/json&#39; } }); // ❌ 비권장: 바디에 토큰 포함 fetch(&#39;/api/data&#39;, { method: &#39;POST&#39;, headers: { &#39;Content-Type&#39;: &#39;application/json&#39; }, body: JSON.stringify({ accessToken: accessToken, otherData: data }) }); 결론: Authorization 헤더를 사용하는 것이 보안상 더 안전하며, HTTP 표준을 준수하는 방법입니다. 대부분의 보안 도구와 인프라가 이를 전제로 설계되어 있어 더 나은 보안 보장을 제공합니다.
+  content="DB의 테이블의 row가 너무 많아질떄 (예 하루에 10만건씩 누적), 대처 방법 “하루 10만 건씩 계속 누적”이면 1년에 3,650만 건입니다. 초반엔 버티지만, 몇 달만 지나도 쿼리·백업·VACUUM/OPTIMIZE 비용이 급증하죠. 아래 순서대로 적용해보세요. 1) 먼저 결정할 것 (운영 정책) 보존 기간: 예) “6개월은 온라인(핫), 2년은 아카이브(콜드), 그 외 삭제” 주요 조회 패턴: 최근 N일만 조회? 특정 사용자/키 기준 조회? 집계 위주? SLA/성능: p95 응답시간, 허용 가능한 쓰기 지연 2) 즉시 효과 (스키마/인덱스/쓰기) 인덱스 슬림화: 실제 조건/정렬에 쓰는 컬럼만 인덱스. 불필요한 복합 인덱스 제거.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -60,16 +58,15 @@
 />
 <meta
   property="og:title"
-  content="Access Token을 http header에 보내는 것과 body에 보내는 것의 차이 - Pink Spider"
+  content=" - Pink Spider"
 />
 <meta
   property="og:description"
-  content="HTTP API 호출 시 access token을 헤더와 바디에 보내는 것 사이에는 몇 가지 중요한 보안상 차이점이 있습니다:
-주요 보안 차이점 1. 로깅 및 모니터링 헤더: 대부분의 웹 서버와 프록시는 기본적으로 Authorization 헤더를 로그에서 마스킹하거나 제외합니다 바디: 요청 바디는 디버깅 목적으로 로그에 기록될 가능성이 높아 토큰이 평문으로 노출될 위험이 있습니다 2. 캐싱 동작 헤더: HTTP 캐시는 Authorization 헤더가 있는 요청을 기본적으로 캐시하지 않습니다 바디: 바디에 토큰이 있어도 캐시 정책에 따라 응답이 캐시될 수 있어, 의도치 않은 토큰 노출 위험이 있습니다 3. 프록시 및 미들웨어 처리 헤더: 표준 인증 헤더로 인식되어 보안 미들웨어에서 적절히 처리됩니다 바디: 일반 데이터로 취급되어 보안 처리가 누락될 수 있습니다 4. 브라우저 개발자 도구 헤더: 네트워크 탭에서 볼 수는 있지만, Authorization 헤더임을 명확히 인식할 수 있습니다 바디: 일반 데이터처럼 보여 개발자가 민감한 정보임을 놓칠 수 있습니다 권장사항 // ✅ 권장: Authorization 헤더 사용 fetch(&#39;/api/data&#39;, { headers: { &#39;Authorization&#39;: &#39;Bearer &#39; &#43; accessToken, &#39;Content-Type&#39;: &#39;application/json&#39; } }); // ❌ 비권장: 바디에 토큰 포함 fetch(&#39;/api/data&#39;, { method: &#39;POST&#39;, headers: { &#39;Content-Type&#39;: &#39;application/json&#39; }, body: JSON.stringify({ accessToken: accessToken, otherData: data }) }); 결론: Authorization 헤더를 사용하는 것이 보안상 더 안전하며, HTTP 표준을 준수하는 방법입니다. 대부분의 보안 도구와 인프라가 이를 전제로 설계되어 있어 더 나은 보안 보장을 제공합니다.
+  content="DB의 테이블의 row가 너무 많아질떄 (예 하루에 10만건씩 누적), 대처 방법 “하루 10만 건씩 계속 누적”이면 1년에 3,650만 건입니다. 초반엔 버티지만, 몇 달만 지나도 쿼리·백업·VACUUM/OPTIMIZE 비용이 급증하죠. 아래 순서대로 적용해보세요. 1) 먼저 결정할 것 (운영 정책) 보존 기간: 예) “6개월은 온라인(핫), 2년은 아카이브(콜드), 그 외 삭제” 주요 조회 패턴: 최근 N일만 조회? 특정 사용자/키 기준 조회? 집계 위주? SLA/성능: p95 응답시간, 허용 가능한 쓰기 지연 2) 즉시 효과 (스키마/인덱스/쓰기) 인덱스 슬림화: 실제 조건/정렬에 쓰는 컬럼만 인덱스. 불필요한 복합 인덱스 제거.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/jwt_http_header_body/" />
-<meta property="og:site_name" content="Access Token을 http header에 보내는 것과 body에 보내는 것의 차이" />
+<meta property="og:url" content="https://pink-spider.github.io/post/big_data_db/" />
+<meta property="og:site_name" content="" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -77,7 +74,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-09-12 08:25:18 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-10-14 11:25:18 &#43;0900 KST" />
 
 
 
@@ -287,18 +284,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/jwt_http_header_body/">Access Token을 http header에 보내는 것과 body에 보내는 것의 차이</a></strong>
+                      href="https://pink-spider.github.io/post/big_data_db/"></a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Fri, 12 Sep 2025 08:25:18 &#43;0900"
+                  Created <relative-time datetime="Tue, 14 Oct 2025 11:25:18 &#43;0900"
                     class="no-wrap">
-                    Fri, 12 Sep 2025 08:25:18 &#43;0900</relative-time>
+                    Tue, 14 Oct 2025 11:25:18 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Fri, 12 Sep 2025 09:00:33 &#43;0900"
+                  Modified <relative-time datetime="Tue, 14 Oct 2025 11:37:21 &#43;0900"
                     class="no-wrap">
-                    Fri, 12 Sep 2025 09:00:33 &#43;0900</relative-time>
+                    Tue, 14 Oct 2025 11:37:21 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -328,9 +325,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      492 Words
+                      1198 Words
                     <span class="file-info-divider"></span>
-                                        2 min
+                                        5 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -341,49 +338,120 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>HTTP API 호출 시 access token을 헤더와 바디에 보내는 것 사이에는 몇 가지 중요한 보안상 차이점이 있습니다:</p>
-<h2 id="주요-보안-차이점">주요 보안 차이점</h2>
-<h3 id="1-로깅-및-모니터링">1. <strong>로깅 및 모니터링</strong></h3>
+                <article class="markdown-body entry-content container-lg"><h1 id="db의-테이블의-row가-너무-많아질떄-예-하루에-10만건씩-누적-대처-방법">DB의 테이블의 row가 너무 많아질떄 (예 하루에 10만건씩 누적), 대처 방법</h1>
 <ul>
-<li><strong>헤더</strong>: 대부분의 웹 서버와 프록시는 기본적으로 Authorization 헤더를 로그에서 마스킹하거나 제외합니다</li>
-<li><strong>바디</strong>: 요청 바디는 디버깅 목적으로 로그에 기록될 가능성이 높아 토큰이 평문으로 노출될 위험이 있습니다</li>
+<li>“하루 10만 건씩 계속 누적”이면 1년에 3,650만 건입니다. 초반엔 버티지만, 몇 달만 지나도 쿼리·백업·VACUUM/OPTIMIZE 비용이 급증하죠. 아래 순서대로 적용해보세요.</li>
 </ul>
-<h3 id="2-캐싱-동작">2. <strong>캐싱 동작</strong></h3>
+<h1 id="1-먼저-결정할-것-운영-정책">1) 먼저 결정할 것 (운영 정책)</h1>
 <ul>
-<li><strong>헤더</strong>: HTTP 캐시는 Authorization 헤더가 있는 요청을 기본적으로 캐시하지 않습니다</li>
-<li><strong>바디</strong>: 바디에 토큰이 있어도 캐시 정책에 따라 응답이 캐시될 수 있어, 의도치 않은 토큰 노출 위험이 있습니다</li>
+<li><strong>보존 기간</strong>: 예) “6개월은 온라인(핫), 2년은 아카이브(콜드), 그 외 삭제”</li>
+<li><strong>주요 조회 패턴</strong>: 최근 N일만 조회? 특정 사용자/키 기준 조회? 집계 위주?</li>
+<li><strong>SLA/성능</strong>: p95 응답시간, 허용 가능한 쓰기 지연</li>
 </ul>
-<h3 id="3-프록시-및-미들웨어-처리">3. <strong>프록시 및 미들웨어 처리</strong></h3>
+<h1 id="2-즉시-효과-스키마인덱스쓰기">2) 즉시 효과 (스키마/인덱스/쓰기)</h1>
 <ul>
-<li><strong>헤더</strong>: 표준 인증 헤더로 인식되어 보안 미들웨어에서 적절히 처리됩니다</li>
-<li><strong>바디</strong>: 일반 데이터로 취급되어 보안 처리가 누락될 수 있습니다</li>
-</ul>
-<h3 id="4-브라우저-개발자-도구">4. <strong>브라우저 개발자 도구</strong></h3>
+<li>
+<p><strong>인덱스 슬림화</strong>: 실제 조건/정렬에 쓰는 컬럼만 인덱스. 불필요한 복합 인덱스 제거.</p>
+</li>
+<li>
+<p><strong>Covering/Partial 인덱스</strong>:</p>
 <ul>
-<li><strong>헤더</strong>: 네트워크 탭에서 볼 수는 있지만, Authorization 헤더임을 명확히 인식할 수 있습니다</li>
-<li><strong>바디</strong>: 일반 데이터처럼 보여 개발자가 민감한 정보임을 놓칠 수 있습니다</li>
+<li>
+<p>PostgreSQL: 최근 데이터만 대상으로 부분 인덱스</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">CONCURRENTLY</span><span class="w"> </span><span class="n">idx_events_recent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ON</span><span class="w"> </span><span class="n">events</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;30 days&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>
+<p>대용량 타임순 데이터는 <strong>BRIN 인덱스</strong> 고려(append-only에 매우 저렴).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">CONCURRENTLY</span><span class="w"> </span><span class="n">idx_events_brin</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">BRIN</span><span class="p">(</span><span class="n">created_at</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div></li>
 </ul>
-<h2 id="권장사항">권장사항</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// ✅ 권장: Authorization 헤더 사용
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/data&#39;</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Authorization&#39;</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">accessToken</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// ❌ 비권장: 바디에 토큰 포함
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/data&#39;</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">body</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">accessToken</span><span class="o">:</span> <span class="nx">accessToken</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">otherData</span><span class="o">:</span> <span class="nx">data</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></div><p><strong>결론</strong>: Authorization 헤더를 사용하는 것이 보안상 더 안전하며, HTTP 표준을 준수하는 방법입니다. 대부분의 보안 도구와 인프라가 이를 전제로 설계되어 있어 더 나은 보안 보장을 제공합니다.</p>
+</li>
+<li>
+<p><strong>배치 쓰기</strong>: 단건 insert 대신 배치(예: 500~5,000건 단위), 트랜잭션 묶기.</p>
+</li>
+<li>
+<p><strong>PK 설계</strong>: InnoDB/Clustered PK는 증가형(빅시리얼/스노우플레이크). 랜덤 UUID v4를 클러스터 키로 쓰지 않기.</p>
+</li>
+</ul>
+<h1 id="3-파티셔닝-핵심">3) 파티셔닝 (핵심)</h1>
+<p>대부분의 “시간 기반 로그/이벤트”는 <strong>기간별 파티션</strong>으로 해결됩니다. 파티션 단위는 월(일간 트래픽이 높으면 “주/일”).</p>
+<ul>
+<li>
+<p><strong>장점</strong>: <code>DROP PARTITION</code>으로 오래된 데이터 제거가 O(메타데이터)급. 유지보수·백업·인덱스가 파티션별로 슬림.</p>
+</li>
+<li>
+<p><strong>PostgreSQL 예시 (월 파티션)</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">id</span><span class="w"> </span><span class="n">bigserial</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">user_id</span><span class="w"> </span><span class="nb">bigint</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">created_at</span><span class="w"> </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">payload</span><span class="w"> </span><span class="n">jsonb</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">RANGE</span><span class="w"> </span><span class="p">(</span><span class="n">created_at</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">events_2025_10</span><span class="w"> </span><span class="n">PARTITION</span><span class="w"> </span><span class="k">OF</span><span class="w"> </span><span class="n">events</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FOR</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;2025-10-01&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;2025-11-01&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 앞으로 매월 자동 생성(배치 잡) + 오래된 파티션 DROP
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">events_2024_10</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 보존기간 지난 달은 즉시 삭제
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>MySQL/InnoDB</strong>: RANGE 파티션(TO_DAYS(created_at)) 또는 HASH(user_id). 오래된 파티션 <code>ALTER TABLE ... DROP PARTITION</code>.</p>
+</li>
+</ul>
+<h1 id="4-보존아카이브요약롤업">4) 보존/아카이브/요약(롤업)</h1>
+<ul>
+<li>
+<p><strong>TTL/만료 정책</strong>: 파티션 드롭으로 실행(DELETE보다 훨씬 빠름).</p>
+</li>
+<li>
+<p><strong>아카이브 테이블/스토리지</strong>:</p>
+<ul>
+<li>
+<p>OLTP에는 최근 3~6개월만 두고, 이전은 <strong>아카이브 스키마</strong>로 이동(또는 S3/Coldw storage + Athena/BigQuery/ClickHouse).</p>
+</li>
+<li>
+<p>예:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">events_archive</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">events</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">interval</span><span class="w"> </span><span class="s1">&#39;180 days&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 그 후 해당 파티션 DROP
+</span></span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><strong>롤업 테이블/머터리얼라이즈드 뷰</strong>: 조회가 “일/주 단위 집계”라면 사전 집계.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="n">MATERIALIZED</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">daily_counts</span><span class="w"> </span><span class="k">AS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="n">date_trunc</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">day</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">cnt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">events</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 주기적 갱신
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">REFRESH</span><span class="w"> </span><span class="n">MATERIALIZED</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">CONCURRENTLY</span><span class="w"> </span><span class="n">daily_counts</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div></li>
+</ul>
+<h1 id="5-운영튜닝">5) 운영/튜닝</h1>
+<ul>
+<li><strong>Autovacuum/Analyze(PostgreSQL)</strong>: 대용량 테이블은 파라미터 하향 조정(빠른 회전), 파티션별 병렬 VACUUM.
+예) <code>autovacuum_vacuum_scale_factor</code> 0.1→0.02, <code>autovacuum_analyze_scale_factor</code> 0.05 등.</li>
+<li><strong>백업 전략</strong>: 파티션 단위 백업. 오래된 파티션은 스냅샷만 보관.</li>
+<li><strong>모니터링</strong>: 파티션 개수, 인덱스 크기, 힙블로트, 느린 쿼리 패턴 추적.</li>
+</ul>
+<h1 id="6-필요-시-아키텍처-분리">6) 필요 시 아키텍처 분리</h1>
+<ul>
+<li><strong>쓰기 많은 로그/이벤트</strong>: TimescaleDB(PSQL 확장), ClickHouse, BigQuery 같은 <strong>시계열/컬럼 지향</strong>으로 분리.
+OLTP(트랜잭션)는 RDB, 분석/검색은 OLAP/서치로 <strong>CQRS/ETL</strong>.</li>
+<li><strong>CQRS 파이프라인</strong>: OLTP → (Debezium/Kafka CDC) → 스트리밍 집계/보관.</li>
+</ul>
+<h1 id="7-현실적인-적용-조합권장-기본셋">7) 현실적인 적용 조합(권장 기본셋)</h1>
+<ol>
+<li>“기간 기준 파티셔닝(월)” + “최근 구간 Partial/BRIN 인덱스”</li>
+<li>“6개월 TTL(파티션 드롭)” + “일간 롤업 뷰”</li>
+<li>“아카이브는 S3/저비용 스토리지(압축/파케이)”</li>
+<li>“배치 insert + PK 증가형”
+→ 대부분의 10만건/일 워크로드는 이 4가지로 깔끔히 안정화됩니다.</li>
+</ol>
 </article>
               </div>
 
@@ -396,13 +464,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/big_data_db/"> </a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/event_raise_listen/">Java에서 event를 활용한 구현 예시&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/jwt_http_header_body/">Access Token을 http header에 보내는 것과 body에 보내는 것의 차이&nbsp;</a><div> »</div>
           
         </div>
       </div>

@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">89</span>
+              <span class="Counter">90</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">89</span>
+      <span class="Counter ">90</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,56 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/pitest_mutation_test/">Mutation Testing in Java, Pitest</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>아래에 <strong>Java에서 PIT (Pitest) Mutation Testing</strong>을 사용하는 방법을 단계별로 정리해 드립니다. PIT는 자바 코드의 테스트 커버리지를 실제로 검증하는 강력한 도구로, 잘못된(변이된) 코드를 테스트가 얼마나 잘 잡아내는지를 측정합니다.</p>
+<hr>
+<h2 id="-1-pitpitest-소개">📌 1. PIT(Pitest) 소개</h2>
+<ul>
+<li>
+<p><strong>Mutation Testing이란?</strong></p>
+<ul>
+<li>기존 코드를 일부러 “변이(mutant)” 시켜서 테스트를 돌려보는 기법입니다.</li>
+<li>테스트가 이 변이를 검출하지 못하면, 테스트에 허점이 있다는 뜻입니다.</li>
+<li>단순한 라인 커버리지보다 더 신뢰성 있는 테스트 품질 지표를 제공합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>PIT의 특징</strong></p>
+<ul>
+<li>JUnit 기반 테스트와 잘 통합됩니다.</li>
+<li>Maven, Gradle, Ant에서 쉽게 사용 가능합니다.</li>
+<li>HTML 및 XML 리포트를 생성합니다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="-2-maven-프로젝트에-pit-적용">⚙️ 2. Maven 프로젝트에 PIT 적용</h2>
+<h3 id="21-maven-플러그인-추가">2.1 Maven 플러그인 추가</h3>
+<p><code>pom.xml</code>에 다음 플러그인을 설정합니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Jul 2025 10:44:24 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Jul 2025 10:44:24 &#43;0900">
+                Thu, 03 Jul 2025 10:44:24 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1339,52 +1389,6 @@ public class SshTunnelConfig {
               <relative-time datetime=" Fri, 20 Jun 2025 14:11:00 &#43;0900" class="no-wrap"
                 title=" Fri, 20 Jun 2025 14:11:00 &#43;0900">
                 Fri, 20 Jun 2025 14:11:00 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/js/about_closure/">JS에서 클로저(closure)란...</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>JavaScript에서 **클로저(Closure)**는 함수와 그 함수가 선언된 어휘적 환경(Lexical Environment)의 조합을 말합니다. 즉, <strong>함수가 외부 스코프의 변수에 접근할 수 있는 기능</strong>을 의미합니다.</p>
-<hr>
-<h2 id="-기본-개념">📌 기본 개념</h2>
-<p>클로저는 다음과 같은 조건에서 생성됩니다:</p>
-<ol>
-<li><strong>함수 안에 함수가 정의되어 있고</strong>,</li>
-<li>내부 함수가 외부 함수의 변수에 접근할 수 있으며,</li>
-<li><strong>외부 함수의 실행이 끝난 뒤에도 내부 함수가 여전히 그 변수에 접근할 수 있을 때</strong> 클로저가 됩니다.</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">outer</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kd">function</span> <span class="nx">inner</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">counter</span> <span class="o">=</span> <span class="nx">outer</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="nx">counter</span><span class="p">();</span> <span class="c1">// 1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">counter</span><span class="p">();</span> <span class="c1">// 2
-</span></span></span></code></pre></div><p>위 예제에서 <code>inner()</code> 함수는 <code>outer()</code>의 지역 변수 <code>count</code>에 접근합니다. <code>outer()</code>의 실행이 끝났음에도 <code>counter()</code>가 <code>count</code>에 계속 접근할 수 있는 이유는 클로저 때문입니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Fri, 20 Jun 2025 14:06:17 &#43;0900" class="no-wrap"
-                title=" Fri, 20 Jun 2025 14:06:17 &#43;0900">
-                Fri, 20 Jun 2025 14:06:17 &#43;0900
               </relative-time>
             </div>
           </div>

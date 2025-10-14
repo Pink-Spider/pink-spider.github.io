@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">89</span>
+              <span class="Counter">90</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">89</span>
+      <span class="Counter ">90</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,46 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/filestream_memory/">File을 stream 방식으로 write할 때, 메모리는?</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Spring Boot에서 파일을 스트리밍(Stream) 방식으로 <strong>write</strong>할 때, <strong>메모리에 올릴지 여부는 사용 방식에 따라 달라집니다</strong>. <!-- raw HTML omitted -->
+하지만 일반적인 경우 스트리밍은 <strong>메모리 사용을 최소화하기 위한 기법</strong>으로, 전체 데이터를 메모리에 올리지 않고 일정 크기의 버퍼를 통해 점진적으로 처리합니다.</p>
+<hr>
+<h2 id="-메모리에-올리지-않는-경우-streaming-방식">✅ 메모리에 올리지 않는 경우 (Streaming 방식)</h2>
+<p>Java에서 <code>InputStream</code> → <code>OutputStream</code> 형태로 데이터를 전달할 때 보통 다음처럼 사용합니다:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">InputStream</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">OutputStream</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileOutputStream</span><span class="p">(</span><span class="s">&#34;output.txt&#34;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">8192</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="c1">// 8KB 버퍼</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">bytesRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">out</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">bytesRead</span><span class="p">,</span><span class="w"> </span><span class="n">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>이 방식은:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 30 Apr 2025 13:25:18 &#43;0900" class="no-wrap"
+                title=" Wed, 30 Apr 2025 13:25:18 &#43;0900">
+                Wed, 30 Apr 2025 13:25:18 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1039,48 +1079,6 @@ class Solution {
               <relative-time datetime=" Thu, 24 Apr 2025 11:22:53 &#43;0900" class="no-wrap"
                 title=" Thu, 24 Apr 2025 11:22:53 &#43;0900">
                 Thu, 24 Apr 2025 11:22:53 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/jpa/n&#43;1/">JPA 사용시 N&#43;1 이슈에 대하여</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>JPA에서 <strong>N+1 문제</strong>는 성능 저하를 유발할 수 있는 대표적인 <strong>ORM 사용 시의 이슈</strong> 중 하나입니다. 아래에 자세히 설명드릴게요.</p>
-<hr>
-<h3 id="n1-문제란">N+1 문제란?</h3>
-<p><strong>N+1 문제</strong>는 JPA에서 <strong>연관된 엔티티를 지연 로딩(LAZY loading)</strong> 방식으로 조회할 때 발생합니다.</p>
-<p>예를 들어, 다음과 같은 상황을 가정해 봅시다:</p>
-<ul>
-<li>게시글(Post)과 작성자(Member)는 다대일(N:1) 관계이다.</li>
-<li>게시글 1개는 작성자 1명을 가진다.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Entity</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Post</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@ManyToOne</span><span class="p">(</span><span class="n">fetch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FetchType</span><span class="p">.</span><span class="na">LAZY</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Member</span><span class="w"> </span><span class="n">author</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>게시글 리스트를 조회하는 쿼리를 날리면:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Post</span><span class="o">&gt;</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">postRepository</span><span class="p">.</span><span class="na">findAll</span><span class="p">();</span><span class="w">
-</span></span></span></code></pre></div><p>이때 JPA는 다음과 같은 방식으로 작동합니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 23 Apr 2025 20:48:45 &#43;0900" class="no-wrap"
-                title=" Wed, 23 Apr 2025 20:48:45 &#43;0900">
-                Wed, 23 Apr 2025 20:48:45 &#43;0900
               </relative-time>
             </div>
           </div>

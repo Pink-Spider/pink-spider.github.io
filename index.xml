@@ -6,8 +6,15 @@
     <description>Recent content on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 12 Sep 2025 09:00:33 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 14 Oct 2025 11:37:21 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://pink-spider.github.io/post/big_data_db/</link>
+      <pubDate>Tue, 14 Oct 2025 11:25:18 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/big_data_db/</guid>
+      <description>&lt;h1 id=&#34;db의-테이블의-row가-너무-많아질떄-예-하루에-10만건씩-누적-대처-방법&#34;&gt;DB의 테이블의 row가 너무 많아질떄 (예 하루에 10만건씩 누적), 대처 방법&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;“하루 10만 건씩 계속 누적”이면 1년에 3,650만 건입니다. 초반엔 버티지만, 몇 달만 지나도 쿼리·백업·VACUUM/OPTIMIZE 비용이 급증하죠. 아래 순서대로 적용해보세요.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;1-먼저-결정할-것-운영-정책&#34;&gt;1) 먼저 결정할 것 (운영 정책)&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;보존 기간&lt;/strong&gt;: 예) “6개월은 온라인(핫), 2년은 아카이브(콜드), 그 외 삭제”&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;주요 조회 패턴&lt;/strong&gt;: 최근 N일만 조회? 특정 사용자/키 기준 조회? 집계 위주?&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;SLA/성능&lt;/strong&gt;: p95 응답시간, 허용 가능한 쓰기 지연&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;2-즉시-효과-스키마인덱스쓰기&#34;&gt;2) 즉시 효과 (스키마/인덱스/쓰기)&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;인덱스 슬림화&lt;/strong&gt;: 실제 조건/정렬에 쓰는 컬럼만 인덱스. 불필요한 복합 인덱스 제거.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Access Token을 http header에 보내는 것과 body에 보내는 것의 차이</title>
       <link>https://pink-spider.github.io/post/spring/jwt_http_header_body/</link>
