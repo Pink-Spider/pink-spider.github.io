@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Posts | Pink Spider
+    Java는 multi paradigm 언어일까? | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,20 +27,24 @@
   
   <meta
   name="description"
-  content=""
+  content="Java는 멀티 패러다임 언어인가? Java는 멀티 패러다임 언어라고 할 수 있습니다. 특히 Java 8 이후로는 더욱 명확해졌습니다. 초기에는 &ldquo;순수한&rdquo; 객체지향 언어를 목표로 했지만, 시간이 지나면서 다양한 프로그래밍 패러다임을 수용하게 되었습니다.
+Java가 지원하는 프로그래밍 패러다임 1. 객체지향 프로그래밍 (OOP) - 핵심 패러다임 // 클래스, 상속, 캡슐화, 다형성 public class Animal { private String name; public void makeSound() { System.out.println(&#34;Some sound&#34;); } } public class Dog extends Animal { @Override public void makeSound() { System.out.println(&#34;Woof!&#34;); } } 2. 명령형 프로그래밍 (Imperative) // 상태 변경과 제어 흐름을 명시적으로 작성 public static int factorial(int n) { int result = 1; for (int i = 1; i &lt;= n; i&#43;&#43;) { result *= i; // 상태 변경 } return result; } 3. 함수형 프로그래밍 (Functional) - Java 8&#43; import java.util.*; import java.util.function.*; import java.util.stream.*; public class FunctionalExample { public static void main(String[] args) { // 1. 람다 표현식과 고차 함수 Function&lt;Integer, Integer&gt; square = x -&gt; x * x; Function&lt;Integer, Integer&gt; addOne = x -&gt; x &#43; 1; // 함수 합성 Function&lt;Integer, Integer&gt; squareThenAdd = square.andThen(addOne); System.out.println(squareThenAdd.apply(3)); // 10 // 2. 불변성과 순수 함수 List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 3, 4, 5); List&lt;Integer&gt; doubled = numbers.stream() .map(n -&gt; n * 2) // 원본을 변경하지 않음 .collect(Collectors.toList()); // 3. 함수를 파라미터로 전달 calculate(10, 5, (a, b) -&gt; a &#43; b); // 15 calculate(10, 5, (a, b) -&gt; a * b); // 50 } static void calculate(int x, int y, BinaryOperator&lt;Integer&gt; operation) { System.out.println(operation.apply(x, y)); } } 4. 제네릭 프로그래밍 (Generic) // 타입 파라미터를 사용한 일반화 public class Box&lt;T&gt; { private T content; public void set(T content) { this.content = content; } public T get() { return content; } } // 제네릭 메서드 public static &lt;T extends Comparable&lt;T&gt;&gt; T findMax(List&lt;T&gt; list) { return list.stream() .max(Comparable::compareTo) .orElse(null); } 5. 동시성/병렬 프로그래밍 (Concurrent/Parallel) import java.util.concurrent.*; public class ConcurrentExample { public static void main(String[] args) throws Exception { // CompletableFuture를 사용한 비동기 프로그래밍 CompletableFuture&lt;String&gt; future1 = CompletableFuture .supplyAsync(() -&gt; fetchDataFromAPI1()); CompletableFuture&lt;String&gt; future2 = CompletableFuture .supplyAsync(() -&gt; fetchDataFromAPI2()); // 두 작업을 결합 CompletableFuture&lt;String&gt; combined = future1 .thenCombine(future2, (result1, result2) -&gt; result1 &#43; &#34; &#34; &#43; result2); System.out.println(combined.get()); } } 6. 반응형 프로그래밍 (Reactive) - 라이브러리 사용 // RxJava 또는 Project Reactor 사용 예제 Flux.just(1, 2, 3, 4, 5) .filter(n -&gt; n % 2 == 0) .map(n -&gt; n * 2) .subscribe(System.out::println); 다양한 패러다임을 혼합한 실제 예제 import java.util.*; import java.util.concurrent.*; import java.util.stream.*; // OOP: 클래스와 인터페이스 정의 interface DataProcessor&lt;T&gt; { CompletableFuture&lt;List&lt;T&gt;&gt; process(List&lt;T&gt; data); } public class HybridExample implements DataProcessor&lt;Integer&gt; { private final ExecutorService executor = Executors.newFixedThreadPool(4); @Override public CompletableFuture&lt;List&lt;Integer&gt;&gt; process(List&lt;Integer&gt; data) { // 함수형 &#43; 동시성 프로그래밍 return CompletableFuture.supplyAsync(() -&gt; data.parallelStream() // 병렬 처리 .filter(n -&gt; n &gt; 0) // 함수형: 필터링 .map(this::complexCalculation) // 메서드 참조 .sorted() // 정렬 .collect(Collectors.toList()), executor ); } // 명령형 스타일의 복잡한 계산 private Integer complexCalculation(Integer n) { int result = n; for (int i = 0; i &lt; 3; i&#43;&#43;) { result = result * 2 &#43; 1; } return result; } public static void main(String[] args) throws Exception { HybridExample processor = new HybridExample(); List&lt;Integer&gt; data = Arrays.asList(1, -2, 3, 4, -5, 6); // 비동기 처리 시작 CompletableFuture&lt;List&lt;Integer&gt;&gt; future = processor.process(data); // 콜백 체인 (함수형) future.thenApply(result -&gt; { System.out.println(&#34;처리 결과: &#34; &#43; result); return result; }) .thenAccept(result -&gt; { // 결과 활용 int sum = result.stream().mapToInt(Integer::intValue).sum(); System.out.println(&#34;합계: &#34; &#43; sum); }) .get(); // 완료 대기 processor.executor.shutdown(); } } Java의 멀티 패러다임 특징 장점 점진적 도입: 기존 OOP 코드베이스에 함수형 요소를 점진적으로 도입 가능 유연성: 문제에 가장 적합한 패러다임 선택 가능 생태계: 다양한 스타일의 라이브러리와 호환 한계 완전하지 않은 함수형: 불변성이 언어 차원에서 강제되지 않음 혼재된 스타일: 여러 패러다임이 섞여 일관성 유지가 어려울 수 있음 학습 곡선: 모든 패러다임을 효과적으로 사용하려면 학습이 필요 결론 Java는 &ldquo;실용적인&rdquo; 멀티 패러다임 언어입니다. 순수한 함수형 언어(Haskell)나 순수한 객체지향 언어(Smalltalk)와 달리, Java는 실용성을 중시하며 여러 패러다임의 장점을 선택적으로 활용할 수 있게 설계되었습니다. 특히 Java 8 이후로는 현대적인 프로그래밍 패러다임을 적극적으로 수용하고 있어, 진정한 멀티 패러다임 언어로 진화했다고 볼 수 있습니다.
+"
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/java/java_multi_paradigm/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Posts - Pink Spider"
+  content="Java는 multi paradigm 언어일까? - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content=""
+  content="Java는 멀티 패러다임 언어인가? Java는 멀티 패러다임 언어라고 할 수 있습니다. 특히 Java 8 이후로는 더욱 명확해졌습니다. 초기에는 &ldquo;순수한&rdquo; 객체지향 언어를 목표로 했지만, 시간이 지나면서 다양한 프로그래밍 패러다임을 수용하게 되었습니다.
+Java가 지원하는 프로그래밍 패러다임 1. 객체지향 프로그래밍 (OOP) - 핵심 패러다임 // 클래스, 상속, 캡슐화, 다형성 public class Animal { private String name; public void makeSound() { System.out.println(&#34;Some sound&#34;); } } public class Dog extends Animal { @Override public void makeSound() { System.out.println(&#34;Woof!&#34;); } } 2. 명령형 프로그래밍 (Imperative) // 상태 변경과 제어 흐름을 명시적으로 작성 public static int factorial(int n) { int result = 1; for (int i = 1; i &lt;= n; i&#43;&#43;) { result *= i; // 상태 변경 } return result; } 3. 함수형 프로그래밍 (Functional) - Java 8&#43; import java.util.*; import java.util.function.*; import java.util.stream.*; public class FunctionalExample { public static void main(String[] args) { // 1. 람다 표현식과 고차 함수 Function&lt;Integer, Integer&gt; square = x -&gt; x * x; Function&lt;Integer, Integer&gt; addOne = x -&gt; x &#43; 1; // 함수 합성 Function&lt;Integer, Integer&gt; squareThenAdd = square.andThen(addOne); System.out.println(squareThenAdd.apply(3)); // 10 // 2. 불변성과 순수 함수 List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 3, 4, 5); List&lt;Integer&gt; doubled = numbers.stream() .map(n -&gt; n * 2) // 원본을 변경하지 않음 .collect(Collectors.toList()); // 3. 함수를 파라미터로 전달 calculate(10, 5, (a, b) -&gt; a &#43; b); // 15 calculate(10, 5, (a, b) -&gt; a * b); // 50 } static void calculate(int x, int y, BinaryOperator&lt;Integer&gt; operation) { System.out.println(operation.apply(x, y)); } } 4. 제네릭 프로그래밍 (Generic) // 타입 파라미터를 사용한 일반화 public class Box&lt;T&gt; { private T content; public void set(T content) { this.content = content; } public T get() { return content; } } // 제네릭 메서드 public static &lt;T extends Comparable&lt;T&gt;&gt; T findMax(List&lt;T&gt; list) { return list.stream() .max(Comparable::compareTo) .orElse(null); } 5. 동시성/병렬 프로그래밍 (Concurrent/Parallel) import java.util.concurrent.*; public class ConcurrentExample { public static void main(String[] args) throws Exception { // CompletableFuture를 사용한 비동기 프로그래밍 CompletableFuture&lt;String&gt; future1 = CompletableFuture .supplyAsync(() -&gt; fetchDataFromAPI1()); CompletableFuture&lt;String&gt; future2 = CompletableFuture .supplyAsync(() -&gt; fetchDataFromAPI2()); // 두 작업을 결합 CompletableFuture&lt;String&gt; combined = future1 .thenCombine(future2, (result1, result2) -&gt; result1 &#43; &#34; &#34; &#43; result2); System.out.println(combined.get()); } } 6. 반응형 프로그래밍 (Reactive) - 라이브러리 사용 // RxJava 또는 Project Reactor 사용 예제 Flux.just(1, 2, 3, 4, 5) .filter(n -&gt; n % 2 == 0) .map(n -&gt; n * 2) .subscribe(System.out::println); 다양한 패러다임을 혼합한 실제 예제 import java.util.*; import java.util.concurrent.*; import java.util.stream.*; // OOP: 클래스와 인터페이스 정의 interface DataProcessor&lt;T&gt; { CompletableFuture&lt;List&lt;T&gt;&gt; process(List&lt;T&gt; data); } public class HybridExample implements DataProcessor&lt;Integer&gt; { private final ExecutorService executor = Executors.newFixedThreadPool(4); @Override public CompletableFuture&lt;List&lt;Integer&gt;&gt; process(List&lt;Integer&gt; data) { // 함수형 &#43; 동시성 프로그래밍 return CompletableFuture.supplyAsync(() -&gt; data.parallelStream() // 병렬 처리 .filter(n -&gt; n &gt; 0) // 함수형: 필터링 .map(this::complexCalculation) // 메서드 참조 .sorted() // 정렬 .collect(Collectors.toList()), executor ); } // 명령형 스타일의 복잡한 계산 private Integer complexCalculation(Integer n) { int result = n; for (int i = 0; i &lt; 3; i&#43;&#43;) { result = result * 2 &#43; 1; } return result; } public static void main(String[] args) throws Exception { HybridExample processor = new HybridExample(); List&lt;Integer&gt; data = Arrays.asList(1, -2, 3, 4, -5, 6); // 비동기 처리 시작 CompletableFuture&lt;List&lt;Integer&gt;&gt; future = processor.process(data); // 콜백 체인 (함수형) future.thenApply(result -&gt; { System.out.println(&#34;처리 결과: &#34; &#43; result); return result; }) .thenAccept(result -&gt; { // 결과 활용 int sum = result.stream().mapToInt(Integer::intValue).sum(); System.out.println(&#34;합계: &#34; &#43; sum); }) .get(); // 완료 대기 processor.executor.shutdown(); } } Java의 멀티 패러다임 특징 장점 점진적 도입: 기존 OOP 코드베이스에 함수형 요소를 점진적으로 도입 가능 유연성: 문제에 가장 적합한 패러다임 선택 가능 생태계: 다양한 스타일의 라이브러리와 호환 한계 완전하지 않은 함수형: 불변성이 언어 차원에서 강제되지 않음 혼재된 스타일: 여러 패러다임이 섞여 일관성 유지가 어려울 수 있음 학습 곡선: 모든 패러다임을 효과적으로 사용하려면 학습이 필요 결론 Java는 &ldquo;실용적인&rdquo; 멀티 패러다임 언어입니다. 순수한 함수형 언어(Haskell)나 순수한 객체지향 언어(Smalltalk)와 달리, Java는 실용성을 중시하며 여러 패러다임의 장점을 선택적으로 활용할 수 있게 설계되었습니다. 특히 Java 8 이후로는 현대적인 프로그래밍 패러다임을 적극적으로 수용하고 있어, 진정한 멀티 패러다임 언어로 진화했다고 볼 수 있습니다.
+"
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -52,18 +56,20 @@
 
 <meta
   property="og:type"
-  content="website"
+  content="article"
 />
 <meta
   property="og:title"
-  content="Posts - Pink Spider"
+  content="Java는 multi paradigm 언어일까? - Pink Spider"
 />
 <meta
   property="og:description"
-  content=""
+  content="Java는 멀티 패러다임 언어인가? Java는 멀티 패러다임 언어라고 할 수 있습니다. 특히 Java 8 이후로는 더욱 명확해졌습니다. 초기에는 &ldquo;순수한&rdquo; 객체지향 언어를 목표로 했지만, 시간이 지나면서 다양한 프로그래밍 패러다임을 수용하게 되었습니다.
+Java가 지원하는 프로그래밍 패러다임 1. 객체지향 프로그래밍 (OOP) - 핵심 패러다임 // 클래스, 상속, 캡슐화, 다형성 public class Animal { private String name; public void makeSound() { System.out.println(&#34;Some sound&#34;); } } public class Dog extends Animal { @Override public void makeSound() { System.out.println(&#34;Woof!&#34;); } } 2. 명령형 프로그래밍 (Imperative) // 상태 변경과 제어 흐름을 명시적으로 작성 public static int factorial(int n) { int result = 1; for (int i = 1; i &lt;= n; i&#43;&#43;) { result *= i; // 상태 변경 } return result; } 3. 함수형 프로그래밍 (Functional) - Java 8&#43; import java.util.*; import java.util.function.*; import java.util.stream.*; public class FunctionalExample { public static void main(String[] args) { // 1. 람다 표현식과 고차 함수 Function&lt;Integer, Integer&gt; square = x -&gt; x * x; Function&lt;Integer, Integer&gt; addOne = x -&gt; x &#43; 1; // 함수 합성 Function&lt;Integer, Integer&gt; squareThenAdd = square.andThen(addOne); System.out.println(squareThenAdd.apply(3)); // 10 // 2. 불변성과 순수 함수 List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 3, 4, 5); List&lt;Integer&gt; doubled = numbers.stream() .map(n -&gt; n * 2) // 원본을 변경하지 않음 .collect(Collectors.toList()); // 3. 함수를 파라미터로 전달 calculate(10, 5, (a, b) -&gt; a &#43; b); // 15 calculate(10, 5, (a, b) -&gt; a * b); // 50 } static void calculate(int x, int y, BinaryOperator&lt;Integer&gt; operation) { System.out.println(operation.apply(x, y)); } } 4. 제네릭 프로그래밍 (Generic) // 타입 파라미터를 사용한 일반화 public class Box&lt;T&gt; { private T content; public void set(T content) { this.content = content; } public T get() { return content; } } // 제네릭 메서드 public static &lt;T extends Comparable&lt;T&gt;&gt; T findMax(List&lt;T&gt; list) { return list.stream() .max(Comparable::compareTo) .orElse(null); } 5. 동시성/병렬 프로그래밍 (Concurrent/Parallel) import java.util.concurrent.*; public class ConcurrentExample { public static void main(String[] args) throws Exception { // CompletableFuture를 사용한 비동기 프로그래밍 CompletableFuture&lt;String&gt; future1 = CompletableFuture .supplyAsync(() -&gt; fetchDataFromAPI1()); CompletableFuture&lt;String&gt; future2 = CompletableFuture .supplyAsync(() -&gt; fetchDataFromAPI2()); // 두 작업을 결합 CompletableFuture&lt;String&gt; combined = future1 .thenCombine(future2, (result1, result2) -&gt; result1 &#43; &#34; &#34; &#43; result2); System.out.println(combined.get()); } } 6. 반응형 프로그래밍 (Reactive) - 라이브러리 사용 // RxJava 또는 Project Reactor 사용 예제 Flux.just(1, 2, 3, 4, 5) .filter(n -&gt; n % 2 == 0) .map(n -&gt; n * 2) .subscribe(System.out::println); 다양한 패러다임을 혼합한 실제 예제 import java.util.*; import java.util.concurrent.*; import java.util.stream.*; // OOP: 클래스와 인터페이스 정의 interface DataProcessor&lt;T&gt; { CompletableFuture&lt;List&lt;T&gt;&gt; process(List&lt;T&gt; data); } public class HybridExample implements DataProcessor&lt;Integer&gt; { private final ExecutorService executor = Executors.newFixedThreadPool(4); @Override public CompletableFuture&lt;List&lt;Integer&gt;&gt; process(List&lt;Integer&gt; data) { // 함수형 &#43; 동시성 프로그래밍 return CompletableFuture.supplyAsync(() -&gt; data.parallelStream() // 병렬 처리 .filter(n -&gt; n &gt; 0) // 함수형: 필터링 .map(this::complexCalculation) // 메서드 참조 .sorted() // 정렬 .collect(Collectors.toList()), executor ); } // 명령형 스타일의 복잡한 계산 private Integer complexCalculation(Integer n) { int result = n; for (int i = 0; i &lt; 3; i&#43;&#43;) { result = result * 2 &#43; 1; } return result; } public static void main(String[] args) throws Exception { HybridExample processor = new HybridExample(); List&lt;Integer&gt; data = Arrays.asList(1, -2, 3, 4, -5, 6); // 비동기 처리 시작 CompletableFuture&lt;List&lt;Integer&gt;&gt; future = processor.process(data); // 콜백 체인 (함수형) future.thenApply(result -&gt; { System.out.println(&#34;처리 결과: &#34; &#43; result); return result; }) .thenAccept(result -&gt; { // 결과 활용 int sum = result.stream().mapToInt(Integer::intValue).sum(); System.out.println(&#34;합계: &#34; &#43; sum); }) .get(); // 완료 대기 processor.executor.shutdown(); } } Java의 멀티 패러다임 특징 장점 점진적 도입: 기존 OOP 코드베이스에 함수형 요소를 점진적으로 도입 가능 유연성: 문제에 가장 적합한 패러다임 선택 가능 생태계: 다양한 스타일의 라이브러리와 호환 한계 완전하지 않은 함수형: 불변성이 언어 차원에서 강제되지 않음 혼재된 스타일: 여러 패러다임이 섞여 일관성 유지가 어려울 수 있음 학습 곡선: 모든 패러다임을 효과적으로 사용하려면 학습이 필요 결론 Java는 &ldquo;실용적인&rdquo; 멀티 패러다임 언어입니다. 순수한 함수형 언어(Haskell)나 순수한 객체지향 언어(Smalltalk)와 달리, Java는 실용성을 중시하며 여러 패러다임의 장점을 선택적으로 활용할 수 있게 설계되었습니다. 특히 Java 8 이후로는 현대적인 프로그래밍 패러다임을 적극적으로 수용하고 있어, 진정한 멀티 패러다임 언어로 진화했다고 볼 수 있습니다.
+"
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/" />
-<meta property="og:site_name" content="Posts" />
+<meta property="og:url" content="https://pink-spider.github.io/post/java/java_multi_paradigm/" />
+<meta property="og:site_name" content="Java는 multi paradigm 언어일까?" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -71,15 +77,10 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
+<meta property="article:published_time" content="2025-10-20 13:50:50 &#43;0900 KST" />
 
 
 
-<link
-  href="/post/index.xml"
-  rel="alternate"
-  type="application/rss+xml"
-  title="Pink Spider"
-/>
 
 
 
@@ -268,354 +269,79 @@
 </div>
 
   
-<div class="application-main">
+<div>
   <main>
-
-
-<div class="mt-4 position-sticky top-0 d-none d-md-block bg-white width-full border-bottom color-border-secondary"
-  style="z-index:3;">
-  <div class="container-xl px-3 px-md-4 px-lg-5">
-    <div class="gutter-condensed gutter-lg flex-column flex-md-row d-flex">
-      <div class="flex-shrink-0 col-12 col-md-3 mb-4 mb-md-0">
-      </div>
-      <div class="flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0">
-        <div class="UnderlineNav width-full box-shadow-none hx_UnderlineNav-with-profile-color-modes-banner">
-          <nav class="UnderlineNav-body">
-            <a class="UnderlineNav-item " href="https://pink-spider.github.io/">
-              <svg class="octicon octicon-book UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16"
-                version="1.1" width="16">
-                <path fill-rule="evenodd"
-                  d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.006 1h4.245a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.507a2.25 2.25 0 00-1.591.659l-.622.621a.75.75 0 01-1.06 0l-.622-.621A2.25 2.25 0 005.258 13H.75a.75.75 0 01-.75-.75V1.75zm8.755 3a2.25 2.25 0 012.25-2.25H14.5v9h-3.757c-.71 0-1.4.201-1.992.572l.004-7.322zm-1.504 7.324l.004-5.073-.002-2.253A2.25 2.25 0 005.003 2.5H1.5v9h3.757a3.75 3.75 0 011.994.574z">
-                </path>
-              </svg>
-              Overview
-            </a>
-            <a class="UnderlineNav-item  selected " href="https://pink-spider.github.io//post/">
-              <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16"
-                version="1.1" width="16">
-                <path fill-rule="evenodd"
-                  d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                </path>
-              </svg>
-              Posts
-              <span class="Counter">91</span>
-            </a>
-          </nav>
-          <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
-            <svg width="106" height="60" viewBox="0 0 106 60" fill="none" stroke-width="3" stroke-linecap="round"
-              stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-              <g class="profile-color-modes-illu-group profile-color-modes-illu-red">
-                <path d="M37.5 58.5V57.5C37.5 49.768 43.768 43.5 51.5 43.5V43.5C59.232 43.5 65.5 49.768 65.5 57.5V58.5">
-                </path>
-              </g>
-              <g class="profile-color-modes-illu-group profile-color-modes-illu-orange">
-                <path
-                  d="M104.07 58.5C103.401 55.092 97.7635 54.3869 95.5375 57.489C97.4039 54.6411 99.7685 48.8845 94.6889 46.6592C89.4817 44.378 86.1428 50.1604 85.3786 54.1158C85.9519 50.4768 83.7226 43.294 78.219 44.6737C72.7154 46.0534 72.7793 51.3754 74.4992 55.489C74.169 54.7601 72.4917 53.3567 70.5 52.8196">
-                </path>
-              </g>
-              <g class="profile-color-modes-illu-group profile-color-modes-illu-purple">
-                <path
-                  d="M5.51109 58.5V52.5C5.51109 41.4543 14.4654 32.5 25.5111 32.5C31.4845 32.5 36.8464 35.1188 40.5111 39.2709C40.7212 39.5089 40.9258 39.7521 41.1245 40">
-                </path>
-                <path d="M27.511 49.5C29.6777 49.5 28.911 49.5 32.511 49.5"></path>
-                <path d="M27.511 56.5C29.6776 56.5 26.911 56.5 30.511 56.5"></path>
-              </g>
-              <g class="profile-color-modes-illu-group profile-color-modes-illu-green">
-                <circle cx="5.5" cy="12.5" r="4"></circle>
-                <circle cx="18.5" cy="5.5" r="4"></circle>
-                <path d="M18.5 9.5L18.5 27.5"></path>
-                <path d="M18.5 23.5C6 23.5 5.5 23.6064 5.5 16.5"></path>
-              </g>
-              <g class="profile-color-modes-illu-group profile-color-modes-illu-blue">
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M40.6983 31.5C40.5387 29.6246 40.6456 28.0199 41.1762 27.2317C42.9939 24.5312 49.7417 26.6027 52.5428 30.2409C54.2551 29.8552 56.0796 29.6619 57.9731 29.6619C59.8169 29.6619 61.5953 29.8452 63.2682 30.211C66.0833 26.5913 72.799 24.5386 74.6117 27.2317C75.6839 28.8246 75.0259 33.7525 73.9345 37.5094C74.2013 37.9848 74.4422 38.4817 74.6555 39">
-                  </path>
-                </g>
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M41.508 31.5C41.6336 31.2259 41.7672 30.9582 41.9085 30.6968C40.7845 26.9182 40.086 21.8512 41.1762 20.2317C42.9939 17.5312 49.7417 19.6027 52.5428 23.2409C54.2551 22.8552 56.0796 22.6619 57.9731 22.6619C59.8169 22.6619 61.5953 22.8452 63.2682 23.211C66.0833 19.5913 72.799 17.5386 74.6117 20.2317C75.6839 21.8246 75.0259 26.7525 73.9345 30.5094C75.1352 32.6488 75.811 35.2229 75.811 38.2283C75.811 38.49 75.8058 38.7472 75.7957 39">
-                  </path>
-                  <path d="M49.4996 33V35.6757"></path>
-                  <path d="M67.3375 33V35.6757"></path>
-                </g>
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M41.508 31.5C41.6336 31.2259 41.7672 30.9582 41.9085 30.6968C40.7845 26.9182 40.086 21.8512 41.1762 20.2317C42.9939 17.5312 49.7417 19.6027 52.5428 23.2409C54.2551 22.8552 56.0796 22.6619 57.9731 22.6619C59.8169 22.6619 61.5953 22.8452 63.2682 23.211C66.0833 19.5913 72.799 17.5386 74.6117 20.2317C75.6839 21.8246 75.0259 26.7525 73.9345 30.5094C75.1352 32.6488 75.811 35.2229 75.811 38.2283C75.811 38.49 75.8058 38.7472 75.7957 39">
-                  </path>
-                </g>
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M41.508 31.5C41.6336 31.2259 41.7672 30.9582 41.9085 30.6968C40.7845 26.9182 40.086 21.8512 41.1762 20.2317C42.9939 17.5312 49.7417 19.6027 52.5428 23.2409C54.2551 22.8552 56.0796 22.6619 57.9731 22.6619C59.8169 22.6619 61.5953 22.8452 63.2682 23.211C66.0833 19.5913 72.799 17.5386 74.6117 20.2317C75.6839 21.8246 75.0259 26.7525 73.9345 30.5094C75.1352 32.6488 75.811 35.2229 75.811 38.2283C75.811 38.49 75.8058 38.7472 75.7957 39">
-                  </path>
-                  <path d="M49.4996 33V35.6757"></path>
-                  <path d="M67.3375 33V35.6757"></path>
-                </g>
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M41.508 31.5C41.6336 31.2259 41.7672 30.9582 41.9085 30.6968C40.7845 26.9182 40.086 21.8512 41.1762 20.2317C42.9939 17.5312 49.7417 19.6027 52.5428 23.2409C54.2551 22.8552 56.0796 22.6619 57.9731 22.6619C59.8169 22.6619 61.5953 22.8452 63.2682 23.211C66.0833 19.5913 72.799 17.5386 74.6117 20.2317C75.6839 21.8246 75.0259 26.7525 73.9345 30.5094C75.1352 32.6488 75.811 35.2229 75.811 38.2283C75.811 38.49 75.8058 38.7472 75.7957 39">
-                  </path>
-                </g>
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M41.508 31.5C41.6336 31.2259 41.7672 30.9582 41.9085 30.6968C40.7845 26.9182 40.086 21.8512 41.1762 20.2317C42.9939 17.5312 49.7417 19.6027 52.5428 23.2409C54.2551 22.8552 56.0796 22.6619 57.9731 22.6619C59.8169 22.6619 61.5953 22.8452 63.2682 23.211C66.0833 19.5913 72.799 17.5386 74.6117 20.2317C75.6839 21.8246 75.0259 26.7525 73.9345 30.5094C75.1352 32.6488 75.811 35.2229 75.811 38.2283C75.811 38.49 75.8058 38.7472 75.7957 39">
-                  </path>
-                  <path d="M49.4996 33V35.6757"></path>
-                  <path d="M67.3375 33V35.6757"></path>
-                </g>
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M73.4999 40.2236C74.9709 38.2049 75.8108 35.5791 75.8108 32.2283C75.8108 29.2229 75.1351 26.6488 73.9344 24.5094C75.0258 20.7525 75.6838 15.8246 74.6116 14.2317C72.7989 11.5386 66.0832 13.5913 63.2681 17.211C61.5952 16.8452 59.8167 16.6619 57.973 16.6619C56.0795 16.6619 54.2549 16.8552 52.5427 17.2409C49.7416 13.6027 42.9938 11.5312 41.176 14.2317C40.0859 15.8512 40.7843 20.9182 41.9084 24.6968C41.003 26.3716 40.4146 28.3065 40.2129 30.5">
-                  </path>
-                  <path d="M82.9458 30.5471L76.8413 31.657"></path>
-                  <path d="M76.2867 34.4319L81.8362 37.7616"></path>
-                  <path d="M49.4995 27.8242V30.4999"></path>
-                  <path d="M67.3374 27.8242V30.4998"></path>
-                </g>
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M45.3697 34.2658C41.8877 32.1376 39.7113 28.6222 39.7113 23.2283C39.7113 20.3101 40.3483 17.7986 41.4845 15.6968C40.3605 11.9182 39.662 6.85125 40.7522 5.23168C42.5699 2.53117 49.3177 4.6027 52.1188 8.24095C53.831 7.85521 55.6556 7.66186 57.5491 7.66186C59.3929 7.66186 61.1713 7.84519 62.8442 8.21095C65.6593 4.59134 72.375 2.5386 74.1877 5.23168C75.2599 6.82461 74.6019 11.7525 73.5105 15.5094C74.7112 17.6488 75.3869 20.2229 75.3869 23.2283C75.3869 28.6222 73.2105 32.1376 69.7285 34.2658C70.8603 35.5363 72.6057 38.3556 73.3076 40">
-                  </path>
-                  <path d="M49.0747 19.8242V22.4999"></path>
-                  <path
-                    d="M54.0991 28C54.6651 29.0893 55.7863 30.0812 57.9929 30.0812C59.0642 30.0812 59.8797 29.8461 60.5 29.4788">
-                  </path>
-                  <path d="M66.9126 19.8242V22.4999"></path>
-                  <path d="M33.2533 20.0237L39.0723 22.1767"></path>
-                  <path d="M39.1369 25.0058L33.0935 27.3212"></path>
-                  <path d="M81.8442 19.022L76.0252 21.1751"></path>
-                  <path d="M75.961 24.0041L82.0045 26.3196"></path>
-                </g>
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M73.4999 40.2236C74.9709 38.2049 75.8108 35.5791 75.8108 32.2283C75.8108 29.2229 75.1351 26.6488 73.9344 24.5094C75.0258 20.7525 75.6838 15.8246 74.6116 14.2317C72.7989 11.5386 66.0832 13.5913 63.2681 17.211C61.5952 16.8452 59.8167 16.6619 57.973 16.6619C56.0795 16.6619 54.2549 16.8552 52.5427 17.2409C49.7416 13.6027 42.9938 11.5312 41.176 14.2317C40.0859 15.8512 40.7843 20.9182 41.9084 24.6968C41.003 26.3716 40.4146 28.3065 40.2129 30.5">
-                  </path>
-                  <path d="M82.9458 30.5471L76.8413 31.657"></path>
-                  <path d="M76.2867 34.4319L81.8362 37.7616"></path>
-                  <path d="M49.4995 27.8242V30.4999"></path>
-                  <path d="M67.3374 27.8242V30.4998"></path>
-                </g>
-                <g class="profile-color-modes-illu-frame">
-                  <path
-                    d="M40.6983 31.5C40.5387 29.6246 40.6456 28.0199 41.1762 27.2317C42.9939 24.5312 49.7417 26.6027 52.5428 30.2409C54.2551 29.8552 56.0796 29.6619 57.9731 29.6619C59.8169 29.6619 61.5953 29.8452 63.2682 30.211C66.0833 26.5913 72.799 24.5386 74.6117 27.2317C75.6839 28.8246 75.0259 33.7525 73.9345 37.5094C74.2013 37.9848 74.4422 38.4817 74.6555 39">
-                  </path>
-                </g>
-              </g>
-            </svg>
-            <span class="profile-color-modes-toggle js-promo-color-modes-toggle no-select" tabindex="0"
-              onclick="switchTheme()">
-              <div class="profile-color-modes-toggle-track no-select"></div>
-              <div class="profile-color-modes-toggle-thumb js-promo-color-modes-thumb">
-                <svg style="fill: var(--color-profile-color-modes-toggle-moon); margin: 7px 0 0 7px;" width="14"
-                  height="13" viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
-                  </path>
-                </svg>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
               </div>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/java/java_multi_paradigm/">Java는 multi paradigm 언어일까?</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Mon, 20 Oct 2025 13:50:50 &#43;0900"
+                    class="no-wrap">
+                    Mon, 20 Oct 2025 13:50:50 &#43;0900</relative-time>
 
-
-<div class="container-xl px-3 px-md-4 px-lg-5">
-  <div class="gutter-condensed gutter-lg flex-column flex-md-row d-flex">
-    <div class="flex-shrink-0 col-12 col-md-3 mb-4 mb-md-0">
-      <div class="h-card mt-md-n5" style="margin-top:24px">
-        <div class="user-profile-sticky-bar js-user-profile-sticky-bar d-none d-md-block" id="headerStuck">
-          <div class="user-profile-mini-vcard d-table">
-            <span class="user-profile-mini-avatar d-table-cell v-align-middle lh-condensed-ultra pr-2">
-              
-              <img class="rounded-1 avatar-user" height="32" width="32" src="/images/logo_pinkspider.png" alt="Pink Spider">
-              
-            </span>
-            <span class="d-table-cell v-align-middle lh-condensed">
-              <strong>Pink Spider</strong>
-            </span>
-          </div>
-        </div>
-        <div class="clearfix d-flex d-md-block flex-items-center mb-4 mb-md-0">
-          <div class="position-relative d-inline-block col-2 col-md-12 mr-3 mr-md-0 flex-shrink-0" style="z-index:4;">
-            
-            <a href="/images/logo_pinkspider.png">
-              <img style="height:auto;" alt="Avatar" width="260" height="260" id="headerImg"
-                class="avatar avatar-user width-full border bg-white" src="/images/logo_pinkspider.png" alt="Pink Spider">
-            </a>
-            
-            
-            <div class="user-status-container position-relative hide-sm hide-md">
-              <div class="f5 user-status-circle-badge-container">
-                <div class="user-status-circle-badge d-inline-block lh-condensed-ultra p-2">
-                  <div class="d-flex flex-items-center flex-items-stretch">
-                    <div class="f6 lh-condensed user-status-header d-inline-flex user-status-emoji-only-header circle">
-                      <div class="user-status-emoji-container flex-shrink-0 mr-2 d-flex flex-items-center flex-justify-center ">
-                        <div><g-emoji class="g-emoji">😉</g-emoji></div>
-                      </div>
-                    </div>
-                  </div>
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Mon, 20 Oct 2025 13:52:12 &#43;0900"
+                    class="no-wrap">
+                    Mon, 20 Oct 2025 13:52:12 &#43;0900</relative-time>
+                  
                 </div>
               </div>
             </div>
-            
           </div>
-
-          <div
-            class="vcard-names-container float-left col-10 col-md-12 pt-1 pt-md-3 pb-1 pb-md-3 js-sticky js-user-profile-sticky-fields"
-            data-original-top="0px" style="position: sticky;">
-            <h1 class="vcard-names pl-2 pl-md-0">
-              <span class="p-name vcard-fullname d-block overflow-hidden">Pink Spider</span>
-              
-              <span class="p-nickname vcard-username d-block">Pink-Spider</span>
-              
-            </h1>
-          </div>
-        </div>
-
-        
-        <div class="flex-1 ml-md-0 mb-0 mb-md-3 mb-2">
-          <a id="sponsor-profile-button" aria-label="Sponsor @ljharb" data-hydro-click="{&quot;event_type&quot;:&quot;sponsors.button_click&quot;,&quot;payload&quot;:{&quot;button&quot;:&quot;PROFILE_SPONSOR&quot;,&quot;sponsorable_login&quot;:&quot;ljharb&quot;,&quot;originating_url&quot;:&quot;https://github.com/ljharb&quot;,&quot;user_id&quot;:32745146}}" data-hydro-click-hmac="604a61c55ec5ff78d31e99aa0079236fdfee7870ed60cb4e926c56c405ff61ec" href="https://buymeacoffee.com/pinkspider" target="_blank" data-view-component="true" class="btn btn-block">
-            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-heart icon-sponsor mr-1 v-align-middle color-fg-sponsors anim-pulse-in">
-              <path fill-rule="evenodd" d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.565 20.565 0 008 13.393a20.561 20.561 0 003.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5zM8 14.25l-.345.666-.002-.001-.006-.003-.018-.01a7.643 7.643 0 01-.31-.17 22.075 22.075 0 01-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.08 22.08 0 01-3.744 2.584l-.018.01-.006.003h-.002L8 14.25zm0 0l.345.666a.752.752 0 01-.69 0L8 14.25z"></path>
-            </svg>
-            <span class="v-align-middle">Sponsor</span>
-          </a>
-        </div>
-        
-        
-
-        <div class="p-note user-profile-bio mb-3 js-user-profile-bio f4">
-          <div>답을 찾을 것이다. 늘 그랬듯이...</div>
-        </div>
-
-        <div class="d-flex flex-column">
-          <div class="js-profile-editable-area d-flex flex-column d-md-block">
-            <ul class="vcard-details">
-
-              
-              <li class="vcard-detail pt-1 css-truncate css-truncate-target " id="github-follow-stat" data="Pink-Spider">
-              </li>
-              
-
-              
-              <li class="vcard-detail pt-1 css-truncate css-truncate-target hide-sm hide-md">
-                <svg class="octicon octicon-location" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M11.536 3.464a5 5 0 010 7.072L8 14.07l-3.536-3.535a5 5 0 117.072-7.072v.001zm1.06 8.132a6.5 6.5 0 10-9.192 0l3.535 3.536a1.5 1.5 0 002.122 0l3.535-3.536zM8 9a2 2 0 100-4 2 2 0 000 4z">
-                  </path>
-                </svg>
-                <span class="p-label">Seoul, South Korea</span>
-              </li>
-              
-
-              
-              <li class="vcard-detail pt-1 css-truncate css-truncate-target ">
-                <svg class="octicon octicon-mail" viewBox="0 0 16 16" version="1.1" width="16" height="16">
-                  <path fill-rule="evenodd"
-                    d="M1.75 2A1.75 1.75 0 000 3.75v.736a.75.75 0 000 .027v7.737C0 13.216.784 14 1.75 14h12.5A1.75 1.75 0 0016 12.25v-8.5A1.75 1.75 0 0014.25 2H1.75zM14.5 4.07v-.32a.25.25 0 00-.25-.25H1.75a.25.25 0 00-.25.25v.32L8 7.88l6.5-3.81zm-13 1.74v6.441c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.809L8.38 9.397a.75.75 0 01-.76 0L1.5 5.809z">
-                  </path>
-                </svg>
-                <a class="u-email link-gray-dark " href="mailto:ceo@pink-spider.io">ceo@pink-spider.io</a>
-              </li>
-              
-
-              
-            </ul>
-          </div>
-        </div>
-
-        <div class="border-top color-border-secondary pt-3 mt-3 clearfix hide-sm hide-md">
-          <h2 class="mb-2 h4">Organizations</h2>
-          <div style="display:flex;justify-content:flex-start;flex-wrap:wrap;margin-bottom:3px;">
-          
-          <a style="margin: 0 10px 10px 0;" target="_blank" href="https://github.com/Pink-Spider" aria-label="Github">
-            <svg id="github-icon" viewBox="0 0 16 16" version="1.1" width="32" height="32" fill="#24292e">
-              <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-              </path>
-            </svg>
-          </a>
-          
-
-          
-
-          
-
-          
-
-          
-
-          
-
-          
-
-          
-          
-
-          
-
-          
-          <a style="margin: 0 10px 10px 0;" target="_blank" href="https://pink-spider.github.io/index.xml">
-            <img alt="@rss" width="32" height="32" src="https://pink-spider.github.io/images/rss.png" class="avatar">
-          </a>
-          
-         </div>
         </div>
       </div>
     </div>
 
-    <div class="flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0">
-      
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1259 Words
+                    <span class="file-info-divider"></span>
+                                        6 min
 
-<div class="UnderlineNav user-profile-nav d-block d-md-none position-sticky top-0 pl-3 ml-n3 mr-n3 pr-3 bg-white"
-  style="z-index:3;">
-  <nav class="UnderlineNav-body">
-    <a class="UnderlineNav-item " href="https://pink-spider.github.io/">
-      <svg class="octicon octicon-book UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16" version="1.1"
-        width="16">
-        <path fill-rule="evenodd"
-          d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.006 1h4.245a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.507a2.25 2.25 0 00-1.591.659l-.622.621a.75.75 0 01-1.06 0l-.622-.621A2.25 2.25 0 005.258 13H.75a.75.75 0 01-.75-.75V1.75zm8.755 3a2.25 2.25 0 012.25-2.25H14.5v9h-3.757c-.71 0-1.4.201-1.992.572l.004-7.322zm-1.504 7.324l.004-5.073-.002-2.253A2.25 2.25 0 005.003 2.5H1.5v9h3.757a3.75 3.75 0 011.994.574z">
-        </path>
-      </svg>
-      Overview
-    </a>
-    <a class='UnderlineNav-item   selected '
-      href="https://pink-spider.github.io//post/">
-      <svg class="octicon octicon-repo UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16" version="1.1"
-        width="16">
-        <path fill-rule="evenodd"
-          d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-        </path>
-      </svg>
-      Posts
-      <span class="Counter ">91</span>
-    </a>
-  </nav>
-</div>
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
 
-      
-      
-<div>
-  <div class="position-relative">
-    <div>
-      
-        
-      
-      <ul>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/java/java_multi_paradigm/">Java는 multi paradigm 언어일까?</a>
-              </h3>
-            </div>
 
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h2 id="java는-멀티-패러다임-언어인가">Java는 멀티 패러다임 언어인가?</h2>
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h2 id="java는-멀티-패러다임-언어인가">Java는 멀티 패러다임 언어인가?</h2>
 <p><strong>Java는 멀티 패러다임 언어라고 할 수 있습니다.</strong> 특히 Java 8 이후로는 더욱 명확해졌습니다. 초기에는 &ldquo;순수한&rdquo; 객체지향 언어를 목표로 했지만, 시간이 지나면서 다양한 프로그래밍 패러다임을 수용하게 되었습니다.</p>
 <h2 id="java가-지원하는-프로그래밍-패러다임">Java가 지원하는 프로그래밍 패러다임</h2>
 <h3 id="1-객체지향-프로그래밍-oop---핵심-패러다임">1. 객체지향 프로그래밍 (OOP) - 핵심 패러다임</h3>
@@ -790,365 +516,49 @@
 </ul>
 <h2 id="결론">결론</h2>
 <p>Java는 <strong>&ldquo;실용적인&rdquo; 멀티 패러다임 언어</strong>입니다. 순수한 함수형 언어(Haskell)나 순수한 객체지향 언어(Smalltalk)와 달리, Java는 실용성을 중시하며 여러 패러다임의 장점을 선택적으로 활용할 수 있게 설계되었습니다. 특히 Java 8 이후로는 현대적인 프로그래밍 패러다임을 적극적으로 수용하고 있어, 진정한 멀티 패러다임 언어로 진화했다고 볼 수 있습니다.</p>
+</article>
               </div>
-            </div>
 
-            <div class="f6 text-gray mt-2">
               
-
-              Created
-              <relative-time datetime=" Mon, 20 Oct 2025 13:50:50 &#43;0900" class="no-wrap"
-                title=" Mon, 20 Oct 2025 13:50:50 &#43;0900">
-                Mon, 20 Oct 2025 13:50:50 &#43;0900
-              </relative-time>
             </div>
           </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/big_data_db/"></a>
-              </h3>
-            </div>
+        </div>
+      </div>
 
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="db의-테이블의-row가-너무-많아질떄-예-하루에-10만건씩-누적-대처-방법">DB의 테이블의 row가 너무 많아질떄 (예 하루에 10만건씩 누적), 대처 방법</h1>
-<ul>
-<li>“하루 10만 건씩 계속 누적”이면 1년에 3,650만 건입니다. 초반엔 버티지만, 몇 달만 지나도 쿼리·백업·VACUUM/OPTIMIZE 비용이 급증하죠. 아래 순서대로 적용해보세요.</li>
-</ul>
-<h1 id="1-먼저-결정할-것-운영-정책">1) 먼저 결정할 것 (운영 정책)</h1>
-<ul>
-<li><strong>보존 기간</strong>: 예) “6개월은 온라인(핫), 2년은 아카이브(콜드), 그 외 삭제”</li>
-<li><strong>주요 조회 패턴</strong>: 최근 N일만 조회? 특정 사용자/키 기준 조회? 집계 위주?</li>
-<li><strong>SLA/성능</strong>: p95 응답시간, 허용 가능한 쓰기 지연</li>
-</ul>
-<h1 id="2-즉시-효과-스키마인덱스쓰기">2) 즉시 효과 (스키마/인덱스/쓰기)</h1>
-<ul>
-<li>
-<p><strong>인덱스 슬림화</strong>: 실제 조건/정렬에 쓰는 컬럼만 인덱스. 불필요한 복합 인덱스 제거.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 14 Oct 2025 11:25:18 &#43;0900" class="no-wrap"
-                title=" Tue, 14 Oct 2025 11:25:18 &#43;0900">
-                Tue, 14 Oct 2025 11:25:18 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/jwt_http_header_body/">Access Token을 http header에 보내는 것과 body에 보내는 것의 차이</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>HTTP API 호출 시 access token을 헤더와 바디에 보내는 것 사이에는 몇 가지 중요한 보안상 차이점이 있습니다:</p>
-<h2 id="주요-보안-차이점">주요 보안 차이점</h2>
-<h3 id="1-로깅-및-모니터링">1. <strong>로깅 및 모니터링</strong></h3>
-<ul>
-<li><strong>헤더</strong>: 대부분의 웹 서버와 프록시는 기본적으로 Authorization 헤더를 로그에서 마스킹하거나 제외합니다</li>
-<li><strong>바디</strong>: 요청 바디는 디버깅 목적으로 로그에 기록될 가능성이 높아 토큰이 평문으로 노출될 위험이 있습니다</li>
-</ul>
-<h3 id="2-캐싱-동작">2. <strong>캐싱 동작</strong></h3>
-<ul>
-<li><strong>헤더</strong>: HTTP 캐시는 Authorization 헤더가 있는 요청을 기본적으로 캐시하지 않습니다</li>
-<li><strong>바디</strong>: 바디에 토큰이 있어도 캐시 정책에 따라 응답이 캐시될 수 있어, 의도치 않은 토큰 노출 위험이 있습니다</li>
-</ul>
-<h3 id="3-프록시-및-미들웨어-처리">3. <strong>프록시 및 미들웨어 처리</strong></h3>
-<ul>
-<li><strong>헤더</strong>: 표준 인증 헤더로 인식되어 보안 미들웨어에서 적절히 처리됩니다</li>
-<li><strong>바디</strong>: 일반 데이터로 취급되어 보안 처리가 누락될 수 있습니다</li>
-</ul>
-<h3 id="4-브라우저-개발자-도구">4. <strong>브라우저 개발자 도구</strong></h3>
-<ul>
-<li><strong>헤더</strong>: 네트워크 탭에서 볼 수는 있지만, Authorization 헤더임을 명확히 인식할 수 있습니다</li>
-<li><strong>바디</strong>: 일반 데이터처럼 보여 개발자가 민감한 정보임을 놓칠 수 있습니다</li>
-</ul>
-<h2 id="권장사항">권장사항</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// ✅ 권장: Authorization 헤더 사용
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/data&#39;</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Authorization&#39;</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">accessToken</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// ❌ 비권장: 바디에 토큰 포함
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/data&#39;</span><span class="p">,</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">body</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">accessToken</span><span class="o">:</span> <span class="nx">accessToken</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">otherData</span><span class="o">:</span> <span class="nx">data</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span>
-</span></span></code></pre></div><p><strong>결론</strong>: Authorization 헤더를 사용하는 것이 보안상 더 안전하며, HTTP 표준을 준수하는 방법입니다. 대부분의 보안 도구와 인프라가 이를 전제로 설계되어 있어 더 나은 보안 보장을 제공합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Fri, 12 Sep 2025 08:25:18 &#43;0900" class="no-wrap"
-                title=" Fri, 12 Sep 2025 08:25:18 &#43;0900">
-                Fri, 12 Sep 2025 08:25:18 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/event_raise_listen/">Java에서 event를 활용한 구현 예시</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="1-이벤트-정의-pojorecord-권장">1) 이벤트 정의 (POJO/record 권장)</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// src/main/java/com/example/user/event/UserSignedUpEvent.java</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.user.event</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Instant</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">UserSignedUpEvent</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">Instant</span><span class="w"> </span><span class="n">occurredAt</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
-<p>Spring 6+/Boot 3에서는 <code>ApplicationEvent</code>를 상속할 필요가 없습니다. 평범한 POJO/record가 좋아요.</p></blockquote>
-<hr>
-<h1 id="2-이벤트-발행-raise">2) 이벤트 발행 (raise)</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// src/main/java/com/example/user/service/SignUpService.java</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.user.service</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.user.event.UserSignedUpEvent</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.user.model.User</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.user.repo.UserRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.ApplicationEventPublisher</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Instant</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SignUpService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ApplicationEventPublisher</span><span class="w"> </span><span class="n">publisher</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">SignUpService</span><span class="p">(</span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">ApplicationEventPublisher</span><span class="w"> </span><span class="n">publisher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">userRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">publisher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">publisher</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="nf">signUp</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">));</span><span class="w">  </span><span class="c1">// JPA 엔티티 저장 가정</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 이벤트 발행 (트랜잭션 안에서)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">publisher</span><span class="p">.</span><span class="na">publishEvent</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserSignedUpEvent</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getEmail</span><span class="p">(),</span><span class="w"> </span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">()));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h1 id="3-동기-리스너-기본">3) 동기 리스너 (기본)</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// src/main/java/com/example/user/listener/AuditLogListener.java</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.user.listener</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.user.event.UserSignedUpEvent</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.event.EventListener</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.annotation.Order</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Component</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuditLogListener</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">AuditLogListener</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Order</span><span class="p">(</span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// 여러 리스너가 있을 때 순서 제어 가능 (낮을수록 먼저)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@EventListener</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onUserSignedUp</span><span class="p">(</span><span class="n">UserSignedUpEvent</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&#34;AUDIT: userId={}, email={}, at={}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">userId</span><span class="p">(),</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">email</span><span class="p">(),</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">occurredAt</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><blockquote>
-<p>기본은 “동기 실행”이라 발행 시점에 즉시 호출됩니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 01 Sep 2025 16:13:53 &#43;0900" class="no-wrap"
-                title=" Mon, 01 Sep 2025 16:13:53 &#43;0900">
-                Mon, 01 Sep 2025 16:13:53 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/reflection/">Java Spring에서 &#34;reflection(리플렉션)&#34;</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Java Spring에서 &ldquo;reflection(리플렉션)&ldquo;은 <strong>Java의 런타임 시점에 클래스, 메서드, 필드 등에 접근하고 조작할 수 있는 기능</strong>을 의미합니다. 일반적인 컴파일 시점이 아닌, 실행 중인 애플리케이션의 구조를 동적으로 분석하거나 변경하는 데 활용됩니다.</p>
-<hr>
-<h2 id="-리플렉션이란">💡 리플렉션이란?</h2>
-<p>Java 리플렉션 API는 <code>java.lang.reflect</code> 패키지를 통해 제공되며, 다음과 같은 기능을 제공합니다:</p>
-<ul>
-<li>클래스 이름으로 <code>Class</code> 객체를 얻기</li>
-<li>클래스의 생성자, 메서드, 필드 정보 조회</li>
-<li>메서드 호출, 필드 값 읽기/쓰기 등 동적 조작</li>
-<li>접근 제한자(private 등) 무시하고 접근 (<code>setAccessible(true)</code>)</li>
-</ul>
-<hr>
-<h2 id="-spring에서-리플렉션이-쓰이는-주요-예">🛠 Spring에서 리플렉션이 쓰이는 주요 예</h2>
-<p>Spring 프레임워크는 내부적으로 리플렉션을 매우 광범위하게 사용합니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 29 Jul 2025 14:07:45 &#43;0900" class="no-wrap"
-                title=" Tue, 29 Jul 2025 14:07:45 &#43;0900">
-                Tue, 29 Jul 2025 14:07:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/jpa/row_level_lock_in_jpa/">JPA사용시 row level lock 적용</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring Boot 3 + JPA + MySQL 환경에서 특정 테이블에 대해 <code>find</code> 및 <code>save</code> 작업 시 <strong>row-level lock만 사용</strong>하고 <strong>table-level lock을 피하고 싶을 경우</strong>, 다음과 같은 전략을 사용할 수 있습니다.</p>
-<hr>
-<h2 id="-핵심-개념-요약">✅ 핵심 개념 요약</h2>
-<ul>
-<li>
-<p><strong>MySQL InnoDB 스토리지 엔진</strong>은 기본적으로 <strong>row-level lock</strong>을 지원하며, <strong>JPA의 기본 동작은 row-level lock을 사용</strong>합니다.</p>
-</li>
-<li>
-<p>그러나 다음 조건을 만족하지 않으면 <strong>innoDB라도 table lock이 발생</strong>할 수 있습니다:</p>
-<ul>
-<li>WHERE 절에 인덱스를 잘 사용하지 못하거나</li>
-<li>락 모드가 명시되지 않았거나</li>
-<li><code>UPDATE</code>나 <code>SELECT ... FOR UPDATE</code>에서 범위 검색을 제대로 구성하지 않았거나</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="-전제-조건-테이블이-innodb-엔진인지-확인">✅ 전제 조건: 테이블이 InnoDB 엔진인지 확인</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SHOW</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">STATUS</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;your_table_name&#39;</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>Engine</code> 컬럼이 <code>InnoDB</code>여야 row-level lock이 적용됩니다.</li>
-<li>만약 <code>MyISAM</code>이면 <strong>row-level lock이 불가능</strong>하므로 반드시 InnoDB로 변경해야 합니다:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">your_table_name</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InnoDB</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-jpa에서-row-level-locking만-적용하기">✅ JPA에서 row-level locking만 적용하기</h2>
-<h3 id="1-locklockmodetypepessimistic_write-또는-locklockmodetypepessimistic_read">1. <code>@Lock(LockModeType.PESSIMISTIC_WRITE)</code> 또는 <code>@Lock(LockModeType.PESSIMISTIC_READ)</code></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Repository</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">OrderRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Order</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Lock</span><span class="p">(</span><span class="n">LockModeType</span><span class="p">.</span><span class="na">PESSIMISTIC_WRITE</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&#34;SELECT o FROM Order o WHERE o.id = :id&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByIdForUpdate</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>PESSIMISTIC_WRITE</code>는 <code>SELECT ... FOR UPDATE</code>를 실행하여 row-level exclusive lock을 겁니다.</li>
-<li>이 쿼리는 해당 row를 다른 트랜잭션에서 변경하지 못하게 막습니다.</li>
-<li><code>PESSIMISTIC_READ</code>는 공유락을 걸며 읽기는 허용하되 쓰기는 막습니다.</li>
-</ul>
-<blockquote>
-<p>⚠️ 주의: 이 방법은 반드시 <strong>트랜잭션(@Transactional)</strong> 안에서 사용되어야 실제로 락이 적용됩니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 24 Jul 2025 10:07:45 &#43;0900" class="no-wrap"
-                title=" Thu, 24 Jul 2025 10:07:45 &#43;0900">
-                Thu, 24 Jul 2025 10:07:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-      </ul>
-      <div class="paginate-container">
-        <div class="BtnGroup">
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
           
-          <button class="btn btn-outline BtnGroup-item" disabled="disabled">Previous</button>
+        </div>
+        
+        <div class="pagination-button previous-post">
           
-          
-          <a rel="nofollow" class="btn btn-outline BtnGroup-item" href="/post/page/2/">Next</a>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/big_data_db/">&nbsp;</a><div> »</div>
           
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
 
-      
-    </div>
-  </div>
-</div>
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
 <script>
-window.onscroll = function (e) {
-  const headerImg = document.querySelector('#headerImg');
-  if (headerImg.getBoundingClientRect().bottom <= 0) {
-    document.querySelector('#headerStuck').classList.add('is-stuck');
-  } else {
-    document.querySelector('#headerStuck').classList.remove('is-stuck');
-  }
-};
-var style = localStorage.getItem('data-color-mode');
-iconElement = document.getElementById('github-icon');
-if (style == 'light') {
-  iconElement.setAttribute('fill', '#24292e');
-}
-else {
-  iconElement.removeAttribute('fill');
-  iconElement.setAttribute('class', 'octicon');
-  iconElement.setAttribute('color', '#f0f6fc');
-}
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
 </script>
- 
-</main>
-</div>
+
 
   <div class="footer container-xl width-full p-responsive">
   <div
