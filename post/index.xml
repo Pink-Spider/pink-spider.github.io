@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 20 Oct 2025 13:52:12 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 11 Nov 2025 10:17:20 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aggregate 패턴과 Bulkhead 패턴</title>
+      <link>https://pink-spider.github.io/post/til/aggregate_bulkhead/</link>
+      <pubDate>Tue, 11 Nov 2025 10:16:50 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/til/aggregate_bulkhead/</guid>
+      <description>&lt;p&gt;IT 개발에서 &lt;strong&gt;Aggregate 패턴&lt;/strong&gt;과 &lt;strong&gt;Bulkhead 패턴&lt;/strong&gt;은 모두 **마이크로서비스 아키텍처(MSA)**나 &lt;strong&gt;분산 시스템&lt;/strong&gt;에서 자주 사용되는 **설계 패턴(Design Pattern)**입니다. 각각의 목적은 다르지만, 시스템 안정성과 응답 효율을 높이기 위한 공통 목표를 가집니다. 아래에서 자세히 설명드릴게요.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;-1-aggregate-패턴&#34;&gt;🧩 1. Aggregate 패턴&lt;/h2&gt;&#xA;&lt;h3 id=&#34;-개념&#34;&gt;💡 개념&lt;/h3&gt;&#xA;&lt;p&gt;Aggregate 패턴은 **도메인 주도 설계(DDD: Domain-Driven Design)**에서 등장하는 개념으로, &lt;strong&gt;데이터의 일관성과 변경 단위를 정의&lt;/strong&gt;하기 위한 구조입니다.&#xA;즉, 관련된 엔터티(Entity)와 값 객체(Value Object)를 하나의 **집합(Aggregate)**으로 묶고, 그 집합의 일관성을 책임지는 루트 엔터티를 &lt;strong&gt;Aggregate Root&lt;/strong&gt;라고 부릅니다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Java는 multi paradigm 언어일까?</title>
       <link>https://pink-spider.github.io/post/java/java_multi_paradigm/</link>

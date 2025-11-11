@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">91</span>
+              <span class="Counter">92</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">91</span>
+      <span class="Counter ">92</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,37 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/aggregate_bulkhead/">Aggregate 패턴과 Bulkhead 패턴</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>IT 개발에서 <strong>Aggregate 패턴</strong>과 <strong>Bulkhead 패턴</strong>은 모두 **마이크로서비스 아키텍처(MSA)**나 <strong>분산 시스템</strong>에서 자주 사용되는 **설계 패턴(Design Pattern)**입니다. 각각의 목적은 다르지만, 시스템 안정성과 응답 효율을 높이기 위한 공통 목표를 가집니다. 아래에서 자세히 설명드릴게요.</p>
+<hr>
+<h2 id="-1-aggregate-패턴">🧩 1. Aggregate 패턴</h2>
+<h3 id="-개념">💡 개념</h3>
+<p>Aggregate 패턴은 **도메인 주도 설계(DDD: Domain-Driven Design)**에서 등장하는 개념으로, <strong>데이터의 일관성과 변경 단위를 정의</strong>하기 위한 구조입니다.
+즉, 관련된 엔터티(Entity)와 값 객체(Value Object)를 하나의 **집합(Aggregate)**으로 묶고, 그 집합의 일관성을 책임지는 루트 엔터티를 <strong>Aggregate Root</strong>라고 부릅니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 11 Nov 2025 10:16:50 &#43;0900" class="no-wrap"
+                title=" Tue, 11 Nov 2025 10:16:50 &#43;0900">
+                Tue, 11 Nov 2025 10:16:50 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1036,72 +1067,6 @@
               <relative-time datetime=" Tue, 29 Jul 2025 14:07:45 &#43;0900" class="no-wrap"
                 title=" Tue, 29 Jul 2025 14:07:45 &#43;0900">
                 Tue, 29 Jul 2025 14:07:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/jpa/row_level_lock_in_jpa/">JPA사용시 row level lock 적용</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Spring Boot 3 + JPA + MySQL 환경에서 특정 테이블에 대해 <code>find</code> 및 <code>save</code> 작업 시 <strong>row-level lock만 사용</strong>하고 <strong>table-level lock을 피하고 싶을 경우</strong>, 다음과 같은 전략을 사용할 수 있습니다.</p>
-<hr>
-<h2 id="-핵심-개념-요약">✅ 핵심 개념 요약</h2>
-<ul>
-<li>
-<p><strong>MySQL InnoDB 스토리지 엔진</strong>은 기본적으로 <strong>row-level lock</strong>을 지원하며, <strong>JPA의 기본 동작은 row-level lock을 사용</strong>합니다.</p>
-</li>
-<li>
-<p>그러나 다음 조건을 만족하지 않으면 <strong>innoDB라도 table lock이 발생</strong>할 수 있습니다:</p>
-<ul>
-<li>WHERE 절에 인덱스를 잘 사용하지 못하거나</li>
-<li>락 모드가 명시되지 않았거나</li>
-<li><code>UPDATE</code>나 <code>SELECT ... FOR UPDATE</code>에서 범위 검색을 제대로 구성하지 않았거나</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="-전제-조건-테이블이-innodb-엔진인지-확인">✅ 전제 조건: 테이블이 InnoDB 엔진인지 확인</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SHOW</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">STATUS</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;your_table_name&#39;</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>Engine</code> 컬럼이 <code>InnoDB</code>여야 row-level lock이 적용됩니다.</li>
-<li>만약 <code>MyISAM</code>이면 <strong>row-level lock이 불가능</strong>하므로 반드시 InnoDB로 변경해야 합니다:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">your_table_name</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">InnoDB</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="-jpa에서-row-level-locking만-적용하기">✅ JPA에서 row-level locking만 적용하기</h2>
-<h3 id="1-locklockmodetypepessimistic_write-또는-locklockmodetypepessimistic_read">1. <code>@Lock(LockModeType.PESSIMISTIC_WRITE)</code> 또는 <code>@Lock(LockModeType.PESSIMISTIC_READ)</code></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Repository</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">OrderRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Order</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Lock</span><span class="p">(</span><span class="n">LockModeType</span><span class="p">.</span><span class="na">PESSIMISTIC_WRITE</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&#34;SELECT o FROM Order o WHERE o.id = :id&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Optional</span><span class="o">&lt;</span><span class="n">Order</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByIdForUpdate</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">)</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>PESSIMISTIC_WRITE</code>는 <code>SELECT ... FOR UPDATE</code>를 실행하여 row-level exclusive lock을 겁니다.</li>
-<li>이 쿼리는 해당 row를 다른 트랜잭션에서 변경하지 못하게 막습니다.</li>
-<li><code>PESSIMISTIC_READ</code>는 공유락을 걸며 읽기는 허용하되 쓰기는 막습니다.</li>
-</ul>
-<blockquote>
-<p>⚠️ 주의: 이 방법은 반드시 <strong>트랜잭션(@Transactional)</strong> 안에서 사용되어야 실제로 락이 적용됩니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 24 Jul 2025 10:07:45 &#43;0900" class="no-wrap"
-                title=" Thu, 24 Jul 2025 10:07:45 &#43;0900">
-                Thu, 24 Jul 2025 10:07:45 &#43;0900
               </relative-time>
             </div>
           </div>

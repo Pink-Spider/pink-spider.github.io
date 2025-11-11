@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">91</span>
+              <span class="Counter">92</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">91</span>
+      <span class="Counter ">92</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,177 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/js/about_curring/">About curring</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>커링(Currying)은 여러 개의 인자를 받는 함수를 하나의 인자만 받는 함수들의 연속으로 변환하는 기법입니다. 수학자 하스켈 커리(Haskell Curry)의 이름에서 따온 용어입니다.</p>
+<h2 id="기본-개념">기본 개념</h2>
+<p>일반적인 함수:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> <span class="c1">// 6
+</span></span></span></code></pre></div><p>커링된 함수:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">curriedAdd</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">curriedAdd</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 6
+</span></span></span></code></pre></div><h2 id="화살표-함수로-간단하게">화살표 함수로 간단하게</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">curriedAdd</span> <span class="o">=</span> <span class="nx">a</span> <span class="p">=&gt;</span> <span class="nx">b</span> <span class="p">=&gt;</span> <span class="nx">c</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">curriedAdd</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 6
+</span></span></span></code></pre></div><h2 id="부분-적용-partial-application">부분 적용 (Partial Application)</h2>
+<p>커링의 가장 큰 장점은 부분 적용이 가능하다는 것입니다:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">curriedAdd</span> <span class="o">=</span> <span class="nx">a</span> <span class="p">=&gt;</span> <span class="nx">b</span> <span class="p">=&gt;</span> <span class="nx">c</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 부분 적용
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">add5</span> <span class="o">=</span> <span class="nx">curriedAdd</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">add5And3</span> <span class="o">=</span> <span class="nx">add5</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add5And3</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span> <span class="c1">// 10 (5 + 3 + 2)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add5</span><span class="p">(</span><span class="mi">4</span><span class="p">)(</span><span class="mi">1</span><span class="p">));</span> <span class="c1">// 10 (5 + 4 + 1)
+</span></span></span></code></pre></div><h2 id="실용적인-예제들">실용적인 예제들</h2>
+<h3 id="1-문자열-검사-함수">1. 문자열 검사 함수</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">hasSubstring</span> <span class="o">=</span> <span class="nx">substring</span> <span class="p">=&gt;</span> <span class="nx">str</span> <span class="p">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">substring</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">hasReact</span> <span class="o">=</span> <span class="nx">hasSubstring</span><span class="p">(</span><span class="s1">&#39;React&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">hasVue</span> <span class="o">=</span> <span class="nx">hasSubstring</span><span class="p">(</span><span class="s1">&#39;Vue&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">hasReact</span><span class="p">(</span><span class="s1">&#39;React 개발자&#39;</span><span class="p">));</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">hasVue</span><span class="p">(</span><span class="s1">&#39;Vue.js 프레임워크&#39;</span><span class="p">));</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 배열에서 활용
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">frameworks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;React&#39;</span><span class="p">,</span> <span class="s1">&#39;Angular&#39;</span><span class="p">,</span> <span class="s1">&#39;Vue&#39;</span><span class="p">,</span> <span class="s1">&#39;Svelte&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">reactItems</span> <span class="o">=</span> <span class="nx">frameworks</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">hasReact</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reactItems</span><span class="p">);</span> <span class="c1">// [&#39;React&#39;]
+</span></span></span></code></pre></div><h3 id="2-수학-연산">2. 수학 연산</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">multiply</span> <span class="o">=</span> <span class="nx">a</span> <span class="p">=&gt;</span> <span class="nx">b</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">divide</span> <span class="o">=</span> <span class="nx">a</span> <span class="p">=&gt;</span> <span class="nx">b</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">/</span> <span class="nx">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="kr">double</span> <span class="o">=</span> <span class="nx">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">triple</span> <span class="o">=</span> <span class="nx">multiply</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">half</span> <span class="o">=</span> <span class="nx">divide</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 또는 multiply(0.5)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="kr">double</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span> <span class="c1">// 10
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">triple</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span> <span class="c1">// 12
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">doubled</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kr">double</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">doubled</span><span class="p">);</span> <span class="c1">// [2, 4, 6, 8, 10]
+</span></span></span></code></pre></div><h3 id="3-이벤트-핸들러">3. 이벤트 핸들러</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">level</span> <span class="p">=&gt;</span> <span class="nx">message</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`[</span><span class="si">${</span><span class="nx">level</span><span class="si">}</span><span class="sb">] </span><span class="si">${</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">logError</span> <span class="o">=</span> <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;ERROR&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">logInfo</span> <span class="o">=</span> <span class="nx">log</span><span class="p">(</span><span class="s1">&#39;INFO&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">logError</span><span class="p">(</span><span class="s1">&#39;데이터베이스 연결 실패&#39;</span><span class="p">);</span> <span class="c1">// [ERROR] 데이터베이스 연결 실패
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">logInfo</span><span class="p">(</span><span class="s1">&#39;서버 시작됨&#39;</span><span class="p">);</span> <span class="c1">// [INFO] 서버 시작됨
+</span></span></span></code></pre></div><h3 id="4-api-요청">4. API 요청</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">apiRequest</span> <span class="o">=</span> <span class="nx">method</span> <span class="p">=&gt;</span> <span class="nx">url</span> <span class="p">=&gt;</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">method</span><span class="o">:</span> <span class="nx">method</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span> <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">body</span><span class="o">:</span> <span class="nx">data</span> <span class="o">?</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">:</span> <span class="kc">undefined</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">get</span> <span class="o">=</span> <span class="nx">apiRequest</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">post</span> <span class="o">=</span> <span class="nx">apiRequest</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">put</span> <span class="o">=</span> <span class="nx">apiRequest</span><span class="p">(</span><span class="s1">&#39;PUT&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 사용
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/api/users&#39;</span><span class="p">)();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/api/users&#39;</span><span class="p">)({</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;김철수&#39;</span><span class="p">,</span> <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;kim@example.com&#39;</span> <span class="p">});</span>
+</span></span></code></pre></div><h2 id="자동-커링-함수-만들기">자동 커링 함수 만들기</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">curry</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kd">function</span> <span class="nx">curried</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kd">function</span><span class="p">(...</span><span class="nx">nextArgs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nx">curried</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">nextArgs</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 사용 예
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">curriedAdd</span> <span class="o">=</span> <span class="nx">curry</span><span class="p">(</span><span class="nx">add</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">curriedAdd</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">));</span> <span class="c1">// 6
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">curriedAdd</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">));</span> <span class="c1">// 6
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">curriedAdd</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span> <span class="c1">// 6
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">curriedAdd</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span> <span class="c1">// 6
+</span></span></span></code></pre></div><h2 id="라이브러리에서의-활용">라이브러리에서의 활용</h2>
+<h3 id="lodash">Lodash</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;lodash&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">curriedAdd</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">curry</span><span class="p">(</span><span class="nx">add</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">curriedAdd</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">));</span> <span class="c1">// 6
+</span></span></span></code></pre></div><h3 id="ramda">Ramda</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">R</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;ramda&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;김철수&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">25</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;이영희&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">30</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;박민수&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">35</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">getProperty</span> <span class="o">=</span> <span class="nx">R</span><span class="p">.</span><span class="nx">curry</span><span class="p">((</span><span class="nx">prop</span><span class="p">,</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">prop</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">getName</span> <span class="o">=</span> <span class="nx">getProperty</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">names</span> <span class="o">=</span> <span class="nx">users</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">getName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">names</span><span class="p">);</span> <span class="c1">// [&#39;김철수&#39;, &#39;이영희&#39;, &#39;박민수&#39;]
+</span></span></span></code></pre></div><h2 id="커링의-장점">커링의 장점</h2>
+<ol>
+<li><strong>재사용성</strong>: 특정 매개변수가 고정된 새로운 함수를 쉽게 생성</li>
+<li><strong>가독성</strong>: 함수의 의도가 더 명확해짐</li>
+<li><strong>함수 조합</strong>: 다른 고차 함수들과 조합하기 쉬움</li>
+<li><strong>부분 적용</strong>: 필요할 때 일부 인자만 먼저 적용 가능</li>
+</ol>
+<h2 id="주의사항">주의사항</h2>
+<ol>
+<li><strong>성능</strong>: 함수 호출이 중첩되므로 약간의 오버헤드 발생</li>
+<li><strong>디버깅</strong>: 스택 트레이스가 복잡해질 수 있음</li>
+<li><strong>가독성</strong>: 과도하게 사용하면 오히려 코드를 이해하기 어려워질 수 있음</li>
+</ol>
+<p>커링은 함수형 프로그래밍의 핵심 개념 중 하나로, 코드의 재사용성과 모듈성을 크게 향상시킬 수 있는 강력한 기법입니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Fri, 20 Jun 2025 14:11:00 &#43;0900" class="no-wrap"
+                title=" Fri, 20 Jun 2025 14:11:00 &#43;0900">
+                Fri, 20 Jun 2025 14:11:00 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1204,50 +1375,6 @@ public class HttpApiCachingFilter extends OncePerRequestFilter {
               <relative-time datetime=" Tue, 10 Jun 2025 08:49:58 &#43;0900" class="no-wrap"
                 title=" Tue, 10 Jun 2025 08:49:58 &#43;0900">
                 Tue, 10 Jun 2025 08:49:58 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/db_shading/">DB Shading</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>데이터베이스(DB) 샤딩(DB Sharding)이란 대용량 데이터를 효율적으로 분산·관리하기 위해 하나의 거대한 데이터베이스를 여러 개의 작은 조각(샤드, shard)으로 나누어 각각을 별도의 서버에 분산 저장하고 처리하는 기법을 말합니다.</p>
-<hr>
-<h2 id="1-왜-샤딩이-필요한가">1. 왜 샤딩이 필요한가?</h2>
-<ul>
-<li>
-<p><strong>성능 확장성(Scalability)</strong></p>
-<ul>
-<li>단일 서버에 모든 데이터를 저장하면 저장 용량·처리 능력이 한계에 부딪힙니다.</li>
-<li>데이터와 트래픽이 늘어날수록 로드가 집중되어 응답 지연(latency)이나 병목(bottleneck)이 발생합니다.</li>
-</ul>
-</li>
-<li>
-<p><strong>고가용성(High Availability)</strong></p>
-<ul>
-<li>각 샤드를 독립된 노드에 두면, 일부 노드 장애 시에도 전체 시스템이 완전히 다운되지 않고 가용성을 유지할 수 있습니다.</li>
-</ul>
-</li>
-<li>
-<p><strong>관리 용이성</strong></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 10 Jun 2025 08:44:58 &#43;0900" class="no-wrap"
-                title=" Tue, 10 Jun 2025 08:44:58 &#43;0900">
-                Tue, 10 Jun 2025 08:44:58 &#43;0900
               </relative-time>
             </div>
           </div>
