@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">92</span>
+              <span class="Counter">94</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">92</span>
+      <span class="Counter ">94</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,116 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/pbt/">Property-Based Testing(PBT) 와 jqwik</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>**Property-Based Testing(PBT)**은 입력과 결과 간의 **일반적인 속성(Property)**을 정의하고, 테스트 프레임워크가 그 속성을 충족하는지를 무작위로 생성된 다양한 입력값에 대해 확인하는 방식의 테스트입니다. 단위 테스트처럼 특정 입력값만 확인하는 것이 아니라, <strong>수천 개의 입력 조합을 자동으로 검사할 수 있다는 점에서 매우 강력</strong>합니다.</p>
+<hr>
+<h2 id="-property-based-testing이란">🔍 Property-Based Testing이란?</h2>
+<h3 id="-핵심-개념">✅ 핵심 개념</h3>
+<ul>
+<li><strong>속성(Property)</strong>: 테스트 대상 함수나 로직이 항상 만족해야 하는 일반적인 법칙 또는 규칙.</li>
+<li><strong>입력값 자동 생성</strong>: PBT 프레임워크가 다양한 입력값을 무작위로 생성.</li>
+<li><strong>Fail case 축소(Shrinking)</strong>: 실패한 입력값이 발생했을 때, 실패를 재현할 수 있는 최소 입력값으로 줄여서 디버깅을 쉽게 함.</li>
+</ul>
+<h3 id="-단위-테스트와의-비교">🆚 단위 테스트와의 비교</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>단위 테스트 (Example-based)</th>
+          <th>속성 기반 테스트 (Property-based)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>입력값</td>
+          <td>고정된 사례 수동 지정</td>
+          <td>자동 생성된 다양한 값</td>
+      </tr>
+      <tr>
+          <td>테스트 범위</td>
+          <td>제한적</td>
+          <td>매우 광범위</td>
+      </tr>
+      <tr>
+          <td>유지보수</td>
+          <td>로직 변경 시 테스트 추가 필요</td>
+          <td>Property만 잘 정의하면 자동 적용</td>
+      </tr>
+      <tr>
+          <td>실패 시 디버깅</td>
+          <td>명확한 입력값</td>
+          <td>축소 과정 필요</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-spring-boot에서-property-based-test-사용하는-방법">🧪 Spring Boot에서 Property-Based Test 사용하는 방법</h2>
+<p>Spring Boot 자체는 JUnit을 기반으로 한 단위 테스트가 기본이며, <strong>PBT는 외부 라이브러리를 사용해서 통합</strong>하는 것이 일반적입니다. 가장 널리 쓰이는 Java 기반 라이브러리는 다음과 같습니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Fri, 27 Jun 2025 10:18:03 &#43;0900" class="no-wrap"
+                title=" Fri, 27 Jun 2025 10:18:03 &#43;0900">
+                Fri, 27 Jun 2025 10:18:03 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/db/ubuntu_postgresql/">우분투에 postgresql 설치하기</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Ubuntu에서 PostgreSQL을 설치하고 외부 접속을 허용하려면 다음과 같은 단계로 진행하면 됩니다.</p>
+<hr>
+<h2 id="1-postgresql-설치">1. PostgreSQL 설치</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install postgresql postgresql-contrib
+</span></span></code></pre></div><p>설치 후 PostgreSQL 서비스가 자동 시작됩니다. 상태 확인:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl status postgresql
+</span></span></code></pre></div><hr>
+<h2 id="2-postgresql-유저-및-db-설정">2. PostgreSQL 유저 및 DB 설정</h2>
+<p>PostgreSQL 설치 시 기본적으로 <code>postgres</code>라는 유저가 생성됩니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -i -u postgres
+</span></span><span class="line"><span class="cl">psql
+</span></span></code></pre></div><p>원하는 유저와 DB를 만들고 비밀번호 설정:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">myuser</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;mypassword&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">mydb</span><span class="w"> </span><span class="k">OWNER</span><span class="w"> </span><span class="n">myuser</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>권한 부여:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 23 Jun 2025 10:14:00 &#43;0900" class="no-wrap"
+                title=" Mon, 23 Jun 2025 10:14:00 &#43;0900">
+                Mon, 23 Jun 2025 10:14:00 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1082,299 +1192,6 @@
               <relative-time datetime=" Wed, 18 Jun 2025 11:27:58 &#43;0900" class="no-wrap"
                 title=" Wed, 18 Jun 2025 11:27:58 &#43;0900">
                 Wed, 18 Jun 2025 11:27:58 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/httpapicachingfilter/">HttpApiCachingFilter 와 CachedHttpServletRequestWrapper 구현 예시</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="httpapicachingfilter-와-cachedhttpservletrequestwrapper">HttpApiCachingFilter 와 CachedHttpServletRequestWrapper</h1>
-<ul>
-<li>json과 multipart 외 form-urlencoded의 경우도 허용하면서 logging 정보 남기는 filter 구현 예시</li>
-<li>request 의 inputStream을 한번 읽으면 휘발되기 때문에 이를 방지하는 로직이 중요합니다.</li>
-</ul>
-<h2 id="httpapicachingfilter">HttpApiCachingFilter</h2>
-<pre tabindex="0"><code>@Component
-@Order(value = Ordered.HIGHEST_PRECEDENCE)
-@WebFilter(filterName = &#34;HttpApiCachingFilter&#34;, urlPatterns = &#34;/*&#34;)
-@Slf4j
-public class HttpApiCachingFilter extends OncePerRequestFilter {
-
-    private static String APPLICATION_NAME;
-
-    @Value(&#34;${spring.application.name}&#34;)
-    private void setApplicationName(String value) {
-        APPLICATION_NAME = value;
-    }
-
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-        throws ServletException, IOException {
-        if (isAsyncDispatch(request)) {
-            filterChain.doFilter(request, response);
-        } else if (isMultipartRequest(request)) {
-            doFilterWrapped(new StandardMultipartHttpServletRequest(request), new CachedHttpServletResponseWrapper(response), filterChain);
-        } else {
-            doFilterWrapped(new CachedHttpServletRequestWrapper(request), new CachedHttpServletResponseWrapper(response), filterChain);
-        }
-    }
-
-    protected void doFilterWrapped(HttpServletRequestWrapper request, ContentCachingResponseWrapper response, FilterChain filterChain)
-        throws ServletException, IOException {
-        try {
-            logRequestHeader(request);
-            logRequest(request);
-            filterChain.doFilter(request, response);
-        } finally {
-            logResponseHeader(response);
-            logResponse(response);
-            response.copyBodyToResponse();
-        }
-    }
-
-    private static void logRequestHeader(HttpServletRequestWrapper request) {
-        Enumeration&lt;String&gt; headerNames = request.getHeaderNames();
-        if (headerNames != null) {
-            Collections.list(headerNames).forEach(headersName -&gt; {
-                String headerValue = request.getHeader(headersName);
-                log.info(&#34;Request Header {}: {}&#34;, headersName, headerValue);
-            });
-        }
-    }
-
-    private static void logRequest(HttpServletRequestWrapper request) throws IOException {
-        String contentType = request.getContentType();
-
-        log.info(&#34;Request body: {} uri=[{}] content-type=[{}]&#34;, request.getMethod(),
-            request.getRequestURI(), contentType);
-
-        if (contentType != null &amp;&amp; contentType.startsWith(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
-            Map&lt;String, String[]&gt; paramMap = request.getParameterMap();
-            paramMap.forEach((key, values) -&gt; {
-                for (String value : values) {
-                    log.info(&#34;REQUEST Param: {} = {}&#34;, key, value);
-                }
-            });
-        } else {
-            logPayload(&#34;REQUEST&#34;, contentType, request.getInputStream(), request.getRequestURI());
-        }
-    }
-
-    private static void logResponseHeader(ContentCachingResponseWrapper response) {
-        Collection&lt;String&gt; headerNames = response.getHeaderNames();
-        for (String headerName : headerNames) {
-            for (String value : response.getHeaders(headerName)) {
-                log.info(&#34;Response Header {}: {}&#34;, headerName, value);
-            }
-        }
-    }
-
-    private static void logResponse(ContentCachingResponseWrapper response) throws IOException {
-        logPayload(&#34;RESPONSE&#34;, response.getContentType(), response.getContentInputStream(), null);
-    }
-
-    private static void logPayload(String direction,
-                                   String contentType,
-                                   InputStream inputStream,
-                                   String targetUri
-    ) throws IOException {
-        boolean visible = isVisible(MediaType.valueOf(contentType == null ? &#34;application/json&#34; : contentType));
-        if (visible) {
-            byte[] content = StreamUtils.copyToByteArray(inputStream);
-            if (content.length &gt; 0) {
-                String contentString = new String(content);
-                log.info(&#34;{} Payload: {}&#34;, direction, contentString);
-            }
-        } else {
-            log.info(&#34;{} Payload: Binary Content&#34;, direction);
-        }
-    }
-
-    private static boolean isVisible(MediaType mediaType) {
-        final List&lt;MediaType&gt; VISIBLE_TYPES = Arrays.asList(MediaType.valueOf(&#34;text/*&#34;),
-            MediaType.APPLICATION_FORM_URLENCODED,
-            MediaType.APPLICATION_JSON,
-            MediaType.APPLICATION_XML,
-            MediaType.valueOf(&#34;application/*+json&#34;),
-            MediaType.valueOf(&#34;application/*+xml&#34;),
-            MediaType.MULTIPART_FORM_DATA);
-        return VISIBLE_TYPES.stream().anyMatch(visibleType -&gt; visibleType.includes(mediaType));
-    }
-
-    private boolean isMultipartRequest(HttpServletRequest request) {
-        String contentType = request.getContentType();
-        return request.getMethod().equalsIgnoreCase(&#34;POST&#34;)
-            &amp;&amp; contentType != null
-            &amp;&amp; contentType.startsWith(&#34;multipart/form-data&#34;);
-    }
-}
-</code></pre><h2 id="cachedhttpservletrequestwrapperjava">CachedHttpServletRequestWrapper.java</h2>
-<pre tabindex="0"><code>public class CachedHttpServletRequestWrapper extends HttpServletRequestWrapper {
-
-    private final byte[] cachedBody;
-    private Map&lt;String, String[]&gt; parameterMap;
-
-    public CachedHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
-        super(request);
-        this.cachedBody = request.getInputStream().readAllBytes();
-
-        // form-urlencoded 타입일 때만 파라미터 파싱
-        String contentType = request.getContentType();
-        if (contentType != null &amp;&amp; contentType.startsWith(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
-            String encoding = request.getCharacterEncoding();
-            if (encoding == null) {
-                encoding = StandardCharsets.UTF_8.name();
-            }
-            this.parameterMap = parseFormParameters(new String(this.cachedBody, encoding));
-        } else {
-            // 원본 request의 파라미터 맵 사용
-            this.parameterMap = super.getParameterMap();
-        }
-    }
-
-    @Override
-    public ServletInputStream getInputStream() {
-        ByteArrayInputStream bais = new ByteArrayInputStream(cachedBody);
-
-        return new ServletInputStream() {
-            @Override
-            public int read() {
-                return bais.read();
-            }
-
-            @Override
-            public boolean isFinished() {
-                return bais.available() == 0;
-            }
-
-            @Override
-            public boolean isReady() {
-                return true;
-            }
-
-            @Override
-            public void setReadListener(ReadListener listener) {
-            }
-        };
-    }
-
-    @Override
-    public Map&lt;String, String[]&gt; getParameterMap() {
-        return this.parameterMap;
-    }
-
-    @Override
-    public BufferedReader getReader() {
-        String encoding = getCharacterEncoding();
-        if (encoding == null) {
-            encoding = StandardCharsets.UTF_8.name();
-        }
-        return new BufferedReader(new InputStreamReader(getInputStream(), Charset.forName(encoding)));
-    }
-
-    private Map&lt;String, String[]&gt; parseFormParameters(String body) throws UnsupportedEncodingException {
-        Map&lt;String, List&lt;String&gt;&gt; tempMap = new LinkedHashMap&lt;&gt;();
-
-        // 빈 바디 처리
-        if (body == null || body.trim().isEmpty()) {
-            return new LinkedHashMap&lt;&gt;();
-        }
-
-        for (String pair : body.split(&#34;&amp;&#34;)) {
-            if (pair.trim().isEmpty()) {
-                continue; // 빈 pair 건너뛰기
-            }
-
-            String[] parts = pair.split(&#34;=&#34;, 2);
-            if (parts.length == 0) {
-                continue;
-            }
-
-            String key = URLDecoder.decode(parts[0], StandardCharsets.UTF_8);
-            String value = parts.length &gt; 1 ? URLDecoder.decode(parts[1], StandardCharsets.UTF_8) : &#34;&#34;;
-            tempMap.computeIfAbsent(key, k -&gt; new ArrayList&lt;&gt;()).add(value);
-        }
-
-        return tempMap.entrySet().stream()
-            .collect(Collectors.toMap(Map.Entry::getKey, e -&gt; e.getValue().toArray(new String[0])));
-    }
-}
-</code></pre><h2 id="cachedhttpservletresponsewrapperjava">CachedHttpServletResponseWrapper.java</h2>
-<pre tabindex="0"><code>public class CachedHttpServletResponseWrapper extends ContentCachingResponseWrapper {
-
-    public CachedHttpServletResponseWrapper(HttpServletResponse response) {
-        super(response);
-    }
-}
-</code></pre>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 16 Jun 2025 20:49:58 &#43;0900" class="no-wrap"
-                title=" Mon, 16 Jun 2025 20:49:58 &#43;0900">
-                Mon, 16 Jun 2025 20:49:58 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/shading_in_boot/">Boot에서 샤딩된 DB 사용하려면</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>스프링 부트 애플리케이션 입장에서 샤딩된 DB를 쓰기 위해서 직접 “복잡한” 코드를 많이 짤 필요는 없습니다. 대신, 주로 다음 두 가지 레벨 중 하나의 방식으로 샤딩을 처리하게 됩니다.</p>
-<hr>
-<h2 id="1-외부-프록시미들웨어-사용-mycat-vitess-proxysql-등">1. 외부 프록시/미들웨어 사용 (Mycat, Vitess, ProxySQL 등)</h2>
-<ul>
-<li>
-<p><strong>애플리케이션 변경 제로 또는 최소화</strong></p>
-<ul>
-<li>샤드별 DB URL(호스트/포트) 대신, 프록시의 단일 접점(가상 호스트/포트)을 <code>spring.datasource.url</code>에 지정</li>
-<li>트래픽·샤드 키 기반 분기 로직은 프록시가 대신 수행</li>
-</ul>
-</li>
-<li>
-<p><strong>구현 사항</strong></p>
-<ol>
-<li>
-<p><code>application.yml</code>에 한번만 프록시 접점 정보 등록</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">datasource</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">jdbc:mysql://proxy.example.com:3306/app_db</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">secret</span><span class="w">
-</span></span></span></code></pre></div></li>
-<li>
-<p>필요 시 트랜잭션 격리, 커넥션 풀, 리플리카 읽기 전용 설정 등 추가 구성</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 10 Jun 2025 08:49:58 &#43;0900" class="no-wrap"
-                title=" Tue, 10 Jun 2025 08:49:58 &#43;0900">
-                Tue, 10 Jun 2025 08:49:58 &#43;0900
               </relative-time>
             </div>
           </div>

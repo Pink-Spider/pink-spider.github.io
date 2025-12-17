@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">92</span>
+              <span class="Counter">94</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">92</span>
+      <span class="Counter ">94</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,100 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/singleton_pattern/">Singleton Pattern</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>자바(Java)에서 **싱글톤 패턴(Singleton Pattern)**은 특정 클래스의 인스턴스를 <strong>하나만 생성</strong>하고, <strong>전체 애플리케이션에서 공유</strong>할 수 있도록 보장하는 디자인 패턴입니다. 주로 <strong>공통된 설정, 로깅, 스레드 풀, 캐시, DB 연결 관리</strong> 등에 사용됩니다.</p>
+<hr>
+<h2 id="-싱글톤-패턴의-핵심-개념">✅ 싱글톤 패턴의 핵심 개념</h2>
+<ul>
+<li>클래스의 <strong>인스턴스를 하나만 생성</strong>.</li>
+<li><strong>전역 접근점(Global Access Point)</strong> 제공.</li>
+<li><strong>생성자를 <code>private</code>으로</strong> 숨김.</li>
+<li><strong>정적 메서드로 인스턴스를 반환</strong>.</li>
+</ul>
+<hr>
+<h2 id="-싱글톤-패턴-구현-예제">📦 싱글톤 패턴 구현 예제</h2>
+<h3 id="1-기본-싱글톤-lazy-initialization">1. <strong>기본 싱글톤 (Lazy Initialization)</strong></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Singleton</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 생성자를 private으로 설정하여 외부에서 new로 인스턴스 생성하지 못하도록 함</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="nf">Singleton</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 인스턴스를 필요할 때 생성</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Singleton</span><span class="w"> </span><span class="nf">getInstance</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Singleton</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">instance</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">showMessage</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Hello from Singleton!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><strong>사용 예시:</strong></p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 26 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Mon, 26 May 2025 20:20:45 &#43;0900">
+                Mon, 26 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/idempotence/">멱등성(Idempotence)에 대하여</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>멱등성(Idempotence)은 컴퓨터 과학에서 자주 등장하는 중요한 개념입니다. 아래에 일반적인 의미와 API 개발과의 관련성을 나누어 자세히 설명드리겠습니다.</p>
+<hr>
+<h2 id="-멱등성idempotence이란">💡 멱등성(Idempotence)이란?</h2>
+<p>멱등성이란 <strong>동일한 연산을 여러 번 수행해도 결과가 같아지는 성질</strong>을 말합니다. 수학에서 출발한 개념인데, 예를 들어 함수 <code>f(x)</code>가 있을 때 다음이 성립하면 멱등함수라고 합니다:</p>
+<pre tabindex="0"><code>f(f(x)) = f(x)
+</code></pre><h3 id="예시-수학적-관점">예시 (수학적 관점)</h3>
+<ul>
+<li>절댓값 함수: <code>| |x|| = |x|</code></li>
+<li>집합의 합집합 연산: <code>A ∪ A = A</code></li>
+</ul>
+<hr>
+<h2 id="-멱등성과-api-개발">🌐 멱등성과 API 개발</h2>
+<p>웹 API 설계 시, 멱등성은 <strong>안정적이고 예측 가능한 API</strong>를 만들기 위해 매우 중요한 성질입니다. 특히 REST API에서는 각 HTTP 메서드가 멱등성을 가질지를 설계 시 명확히 고려해야 합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 26 May 2025 20:20:45 &#43;0900" class="no-wrap"
+                title=" Mon, 26 May 2025 20:20:45 &#43;0900">
+                Mon, 26 May 2025 20:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1006,85 +1100,6 @@
               <relative-time datetime=" Sun, 18 May 2025 20:20:45 &#43;0900" class="no-wrap"
                 title=" Sun, 18 May 2025 20:20:45 &#43;0900">
                 Sun, 18 May 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/mysql_slow_query/">MySql slow query 모니터링</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>MySQL에서 <strong>Slow Query(슬로우 쿼리)</strong> 를 모니터링하는 것은 성능 최적화를 위한 중요한 작업입니다. 다음은 슬로우 쿼리를 모니터링하는 일반적인 방법들입니다:</p>
-<hr>
-<h3 id="1-슬로우-쿼리-로그-활성화하기">1. <strong>슬로우 쿼리 로그 활성화하기</strong></h3>
-<p>슬로우 쿼리를 기록하기 위해 MySQL 설정을 조정합니다.</p>
-<h4 id="방법-1-mycnf-또는-myini-파일-수정">방법 1: <code>my.cnf</code> 또는 <code>my.ini</code> 파일 수정</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[mysqld]</span>
-</span></span><span class="line"><span class="cl"><span class="na">slow_query_log</span> <span class="o">=</span> <span class="s">1</span>
-</span></span><span class="line"><span class="cl"><span class="na">slow_query_log_file</span> <span class="o">=</span> <span class="s">/var/log/mysql/slow.log</span>
-</span></span><span class="line"><span class="cl"><span class="na">long_query_time</span> <span class="o">=</span> <span class="s">1</span>
-</span></span><span class="line"><span class="cl"><span class="na">log_queries_not_using_indexes</span> <span class="o">=</span> <span class="s">1</span>
-</span></span></code></pre></div><ul>
-<li><code>slow_query_log</code>: 슬로우 쿼리 로그 기능 활성화</li>
-<li><code>slow_query_log_file</code>: 로그 파일 위치</li>
-<li><code>long_query_time</code>: 몇 초 이상 걸리는 쿼리를 느린 쿼리로 간주할지 설정 (초 단위)</li>
-<li><code>log_queries_not_using_indexes</code>: 인덱스를 사용하지 않는 쿼리도 로그에 기록</li>
-</ul>
-<p>설정 후 MySQL을 재시작해야 반영됩니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 13 May 2025 20:20:45 &#43;0900" class="no-wrap"
-                title=" Tue, 13 May 2025 20:20:45 &#43;0900">
-                Tue, 13 May 2025 20:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/gpt_temperature_top-p/">Chat GPT 기능설정값 temperature, top-p</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>temperature</code>와 <code>top-p</code>(또는 <strong>nucleus sampling</strong>)는 <strong>자연어 생성 모델</strong>이 출력할 단어를 선택할 때의 <strong>랜덤성 조절 파라미터</strong>입니다. 두 개념은 유사한 역할을 하지만 <strong>작동 방식이 다릅니다</strong>. 아래에 각 개념에 대한 자세한 설명과 예제를 제공하겠습니다.</p>
-<hr>
-<h2 id="-temperature-선택의-확률을-부드럽게-조정">🔥 Temperature: &ldquo;선택의 확률을 부드럽게 조정&rdquo;</h2>
-<h3 id="개념">개념</h3>
-<ul>
-<li><code>temperature</code>는 <strong>모델이 다음 단어를 선택할 때의 확률 분포를 얼마나 평탄하게 만들지</strong>를 결정합니다.</li>
-<li>기본값은 <code>1.0</code>이며, 이 값을 <strong>낮추면 더 결정론적(deterministic)</strong>, **높이면 더 창의적(random)**이 됩니다.</li>
-</ul>
-<h3 id="작동-방식">작동 방식</h3>
-<ul>
-<li>
-<p>모델이 생성 가능한 단어에 대해 logit(점수)을 부여한 후 softmax 함수를 통해 확률을 만듭니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 13 May 2025 18:20:45 &#43;0900" class="no-wrap"
-                title=" Tue, 13 May 2025 18:20:45 &#43;0900">
-                Tue, 13 May 2025 18:20:45 &#43;0900
               </relative-time>
             </div>
           </div>

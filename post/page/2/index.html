@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">92</span>
+              <span class="Counter">94</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">92</span>
+      <span class="Counter ">94</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,135 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/event_raise_listen/">Java에서 event를 활용한 구현 예시</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="1-이벤트-정의-pojorecord-권장">1) 이벤트 정의 (POJO/record 권장)</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// src/main/java/com/example/user/event/UserSignedUpEvent.java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.user.event</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Instant</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">UserSignedUpEvent</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">userId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">Instant</span><span class="w"> </span><span class="n">occurredAt</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span></code></pre></div><blockquote>
+<p>Spring 6+/Boot 3에서는 <code>ApplicationEvent</code>를 상속할 필요가 없습니다. 평범한 POJO/record가 좋아요.</p></blockquote>
+<hr>
+<h1 id="2-이벤트-발행-raise">2) 이벤트 발행 (raise)</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// src/main/java/com/example/user/service/SignUpService.java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.user.service</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.user.event.UserSignedUpEvent</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.user.model.User</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.user.repo.UserRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.ApplicationEventPublisher</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Instant</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SignUpService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ApplicationEventPublisher</span><span class="w"> </span><span class="n">publisher</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">SignUpService</span><span class="p">(</span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">ApplicationEventPublisher</span><span class="w"> </span><span class="n">publisher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">userRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">publisher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">publisher</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="nf">signUp</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">));</span><span class="w">  </span><span class="c1">// JPA 엔티티 저장 가정</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 이벤트 발행 (트랜잭션 안에서)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">publisher</span><span class="p">.</span><span class="na">publishEvent</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">UserSignedUpEvent</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getEmail</span><span class="p">(),</span><span class="w"> </span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">()));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">user</span><span class="p">.</span><span class="na">getId</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h1 id="3-동기-리스너-기본">3) 동기 리스너 (기본)</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// src/main/java/com/example/user/listener/AuditLogListener.java</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.user.listener</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">com.example.user.event.UserSignedUpEvent</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.event.EventListener</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.annotation.Order</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AuditLogListener</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">AuditLogListener</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Order</span><span class="p">(</span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// 여러 리스너가 있을 때 순서 제어 가능 (낮을수록 먼저)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@EventListener</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onUserSignedUp</span><span class="p">(</span><span class="n">UserSignedUpEvent</span><span class="w"> </span><span class="n">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&#34;AUDIT: userId={}, email={}, at={}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">userId</span><span class="p">(),</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">email</span><span class="p">(),</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="na">occurredAt</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><blockquote>
+<p>기본은 “동기 실행”이라 발행 시점에 즉시 호출됩니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Mon, 01 Sep 2025 16:13:53 &#43;0900" class="no-wrap"
+                title=" Mon, 01 Sep 2025 16:13:53 &#43;0900">
+                Mon, 01 Sep 2025 16:13:53 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/reflection/">Java Spring에서 &#34;reflection(리플렉션)&#34;</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Java Spring에서 &ldquo;reflection(리플렉션)&ldquo;은 <strong>Java의 런타임 시점에 클래스, 메서드, 필드 등에 접근하고 조작할 수 있는 기능</strong>을 의미합니다. 일반적인 컴파일 시점이 아닌, 실행 중인 애플리케이션의 구조를 동적으로 분석하거나 변경하는 데 활용됩니다.</p>
+<hr>
+<h2 id="-리플렉션이란">💡 리플렉션이란?</h2>
+<p>Java 리플렉션 API는 <code>java.lang.reflect</code> 패키지를 통해 제공되며, 다음과 같은 기능을 제공합니다:</p>
+<ul>
+<li>클래스 이름으로 <code>Class</code> 객체를 얻기</li>
+<li>클래스의 생성자, 메서드, 필드 정보 조회</li>
+<li>메서드 호출, 필드 값 읽기/쓰기 등 동적 조작</li>
+<li>접근 제한자(private 등) 무시하고 접근 (<code>setAccessible(true)</code>)</li>
+</ul>
+<hr>
+<h2 id="-spring에서-리플렉션이-쓰이는-주요-예">🛠 Spring에서 리플렉션이 쓰이는 주요 예</h2>
+<p>Spring 프레임워크는 내부적으로 리플렉션을 매우 광범위하게 사용합니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 29 Jul 2025 14:07:45 &#43;0900" class="no-wrap"
+                title=" Tue, 29 Jul 2025 14:07:45 &#43;0900">
+                Tue, 29 Jul 2025 14:07:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -994,116 +1123,6 @@ public class SshTunnelConfig {
               <relative-time datetime=" Thu, 03 Jul 2025 08:44:24 &#43;0900" class="no-wrap"
                 title=" Thu, 03 Jul 2025 08:44:24 &#43;0900">
                 Thu, 03 Jul 2025 08:44:24 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/pbt/">Property-Based Testing(PBT) 와 jqwik</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>**Property-Based Testing(PBT)**은 입력과 결과 간의 **일반적인 속성(Property)**을 정의하고, 테스트 프레임워크가 그 속성을 충족하는지를 무작위로 생성된 다양한 입력값에 대해 확인하는 방식의 테스트입니다. 단위 테스트처럼 특정 입력값만 확인하는 것이 아니라, <strong>수천 개의 입력 조합을 자동으로 검사할 수 있다는 점에서 매우 강력</strong>합니다.</p>
-<hr>
-<h2 id="-property-based-testing이란">🔍 Property-Based Testing이란?</h2>
-<h3 id="-핵심-개념">✅ 핵심 개념</h3>
-<ul>
-<li><strong>속성(Property)</strong>: 테스트 대상 함수나 로직이 항상 만족해야 하는 일반적인 법칙 또는 규칙.</li>
-<li><strong>입력값 자동 생성</strong>: PBT 프레임워크가 다양한 입력값을 무작위로 생성.</li>
-<li><strong>Fail case 축소(Shrinking)</strong>: 실패한 입력값이 발생했을 때, 실패를 재현할 수 있는 최소 입력값으로 줄여서 디버깅을 쉽게 함.</li>
-</ul>
-<h3 id="-단위-테스트와의-비교">🆚 단위 테스트와의 비교</h3>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>단위 테스트 (Example-based)</th>
-          <th>속성 기반 테스트 (Property-based)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>입력값</td>
-          <td>고정된 사례 수동 지정</td>
-          <td>자동 생성된 다양한 값</td>
-      </tr>
-      <tr>
-          <td>테스트 범위</td>
-          <td>제한적</td>
-          <td>매우 광범위</td>
-      </tr>
-      <tr>
-          <td>유지보수</td>
-          <td>로직 변경 시 테스트 추가 필요</td>
-          <td>Property만 잘 정의하면 자동 적용</td>
-      </tr>
-      <tr>
-          <td>실패 시 디버깅</td>
-          <td>명확한 입력값</td>
-          <td>축소 과정 필요</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h2 id="-spring-boot에서-property-based-test-사용하는-방법">🧪 Spring Boot에서 Property-Based Test 사용하는 방법</h2>
-<p>Spring Boot 자체는 JUnit을 기반으로 한 단위 테스트가 기본이며, <strong>PBT는 외부 라이브러리를 사용해서 통합</strong>하는 것이 일반적입니다. 가장 널리 쓰이는 Java 기반 라이브러리는 다음과 같습니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Fri, 27 Jun 2025 10:18:03 &#43;0900" class="no-wrap"
-                title=" Fri, 27 Jun 2025 10:18:03 &#43;0900">
-                Fri, 27 Jun 2025 10:18:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/infra/db/ubuntu_postgresql/">우분투에 postgresql 설치하기</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>Ubuntu에서 PostgreSQL을 설치하고 외부 접속을 허용하려면 다음과 같은 단계로 진행하면 됩니다.</p>
-<hr>
-<h2 id="1-postgresql-설치">1. PostgreSQL 설치</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
-</span></span><span class="line"><span class="cl">sudo apt install postgresql postgresql-contrib
-</span></span></code></pre></div><p>설치 후 PostgreSQL 서비스가 자동 시작됩니다. 상태 확인:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl status postgresql
-</span></span></code></pre></div><hr>
-<h2 id="2-postgresql-유저-및-db-설정">2. PostgreSQL 유저 및 DB 설정</h2>
-<p>PostgreSQL 설치 시 기본적으로 <code>postgres</code>라는 유저가 생성됩니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo -i -u postgres
-</span></span><span class="line"><span class="cl">psql
-</span></span></code></pre></div><p>원하는 유저와 DB를 만들고 비밀번호 설정:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">myuser</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;mypassword&#39;</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">mydb</span><span class="w"> </span><span class="k">OWNER</span><span class="w"> </span><span class="n">myuser</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><p>권한 부여:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 23 Jun 2025 10:14:00 &#43;0900" class="no-wrap"
-                title=" Mon, 23 Jun 2025 10:14:00 &#43;0900">
-                Mon, 23 Jun 2025 10:14:00 &#43;0900
               </relative-time>
             </div>
           </div>

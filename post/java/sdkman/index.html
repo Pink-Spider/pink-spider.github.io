@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    내 우분투 서버에 SSL 무료 설치하기 | Pink Spider
+    로컬 맥에 여러 jdk를 다루기 위한 툴 - SDKMAN | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,22 +27,26 @@
   
   <meta
   name="description"
-  content="
-내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다.. 내가 쓰는 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다.. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워줍니다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않아야 무료 가능 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
+  content="SDKMAN의 핵심은 **&ldquo;설치(Install) -&gt; 전환(Switch) -&gt; 확인(Check)&rdquo;**의 흐름입니다. 가장 자주 쓰는 명령어 위주로 깔끔하게 정리해 드리겠습니다.
+1. 설치 가능한 버전 목록 보기 (list) 먼저 어떤 버전을 설치할 수 있는지 확인해야 합니다.
+sdk list java 화면 조작: 목록이 길게 나옵니다. Space(다음 페이지), Enter(한 줄 아래), q(나가기) 키를 기억하세요. 식별자(Identifier): 맨 오른쪽 열에 있는 텍스트가 중요합니다. (예: 24-open, 17.0.10-tem 등) 설치할 때 이 이름을 사용합니다. 2. 버전 설치하기 (install) 원하는 버전의 식별자(Identifier)를 입력하여 설치합니다.
+"
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/infra/network/ssl/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/java/sdkman/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="내 우분투 서버에 SSL 무료 설치하기 - Pink Spider"
+  content="로컬 맥에 여러 jdk를 다루기 위한 툴 - SDKMAN - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="
-내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다.. 내가 쓰는 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다.. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워줍니다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않아야 무료 가능 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
+  content="SDKMAN의 핵심은 **&ldquo;설치(Install) -&gt; 전환(Switch) -&gt; 확인(Check)&rdquo;**의 흐름입니다. 가장 자주 쓰는 명령어 위주로 깔끔하게 정리해 드리겠습니다.
+1. 설치 가능한 버전 목록 보기 (list) 먼저 어떤 버전을 설치할 수 있는지 확인해야 합니다.
+sdk list java 화면 조작: 목록이 길게 나옵니다. Space(다음 페이지), Enter(한 줄 아래), q(나가기) 키를 기억하세요. 식별자(Identifier): 맨 오른쪽 열에 있는 텍스트가 중요합니다. (예: 24-open, 17.0.10-tem 등) 설치할 때 이 이름을 사용합니다. 2. 버전 설치하기 (install) 원하는 버전의 식별자(Identifier)를 입력하여 설치합니다.
+"
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
 <meta name="twitter:creator" content="" />
@@ -58,15 +62,17 @@
 />
 <meta
   property="og:title"
-  content="내 우분투 서버에 SSL 무료 설치하기 - Pink Spider"
+  content="로컬 맥에 여러 jdk를 다루기 위한 툴 - SDKMAN - Pink Spider"
 />
 <meta
   property="og:description"
-  content="
-내 우분투 서버에 SSL 무료 설치하기 SSL 발급 사이트 : https://zerossl.com/ 다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다.. 내가 쓰는 도메인 서비스 업체 : whois SSL 설치 절차 무료 SSL의 제약사항은 별도로 알아보기로 하고 기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다.. 이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다. 도메인 소유주임을 확인 받기 ZeroSSL에 회원가입 SSL Certificate Setup 에서 각 항목 채워줍니다. Domains Validity : 90-Day Certificate 로 해야 무료 Add-Ons : 아무것도 선택하지 않아야 무료 가능 CSR &amp; Contact : Auto-Generate CSR 활성화 Finalize Your Order: Free 선택 "
+  content="SDKMAN의 핵심은 **&ldquo;설치(Install) -&gt; 전환(Switch) -&gt; 확인(Check)&rdquo;**의 흐름입니다. 가장 자주 쓰는 명령어 위주로 깔끔하게 정리해 드리겠습니다.
+1. 설치 가능한 버전 목록 보기 (list) 먼저 어떤 버전을 설치할 수 있는지 확인해야 합니다.
+sdk list java 화면 조작: 목록이 길게 나옵니다. Space(다음 페이지), Enter(한 줄 아래), q(나가기) 키를 기억하세요. 식별자(Identifier): 맨 오른쪽 열에 있는 텍스트가 중요합니다. (예: 24-open, 17.0.10-tem 등) 설치할 때 이 이름을 사용합니다. 2. 버전 설치하기 (install) 원하는 버전의 식별자(Identifier)를 입력하여 설치합니다.
+"
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/infra/network/ssl/" />
-<meta property="og:site_name" content="내 우분투 서버에 SSL 무료 설치하기" />
+<meta property="og:url" content="https://pink-spider.github.io/post/java/sdkman/" />
+<meta property="og:site_name" content="로컬 맥에 여러 jdk를 다루기 위한 툴 - SDKMAN" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -74,7 +80,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-03-01 15:19:58 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-12-08 08:49:54 &#43;0900 KST" />
 
 
 
@@ -284,18 +290,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/infra/network/ssl/">내 우분투 서버에 SSL 무료 설치하기</a></strong>
+                      href="https://pink-spider.github.io/post/java/sdkman/">로컬 맥에 여러 jdk를 다루기 위한 툴 - SDKMAN</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Sat, 01 Mar 2025 15:19:58 &#43;0900"
+                  Created <relative-time datetime="Mon, 08 Dec 2025 08:49:54 &#43;0900"
                     class="no-wrap">
-                    Sat, 01 Mar 2025 15:19:58 &#43;0900</relative-time>
+                    Mon, 08 Dec 2025 08:49:54 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Mon, 08 Dec 2025 08:41:47 &#43;0900"
+                  Modified <relative-time datetime="Mon, 08 Dec 2025 09:02:53 &#43;0900"
                     class="no-wrap">
-                    Mon, 08 Dec 2025 08:41:47 &#43;0900</relative-time>
+                    Mon, 08 Dec 2025 09:02:53 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -325,9 +331,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      1199 Words
+                      857 Words
                     <span class="file-info-divider"></span>
-                                        5 min
+                                        4 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -338,144 +344,100 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p><a href="https://zerossl.com"><img src="https://img.shields.io/badge/ssl-free-lightgreen" alt="GoDoc"></a></p>
-<h1 id="내-우분투-서버에-ssl-무료-설치하기">내 우분투 서버에 SSL 무료 설치하기</h1>
-<ul>
-<li>SSL 발급 사이트 : <a href="https://zerossl.com/">https://zerossl.com/</a>  다른 무료 사이트도 많이 있습니다만 여기서 다 나열할 필요는 없을 듯 합니다..</li>
-<li>내가 쓰는 도메인 서비스 업체 : whois</li>
-</ul>
-<h2 id="ssl-설치-절차">SSL 설치 절차</h2>
-<ul>
-<li>무료 SSL의 제약사항은 별도로 알아보기로 하고</li>
-<li>기본 개념은 먼저 인증기관으로 부터 해당 도메인의 소유주가 맞는지 확인을 받고 <!-- raw HTML omitted -->
-인증기관으로부터 SSL인증서와 key를 받아서 서버에 설치했음을 검증받으면 SSL발급을 완료했다고 할 수 있습니다..</li>
-<li>이를 DV(Domain Validation) 이라고 하는데, 소규모 사이트나 개발서버에서 간략하게 무료로 발급받아 사용시에 사용합니다.</li>
-</ul>
-<h3 id="도메인-소유주임을-확인-받기">도메인 소유주임을 확인 받기</h3>
-<ol>
-<li>ZeroSSL에 회원가입
-<img src="./images/ssl/zerossl_dashboard.png" alt="image">
-<!-- raw HTML omitted --></li>
-<li>SSL Certificate Setup 에서 각 항목 채워줍니다.</li>
-</ol>
-<ul>
-<li>Domains</li>
-<li>Validity : 90-Day Certificate 로 해야 무료</li>
-<li>Add-Ons : 아무것도 선택하지 않아야 무료 가능</li>
-<li>CSR &amp; Contact : Auto-Generate CSR 활성화</li>
-<li>Finalize Your Order: Free 선택</li>
-</ul>
-<p><img src="./images/ssl/zero_new_certificate.png" alt="image"></p>
-<ul>
-<li>Domain 소유주가 맞는지 확인하는 절차가 있는데 캡쳐를 못했습니다..<!-- raw HTML omitted -->
-whois의 경우엔 [네임서버 고급설정] 가서 [CNAME 레코드 관리]에서<!-- raw HTML omitted -->
-zeroSsl에서 제공한 호스트명과 CNAME 레코드를 등록해주면 도메인 인증을 할 수 있습니다.</li>
-</ul>
-<h3 id="인증서-받아서-서버에-설치했음을-확인-받기">인증서 받아서 서버에 설치했음을 확인 받기</h3>
-<h4 id="install-certificate">Install Certificate</h4>
-<p><img src="./images/ssl/zerossl_install_certificate.png" alt="image"></p>
-<ol>
-<li>
-<p>Download Certificate 에서 내 경우엔 Server Type을 Ubuntu로 하였습니다..<!-- raw HTML omitted -->
-이렇게 해도 결국엔 apache2를 가동하고 실제 인증서가 서버에 설치가 되었는지 인증기관인 zerossl에 확인이 되어야 합니다.<!-- raw HTML omitted -->
-<!-- raw HTML omitted --></p>
-</li>
-<li>
-<p>Install Certificate</p>
-<ul>
-<li>Zip 파일을 받아서 압축 풀고 tutorial 참고,
-<ul>
-<li>Follow the steps listed on this page. (on this page에 링크 걸려있음)</li>
-</ul>
-</li>
-<li>zip 파일에는 다음 3개의 파일이 들어있습니다.
-<ul>
-<li>certificate.crt</li>
-<li>ca_bundle.crt</li>
-<li>private.key</li>
-</ul>
-</li>
-<li>3개 파일을 우분투로 복사 (FTP든 scp든 사용)</li>
-<li>이제 apache를 띄워서 확인을 받아야 되는데 <!-- raw HTML omitted -->
-내 서버에 /etc/apache2/sites-enabled/your_site_name 이 경로가 없었고 a2ensite 명령어도 없었습니다.</li>
-<li>apache2가 제대로 설치가 안되어 있었기 때문입니다. <!-- raw HTML omitted -->
-apache2가 설치가 되어 있는지 확인하려면 아래 명령어를 쳐보면 됩니다.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apache2 -v
+                <article class="markdown-body entry-content container-lg"><p>SDKMAN의 핵심은 **&ldquo;설치(Install) -&gt; 전환(Switch) -&gt; 확인(Check)&rdquo;**의 흐름입니다. 가장 자주 쓰는 명령어 위주로 깔끔하게 정리해 드리겠습니다.</p>
+<hr>
+<h3 id="1-설치-가능한-버전-목록-보기-list">1. 설치 가능한 버전 목록 보기 (<code>list</code>)</h3>
+<p>먼저 어떤 버전을 설치할 수 있는지 확인해야 합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sdk list java
 </span></span></code></pre></div><ul>
-<li>필요하니 설치. 꼭 아파치로 도메인 소유 인증을 할 필요는 없지만, 어떤 서버로든 인증은 해야 합니다.</li>
+<li><strong>화면 조작:</strong> 목록이 길게 나옵니다. <code>Space</code>(다음 페이지), <code>Enter</code>(한 줄 아래), <strong><code>q</code>(나가기)</strong> 키를 기억하세요.</li>
+<li><strong>식별자(Identifier):</strong> 맨 오른쪽 열에 있는 텍스트가 중요합니다. (예: <code>24-open</code>, <code>17.0.10-tem</code> 등) 설치할 때 이 이름을 사용합니다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt update
-</span></span><span class="line"><span class="cl">sudo apt install apache2 -y
+<h3 id="2-버전-설치하기-install">2. 버전 설치하기 (<code>install</code>)</h3>
+<p>원하는 버전의 식별자(Identifier)를 입력하여 설치합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 최신 OpenJDK 24 설치</span>
+</span></span><span class="line"><span class="cl">sdk install java 24-open
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Java 17 (LTS) 설치 - Temurin 배포판</span>
+</span></span><span class="line"><span class="cl">sdk install java 17.0.10-tem
 </span></span></code></pre></div><ul>
-<li>/etc/apache2/sites-enabled 폴더에는 000-default.conf 파일이 있었는데 아래와 같이 생겼습니다.</li>
-</ul>
-<pre tabindex="0"><code>&lt;VirtualHost *:80&gt;
-    ServerAdmin admin@example.com
-    ServerName example.com
-    ServerAlias www.example.com
-
-    DocumentRoot /var/www/example.com/public_html
-
-    &lt;Directory /var/www/example.com/public_html&gt;
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-    &lt;/Directory&gt;
-
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-&lt;/VirtualHost&gt;
-</code></pre></li>
-</ol>
+<li>설치 중 <em>&ldquo;Do you want to set this version as default? (Y/n)&rdquo;</em> 라고 물으면:
 <ul>
-<li>튜토리얼대로 Apache에서 SSLEngine on을 사용하려 하면 &ldquo;Invalid command &lsquo;SSLEngine&rsquo;&rdquo; 오류가 발생할 수 있는데<!-- raw HTML omitted -->
-그 이유는 apache에 SSL 모듈이 활성화되지 않았기 때문입니다.</li>
+<li><code>Y</code>: 이 버전을 시스템 기본값으로 고정합니다.</li>
+<li><code>n</code>: 설치만 하고, 기본값은 바꾸지 않습니다.</li>
 </ul>
-<ol>
-<li>
-<p>SSL 모듈이 활성화되어 있는지 확인
-먼저, Apache에서 SSL 모듈(mod_ssl)이 활성화되어 있는지 확인</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apache2ctl -M <span class="p">|</span> grep ssl
-</span></span></code></pre></div></li>
-<li>
-<p>SSL 모듈이 비활성화되어 있다면 아래 명령어를 실행하여 활성화 해야 SSL을 적용할 수 있습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo a2enmod ssl
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo systemctl restart apache2
-</span></span></code></pre></div></li>
-<li>
-<p>기본 SSL 설정 파일 활성화</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo a2ensite default-ssl
-</span></span></code></pre></div></li>
-<li>
-<p>여기까지 하고 Installation Complete 확인받으면 완료.</p>
-</li>
-</ol>
-<h4 id="spring-boot-에서-ssl-적용하려면">spring boot 에서 ssl 적용하려면..</h4>
-<ul>
-<li>
-<p>그리고 내가 사용하려는 서버는 Spring Boot 로 개발하였기 때문에 boot 에서 https 를 사용하려면 <!-- raw HTML omitted -->
-기본적으로 .p12(PKCS12) 또는 .jks(Java Key Store)형식의 SSL 키 저장소를 사용하여야 합니다.</p>
-</li>
-<li>
-<p>ZeroSsl 에서 다운로드 받은 .crt 와 .key 를 .p12로 변환하는 방법은 다음과 같습니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">openssl pkcs12 -export -in certificate.crt -inkey private.key -out keystore.p12 -name mycert
-</span></span></code></pre></div></li>
-<li>
-<p>spring booot yml 설정에는 아래 예제처럼&hellip; keystore.p12 는 src/main/resources/ 아래에&hellip;</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">server</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">8443</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ssl</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key-store</span><span class="p">:</span><span class="w"> </span><span class="l">classpath:keystore.p12</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key-store-password</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;your-password&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key-store-type</span><span class="p">:</span><span class="w"> </span><span class="l">PKCS12</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key-alias</span><span class="p">:</span><span class="w"> </span><span class="l">myalias</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>서버에 install certificate 까지 마쳤다면 해당 서버에 ssl 인증서 적용이 완료.</li>
-</ul>
+<h3 id="3-버전-바꾸기-use-vs-default">3. 버전 바꾸기 (<code>use</code> vs <code>default</code>)</h3>
+<p>이 부분이 SDKMAN의 가장 강력한 기능입니다. 상황에 따라 두 가지 명령어를 구분해서 쓰세요.</p>
+<h4 id="a-현재-터미널에서만-잠깐-바꿀-때-use">A. 현재 터미널에서만 잠깐 바꿀 때 (<code>use</code>)</h4>
+<p>터미널 창을 닫으면 효력이 사라집니다. 테스트할 때 유용합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sdk use java 17.0.10-tem
+</span></span></code></pre></div><h4 id="b-영구적으로-기본값을-바꿀-때-default">B. 영구적으로 기본값을 바꿀 때 (<code>default</code>)</h4>
+<p>터미널을 껐다 켜도 계속 이 버전이 유지됩니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sdk default java 24-open
+</span></span></code></pre></div><h3 id="4-현재-상태-확인-current">4. 현재 상태 확인 (<code>current</code>)</h3>
+<p>지금 내가 어떤 버전을 쓰고 있는지, 어떤 버전들이 설치되어 있는지 확인합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 현재 활성화된 버전 확인</span>
+</span></span><span class="line"><span class="cl">sdk current java
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 설치된 모든 버전 목록 확인 (목록 중 &#39;*&#39; 표시가 현재 사용 중인 버전)</span>
+</span></span><span class="line"><span class="cl">sdk list java
+</span></span></code></pre></div><h3 id="5-버전-삭제하기-uninstall">5. 버전 삭제하기 (<code>uninstall</code>)</h3>
+<p>더 이상 안 쓰는 버전은 지워서 용량을 확보하세요.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sdk uninstall java 17.0.10-tem
+</span></span></code></pre></div><hr>
+<h3 id="꿀팁-java-외의-도구도-설치-가능">꿀팁: Java 외의 도구도 설치 가능</h3>
+<p>SDKMAN은 Java(JDK)뿐만 아니라 빌드 도구(Gradle, Maven)나 프레임워크(Spring Boot CLI)도 똑같이 관리해 줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Gradle 설치</span>
+</span></span><span class="line"><span class="cl">sdk install gradle
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Maven 설치</span>
+</span></span><span class="line"><span class="cl">sdk install maven
+</span></span></code></pre></div><p>버전 관리가 꼬이기 쉬운 Gradle, Maven도 SDKMAN으로 관리하면 프로젝트별로 버전을 쉽게 바꿀 수 있어 매우 편리합니다.</p>
+<hr>
+<h3 id="요약-cheat-sheet">요약 (Cheat Sheet)</h3>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">기능</th>
+          <th style="text-align: left">명령어</th>
+          <th style="text-align: left">비고</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>목록 보기</strong></td>
+          <td style="text-align: left"><code>sdk list java</code></td>
+          <td style="text-align: left"><code>q</code>로 종료</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>설치</strong></td>
+          <td style="text-align: left"><code>sdk install java [식별자]</code></td>
+          <td style="text-align: left">예: <code>24-open</code></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>잠깐 쓰기</strong></td>
+          <td style="text-align: left"><code>sdk use java [식별자]</code></td>
+          <td style="text-align: left">현재 창 닫으면 초기화</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>기본 설정</strong></td>
+          <td style="text-align: left"><code>sdk default java [식별자]</code></td>
+          <td style="text-align: left"><strong>영구 변경</strong></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>현재 버전</strong></td>
+          <td style="text-align: left"><code>sdk current java</code></td>
+          <td style="text-align: left"></td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>삭제</strong></td>
+          <td style="text-align: left"><code>sdk uninstall java [식별자]</code></td>
+          <td style="text-align: left"></td>
+      </tr>
+  </tbody>
+</table>
 </article>
               </div>
 
@@ -488,13 +450,13 @@ apache2가 설치가 되어 있는지 확인하려면 아래 명령어를 쳐보
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/aes/aes_key_generate/"> AES key Generator</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/gitleaks/"> Git에 보안에 문제되거나 민감정보를 커밋했는지 확인하자</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/msa/restdoc_swagger_ui_sample/">Restdoc Swagger Ui Sample&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/aggregate_bulkhead/">Aggregate 패턴과 Bulkhead 패턴&nbsp;</a><div> »</div>
           
         </div>
       </div>

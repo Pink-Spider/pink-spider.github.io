@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">92</span>
+              <span class="Counter">94</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">92</span>
+      <span class="Counter ">94</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,191 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/tdd/mock_injectmock/">@Mock, @InjectBean 의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="mock-과-injectedmock">@Mock 과 @InjectedMock</h1>
+<p><code>@Mock</code>과 <code>@InjectMocks</code>의 차이를 알아볼게요. 이 둘은 <strong>함께 자주 쓰이지만 서로 다른 역할</strong>을 해요.</p>
+<hr>
+<h3 id="-mock">🔹 <code>@Mock</code></h3>
+<ul>
+<li>Mockito에서 제공</li>
+<li><strong>Mock 객체를 생성</strong>해줌</li>
+<li>단독으로는 그냥 가짜 객체일 뿐, 아무 데도 주입되지 않음</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w"> </span><span class="c1">// 가짜 객체 생성</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-injectmocks">🔸 <code>@InjectMocks</code></h3>
+<ul>
+<li>역시 Mockito에서 제공</li>
+<li><strong>테스트 대상 객체(테스트할 클래스)를 생성</strong>하고,<br>
+그 안에 있는 의존성 필드에 <code>@Mock</code>으로 만든 객체들을 <strong>자동으로 주입</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w"> </span><span class="c1">// MyService 객체를 만들고, 내부에 있는 MyRepository 등에 @Mock 객체를 주입</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-간단-예시">✅ 간단 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@ExtendWith</span><span class="p">(</span><span class="n">MockitoExtension</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyServiceTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyRepository</span><span class="w"> </span><span class="n">myRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MyService</span><span class="w"> </span><span class="n">myService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">testSomething</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService는 실제 객체</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myRepository는 mock 객체</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// myService 내부에서 myRepository가 사용될 때 mock이 주입됨</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-정리하자면">📌 정리하자면:</h3>
+<table>
+  <thead>
+      <tr>
+          <th>어노테이션</th>
+          <th>역할</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>@Mock</code></td>
+          <td>가짜(Mock) 객체 생성</td>
+      </tr>
+      <tr>
+          <td><code>@InjectMocks</code></td>
+          <td>테스트 대상 객체를 생성하고, <code>@Mock</code> 객체를 그 안에 주입</td>
+      </tr>
+  </tbody>
+</table>
+<p>즉, <code>@Mock</code>이 가짜 부품을 만드는 거고,<br>
+<code>@InjectMocks</code>는 그 부품을 조립해서 테스트 대상 객체를 만드는 거예요.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
+                Thu, 03 Apr 2025 15:57:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/tdd/mock_stub/">Mock, Stub 의 차이</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="mock-stub-의-차이">Mock, Stub 의 차이</h1>
+<p><code>mock</code>과 <code>stub</code>은 테스트에서 <strong>외부 의존성을 대체</strong>하기 위해 쓰이는 객체인데, 둘은 <strong>목적과 기능 면에서 조금 달라요.</strong></p>
+<hr>
+<h2 id="-요약-비교">📌 요약 비교</h2>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th><strong>Stub</strong></th>
+          <th><strong>Mock</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>목적</td>
+          <td>고정된 값 반환 (단순 대체)</td>
+          <td>동작 검증 + 유연한 설정</td>
+      </tr>
+      <tr>
+          <td>기능</td>
+          <td>미리 정의된 응답 제공</td>
+          <td>호출 여부, 호출 횟수, 파라미터 검증 등 가능</td>
+      </tr>
+      <tr>
+          <td>테스트 타입</td>
+          <td>주로 상태 기반 테스트 (State-based)</td>
+          <td>주로 행위 기반 테스트 (Behavior-based)</td>
+      </tr>
+      <tr>
+          <td>예시</td>
+          <td>&ldquo;이 메서드가 호출되면 무조건 이 값을 리턴&rdquo;</td>
+          <td>&ldquo;이 메서드가 정확히 한 번 호출됐는지 확인하자&rdquo;</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-stub-단순하게-리턴값만-정해놓은-가짜">🔹 Stub: 단순하게 <strong>리턴값만 정해놓은 가짜</strong></h2>
+<ul>
+<li>실제 메서드 로직은 필요 없고, &ldquo;이 값을 주면 이 값을 돌려줘!&rdquo; 같은 간단한 대체품.</li>
+<li>주로 &ldquo;기존 시스템에서 이거만 제대로 동작하면 돼&quot;라는 테스트에 사용.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">user</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-mock-행위호출-여부-등까지-확인하는-가짜">🔸 Mock: <strong>행위(호출 여부 등)까지 확인</strong>하는 가짜</h2>
+<ul>
+<li>리턴값도 정의할 수 있지만, <strong>&ldquo;정말로 이 메서드가 호출됐는가?&rdquo;</strong> 같은 검증도 가능.</li>
+<li><code>verify()</code> 같은 메서드를 통해 테스트의 정확성을 높임.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-실제-테스트-예시">✅ 실제 테스트 예시</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Mock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserRepository</span><span class="w"> </span><span class="n">userRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@InjectMocks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">void</span><span class="w"> </span><span class="nf">testUserFetch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Stub: 리턴값 지정</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">when</span><span class="p">(</span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">)).</span><span class="na">thenReturn</span><span class="p">(</span><span class="n">Optional</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">(</span><span class="s">&#34;Alice&#34;</span><span class="p">)));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 메서드 실행</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="na">getUser</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Mock: 호출 여부 검증</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">verify</span><span class="p">(</span><span class="n">userRepository</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">(</span><span class="n">1</span><span class="p">)).</span><span class="na">findById</span><span class="p">(</span><span class="n">1L</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="-간단-비유">📎 간단 비유</h2>
+<ul>
+<li><strong>Stub</strong>: “누가 와도 <strong>무조건 이 대사만 말해!”</strong></li>
+<li><strong>Mock</strong>: “누가 오면 이 대사를 하고, <strong>제대로 말했는지 검사도 합니다.!”</strong></li>
+</ul>
+<hr>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 15:57:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 15:57:29 &#43;0900">
+                Thu, 03 Apr 2025 15:57:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -939,152 +1124,6 @@
               <relative-time datetime=" Tue, 01 Apr 2025 13:59:38 &#43;0900" class="no-wrap"
                 title=" Tue, 01 Apr 2025 13:59:38 &#43;0900">
                 Tue, 01 Apr 2025 13:59:38 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/memory/cacheable/">Cacheable 어노테이션에 대해서</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>@Cacheable</code> 어노테이션은 Spring Framework에서 <strong>메서드의 반환값을 캐시에 저장</strong>하여, <strong>같은 인자가 들어올 경우 캐시된 값을 재사용</strong>하도록 하는 기능을 제공합니다. 즉, 메서드를 반복적으로 호출하더라도 실제로는 <strong>처음 한 번만 실행되고</strong>, 이후 호출은 캐시된 결과를 반환하게 됩니다.</p>
-<hr>
-<h3 id="-주요-역할-요약">📌 주요 역할 요약</h3>
-<ul>
-<li><strong>중복 호출 방지</strong>: 동일한 입력값에 대해 메서드를 반복 호출하면, 캐시된 결과를 반환해 성능 향상.</li>
-<li><strong>결과 저장</strong>: 메서드 실행 결과를 캐시에 저장.</li>
-<li><strong>조건부 캐싱</strong>: 특정 조건에 따라 캐싱 여부 제어 가능.</li>
-</ul>
-<hr>
-<h3 id="-기본-사용-예시">✅ 기본 사용 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="s">&#34;users&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="nf">findUserById</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 실제로는 DB나 외부 API 호출</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElse</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>위 메서드는 <code>users</code>라는 캐시 이름으로 결과를 저장합니다.</li>
-<li><code>id</code>가 동일한 경우, 이후 호출은 캐시된 <code>User</code> 객체를 반환합니다.</li>
-</ul>
-<hr>
-<h3 id="-주요-속성">🔧 주요 속성</h3>
-<table>
-  <thead>
-      <tr>
-          <th>속성</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>value</code> 또는 <code>cacheNames</code></td>
-          <td>사용할 캐시 이름 지정</td>
-      </tr>
-      <tr>
-          <td><code>key</code></td>
-          <td>캐시 키를 지정 (SpEL 표현식 사용 가능)</td>
-      </tr>
-      <tr>
-          <td><code>condition</code></td>
-          <td>캐싱할 조건 지정 (SpEL)</td>
-      </tr>
-      <tr>
-          <td><code>unless</code></td>
-          <td>결과를 저장하지 않을 조건 (SpEL)</td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="예시">예시:</h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Cacheable</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;books&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#isbn&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">unless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;#result == null&#34;</span><span class="p">)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Book</span><span class="w"> </span><span class="nf">findBook</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">isbn</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bookRepository</span><span class="p">.</span><span class="na">findByIsbn</span><span class="p">(</span><span class="n">isbn</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h3 id="-함께-알아두면-좋은-어노테이션">🧠 함께 알아두면 좋은 어노테이션</h3>
-<ul>
-<li><code>@CachePut</code> : 캐시를 <strong>강제로 업데이트</strong>할 때 사용</li>
-<li><code>@CacheEvict</code> : 캐시를 <strong>삭제</strong>할 때 사용</li>
-<li><code>@Caching</code> : 여러 캐시 어노테이션을 함께 사용할 때</li>
-</ul>
-<hr>
-<p>필요하다면 Redis나 Caffeine 같은 캐시 스토어와 함께 연동도 가능합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 01 Apr 2025 11:34:10 &#43;0900" class="no-wrap"
-                title=" Tue, 01 Apr 2025 11:34:10 &#43;0900">
-                Tue, 01 Apr 2025 11:34:10 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/git/git_submodule_reset/">서브모듈 완전히 초기화하고 다시 셋팅</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h2 id="-서브모듈-완전히-초기화하고-다시-셋팅">✅ 서브모듈 완전히 초기화하고 다시 셋팅</h2>
-<ol>
-<li>
-<p><strong>서브모듈을 Git에서 먼저 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule deinit -f .
-</span></span></code></pre></div></li>
-<li>
-<p><strong>서브모듈 디렉토리를 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm -rf .git/modules/&lt;서브모듈_이름&gt;
-</span></span><span class="line"><span class="cl">rm -rf &lt;서브모듈_디렉토리&gt;
-</span></span></code></pre></div></li>
-<li>
-<p><strong><code>.gitmodules</code> 파일 삭제</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rm .gitmodules
-</span></span></code></pre></div></li>
-<li>
-<p><strong>인덱스에서 서브모듈 흔적 제거</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git rm --cached &lt;서브모듈_디렉토리&gt;
-</span></span></code></pre></div></li>
-<li>
-<p><strong>커밋</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Remove submodule completely&#34;</span>
-</span></span></code></pre></div></li>
-<li>
-<p><strong>새로운 서브모듈 추가 (필요한 경우)</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git submodule add &lt;repo-url&gt; &lt;path&gt;
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;Add submodule&#34;</span>
-</span></span></code></pre></div></li>
-</ol>
-<hr>
-<h2 id="-정리하자면">🧠 정리하자면:</h2>
-<ul>
-<li>단순히 <code>.gitmodules</code> 파일만 지우면 안 되고,</li>
-<li>Git 내부의 서브모듈 정보 (<code>.git/modules</code>, 인덱스 등)도 같이 정리해줘야 해요.</li>
-</ul>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 01 Apr 2025 11:25:45 &#43;0900" class="no-wrap"
-                title=" Tue, 01 Apr 2025 11:25:45 &#43;0900">
-                Tue, 01 Apr 2025 11:25:45 &#43;0900
               </relative-time>
             </div>
           </div>
