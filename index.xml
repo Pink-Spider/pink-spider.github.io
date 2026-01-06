@@ -6,8 +6,15 @@
     <description>Recent content on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 29 Dec 2025 09:39:01 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 Jan 2026 10:30:08 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes(쿠버네티스)와 Docker(도커)의 관계</title>
+      <link>https://pink-spider.github.io/post/infra/kube_docker/</link>
+      <pubDate>Tue, 06 Jan 2026 10:30:03 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/infra/kube_docker/</guid>
+      <description>&lt;p&gt;Kubernetes(쿠버네티스)와 Docker(도커)의 관계는 **&amp;ldquo;경쟁 관계&amp;quot;가 아니라 &amp;ldquo;상호 보완적인 관계&amp;rdquo;**입니다. 이 둘의 차이를 명확히 이해하기 위해 가장 쉬운 비유를 들어 설명해 드리겠습니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;1-핵심-비유-화물선과-항만-시스템&#34;&gt;1. 핵심 비유: 화물선과 항만 시스템&lt;/h3&gt;&#xA;&lt;p&gt;이 두 기술의 관계를 &lt;strong&gt;물류 시스템&lt;/strong&gt;에 비유하면 아주 명확해집니다.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Docker (컨테이너):&lt;/strong&gt; **&amp;lsquo;규격화된 화물 컨테이너 박스&amp;rsquo;**입니다.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;물건(애플리케이션 코드, 라이브러리 등)을 박스에 담아 포장하는 기술입니다.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;이 박스만 있으면 어떤 배(서버)나 트럭(노트북)에 실어도 내용물이 안전하게 전달됩니다.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Kubernetes (조타수/항만 관리자):&lt;/strong&gt; **&amp;lsquo;수천 개의 컨테이너를 관리하는 시스템&amp;rsquo;**입니다.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;컨테이너가 배에 잘 실렸는지, 배가 흔들려 컨테이너가 떨어지면(에러 발생) 다시 실어주는지, 화물이 많아지면 배를 더 부를지(스케일링)를 결정합니다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>코딩 테스트 합격자 되기(자바편) - 30. 간단한 유니온 파인드 알고리즘 구현하기</title>
       <link>https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/30/</link>

@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">95</span>
+              <span class="Counter">96</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">95</span>
+      <span class="Counter ">96</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,50 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/kube_docker/">Kubernetes(쿠버네티스)와 Docker(도커)의 관계</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Kubernetes(쿠버네티스)와 Docker(도커)의 관계는 **&ldquo;경쟁 관계&quot;가 아니라 &ldquo;상호 보완적인 관계&rdquo;**입니다. 이 둘의 차이를 명확히 이해하기 위해 가장 쉬운 비유를 들어 설명해 드리겠습니다.</p>
+<hr>
+<h3 id="1-핵심-비유-화물선과-항만-시스템">1. 핵심 비유: 화물선과 항만 시스템</h3>
+<p>이 두 기술의 관계를 <strong>물류 시스템</strong>에 비유하면 아주 명확해집니다.</p>
+<ul>
+<li>
+<p><strong>Docker (컨테이너):</strong> **&lsquo;규격화된 화물 컨테이너 박스&rsquo;**입니다.</p>
+</li>
+<li>
+<p>물건(애플리케이션 코드, 라이브러리 등)을 박스에 담아 포장하는 기술입니다.</p>
+</li>
+<li>
+<p>이 박스만 있으면 어떤 배(서버)나 트럭(노트북)에 실어도 내용물이 안전하게 전달됩니다.</p>
+</li>
+<li>
+<p><strong>Kubernetes (조타수/항만 관리자):</strong> **&lsquo;수천 개의 컨테이너를 관리하는 시스템&rsquo;**입니다.</p>
+</li>
+<li>
+<p>컨테이너가 배에 잘 실렸는지, 배가 흔들려 컨테이너가 떨어지면(에러 발생) 다시 실어주는지, 화물이 많아지면 배를 더 부를지(스케일링)를 결정합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 06 Jan 2026 10:30:03 &#43;0900" class="no-wrap"
+                title=" Tue, 06 Jan 2026 10:30:03 &#43;0900">
+                Tue, 06 Jan 2026 10:30:03 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -993,45 +1037,6 @@ git push -f origin main
               <relative-time datetime=" Mon, 20 Oct 2025 13:50:50 &#43;0900" class="no-wrap"
                 title=" Mon, 20 Oct 2025 13:50:50 &#43;0900">
                 Mon, 20 Oct 2025 13:50:50 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/big_data_db/"></a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="db의-테이블의-row가-너무-많아질떄-예-하루에-10만건씩-누적-대처-방법">DB의 테이블의 row가 너무 많아질떄 (예 하루에 10만건씩 누적), 대처 방법</h1>
-<ul>
-<li>“하루 10만 건씩 계속 누적”이면 1년에 3,650만 건입니다. 초반엔 버티지만, 몇 달만 지나도 쿼리·백업·VACUUM/OPTIMIZE 비용이 급증하죠. 아래 순서대로 적용해보세요.</li>
-</ul>
-<h1 id="1-먼저-결정할-것-운영-정책">1) 먼저 결정할 것 (운영 정책)</h1>
-<ul>
-<li><strong>보존 기간</strong>: 예) “6개월은 온라인(핫), 2년은 아카이브(콜드), 그 외 삭제”</li>
-<li><strong>주요 조회 패턴</strong>: 최근 N일만 조회? 특정 사용자/키 기준 조회? 집계 위주?</li>
-<li><strong>SLA/성능</strong>: p95 응답시간, 허용 가능한 쓰기 지연</li>
-</ul>
-<h1 id="2-즉시-효과-스키마인덱스쓰기">2) 즉시 효과 (스키마/인덱스/쓰기)</h1>
-<ul>
-<li>
-<p><strong>인덱스 슬림화</strong>: 실제 조건/정렬에 쓰는 컬럼만 인덱스. 불필요한 복합 인덱스 제거.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 14 Oct 2025 11:25:18 &#43;0900" class="no-wrap"
-                title=" Tue, 14 Oct 2025 11:25:18 &#43;0900">
-                Tue, 14 Oct 2025 11:25:18 &#43;0900
               </relative-time>
             </div>
           </div>

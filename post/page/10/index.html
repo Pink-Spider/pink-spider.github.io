@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">95</span>
+              <span class="Counter">96</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">95</span>
+      <span class="Counter ">96</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,49 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/til/basic_theory/restapi/">REST API</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h1 id="rest-api란-무엇이며-restful-하다는-건-어떤-의미인가">Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가?</h1>
+<p>REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.</p>
+<hr>
+<h3 id="-rest-api란">🔹 REST API란?</h3>
+<p><strong>REST</strong>는 &ldquo;<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer&quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 <strong>웹 아키텍처 스타일</strong> 중 하나죠.</p>
+<p>즉, <strong>REST API</strong>는 이 REST 원칙에 따라 설계된 <strong>웹 API</strong>를 말해요.</p>
+<hr>
+<h3 id="-rest의-핵심-개념">🔹 REST의 핵심 개념</h3>
+<p>REST는 다음의 6가지 제약 조건을 기반으로 해요:</p>
+<ol>
+<li>
+<p><strong>클라이언트-서버 구조</strong></p>
+<ul>
+<li>클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔.</li>
+</ul>
+</li>
+<li>
+<p><strong>무상태성 (Stateless)</strong></p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 03 Apr 2025 18:02:29 &#43;0900" class="no-wrap"
+                title=" Thu, 03 Apr 2025 18:02:29 &#43;0900">
+                Thu, 03 Apr 2025 18:02:29 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1081,69 +1124,6 @@
               <relative-time datetime=" Wed, 02 Apr 2025 10:50:33 &#43;0900" class="no-wrap"
                 title=" Wed, 02 Apr 2025 10:50:33 &#43;0900">
                 Wed, 02 Apr 2025 10:50:33 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/memory/jvm_stack/">JVM 에서 쓰이는 stack 의 종류</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>JVM(Java Virtual Machine)에서는 내부적으로 여러 종류의 <strong>스택(stack)</strong> 을 사용합니다. <!-- raw HTML omitted -->
-각각의 스택은 JVM의 실행 및 메모리 관리 등에서 중요한 역할을 합니다. 주요 스택 종류는 다음과 같습니다:</p>
-<hr>
-<h3 id="-1-java-virtual-machine-stack-또는-thread-stack">🧠 1. <strong>Java Virtual Machine Stack (또는 Thread Stack)</strong></h3>
-<ul>
-<li><strong>설명</strong>: 각 <strong>스레드(thread)</strong> 마다 하나씩 존재하는 스택입니다.</li>
-<li><strong>역할</strong>: 메서드 호출 시 생성되는 <strong>스택 프레임(stack frame)</strong> 을 저장합니다. 각 프레임에는:
-<ul>
-<li>지역 변수(Local Variables)</li>
-<li>피연산자 스택(Operand Stack)</li>
-<li>메서드 반환 주소 등이 포함됨</li>
-</ul>
-</li>
-<li><strong>예외</strong>: 스택 오버플로우 발생 시 <code>StackOverflowError</code> 발생</li>
-</ul>
-<hr>
-<h3 id="-2-native-method-stack">🔁 2. <strong>Native Method Stack</strong></h3>
-<ul>
-<li><strong>설명</strong>: 네이티브 메서드(C로 구현된 JNI 메서드 등) 호출 시 사용되는 스택입니다.</li>
-<li><strong>역할</strong>: C/C++ 등 JVM 외부 언어로 구현된 메서드에서 필요한 데이터를 저장</li>
-<li><strong>특이사항</strong>: 일부 JVM 구현에서는 Java 스택과 통합되기도 함</li>
-</ul>
-<hr>
-<h3 id="-3-operand-stack-피연산자-스택">💾 3. <strong>Operand Stack (피연산자 스택)</strong></h3>
-<ul>
-<li><strong>설명</strong>: 위의 JVM Stack의 <strong>각 스택 프레임 내</strong>에 존재하는 스택입니다.</li>
-<li><strong>역할</strong>: 바이트코드 명령어가 실행 중인 <strong>중간 연산 결과</strong>를 임시로 저장</li>
-<li><strong>예시</strong>: <code>iadd</code>, <code>imul</code> 같은 바이트코드 명령은 이 스택에서 피연산자를 꺼내 계산</li>
-</ul>
-<hr>
-<h3 id="-4-call-stack-호출-스택">🧱 4. <strong>Call Stack (호출 스택)</strong></h3>
-<ul>
-<li><strong>설명</strong>: JVM Stack의 구조적인 측면을 지칭하는 용어로, 메서드 호출의 흐름을 나타냅니다.</li>
-<li><strong>역할</strong>: 현재 실행 중인 메서드부터 시작해 호출된 메서드들이 차곡차곡 쌓여 있음</li>
-<li><strong>특징</strong>: 디버깅 시 &ldquo;Stack Trace&quot;로 확인 가능</li>
-</ul>
-<hr>
-<p>추가로 JVM에는 스택 이외에도 다음과 같은 메모리 영역이 있습니다:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 01 Apr 2025 15:44:09 &#43;0900" class="no-wrap"
-                title=" Tue, 01 Apr 2025 15:44:09 &#43;0900">
-                Tue, 01 Apr 2025 15:44:09 &#43;0900
               </relative-time>
             </div>
           </div>
