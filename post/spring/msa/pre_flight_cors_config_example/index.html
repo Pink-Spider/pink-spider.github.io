@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    All About Join | Pink Spider
+    PreFlightCorsConfig_example | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,25 +27,21 @@
   
   <meta
   name="description"
-  content="MySQL을 비롯한 대부분의 관계형 데이터베이스에서 사용되는 JOIN은 여러 테이블의 데이터를 조합해 하나의 결과로 만드는 데 사용됩니다. 아래는 대표적인 JOIN 종류와 각각의 설명, 예제를 포함한 정리입니다.
-🔗 1. INNER JOIN ✅ 정의 두 테이블에서 공통된 값이 존재하는 행만 반환합니다.
-🧪 예시 SELECT a.id, a.name, b.order_date FROM customers a INNER JOIN orders b ON a.id = b.customer_id; 📌 특징 가장 일반적인 JOIN 방식 양쪽 모두 일치하는 값이 있어야 결과에 포함됨 🔗 2. LEFT JOIN (또는 LEFT OUTER JOIN) ✅ 정의 왼쪽 테이블의 모든 행을 반환하며, 오른쪽 테이블에 일치하는 값이 없으면 NULL로 채워집니다.
+  content="PreFlightCorsConfig example @Configuration public class PreFlightCorsConfig { private final CorsProperties corsProperties; public PreFlightCorsConfig(CorsProperties corsProperties) { this.corsProperties = corsProperties; } private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;; private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;; private static final String ALLOWED_CREDENTIALS = &#34;true&#34;; // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함 private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;; private static final String MAX_AGE = &#34;3600&#34;; @Bean public WebFilter corsFilter() { return (ServerWebExchange ctx, WebFilterChain chain) -&gt; { ServerHttpRequest request = ctx.getRequest(); String requestOrigin = request.getHeaders().getOrigin(); if (CorsUtils.isPreFlightRequest(request)) { ServerHttpResponse response = ctx.getResponse(); HttpHeaders headers = response.getHeaders(); if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) { headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin); } headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS); headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE); headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS); headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS); headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); // 프론트에서 해당 헤더를 확인할수잇게 허가해줌 headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); if (request.getMethod() == HttpMethod.OPTIONS) { response.setStatusCode(HttpStatus.OK); return Mono.empty(); } } return chain.filter(ctx); }; } } CorsProperties @Component @Getter @Setter @ConfigurationProperties(prefix = &#34;app.cors&#34;) public class CorsProperties { private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;(); } 설정 dev, prod profile 별로 다르게 설정하는 게 일반적 # application-dev.yml cors: allowed-origins: - &#34;http://localhost:3000&#34; - &#34;http://127.0.0.1:3000&#34; # application-prod.yml cors: allowed-origins: - &#34;https://example.com&#34; - &#34;https://another-domain.com&#34; spspring-cloud-starter-gateway 사용시 Spring Cloud Gateway를 사용하고 있다면 PreFlightCorsConfig 같은 별도의 Java Config 없이도 application.yml에 설정만으로 CORS 처리가 가능합니다.**
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/infra/db/all_about_join/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/msa/pre_flight_cors_config_example/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="All About Join - Pink Spider"
+  content="PreFlightCorsConfig_example - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="MySQL을 비롯한 대부분의 관계형 데이터베이스에서 사용되는 JOIN은 여러 테이블의 데이터를 조합해 하나의 결과로 만드는 데 사용됩니다. 아래는 대표적인 JOIN 종류와 각각의 설명, 예제를 포함한 정리입니다.
-🔗 1. INNER JOIN ✅ 정의 두 테이블에서 공통된 값이 존재하는 행만 반환합니다.
-🧪 예시 SELECT a.id, a.name, b.order_date FROM customers a INNER JOIN orders b ON a.id = b.customer_id; 📌 특징 가장 일반적인 JOIN 방식 양쪽 모두 일치하는 값이 있어야 결과에 포함됨 🔗 2. LEFT JOIN (또는 LEFT OUTER JOIN) ✅ 정의 왼쪽 테이블의 모든 행을 반환하며, 오른쪽 테이블에 일치하는 값이 없으면 NULL로 채워집니다.
+  content="PreFlightCorsConfig example @Configuration public class PreFlightCorsConfig { private final CorsProperties corsProperties; public PreFlightCorsConfig(CorsProperties corsProperties) { this.corsProperties = corsProperties; } private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;; private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;; private static final String ALLOWED_CREDENTIALS = &#34;true&#34;; // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함 private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;; private static final String MAX_AGE = &#34;3600&#34;; @Bean public WebFilter corsFilter() { return (ServerWebExchange ctx, WebFilterChain chain) -&gt; { ServerHttpRequest request = ctx.getRequest(); String requestOrigin = request.getHeaders().getOrigin(); if (CorsUtils.isPreFlightRequest(request)) { ServerHttpResponse response = ctx.getResponse(); HttpHeaders headers = response.getHeaders(); if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) { headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin); } headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS); headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE); headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS); headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS); headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); // 프론트에서 해당 헤더를 확인할수잇게 허가해줌 headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); if (request.getMethod() == HttpMethod.OPTIONS) { response.setStatusCode(HttpStatus.OK); return Mono.empty(); } } return chain.filter(ctx); }; } } CorsProperties @Component @Getter @Setter @ConfigurationProperties(prefix = &#34;app.cors&#34;) public class CorsProperties { private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;(); } 설정 dev, prod profile 별로 다르게 설정하는 게 일반적 # application-dev.yml cors: allowed-origins: - &#34;http://localhost:3000&#34; - &#34;http://127.0.0.1:3000&#34; # application-prod.yml cors: allowed-origins: - &#34;https://example.com&#34; - &#34;https://another-domain.com&#34; spspring-cloud-starter-gateway 사용시 Spring Cloud Gateway를 사용하고 있다면 PreFlightCorsConfig 같은 별도의 Java Config 없이도 application.yml에 설정만으로 CORS 처리가 가능합니다.**
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -62,17 +58,15 @@
 />
 <meta
   property="og:title"
-  content="All About Join - Pink Spider"
+  content="PreFlightCorsConfig_example - Pink Spider"
 />
 <meta
   property="og:description"
-  content="MySQL을 비롯한 대부분의 관계형 데이터베이스에서 사용되는 JOIN은 여러 테이블의 데이터를 조합해 하나의 결과로 만드는 데 사용됩니다. 아래는 대표적인 JOIN 종류와 각각의 설명, 예제를 포함한 정리입니다.
-🔗 1. INNER JOIN ✅ 정의 두 테이블에서 공통된 값이 존재하는 행만 반환합니다.
-🧪 예시 SELECT a.id, a.name, b.order_date FROM customers a INNER JOIN orders b ON a.id = b.customer_id; 📌 특징 가장 일반적인 JOIN 방식 양쪽 모두 일치하는 값이 있어야 결과에 포함됨 🔗 2. LEFT JOIN (또는 LEFT OUTER JOIN) ✅ 정의 왼쪽 테이블의 모든 행을 반환하며, 오른쪽 테이블에 일치하는 값이 없으면 NULL로 채워집니다.
+  content="PreFlightCorsConfig example @Configuration public class PreFlightCorsConfig { private final CorsProperties corsProperties; public PreFlightCorsConfig(CorsProperties corsProperties) { this.corsProperties = corsProperties; } private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;; private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;; private static final String ALLOWED_CREDENTIALS = &#34;true&#34;; // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함 private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;; private static final String MAX_AGE = &#34;3600&#34;; @Bean public WebFilter corsFilter() { return (ServerWebExchange ctx, WebFilterChain chain) -&gt; { ServerHttpRequest request = ctx.getRequest(); String requestOrigin = request.getHeaders().getOrigin(); if (CorsUtils.isPreFlightRequest(request)) { ServerHttpResponse response = ctx.getResponse(); HttpHeaders headers = response.getHeaders(); if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) { headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin); } headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS); headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE); headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS); headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS); headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); // 프론트에서 해당 헤더를 확인할수잇게 허가해줌 headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS); if (request.getMethod() == HttpMethod.OPTIONS) { response.setStatusCode(HttpStatus.OK); return Mono.empty(); } } return chain.filter(ctx); }; } } CorsProperties @Component @Getter @Setter @ConfigurationProperties(prefix = &#34;app.cors&#34;) public class CorsProperties { private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;(); } 설정 dev, prod profile 별로 다르게 설정하는 게 일반적 # application-dev.yml cors: allowed-origins: - &#34;http://localhost:3000&#34; - &#34;http://127.0.0.1:3000&#34; # application-prod.yml cors: allowed-origins: - &#34;https://example.com&#34; - &#34;https://another-domain.com&#34; spspring-cloud-starter-gateway 사용시 Spring Cloud Gateway를 사용하고 있다면 PreFlightCorsConfig 같은 별도의 Java Config 없이도 application.yml에 설정만으로 CORS 처리가 가능합니다.**
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/infra/db/all_about_join/" />
-<meta property="og:site_name" content="All About Join" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/msa/pre_flight_cors_config_example/" />
+<meta property="og:site_name" content="PreFlightCorsConfig_example" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -80,7 +74,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2025-06-18 11:27:58 &#43;0900 KST" />
+<meta property="article:published_time" content="2025-03-31 00:49:17 &#43;0900 KST" />
 
 
 
@@ -290,12 +284,12 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/infra/db/all_about_join/">All About Join</a></strong>
+                      href="https://pink-spider.github.io/post/spring/msa/pre_flight_cors_config_example/">PreFlightCorsConfig_example</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 18 Jun 2025 11:27:58 &#43;0900"
+                  Created <relative-time datetime="Mon, 31 Mar 2025 00:49:17 &#43;0900"
                     class="no-wrap">
-                    Wed, 18 Jun 2025 11:27:58 &#43;0900</relative-time>
+                    Mon, 31 Mar 2025 00:49:17 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
@@ -331,9 +325,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      910 Words
+                      632 Words
                     <span class="file-info-divider"></span>
-                                        4 min
+                                        3 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -344,133 +338,141 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>MySQL을 비롯한 대부분의 관계형 데이터베이스에서 사용되는 <strong>JOIN</strong>은 여러 테이블의 데이터를 조합해 하나의 결과로 만드는 데 사용됩니다. 아래는 대표적인 JOIN 종류와 각각의 설명, 예제를 포함한 정리입니다.</p>
-<hr>
-<h2 id="-1-inner-join">🔗 1. INNER JOIN</h2>
-<h3 id="-정의">✅ 정의</h3>
-<p>두 테이블에서 <strong>공통된 값이 존재하는 행만</strong> 반환합니다.</p>
-<h3 id="-예시">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">order_date</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징">📌 특징</h3>
+                <article class="markdown-body entry-content container-lg"><h1 id="preflightcorsconfig-example">PreFlightCorsConfig example</h1>
+<pre tabindex="0"><code>@Configuration
+public class PreFlightCorsConfig {
+
+    private final CorsProperties corsProperties;
+
+    public PreFlightCorsConfig(CorsProperties corsProperties) {
+        this.corsProperties = corsProperties;
+    }
+
+    private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;;
+
+    private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;;
+
+    private static final String ALLOWED_CREDENTIALS = &#34;true&#34;;
+
+    // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함
+    private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;;
+
+    private static final String MAX_AGE = &#34;3600&#34;;
+
+    @Bean
+    public WebFilter corsFilter() {
+        return (ServerWebExchange ctx, WebFilterChain chain) -&gt; {
+            ServerHttpRequest request = ctx.getRequest();
+            String requestOrigin = request.getHeaders().getOrigin();
+
+            if (CorsUtils.isPreFlightRequest(request)) {
+                ServerHttpResponse response = ctx.getResponse();
+                HttpHeaders headers = response.getHeaders();
+
+                if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) {
+                    headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin);
+                }
+
+                headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS);
+                headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE);
+                headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS);
+                headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS);
+                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
+
+                // 프론트에서 해당 헤더를 확인할수잇게 허가해줌
+                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
+                if (request.getMethod() == HttpMethod.OPTIONS) {
+                    response.setStatusCode(HttpStatus.OK);
+                    return Mono.empty();
+                }
+            }
+
+            return chain.filter(ctx);
+        };
+    }
+}
+</code></pre><h1 id="corsproperties">CorsProperties</h1>
+<pre tabindex="0"><code>@Component
+@Getter
+@Setter
+@ConfigurationProperties(prefix = &#34;app.cors&#34;)
+public class CorsProperties {
+
+    private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;();
+}
+</code></pre><h1 id="설정">설정</h1>
 <ul>
-<li>가장 일반적인 JOIN 방식</li>
-<li>양쪽 모두 일치하는 값이 있어야 결과에 포함됨</li>
+<li>dev, prod profile 별로 다르게 설정하는 게 일반적</li>
 </ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-dev.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://localhost:3000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://127.0.0.1:3000&#34;</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-prod.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://example.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://another-domain.com&#34;</span><span class="w">
+</span></span></span></code></pre></div><h1 id="spspring-cloud-starter-gateway-사용시">spspring-cloud-starter-gateway 사용시</h1>
+<p>Spring Cloud Gateway를 사용하고 있다면 <code>PreFlightCorsConfig</code> 같은 별도의 Java Config 없이도 <code>application.yml</code>에 설정만으로 CORS 처리가 가능합니다.**</p>
 <hr>
-<h2 id="-2-left-join-또는-left-outer-join">🔗 2. LEFT JOIN (또는 LEFT OUTER JOIN)</h2>
-<h3 id="-정의-1">✅ 정의</h3>
-<p>왼쪽 테이블의 모든 행을 반환하며, 오른쪽 테이블에 일치하는 값이 없으면 <code>NULL</code>로 채워집니다.</p>
-<h3 id="-예시-1">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">order_date</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-1">📌 특징</h3>
-<ul>
-<li>고객 중 주문 이력이 없는 사람도 포함됨</li>
-<li>&ldquo;왼쪽 기준&rdquo; 전체 목록이 필요할 때 유용</li>
-</ul>
+<h2 id="-tldr">✅ TL;DR</h2>
+<h3 id="-springcloudgatewayglobalcorscors-configurations">✔️ <code>spring.cloud.gateway.globalcors.cors-configurations</code></h3>
+<p>이 설정은 <strong>Spring Cloud Gateway 전용</strong>이며, Gateway 레벨에서 전역적으로 CORS 프리플라이트 요청을 처리합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cloud</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">gateway</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">globalcors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cors-configurations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">&#39;[/**]&#39;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedOrigins</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="s2">&#34;https://dev.pink-spider.io&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedMethods</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">OPTIONS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">PUT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="l">DELETE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowedHeaders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="s2">&#34;*&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">exposedHeaders</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="s2">&#34;Authorization&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="s2">&#34;Refresh-token&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">allowCredentials</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></div><blockquote>
+<p><code>allowedHeaders: &quot;*&quot;</code> 와 같이 와일드카드도 가능합니다 (필요 시 명시적으로 지정 가능).</p></blockquote>
 <hr>
-<h2 id="-3-right-join-또는-right-outer-join">🔗 3. RIGHT JOIN (또는 RIGHT OUTER JOIN)</h2>
-<h3 id="-정의-2">✅ 정의</h3>
-<p>오른쪽 테이블의 모든 행을 반환하며, 왼쪽 테이블에 일치하는 값이 없으면 <code>NULL</code>로 채워집니다.</p>
-<h3 id="-예시-2">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">order_date</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">RIGHT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-2">📌 특징</h3>
-<ul>
-<li>주문은 존재하지만 고객 테이블에 정보가 없을 경우에도 포함됨 (예: 삭제된 고객)</li>
-</ul>
-<hr>
-<h2 id="-4-full-outer-join-mysql은-직접-지원하지-않음">🔗 4. FULL OUTER JOIN (MySQL은 직접 지원하지 않음)</h2>
-<h3 id="-정의-3">✅ 정의</h3>
-<p><strong>양쪽 테이블의 모든 행을 반환</strong>하며, 일치하지 않는 경우 <code>NULL</code>로 표시합니다.</p>
-<h3 id="-대안-예시-mysql에서-시뮬레이션-방식">🧪 대안 예시 (MySQL에서 시뮬레이션 방식)</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">UNION</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">RIGHT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">customer_id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-3">📌 특징</h3>
-<ul>
-<li><strong>LEFT + RIGHT</strong>를 합친 개념</li>
-<li>MySQL에서는 직접 지원하지 않으므로 <code>UNION</code>을 통해 흉내냄</li>
-</ul>
-<hr>
-<h2 id="-5-cross-join">🔗 5. CROSS JOIN</h2>
-<h3 id="-정의-4">✅ 정의</h3>
-<p><strong>모든 조합(Cartesian Product)</strong> 을 반환합니다.
-예: A(3개 행) × B(2개 행) = 6개 행</p>
-<h3 id="-예시-3">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">product</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-4">📌 특징</h3>
-<ul>
-<li>조합 생성에 유용 (예: 옵션, 요일, 좌석)</li>
-<li>실수로 사용 시 폭발적인 데이터 양 초래 가능</li>
-</ul>
-<hr>
-<h2 id="-6-self-join">🔗 6. SELF JOIN</h2>
-<h3 id="-정의-5">✅ 정의</h3>
-<p>자기 자신 테이블과의 JOIN입니다. 계층 구조나 상호 관계 표현에 사용됩니다.</p>
-<h3 id="-예시-4">🧪 예시</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">employee</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">manager</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="n">a</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">employees</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">manager_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">id</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><h3 id="-특징-5">📌 특징</h3>
-<ul>
-<li>조직도나 트리 구조에서 자주 사용</li>
-</ul>
-<hr>
-<h2 id="-요약표">✅ 요약표</h2>
+<h2 id="-언제-preflightcorsconfig가-필요한가">✅ 언제 <code>PreFlightCorsConfig</code>가 필요한가?</h2>
 <table>
   <thead>
       <tr>
-          <th>JOIN 종류</th>
-          <th>설명</th>
-          <th>포함 행 수</th>
+          <th>상황</th>
+          <th>필요 여부</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>INNER JOIN</td>
-          <td>양쪽 일치하는 행만</td>
-          <td>교집합</td>
+          <td><strong>Spring Cloud Gateway 사용</strong></td>
+          <td>❌ <strong>필요 없음</strong> (YAML 설정으로 충분)</td>
       </tr>
       <tr>
-          <td>LEFT JOIN</td>
-          <td>왼쪽 + 오른쪽 일치하는 행</td>
-          <td>왼쪽 기준 전체</td>
+          <td><strong>Spring WebFlux/Web MVC 단독 서버</strong></td>
+          <td>✅ 필요 (Filter 또는 WebMvcConfigurer 필요)</td>
       </tr>
       <tr>
-          <td>RIGHT JOIN</td>
-          <td>오른쪽 + 왼쪽 일치하는 행</td>
-          <td>오른쪽 기준 전체</td>
-      </tr>
-      <tr>
-          <td>FULL OUTER JOIN</td>
-          <td>양쪽 전체 + 일치하지 않으면 NULL</td>
-          <td>합집합 (MySQL에서는 UNION 필요)</td>
-      </tr>
-      <tr>
-          <td>CROSS JOIN</td>
-          <td>두 테이블의 모든 조합</td>
-          <td>곱집합 (N × M)</td>
-      </tr>
-      <tr>
-          <td>SELF JOIN</td>
-          <td>같은 테이블끼리 JOIN</td>
-          <td>자기 자신과 비교 필요 시</td>
+          <td><strong>특정 조건 하에서 커스텀 로직이 필요한 경우</strong></td>
+          <td>✅ 필요할 수 있음 (예: 다이내믹 Origin 체크 등)</td>
       </tr>
   </tbody>
 </table>
 <hr>
-<p>필요하시면 각 JOIN의 시각화 도표, 성능 튜닝 팁, 또는 쿼리 최적화 예제도 도와드릴 수 있습니다.</p>
+<h2 id="-정리">🎯 정리</h2>
+<ul>
+<li><strong>Spring Cloud Gateway를 쓰고 있고, YAML 설정만으로 잘 작동 중이라면 <code>PreFlightCorsConfig</code>는 제거해도 됩니다.</strong></li>
+<li>단, 프리플라이트 요청이 제대로 처리되지 않거나, 동적으로 origin을 제어해야 할 필요가 있을 때만 Java 코드 수준에서 커스터마이징이 필요합니다.</li>
+</ul>
+<hr>
 </article>
               </div>
 
@@ -483,13 +485,13 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/js/about_closure/"> JS에서 클로저(closure)란...</a>
+          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/k8s/k8s/"> About k8s</a>
           
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/http_api_caching_filter/">HttpApiCachingFilter...&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/basic/vo_dto_comparison/">Vo와 Dto&nbsp;</a><div> »</div>
           
         </div>
       </div>
