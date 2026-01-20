@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">96</span>
+              <span class="Counter">97</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">96</span>
+      <span class="Counter ">97</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,46 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/kafka/kakfa_exception/">Apache Kafka 사용 시 발생할 수 있는 주요 오류</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Apache Kafka 사용 시 발생할 수 있는 주요 오류 유형과 그 해결 방법을 정리해 보겠습니다.</p>
+<hr>
+<h2 id="1-네트워크-및-연결-오류"><strong>1. 네트워크 및 연결 오류</strong></h2>
+<h3 id="-오류-connection-to-broker-broker_id-failed">❌ 오류: <code>Connection to broker &lt;broker_id&gt; failed</code></h3>
+<p>📌 <strong>원인</strong>: 브로커와의 네트워크 연결 문제, 브로커 다운, 방화벽 문제 등<br>
+✅ <strong>해결 방법</strong>:</p>
+<ul>
+<li><code>zookeeper</code>와 <code>broker</code>가 실행 중인지 확인 (<code>ps aux | grep kafka</code>)</li>
+<li><code>listeners</code> 및 <code>advertised.listeners</code> 설정 확인 (<code>server.properties</code>)</li>
+<li>방화벽 설정 (<code>iptables -L</code>, <code>firewalld</code>)을 점검하여 포트가 열려 있는지 확인</li>
+</ul>
+<hr>
+<h2 id="2-브로커-및-토픽-관련-오류"><strong>2. 브로커 및 토픽 관련 오류</strong></h2>
+<h3 id="-오류-leader-not-available-for-partition-partition_id">❌ 오류: <code>Leader not available for partition &lt;partition_id&gt;</code></h3>
+<p>📌 <strong>원인</strong>:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 13:30:03 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 13:30:03 &#43;0900">
+                Wed, 26 Mar 2025 13:30:03 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -892,69 +932,6 @@
               <relative-time datetime=" Wed, 26 Mar 2025 11:21:45 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 11:21:45 &#43;0900">
                 Wed, 26 Mar 2025 11:21:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/about_trasactional/">Spring Boot JPA에서 @Transactional 옵션 정리</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="spring-boot-jpa에서-transactional-옵션-정리">Spring Boot JPA에서 @Transactional 옵션 정리</h1>
-<p>Spring Boot JPA에서 <code>@Transactional</code>은 트랜잭션 처리를 위해 사용하는 매우 중요한 어노테이션이에요. 데이터베이스의 일관성과 무결성을 유지하기 위해 여러 작업을 하나의 트랜잭션으로 묶어 실행할 때 사용하죠. 아래에 사용법을 정리해볼게요.</p>
-<hr>
-<h3 id="-기본-사용법">📌 기본 사용법</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">joinMember</span><span class="p">(</span><span class="n">Member</span><span class="w"> </span><span class="n">member</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">member</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 예외 발생 시 전체 트랜잭션 롤백</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li><code>@Transactional</code>을 메서드에 붙이면 해당 메서드 안의 작업이 하나의 트랜잭션으로 처리돼요.</li>
-<li>런타임 중 예외가 발생하면 자동으로 롤백돼요. (기본적으로 <strong>unchecked exception</strong>일 때만 롤백)</li>
-</ul>
-<hr>
-<h3 id="-클래스-레벨에-사용">📌 클래스 레벨에 사용</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Transactional</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 트랜잭션 적용됨</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>클래스 전체에 트랜잭션을 걸 수 있어요. 단, 메서드에 개별적으로 설정된 게 우선 적용됩니다.</li>
-</ul>
-<hr>
-<h3 id="-rollbackfor-옵션">📌 rollbackFor 옵션</h3>
-<p>기본적으로 <code>RuntimeException</code>과 그 하위 클래스만 롤백 대상으로 간주돼요. 만약 체크 예외(<code>Exception</code>)도 롤백하고 싶다면:</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:15:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:15:45 &#43;0900">
-                Wed, 26 Mar 2025 11:15:45 &#43;0900
               </relative-time>
             </div>
           </div>

@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">96</span>
+              <span class="Counter">97</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">96</span>
+      <span class="Counter ">97</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,55 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/redis/redis_pub_sub_stream/">Redis에서 pub/sub, 그리고 Redis Stream</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Redis에서 <code>Pub/Sub</code>(Publish/Subscribe) 기능을 사용하는 방법은 비교적 간단합니다. 아래는 기본적인 사용 방법과 예제입니다.</p>
+<hr>
+<h2 id="-개념-요약">🧠 개념 요약</h2>
+<p>Redis Pub/Sub는 <strong>메시지 브로커</strong> 역할을 수행하여, 한 클라이언트가 메시지를 발행(Publish)하면, 해당 채널을 구독(Subscribe)하고 있는 다른 클라이언트들이 실시간으로 그 메시지를 받게 됩니다.</p>
+<ul>
+<li><strong>Publisher</strong>: 채널에 메시지를 발행하는 클라이언트</li>
+<li><strong>Subscriber</strong>: 특정 채널을 구독하고 메시지를 받는 클라이언트</li>
+</ul>
+<hr>
+<h2 id="-명령어">🛠 명령어</h2>
+<ul>
+<li><code>PUBLISH &lt;channel&gt; &lt;message&gt;</code>: 메시지를 발행</li>
+<li><code>SUBSCRIBE &lt;channel&gt; [&lt;channel&gt; ...]</code>: 채널 구독</li>
+<li><code>UNSUBSCRIBE [&lt;channel&gt; ...]</code>: 채널 구독 취소</li>
+</ul>
+<hr>
+<h2 id="-예제-cli-기준">💻 예제 (CLI 기준)</h2>
+<h3 id="터미널-1--subscriber">터미널 1 – Subscriber</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
+</span></span><span class="line"><span class="cl">&gt; SUBSCRIBE news
+</span></span></code></pre></div><h3 id="터미널-2--publisher">터미널 2 – Publisher</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis-cli
+</span></span><span class="line"><span class="cl">&gt; PUBLISH news <span class="s2">&#34;Hello from Redis!&#34;</span>
+</span></span></code></pre></div><p>Subscriber는 다음과 같은 응답을 받습니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 21 May 2025 14:20:45 &#43;0900" class="no-wrap"
+                title=" Wed, 21 May 2025 14:20:45 &#43;0900">
+                Wed, 21 May 2025 14:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1067,74 +1116,6 @@
               <relative-time datetime=" Fri, 09 May 2025 09:20:45 &#43;0900" class="no-wrap"
                 title=" Fri, 09 May 2025 09:20:45 &#43;0900">
                 Fri, 09 May 2025 09:20:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/basic/transactional_annotaion/">2개의 @Transactional </a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p><code>@Transactional</code> 어노테이션은 Java에서 트랜잭션 처리를 위한 핵심 수단으로, <code>springframework.transaction.annotation.Transactional</code>과 <code>jakarta.transaction.Transactional</code>은 비슷해 보이지만 다음과 같은 <strong>주요 차이점</strong>이 있습니다:</p>
-<hr>
-<h3 id="1-패키지-출처">1. <strong>패키지 출처</strong></h3>
-<table>
-  <thead>
-      <tr>
-          <th>항목</th>
-          <th>Spring 어노테이션</th>
-          <th>Jakarta 어노테이션</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>어노테이션 경로</td>
-          <td><code>org.springframework.transaction.annotation.Transactional</code></td>
-          <td><code>jakarta.transaction.Transactional</code></td>
-      </tr>
-      <tr>
-          <td>소속</td>
-          <td>Spring Framework</td>
-          <td>Jakarta EE (구 Java EE)</td>
-      </tr>
-      <tr>
-          <td>API 레벨</td>
-          <td>Spring 전용 기능</td>
-          <td>Java 표준 사양 (JSR-907 등) 기반</td>
-      </tr>
-  </tbody>
-</table>
-<hr>
-<h3 id="2-적용-대상의-차이">2. <strong>적용 대상의 차이</strong></h3>
-<ul>
-<li>
-<p><strong>Spring <code>@Transactional</code></strong></p>
-<ul>
-<li><strong>Spring AOP 기반</strong>으로 동작.</li>
-<li>프록시 방식으로 트랜잭션을 관리.</li>
-<li>Spring Data JPA, Spring JDBC, MyBatis 등 다양한 Spring 기술 스택과 자연스럽게 통합됨.</li>
-<li>세밀한 제어가 가능: <code>propagation</code>, <code>isolation</code>, <code>timeout</code>, <code>rollbackFor</code>, <code>readOnly</code> 등 속성 다양.</li>
-</ul>
-</li>
-<li>
-<p><strong>Jakarta <code>@Transactional</code></strong></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 01 May 2025 23:40:45 &#43;0900" class="no-wrap"
-                title=" Thu, 01 May 2025 23:40:45 &#43;0900">
-                Thu, 01 May 2025 23:40:45 &#43;0900
               </relative-time>
             </div>
           </div>

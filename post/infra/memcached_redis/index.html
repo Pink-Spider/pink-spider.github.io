@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Kubernetes(쿠버네티스)와 Docker(도커)의 관계 | Pink Spider
+    Memcached 와 redis 비교 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,33 +27,27 @@
   
   <meta
   name="description"
-  content="Kubernetes(쿠버네티스)와 Docker(도커)의 관계는 **&ldquo;경쟁 관계&quot;가 아니라 &ldquo;상호 보완적인 관계&rdquo;**입니다. 이 둘의 차이를 명확히 이해하기 위해 가장 쉬운 비유를 들어 설명해 드리겠습니다.
-1. 핵심 비유: 화물선과 항만 시스템 이 두 기술의 관계를 물류 시스템에 비유하면 아주 명확해집니다.
-Docker (컨테이너): **&lsquo;규격화된 화물 컨테이너 박스&rsquo;**입니다.
-물건(애플리케이션 코드, 라이브러리 등)을 박스에 담아 포장하는 기술입니다.
-이 박스만 있으면 어떤 배(서버)나 트럭(노트북)에 실어도 내용물이 안전하게 전달됩니다.
-Kubernetes (조타수/항만 관리자): **&lsquo;수천 개의 컨테이너를 관리하는 시스템&rsquo;**입니다.
-컨테이너가 배에 잘 실렸는지, 배가 흔들려 컨테이너가 떨어지면(에러 발생) 다시 실어주는지, 화물이 많아지면 배를 더 부를지(스케일링)를 결정합니다.
+  content="Memcached와 Redis는 둘 다 고성능 인메모리(In-memory) 키-값(Key-Value) 저장소로, 주로 데이터베이스 부하를 줄이고 애플리케이션 속도를 높이는 캐시(Cache) 용도로 사용된다는 공통점이 있습니다.
+하지만 &ldquo;단순함과 멀티스레드(Memcached)&rdquo; 대 **&ldquo;강력한 기능과 유연성(Redis)&rdquo;**이라는 명확한 차이가 있습니다.
+두 기술의 핵심적인 차이를 4가지 관점(데이터 구조, 아키텍처, 영속성, 확장성)에서 정리해 드립니다.
+1. 한눈에 보는 비교 (Executive Summary) 특징 Memcached Redis 주요 컨셉 고성능, 단순함, 멀티스레드 다양한 자료구조, 영속성, 기능 풍부 자료 구조 String (단순 문자열/바이너리) String, List, Set, Hash, Sorted Set, Geo 등 스레드 모델 멀티 스레드 (Multi-threaded) 싱글 스레드 (Single-threaded) (I/O는 멀티 가능) 데이터 영속성 지원 안 함 (재부팅 시 데이터 소멸) 지원 (RDB, AOF) 확장성(Clustering) 클라이언트 측 분산 (Consistent Hashing) 서버 측 분산 (Redis Cluster) 복제(Replication) 지원 안 함 Master-Slave 복제 지원 주요 용도 단순 캐싱 (세션, HTML 조각) 복잡한 캐싱, 리더보드, 대기열, 메시지 브로커 2. 상세 차이점 분석 ① 데이터 구조 (Data Structures) Memcached: 오직 **문자열(String)**만 저장합니다. 리스트나 해시 같은 구조를 저장하려면 JSON 등으로 직렬화(Serialize)해서 문자열로 만든 뒤 저장해야 합니다. 데이터를 수정하려면 전체 데이터를 가져와서 수정한 뒤 다시 덮어써야 하는 단점이 있습니다. Redis: 다양한 자료구조를 지원합니다. 리스트(List)에 요소를 추가하거나, 해시(Hash)의 특정 필드만 수정하는 등 효율적인 데이터 조작이 가능합니다. 활용 예: &lsquo;실시간 랭킹&rsquo; 구현 시 Redis의 Sorted Set을 쓰면 매우 쉽게 구현 가능합니다. ② 스레드 모델 (Architecture) 가장 큰 아키텍처 차이입니다.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/infra/kube_docker/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/infra/memcached_redis/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Kubernetes(쿠버네티스)와 Docker(도커)의 관계 - Pink Spider"
+  content="Memcached 와 redis 비교 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="Kubernetes(쿠버네티스)와 Docker(도커)의 관계는 **&ldquo;경쟁 관계&quot;가 아니라 &ldquo;상호 보완적인 관계&rdquo;**입니다. 이 둘의 차이를 명확히 이해하기 위해 가장 쉬운 비유를 들어 설명해 드리겠습니다.
-1. 핵심 비유: 화물선과 항만 시스템 이 두 기술의 관계를 물류 시스템에 비유하면 아주 명확해집니다.
-Docker (컨테이너): **&lsquo;규격화된 화물 컨테이너 박스&rsquo;**입니다.
-물건(애플리케이션 코드, 라이브러리 등)을 박스에 담아 포장하는 기술입니다.
-이 박스만 있으면 어떤 배(서버)나 트럭(노트북)에 실어도 내용물이 안전하게 전달됩니다.
-Kubernetes (조타수/항만 관리자): **&lsquo;수천 개의 컨테이너를 관리하는 시스템&rsquo;**입니다.
-컨테이너가 배에 잘 실렸는지, 배가 흔들려 컨테이너가 떨어지면(에러 발생) 다시 실어주는지, 화물이 많아지면 배를 더 부를지(스케일링)를 결정합니다.
+  content="Memcached와 Redis는 둘 다 고성능 인메모리(In-memory) 키-값(Key-Value) 저장소로, 주로 데이터베이스 부하를 줄이고 애플리케이션 속도를 높이는 캐시(Cache) 용도로 사용된다는 공통점이 있습니다.
+하지만 &ldquo;단순함과 멀티스레드(Memcached)&rdquo; 대 **&ldquo;강력한 기능과 유연성(Redis)&rdquo;**이라는 명확한 차이가 있습니다.
+두 기술의 핵심적인 차이를 4가지 관점(데이터 구조, 아키텍처, 영속성, 확장성)에서 정리해 드립니다.
+1. 한눈에 보는 비교 (Executive Summary) 특징 Memcached Redis 주요 컨셉 고성능, 단순함, 멀티스레드 다양한 자료구조, 영속성, 기능 풍부 자료 구조 String (단순 문자열/바이너리) String, List, Set, Hash, Sorted Set, Geo 등 스레드 모델 멀티 스레드 (Multi-threaded) 싱글 스레드 (Single-threaded) (I/O는 멀티 가능) 데이터 영속성 지원 안 함 (재부팅 시 데이터 소멸) 지원 (RDB, AOF) 확장성(Clustering) 클라이언트 측 분산 (Consistent Hashing) 서버 측 분산 (Redis Cluster) 복제(Replication) 지원 안 함 Master-Slave 복제 지원 주요 용도 단순 캐싱 (세션, HTML 조각) 복잡한 캐싱, 리더보드, 대기열, 메시지 브로커 2. 상세 차이점 분석 ① 데이터 구조 (Data Structures) Memcached: 오직 **문자열(String)**만 저장합니다. 리스트나 해시 같은 구조를 저장하려면 JSON 등으로 직렬화(Serialize)해서 문자열로 만든 뒤 저장해야 합니다. 데이터를 수정하려면 전체 데이터를 가져와서 수정한 뒤 다시 덮어써야 하는 단점이 있습니다. Redis: 다양한 자료구조를 지원합니다. 리스트(List)에 요소를 추가하거나, 해시(Hash)의 특정 필드만 수정하는 등 효율적인 데이터 조작이 가능합니다. 활용 예: &lsquo;실시간 랭킹&rsquo; 구현 시 Redis의 Sorted Set을 쓰면 매우 쉽게 구현 가능합니다. ② 스레드 모델 (Architecture) 가장 큰 아키텍처 차이입니다.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -70,21 +64,18 @@ Kubernetes (조타수/항만 관리자): **&lsquo;수천 개의 컨테이너를 
 />
 <meta
   property="og:title"
-  content="Kubernetes(쿠버네티스)와 Docker(도커)의 관계 - Pink Spider"
+  content="Memcached 와 redis 비교 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="Kubernetes(쿠버네티스)와 Docker(도커)의 관계는 **&ldquo;경쟁 관계&quot;가 아니라 &ldquo;상호 보완적인 관계&rdquo;**입니다. 이 둘의 차이를 명확히 이해하기 위해 가장 쉬운 비유를 들어 설명해 드리겠습니다.
-1. 핵심 비유: 화물선과 항만 시스템 이 두 기술의 관계를 물류 시스템에 비유하면 아주 명확해집니다.
-Docker (컨테이너): **&lsquo;규격화된 화물 컨테이너 박스&rsquo;**입니다.
-물건(애플리케이션 코드, 라이브러리 등)을 박스에 담아 포장하는 기술입니다.
-이 박스만 있으면 어떤 배(서버)나 트럭(노트북)에 실어도 내용물이 안전하게 전달됩니다.
-Kubernetes (조타수/항만 관리자): **&lsquo;수천 개의 컨테이너를 관리하는 시스템&rsquo;**입니다.
-컨테이너가 배에 잘 실렸는지, 배가 흔들려 컨테이너가 떨어지면(에러 발생) 다시 실어주는지, 화물이 많아지면 배를 더 부를지(스케일링)를 결정합니다.
+  content="Memcached와 Redis는 둘 다 고성능 인메모리(In-memory) 키-값(Key-Value) 저장소로, 주로 데이터베이스 부하를 줄이고 애플리케이션 속도를 높이는 캐시(Cache) 용도로 사용된다는 공통점이 있습니다.
+하지만 &ldquo;단순함과 멀티스레드(Memcached)&rdquo; 대 **&ldquo;강력한 기능과 유연성(Redis)&rdquo;**이라는 명확한 차이가 있습니다.
+두 기술의 핵심적인 차이를 4가지 관점(데이터 구조, 아키텍처, 영속성, 확장성)에서 정리해 드립니다.
+1. 한눈에 보는 비교 (Executive Summary) 특징 Memcached Redis 주요 컨셉 고성능, 단순함, 멀티스레드 다양한 자료구조, 영속성, 기능 풍부 자료 구조 String (단순 문자열/바이너리) String, List, Set, Hash, Sorted Set, Geo 등 스레드 모델 멀티 스레드 (Multi-threaded) 싱글 스레드 (Single-threaded) (I/O는 멀티 가능) 데이터 영속성 지원 안 함 (재부팅 시 데이터 소멸) 지원 (RDB, AOF) 확장성(Clustering) 클라이언트 측 분산 (Consistent Hashing) 서버 측 분산 (Redis Cluster) 복제(Replication) 지원 안 함 Master-Slave 복제 지원 주요 용도 단순 캐싱 (세션, HTML 조각) 복잡한 캐싱, 리더보드, 대기열, 메시지 브로커 2. 상세 차이점 분석 ① 데이터 구조 (Data Structures) Memcached: 오직 **문자열(String)**만 저장합니다. 리스트나 해시 같은 구조를 저장하려면 JSON 등으로 직렬화(Serialize)해서 문자열로 만든 뒤 저장해야 합니다. 데이터를 수정하려면 전체 데이터를 가져와서 수정한 뒤 다시 덮어써야 하는 단점이 있습니다. Redis: 다양한 자료구조를 지원합니다. 리스트(List)에 요소를 추가하거나, 해시(Hash)의 특정 필드만 수정하는 등 효율적인 데이터 조작이 가능합니다. 활용 예: &lsquo;실시간 랭킹&rsquo; 구현 시 Redis의 Sorted Set을 쓰면 매우 쉽게 구현 가능합니다. ② 스레드 모델 (Architecture) 가장 큰 아키텍처 차이입니다.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/infra/kube_docker/" />
-<meta property="og:site_name" content="Kubernetes(쿠버네티스)와 Docker(도커)의 관계" />
+<meta property="og:url" content="https://pink-spider.github.io/post/infra/memcached_redis/" />
+<meta property="og:site_name" content="Memcached 와 redis 비교" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -92,7 +83,7 @@ Kubernetes (조타수/항만 관리자): **&lsquo;수천 개의 컨테이너를 
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2026-01-06 10:30:03 &#43;0900 KST" />
+<meta property="article:published_time" content="2026-01-20 09:41:22 &#43;0900 KST" />
 
 
 
@@ -302,18 +293,18 @@ Kubernetes (조타수/항만 관리자): **&lsquo;수천 개의 컨테이너를 
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/infra/kube_docker/">Kubernetes(쿠버네티스)와 Docker(도커)의 관계</a></strong>
+                      href="https://pink-spider.github.io/post/infra/memcached_redis/">Memcached 와 redis 비교</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Tue, 06 Jan 2026 10:30:03 &#43;0900"
+                  Created <relative-time datetime="Tue, 20 Jan 2026 09:41:22 &#43;0900"
                     class="no-wrap">
-                    Tue, 06 Jan 2026 10:30:03 &#43;0900</relative-time>
+                    Tue, 20 Jan 2026 09:41:22 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 06 Jan 2026 10:30:08 &#43;0900"
+                  Modified <relative-time datetime="Tue, 20 Jan 2026 09:42:14 &#43;0900"
                     class="no-wrap">
-                    Tue, 06 Jan 2026 10:30:08 &#43;0900</relative-time>
+                    Tue, 20 Jan 2026 09:42:14 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -343,9 +334,9 @@ Kubernetes (조타수/항만 관리자): **&lsquo;수천 개의 컨테이너를 
                         </div>
                       </div>
                     </details-menu>
-                      1556 Words
+                      1685 Words
                     <span class="file-info-divider"></span>
-                                        7 min
+                                        8 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -356,87 +347,99 @@ Kubernetes (조타수/항만 관리자): **&lsquo;수천 개의 컨테이너를 
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>Kubernetes(쿠버네티스)와 Docker(도커)의 관계는 **&ldquo;경쟁 관계&quot;가 아니라 &ldquo;상호 보완적인 관계&rdquo;**입니다. 이 둘의 차이를 명확히 이해하기 위해 가장 쉬운 비유를 들어 설명해 드리겠습니다.</p>
+                <article class="markdown-body entry-content container-lg"><p><strong>Memcached</strong>와 <strong>Redis</strong>는 둘 다 고성능 <strong>인메모리(In-memory) 키-값(Key-Value) 저장소</strong>로, 주로 데이터베이스 부하를 줄이고 애플리케이션 속도를 높이는 <strong>캐시(Cache)</strong> 용도로 사용된다는 공통점이 있습니다.</p>
+<p>하지만 <strong>&ldquo;단순함과 멀티스레드(Memcached)&rdquo;</strong> 대 **&ldquo;강력한 기능과 유연성(Redis)&rdquo;**이라는 명확한 차이가 있습니다.</p>
+<p>두 기술의 핵심적인 차이를 4가지 관점(데이터 구조, 아키텍처, 영속성, 확장성)에서 정리해 드립니다.</p>
 <hr>
-<h3 id="1-핵심-비유-화물선과-항만-시스템">1. 핵심 비유: 화물선과 항만 시스템</h3>
-<p>이 두 기술의 관계를 <strong>물류 시스템</strong>에 비유하면 아주 명확해집니다.</p>
-<ul>
-<li>
-<p><strong>Docker (컨테이너):</strong> **&lsquo;규격화된 화물 컨테이너 박스&rsquo;**입니다.</p>
-</li>
-<li>
-<p>물건(애플리케이션 코드, 라이브러리 등)을 박스에 담아 포장하는 기술입니다.</p>
-</li>
-<li>
-<p>이 박스만 있으면 어떤 배(서버)나 트럭(노트북)에 실어도 내용물이 안전하게 전달됩니다.</p>
-</li>
-<li>
-<p><strong>Kubernetes (조타수/항만 관리자):</strong> **&lsquo;수천 개의 컨테이너를 관리하는 시스템&rsquo;**입니다.</p>
-</li>
-<li>
-<p>컨테이너가 배에 잘 실렸는지, 배가 흔들려 컨테이너가 떨어지면(에러 발생) 다시 실어주는지, 화물이 많아지면 배를 더 부를지(스케일링)를 결정합니다.</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>한마디로 정리하면:</strong>
-<strong>Docker</strong>는 애플리케이션을 **&lsquo;포장&rsquo;**하고 **&lsquo;실행&rsquo;**하는 역할을 하고,
-<strong>Kubernetes</strong>는 그 포장된 애플리케이션들을 대규모로 **&lsquo;관리&rsquo;**하고 **&lsquo;지휘&rsquo;**하는 역할을 합니다.</p></blockquote>
-<hr>
-<h3 id="2-왜-둘-다-필요할까요-상세-비교">2. 왜 둘 다 필요할까요? (상세 비교)</h3>
-<p>Docker만 있어도 서비스를 배포할 수 있습니다. 하지만 서비스의 규모가 커지면 Docker 하나만으로는 감당하기 어려워집니다.</p>
+<h3 id="1-한눈에-보는-비교-executive-summary">1. 한눈에 보는 비교 (Executive Summary)</h3>
 <table>
   <thead>
       <tr>
-          <th>구분</th>
-          <th><strong>Docker (도커)</strong></th>
-          <th><strong>Kubernetes (쿠버네티스)</strong></th>
+          <th>특징</th>
+          <th><strong>Memcached</strong></th>
+          <th><strong>Redis</strong></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><strong>주요 역할</strong></td>
-          <td><strong>컨테이너화 (Containerization)</strong></td>
-          <td><strong>오케스트레이션 (Orchestration)</strong></td>
+          <td><strong>주요 컨셉</strong></td>
+          <td>고성능, 단순함, 멀티스레드</td>
+          <td>다양한 자료구조, 영속성, 기능 풍부</td>
       </tr>
       <tr>
-          <td><strong>하는 일</strong></td>
-          <td>프로그램을 한 번 만들면(Build) 어디서든 돌아가게(Run) 만듦.</td>
-          <td>여러 개의 컨테이너를 조율하고 관리함.</td>
+          <td><strong>자료 구조</strong></td>
+          <td><strong>String (단순 문자열/바이너리)</strong></td>
+          <td>String, List, Set, Hash, Sorted Set, Geo 등</td>
       </tr>
       <tr>
-          <td><strong>관리 규모</strong></td>
-          <td>보통 서버 1대나 소규모 컨테이너 관리에 적합.</td>
-          <td>수십~수천 대의 서버와 수만 개의 컨테이너 관리에 적합.</td>
+          <td><strong>스레드 모델</strong></td>
+          <td><strong>멀티 스레드 (Multi-threaded)</strong></td>
+          <td><strong>싱글 스레드 (Single-threaded)</strong> (I/O는 멀티 가능)</td>
       </tr>
       <tr>
-          <td><strong>자동화 기능</strong></td>
-          <td>기본적으로 수동 관리가 필요함 (컨테이너가 죽으면 직접 다시 켜야 할 수 있음).</td>
-          <td><strong>자동 복구(Self-healing):</strong> 컨테이너가 죽으면 알아서 다시 살림.<!-- raw HTML omitted --></td>
+          <td><strong>데이터 영속성</strong></td>
+          <td>지원 안 함 (재부팅 시 데이터 소멸)</td>
+          <td><strong>지원 (RDB, AOF)</strong></td>
+      </tr>
+      <tr>
+          <td><strong>확장성(Clustering)</strong></td>
+          <td>클라이언트 측 분산 (Consistent Hashing)</td>
+          <td>서버 측 분산 (Redis Cluster)</td>
+      </tr>
+      <tr>
+          <td><strong>복제(Replication)</strong></td>
+          <td>지원 안 함</td>
+          <td>Master-Slave 복제 지원</td>
+      </tr>
+      <tr>
+          <td><strong>주요 용도</strong></td>
+          <td>단순 캐싱 (세션, HTML 조각)</td>
+          <td>복잡한 캐싱, 리더보드, 대기열, 메시지 브로커</td>
       </tr>
   </tbody>
 </table>
-<p><!-- raw HTML omitted --><strong>자동 확장(Auto-scaling):</strong> 사용자가 몰리면 컨테이너 수를 늘림. |
-| <strong>비유</strong> | 레고 블록 (하나하나의 유닛) | 레고로 만든 거대한 성을 관리하는 관리인 |</p>
-<h3 id="3-함께-사용할-때의-워크플로우">3. 함께 사용할 때의 워크플로우</h3>
-<p>현업에서는 보통 이 두 가지를 다음과 같은 순서로 함께 사용합니다.</p>
-<ol>
-<li><strong>Docker로 만들기:</strong> 개발자가 Docker를 이용해 코드를 &lsquo;이미지(설치 파일)&lsquo;로 만듭니다.</li>
-<li><strong>Docker로 테스트:</strong> 개발자 개인 PC(Docker Desktop 등)에서 잘 돌아가는지 확인합니다.</li>
-<li><strong>Kubernetes에 맡기기:</strong> 테스트가 끝난 이 &lsquo;Docker 이미지&rsquo;를 Kubernetes 클러스터(서버 묶음)에 던져줍니다. &ldquo;이거 3개 띄워주고, 문제 생기면 알아서 재시작해 줘.&rdquo;</li>
-<li><strong>Kubernetes가 운영:</strong> Kubernetes는 Docker(또는 호환되는 런타임)를 이용해 실제 서버들 위에서 컨테이너를 실행하고 상태를 감시합니다.</li>
-</ol>
 <hr>
-<h3 id="4-자주-하는-오해-쿠버네티스가-도커를-버렸다던데">4. 자주 하는 오해: &ldquo;쿠버네티스가 도커를 버렸다던데?&rdquo;</h3>
-<p>뉴스를 보시다가 **&ldquo;Kubernetes가 Docker 지원을 중단했다(Dockershim 제거)&rdquo;**는 소식을 접하고 혼란스러워하시는 분들이 많습니다. 결론부터 말씀드리면 <strong>개발자 입장에서는 크게 달라지는 것이 없습니다.</strong></p>
+<h3 id="2-상세-차이점-분석">2. 상세 차이점 분석</h3>
+<h4 id="-데이터-구조-data-structures">① 데이터 구조 (Data Structures)</h4>
 <ul>
-<li><strong>과거:</strong> Kubernetes가 Docker 프로그램을 직접 사용해서 컨테이너를 돌렸습니다.</li>
-<li><strong>현재:</strong> Kubernetes가 Docker 대신 <code>containerd</code> 같은 더 가볍고 전문적인 실행 도구를 직접 사용합니다.</li>
-<li><strong>하지만:</strong> 여러분은 여전히 <strong>Docker로 이미지를 만들고(Build), Docker 명령어를 사용</strong>할 수 있습니다. Kubernetes는 여전히 Docker로 만든 이미지를 완벽하게 실행할 수 있기 때문입니다.</li>
+<li><strong>Memcached:</strong> 오직 **문자열(String)**만 저장합니다. 리스트나 해시 같은 구조를 저장하려면 JSON 등으로 직렬화(Serialize)해서 문자열로 만든 뒤 저장해야 합니다. 데이터를 수정하려면 전체 데이터를 가져와서 수정한 뒤 다시 덮어써야 하는 단점이 있습니다.</li>
+<li><strong>Redis:</strong> <strong>다양한 자료구조</strong>를 지원합니다. 리스트(List)에 요소를 추가하거나, 해시(Hash)의 특정 필드만 수정하는 등 효율적인 데이터 조작이 가능합니다.</li>
+<li><em>활용 예:</em> &lsquo;실시간 랭킹&rsquo; 구현 시 Redis의 <code>Sorted Set</code>을 쓰면 매우 쉽게 구현 가능합니다.</li>
 </ul>
-<h3 id="요약">요약</h3>
+<h4 id="-스레드-모델-architecture">② 스레드 모델 (Architecture)</h4>
+<p>가장 큰 아키텍처 차이입니다.</p>
 <ul>
-<li><strong>Docker:</strong> 애플리케이션을 <strong>하나의 패키지</strong>로 만드는 도구.</li>
-<li><strong>Kubernetes:</strong> 그 패키지들이 서버 세상에서 <strong>질서 있게 돌아가도록 지휘</strong>하는 도구.</li>
+<li><strong>Memcached (멀티 스레드):</strong> 여러 개의 코어를 동시에 사용하여 트래픽을 처리합니다. 따라서 **Scale-up(서버 사양 높이기)**을 통해 처리량을 쉽게 늘릴 수 있습니다.</li>
+<li><strong>Redis (싱글 스레드 기반):</strong> 실제 명령 처리는 하나의 스레드에서 순차적으로 실행됩니다. (이벤트 루프 방식).</li>
+<li><em>주의점:</em> Redis는 한 번에 하나의 명령만 처리하므로, 처리 시간이 긴 명령(예: <code>KEYS *</code>, 전체 데이터 삭제 등)을 실행하면 그동안 다른 요청들이 대기해야 하는 <strong>Blocking</strong> 현상이 발생할 수 있습니다. (※ Redis 6.0부터 네트워크 I/O는 멀티 스레드로 처리가 가능해졌지만, 명령 실행은 여전히 싱글 스레드입니다.)</li>
+</ul>
+<h4 id="-영속성-persistence">③ 영속성 (Persistence)</h4>
+<ul>
+<li><strong>Memcached:</strong> 메모리에만 데이터를 저장하므로 프로세스가 죽거나 서버가 재부팅되면 <strong>데이터가 모두 사라집니다.</strong> 캐시 용도로만 적합합니다.</li>
+<li><strong>Redis:</strong> 데이터를 디스크에 저장하여 복구할 수 있는 옵션을 제공합니다.</li>
+<li><strong>RDB:</strong> 특정 시점의 스냅샷 저장.</li>
+<li><strong>AOF:</strong> 모든 쓰기 작업을 로그로 기록.</li>
+</ul>
+<h4 id="-확장성-scaling">④ 확장성 (Scaling)</h4>
+<ul>
+<li><strong>Memcached:</strong> 서버끼리 서로 통신하지 않습니다. 데이터 분산은 **클라이언트(애플리케이션)**가 어떤 서버에 저장할지 결정합니다(Consistent Hashing). 클러스터 관리가 비교적 단순하지만, 서버 추가/제거 시 캐시 미스(Cache Miss) 관리가 필요합니다.</li>
+<li><strong>Redis:</strong> <strong>Redis Cluster</strong> 기능을 통해 서버끼리 통신하며 데이터를 자동으로 분산(Sharding)하고, 장애 시 자동으로 복구(Failover)하는 기능을 자체적으로 지원합니다.</li>
+</ul>
+<hr>
+<h3 id="3-어떤-것을-선택해야-할까요">3. 어떤 것을 선택해야 할까요?</h3>
+<p>최근의 기술 트렌드는 <strong>Redis를 기본으로 선택</strong>하는 추세입니다. Redis가 Memcached의 기능을 거의 다 포함하면서도 더 많은 기능을 제공하기 때문입니다.</p>
+<p><strong>✅ Redis를 선택하세요</strong></p>
+<ul>
+<li>단순 문자열 외에 <strong>리스트, 셋, 정렬된 셋</strong> 등 복잡한 데이터 처리가 필요할 때.</li>
+<li>**데이터의 영속성(Persistence)**이 필요하거나, 중요 데이터의 백업이 필요할 때.</li>
+<li>여러 대의 서버로 <strong>클러스터링</strong> 및 고가용성(HA) 구성이 필요할 때.</li>
+<li>Pub/Sub(메시지 큐), Geo(위치 정보) 등의 부가 기능이 필요할 때.</li>
+</ul>
+<p><strong>✅ Memcached를 선택하세요</strong></p>
+<ul>
+<li>데이터가 작고 정적이며(HTML 조각, 단순 세션 객체), <strong>극도로 높은 트래픽</strong>이 발생하는 경우.</li>
+<li>복잡한 기능 없이 <strong>가장 단순한 캐시 시스템</strong>이 필요할 때.</li>
+<li>대용량의 멀티 코어 서버 하나에서 최대한의 스레드 성능을 뽑아내야 할 때 (Redis는 코어 1개만 주로 사용하므로, 멀티 코어 활용 면에서는 Memcached가 설정이 더 간단할 수 있습니다).</li>
 </ul>
 </article>
               </div>
@@ -450,13 +453,11 @@ Kubernetes (조타수/항만 관리자): **&lsquo;수천 개의 컨테이너를 
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/memcached_redis/"> Memcached 와 redis 비교</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/30/">코딩 테스트 합격자 되기(자바편) - 30. 간단한 유니온 파인드 알고리즘 구현하기&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/kube_docker/">Kubernetes(쿠버네티스)와 Docker(도커)의 관계&nbsp;</a><div> »</div>
           
         </div>
       </div>

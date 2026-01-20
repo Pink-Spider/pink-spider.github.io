@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">96</span>
+              <span class="Counter">97</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">96</span>
+      <span class="Counter ">97</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,91 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/msa/msa_traceid_spanid/">MSA에서 traceId 와 spanId 란?</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>MSA(Microservices Architecture)에서 <strong>trace ID</strong>와 <strong>span ID</strong>는 **분산 추적(distributed tracing)**에서 사용되는 고유 식별자들이야. 시스템 전체에서 요청의 흐름을 추적할 수 있게 해주는 핵심 개념입니다.</p>
+<hr>
+<h3 id="1-trace-id">1. <strong>Trace ID</strong></h3>
+<ul>
+<li><strong>하나의 전체 요청(Request)을 식별하는 고유한 ID</strong>입니다.</li>
+<li>예: 사용자가 웹에서 어떤 버튼을 클릭해서 API 요청이 들어오고, 그 요청이 여러 개의 마이크로서비스를 거쳐 처리되는 경우, <strong>이 전체 흐름을 하나의 trace로 봅니다</strong>.</li>
+<li>즉, trace ID는 **&ldquo;이 요청이 어디서 시작돼서 어디까지 갔는가&rdquo;**를 나타냄.</li>
+</ul>
+<hr>
+<h3 id="2-span-id">2. <strong>Span ID</strong></h3>
+<ul>
+<li>trace 안에서 **각각의 작업 단위(작은 호출 하나하나)**를 식별하는 ID입니다.</li>
+<li>예: A 서비스가 B 서비스와 C 서비스를 호출하면, A-B, A-C 각각이 별도의 <strong>span</strong>이 되고, 각각에 대한 <strong>span ID</strong>가 있습니다.</li>
+<li>Span은 시작 시간, 종료 시간, 어떤 작업인지 등 세부 정보도 포함됩니다.</li>
+</ul>
+<hr>
+<h3 id="구조-예시">구조 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">[Trace ID: abc123]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   ┌─────────────┐       ┌─────────────┐
+</span></span><span class="line"><span class="cl">   │ User Request│──────▶│ API Gateway │───┐
+</span></span><span class="line"><span class="cl">   └─────────────┘       └─────────────┘   │
+</span></span><span class="line"><span class="cl">                                           ▼
+</span></span><span class="line"><span class="cl">                                   ┌────────────┐
+</span></span><span class="line"><span class="cl">                                   │ Service A  │───┐
+</span></span><span class="line"><span class="cl">                                   └────────────┘   │
+</span></span><span class="line"><span class="cl">                                                    ▼
+</span></span><span class="line"><span class="cl">                                            ┌────────────┐
+</span></span><span class="line"><span class="cl">                                            │ Service B  │
+</span></span><span class="line"><span class="cl">                                            └────────────┘
+</span></span></code></pre></div><ul>
+<li>전체 요청의 흐름이 하나의 <strong>Trace ID</strong> (<code>abc123</code>)를 공유하고,</li>
+<li>각 서비스 간 호출은 서로 다른 <strong>Span ID</strong>를 가짐.</li>
+</ul>
+<hr>
+<h3 id="요약">요약</h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Trace ID</td>
+          <td>전체 요청 흐름을 추적하기 위한 고유 ID</td>
+      </tr>
+      <tr>
+          <td>Span ID</td>
+          <td>Trace 내에서 개별 작업을 구분하는 ID</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="첨언">첨언</h3>
+<ul>
+<li>실제 MSA 구현시 front end에서 api request시점부터 trace id와 span id가 채번되고</li>
+<li>예를 들어, bff -&gt; api-gateway -&gt; user-service 를 통해 request 가 흘러간다면, 각 서비스는 동일한 trace id로 추적이 되어야 합니다.</li>
+</ul>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 02 Apr 2025 10:50:33 &#43;0900" class="no-wrap"
+                title=" Wed, 02 Apr 2025 10:50:33 &#43;0900">
+                Wed, 02 Apr 2025 10:50:33 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -909,109 +994,6 @@
               <relative-time datetime=" Mon, 31 Mar 2025 12:48:01 &#43;0900" class="no-wrap"
                 title=" Mon, 31 Mar 2025 12:48:01 &#43;0900">
                 Mon, 31 Mar 2025 12:48:01 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/msa/pre_flight_cors_config_example/">PreFlightCorsConfig_example</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="preflightcorsconfig-example">PreFlightCorsConfig example</h1>
-<pre tabindex="0"><code>@Configuration
-public class PreFlightCorsConfig {
-
-    private final CorsProperties corsProperties;
-
-    public PreFlightCorsConfig(CorsProperties corsProperties) {
-        this.corsProperties = corsProperties;
-    }
-
-    private static final String ALLOWED_HEADERS = &#34;x-requested-with,authorization, refresh-token,Access-Control-Allow-Origin,Content-Type, credential,X-AUTH-TOKEN,X-CSRF-TOKEN&#34;;
-
-    private static final String ALLOWED_METHODS = &#34;GET, PUT, POST, PATCH, DELETE, OPTIONS&#34;;
-
-    private static final String ALLOWED_CREDENTIALS = &#34;true&#34;;
-
-    // 중요 해당 헤더가 없다면 axios를 통한 프론트에서 확인이 불가능함
-    private static final String EXPOSE_HEADERS = &#34;*,Authorization,Refresh-token,authorization,refresh-token&#34;;
-
-    private static final String MAX_AGE = &#34;3600&#34;;
-
-    @Bean
-    public WebFilter corsFilter() {
-        return (ServerWebExchange ctx, WebFilterChain chain) -&gt; {
-            ServerHttpRequest request = ctx.getRequest();
-            String requestOrigin = request.getHeaders().getOrigin();
-
-            if (CorsUtils.isPreFlightRequest(request)) {
-                ServerHttpResponse response = ctx.getResponse();
-                HttpHeaders headers = response.getHeaders();
-
-                if (requestOrigin != null &amp;&amp; corsProperties.getAllowedOrigins().contains(requestOrigin)) {
-                    headers.add(&#34;Access-Control-Allow-Origin&#34;, requestOrigin);
-                }
-
-                headers.add(&#34;Access-Control-Allow-Methods&#34;, ALLOWED_METHODS);
-                headers.add(&#34;Access-Control-Max-Age&#34;, MAX_AGE);
-                headers.add(&#34;Access-Control-Allow-Headers&#34;, ALLOWED_HEADERS);
-                headers.add(&#34;Access-Control-Allow-Credentials&#34;, ALLOWED_CREDENTIALS);
-                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
-
-                // 프론트에서 해당 헤더를 확인할수잇게 허가해줌
-                headers.add(&#34;Access-Control-Expose-Headers&#34;, EXPOSE_HEADERS);
-                if (request.getMethod() == HttpMethod.OPTIONS) {
-                    response.setStatusCode(HttpStatus.OK);
-                    return Mono.empty();
-                }
-            }
-
-            return chain.filter(ctx);
-        };
-    }
-}
-</code></pre><h1 id="corsproperties">CorsProperties</h1>
-<pre tabindex="0"><code>@Component
-@Getter
-@Setter
-@ConfigurationProperties(prefix = &#34;app.cors&#34;)
-public class CorsProperties {
-
-    private List&lt;String&gt; allowedOrigins = new ArrayList&lt;&gt;();
-}
-</code></pre><h1 id="설정">설정</h1>
-<ul>
-<li>dev, prod profile 별로 다르게 설정하는 게 일반적</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-dev.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://localhost:3000&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;http://127.0.0.1:3000&#34;</span><span class="w">
-</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application-prod.yml</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cors</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allowed-origins</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://example.com&#34;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;https://another-domain.com&#34;</span><span class="w">
-</span></span></span></code></pre></div><h1 id="spspring-cloud-starter-gateway-사용시">spspring-cloud-starter-gateway 사용시</h1>
-<p>Spring Cloud Gateway를 사용하고 있다면 <code>PreFlightCorsConfig</code> 같은 별도의 Java Config 없이도 <code>application.yml</code>에 설정만으로 CORS 처리가 가능합니다.**</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 31 Mar 2025 00:49:17 &#43;0900" class="no-wrap"
-                title=" Mon, 31 Mar 2025 00:49:17 &#43;0900">
-                Mon, 31 Mar 2025 00:49:17 &#43;0900
               </relative-time>
             </div>
           </div>
