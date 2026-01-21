@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">97</span>
+              <span class="Counter">98</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">97</span>
+      <span class="Counter ">98</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,46 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/streaming_query/">스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 스트리밍 쿼리(Streaming Query)</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <h2 id="장단점">장단점</h2>
+<p>스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 **스트리밍 쿼리(Streaming Query)**는 대용량 데이터를 처리할 때 메모리 문제를 해결하기 위해 사용하는 매우 중요한 기술입니다.</p>
+<p>일반적으로 데이터를 <code>List&lt;T&gt;</code> 형태로 조회하면 모든 결과가 애플리케이션 메모리(RAM)에 적재되지만, 스트리밍 쿼리는 데이터베이스 커서(Cursor)를 사용하여 <strong>필요한 만큼만 조금씩 가져와 처리</strong>하는 방식입니다.</p>
+<p>요청하신 스트리밍 쿼리의 특징과 장단점을 정리해 드립니다.</p>
+<hr>
+<h3 id="1-스트리밍-쿼리의-주요-특징">1. 스트리밍 쿼리의 주요 특징</h3>
+<p>스트리밍 쿼리는 Java 8의 <code>Stream&lt;T&gt;</code> API를 활용하여 DB 결과를 물 흐르듯 처리합니다.</p>
+<ul>
+<li><strong>커서(Cursor) 기반 동작:</strong> 데이터베이스 내부의 커서를 이동시키며 데이터를 순차적으로 읽어옵니다.</li>
+<li><strong>지연 로딩(Lazy Loading)과 유사:</strong> <code>Stream</code> 객체를 생성한 시점에는 쿼리만 실행되고, 실제 데이터는 <code>stream.forEach()</code>나 <code>next()</code> 등을 호출할 때 가져옵니다.</li>
+<li><strong>트랜잭션 의존성:</strong> 스트림 처리가 끝날 때까지 DB 연결(Connection)을 유지해야 하므로, 반드시 활성화된 트랜잭션 안에서 수행되어야 합니다.</li>
+</ul>
+<hr>
+<h3 id="2-장점-pros">2. 장점 (Pros)</h3>
+<p>대용량 데이터 처리(Batch 작업, 엑셀 다운로드 등)에서 강력한 이점을 가집니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Tue, 20 Jan 2026 21:20:45 &#43;0900" class="no-wrap"
+                title=" Tue, 20 Jan 2026 21:20:45 &#43;0900">
+                Tue, 20 Jan 2026 21:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -892,37 +932,6 @@ git push -f origin main
               <relative-time datetime=" Mon, 08 Dec 2025 08:49:54 &#43;0900" class="no-wrap"
                 title=" Mon, 08 Dec 2025 08:49:54 &#43;0900">
                 Mon, 08 Dec 2025 08:49:54 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/aggregate_bulkhead/">Aggregate 패턴과 Bulkhead 패턴</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>IT 개발에서 <strong>Aggregate 패턴</strong>과 <strong>Bulkhead 패턴</strong>은 모두 **마이크로서비스 아키텍처(MSA)**나 <strong>분산 시스템</strong>에서 자주 사용되는 **설계 패턴(Design Pattern)**입니다. 각각의 목적은 다르지만, 시스템 안정성과 응답 효율을 높이기 위한 공통 목표를 가집니다. 아래에서 자세히 설명드릴게요.</p>
-<hr>
-<h2 id="-1-aggregate-패턴">🧩 1. Aggregate 패턴</h2>
-<h3 id="-개념">💡 개념</h3>
-<p>Aggregate 패턴은 **도메인 주도 설계(DDD: Domain-Driven Design)**에서 등장하는 개념으로, <strong>데이터의 일관성과 변경 단위를 정의</strong>하기 위한 구조입니다.
-즉, 관련된 엔터티(Entity)와 값 객체(Value Object)를 하나의 **집합(Aggregate)**으로 묶고, 그 집합의 일관성을 책임지는 루트 엔터티를 <strong>Aggregate Root</strong>라고 부릅니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 11 Nov 2025 10:16:50 &#43;0900" class="no-wrap"
-                title=" Tue, 11 Nov 2025 10:16:50 &#43;0900">
-                Tue, 11 Nov 2025 10:16:50 &#43;0900
               </relative-time>
             </div>
           </div>

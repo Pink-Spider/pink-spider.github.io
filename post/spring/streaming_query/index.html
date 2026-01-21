@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 스트리밍 쿼리(Streaming Query) | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="장단점 스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 **스트리밍 쿼리(Streaming Query)**는 대용량 데이터를 처리할 때 메모리 문제를 해결하기 위해 사용하는 매우 중요한 기술입니다.
+일반적으로 데이터를 List&lt;T&gt; 형태로 조회하면 모든 결과가 애플리케이션 메모리(RAM)에 적재되지만, 스트리밍 쿼리는 데이터베이스 커서(Cursor)를 사용하여 필요한 만큼만 조금씩 가져와 처리하는 방식입니다.
+요청하신 스트리밍 쿼리의 특징과 장단점을 정리해 드립니다.
+1. 스트리밍 쿼리의 주요 특징 스트리밍 쿼리는 Java 8의 Stream&lt;T&gt; API를 활용하여 DB 결과를 물 흐르듯 처리합니다.
+커서(Cursor) 기반 동작: 데이터베이스 내부의 커서를 이동시키며 데이터를 순차적으로 읽어옵니다. 지연 로딩(Lazy Loading)과 유사: Stream 객체를 생성한 시점에는 쿼리만 실행되고, 실제 데이터는 stream.forEach()나 next() 등을 호출할 때 가져옵니다. 트랜잭션 의존성: 스트림 처리가 끝날 때까지 DB 연결(Connection)을 유지해야 하므로, 반드시 활성화된 트랜잭션 안에서 수행되어야 합니다. 2. 장점 (Pros) 대용량 데이터 처리(Batch 작업, 엑셀 다운로드 등)에서 강력한 이점을 가집니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/streaming_query/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 스트리밍 쿼리(Streaming Query) - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="장단점 스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 **스트리밍 쿼리(Streaming Query)**는 대용량 데이터를 처리할 때 메모리 문제를 해결하기 위해 사용하는 매우 중요한 기술입니다.
+일반적으로 데이터를 List&lt;T&gt; 형태로 조회하면 모든 결과가 애플리케이션 메모리(RAM)에 적재되지만, 스트리밍 쿼리는 데이터베이스 커서(Cursor)를 사용하여 필요한 만큼만 조금씩 가져와 처리하는 방식입니다.
+요청하신 스트리밍 쿼리의 특징과 장단점을 정리해 드립니다.
+1. 스트리밍 쿼리의 주요 특징 스트리밍 쿼리는 Java 8의 Stream&lt;T&gt; API를 활용하여 DB 결과를 물 흐르듯 처리합니다.
+커서(Cursor) 기반 동작: 데이터베이스 내부의 커서를 이동시키며 데이터를 순차적으로 읽어옵니다. 지연 로딩(Lazy Loading)과 유사: Stream 객체를 생성한 시점에는 쿼리만 실행되고, 실제 데이터는 stream.forEach()나 next() 등을 호출할 때 가져옵니다. 트랜잭션 의존성: 스트림 처리가 끝날 때까지 DB 연결(Connection)을 유지해야 하므로, 반드시 활성화된 트랜잭션 안에서 수행되어야 합니다. 2. 장점 (Pros) 대용량 데이터 처리(Batch 작업, 엑셀 다운로드 등)에서 강력한 이점을 가집니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 스트리밍 쿼리(Streaming Query) - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="장단점 스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 **스트리밍 쿼리(Streaming Query)**는 대용량 데이터를 처리할 때 메모리 문제를 해결하기 위해 사용하는 매우 중요한 기술입니다.
+일반적으로 데이터를 List&lt;T&gt; 형태로 조회하면 모든 결과가 애플리케이션 메모리(RAM)에 적재되지만, 스트리밍 쿼리는 데이터베이스 커서(Cursor)를 사용하여 필요한 만큼만 조금씩 가져와 처리하는 방식입니다.
+요청하신 스트리밍 쿼리의 특징과 장단점을 정리해 드립니다.
+1. 스트리밍 쿼리의 주요 특징 스트리밍 쿼리는 Java 8의 Stream&lt;T&gt; API를 활용하여 DB 결과를 물 흐르듯 처리합니다.
+커서(Cursor) 기반 동작: 데이터베이스 내부의 커서를 이동시키며 데이터를 순차적으로 읽어옵니다. 지연 로딩(Lazy Loading)과 유사: Stream 객체를 생성한 시점에는 쿼리만 실행되고, 실제 데이터는 stream.forEach()나 next() 등을 호출할 때 가져옵니다. 트랜잭션 의존성: 스트림 처리가 끝날 때까지 DB 연결(Connection)을 유지해야 하므로, 반드시 활성화된 트랜잭션 안에서 수행되어야 합니다. 2. 장점 (Pros) 대용량 데이터 처리(Batch 작업, 엑셀 다운로드 등)에서 강력한 이점을 가집니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/streaming_query/" />
+<meta property="og:site_name" content="스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 스트리밍 쿼리(Streaming Query)" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2026-01-20 21:20:45 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/spring/streaming_query/">스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 스트리밍 쿼리(Streaming Query)</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Tue, 20 Jan 2026 21:20:45 &#43;0900"
+                    class="no-wrap">
+                    Tue, 20 Jan 2026 21:20:45 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Wed, 21 Jan 2026 11:42:52 &#43;0900"
+                    class="no-wrap">
+                    Wed, 21 Jan 2026 11:42:52 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      4212 Words
+                    <span class="file-info-divider"></span>
+                                        19 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h2 id="장단점">장단점</h2>
+<p>스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 **스트리밍 쿼리(Streaming Query)**는 대용량 데이터를 처리할 때 메모리 문제를 해결하기 위해 사용하는 매우 중요한 기술입니다.</p>
+<p>일반적으로 데이터를 <code>List&lt;T&gt;</code> 형태로 조회하면 모든 결과가 애플리케이션 메모리(RAM)에 적재되지만, 스트리밍 쿼리는 데이터베이스 커서(Cursor)를 사용하여 <strong>필요한 만큼만 조금씩 가져와 처리</strong>하는 방식입니다.</p>
+<p>요청하신 스트리밍 쿼리의 특징과 장단점을 정리해 드립니다.</p>
+<hr>
+<h3 id="1-스트리밍-쿼리의-주요-특징">1. 스트리밍 쿼리의 주요 특징</h3>
+<p>스트리밍 쿼리는 Java 8의 <code>Stream&lt;T&gt;</code> API를 활용하여 DB 결과를 물 흐르듯 처리합니다.</p>
+<ul>
+<li><strong>커서(Cursor) 기반 동작:</strong> 데이터베이스 내부의 커서를 이동시키며 데이터를 순차적으로 읽어옵니다.</li>
+<li><strong>지연 로딩(Lazy Loading)과 유사:</strong> <code>Stream</code> 객체를 생성한 시점에는 쿼리만 실행되고, 실제 데이터는 <code>stream.forEach()</code>나 <code>next()</code> 등을 호출할 때 가져옵니다.</li>
+<li><strong>트랜잭션 의존성:</strong> 스트림 처리가 끝날 때까지 DB 연결(Connection)을 유지해야 하므로, 반드시 활성화된 트랜잭션 안에서 수행되어야 합니다.</li>
+</ul>
+<hr>
+<h3 id="2-장점-pros">2. 장점 (Pros)</h3>
+<p>대용량 데이터 처리(Batch 작업, 엑셀 다운로드 등)에서 강력한 이점을 가집니다.</p>
+<ol>
+<li><strong>메모리 효율성 (OOM 방지):</strong></li>
+</ol>
+<ul>
+<li>가장 큰 장점입니다. 수백만 건의 데이터를 조회하더라도 전체를 메모리에 올리지 않고, 일정 크기(Fetch Size)만큼만 메모리에 유지하므로 <code>OutOfMemoryError</code>를 예방할 수 있습니다.</li>
+</ul>
+<ol start="2">
+<li><strong>응답 속도 향상 (초기 지연 감소):</strong></li>
+</ol>
+<ul>
+<li>전체 데이터를 로딩할 때까지 기다리지 않고, 첫 번째 데이터가 도착하는 즉시 처리를 시작할 수 있어 처리 시간을 단축할 수 있습니다.</li>
+</ul>
+<ol start="3">
+<li><strong>확장성:</strong></li>
+</ol>
+<ul>
+<li>애플리케이션 서버의 메모리 스펙을 무리하게 늘리지 않아도 대규모 데이터 처리가 가능합니다.</li>
+</ul>
+<hr>
+<h3 id="3-단점-cons">3. 단점 (Cons)</h3>
+<p>모든 상황에 스트리밍이 좋은 것은 아닙니다. 잘못 사용하면 오히려 시스템 장애를 유발할 수 있습니다.</p>
+<ol>
+<li><strong>DB 커넥션 점유 시간 증가:</strong></li>
+</ol>
+<ul>
+<li>스트림 처리가 끝날 때까지 DB 연결을 놓지 않습니다. 만약 애플리케이션 로직(데이터 가공, 외부 API 호출 등)이 느리다면, <strong>DB 커넥션 풀(Connection Pool)이 고갈</strong>되어 다른 요청을 처리하지 못할 수 있습니다.</li>
+</ul>
+<ol start="2">
+<li><strong>트랜잭션 관리의 복잡성:</strong></li>
+</ol>
+<ul>
+<li>반드시 <code>@Transactional(readOnly = true)</code> 환경이 필요하며, 사용 후에는 반드시 자원(Stream)을 닫아주어야 합니다(try-with-resources 권장).</li>
+</ul>
+<ol start="3">
+<li><strong>네트워크 오버헤드 가능성:</strong></li>
+</ol>
+<ul>
+<li>적절한 <code>Fetch Size</code>를 설정하지 않으면(예: 1건씩 가져오기), DB와 애플리케이션 간의 통신 횟수가 폭증하여 오히려 성능이 저하될 수 있습니다.</li>
+</ul>
+<ol start="4">
+<li><strong>타임아웃 위험:</strong></li>
+</ol>
+<ul>
+<li>대용량 처리 시간이 길어지면 트랜잭션 타임아웃이나 DB 세션 타임아웃이 발생할 수 있습니다.</li>
+</ul>
+<hr>
+<h3 id="4-사용-시-주의사항-best-practices">4. 사용 시 주의사항 (Best Practices)</h3>
+<p>성공적인 스트리밍 쿼리 구현을 위해 다음 사항들을 반드시 고려해야 합니다.</p>
+<blockquote>
+<p><strong>💡 핵심 설정: Fetch Size</strong>
+MySQL이나 PostgreSQL 등 DB 드라이버마다 기본 동작이 다릅니다. 단순히 <code>Stream</code>을 반환한다고 스트리밍이 되는 것이 아닙니다.</p></blockquote>
+<ul>
+<li><strong>MySQL:</strong> 기본적으로 드라이버가 모든 데이터를 메모리에 로드해버립니다. 이를 방지하려면 <code>FetchSize</code>를 <code>Integer.MIN_VALUE</code>로 설정하거나, 커스텀 설정을 통해 스트리밍 모드를 강제해야 합니다.</li>
+<li><strong>자원 해제:</strong> Stream은 <code>AutoCloseable</code>을 구현하므로 반드시 <code>try-with-resources</code> 블록을 사용하여 닫아야 합니다.</li>
+</ul>
+<p><strong>코드 예시:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Transactional</span><span class="p">(</span><span class="n">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processLargeData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// try-with-resources로 스트림 자동 종료 보장</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">userStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userRepository</span><span class="p">.</span><span class="na">streamAllByStatus</span><span class="p">(</span><span class="s">&#34;ACTIVE&#34;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">userStream</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">user</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 비즈니스 로직 수행 (가벼운 작업 권장)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">csvWriter</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">user</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 주의: 여기서 엔티티를 수정해도 영속성 컨텍스트 관리에 주의가 필요함</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// (대량 처리 시 entityManager.detach() 등으로 메모리 비우기 필요)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<p>스트리밍 쿼리는 **&ldquo;메모리는 아끼지만, DB 연결 시간은 길게 가져가는 전략&rdquo;**이라고 요약할 수 있습니다.</p>
+<h2 id="리액티브-고려한다면">리액티브 고려한다면&hellip;</h2>
+<p>스프링 부트에서 대용량 데이터를 처리할 때 **리액티브 스택(Spring WebFlux + R2DBC)**은 기존의 블로킹 스트리밍(JPA/JDBC)과는 다른 차원의 접근 방식을 제공합니다.</p>
+<p>결론부터 말씀드리면, **&ldquo;동시 접속자가 많고, 데이터를 클라이언트에게 실시간으로 흘려보내야 하는 경우&rdquo;**에는 리액티브가 압도적으로 유리하지만, **&ldquo;단순한 배치 작업이나 복잡한 비즈니스 로직이 얽힌 경우&rdquo;**에는 학습 곡선과 복잡도 대비 효율이 떨어질 수 있습니다.</p>
+<p>리액티브(WebFlux) 환경에서 대용량 DB Fetch 시의 특징과 장단점을 분석해 드립니다.</p>
+<hr>
+<h3 id="1-리액티브-처리의-핵심-backpressure-배압">1. 리액티브 처리의 핵심: Backpressure (배압)</h3>
+<p>리액티브 스트림의 가장 큰 차별점은 <strong>Backpressure(배압)</strong> 기능입니다.</p>
+<ul>
+<li><strong>기존 방식(Push):</strong> DB가 데이터를 읽는 속도가 애플리케이션이 처리하는 속도보다 빠르면, 애플리케이션 메모리에 데이터가 쌓이다가 <code>OutOfMemory</code>가 발생할 수 있습니다.</li>
+<li><strong>리액티브 방식(Pull):</strong> 애플리케이션(Subscriber)이 자신이 처리할 수 있는 양만큼만 DB(Publisher)에 요청합니다. (&ldquo;지금 10개만 줘, 다 처리하면 또 달라고 할게&rdquo;)</li>
+<li><strong>효과:</strong> 대용량 데이터 조회 시 애플리케이션의 메모리 안정성이 훨씬 뛰어납니다.</li>
+</ul>
+<h3 id="2-블로킹jpa-vs-리액티브r2dbc-비교">2. 블로킹(JPA) vs 리액티브(R2DBC) 비교</h3>
+<p>대용량 처리에 있어 두 방식은 <strong>스레드 모델</strong>과 <strong>데이터 흐름</strong>에서 큰 차이가 있습니다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>특징</th>
+          <th>기존 JPA 스트리밍 (Blocking)</th>
+          <th>리액티브 R2DBC (Non-Blocking)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>스레드 사용</strong></td>
+          <td><strong>Thread-per-Request</strong> (요청당 스레드 하나 점유)</td>
+          <td><strong>Event Loop</strong> (소수의 스레드로 처리)</td>
+      </tr>
+      <tr>
+          <td><strong>데이터 흐름</strong></td>
+          <td><code>List&lt;T&gt;</code> 또는 <code>Stream&lt;T&gt;</code></td>
+          <td><code>Flux&lt;T&gt;</code></td>
+      </tr>
+      <tr>
+          <td><strong>DB 드라이버</strong></td>
+          <td>JDBC (Blocking)</td>
+          <td>R2DBC (Non-Blocking)</td>
+      </tr>
+      <tr>
+          <td><strong>주요 이점</strong></td>
+          <td>구현이 쉽고, 디버깅이 편함</td>
+          <td><strong>적은 리소스로 높은 동시성 처리 가능</strong></td>
+      </tr>
+      <tr>
+          <td><strong>ORM 기능</strong></td>
+          <td>강력함 (JPA Dirty Checking, Lazy Loading)</td>
+          <td><strong>제한적</strong> (JPA의 고급 기능 사용 불가)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="3-리액티브-방식의-장점">3. 리액티브 방식의 장점</h3>
+<ol>
+<li><strong>시스템 리소스 효율 극대화 (Non-Blocking I/O):</strong></li>
+</ol>
+<ul>
+<li>JPA 스트리밍은 데이터를 가져오는 동안 스레드가 대기(Block) 상태가 되지만, 리액티브는 DB I/O를 기다리는 동안 스레드가 다른 요청을 처리합니다.</li>
+<li>따라서 <strong>동시에 수많은 사용자가 대용량 조회를 요청</strong>해도 서버가 뻗지 않고 버틸 수 있습니다.</li>
+</ul>
+<ol start="2">
+<li><strong>Full Streaming (DB → Server → Client):</strong></li>
+</ol>
+<ul>
+<li>DB에서 읽은 데이터를 서버 메모리에 모으지 않고, <strong>즉시 HTTP Response(예: SSE, NDJSON)로 클라이언트에게 흘려보낼 수 있습니다.</strong></li>
+<li>사용자는 전체 로딩을 기다리지 않고 첫 번째 데이터부터 바로 화면에서 볼 수 있습니다.</li>
+</ul>
+<ol start="3">
+<li><strong>메모리 오버플로우 원천 차단:</strong></li>
+</ol>
+<ul>
+<li>Backpressure를 통해 소비 속도에 맞춰 DB 조회를 조절하므로 안정적입니다.</li>
+</ul>
+<h3 id="4-리액티브-방식의-단점-치명적일-수-있음">4. 리액티브 방식의 단점 (치명적일 수 있음)</h3>
+<ol>
+<li><strong>R2DBC는 JPA가 아닙니다:</strong></li>
+</ol>
+<ul>
+<li>JPA의 편리한 기능(영속성 컨텍스트, 지연 로딩, 1차 캐시 등)이 없습니다.</li>
+<li>복잡한 연관 관계(Join) 매핑을 직접 처리해야 하거나 구현 난이도가 높습니다.</li>
+</ul>
+<ol start="2">
+<li><strong>디버깅과 구현의 어려움:</strong></li>
+</ol>
+<ul>
+<li>비동기 로직 특성상 흐름을 추적하기 어렵고, 기존 명령형 프로그래밍 스타일에 익숙하다면 코드를 짜는 것 자체가 고역일 수 있습니다.</li>
+</ul>
+<ol start="3">
+<li><strong>생태계 성숙도:</strong></li>
+</ol>
+<ul>
+<li>JDBC 드라이버만큼 성숙하지 않아 특정 DB의 고급 기능을 지원하지 않거나, 안정성 이슈가 드물게 발생할 수 있습니다.</li>
+</ul>
+<hr>
+<h3 id="5-언제-무엇을-써야-할까요-가이드라인">5. 언제 무엇을 써야 할까요? (가이드라인)</h3>
+<p>상황에 따라 추천하는 기술 스택이 다릅니다.</p>
+<h4 id="a-리액티브webflux--r2dbc를-써야-하는-경우">A. 리액티브(WebFlux + R2DBC)를 써야 하는 경우</h4>
+<ul>
+<li><strong>MSA 게이트웨이 또는 중계 서비스:</strong> 데이터를 가공 없이 빠르게 토스해야 할 때.</li>
+<li><strong>실시간 대시보드/피드:</strong> 수많은 사용자가 동시에 대량의 로그나 이력 데이터를 조회해야 할 때.</li>
+<li><strong>메모리가 매우 적은 컨테이너 환경:</strong> 적은 리소스로 처리량을 높여야 할 때.</li>
+</ul>
+<h4 id="b-기존-jpa-스트리밍을-유지해야-하는-경우">B. 기존 JPA 스트리밍을 유지해야 하는 경우</h4>
+<ul>
+<li><strong>배치(Batch) 애플리케이션:</strong> 밤에 혼자 도는 작업이라면 동시성 처리가 필요 없으므로 JPA가 훨씬 생산성이 높습니다.</li>
+<li><strong>복잡한 비즈니스 로직:</strong> 데이터를 조회해서 계산하고, 상태를 변경하고, 다시 저장하는 복잡한 과정이 있다면 JPA의 영속성 관리가 필수적입니다.</li>
+<li><strong>팀의 숙련도:</strong> 팀원들이 Reactive Streams에 익숙하지 않다면 유지보수 비용이 폭발합니다.</li>
+</ul>
+<hr>
+<h3 id="요약">요약</h3>
+<p>대용량 Fetch 시 리액티브는 **&ldquo;속도 자체를 빠르게 하는 것이 아니라, 동시에 많은 요청을 효율적으로 처리하고 메모리를 보호하는 기술&rdquo;**입니다.</p>
+<h2 id="try-with-resources">try-with-resources</h2>
+<p><code>try-with-resources</code>는 자바 7부터 도입된 문법으로, **&ldquo;사용이 끝난 자원(Stream, File, DB Connection 등)을 자동으로 닫아주는(close) 기능&rdquo;**입니다.</p>
+<p>스프링 부트(JPA)에서 스트리밍 쿼리를 사용할 때 <strong>DB 연결을 안전하게 반환하기 위해</strong> 반드시 사용해야 합니다.</p>
+<p>가장 쉬운 사용법과 예시를 보여드리겠습니다.</p>
+<hr>
+<h3 id="1-기본-문법-구조">1. 기본 문법 구조</h3>
+<p>기존의 <code>try-catch-finally</code>에서 <code>finally</code> 블록에 <code>close()</code>를 넣던 번거로움을 없앴습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// try 옆 괄호 ( ) 안에 자원을 선언합니다.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">자원_타입</span><span class="w"> </span><span class="n">변수명</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">자원_생성</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 여기서 변수를 사용합니다.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 이 블록( { } )이 끝나면 자동으로 변수.close()가 실행됩니다.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 예외 처리</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="2-jpa-스트리밍-쿼리-실전-예제">2. JPA 스트리밍 쿼리 실전 예제</h3>
+<p>JPA에서 <code>Stream&lt;T&gt;</code>을 반환받을 때 가장 전형적인 패턴입니다.</p>
+<p><strong>시나리오:</strong> <code>MemberRepository</code>에서 회원 전체를 스트림으로 가져와서 처리하는 상황</p>
+<h4 id="-repository-stream-메서드-정의">① Repository (Stream 메서드 정의)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">MemberRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Member</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// QueryHint로 FetchSize 설정 (선택사항이지만 대용량 처리 시 권장)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@QueryHints</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@QueryHint</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HINT_FETCH_SIZE</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;1000&#34;</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&#34;select m from Member m&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Member</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">streamAllMembers</span><span class="p">();</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><h4 id="-service-try-with-resources-사용">② Service (try-with-resources 사용)</h4>
+<p>여기가 핵심입니다. <code>Stream</code>을 여는 코드를 <code>try (...)</code> 안에 넣습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@RequiredArgsConstructor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MemberService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MemberRepository</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Transactional</span><span class="p">(</span><span class="n">readOnly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// 1. 스트림은 트랜잭션 안에서만 살아있습니다.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processAllMembers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 2. try ( ) 괄호 안에서 스트림을 엽니다.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">Stream</span><span class="o">&lt;</span><span class="n">Member</span><span class="o">&gt;</span><span class="w"> </span><span class="n">memberStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memberRepository</span><span class="p">.</span><span class="na">streamAllMembers</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 3. 스트림 사용 (데이터가 물 흐르듯 들어옵니다)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">memberStream</span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">member</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;회원 처리: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">member</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="c1">// 여기서 엑셀 쓰기나 비즈니스 로직 수행</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 4. 여기서 자동으로 memberStream.close()가 호출되며 DB 커넥션이 반환됩니다.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 예외가 터져도 close()는 무조건 보장됩니다.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="3-왜-이렇게-해야-하나요">3. 왜 이렇게 해야 하나요?</h3>
+<p>만약 <code>try-with-resources</code>를 쓰지 않고 일반적인 변수처럼 선언해서 쓰면 다음과 같은 끔찍한 일이 벌어집니다.</p>
+<ol>
+<li><strong>DB 커넥션 누수:</strong> 스트림을 다 쓰고 나서 <code>close()</code>를 깜빡하면, 해당 DB 연결(Connection)이 반환되지 않고 계속 점유 상태로 남습니다.</li>
+<li><strong>서버 장애:</strong> 시간이 지나면 커넥션 풀(HikariCP)의 모든 연결이 고갈되어 서버가 멈춥니다(Deadlock).</li>
+</ol>
+<h3 id="4-주의할-점-여기서-끝내야-합니다">4. 주의할 점: &ldquo;여기서 끝내야 합니다&rdquo;</h3>
+<p>스트림을 <strong>Service 계층 밖으로(Controller 등으로) 리턴해버리면 안 됩니다.</strong></p>
+<ul>
+<li><strong>이유:</strong> <code>try</code> 블록을 벗어나는 순간 <code>close()</code>가 실행되어 DB 연결이 끊깁니다. Controller에서 데이터를 읽으려 하면 <code>Session closed</code> 에러가 발생합니다.</li>
+<li><strong>해결:</strong> Service 메서드 안에서(<code>try</code> 블록 안에서) 데이터 가공, 파일 변환 등 모든 처리를 끝내야 합니다.</li>
+</ul>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/memcached_redis/">Memcached 와 redis 비교&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>
