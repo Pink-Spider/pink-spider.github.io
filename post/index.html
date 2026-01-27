@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">98</span>
+              <span class="Counter">99</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">98</span>
+      <span class="Counter ">99</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,43 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/infra/db/normalization_denormalization/">정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>데이터베이스 설계에서 **정규화(Normalization)**와 **반정규화(Denormalization)**는 데이터의 **무결성(Integrity)**과 <strong>성능(Performance)</strong> 사이의 균형을 맞추는 핵심적인 개념입니다.</p>
+<p>이 둘의 관계는 흔히 **&ldquo;데이터 정합성 vs. 읽기 성능&rdquo;**의 트레이드오프(Trade-off)로 요약할 수 있습니다. 각 개념의 특징과 트레이드오프 요소를 상세히 분석해 드리겠습니다.</p>
+<hr>
+<h3 id="1-핵심-트레이드오프-요약">1. 핵심 트레이드오프 요약</h3>
+<p>가장 먼저 이해해야 할 큰 그림은 다음과 같습니다.</p>
+<ul>
+<li><strong>정규화:</strong> 데이터를 쪼개서 <strong>중복을 제거</strong>하고 <strong>무결성</strong>을 지킵니다. (쓰기 성능 향상, 읽기 시 JOIN 비용 발생)</li>
+<li><strong>반정규화:</strong> 성능을 위해 의도적으로 <strong>데이터를 중복</strong>시킵니다. (읽기 성능 향상, 쓰기 시 동기화 비용 발생)</li>
+</ul>
+<hr>
+<h3 id="2-정규화-normalization">2. 정규화 (Normalization)</h3>
+<p>데이터의 중복을 최소화하고, 이상 현상(Anomaly)을 방지하기 위해 테이블을 분리하는 과정입니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 21 Jan 2026 21:20:45 &#43;0900" class="no-wrap"
+                title=" Wed, 21 Jan 2026 21:20:45 &#43;0900">
+                Wed, 21 Jan 2026 21:20:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -896,42 +933,6 @@ git push -f origin main
               <relative-time datetime=" Wed, 17 Dec 2025 11:16:03 &#43;0900" class="no-wrap"
                 title=" Wed, 17 Dec 2025 11:16:03 &#43;0900">
                 Wed, 17 Dec 2025 11:16:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/java/sdkman/">로컬 맥에 여러 jdk를 다루기 위한 툴 - SDKMAN</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>SDKMAN의 핵심은 **&ldquo;설치(Install) -&gt; 전환(Switch) -&gt; 확인(Check)&rdquo;**의 흐름입니다. 가장 자주 쓰는 명령어 위주로 깔끔하게 정리해 드리겠습니다.</p>
-<hr>
-<h3 id="1-설치-가능한-버전-목록-보기-list">1. 설치 가능한 버전 목록 보기 (<code>list</code>)</h3>
-<p>먼저 어떤 버전을 설치할 수 있는지 확인해야 합니다.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sdk list java
-</span></span></code></pre></div><ul>
-<li><strong>화면 조작:</strong> 목록이 길게 나옵니다. <code>Space</code>(다음 페이지), <code>Enter</code>(한 줄 아래), <strong><code>q</code>(나가기)</strong> 키를 기억하세요.</li>
-<li><strong>식별자(Identifier):</strong> 맨 오른쪽 열에 있는 텍스트가 중요합니다. (예: <code>24-open</code>, <code>17.0.10-tem</code> 등) 설치할 때 이 이름을 사용합니다.</li>
-</ul>
-<h3 id="2-버전-설치하기-install">2. 버전 설치하기 (<code>install</code>)</h3>
-<p>원하는 버전의 식별자(Identifier)를 입력하여 설치합니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 08 Dec 2025 08:49:54 &#43;0900" class="no-wrap"
-                title=" Mon, 08 Dec 2025 08:49:54 &#43;0900">
-                Mon, 08 Dec 2025 08:49:54 &#43;0900
               </relative-time>
             </div>
           </div>

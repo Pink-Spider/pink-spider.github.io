@@ -300,7 +300,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">98</span>
+              <span class="Counter">99</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -592,7 +592,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">98</span>
+      <span class="Counter ">99</span>
     </a>
   </nav>
 </div>
@@ -625,6 +625,45 @@
           Recent posts
         </h2>
         <ol class="d-flex flex-wrap list-style-none gutter-condensed mb-4 js-recent-items-reorder-list">
+          
+          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
+            <div
+              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
+              <div class="pinned-item-list-item-content">
+                <div class="d-flex width-full flex-items-center position-relative">
+                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
+                    width="16" height="16">
+                    <path fill-rule="evenodd"
+                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+                    </path>
+                  </svg>
+                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/infra/db/normalization_denormalization/">
+                    <span class="repo" title="정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프">정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프</span>
+                  </a>
+                </div>
+
+
+                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
+                  <p>데이터베이스 설계에서 **정규화(Normalization)**와 **반정규화(Denormalization)**는 데이터의 **무결성(Integrity)**과 <strong>성능(Performance)</strong> 사이의 균형을 맞추는 핵심적인 개념입니다.</p>
+<p>이 둘의 관계는 흔히 **&ldquo;데이터 정합성 vs. 읽기 성능&rdquo;**의 트레이드오프(Trade-off)로 요약할 수 있습니다. 각 개념의 특징과 트레이드오프 요소를 상세히 분석해 드리겠습니다.</p>
+<hr>
+<h3 id="1-핵심-트레이드오프-요약">1. 핵심 트레이드오프 요약</h3>
+<p>가장 먼저 이해해야 할 큰 그림은 다음과 같습니다.</p>
+<ul>
+<li><strong>정규화:</strong> 데이터를 쪼개서 <strong>중복을 제거</strong>하고 <strong>무결성</strong>을 지킵니다. (쓰기 성능 향상, 읽기 시 JOIN 비용 발생)</li>
+<li><strong>반정규화:</strong> 성능을 위해 의도적으로 <strong>데이터를 중복</strong>시킵니다. (읽기 성능 향상, 쓰기 시 동기화 비용 발생)</li>
+</ul>
+<hr>
+<h3 id="2-정규화-normalization">2. 정규화 (Normalization)</h3>
+<p>데이터의 중복을 최소화하고, 이상 현상(Anomaly)을 방지하기 위해 테이블을 분리하는 과정입니다.</p>
+                </div>
+
+                <p class="mb-0 f6 text-gray">
+                  
+                </p>
+              </div>
+            </div>
+          </li>
           
           <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
             <div
@@ -802,84 +841,18 @@
             </div>
           </li>
           
-          <li class="col-12 col-md-6 col-lg-6 mb-3 d-flex flex-content-stretch">
-            <div
-              class="Box pinned-item-list-item d-flex p-3 width-full js-pinned-item-list-item public source reorderable sortable-button-item">
-              <div class="pinned-item-list-item-content">
-                <div class="d-flex width-full flex-items-center position-relative">
-                  <svg class="octicon octicon-repo mr-2 text-gray flex-shrink-0" viewBox="0 0 16 16" version="1.1"
-                    width="16" height="16">
-                    <path fill-rule="evenodd"
-                      d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
-                    </path>
-                  </svg>
-                  <a class="text-bold flex-auto min-width-0" href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/30/">
-                    <span class="repo" title="코딩 테스트 합격자 되기(자바편) - 30. 간단한 유니온 파인드 알고리즘 구현하기">코딩 테스트 합격자 되기(자바편) - 30. 간단한 유니온 파인드 알고리즘 구현하기</span>
-                  </a>
-                </div>
-
-
-                <div name="summary" class="pinned-item-desc text-gray text-small d-block mt-2 mb-3">
-                  <h2 id="답">답</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 30. 간단한 유니온 파인드 알고리즘 구현하기</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Solution30</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">parent</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">findRootNode</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findRootNode</span><span class="p">(</span><span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">union</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">root1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findRootNode</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">root2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findRootNode</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">parent</span><span class="o">[</span><span class="n">root2</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">root1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Boolean</span><span class="o">[]</span><span class="w"> </span><span class="nf">solution</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">operations</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">k</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">parent</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">op</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">operations</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">op</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">union</span><span class="p">(</span><span class="n">op</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">op</span><span class="o">[</span><span class="n">2</span><span class="o">]</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">answer</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">findRootNode</span><span class="p">(</span><span class="n">op</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">findRootNode</span><span class="p">(</span><span class="n">op</span><span class="o">[</span><span class="n">2</span><span class="o">]</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">answer</span><span class="p">.</span><span class="na">toArray</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Boolean</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><p>코드에서 <code>return answer.toArray(new Boolean[0]);</code> 구문은 <strong><code>ArrayList&lt;Boolean&gt;</code> 타입인 <code>answer</code>를 <code>Boolean[]</code> 배열로 변환하여 반환</strong>하는 역할을 합니다.</p>
-                </div>
-
-                <p class="mb-0 f6 text-gray">
-                  
-                </p>
-              </div>
-            </div>
-          </li>
-          
         </ol>
       </div>
     </div>
 
     
     <div class="mt-4 position-relative" id="contributions" data='[
+{
+  "title": "%ec%a0%95%ea%b7%9c%ed%99%94%28Normalization%29%ec%99%80%20%eb%b0%98%ec%a0%95%ea%b7%9c%ed%99%94%28Denormalization%29%20%ec%9d%98%20%ed%8a%b8%eb%a0%88%ec%9d%b4%eb%93%9c%ec%98%a4%ed%94%84",
+  "link": "https://pink-spider.github.io/post/infra/db/normalization_denormalization/",
+  "publishDate": "2026-01-21%2021:20:45"
+},
+
 {
   "title": "%ec%8a%a4%ed%94%84%eb%a7%81%eb%b6%80%ed%8a%b8%28Spring%20Boot%29%ec%99%80%20JPA%28Hibernate%29%20%ed%99%98%ea%b2%bd%ec%97%90%ec%84%9c%20%ec%8a%a4%ed%8a%b8%eb%a6%ac%eb%b0%8d%20%ec%bf%bc%eb%a6%ac%28Streaming%20Query%29",
   "link": "https://pink-spider.github.io/post/spring/streaming_query/",

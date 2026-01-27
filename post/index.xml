@@ -9,6 +9,13 @@
     <lastBuildDate>Wed, 21 Jan 2026 11:42:52 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프</title>
+      <link>https://pink-spider.github.io/post/infra/db/normalization_denormalization/</link>
+      <pubDate>Wed, 21 Jan 2026 21:20:45 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/infra/db/normalization_denormalization/</guid>
+      <description>&lt;p&gt;데이터베이스 설계에서 **정규화(Normalization)**와 **반정규화(Denormalization)**는 데이터의 **무결성(Integrity)**과 &lt;strong&gt;성능(Performance)&lt;/strong&gt; 사이의 균형을 맞추는 핵심적인 개념입니다.&lt;/p&gt;&#xA;&lt;p&gt;이 둘의 관계는 흔히 **&amp;ldquo;데이터 정합성 vs. 읽기 성능&amp;rdquo;**의 트레이드오프(Trade-off)로 요약할 수 있습니다. 각 개념의 특징과 트레이드오프 요소를 상세히 분석해 드리겠습니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;1-핵심-트레이드오프-요약&#34;&gt;1. 핵심 트레이드오프 요약&lt;/h3&gt;&#xA;&lt;p&gt;가장 먼저 이해해야 할 큰 그림은 다음과 같습니다.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;정규화:&lt;/strong&gt; 데이터를 쪼개서 &lt;strong&gt;중복을 제거&lt;/strong&gt;하고 &lt;strong&gt;무결성&lt;/strong&gt;을 지킵니다. (쓰기 성능 향상, 읽기 시 JOIN 비용 발생)&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;반정규화:&lt;/strong&gt; 성능을 위해 의도적으로 &lt;strong&gt;데이터를 중복&lt;/strong&gt;시킵니다. (읽기 성능 향상, 쓰기 시 동기화 비용 발생)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;2-정규화-normalization&#34;&gt;2. 정규화 (Normalization)&lt;/h3&gt;&#xA;&lt;p&gt;데이터의 중복을 최소화하고, 이상 현상(Anomaly)을 방지하기 위해 테이블을 분리하는 과정입니다.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 스트리밍 쿼리(Streaming Query)</title>
       <link>https://pink-spider.github.io/post/spring/streaming_query/</link>
       <pubDate>Tue, 20 Jan 2026 21:20:45 +0900</pubDate>

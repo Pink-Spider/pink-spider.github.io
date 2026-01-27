@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">98</span>
+              <span class="Counter">99</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">98</span>
+      <span class="Counter ">99</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,54 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/servlet_dispatcherservlet/">servlet은 무엇이고 dispatcher servlet은 무엇인가</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Spring에서는 <code>Servlet</code>과 <code>DispatcherServlet</code>이 웹 요청 처리에서 핵심적인 역할을 해요.
+개념을 하나씩 명확히 정리해볼게요.</p>
+<hr>
+<h2 id="-1-servlet이란">🧱 1. <strong>Servlet</strong>이란?</h2>
+<h3 id="-정의">✅ 정의</h3>
+<ul>
+<li><strong>자바 웹에서 가장 기본적인 컴포넌트</strong></li>
+<li>HTTP 요청을 처리하고, HTTP 응답을 반환하는 <strong>자바 클래스</strong></li>
+<li>톰캣(Tomcat) 같은 서블릿 컨테이너에서 실행됨</li>
+</ul>
+<h3 id="-역할">✅ 역할</h3>
+<ul>
+<li>웹 브라우저에서 온 요청을 받아서 처리하고, 응답을 생성함</li>
+<li>예전에는 모든 요청을 직접 Servlet에서 처리했어요.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@WebServlet</span><span class="p">(</span><span class="s">&#34;/hello&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HelloServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doGet</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">getWriter</span><span class="p">().</span><span class="na">write</span><span class="p">(</span><span class="s">&#34;Hello from Servlet!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><blockquote>
+<p>이건 거의 Spring 이전의 <strong>전통적인 웹 방식</strong>이에요.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 26 Mar 2025 08:19:45 &#43;0900" class="no-wrap"
+                title=" Wed, 26 Mar 2025 08:19:45 &#43;0900">
+                Wed, 26 Mar 2025 08:19:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -935,139 +983,6 @@
 <ul>
 <li>
 <p>AES 암호화는 여러 라운드(Round)의 연산을 통해 이루어집니다. 사용되는 키 길이에 따라 라운드 수가 달라집니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 20 Mar 2025 16:18:45 &#43;0900" class="no-wrap"
-                title=" Thu, 20 Mar 2025 16:18:45 &#43;0900">
-                Thu, 20 Mar 2025 16:18:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/aes/aes_key_generate/">AES key Generator</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="java에서-aes를-사용하기-위해-key-iv-등-생성하는-코드">Java에서 AES를 사용하기 위해 key, iv 등 생성하는 코드</h1>
-<ul>
-<li>알고리즘은 AES-128, AES-192, AES-256 어떤 걸 사용하느냐에 따라 key, iv자체의 size가 달라질 수 있습니다</li>
-<li>본 글에서는 AES/CBC/PKCS5Padding 256 을 기반으로 했습니다.</li>
-</ul>
-<h3 id="java에서-암복호화에-사용하기-위한-key-iv-는-어떻게-만들까">Java에서 암복호화에 사용하기 위한 key, iv 는 어떻게 만들까?</h3>
-<ul>
-<li>현업에서는 key, iv를 데이터 제공 측과 소비측에서 양쪽에서 key, iv를 공유하는데<!-- raw HTML omitted -->
-key, iv를 만드는 방법도 다양했습니다.</li>
-<li>본 글에서 다양한 케이스를 코드로 처리한 내용을 적어봅니다.</li>
-<li>대체로 key,iv는 base64혹은 hex등으로 encode해서 저장하고, runtime에 decode해서 쓰는 것이 일반적입니다.</li>
-</ul>
-<h4 id="key-만들기-다양한-방법">key 만들기 다양한 방법</h4>
-<ul>
-<li>base64등 encode 없이 그냥 문자열로 만들기</li>
-</ul>
-<pre tabindex="0"><code>    public String generateRandomString() {
-        String CHARACTERS = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+&#34;;
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder(32);
-
-        for (int i = 0; i &lt; 32; i++) {
-            sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
-        }
-
-        return sb.toString();
-    }
-</code></pre><!-- raw HTML omitted -->
-<ul>
-<li>base64는 java.util 을 쓰기도 하고 apache.commons.codec.binary등을 쓸 수 있습니다.</li>
-</ul>
-<pre tabindex="0"><code>    public void keyGenerator() throws NoSuchAlgorithmException {
-        // 1. Secret Key 생성 (AES-256)
-        KeyGenerator keyGenerator = KeyGenerator.getInstance(&#34;AES&#34;);
-        keyGenerator.init(256); // AES-256 사용
-        SecretKey secretKey = keyGenerator.generateKey();
-
-        // 2. IV 생성 (AES CBC 모드에서는 16바이트 IV 필요)
-        byte[] iv = new byte[16];
-        SecureRandom secureRandom = new SecureRandom();
-        secureRandom.nextBytes(iv);
-
-        // 3. Base64로 인코딩하여 출력
-        System.out.println(&#34;Secret Key (Base64): &#34; + Base64.getEncoder().encodeToString(secretKey.getEncoded()));
-        System.out.println(&#34;IV (Base64): &#34; + Base64.getEncoder().encodeToString(iv));
-    }
-</code></pre><!-- raw HTML omitted -->
-<ul>
-<li>base64</li>
-</ul>
-<pre tabindex="0"><code>    public void generateBase64RandomKey() {
-        int AES_KEY_SIZE = 32; //256 bit
-        int IV_SIZE = 16;
-
-        byte[] secretKeyBytes = new byte[AES_KEY_SIZE];
-        byte[] ivBytes = new byte[IV_SIZE];
-
-        new SecureRandom().nextBytes(secretKeyBytes);
-        new SecureRandom().nextBytes(ivBytes);
-
-        log.info(&#34;secretKeyBytes: {}&#34;, Base64.getEncoder().encodeToString(secretKeyBytes));
-        log.info(&#34;ivBytes: {}&#34;, Base64.getEncoder().encodeToString(ivBytes));
-    }
-</code></pre><!-- raw HTML omitted -->
-<ul>
-<li>hex</li>
-</ul>
-<pre tabindex="0"><code>    public void generateHexRandomKey() {
-        int AES_KEY_SIZE = 32; //256 bit
-        int IV_SIZE = 16;
-
-        byte[] secretKeyBytes = new byte[AES_KEY_SIZE];
-        byte[] ivBytes = new byte[IV_SIZE];
-
-        new SecureRandom().nextBytes(secretKeyBytes);
-        new SecureRandom().nextBytes(ivBytes);
-
-        log.info(&#34;secretKeyBytes: {}&#34;, bytesToHex(secretKeyBytes));
-        log.info(&#34;ivBytes: {}&#34;, bytesToHex(ivBytes));
-    }
-</code></pre><!-- raw HTML omitted -->
-<ul>
-<li>32byte(256bit) 랜덤 문자열 만들고, base64 encode 하기</li>
-</ul>
-<pre tabindex="0"><code>    public void generateRandomStringAndGenerateKey() {
-        int size = 32;
-        String CHARACTERS = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()-_=+&#34;;
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder(size);
-
-        for (int i = 0; i &lt; size; i++) {
-            sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
-        }
-
-        String secretKeyBase64 = Base64.getEncoder().encodeToString(sb.toString().getBytes());
-        String ivBase64 = Base64.getEncoder().encodeToString(sb.substring(0,16).getBytes());
-    }
-</code></pre><!-- raw HTML omitted -->
-<ul>
-<li>32byte 문자열을 사용해서 base64 encode 하기</li>
-</ul>
-<pre tabindex="0"><code>    public void generateKeyWithString() {
-        String input = &#34;YOUR 32자리 문자열&#34;;
-        String secretKeyBase64 = Base64.getEncoder().encodeToString(input.getBytes());
-        String ivBase64 = Base64.getEncoder().encodeToString(input.substring(0,16).getBytes());
-        String decoded = new String(Base64.getDecoder().decode(secretKeyBase64));
-    }
-</code></pre>
               </div>
             </div>
 
