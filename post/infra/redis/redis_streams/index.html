@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    Spring Boot 비동기 프로그래밍:Future 패턴 | Pink Spider
+    Redis pub/sub 과 streams | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,25 +27,27 @@
   
   <meta
   name="description"
-  content="Spring Boot(또는 Java)에서 Future 패턴은 비동기 프로그래밍을 위한 핵심 디자인 패턴입니다. 쉽게 말해, **&ldquo;지금 당장 결과를 줄 수는 없지만, 미래의 어느 시점에 작업이 완료되면 결과물을 넘겨주겠다&rdquo;**는 약속(Promise)과 같습니다.
-1. Future 패턴의 핵심 개념 일반적인 동기(Synchronous) 방식에서는 작업이 끝날 때까지 스레드가 아무것도 못 하고 기다려야 합니다(Blocking). 반면, Future 패턴을 사용하면 작업을 별도의 스레드에 맡기고 메인 스레드는 자기 할 일을 계속할 수 있습니다.
-주요 특징 비차단(Non-blocking): 결과가 나올 때까지 기다리지 않고 다른 작업을 수행할 수 있어 효율적입니다. 지연 실행: 결과가 실제로 필요한 시점까지 데이터 계산을 미룰 수 있습니다. 결합성: 여러 비동기 작업의 결과를 합치거나, 순차적으로 실행하는 흐름을 만들 수 있습니다. 2. Spring Boot에서의 구현 방식 Spring Boot에서는 주로 CompletableFuture와 @Async 어노테이션을 조합하여 이 패턴을 구현합니다.
+  content="Redis를 활용한 메시징 시스템의 두 기능은 모두 &ldquo;데이터를 전달한다&quot;는 목적은 같지만, **철학(Philosophy)**과 데이터 보존 방식에서 결정적인 차이가 있습니다.
+한마디로 요약하자면: **Pub/Sub은 &lsquo;방송&rsquo;**이고, **Streams는 &lsquo;기록이 남는 로그&rsquo;**입니다.
+1. Redis Pub/Sub (Publish/Subscribe) 가장 전통적인 형태의 메시징 모델입니다. 발신자가 메시지를 던지면, 그 순간 연결되어 있는 모든 수신자에게 실시간으로 전달됩니다.
+휘발성 (Fire and Forget): 메시지를 보낸 후 어디에도 저장하지 않습니다. 수신자가 오프라인 상태라면 그 메시지는 영원히 사라집니다. 실시간성: 지연 시간이 거의 없어 실시간 알림이나 채팅에 적합합니다. 팬아웃(Fan-out): 하나의 메시지를 수천 명의 구독자에게 동시에 뿌릴 때 매우 효율적입니다. 2. Redis Streams Kafka와 유사한 기능을 Redis에 구현한 모델입니다. 단순 전달을 넘어 데이터의 &lsquo;이력&rsquo;을 관리합니다.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/spring/future_pattern/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/infra/redis/redis_streams/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Spring Boot 비동기 프로그래밍:Future 패턴 - Pink Spider"
+  content="Redis pub/sub 과 streams - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="Spring Boot(또는 Java)에서 Future 패턴은 비동기 프로그래밍을 위한 핵심 디자인 패턴입니다. 쉽게 말해, **&ldquo;지금 당장 결과를 줄 수는 없지만, 미래의 어느 시점에 작업이 완료되면 결과물을 넘겨주겠다&rdquo;**는 약속(Promise)과 같습니다.
-1. Future 패턴의 핵심 개념 일반적인 동기(Synchronous) 방식에서는 작업이 끝날 때까지 스레드가 아무것도 못 하고 기다려야 합니다(Blocking). 반면, Future 패턴을 사용하면 작업을 별도의 스레드에 맡기고 메인 스레드는 자기 할 일을 계속할 수 있습니다.
-주요 특징 비차단(Non-blocking): 결과가 나올 때까지 기다리지 않고 다른 작업을 수행할 수 있어 효율적입니다. 지연 실행: 결과가 실제로 필요한 시점까지 데이터 계산을 미룰 수 있습니다. 결합성: 여러 비동기 작업의 결과를 합치거나, 순차적으로 실행하는 흐름을 만들 수 있습니다. 2. Spring Boot에서의 구현 방식 Spring Boot에서는 주로 CompletableFuture와 @Async 어노테이션을 조합하여 이 패턴을 구현합니다.
+  content="Redis를 활용한 메시징 시스템의 두 기능은 모두 &ldquo;데이터를 전달한다&quot;는 목적은 같지만, **철학(Philosophy)**과 데이터 보존 방식에서 결정적인 차이가 있습니다.
+한마디로 요약하자면: **Pub/Sub은 &lsquo;방송&rsquo;**이고, **Streams는 &lsquo;기록이 남는 로그&rsquo;**입니다.
+1. Redis Pub/Sub (Publish/Subscribe) 가장 전통적인 형태의 메시징 모델입니다. 발신자가 메시지를 던지면, 그 순간 연결되어 있는 모든 수신자에게 실시간으로 전달됩니다.
+휘발성 (Fire and Forget): 메시지를 보낸 후 어디에도 저장하지 않습니다. 수신자가 오프라인 상태라면 그 메시지는 영원히 사라집니다. 실시간성: 지연 시간이 거의 없어 실시간 알림이나 채팅에 적합합니다. 팬아웃(Fan-out): 하나의 메시지를 수천 명의 구독자에게 동시에 뿌릴 때 매우 효율적입니다. 2. Redis Streams Kafka와 유사한 기능을 Redis에 구현한 모델입니다. 단순 전달을 넘어 데이터의 &lsquo;이력&rsquo;을 관리합니다.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -62,17 +64,18 @@
 />
 <meta
   property="og:title"
-  content="Spring Boot 비동기 프로그래밍:Future 패턴 - Pink Spider"
+  content="Redis pub/sub 과 streams - Pink Spider"
 />
 <meta
   property="og:description"
-  content="Spring Boot(또는 Java)에서 Future 패턴은 비동기 프로그래밍을 위한 핵심 디자인 패턴입니다. 쉽게 말해, **&ldquo;지금 당장 결과를 줄 수는 없지만, 미래의 어느 시점에 작업이 완료되면 결과물을 넘겨주겠다&rdquo;**는 약속(Promise)과 같습니다.
-1. Future 패턴의 핵심 개념 일반적인 동기(Synchronous) 방식에서는 작업이 끝날 때까지 스레드가 아무것도 못 하고 기다려야 합니다(Blocking). 반면, Future 패턴을 사용하면 작업을 별도의 스레드에 맡기고 메인 스레드는 자기 할 일을 계속할 수 있습니다.
-주요 특징 비차단(Non-blocking): 결과가 나올 때까지 기다리지 않고 다른 작업을 수행할 수 있어 효율적입니다. 지연 실행: 결과가 실제로 필요한 시점까지 데이터 계산을 미룰 수 있습니다. 결합성: 여러 비동기 작업의 결과를 합치거나, 순차적으로 실행하는 흐름을 만들 수 있습니다. 2. Spring Boot에서의 구현 방식 Spring Boot에서는 주로 CompletableFuture와 @Async 어노테이션을 조합하여 이 패턴을 구현합니다.
+  content="Redis를 활용한 메시징 시스템의 두 기능은 모두 &ldquo;데이터를 전달한다&quot;는 목적은 같지만, **철학(Philosophy)**과 데이터 보존 방식에서 결정적인 차이가 있습니다.
+한마디로 요약하자면: **Pub/Sub은 &lsquo;방송&rsquo;**이고, **Streams는 &lsquo;기록이 남는 로그&rsquo;**입니다.
+1. Redis Pub/Sub (Publish/Subscribe) 가장 전통적인 형태의 메시징 모델입니다. 발신자가 메시지를 던지면, 그 순간 연결되어 있는 모든 수신자에게 실시간으로 전달됩니다.
+휘발성 (Fire and Forget): 메시지를 보낸 후 어디에도 저장하지 않습니다. 수신자가 오프라인 상태라면 그 메시지는 영원히 사라집니다. 실시간성: 지연 시간이 거의 없어 실시간 알림이나 채팅에 적합합니다. 팬아웃(Fan-out): 하나의 메시지를 수천 명의 구독자에게 동시에 뿌릴 때 매우 효율적입니다. 2. Redis Streams Kafka와 유사한 기능을 Redis에 구현한 모델입니다. 단순 전달을 넘어 데이터의 &lsquo;이력&rsquo;을 관리합니다.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/spring/future_pattern/" />
-<meta property="og:site_name" content="Spring Boot 비동기 프로그래밍:Future 패턴" />
+<meta property="og:url" content="https://pink-spider.github.io/post/infra/redis/redis_streams/" />
+<meta property="og:site_name" content="Redis pub/sub 과 streams" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -80,7 +83,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2026-01-27 11:25:18 &#43;0900 KST" />
+<meta property="article:published_time" content="2026-02-12 11:14:05 &#43;0900 KST" />
 
 
 
@@ -290,18 +293,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/spring/future_pattern/">Spring Boot 비동기 프로그래밍:Future 패턴</a></strong>
+                      href="https://pink-spider.github.io/post/infra/redis/redis_streams/">Redis pub/sub 과 streams</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Tue, 27 Jan 2026 11:25:18 &#43;0900"
+                  Created <relative-time datetime="Thu, 12 Feb 2026 11:14:05 &#43;0900"
                     class="no-wrap">
-                    Tue, 27 Jan 2026 11:25:18 &#43;0900</relative-time>
+                    Thu, 12 Feb 2026 11:14:05 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Tue, 27 Jan 2026 10:57:58 &#43;0900"
+                  Modified <relative-time datetime="Thu, 12 Feb 2026 11:39:20 &#43;0900"
                     class="no-wrap">
-                    Tue, 27 Jan 2026 10:57:58 &#43;0900</relative-time>
+                    Thu, 12 Feb 2026 11:39:20 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -331,9 +334,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      888 Words
+                      1658 Words
                     <span class="file-info-divider"></span>
-                                        4 min
+                                        8 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -344,68 +347,137 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>Spring Boot(또는 Java)에서 <strong>Future 패턴</strong>은 비동기 프로그래밍을 위한 핵심 디자인 패턴입니다. 쉽게 말해, **&ldquo;지금 당장 결과를 줄 수는 없지만, 미래의 어느 시점에 작업이 완료되면 결과물을 넘겨주겠다&rdquo;**는 약속(Promise)과 같습니다.</p>
+                <article class="markdown-body entry-content container-lg"><p>Redis를 활용한 메시징 시스템의 두 기능은 모두 &ldquo;데이터를 전달한다&quot;는 목적은 같지만, **철학(Philosophy)**과 <strong>데이터 보존 방식</strong>에서 결정적인 차이가 있습니다.</p>
+<p>한마디로 요약하자면: **Pub/Sub은 &lsquo;방송&rsquo;**이고, **Streams는 &lsquo;기록이 남는 로그&rsquo;**입니다.</p>
 <hr>
-<h2 id="1-future-패턴의-핵심-개념">1. Future 패턴의 핵심 개념</h2>
-<p>일반적인 <strong>동기(Synchronous)</strong> 방식에서는 작업이 끝날 때까지 스레드가 아무것도 못 하고 기다려야 합니다(Blocking). 반면, <strong>Future 패턴</strong>을 사용하면 작업을 별도의 스레드에 맡기고 메인 스레드는 자기 할 일을 계속할 수 있습니다.</p>
-<h3 id="주요-특징">주요 특징</h3>
+<h2 id="1-redis-pubsub-publishsubscribe">1. Redis Pub/Sub (Publish/Subscribe)</h2>
+<p>가장 전통적인 형태의 메시징 모델입니다. 발신자가 메시지를 던지면, 그 순간 연결되어 있는 모든 수신자에게 실시간으로 전달됩니다.</p>
 <ul>
-<li><strong>비차단(Non-blocking):</strong> 결과가 나올 때까지 기다리지 않고 다른 작업을 수행할 수 있어 효율적입니다.</li>
-<li><strong>지연 실행:</strong> 결과가 실제로 필요한 시점까지 데이터 계산을 미룰 수 있습니다.</li>
-<li><strong>결합성:</strong> 여러 비동기 작업의 결과를 합치거나, 순차적으로 실행하는 흐름을 만들 수 있습니다.</li>
+<li><strong>휘발성 (Fire and Forget):</strong> 메시지를 보낸 후 어디에도 저장하지 않습니다. 수신자가 오프라인 상태라면 그 메시지는 영원히 사라집니다.</li>
+<li><strong>실시간성:</strong> 지연 시간이 거의 없어 실시간 알림이나 채팅에 적합합니다.</li>
+<li><strong>팬아웃(Fan-out):</strong> 하나의 메시지를 수천 명의 구독자에게 동시에 뿌릴 때 매우 효율적입니다.</li>
 </ul>
 <hr>
-<h2 id="2-spring-boot에서의-구현-방식">2. Spring Boot에서의 구현 방식</h2>
-<p>Spring Boot에서는 주로 <code>CompletableFuture</code>와 <code>@Async</code> 어노테이션을 조합하여 이 패턴을 구현합니다.</p>
-<h3 id="-async-어노테이션">① <code>@Async</code> 어노테이션</h3>
-<p>메서드 위에 이 어노테이션을 붙이면, 해당 메서드는 Spring의 <code>TaskExecutor</code>에 의해 별도의 스레드에서 실행됩니다.</p>
-<h3 id="-completablefuturet">② <code>CompletableFuture&lt;T&gt;</code></h3>
-<p>Java 8에서 도입된 <code>Future</code>의 확장판입니다. 단순히 결과를 기다리는 것을 넘어, 작업 완료 후 콜백을 실행하거나 예외 처리를 하는 등 훨씬 강력한 기능을 제공합니다.</p>
-<p><strong>코드 예시:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Service</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Async</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">processOrder</span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 시간이 오래 걸리는 작업 (예: 결제 처리)</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2000</span><span class="p">);</span><span class="w"> 
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="p">.</span><span class="na">completedFuture</span><span class="p">(</span><span class="s">&#34;Order Processed: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">order</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><hr>
-<h2 id="3-future-vs-completablefuture">3. Future vs CompletableFuture</h2>
+<h2 id="2-redis-streams">2. Redis Streams</h2>
+<p>Kafka와 유사한 기능을 Redis에 구현한 모델입니다. 단순 전달을 넘어 데이터의 &lsquo;이력&rsquo;을 관리합니다.</p>
+<ul>
+<li><strong>영속성 (Persistence):</strong> 메시지가 Redis 메모리에 저장됩니다. 소비자가 읽어간 후에도 설정한 기간이나 개수만큼 보관됩니다.</li>
+<li><strong>소비자 그룹 (Consumer Groups):</strong> 여러 대의 서버가 하나의 스트림을 나눠서 처리할 수 있습니다. (메시지 분산 처리)</li>
+<li><strong>오프라인 대응:</strong> 수신자가 잠시 다운되었다가 다시 접속해도, 읽지 않은 시점부터 메시지를 다시 가져올 수 있습니다.</li>
+<li><strong>확인 응답 (ACK):</strong> 소비자가 메시지를 성공적으로 처리했는지 서버에 알리는 메커니즘이 있습니다.</li>
+</ul>
+<hr>
+<h2 id="3-주요-차이점-비교-테이블">3. 주요 차이점 비교 테이블</h2>
 <table>
   <thead>
       <tr>
-          <th>특징</th>
-          <th>Future (기존)</th>
-          <th>CompletableFuture (권장)</th>
+          <th>구분</th>
+          <th>Redis Pub/Sub</th>
+          <th>Redis Streams</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><strong>결과 확인</strong></td>
-          <td><code>get()</code> 호출 시 결과가 나올 때까지 블로킹됨</td>
-          <td>비동기 콜백(<code>thenAccept</code>) 지원</td>
+          <td><strong>데이터 저장</strong></td>
+          <td>없음 (즉시 삭제)</td>
+          <td>있음 (메모리에 보관)</td>
       </tr>
       <tr>
-          <td><strong>예외 처리</strong></td>
-          <td>내부에서 직접 처리해야 함</td>
-          <td><code>exceptionally()</code> 등 전용 메서드 제공</td>
+          <td><strong>메시지 재전송</strong></td>
+          <td>불가능</td>
+          <td>가능 (Offset 기준)</td>
       </tr>
       <tr>
-          <td><strong>작업 조합</strong></td>
-          <td>여러 Future를 묶기 어려움</td>
-          <td><code>thenCombine</code>, <code>allOf</code> 등으로 조합 가능</td>
+          <td><strong>수신 대상</strong></td>
+          <td>연결된 모든 구독자</td>
+          <td>소비자 그룹 내 1명 또는 전체</td>
+      </tr>
+      <tr>
+          <td><strong>주요 용도</strong></td>
+          <td>실시간 채팅, 단순 알림</td>
+          <td>이벤트 소싱, 작업 큐, 데이터 분석</td>
+      </tr>
+      <tr>
+          <td><strong>안정성</strong></td>
+          <td>낮음 (네트워크 끊기면 유실)</td>
+          <td>높음 (ACK 및 재처리 지원)</td>
       </tr>
   </tbody>
 </table>
 <hr>
-<h2 id="4-주의할-점">4. 주의할 점</h2>
+<h2 id="무엇을-선택해야-할까요">무엇을 선택해야 할까요?</h2>
+<ul>
+<li>
+<p><strong>Pub/Sub</strong>을 선택하세요:</p>
+</li>
+<li>
+<p>메시지 유실이 크게 중요하지 않은 실시간 대시보드 업데이트.</p>
+</li>
+<li>
+<p>짧고 빠른 실시간 채팅 서비스.</p>
+</li>
+<li>
+<p>구현이 매우 간단해야 할 때.</p>
+</li>
+<li>
+<p><strong>Streams</strong>를 선택하세요:</p>
+</li>
+<li>
+<p>데이터 유실이 절대 없어야 하는 결제/주문 이벤트 처리.</p>
+</li>
+<li>
+<p>대량의 데이터를 여러 워커(Worker)가 분산해서 처리해야 할 때.</p>
+</li>
+<li>
+<p>서비스가 잠시 멈춰도 재가동 시 과거 데이터를 이어서 처리해야 할 때.</p>
+</li>
+</ul>
+<h1 id="추후-kafka로-전환을-미리-고려한다면">추후 Kafka로 전환을 미리 고려한다면?</h1>
+<p>추후에 <strong>Apache Kafka</strong>로 마이그레이션할 계획이 있으시다면, 고민할 필요 없이 <strong>Redis Streams</strong>를 선택하셔야 합니다.</p>
+<p>Redis Streams 자체가 Kafka의 디자인 철학(Append-only Log, Consumer Group, Offset 관리)을 상당 부분 벤치마킹하여 만들어졌기 때문입니다.</p>
+<hr>
+<h2 id="redis-streams가-kafka로-가는-징검다리인-이유">Redis Streams가 Kafka로 가는 징검다리인 이유</h2>
+<h3 id="1-동일한-아키텍처-구조">1. 동일한 아키텍처 구조</h3>
+<p>Kafka와 Redis Streams는 메시지를 처리하는 방식이 매우 유사합니다. 나중에 코드를 수정할 때 로직의 큰 틀을 유지할 수 있습니다.</p>
+<ul>
+<li><strong>Log-based Storage:</strong> 두 시스템 모두 메시지를 순차적으로 쌓아두는 로그 형태입니다.</li>
+<li><strong>Consumer Groups:</strong> Kafka의 핵심 기능인 &lsquo;소비자 그룹&rsquo; 개념이 Redis Streams에도 그대로 구현되어 있어, 수평 확장(Scaling-out) 로직을 미리 연습할 수 있습니다.</li>
+<li><strong>Offset 관리:</strong> 어디까지 읽었는지 기록하는 <code>ID</code> (Redis)와 <code>Offset</code> (Kafka) 개념이 대응됩니다.</li>
+</ul>
+<h3 id="2-마이그레이션-시나리오-비교">2. 마이그레이션 시나리오 비교</h3>
+<table>
+  <thead>
+      <tr>
+          <th>비교 항목</th>
+          <th>Pub/Sub → Kafka</th>
+          <th><strong>Streams → Kafka</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>코드 변경량</strong></td>
+          <td>로직 전체를 새로 짜야 함</td>
+          <td>인터페이스와 라이브러리 교체 수준</td>
+      </tr>
+      <tr>
+          <td><strong>데이터 성격</strong></td>
+          <td>실시간 방송형 (비저장)</td>
+          <td>로그/이벤트형 (저장)</td>
+      </tr>
+      <tr>
+          <td><strong>장애 대응</strong></td>
+          <td>재처리를 위한 DB 설계 별도 필요</td>
+          <td>이미 구현된 ACK/Retry 로직 활용 가능</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="kafka로-넘어가기-전-주의할-점">Kafka로 넘어가기 전, 주의할 점</h2>
+<p>비록 Streams가 Kafka와 닮았지만, <strong>Redis는 결국 &lsquo;인메모리&rsquo; 기반</strong>이라는 점을 기억해야 합니다.</p>
 <ol>
-<li><strong>Thread Pool 설정:</strong> <code>@Async</code>를 사용할 때는 기본 설정 대신 커스텀 <code>ThreadPoolTaskExecutor</code>를 설정하는 것이 운영 환경에서 안전합니다.</li>
-<li><strong>get()의 함정:</strong> <code>future.get()</code>을 호출하는 순간, 결과가 나올 때까지 현재 스레드는 멈춥니다. 가급적 콜백 방식을 사용하는 것이 좋습니다.</li>
-<li><strong>Self-invocation:</strong> 같은 클래스 내에서 <code>@Async</code> 메서드를 호출하면 프록시 패턴 특성상 비동기로 동작하지 않습니다.</li>
+<li><strong>저장 용량의 한계:</strong> Kafka는 디스크 기반이라 테라바이트 단위의 데이터를 쌓아두지만, Redis는 메모리가 꽉 차면 위험합니다. <code>XADD</code> 시 <code>MAXLEN</code> 옵션을 사용해 데이터 개수를 제한하며 운영하는 것이 좋습니다.</li>
+<li><strong>영속성 전략:</strong> Redis의 AOF(Append Only File) 설정을 강화해야 Kafka 수준의 안정성을 흉내 낼 수 있습니다. (물론 성능은 조금 트레이드오프 됩니다.)</li>
+<li><strong>파티셔닝:</strong> Kafka의 파티션만큼 강력한 분산 처리를 Redis에서 구현하려면 Redis Cluster 환경을 잘 구성해야 합니다.</li>
 </ol>
 </article>
               </div>
@@ -419,13 +491,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/redis/redis_streams/"> Redis pub/sub 과 streams</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/db/normalization_denormalization/">정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/future_pattern/">Spring Boot 비동기 프로그래밍:Future 패턴&nbsp;</a><div> »</div>
           
         </div>
       </div>

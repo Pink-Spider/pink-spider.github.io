@@ -6,8 +6,15 @@
     <description>Recent content on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 27 Jan 2026 10:57:58 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 12 Feb 2026 11:39:20 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis pub/sub 과 streams</title>
+      <link>https://pink-spider.github.io/post/infra/redis/redis_streams/</link>
+      <pubDate>Thu, 12 Feb 2026 11:14:05 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/infra/redis/redis_streams/</guid>
+      <description>&lt;p&gt;Redis를 활용한 메시징 시스템의 두 기능은 모두 &amp;ldquo;데이터를 전달한다&amp;quot;는 목적은 같지만, **철학(Philosophy)**과 &lt;strong&gt;데이터 보존 방식&lt;/strong&gt;에서 결정적인 차이가 있습니다.&lt;/p&gt;&#xA;&lt;p&gt;한마디로 요약하자면: **Pub/Sub은 &amp;lsquo;방송&amp;rsquo;**이고, **Streams는 &amp;lsquo;기록이 남는 로그&amp;rsquo;**입니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-redis-pubsub-publishsubscribe&#34;&gt;1. Redis Pub/Sub (Publish/Subscribe)&lt;/h2&gt;&#xA;&lt;p&gt;가장 전통적인 형태의 메시징 모델입니다. 발신자가 메시지를 던지면, 그 순간 연결되어 있는 모든 수신자에게 실시간으로 전달됩니다.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;휘발성 (Fire and Forget):&lt;/strong&gt; 메시지를 보낸 후 어디에도 저장하지 않습니다. 수신자가 오프라인 상태라면 그 메시지는 영원히 사라집니다.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;실시간성:&lt;/strong&gt; 지연 시간이 거의 없어 실시간 알림이나 채팅에 적합합니다.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;팬아웃(Fan-out):&lt;/strong&gt; 하나의 메시지를 수천 명의 구독자에게 동시에 뿌릴 때 매우 효율적입니다.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;2-redis-streams&#34;&gt;2. Redis Streams&lt;/h2&gt;&#xA;&lt;p&gt;Kafka와 유사한 기능을 Redis에 구현한 모델입니다. 단순 전달을 넘어 데이터의 &amp;lsquo;이력&amp;rsquo;을 관리합니다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Spring Boot 비동기 프로그래밍:Future 패턴</title>
       <link>https://pink-spider.github.io/post/spring/future_pattern/</link>

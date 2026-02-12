@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">100</span>
+              <span class="Counter">101</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">100</span>
+      <span class="Counter ">101</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,46 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/map_to_int/">mapToInt</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p><code>stream().mapToInt()</code>는 Java Stream API에서 사용되는 메서드 중 하나로, <strong>Stream의 요소를 <code>int</code>형 정수로 변환하여 <code>IntStream</code>을 생성</strong>하는 역할을 합니다.</p>
+<h3 id="-사용-목적">💡 사용 목적</h3>
+<p><code>mapToInt()</code>는 주로 <strong>객체 스트림에서 정수값을 추출하고자 할 때</strong> 사용됩니다. 예를 들어, 어떤 객체 리스트에서 특정 필드(예: 나이, 점수 등)를 정수로 뽑아낼 때 유용합니다.</p>
+<hr>
+<h3 id="-기본-구조">📌 기본 구조</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Stream</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">IntStream</span><span class="w"> </span><span class="n">intStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stream</span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">element</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">변환할</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">값</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="-예시">✅ 예시</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&#34;1&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;2&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;3&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">mapToInt</span><span class="p">(</span><span class="n">Integer</span><span class="p">::</span><span class="n">parseInt</span><span class="p">)</span><span class="w">  </span><span class="c1">// String → int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="p">.</span><span class="na">sum</span><span class="p">();</span><span class="w">                       </span><span class="c1">// IntStream 연산 사용</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w"> </span><span class="c1">// 출력: 6</span><span class="w">
+</span></span></span></code></pre></div><p>위 코드에서:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Wed, 23 Apr 2025 13:48:45 &#43;0900" class="no-wrap"
+                title=" Wed, 23 Apr 2025 13:48:45 &#43;0900">
+                Wed, 23 Apr 2025 13:48:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -1114,47 +1154,6 @@ int total = numbers.stream().mapToInt(i-&gt;i).sum();
               <relative-time datetime=" Thu, 17 Apr 2025 18:54:11 &#43;0900" class="no-wrap"
                 title=" Thu, 17 Apr 2025 18:54:11 &#43;0900">
                 Thu, 17 Apr 2025 18:54:11 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/finance/portpolio/">포트폴리오 이론</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>**공분산(Covariance)**은 두 변수 간의 관계를 측정하는 통계적 개념으로, 한 변수의 변화가 다른 변수의 변화와 어떻게 연관되어 있는지를 나타냅니다. 공분산은 변수 간의 <strong>방향성과 크기</strong>를 설명합니다.</p>
-<h3 id="공분산의-정의">공분산의 정의</h3>
-<p>공분산은 두 변수 (X)와 (Y)의 값들이 각각 평균에서 벗어난 정도를 곱한 값의 평균으로 계산됩니다.<br>
-수식으로는 다음과 같습니다:</p>
-<p>[
-\text{Cov}(X, Y) = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})}{n}
-]</p>
-<ul>
-<li>(X_i, Y_i): 각 변수 (X)와 (Y)의 관측값</li>
-<li>(\bar{X}, \bar{Y}): 변수 (X)와 (Y)의 평균값</li>
-<li>(n): 관측값의 개수</li>
-</ul>
-<h3 id="공분산의-특징">공분산의 특징</h3>
-<ol>
-<li>
-<p><strong>양수(Positive):</strong></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Mon, 14 Apr 2025 09:10:45 &#43;0900" class="no-wrap"
-                title=" Mon, 14 Apr 2025 09:10:45 &#43;0900">
-                Mon, 14 Apr 2025 09:10:45 &#43;0900
               </relative-time>
             </div>
           </div>
