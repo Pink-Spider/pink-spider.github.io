@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">99</span>
+              <span class="Counter">100</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">99</span>
+      <span class="Counter ">100</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,104 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/abstract_interface/">abstract class 와 interface</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Java에서 <code>abstract class</code>와 <code>interface</code>는 둘 다 **추상화(abstraction)**를 위한 수단이지만, 설계 목적과 사용 방식에 중요한 차이가 있습니다. 아래에 그 차이점을 정리해 드릴게요.</p>
+<hr>
+<h2 id="-공통점">✅ 공통점</h2>
+<ul>
+<li>둘 다 <strong>인스턴스화할 수 없음</strong></li>
+<li>둘 다 <strong>메서드 시그니처만 선언</strong>하고, 구현은 하위 클래스(또는 구현 클래스)에서 담당</li>
+<li>둘 다 **다형성(polymorphism)**을 위한 수단</li>
+</ul>
+<hr>
+<h2 id="-주요-차이점">🔍 주요 차이점</h2>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th><code>abstract class</code></th>
+          <th><code>interface</code></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>키워드</td>
+          <td><code>abstract class ClassName</code></td>
+          <td><code>interface InterfaceName</code></td>
+      </tr>
+      <tr>
+          <td>다중 상속</td>
+          <td><strong>불가</strong> (단일 상속만 가능)</td>
+          <td><strong>가능</strong> (여러 인터페이스 구현 가능)</td>
+      </tr>
+      <tr>
+          <td>생성자</td>
+          <td>생성자 정의 가능</td>
+          <td>생성자 없음</td>
+      </tr>
+      <tr>
+          <td>필드</td>
+          <td>인스턴스 변수, 정적 변수 가능</td>
+          <td><code>public static final</code> 상수만 선언 가능 (Java 8 이전 기준)</td>
+      </tr>
+      <tr>
+          <td>메서드 구현</td>
+          <td>일부 메서드 구현 가능</td>
+          <td>Java 8부터는 <code>default</code>, <code>static</code> 메서드 구현 가능</td>
+      </tr>
+      <tr>
+          <td>접근 제어자</td>
+          <td>다양한 접근 제어자(<code>private</code>, <code>protected</code>, <code>public</code>) 사용 가능</td>
+          <td>모든 메서드는 기본적으로 <code>public abstract</code> (Java 9 이후 <code>private</code> 메서드도 가능)</td>
+      </tr>
+      <tr>
+          <td>목적</td>
+          <td><strong>&ldquo;IS-A&rdquo; 관계 (상속 기반의 계층화)</strong></td>
+          <td><strong>기능 정의용, 계약 기반 구조 (다형성, 플러그인)</strong></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-java-8-이후-달라진-점">✨ Java 8+ 이후 달라진 점</h2>
+<ul>
+<li>Java 8부터 인터페이스에 <code>default</code> 메서드와 <code>static</code> 메서드 추가 가능
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">interface</span> <span class="nc">Vehicle</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Starting...&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div></li>
+<li>Java 9부터는 <code>private</code> 메서드도 인터페이스 내부에서 선언 가능</li>
+</ul>
+<hr>
+<h2 id="-언제-어떤-걸-써야-할까">✅ 언제 어떤 걸 써야 할까?</h2>
+<ul>
+<li>
+<p><code>abstract class</code>가 적합한 경우:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 24 Apr 2025 21:48:45 &#43;0900" class="no-wrap"
+                title=" Thu, 24 Apr 2025 21:48:45 &#43;0900">
+                Thu, 24 Apr 2025 21:48:45 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -953,131 +1051,6 @@ class Solution {
               <relative-time datetime=" Wed, 23 Apr 2025 13:48:45 &#43;0900" class="no-wrap"
                 title=" Wed, 23 Apr 2025 13:48:45 &#43;0900">
                 Wed, 23 Apr 2025 13:48:45 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/book/coding_test/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%ED%95%A9%EA%B2%A9%EC%9E%90%EB%90%98%EA%B8%B0/2/">코딩 테스트 합격자 되기 정리 #2</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="배열">배열</h1>
-<h2 id="선언">선언</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">0</span><span class="p">};</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">6</span><span class="o">]</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>ArrayList - 저장할 데이터 개수를 정확히 알 수 없다면&hellip;</li>
-</ul>
-<h2 id="차원">차원</h2>
-<ul>
-<li>2차원</li>
-</ul>
-<pre tabindex="0"><code>int[][] arr = { {1,2,3}, {4,5,6}};
-</code></pre><h2 id="arraylist">ArrayList</h2>
-<ul>
-<li>추가</li>
-</ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">list</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">1</span><span class="p">);</span><span class="w">
-</span></span></span></code></pre></div><ul>
-<li>초기화</li>
-</ul>
-<pre tabindex="0"><code>ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;&gt;(list);
-</code></pre><ul>
-<li>접근 - get(index)</li>
-<li>삭제 - remove()</li>
-</ul>
-<hr>
-<ul>
-<li>length 변수</li>
-<li>Arrays.sort()</li>
-<li>toString()</li>
-<li>size()</li>
-<li>isEmpty()</li>
-<li>Collections.sort</li>
-</ul>
-<pre tabindex="0"><code>ArrayList&lt;Integer&gt; list = new ArrayList&lt;&gt;(Arrays.asList(1,2,3,4,5));
-Collections.sort(list); // array는 Arrays.sort()
-</code></pre><ul>
-<li>sort() 사용시 from 인덱스, to 인덱스로 특정범위만 정렬 가능</li>
-</ul>
-<h3 id="arraylist-효율성">ArrayList 효율성</h3>
-<ul>
-<li>시간 복잡도</li>
-</ul>
-<ul>
-<li>접근 O(1)</li>
-<li>맨 뒤 삽입 O(1)</li>
-<li>맨 앞이나 중간. O(N)</li>
-</ul>
-<ul>
-<li>고려할 점
-<ul>
-<li>할당할 수 있는 메모리 - 정수형 1차원 1000만개, 2차원은 3000*3000 정도</li>
-<li>중간에 데이터 삽입이 빈번한 경우 시간 초과할 수 있음.</li>
-</ul>
-</li>
-</ul>
-<h3 id="몸풀기-문제">몸풀기 문제</h3>
-<h4 id="정렬">정렬</h4>
-<ul>
-<li>Arrays.sort() -&gt; Dual-Pivot QuickSort 혹은 Tim-Sort : 성능좋으니까 그냥 쓰자</li>
-</ul>
-<pre tabindex="0"><code>// bubble sort 예
-private static int[] bubbleSort(int[] org) {
-    int[] arr = org.clone();
-    int n = arr.length;
-    for(int i=0; i&lt; n; i++) {
-        for(int j=0; j&lt;n-i-1; j++) {
-            if(arr[j] &gt; arr[j+1]) {
-                int temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
-            }
-        }
-    }
-}
-</code></pre><ul>
-<li>원본을 그대로 두고 싶으면</li>
-</ul>
-<pre tabindex="0"><code>int[] clone = arr.clone();
-</code></pre><h4 id="배열-제어하기">배열 제어하기</h4>
-<ul>
-<li>중복 제거</li>
-</ul>
-<pre tabindex="0"><code>Integer[] result = Arrays.stream(arr).boxed().distinct().toArray(Integer[]::new);
-
-Arrays.sort(result, Collections.reverseOrder()); 
-
-Arrays.stream(result).mapToInt(Integer::intValue).toArray(); // int[]로
-</code></pre><ul>
-<li>가급적 표준 API를 사용해서 시간초과 발생하지 않도록</li>
-</ul>
-<pre tabindex="0"><code>TreeSet&lt;Integer&gt; set = new TreeSet&lt;&gt;(Collections.reverseOrder());
-int[] result = new int[set.size()];
-for(int i = 0; i &lt; result.length; i++) {
-    result[i] = set.pollFirst();
-} 
-// 중복제거 O(N), 정렬 O(NlogN) =&gt; O(NlogN)
-</code></pre>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Tue, 22 Apr 2025 20:48:45 &#43;0900" class="no-wrap"
-                title=" Tue, 22 Apr 2025 20:48:45 &#43;0900">
-                Tue, 22 Apr 2025 20:48:45 &#43;0900
               </relative-time>
             </div>
           </div>

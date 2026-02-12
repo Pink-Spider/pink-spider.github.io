@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/your%20css%20file%20name" />
   
   <title>
-    정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프 | Pink Spider
+    Spring Boot 비동기 프로그래밍:Future 패턴 | Pink Spider
   </title>
   
   <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
@@ -27,27 +27,25 @@
   
   <meta
   name="description"
-  content="데이터베이스 설계에서 **정규화(Normalization)**와 **반정규화(Denormalization)**는 데이터의 **무결성(Integrity)**과 성능(Performance) 사이의 균형을 맞추는 핵심적인 개념입니다.
-이 둘의 관계는 흔히 **&ldquo;데이터 정합성 vs. 읽기 성능&rdquo;**의 트레이드오프(Trade-off)로 요약할 수 있습니다. 각 개념의 특징과 트레이드오프 요소를 상세히 분석해 드리겠습니다.
-1. 핵심 트레이드오프 요약 가장 먼저 이해해야 할 큰 그림은 다음과 같습니다.
-정규화: 데이터를 쪼개서 중복을 제거하고 무결성을 지킵니다. (쓰기 성능 향상, 읽기 시 JOIN 비용 발생) 반정규화: 성능을 위해 의도적으로 데이터를 중복시킵니다. (읽기 성능 향상, 쓰기 시 동기화 비용 발생) 2. 정규화 (Normalization) 데이터의 중복을 최소화하고, 이상 현상(Anomaly)을 방지하기 위해 테이블을 분리하는 과정입니다.
+  content="Spring Boot(또는 Java)에서 Future 패턴은 비동기 프로그래밍을 위한 핵심 디자인 패턴입니다. 쉽게 말해, **&ldquo;지금 당장 결과를 줄 수는 없지만, 미래의 어느 시점에 작업이 완료되면 결과물을 넘겨주겠다&rdquo;**는 약속(Promise)과 같습니다.
+1. Future 패턴의 핵심 개념 일반적인 동기(Synchronous) 방식에서는 작업이 끝날 때까지 스레드가 아무것도 못 하고 기다려야 합니다(Blocking). 반면, Future 패턴을 사용하면 작업을 별도의 스레드에 맡기고 메인 스레드는 자기 할 일을 계속할 수 있습니다.
+주요 특징 비차단(Non-blocking): 결과가 나올 때까지 기다리지 않고 다른 작업을 수행할 수 있어 효율적입니다. 지연 실행: 결과가 실제로 필요한 시점까지 데이터 계산을 미룰 수 있습니다. 결합성: 여러 비동기 작업의 결과를 합치거나, 순차적으로 실행하는 흐름을 만들 수 있습니다. 2. Spring Boot에서의 구현 방식 Spring Boot에서는 주로 CompletableFuture와 @Async 어노테이션을 조합하여 이 패턴을 구현합니다.
 "
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="https://pink-spider.github.io/post/infra/db/normalization_denormalization/" />
+<link rel="canonical" href="https://pink-spider.github.io/post/spring/future_pattern/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프 - Pink Spider"
+  content="Spring Boot 비동기 프로그래밍:Future 패턴 - Pink Spider"
 />
 <meta
   name="twitter:description"
-  content="데이터베이스 설계에서 **정규화(Normalization)**와 **반정규화(Denormalization)**는 데이터의 **무결성(Integrity)**과 성능(Performance) 사이의 균형을 맞추는 핵심적인 개념입니다.
-이 둘의 관계는 흔히 **&ldquo;데이터 정합성 vs. 읽기 성능&rdquo;**의 트레이드오프(Trade-off)로 요약할 수 있습니다. 각 개념의 특징과 트레이드오프 요소를 상세히 분석해 드리겠습니다.
-1. 핵심 트레이드오프 요약 가장 먼저 이해해야 할 큰 그림은 다음과 같습니다.
-정규화: 데이터를 쪼개서 중복을 제거하고 무결성을 지킵니다. (쓰기 성능 향상, 읽기 시 JOIN 비용 발생) 반정규화: 성능을 위해 의도적으로 데이터를 중복시킵니다. (읽기 성능 향상, 쓰기 시 동기화 비용 발생) 2. 정규화 (Normalization) 데이터의 중복을 최소화하고, 이상 현상(Anomaly)을 방지하기 위해 테이블을 분리하는 과정입니다.
+  content="Spring Boot(또는 Java)에서 Future 패턴은 비동기 프로그래밍을 위한 핵심 디자인 패턴입니다. 쉽게 말해, **&ldquo;지금 당장 결과를 줄 수는 없지만, 미래의 어느 시점에 작업이 완료되면 결과물을 넘겨주겠다&rdquo;**는 약속(Promise)과 같습니다.
+1. Future 패턴의 핵심 개념 일반적인 동기(Synchronous) 방식에서는 작업이 끝날 때까지 스레드가 아무것도 못 하고 기다려야 합니다(Blocking). 반면, Future 패턴을 사용하면 작업을 별도의 스레드에 맡기고 메인 스레드는 자기 할 일을 계속할 수 있습니다.
+주요 특징 비차단(Non-blocking): 결과가 나올 때까지 기다리지 않고 다른 작업을 수행할 수 있어 효율적입니다. 지연 실행: 결과가 실제로 필요한 시점까지 데이터 계산을 미룰 수 있습니다. 결합성: 여러 비동기 작업의 결과를 합치거나, 순차적으로 실행하는 흐름을 만들 수 있습니다. 2. Spring Boot에서의 구현 방식 Spring Boot에서는 주로 CompletableFuture와 @Async 어노테이션을 조합하여 이 패턴을 구현합니다.
 "
 />
 <meta name="twitter:site" content="https://pink-spider.github.io/" />
@@ -64,18 +62,17 @@
 />
 <meta
   property="og:title"
-  content="정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프 - Pink Spider"
+  content="Spring Boot 비동기 프로그래밍:Future 패턴 - Pink Spider"
 />
 <meta
   property="og:description"
-  content="데이터베이스 설계에서 **정규화(Normalization)**와 **반정규화(Denormalization)**는 데이터의 **무결성(Integrity)**과 성능(Performance) 사이의 균형을 맞추는 핵심적인 개념입니다.
-이 둘의 관계는 흔히 **&ldquo;데이터 정합성 vs. 읽기 성능&rdquo;**의 트레이드오프(Trade-off)로 요약할 수 있습니다. 각 개념의 특징과 트레이드오프 요소를 상세히 분석해 드리겠습니다.
-1. 핵심 트레이드오프 요약 가장 먼저 이해해야 할 큰 그림은 다음과 같습니다.
-정규화: 데이터를 쪼개서 중복을 제거하고 무결성을 지킵니다. (쓰기 성능 향상, 읽기 시 JOIN 비용 발생) 반정규화: 성능을 위해 의도적으로 데이터를 중복시킵니다. (읽기 성능 향상, 쓰기 시 동기화 비용 발생) 2. 정규화 (Normalization) 데이터의 중복을 최소화하고, 이상 현상(Anomaly)을 방지하기 위해 테이블을 분리하는 과정입니다.
+  content="Spring Boot(또는 Java)에서 Future 패턴은 비동기 프로그래밍을 위한 핵심 디자인 패턴입니다. 쉽게 말해, **&ldquo;지금 당장 결과를 줄 수는 없지만, 미래의 어느 시점에 작업이 완료되면 결과물을 넘겨주겠다&rdquo;**는 약속(Promise)과 같습니다.
+1. Future 패턴의 핵심 개념 일반적인 동기(Synchronous) 방식에서는 작업이 끝날 때까지 스레드가 아무것도 못 하고 기다려야 합니다(Blocking). 반면, Future 패턴을 사용하면 작업을 별도의 스레드에 맡기고 메인 스레드는 자기 할 일을 계속할 수 있습니다.
+주요 특징 비차단(Non-blocking): 결과가 나올 때까지 기다리지 않고 다른 작업을 수행할 수 있어 효율적입니다. 지연 실행: 결과가 실제로 필요한 시점까지 데이터 계산을 미룰 수 있습니다. 결합성: 여러 비동기 작업의 결과를 합치거나, 순차적으로 실행하는 흐름을 만들 수 있습니다. 2. Spring Boot에서의 구현 방식 Spring Boot에서는 주로 CompletableFuture와 @Async 어노테이션을 조합하여 이 패턴을 구현합니다.
 "
 />
-<meta property="og:url" content="https://pink-spider.github.io/post/infra/db/normalization_denormalization/" />
-<meta property="og:site_name" content="정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프" />
+<meta property="og:url" content="https://pink-spider.github.io/post/spring/future_pattern/" />
+<meta property="og:site_name" content="Spring Boot 비동기 프로그래밍:Future 패턴" />
 <meta
   property="og:image"
   content="https://pink-spider.github.io/"
@@ -83,7 +80,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2026-01-21 21:20:45 &#43;0900 KST" />
+<meta property="article:published_time" content="2026-01-27 11:25:18 &#43;0900 KST" />
 
 
 
@@ -293,18 +290,18 @@
                   <span class="author">
                     <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
-                      href="https://pink-spider.github.io/post/infra/db/normalization_denormalization/">정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프</a></strong>
+                      href="https://pink-spider.github.io/post/spring/future_pattern/">Spring Boot 비동기 프로그래밍:Future 패턴</a></strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 21 Jan 2026 21:20:45 &#43;0900"
+                  Created <relative-time datetime="Tue, 27 Jan 2026 11:25:18 &#43;0900"
                     class="no-wrap">
-                    Wed, 21 Jan 2026 21:20:45 &#43;0900</relative-time>
+                    Tue, 27 Jan 2026 11:25:18 &#43;0900</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 21 Jan 2026 11:37:14 &#43;0900"
+                  Modified <relative-time datetime="Tue, 27 Jan 2026 10:57:58 &#43;0900"
                     class="no-wrap">
-                    Wed, 21 Jan 2026 11:37:14 &#43;0900</relative-time>
+                    Tue, 27 Jan 2026 10:57:58 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -334,9 +331,9 @@
                         </div>
                       </div>
                     </details-menu>
-                      1669 Words
+                      888 Words
                     <span class="file-info-divider"></span>
-                                        8 min
+                                        4 min
 
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
@@ -347,145 +344,69 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>데이터베이스 설계에서 **정규화(Normalization)**와 **반정규화(Denormalization)**는 데이터의 **무결성(Integrity)**과 <strong>성능(Performance)</strong> 사이의 균형을 맞추는 핵심적인 개념입니다.</p>
-<p>이 둘의 관계는 흔히 **&ldquo;데이터 정합성 vs. 읽기 성능&rdquo;**의 트레이드오프(Trade-off)로 요약할 수 있습니다. 각 개념의 특징과 트레이드오프 요소를 상세히 분석해 드리겠습니다.</p>
+                <article class="markdown-body entry-content container-lg"><p>Spring Boot(또는 Java)에서 <strong>Future 패턴</strong>은 비동기 프로그래밍을 위한 핵심 디자인 패턴입니다. 쉽게 말해, **&ldquo;지금 당장 결과를 줄 수는 없지만, 미래의 어느 시점에 작업이 완료되면 결과물을 넘겨주겠다&rdquo;**는 약속(Promise)과 같습니다.</p>
 <hr>
-<h3 id="1-핵심-트레이드오프-요약">1. 핵심 트레이드오프 요약</h3>
-<p>가장 먼저 이해해야 할 큰 그림은 다음과 같습니다.</p>
+<h2 id="1-future-패턴의-핵심-개념">1. Future 패턴의 핵심 개념</h2>
+<p>일반적인 <strong>동기(Synchronous)</strong> 방식에서는 작업이 끝날 때까지 스레드가 아무것도 못 하고 기다려야 합니다(Blocking). 반면, <strong>Future 패턴</strong>을 사용하면 작업을 별도의 스레드에 맡기고 메인 스레드는 자기 할 일을 계속할 수 있습니다.</p>
+<h3 id="주요-특징">주요 특징</h3>
 <ul>
-<li><strong>정규화:</strong> 데이터를 쪼개서 <strong>중복을 제거</strong>하고 <strong>무결성</strong>을 지킵니다. (쓰기 성능 향상, 읽기 시 JOIN 비용 발생)</li>
-<li><strong>반정규화:</strong> 성능을 위해 의도적으로 <strong>데이터를 중복</strong>시킵니다. (읽기 성능 향상, 쓰기 시 동기화 비용 발생)</li>
+<li><strong>비차단(Non-blocking):</strong> 결과가 나올 때까지 기다리지 않고 다른 작업을 수행할 수 있어 효율적입니다.</li>
+<li><strong>지연 실행:</strong> 결과가 실제로 필요한 시점까지 데이터 계산을 미룰 수 있습니다.</li>
+<li><strong>결합성:</strong> 여러 비동기 작업의 결과를 합치거나, 순차적으로 실행하는 흐름을 만들 수 있습니다.</li>
 </ul>
 <hr>
-<h3 id="2-정규화-normalization">2. 정규화 (Normalization)</h3>
-<p>데이터의 중복을 최소화하고, 이상 현상(Anomaly)을 방지하기 위해 테이블을 분리하는 과정입니다.</p>
-<ul>
-<li>
-<p><strong>주요 목표:</strong> 데이터 무결성 보장, 저장 공간 효율화.</p>
-</li>
-<li>
-<p><strong>장점:</strong></p>
-</li>
-<li>
-<p><strong>데이터 일관성:</strong> 데이터가 한 곳에만 존재하므로, 수정 시 한 군데만 고치면 됩니다.</p>
-</li>
-<li>
-<p><strong>저장 공간 절약:</strong> 중복 데이터가 제거되어 디스크 공간을 효율적으로 씁니다.</p>
-</li>
-<li>
-<p><strong>이상 현상 방지:</strong> 삽입, 삭제, 갱신 시 발생하는 불일치 문제를 막습니다.</p>
-</li>
-<li>
-<p><strong>단점 (트레이드오프):</strong></p>
-</li>
-<li>
-<p><strong>읽기 성능 저하:</strong> 데이터를 조회할 때 여러 테이블을 <strong>JOIN</strong>해야 하므로 CPU 연산 비용이 증가하고 응답 속도가 느려질 수 있습니다.</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>💡 핵심:</strong> 정규화는 <strong>&ldquo;쓰기(Write/Update)&rdquo;</strong> 작업에 유리하고 데이터 관리를 편하게 해줍니다.</p></blockquote>
-<hr>
-<h3 id="3-반정규화-denormalization">3. 반정규화 (Denormalization)</h3>
-<p>시스템의 성능 향상(주로 조회 속도)을 위해 정규화된 데이터 모델을 의도적으로 통합하거나 중복 데이터를 허용하는 과정입니다.</p>
-<ul>
-<li>
-<p><strong>주요 목표:</strong> 읽기 성능(Read Performance) 최적화.</p>
-</li>
-<li>
-<p><strong>장점:</strong></p>
-</li>
-<li>
-<p><strong>빠른 조회 속도:</strong> JOIN 연산을 줄이거나 없애서 데이터를 즉시 가져올 수 있습니다.</p>
-</li>
-<li>
-<p><strong>쿼리 단순화:</strong> 복잡한 로직 없이 간단한 SELECT 문으로 데이터를 조회할 수 있습니다.</p>
-</li>
-<li>
-<p><strong>단점 (트레이드오프):</strong></p>
-</li>
-<li>
-<p><strong>데이터 무결성 위험:</strong> 데이터가 여러 곳에 중복 저장되므로, 한 곳만 수정되고 다른 곳은 수정되지 않는 <strong>데이터 불일치</strong>가 발생할 수 있습니다.</p>
-</li>
-<li>
-<p><strong>쓰기 성능 저하:</strong> 데이터를 생성/수정할 때 중복된 모든 데이터를 동시에 갱신해야 하므로 쓰기 비용이 증가합니다.</p>
-</li>
-<li>
-<p><strong>저장 공간 증가:</strong> 중복 데이터만큼 더 많은 디스크 공간이 필요합니다.</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>💡 핵심:</strong> 반정규화는 <strong>&ldquo;읽기(Read)&rdquo;</strong> 작업에 유리하지만, 데이터 관리 난이도를 높입니다.</p></blockquote>
-<hr>
-<h3 id="4-한눈에-보는-비교-table">4. 한눈에 보는 비교 (Table)</h3>
+<h2 id="2-spring-boot에서의-구현-방식">2. Spring Boot에서의 구현 방식</h2>
+<p>Spring Boot에서는 주로 <code>CompletableFuture</code>와 <code>@Async</code> 어노테이션을 조합하여 이 패턴을 구현합니다.</p>
+<h3 id="-async-어노테이션">① <code>@Async</code> 어노테이션</h3>
+<p>메서드 위에 이 어노테이션을 붙이면, 해당 메서드는 Spring의 <code>TaskExecutor</code>에 의해 별도의 스레드에서 실행됩니다.</p>
+<h3 id="-completablefuturet">② <code>CompletableFuture&lt;T&gt;</code></h3>
+<p>Java 8에서 도입된 <code>Future</code>의 확장판입니다. 단순히 결과를 기다리는 것을 넘어, 작업 완료 후 콜백을 실행하거나 예외 처리를 하는 등 훨씬 강력한 기능을 제공합니다.</p>
+<p><strong>코드 예시:</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OrderService</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Async</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">processOrder</span><span class="p">(</span><span class="n">Order</span><span class="w"> </span><span class="n">order</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// 시간이 오래 걸리는 작업 (예: 결제 처리)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="n">2000</span><span class="p">);</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">CompletableFuture</span><span class="p">.</span><span class="na">completedFuture</span><span class="p">(</span><span class="s">&#34;Order Processed: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">order</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h2 id="3-future-vs-completablefuture">3. Future vs CompletableFuture</h2>
 <table>
   <thead>
       <tr>
-          <th>비교 항목</th>
-          <th>정규화 (Normalization)</th>
-          <th>반정규화 (Denormalization)</th>
+          <th>특징</th>
+          <th>Future (기존)</th>
+          <th>CompletableFuture (권장)</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td><strong>핵심 가치</strong></td>
-          <td>데이터 정확성, 무결성</td>
-          <td>데이터 조회 속도</td>
+          <td><strong>결과 확인</strong></td>
+          <td><code>get()</code> 호출 시 결과가 나올 때까지 블로킹됨</td>
+          <td>비동기 콜백(<code>thenAccept</code>) 지원</td>
       </tr>
       <tr>
-          <td><strong>데이터 형태</strong></td>
-          <td>테이블이 잘게 쪼개짐 (분산)</td>
-          <td>테이블이 통합됨 (중복)</td>
+          <td><strong>예외 처리</strong></td>
+          <td>내부에서 직접 처리해야 함</td>
+          <td><code>exceptionally()</code> 등 전용 메서드 제공</td>
       </tr>
       <tr>
-          <td><strong>SQL 복잡도</strong></td>
-          <td>높음 (다수의 JOIN 필요)</td>
-          <td>낮음 (단순 조회)</td>
-      </tr>
-      <tr>
-          <td><strong>읽기 속도</strong></td>
-          <td>상대적으로 느림</td>
-          <td><strong>매우 빠름</strong></td>
-      </tr>
-      <tr>
-          <td><strong>쓰기 속도</strong></td>
-          <td><strong>빠름</strong> (한 곳만 수정)</td>
-          <td>느림 (여러 곳 수정 필요)</td>
-      </tr>
-      <tr>
-          <td><strong>저장 공간</strong></td>
-          <td>효율적 (작음)</td>
-          <td>비효율적 (큼)</td>
-      </tr>
-      <tr>
-          <td><strong>유지 보수</strong></td>
-          <td>데이터 구조 변경 시 유연함</td>
-          <td>데이터 동기화 로직 필요</td>
+          <td><strong>작업 조합</strong></td>
+          <td>여러 Future를 묶기 어려움</td>
+          <td><code>thenCombine</code>, <code>allOf</code> 등으로 조합 가능</td>
       </tr>
   </tbody>
 </table>
 <hr>
-<h3 id="5-언제-무엇을-선택해야-할까-전략적-접근">5. 언제 무엇을 선택해야 할까? (전략적 접근)</h3>
-<p>무조건적인 반정규화는 위험합니다. 일반적으로 다음과 같은 순서로 접근하는 것이 정석입니다.</p>
+<h2 id="4-주의할-점">4. 주의할 점</h2>
 <ol>
-<li><strong>기본은 정규화:</strong> 처음 설계 단계에서는 **제3정규형(3NF)**까지 진행하여 데이터의 무결성을 확보합니다.</li>
-<li><strong>성능 이슈 발생:</strong> 서비스 운영 중 특정 조회 쿼리에서 성능 저하가 발생합니다.</li>
-<li><strong>다른 최적화 우선 시도:</strong></li>
+<li><strong>Thread Pool 설정:</strong> <code>@Async</code>를 사용할 때는 기본 설정 대신 커스텀 <code>ThreadPoolTaskExecutor</code>를 설정하는 것이 운영 환경에서 안전합니다.</li>
+<li><strong>get()의 함정:</strong> <code>future.get()</code>을 호출하는 순간, 결과가 나올 때까지 현재 스레드는 멈춥니다. 가급적 콜백 방식을 사용하는 것이 좋습니다.</li>
+<li><strong>Self-invocation:</strong> 같은 클래스 내에서 <code>@Async</code> 메서드를 호출하면 프록시 패턴 특성상 비동기로 동작하지 않습니다.</li>
 </ol>
-<ul>
-<li>인덱스(Index) 튜닝</li>
-<li>쿼리 최적화</li>
-<li>캐싱(Caching) 서버(Redis 등) 도입</li>
-</ul>
-<ol start="4">
-<li><strong>최후의 수단으로 반정규화:</strong> 위 방법으로도 해결되지 않을 때, <strong>조회 빈도가 매우 높고 갱신 빈도가 낮은</strong> 데이터에 한해 부분적으로 반정규화를 수행합니다.</li>
-</ol>
-<p><strong>반정규화가 효과적인 예시:</strong></p>
-<ul>
-<li>쇼핑몰의 &lsquo;주문 내역&rsquo; 테이블에 &lsquo;상품명&rsquo;이나 &lsquo;상품 가격&rsquo;을 중복 저장 (상품 정보가 바뀌어도 과거 주문 내역의 가격은 변하면 안 되기 때문 + 조회 속도 향상).</li>
-<li>게시판의 &lsquo;게시글&rsquo; 테이블에 &lsquo;댓글 수(count)&rsquo; 컬럼 추가 (매번 <code>count(*)</code>를 수행하는 비용 절감).</li>
-</ul>
-<hr>
-<p>데이터 모델링은 정답이 있는 것이 아니라, 비즈니스 요구사항(데이터 정확도가 중요한가, 속도가 중요한가)에 맞춰 최적의 균형점을 찾는 과정입니다.</p>
 </article>
               </div>
 
@@ -498,13 +419,11 @@
       <div class="pagination-nav">
         <div class="pagination-button next-post">
           
-          <div>«&nbsp;</div><a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/future_pattern/"> Spring Boot 비동기 프로그래밍:Future 패턴</a>
-          
         </div>
         
         <div class="pagination-button previous-post">
           
-          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/spring/streaming_query/">스프링부트(Spring Boot)와 JPA(Hibernate) 환경에서 스트리밍 쿼...&nbsp;</a><div> »</div>
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/infra/db/normalization_denormalization/">정규화(Normalization)와 반정규화(Denormalization) 의 트레이드오프&nbsp;</a><div> »</div>
           
         </div>
       </div>
