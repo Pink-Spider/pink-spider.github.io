@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">101</span>
+              <span class="Counter">102</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">101</span>
+      <span class="Counter ">102</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,115 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/basic/vo_dto_comparison/">Vo와 Dto</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>Spring을 포함한 Java 기반 애플리케이션에서 **VO(Value Object)**와 **DTO(Data Transfer Object)**는 개념적으로 비슷해 보일 수 있지만, 그 목적과 사용하는 맥락에서 차이가 있습니다. 아래에 각각을 설명하고 차이를 정리할게요.</p>
+<hr>
+<h3 id="1-vo-value-object"><strong>1. VO (Value Object)</strong></h3>
+<ul>
+<li><strong>의미</strong>: <strong>값 자체를 표현하는 객체</strong>. 값의 동등성을 비교할 때, 객체의 참조가 아니라 <strong>값이 같은지</strong>로 판단합니다.</li>
+<li><strong>특징</strong>:
+<ul>
+<li>**불변(Immutable)**하게 설계하는 것이 일반적입니다.</li>
+<li><code>equals()</code>, <code>hashCode()</code>를 재정의해서 <strong>값이 같으면 동일한 객체로 간주</strong>합니다.</li>
+<li>주로 <strong>도메인 모델</strong>에서 사용되며, 특정 개념(예: 주소, 돈, 이름 등)을 캡슐화합니다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Address</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Address</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">street</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">street</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">street</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// equals, hashCode 반드시 재정의</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="2-dto-data-transfer-object"><strong>2. DTO (Data Transfer Object)</strong></h3>
+<ul>
+<li><strong>의미</strong>: <strong>계층 간 데이터 전달</strong>을 위해 사용하는 객체 (예: Controller → Service → Repository)</li>
+<li><strong>특징</strong>:
+<ul>
+<li><strong>불변일 필요 없음</strong>, Getter/Setter 있음</li>
+<li>단순히 데이터를 <strong>옮기는 목적</strong> (로직이 없어야 함)</li>
+<li>보통 <strong>입력(Request)</strong>, **출력(Response)**용으로 많이 쓰임</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserResponseDto</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 기본 생성자, getter/setter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><hr>
+<h3 id="정리-vo-vs-dto"><strong>정리: VO vs DTO</strong></h3>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>VO (Value Object)</th>
+          <th>DTO (Data Transfer Object)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>목적</td>
+          <td>값 자체를 표현</td>
+          <td>데이터 전달</td>
+      </tr>
+      <tr>
+          <td>불변성</td>
+          <td>보통 불변</td>
+          <td>보통 가변</td>
+      </tr>
+      <tr>
+          <td>사용 위치</td>
+          <td>도메인 모델</td>
+          <td>계층 간 데이터 전달</td>
+      </tr>
+      <tr>
+          <td>equals/hashCode</td>
+          <td>값 기준으로 재정의</td>
+          <td>일반적으로 재정의하지 않음</td>
+      </tr>
+      <tr>
+          <td>로직 포함</td>
+          <td>가능</td>
+          <td>없음 (순수 데이터만)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="사용-예시">사용 예시</h1>
+<p>간단한 Spring 기반 애플리케이션 구조에서 <strong>VO와 DTO의 차이</strong>를 실제 예제 코드입니다.<!-- raw HTML omitted -->
+예시는 “사용자(User) 정보 처리”를 중심으로 구성합니다.</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Sun, 30 Mar 2025 17:14:05 &#43;0900" class="no-wrap"
+                title=" Sun, 30 Mar 2025 17:14:05 &#43;0900">
+                Sun, 30 Mar 2025 17:14:05 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -907,36 +1016,6 @@ Kafka 전송이 실패했을 때 자동으로 재시도를 하고, 최종적으�
               <relative-time datetime=" Wed, 26 Mar 2025 13:30:03 &#43;0900" class="no-wrap"
                 title=" Wed, 26 Mar 2025 13:30:03 &#43;0900">
                 Wed, 26 Mar 2025 13:30:03 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/spring/jpa/lock_unlock/">데이터베이스에서 모든 트랜잭션에 대해 Lock과 Unlock을 사용하는 방법</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <p>데이터베이스에서 모든 트랜잭션에 대해 <strong>Lock</strong>과 <strong>Unlock</strong>을 사용하는 방법은 데이터베이스 및 트랜잭션의 동작 방식에 따라 다릅니다. 일반적으로 <strong>테이블 잠금</strong>, <strong>행 잠금</strong>, <strong>트랜잭션 격리 수준</strong>, <strong>명시적 잠금 해제</strong>를 조합하여 구현할 수 있습니다. Java 환경에서는 JDBC, JPA, QueryDSL 등을 활용해 이를 설정할 수 있습니다.</p>
-<p>아래는 SELECT뿐만 아니라 <strong>INSERT</strong>, <strong>UPDATE</strong>, <strong>DELETE</strong> 등 모든 트랜잭션에서 Lock과 Unlock을 사용하는 방법을 설명합니다.</p>
-<hr>
-<h2 id="1-테이블-잠금-table-lock">1. <strong>테이블 잠금 (Table Lock)</strong></h2>
-<p><strong>테이블 단위로 잠금을 설정</strong>하여 트랜잭션이 완료되기 전까지 다른 트랜잭션의 접근을 막습니다.</p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Wed, 26 Mar 2025 11:33:45 &#43;0900" class="no-wrap"
-                title=" Wed, 26 Mar 2025 11:33:45 &#43;0900">
-                Wed, 26 Mar 2025 11:33:45 &#43;0900
               </relative-time>
             </div>
           </div>

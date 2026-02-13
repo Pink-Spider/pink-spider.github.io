@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 12 Feb 2026 11:39:20 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 13 Feb 2026 11:49:46 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>분산락(distributed lock) deep dive</title>
+      <link>https://pink-spider.github.io/post/distributed_lock/</link>
+      <pubDate>Fri, 13 Feb 2026 11:14:05 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/distributed_lock/</guid>
+      <description>&lt;p&gt;분산 시스템에서 여러 대의 서버가 동일한 자원에 동시에 접근할 때, 데이터의 일관성을 유지하기 위해 사용하는 기술이 바로 **분산락(Distributed Lock)**입니다.&lt;/p&gt;&#xA;&lt;p&gt;단일 서버 환경에서는 &lt;code&gt;synchronized&lt;/code&gt;나 &lt;code&gt;ReentrantLock&lt;/code&gt; 같은 자바 표준 API로 동시성을 제어할 수 있지만, 서버가 여러 대라면 각 서버의 로컬 락은 서로를 알지 못합니다. 이때 모든 서버가 공통으로 바라보는 &lt;strong&gt;외부 저장소&lt;/strong&gt;를 활용해 &amp;ldquo;누가 자원을 선점했는지&amp;quot;를 기록하는 것이 핵심입니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-분산락이-필요한-이유&#34;&gt;1. 분산락이 필요한 이유&lt;/h2&gt;&#xA;&lt;p&gt;동일한 DB 레코드에 대해 여러 인스턴스가 동시에 수정 요청을 보낼 때, **레이스 컨디션(Race Condition)**이 발생하여 데이터가 꼬일 수 있습니다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Redis pub/sub 과 streams</title>
       <link>https://pink-spider.github.io/post/infra/redis/redis_streams/</link>

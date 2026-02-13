@@ -298,7 +298,7 @@
                 </path>
               </svg>
               Posts
-              <span class="Counter">101</span>
+              <span class="Counter">102</span>
             </a>
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
@@ -590,7 +590,7 @@
         </path>
       </svg>
       Posts
-      <span class="Counter ">101</span>
+      <span class="Counter ">102</span>
     </a>
   </nav>
 </div>
@@ -604,6 +604,84 @@
         
       
       <ul>
+        
+        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
+          <div class="col-12 d-inline-block">
+            <div class="d-inline-block mb-1">
+              <h3 class="wb-break-all">
+                <a href="https://pink-spider.github.io/post/spring/ddd/about_ddd/">Feign Timecheck</a>
+              </h3>
+            </div>
+
+            <div>
+              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
+                <p>DDD(Domain-Driven Design, 도메인 주도 설계)는 복잡한 소프트웨어 시스템을 설계할 때 <strong>비즈니스 도메인(업무 영역)</strong> 을 중심에 두고 개발하는 방법론이에요. 에릭 에반스(Eric Evans)의 책 *&ldquo;Domain-Driven Design: Tackling Complexity in the Heart of Software&rdquo;*에서 처음 제안되었고, 특히 <strong>도메인 복잡성이 높은 시스템</strong>에서 강력한 효과를 발휘합니다.</p>
+<hr>
+<h3 id="-ddd란">✅ DDD란?</h3>
+<p>간단히 말해 DDD는:</p>
+<ul>
+<li><strong>비즈니스의 핵심 로직(도메인)</strong> 을 가장 중요한 것으로 보고,</li>
+<li><strong>도메인 전문가와 개발자가 협력</strong>하여,</li>
+<li>소프트웨어 모델을 <strong>업무 용어와 일치</strong>시키고,</li>
+<li>유지보수 가능하고 유연한 설계를 만드는 것을 목표로 해요.</li>
+</ul>
+<hr>
+<h3 id="-ddd의-핵심-개념">✅ DDD의 핵심 개념</h3>
+<table>
+  <thead>
+      <tr>
+          <th>개념</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Entity</strong></td>
+          <td>식별자가 있어 고유하게 구분되는 객체 (ex. <code>Order</code>, <code>User</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Value Object</strong></td>
+          <td>식별자 없이 값 자체로 의미가 있는 객체 (ex. <code>Address</code>, <code>Money</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Aggregate</strong></td>
+          <td>도메인 객체들의 군집. 하나의 루트 엔티티(Aggregate Root)가 존재</td>
+      </tr>
+      <tr>
+          <td><strong>Repository</strong></td>
+          <td>도메인 객체를 저장하고 조회하는 인터페이스 (<code>findById</code>, <code>save</code>)</td>
+      </tr>
+      <tr>
+          <td><strong>Service (도메인 서비스)</strong></td>
+          <td>특정 엔티티에 속하지 않는 비즈니스 로직 담당</td>
+      </tr>
+      <tr>
+          <td><strong>Factory</strong></td>
+          <td>복잡한 객체 생성 로직 담당</td>
+      </tr>
+      <tr>
+          <td><strong>Bounded Context</strong></td>
+          <td>특정 도메인 모델이 적용되는 명확한 경계</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="-spring-boot에서-ddd-코드상-특징">✅ Spring Boot에서 DDD 코드상 특징</h3>
+<p>Spring Boot에서 DDD를 적용하면 다음과 같은 <strong>패키지 구조 및 역할 분리</strong>가 나타납니다:</p>
+              </div>
+            </div>
+
+            <div class="f6 text-gray mt-2">
+              
+
+              Created
+              <relative-time datetime=" Thu, 17 Apr 2025 18:54:11 &#43;0900" class="no-wrap"
+                title=" Thu, 17 Apr 2025 18:54:11 &#43;0900">
+                Thu, 17 Apr 2025 18:54:11 &#43;0900
+              </relative-time>
+            </div>
+          </div>
+        </li>
         
         <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
           <div class="col-12 d-inline-block">
@@ -818,49 +896,6 @@
               <relative-time datetime=" Tue, 08 Apr 2025 17:42:13 &#43;0900" class="no-wrap"
                 title=" Tue, 08 Apr 2025 17:42:13 &#43;0900">
                 Tue, 08 Apr 2025 17:42:13 &#43;0900
-              </relative-time>
-            </div>
-          </div>
-        </li>
-        
-        <li class="col-12 d-flex width-full py-4 border-bottom color-border-secondary public source">
-          <div class="col-12 d-inline-block">
-            <div class="d-inline-block mb-1">
-              <h3 class="wb-break-all">
-                <a href="https://pink-spider.github.io/post/til/basic_theory/restapi/">REST API</a>
-              </h3>
-            </div>
-
-            <div>
-              <div class="col-12 d-inline-block text-gray mb-2 pr-4">
-                <h1 id="rest-api란-무엇이며-restful-하다는-건-어떤-의미인가">Rest API란 무엇이며, RestFul 하다는 건 어떤 의미인가?</h1>
-<p>REST API와 RESTful의 개념은 웹 개발에서 자주 등장하지만, 처음 접하면 헷갈릴 수 있어요. 쉽게 풀어서 설명해볼게요.</p>
-<hr>
-<h3 id="-rest-api란">🔹 REST API란?</h3>
-<p><strong>REST</strong>는 &ldquo;<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer&quot;의 약자예요. 2000년에 로이 필딩(Roy Fielding)이 논문에서 제안한 <strong>웹 아키텍처 스타일</strong> 중 하나죠.</p>
-<p>즉, <strong>REST API</strong>는 이 REST 원칙에 따라 설계된 <strong>웹 API</strong>를 말해요.</p>
-<hr>
-<h3 id="-rest의-핵심-개념">🔹 REST의 핵심 개념</h3>
-<p>REST는 다음의 6가지 제약 조건을 기반으로 해요:</p>
-<ol>
-<li>
-<p><strong>클라이언트-서버 구조</strong></p>
-<ul>
-<li>클라이언트(브라우저, 앱)와 서버는 서로 분리되어 역할을 나눔.</li>
-</ul>
-</li>
-<li>
-<p><strong>무상태성 (Stateless)</strong></p>
-              </div>
-            </div>
-
-            <div class="f6 text-gray mt-2">
-              
-
-              Created
-              <relative-time datetime=" Thu, 03 Apr 2025 18:02:29 &#43;0900" class="no-wrap"
-                title=" Thu, 03 Apr 2025 18:02:29 &#43;0900">
-                Thu, 03 Apr 2025 18:02:29 &#43;0900
               </relative-time>
             </div>
           </div>
