@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    ASD-STE100 완전 정복: 53개 규칙으로 배우는 Simplified Technical English | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="들어가며: 매뉴얼이 오해를 부르면 사고가 난다 기술 문서의 독자는 대부분 영어 원어민이 아니고, 문서를 읽는 순간은 대개 바쁘거나 급한 상황입니다. 정비사가 &ldquo;Check the valve is closed&quot;를 &ldquo;밸브를 닫아라&quot;로 읽을지 &ldquo;닫혀 있는지 확인하라&quot;로 읽을지 헷갈린다면, 그건 문서의 결함입니다.
+항공 업계는 이 문제를 40년 넘게 하나의 표준으로 풀어 왔습니다. 그게 이번 글의 주제인 ASD-STE100 Simplified Technical English(STE) 입니다. 이 글에서는 STE가 무엇인지, 53개 작성 규칙이 각각 무엇을 요구하는지, 그리고 개발자가 실무에서 어떻게 써먹을 수 있는지 정리합니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/asd-ste100-guide/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="ASD-STE100 완전 정복: 53개 규칙으로 배우는 Simplified Technical English - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="들어가며: 매뉴얼이 오해를 부르면 사고가 난다 기술 문서의 독자는 대부분 영어 원어민이 아니고, 문서를 읽는 순간은 대개 바쁘거나 급한 상황입니다. 정비사가 &ldquo;Check the valve is closed&quot;를 &ldquo;밸브를 닫아라&quot;로 읽을지 &ldquo;닫혀 있는지 확인하라&quot;로 읽을지 헷갈린다면, 그건 문서의 결함입니다.
+항공 업계는 이 문제를 40년 넘게 하나의 표준으로 풀어 왔습니다. 그게 이번 글의 주제인 ASD-STE100 Simplified Technical English(STE) 입니다. 이 글에서는 STE가 무엇인지, 53개 작성 규칙이 각각 무엇을 요구하는지, 그리고 개발자가 실무에서 어떻게 써먹을 수 있는지 정리합니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="ASD-STE100 완전 정복: 53개 규칙으로 배우는 Simplified Technical English - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="들어가며: 매뉴얼이 오해를 부르면 사고가 난다 기술 문서의 독자는 대부분 영어 원어민이 아니고, 문서를 읽는 순간은 대개 바쁘거나 급한 상황입니다. 정비사가 &ldquo;Check the valve is closed&quot;를 &ldquo;밸브를 닫아라&quot;로 읽을지 &ldquo;닫혀 있는지 확인하라&quot;로 읽을지 헷갈린다면, 그건 문서의 결함입니다.
+항공 업계는 이 문제를 40년 넘게 하나의 표준으로 풀어 왔습니다. 그게 이번 글의 주제인 ASD-STE100 Simplified Technical English(STE) 입니다. 이 글에서는 STE가 무엇인지, 53개 작성 규칙이 각각 무엇을 요구하는지, 그리고 개발자가 실무에서 어떻게 써먹을 수 있는지 정리합니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/asd-ste100-guide/" />
+<meta property="og:site_name" content="ASD-STE100 완전 정복: 53개 규칙으로 배우는 Simplified Technical English" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2026-10-13 15:49:00 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/asd-ste100-guide/">ASD-STE100 완전 정복: 53개 규칙으로 배우는 Simplified Technical English</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Tue, 13 Oct 2026 15:49:00 &#43;0900"
+                    class="no-wrap">
+                    Tue, 13 Oct 2026 15:49:00 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Tue, 13 Oct 2026 15:49:31 &#43;0900"
+                    class="no-wrap">
+                    Tue, 13 Oct 2026 15:49:31 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      3430 Words
+                    <span class="file-info-divider"></span>
+                                        16 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/asd-ste100">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      ASD-STE100
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/ste">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      STE
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/technical-writing">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      Technical Writing
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/documentation">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      Documentation
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/llm">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      LLM
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h2 id="들어가며-매뉴얼이-오해를-부르면-사고가-난다">들어가며: 매뉴얼이 오해를 부르면 사고가 난다</h2>
+<p>기술 문서의 독자는 대부분 영어 원어민이 아니고, 문서를 읽는 순간은 대개 바쁘거나 급한 상황입니다. 정비사가 &ldquo;Check the valve is closed&quot;를 &ldquo;밸브를 닫아라&quot;로 읽을지 &ldquo;닫혀 있는지 확인하라&quot;로 읽을지 헷갈린다면, 그건 문서의 결함입니다.</p>
+<p>항공 업계는 이 문제를 40년 넘게 하나의 표준으로 풀어 왔습니다. 그게 이번 글의 주제인 <strong>ASD-STE100 Simplified Technical English(STE)</strong> 입니다. 이 글에서는 STE가 무엇인지, 53개 작성 규칙이 각각 무엇을 요구하는지, 그리고 개발자가 실무에서 어떻게 써먹을 수 있는지 정리합니다.</p>
+<h2 id="asd-ste100-한눈에-보기">ASD-STE100 한눈에 보기</h2>
+<p>STE는 기술 문서 전용 <strong>통제 자연어(controlled natural language)</strong> 입니다. 일반 영어의 부분집합이라서 원어민에게도 자연스럽게 읽히지만, 쓸 수 있는 단어와 문법이 엄격히 제한됩니다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>내용</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>시작</td>
+          <td>1970년대 후반, AECMA Simplified English (Issue 1, 1980)</td>
+      </tr>
+      <tr>
+          <td>관리 주체</td>
+          <td>ASD(유럽 항공우주·방산 산업협회) 산하 STEMG</td>
+      </tr>
+      <tr>
+          <td>현행판</td>
+          <td>Issue 9, 2025년 1월 15일 발행</td>
+      </tr>
+      <tr>
+          <td>위상</td>
+          <td>Issue 8(2021)까지 사양, Issue 9부터 국제 표준</td>
+      </tr>
+      <tr>
+          <td>구성</td>
+          <td>9개 섹션 53개 작성 규칙 + 약 900개 승인 단어 사전</td>
+      </tr>
+      <tr>
+          <td>비용</td>
+          <td>Issue 6(2013)부터 무료, 공식 사이트에서 신청</td>
+      </tr>
+  </tbody>
+</table>
+<p>Issue 9는 새 규칙을 추가하지 않았습니다. 대신 53개 중 31개 규칙의 문구를 다듬었고, 기술 명사·기술 동사 분류를 용어학 표준 ISO 1087-1:2019에 맞췄습니다.</p>
+<h2 id="핵심-원리-한-단어-한-의미-한-품사">핵심 원리: 한 단어, 한 의미, 한 품사</h2>
+<p>53개 규칙을 관통하는 원리는 하나입니다. <strong>각 단어는 정해진 하나의 의미와 하나의 품사로만 쓴다.</strong> 프로그래밍으로 치면 오버로딩을 금지한 강타입 언어에 가깝습니다.</p>
+<p>예를 들어 사전에서 <code>follow</code>는 &ldquo;뒤따르다&quot;라는 의미로만 승인되어 있습니다. 그래서 &ldquo;지시를 따르다&quot;라는 뜻으로 쓰려면 <code>follow</code> 대신 <code>obey</code>를 써야 합니다. 마찬가지로 <code>test</code>가 명사로만 승인되어 있다면 동사로 쓸 수 없습니다.</p>
+<p>사전에 없는 단어는 무조건 금지일까요? 아닙니다. 부품명·도구명 같은 <strong>기술 명사(TN)</strong> 와 가공·작업을 뜻하는 <strong>기술 동사(TV)</strong> 는 해당 분야에서 승인되었다면 쓸 수 있습니다. 즉 STE는 일반 어휘를 통제하고, 도메인 용어는 조직이 관리하도록 열어 둔 구조입니다.</p>
+<h2 id="53개-작성-규칙-전체-정리">53개 작성 규칙 전체 정리</h2>
+<p>아래는 Issue 9의 53개 규칙을 섹션별로 한국어로 요약한 것입니다. 공식 원문이 아닌 해설용 요약이므로, 정확한 문구와 예문은 공식 문서를 확인하세요.</p>
+<h3 id="section-1-단어-14개">Section 1. 단어 (14개)</h3>
+<p>어떤 단어를, 어떤 의미와 품사로 쓸 수 있는지 정하는 섹션입니다. STE의 뼈대가 여기 다 있습니다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>규칙</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1.1</td>
+          <td>사전 승인 단어, 기술 명사(TN), 기술 동사(TV)만 사용한다</td>
+      </tr>
+      <tr>
+          <td>1.2</td>
+          <td>승인 단어는 사전에 지정된 품사로만 쓴다</td>
+      </tr>
+      <tr>
+          <td>1.3</td>
+          <td>승인 단어는 승인된 의미로만 쓴다</td>
+      </tr>
+      <tr>
+          <td>1.4</td>
+          <td>동사와 형용사는 승인된 형태로만 쓴다</td>
+      </tr>
+      <tr>
+          <td>1.5</td>
+          <td>기술 명사 카테고리에 속하는 단어는 쓸 수 있다</td>
+      </tr>
+      <tr>
+          <td>1.6</td>
+          <td>미승인 단어는 기술 명사이거나 그 일부일 때만 쓴다</td>
+      </tr>
+      <tr>
+          <td>1.7</td>
+          <td>기술 명사를 동사로 쓰지 않는다</td>
+      </tr>
+      <tr>
+          <td>1.8</td>
+          <td>회사·업계·분야에서 승인된 기술 명사를 쓴다</td>
+      </tr>
+      <tr>
+          <td>1.9</td>
+          <td>기술 명사를 골라야 하면 짧고 이해하기 쉬운 것을 고른다</td>
+      </tr>
+      <tr>
+          <td>1.10</td>
+          <td>지역어, 속어, 은어를 기술 명사로 쓰지 않는다</td>
+      </tr>
+      <tr>
+          <td>1.11</td>
+          <td>같은 대상에 서로 다른 기술 명사를 쓰지 않는다</td>
+      </tr>
+      <tr>
+          <td>1.12</td>
+          <td>기술 동사 카테고리에 속하는 동사는 쓸 수 있다</td>
+      </tr>
+      <tr>
+          <td>1.13</td>
+          <td>기술 동사를 명사로 쓰지 않는다</td>
+      </tr>
+      <tr>
+          <td>1.14</td>
+          <td>별도 공식 지침이 없으면 미국식 철자를 쓴다</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="section-2-명사구-2개">Section 2. 명사구 (2개)</h3>
+<p>영어 기술 문서의 고질병인 명사 덩어리(noun cluster)를 막는 섹션입니다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>규칙</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2.1</td>
+          <td>복합 명사는 명사 3개 이하로 쓴다</td>
+      </tr>
+      <tr>
+          <td>2.2</td>
+          <td>4단어 이상의 기술 명사는 처음에 전체를 쓰고, 짧은 이름을 붙이거나 하이픈으로 명확히 한다</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="section-3-동사-7개">Section 3. 동사 (7개)</h3>
+<p>시제와 태를 단순하게 제한해 번역과 해석의 갈래를 줄입니다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>규칙</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>3.1</td>
+          <td>사전에 나온 동사 형태만 쓴다</td>
+      </tr>
+      <tr>
+          <td>3.2</td>
+          <td>허용 형태는 원형, 명령형, 단순 현재, 단순 과거, 단순 미래, 형용사로 쓰는 과거분사뿐이다</td>
+      </tr>
+      <tr>
+          <td>3.3</td>
+          <td>과거분사는 형용사로 쓴다</td>
+      </tr>
+      <tr>
+          <td>3.4</td>
+          <td>조동사를 겹쳐 복잡한 동사 구문을 만들지 않는다</td>
+      </tr>
+      <tr>
+          <td>3.5</td>
+          <td>-ing 형태는 기술 명사이거나 그 수식어일 때만 쓴다</td>
+      </tr>
+      <tr>
+          <td>3.6</td>
+          <td>능동태를 쓴다. 서술문에서 수동태는 행위자를 모를 때만 쓴다</td>
+      </tr>
+      <tr>
+          <td>3.7</td>
+          <td>동작은 명사가 아니라 승인된 동사로 표현한다</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="section-4-문장-5개">Section 4. 문장 (5개)</h3>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>규칙</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>4.1</td>
+          <td>짧고 명확한 문장을 쓴다</td>
+      </tr>
+      <tr>
+          <td>4.2</td>
+          <td>문장을 줄이려고 단어를 생략하거나 축약형을 쓰지 않는다</td>
+      </tr>
+      <tr>
+          <td>4.3</td>
+          <td>복잡한 내용은 세로 목록으로 쓴다</td>
+      </tr>
+      <tr>
+          <td>4.4</td>
+          <td>관련 주제의 문장은 연결어로 잇는다</td>
+      </tr>
+      <tr>
+          <td>4.5</td>
+          <td>적용 가능하면 명사 앞에 관사나 지시형용사를 붙인다</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="section-5-절차문-5개">Section 5. 절차문 (5개)</h3>
+<p>&ldquo;무엇을 하라&quot;는 지시문 규칙입니다. 실무에서 가장 효과가 큰 섹션입니다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>규칙</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>5.1</td>
+          <td>문장을 짧게 쓴다. 절차문은 문장당 최대 20단어</td>
+      </tr>
+      <tr>
+          <td>5.2</td>
+          <td>동시에 일어나는 동작이 아니면 한 문장에 지시 하나만 쓴다</td>
+      </tr>
+      <tr>
+          <td>5.3</td>
+          <td>지시는 명령형으로 쓴다</td>
+      </tr>
+      <tr>
+          <td>5.4</td>
+          <td>지시를 조건이나 서술로 시작하면 쉼표로 명령과 분리한다</td>
+      </tr>
+      <tr>
+          <td>5.5</td>
+          <td>노트(Note)에는 정보만 쓰고 지시는 쓰지 않는다</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="section-6-서술문-6개">Section 6. 서술문 (6개)</h3>
+<p>시스템 동작이나 원리를 설명하는 글의 규칙입니다. 이 섹션은 번호별 요지를 확인하지 못해 내용 중심으로 정리합니다.</p>
+<ul>
+<li>서술문은 문장당 최대 25단어</li>
+<li>정보를 논리적 순서로 제시하고, 문단은 주제문으로 시작</li>
+<li>한 문단에는 주제 하나</li>
+<li>한 문단은 최대 6문장</li>
+<li>문장 길이와 구조에 변화를 준다 (6.5)</li>
+<li>핵심 용어와 연결어로 흐름을 분명히 한다</li>
+</ul>
+<h3 id="section-7-안전-지시-3개">Section 7. 안전 지시 (3개)</h3>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>규칙</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>7.1</td>
+          <td>위험 수준에 맞는 신호어를 쓴다 (WARNING, CAUTION 등)</td>
+      </tr>
+      <tr>
+          <td>7.2</td>
+          <td>명확하고 정확한 명령이나 조건으로 시작한다</td>
+      </tr>
+      <tr>
+          <td>7.3</td>
+          <td>위험이나 예상 결과를 설명하는 문장을 붙인다</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="section-8-구두점과-단어-수-계산-7개">Section 8. 구두점과 단어 수 계산 (7개)</h3>
+<p>20/25단어 제한을 지키려면 &ldquo;무엇을 한 단어로 세는가&quot;가 정해져 있어야 합니다. 이 섹션이 그 계산법입니다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>규칙</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>8.1</td>
+          <td>표준 영어 구두점은 모두 쓸 수 있지만 세미콜론(;)은 쓰지 않는다</td>
+      </tr>
+      <tr>
+          <td>8.2</td>
+          <td>직접 관련된 단어는 하이픈으로 잇는다</td>
+      </tr>
+      <tr>
+          <td>8.3</td>
+          <td>괄호를 쓸 수 있다</td>
+      </tr>
+      <tr>
+          <td>8.4</td>
+          <td>세로 목록에서 콜론은 단어 수 계산상 마침표와 같다</td>
+      </tr>
+      <tr>
+          <td>8.5</td>
+          <td>괄호 안 텍스트는 문장에서 한 단어로 센다</td>
+      </tr>
+      <tr>
+          <td>8.6</td>
+          <td>숫자, 단위, 식별자 같은 요소는 각각 한 단어로 센다</td>
+      </tr>
+      <tr>
+          <td>8.7</td>
+          <td>하이픈으로 이은 단어는 한 단어로 센다</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="section-9-작성-관행-4개">Section 9. 작성 관행 (4개)</h3>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>규칙</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>9.1</td>
+          <td>단어 치환만으로 안 되면 문장 구조를 바꿔 다시 쓴다</td>
+      </tr>
+      <tr>
+          <td>9.2</td>
+          <td>각 승인 단어를 올바르게 쓴다</td>
+      </tr>
+      <tr>
+          <td>9.3</td>
+          <td>두 단어를 붙여 구동사(phrasal verb)를 만들지 않는다</td>
+      </tr>
+      <tr>
+          <td>9.4</td>
+          <td>용어와 표현은 항상 일관된 스타일로 쓴다</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="보충-지침-gr-1--gr-8">보충 지침 GR-1 ~ GR-8</h3>
+<p>53개 규칙과 별도로 문법 보충 지침이 있습니다. 접속사 that, 전치사 with, 대명사 사용, 대명사 this, 거짓 동족어(false friends), 라틴어 약어, 포용적 언어, 소유격을 다룹니다. 예를 들어 <code>e.g.</code>, <code>i.e.</code>, <code>etc.</code>는 쓰지 않고 <code>for example</code>, <code>that is</code>, 목록으로 바꿉니다.</p>
+<h2 id="before--after-예제">Before / After 예제</h2>
+<p>규칙은 예제로 보면 금방 감이 옵니다. 아래는 개발 문서에서 흔히 보는 문장을 STE 스타일로 고친 예입니다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>적용 규칙</th>
+          <th>Before</th>
+          <th>After</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>3.6 능동태</td>
+          <td>The config file is read by the server at startup.</td>
+          <td>The server reads the config file at startup.</td>
+      </tr>
+      <tr>
+          <td>3.5 -ing 금지</td>
+          <td>The service is running in degraded mode.</td>
+          <td>The service operates in degraded mode.</td>
+      </tr>
+      <tr>
+          <td>3.7 동사로 표현</td>
+          <td>Perform a restart of the pod.</td>
+          <td>Restart the pod.</td>
+      </tr>
+      <tr>
+          <td>2.1 명사 3개 이하</td>
+          <td>Update the payment gateway retry policy timeout value.</td>
+          <td>Update the timeout value of the retry policy for the payment gateway.</td>
+      </tr>
+      <tr>
+          <td>4.2 축약 금지</td>
+          <td>Don&rsquo;t delete the lock file.</td>
+          <td>Do not delete the lock file.</td>
+      </tr>
+      <tr>
+          <td>5.2 지시 하나</td>
+          <td>Stop the consumer and drain the queue.</td>
+          <td>Stop the consumer. Then, drain the queue.</td>
+      </tr>
+      <tr>
+          <td>5.4 조건 먼저</td>
+          <td>Roll back if the health check fails.</td>
+          <td>If the health check fails, install the previous release.</td>
+      </tr>
+      <tr>
+          <td>8.1 세미콜론 금지</td>
+          <td>The job failed; check the logs.</td>
+          <td>The job failed. Examine the logs.</td>
+      </tr>
+      <tr>
+          <td>9.3 구동사 금지</td>
+          <td>Set up the database and carry out the migration.</td>
+          <td>Install the database. Then, do the migration.</td>
+      </tr>
+  </tbody>
+</table>
+<p><code>restart</code>, <code>drain</code>처럼 사전 승인 단어가 아닌 동사는 조직이 기술 동사(TV)로 등록해야 쓸 수 있습니다. 실무에서는 이렇게 팀 용어집을 함께 관리하는 것이 STE 도입의 핵심입니다.</p>
+<h2 id="개발자는-어떻게-써먹을까">개발자는 어떻게 써먹을까</h2>
+<p>STE는 항공·방산 표준이지만, &ldquo;오해 없이 읽혀야 하고 번역될 수 있어야 하는 글&quot;이라면 어디든 통합니다. 개발 현장에서는 특히 아래 네 곳에서 효과가 큽니다.</p>
+<ol>
+<li><strong>런북과 장애 대응 문서</strong>: 새벽 3시에 읽는 문서입니다. 명령형, 한 문장 한 지시, 조건 먼저(5.2~5.4)만 지켜도 실수가 확 줄어듭니다.</li>
+<li><strong>에러 메시지와 UI 문구</strong>: 짧은 문장, 능동태, 축약형 금지는 다국어 번역 품질에 그대로 반영됩니다.</li>
+<li><strong>API 문서와 README</strong>: 같은 대상에 같은 용어를 쓰는 규칙(1.11, 9.4)은 그대로 팀 용어집 운영 원칙이 됩니다.</li>
+<li><strong>LLM 프롬프트와 에이전트 출력 스타일</strong>: 최근에는 STE 핵심 규칙을 Claude Code 스킬이나 출력 스타일로 주입해 장황한 AI 문장을 줄이는 사례가 늘고 있습니다.</li>
+</ol>
+<p>처음부터 900단어 사전을 다 지킬 필요는 없습니다. 아래 핵심 규칙부터 팀 스타일 가이드에 넣어 보세요.</p>
+<ul>
+<li>절차문 20단어, 서술문 25단어 제한</li>
+<li>능동태, 단순 시제</li>
+<li>명사구는 3단어 이하</li>
+<li>한 문장에 지시 하나, 조건은 앞에</li>
+<li>축약형, 세미콜론, 구동사, 라틴어 약어 금지</li>
+<li>하나의 대상에는 하나의 용어</li>
+</ul>
+<p>정식 준수가 필요하다면 TechScribe 같은 STE 체커 도구로 승인 단어와 품사를 자동 검사하는 것이 현실적입니다.</p>
+<h2 id="마치며">마치며</h2>
+<p>STE의 53개 규칙은 결국 하나의 질문으로 모입니다. &ldquo;이 문장을 읽는 사람이 다르게 해석할 여지가 있는가?&rdquo; 이 질문을 습관으로 만들면, 영어든 한국어든 문서의 질이 달라집니다.</p>
+<p>공식 문서는 무료로 신청할 수 있으니, 팀 문서 가이드를 만들 계획이라면 원문과 사전을 꼭 한 번 훑어보길 권합니다.</p>
+<h2 id="참고-자료">참고 자료</h2>
+<ul>
+<li><a href="https://asd-ste100.org/about_STE.html">About ASD-STE100 — 공식 사이트</a></li>
+<li><a href="https://simplified-english.co.uk/rules-ste9.html">Term checker rules for ASD-STE100 issue 9 — TechScribe</a></li>
+<li><a href="https://www.tcworld.info/news/asd-ste100-issue-9-setting-a-standard-for-technical-documentation">ASD-STE100 Issue 9: Setting a standard for technical documentation — tcworld</a></li>
+<li><a href="https://asd-europe.org/news-media/news-events/news/simplified-technical-english-asd-ste100-issue-9">A milestone in Simplified Technical English — ASD</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Simplified_Technical_English">Simplified Technical English — Wikipedia</a></li>
+</ul>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/vibe/three_strategies_query/">3가지 프롬프트 전략&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>
