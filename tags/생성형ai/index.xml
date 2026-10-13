@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>생성형AI on Pink Spider</title>
+    <link>https://pink-spider.github.io/tags/%EC%83%9D%EC%84%B1%ED%98%95ai/</link>
+    <description>Recent content in 생성형AI on Pink Spider</description>
+    <generator>Hugo</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Tue, 13 Oct 2026 10:30:10 +0900</lastBuildDate>
+    <atom:link href="https://pink-spider.github.io/tags/%EC%83%9D%EC%84%B1%ED%98%95ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>3가지 프롬프트 전략</title>
+      <link>https://pink-spider.github.io/post/vibe/three_strategies_query/</link>
+      <pubDate>Tue, 13 Oct 2026 10:20:25 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/vibe/three_strategies_query/</guid>
+      <description>&lt;h1 id=&#34;프롬프트-엔지니어링-기초-단순-질의-vs-구조화된-접근-vs-생각의-사슬cot&#34;&gt;프롬프트 엔지니어링 기초: 단순 질의 vs 구조화된 접근 vs 생각의 사슬(CoT)&lt;/h1&gt;&#xA;&lt;p&gt;같은 AI 모델이라도 &lt;strong&gt;어떻게 묻느냐&lt;/strong&gt;에 따라 답변의 품질이 크게 달라집니다.&#xA;원하는 결과를 얻기 위해 지시문을 설계하는 기법을 &lt;strong&gt;프롬프팅 전략&lt;/strong&gt;이라고 합니다.&lt;/p&gt;&#xA;&lt;p&gt;이 글에서는 가장 기본이 되는 세 가지 전략을 정리합니다.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;단순 질의 (Naïve Query)&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;구조화된 접근 (Structured Approach)&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;생각의 사슬 (Chain-of-Thought, CoT)&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;세 전략은 &amp;ldquo;프롬프트를 얼마나 구체적으로 쓰는가&amp;quot;와 &amp;ldquo;AI의 사고 과정을 어떻게 유도하는가&amp;quot;에 따라 구분됩니다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;한눈에-비교하기&#34;&gt;한눈에 비교하기&lt;/h2&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;전략&lt;/th&gt;&#xA;          &lt;th&gt;핵심 아이디어&lt;/th&gt;&#xA;          &lt;th&gt;장점&lt;/th&gt;&#xA;          &lt;th&gt;단점&lt;/th&gt;&#xA;          &lt;th&gt;적합한 상황&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;단순 질의&lt;/td&gt;&#xA;          &lt;td&gt;한두 문장의 자연어로 질문&lt;/td&gt;&#xA;          &lt;td&gt;빠르고 간편함&lt;/td&gt;&#xA;          &lt;td&gt;답변이 일반적이고 일관성이 낮음&lt;/td&gt;&#xA;          &lt;td&gt;가벼운 질문, 사실 확인&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;구조화된 접근&lt;/td&gt;&#xA;          &lt;td&gt;역할·맥락·제약·출력 형식을 명시&lt;/td&gt;&#xA;          &lt;td&gt;원하는 형태의 결과를 일관되게 얻음&lt;/td&gt;&#xA;          &lt;td&gt;작성에 시간이 듦&lt;/td&gt;&#xA;          &lt;td&gt;업무 문서, 반복 작업, 자동화&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;생각의 사슬&lt;/td&gt;&#xA;          &lt;td&gt;단계별 추론 과정을 유도&lt;/td&gt;&#xA;          &lt;td&gt;복잡한 논리·계산 문제의 정확도 향상&lt;/td&gt;&#xA;          &lt;td&gt;토큰 사용량 증가, 단순 작업엔 과함&lt;/td&gt;&#xA;          &lt;td&gt;수학, 논리 추론, 의사결정&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-단순-질의-naïve-query&#34;&gt;1. 단순 질의 (Naïve Query)&lt;/h2&gt;&#xA;&lt;p&gt;특별한 형식 없이 떠오른 생각을 그대로 한두 문장으로 묻는 방식입니다.&#xA;대부분의 사람이 AI를 처음 쓸 때 사용하는 방식이기도 합니다.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

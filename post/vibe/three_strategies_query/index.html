@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    3가지 프롬프트 전략 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="프롬프트 엔지니어링 기초: 단순 질의 vs 구조화된 접근 vs 생각의 사슬(CoT) 같은 AI 모델이라도 어떻게 묻느냐에 따라 답변의 품질이 크게 달라집니다. 원하는 결과를 얻기 위해 지시문을 설계하는 기법을 프롬프팅 전략이라고 합니다.
+이 글에서는 가장 기본이 되는 세 가지 전략을 정리합니다.
+단순 질의 (Naïve Query) 구조화된 접근 (Structured Approach) 생각의 사슬 (Chain-of-Thought, CoT) 세 전략은 &ldquo;프롬프트를 얼마나 구체적으로 쓰는가&quot;와 &ldquo;AI의 사고 과정을 어떻게 유도하는가&quot;에 따라 구분됩니다.
+한눈에 비교하기 전략 핵심 아이디어 장점 단점 적합한 상황 단순 질의 한두 문장의 자연어로 질문 빠르고 간편함 답변이 일반적이고 일관성이 낮음 가벼운 질문, 사실 확인 구조화된 접근 역할·맥락·제약·출력 형식을 명시 원하는 형태의 결과를 일관되게 얻음 작성에 시간이 듦 업무 문서, 반복 작업, 자동화 생각의 사슬 단계별 추론 과정을 유도 복잡한 논리·계산 문제의 정확도 향상 토큰 사용량 증가, 단순 작업엔 과함 수학, 논리 추론, 의사결정 1. 단순 질의 (Naïve Query) 특별한 형식 없이 떠오른 생각을 그대로 한두 문장으로 묻는 방식입니다. 대부분의 사람이 AI를 처음 쓸 때 사용하는 방식이기도 합니다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/vibe/three_strategies_query/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="3가지 프롬프트 전략 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="프롬프트 엔지니어링 기초: 단순 질의 vs 구조화된 접근 vs 생각의 사슬(CoT) 같은 AI 모델이라도 어떻게 묻느냐에 따라 답변의 품질이 크게 달라집니다. 원하는 결과를 얻기 위해 지시문을 설계하는 기법을 프롬프팅 전략이라고 합니다.
+이 글에서는 가장 기본이 되는 세 가지 전략을 정리합니다.
+단순 질의 (Naïve Query) 구조화된 접근 (Structured Approach) 생각의 사슬 (Chain-of-Thought, CoT) 세 전략은 &ldquo;프롬프트를 얼마나 구체적으로 쓰는가&quot;와 &ldquo;AI의 사고 과정을 어떻게 유도하는가&quot;에 따라 구분됩니다.
+한눈에 비교하기 전략 핵심 아이디어 장점 단점 적합한 상황 단순 질의 한두 문장의 자연어로 질문 빠르고 간편함 답변이 일반적이고 일관성이 낮음 가벼운 질문, 사실 확인 구조화된 접근 역할·맥락·제약·출력 형식을 명시 원하는 형태의 결과를 일관되게 얻음 작성에 시간이 듦 업무 문서, 반복 작업, 자동화 생각의 사슬 단계별 추론 과정을 유도 복잡한 논리·계산 문제의 정확도 향상 토큰 사용량 증가, 단순 작업엔 과함 수학, 논리 추론, 의사결정 1. 단순 질의 (Naïve Query) 특별한 형식 없이 떠오른 생각을 그대로 한두 문장으로 묻는 방식입니다. 대부분의 사람이 AI를 처음 쓸 때 사용하는 방식이기도 합니다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="3가지 프롬프트 전략 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="프롬프트 엔지니어링 기초: 단순 질의 vs 구조화된 접근 vs 생각의 사슬(CoT) 같은 AI 모델이라도 어떻게 묻느냐에 따라 답변의 품질이 크게 달라집니다. 원하는 결과를 얻기 위해 지시문을 설계하는 기법을 프롬프팅 전략이라고 합니다.
+이 글에서는 가장 기본이 되는 세 가지 전략을 정리합니다.
+단순 질의 (Naïve Query) 구조화된 접근 (Structured Approach) 생각의 사슬 (Chain-of-Thought, CoT) 세 전략은 &ldquo;프롬프트를 얼마나 구체적으로 쓰는가&quot;와 &ldquo;AI의 사고 과정을 어떻게 유도하는가&quot;에 따라 구분됩니다.
+한눈에 비교하기 전략 핵심 아이디어 장점 단점 적합한 상황 단순 질의 한두 문장의 자연어로 질문 빠르고 간편함 답변이 일반적이고 일관성이 낮음 가벼운 질문, 사실 확인 구조화된 접근 역할·맥락·제약·출력 형식을 명시 원하는 형태의 결과를 일관되게 얻음 작성에 시간이 듦 업무 문서, 반복 작업, 자동화 생각의 사슬 단계별 추론 과정을 유도 복잡한 논리·계산 문제의 정확도 향상 토큰 사용량 증가, 단순 작업엔 과함 수학, 논리 추론, 의사결정 1. 단순 질의 (Naïve Query) 특별한 형식 없이 떠오른 생각을 그대로 한두 문장으로 묻는 방식입니다. 대부분의 사람이 AI를 처음 쓸 때 사용하는 방식이기도 합니다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/vibe/three_strategies_query/" />
+<meta property="og:site_name" content="3가지 프롬프트 전략" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2026-10-13 10:20:25 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/vibe/three_strategies_query/">3가지 프롬프트 전략</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Tue, 13 Oct 2026 10:20:25 &#43;0900"
+                    class="no-wrap">
+                    Tue, 13 Oct 2026 10:20:25 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Tue, 13 Oct 2026 10:30:10 &#43;0900"
+                    class="no-wrap">
+                    Tue, 13 Oct 2026 10:30:10 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1951 Words
+                    <span class="file-info-divider"></span>
+                                        9 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      프롬프트엔지니어링
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/prompt-engineering">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      Prompt Engineering
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/chain-of-thought">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      Chain-of-Thought
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/cot">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      CoT
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/llm">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      LLM
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/%EC%83%9D%EC%84%B1%ED%98%95ai">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      생성형AI
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="프롬프트-엔지니어링-기초-단순-질의-vs-구조화된-접근-vs-생각의-사슬cot">프롬프트 엔지니어링 기초: 단순 질의 vs 구조화된 접근 vs 생각의 사슬(CoT)</h1>
+<p>같은 AI 모델이라도 <strong>어떻게 묻느냐</strong>에 따라 답변의 품질이 크게 달라집니다.
+원하는 결과를 얻기 위해 지시문을 설계하는 기법을 <strong>프롬프팅 전략</strong>이라고 합니다.</p>
+<p>이 글에서는 가장 기본이 되는 세 가지 전략을 정리합니다.</p>
+<ul>
+<li><strong>단순 질의 (Naïve Query)</strong></li>
+<li><strong>구조화된 접근 (Structured Approach)</strong></li>
+<li><strong>생각의 사슬 (Chain-of-Thought, CoT)</strong></li>
+</ul>
+<p>세 전략은 &ldquo;프롬프트를 얼마나 구체적으로 쓰는가&quot;와 &ldquo;AI의 사고 과정을 어떻게 유도하는가&quot;에 따라 구분됩니다.</p>
+<hr>
+<h2 id="한눈에-비교하기">한눈에 비교하기</h2>
+<table>
+  <thead>
+      <tr>
+          <th>전략</th>
+          <th>핵심 아이디어</th>
+          <th>장점</th>
+          <th>단점</th>
+          <th>적합한 상황</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>단순 질의</td>
+          <td>한두 문장의 자연어로 질문</td>
+          <td>빠르고 간편함</td>
+          <td>답변이 일반적이고 일관성이 낮음</td>
+          <td>가벼운 질문, 사실 확인</td>
+      </tr>
+      <tr>
+          <td>구조화된 접근</td>
+          <td>역할·맥락·제약·출력 형식을 명시</td>
+          <td>원하는 형태의 결과를 일관되게 얻음</td>
+          <td>작성에 시간이 듦</td>
+          <td>업무 문서, 반복 작업, 자동화</td>
+      </tr>
+      <tr>
+          <td>생각의 사슬</td>
+          <td>단계별 추론 과정을 유도</td>
+          <td>복잡한 논리·계산 문제의 정확도 향상</td>
+          <td>토큰 사용량 증가, 단순 작업엔 과함</td>
+          <td>수학, 논리 추론, 의사결정</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="1-단순-질의-naïve-query">1. 단순 질의 (Naïve Query)</h2>
+<p>특별한 형식 없이 떠오른 생각을 그대로 한두 문장으로 묻는 방식입니다.
+대부분의 사람이 AI를 처음 쓸 때 사용하는 방식이기도 합니다.</p>
+<p><strong>예시</strong></p>
+<blockquote>
+<p>마케팅 트렌드에 대해 알려줘.</p>
+</blockquote>
+<p><strong>특징</strong></p>
+<ul>
+<li>작성이 빠르고 직관적입니다.</li>
+<li>대신 AI가 &ldquo;어떤 분야의, 언제의, 누구를 위한&rdquo; 트렌드인지 알 수 없기 때문에 범위가 넓고 뻔한 답변이 나오기 쉽습니다.</li>
+<li>간단한 사실 확인이나 아이디어를 가볍게 탐색할 때는 이 방식으로도 충분합니다.</li>
+</ul>
+<hr>
+<h2 id="2-구조화된-접근-structured-approach">2. 구조화된 접근 (Structured Approach)</h2>
+<p>AI에게 <strong>역할(Persona)</strong>, <strong>목표(Task)</strong>, <strong>맥락(Context)</strong>, <strong>제약 조건(Constraints)</strong>, <strong>출력 형식(Format)</strong> 을 명확히 지정하는 방식입니다.
+사람에게 업무를 지시할 때 요구사항을 구체적으로 전달하는 것과 같은 원리입니다.</p>
+<p><strong>예시</strong></p>
+<blockquote>
+<p><strong>역할:</strong> 너는 10년 차 B2B IT 마케터야.
+<strong>목표:</strong> 2026년 B2B SaaS 마케팅 트렌드 3가지를 분석해 줘.
+<strong>대상 독자:</strong> 마케팅 경험이 1~2년인 스타트업 실무자
+<strong>조건:</strong> 전문 용어는 쉽게 풀어서 설명하고, 전체 500자 내외로 작성해 줘.
+<strong>출력 형식:</strong> 트렌드별로 bullet point(•) 한 개씩, 각 항목에 &ldquo;왜 중요한가&quot;를 한 줄 덧붙여 줘.</p>
+</blockquote>
+<p><strong>특징</strong></p>
+<ul>
+<li>답변의 범위·깊이·형식을 정밀하게 제어할 수 있습니다.</li>
+<li>같은 프롬프트를 반복 사용하면 결과물의 품질이 일정하게 유지되므로, 보고서 작성이나 업무 자동화에 특히 유용합니다.</li>
+<li>항목을 XML 태그(<code>&lt;context&gt;...&lt;/context&gt;</code>)나 마크다운 헤더로 구분하면 AI가 지시와 자료를 더 정확히 구분합니다.</li>
+</ul>
+<hr>
+<h2 id="3-생각의-사슬-chain-of-thought-cot">3. 생각의 사슬 (Chain-of-Thought, CoT)</h2>
+<p>최종 답만 요구하지 않고 <strong>중간 추론 과정을 단계별로 거치도록 유도</strong>하는 방식입니다.
+크게 두 가지 방법이 있습니다.</p>
+<ul>
+<li><strong>Zero-shot CoT:</strong> 질문 끝에 &ldquo;단계별로 차근차근 생각해 봐(Let&rsquo;s think step by step)&rdquo; 같은 문구를 덧붙입니다.</li>
+<li><strong>Few-shot CoT:</strong> 풀이 과정까지 포함된 예시를 몇 개 보여 준 뒤 같은 방식으로 풀게 합니다.</li>
+</ul>
+<p><strong>예시</strong></p>
+<blockquote>
+<p>A 마트에서는 사과 5개에 5,000원이고, B 마트에서는 3개에 3,600원이야.
+어느 마트의 사과 한 개 가격이 더 저렴한지 단계를 나누어 설명해 줘.</p>
+</blockquote>
+<p><strong>기대하는 답변 흐름</strong></p>
+<ol>
+<li>A 마트: 5,000원 ÷ 5개 = 개당 1,000원</li>
+<li>B 마트: 3,600원 ÷ 3개 = 개당 1,200원</li>
+<li>결론: A 마트가 개당 200원 더 저렴하다.</li>
+</ol>
+<p><strong>특징</strong></p>
+<ul>
+<li>문제를 작은 단계로 쪼개 풀기 때문에 수학 계산, 논리 추론, 여러 조건을 따지는 의사결정에서 정확도가 올라갑니다.</li>
+<li>추론 과정이 드러나므로 사람이 <strong>어디서 틀렸는지 검증하기 쉽다</strong>는 장점도 있습니다.</li>
+<li>다만 CoT는 <em>추론 오류</em>를 줄이는 기법이지, 모델이 모르는 사실을 지어내는 <em>할루시네이션</em>을 막아 주지는 않습니다. 사실 정확성이 중요하다면 출처 확인을 함께 요구하는 것이 좋습니다.</li>
+<li>최근에는 모델 자체에 추론 단계가 내장된 <strong>추론형(Reasoning) 모델</strong>이 많아, &ldquo;단계별로 생각해&quot;라는 문구 없이도 비슷한 효과를 얻는 경우가 늘었습니다. 이런 모델에서는 사고 과정을 일일이 지시하기보다 <strong>문제와 조건을 정확히 전달하는 것</strong>이 더 중요합니다.</li>
+</ul>
+<hr>
+<h2 id="실전-팁-세-전략은-섞어-쓰는-것">실전 팁: 세 전략은 섞어 쓰는 것</h2>
+<p>세 가지는 서로 배타적인 선택지가 아니라 <strong>필요에 따라 조합하는 도구</strong>입니다.</p>
+<ul>
+<li>간단한 질문 → 단순 질의로 충분</li>
+<li>결과물의 형태가 중요 → 구조화된 접근</li>
+<li>계산·판단이 복잡 → 구조화된 접근 + CoT</li>
+</ul>
+<p>예를 들어 &ldquo;투자 시나리오 비교 보고서&quot;를 요청한다면, 역할과 출력 형식은 구조화된 방식으로 지정하고, 시나리오 비교 부분에만 단계별 추론을 요청하는 식으로 조합할 수 있습니다.</p>
+<hr>
+<h2 id="마무리">마무리</h2>
+<table>
+  <thead>
+      <tr>
+          <th>상황</th>
+          <th>추천 전략</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>빠르게 감을 잡고 싶을 때</td>
+          <td>단순 질의</td>
+      </tr>
+      <tr>
+          <td>정해진 형식의 결과물이 필요할 때</td>
+          <td>구조화된 접근</td>
+      </tr>
+      <tr>
+          <td>정답까지의 논리가 중요할 때</td>
+          <td>생각의 사슬 (CoT)</td>
+      </tr>
+  </tbody>
+</table>
+<p>좋은 프롬프트의 핵심은 결국 <strong>&ldquo;AI가 추측해야 할 부분을 줄이는 것&rdquo;</strong> 입니다.
+처음에는 단순 질의로 시작하고, 답변이 아쉬울 때마다 맥락·형식·추론 단계를 하나씩 추가해 보세요.</p>
+<p><strong>참고 자료</strong></p>
+<ul>
+<li>Wei et al., <em>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</em> (2022)</li>
+<li>Kojima et al., <em>Large Language Models are Zero-Shot Reasoners</em> (2022)</li>
+</ul>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/til/null-safety/">Null Safety란 무엇인가? 개념부터 실전 예시까지&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>

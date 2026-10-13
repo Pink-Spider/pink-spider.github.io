@@ -2,8 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://pink-spider.github.io/post/vibe/three_strategies_query/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/categories/ai/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
     <loc>https://pink-spider.github.io/categories/</loc>
-    <lastmod>2026-07-14T10:41:10+09:00</lastmod>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/tags/chain-of-thought/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/tags/cot/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/tags/llm/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/post/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/tags/prompt-engineering/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/tags/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/tags/%EC%83%9D%EC%84%B1%ED%98%95ai/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
+  </url><url>
+    <loc>https://pink-spider.github.io/tags/%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81/</loc>
+    <lastmod>2026-10-13T10:30:10+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/tags/java/</loc>
     <lastmod>2026-07-14T10:41:10+09:00</lastmod>
@@ -17,12 +50,6 @@
     <loc>https://pink-spider.github.io/tags/null-safety/</loc>
     <lastmod>2026-07-14T10:40:24+09:00</lastmod>
   </url><url>
-    <loc>https://pink-spider.github.io/</loc>
-    <lastmod>2026-07-14T10:41:10+09:00</lastmod>
-  </url><url>
-    <loc>https://pink-spider.github.io/post/</loc>
-    <lastmod>2026-07-14T10:41:10+09:00</lastmod>
-  </url><url>
     <loc>https://pink-spider.github.io/tags/programming/</loc>
     <lastmod>2026-07-14T10:40:24+09:00</lastmod>
   </url><url>
@@ -31,9 +58,6 @@
   </url><url>
     <loc>https://pink-spider.github.io/tags/swift/</loc>
     <lastmod>2026-07-14T10:40:24+09:00</lastmod>
-  </url><url>
-    <loc>https://pink-spider.github.io/tags/</loc>
-    <lastmod>2026-07-14T10:41:10+09:00</lastmod>
   </url><url>
     <loc>https://pink-spider.github.io/tags/typescript/</loc>
     <lastmod>2026-07-14T10:40:24+09:00</lastmod>
