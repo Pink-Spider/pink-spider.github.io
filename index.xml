@@ -6,8 +6,15 @@
     <description>Recent content on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 14 Oct 2026 08:26:14 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 11:55:59 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>오픈소스 라이센스 정리: MIT, Apache, GPL, 그리고 그 사이의 모든 것</title>
+      <link>https://pink-spider.github.io/post/about_opensource_license/</link>
+      <pubDate>Fri, 16 Oct 2026 11:00:00 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/about_opensource_license/</guid>
+      <description>&lt;h2 id=&#34;들어가며&#34;&gt;들어가며&lt;/h2&gt;&#xA;&lt;p&gt;개인 프로젝트들을 GitHub public 레포로 옮기고 정리하다 보니 매번 같은 지점에서 손이 멈췄다. &lt;strong&gt;&amp;ldquo;LICENSE 파일에 뭘 넣지?&amp;rdquo;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;회사 업무에서는 보통 &amp;ldquo;사내 정책상 GPL 계열 금지&amp;rdquo; 정도의 규칙만 따르면 됐는데, 막상 내 코드를 공개하는 입장이 되니 고려할 게 생각보다 많았다. 남이 내 코드를 어떻게 써도 되는지, 내가 쓴 의존성 라이브러리의 라이센스와 충돌은 없는지, 나중에 이 코드로 상업 서비스를 하면 문제는 없는지.&lt;/p&gt;&#xA;&lt;p&gt;이 글은 그 고민을 정리한 기록이다.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;⚠️ 이 글은 개발자 관점의 정리이며 법률 자문이 아니다. 상업적·법적 리스크가 큰 결정이라면 반드시 전문가와 상의하자.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>ASD-STE100 완전 정복: 53개 규칙으로 배우는 Simplified Technical English</title>
       <link>https://pink-spider.github.io/post/asd-ste100-guide/</link>
