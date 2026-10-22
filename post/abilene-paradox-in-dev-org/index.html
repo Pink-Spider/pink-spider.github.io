@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <script
+    type="application/javascript"
+    src='https://pink-spider.github.io/js/theme-mode.js'
+  ></script>
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/frameworks.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github.min.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/github-style.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/light.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/dark.css' />
+  <link rel="stylesheet" href='https://pink-spider.github.io/css/syntax.css' />
+  
+  <link rel="stylesheet" href="/your%20css%20file%20name" />
+  
+  <title>
+    아무도 원하지 않았던 MSA 전환 — 개발 조직의 애빌린의 역설 | Pink Spider
+  </title>
+  
+  <link rel="icon" type="image/x-icon" href="/images/logo_pinkspider.png" />
+  
+  <meta name="theme-color" content="#1e2327" />
+
+  
+  <meta
+  name="description"
+  content="들어가며 회고 자리에서 이런 말을 들어본 적이 있을 것이다.
+&ldquo;솔직히 저는 처음부터 이거 좀 무리라고 생각했어요.&rdquo; &ldquo;어? 저도요.&rdquo; &ldquo;…저도 그랬는데.&rdquo;
+그런데 그 결정을 내린 회의에서는 아무도 반대하지 않았다. 오히려 다들 고개를 끄덕였다. 결과적으로 아무도 원하지 않았던 결정을, 모두가 동의한 채로 실행한 셈이다.
+조직행동론에서는 이 현상을 애빌린의 역설(Abilene Paradox) 이라고 부른다. 이 글에서는 개념을 짧게 정리하고, 개발 조직에서 실제로 자주 마주치는 사례들과 이를 막기 위한 구조적인 장치를 정리해 본다.
+1. 애빌린의 역설이란 원래 이야기 경영학자 제리 B. 하비(Jerry B. Harvey)가 1974년 논문 &ldquo;The Abilene Paradox: The Management of Agreement&rdquo; 에서 소개한 일화다.
+"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://pink-spider.github.io/post/abilene-paradox-in-dev-org/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="아무도 원하지 않았던 MSA 전환 — 개발 조직의 애빌린의 역설 - Pink Spider"
+/>
+<meta
+  name="twitter:description"
+  content="들어가며 회고 자리에서 이런 말을 들어본 적이 있을 것이다.
+&ldquo;솔직히 저는 처음부터 이거 좀 무리라고 생각했어요.&rdquo; &ldquo;어? 저도요.&rdquo; &ldquo;…저도 그랬는데.&rdquo;
+그런데 그 결정을 내린 회의에서는 아무도 반대하지 않았다. 오히려 다들 고개를 끄덕였다. 결과적으로 아무도 원하지 않았던 결정을, 모두가 동의한 채로 실행한 셈이다.
+조직행동론에서는 이 현상을 애빌린의 역설(Abilene Paradox) 이라고 부른다. 이 글에서는 개념을 짧게 정리하고, 개발 조직에서 실제로 자주 마주치는 사례들과 이를 막기 위한 구조적인 장치를 정리해 본다.
+1. 애빌린의 역설이란 원래 이야기 경영학자 제리 B. 하비(Jerry B. Harvey)가 1974년 논문 &ldquo;The Abilene Paradox: The Management of Agreement&rdquo; 에서 소개한 일화다.
+"
+/>
+<meta name="twitter:site" content="https://pink-spider.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="https://pink-spider.github.io/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="아무도 원하지 않았던 MSA 전환 — 개발 조직의 애빌린의 역설 - Pink Spider"
+/>
+<meta
+  property="og:description"
+  content="들어가며 회고 자리에서 이런 말을 들어본 적이 있을 것이다.
+&ldquo;솔직히 저는 처음부터 이거 좀 무리라고 생각했어요.&rdquo; &ldquo;어? 저도요.&rdquo; &ldquo;…저도 그랬는데.&rdquo;
+그런데 그 결정을 내린 회의에서는 아무도 반대하지 않았다. 오히려 다들 고개를 끄덕였다. 결과적으로 아무도 원하지 않았던 결정을, 모두가 동의한 채로 실행한 셈이다.
+조직행동론에서는 이 현상을 애빌린의 역설(Abilene Paradox) 이라고 부른다. 이 글에서는 개념을 짧게 정리하고, 개발 조직에서 실제로 자주 마주치는 사례들과 이를 막기 위한 구조적인 장치를 정리해 본다.
+1. 애빌린의 역설이란 원래 이야기 경영학자 제리 B. 하비(Jerry B. Harvey)가 1974년 논문 &ldquo;The Abilene Paradox: The Management of Agreement&rdquo; 에서 소개한 일화다.
+"
+/>
+<meta property="og:url" content="https://pink-spider.github.io/post/abilene-paradox-in-dev-org/" />
+<meta property="og:site_name" content="아무도 원하지 않았던 MSA 전환 — 개발 조직의 애빌린의 역설" />
+<meta
+  property="og:image"
+  content="https://pink-spider.github.io/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2026-10-22 13:14:00 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6329038356545416"
+        crossorigin="anonymous"></script>
+
+<body>
+  
+
+<style>
+  .height-limitation {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .loader {
+    border: 4px solid #f3f3f3;
+    border-bottom: 4px solid var(--color-fg-muted);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<div style="position: relative">
+  <header
+    class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on"
+  >
+    <div
+      class="Header-item mobile-none"
+      style="margin-top: -4px; margin-bottom: -4px"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button
+        class="Header-link btn-link js-details-target"
+        type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'"
+        aria-label="Search"
+      >
+        <svg
+          height="24"
+          class="octicon octicon-three-bars"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="24"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <div
+      style="display: none"
+      id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex"
+    >
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to"
+      >
+        <div class="position-relative">
+          <form
+            target="_blank"
+            action="https://www.google.com/search"
+            accept-charset="UTF-8"
+            method="get"
+            autocomplete="off"
+          >
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center"
+            >
+              <input
+                type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q"
+                value=""
+                placeholder="Search"
+                autocomplete="off"
+              />
+              <input type="hidden" name="q" value="site:https://pink-spider.github.io/" />
+              <div
+                class="js-jump-to-suggestions-container jump-to-suggestions overflow-hidden position-absolute"
+              >
+                <div
+                  id="search-progress"
+                  class="d-none color-bg-primary no-underline p-2"
+                  role="progress"
+                  aria-selected="false"
+                >
+                  <div class="loader"></div>
+                </div>
+
+                <ul
+                  id="jump-to-results"
+                  role="listbox"
+                  class="Box border-0 p-0 m-0 js-navigation-container jump-to-suggestions-results-container js-jump-to-suggestions-results-container js-active-navigation-container height-limitation"
+                ></ul>
+              </div>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="Header-item Header-item--full flex-justify-center d-md-none position-relative"
+    >
+      <a class="Header-link" href="https://pink-spider.github.io/" aria-label="Home">
+        <svg
+          class="octicon octicon-mark-github v-align-middle"
+          height="32"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="32"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+    <div class="Theme-switcher Header-item" style="margin-right: 0">
+      <span
+        role="button"
+        class="Header-link no-select"
+        onclick="switchTheme()"
+        style="cursor: pointer"
+        aria-label="Switch theme"
+      >
+        <svg
+          style="fill: var(--color-profile-color-modes-toggle-moon)"
+          class="no-select"
+          viewBox="0 0 16 16"
+          version="1.1"
+          width="16"
+          height="16"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  </header>
+</div>
+
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://pink-spider.github.io/">
+                  <img class=" avatar-user"
+                    src="/images/logo_pinkspider.png"
+                    width="32" height="32" alt="Pink Spider"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://pink-spider.github.io/">Pink Spider</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://pink-spider.github.io/post/abilene-paradox-in-dev-org/">아무도 원하지 않았던 MSA 전환 — 개발 조직의 애빌린의 역설</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Thu, 22 Oct 2026 13:14:00 &#43;0900"
+                    class="no-wrap">
+                    Thu, 22 Oct 2026 13:14:00 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Thu, 22 Oct 2026 13:17:32 &#43;0900"
+                    class="no-wrap">
+                    Thu, 22 Oct 2026 13:17:32 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      6943 Words
+                    <span class="file-info-divider"></span>
+                                        32 min
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/%EC%95%A0%EB%B9%8C%EB%A6%B0%EC%9D%98-%EC%97%AD%EC%84%A4">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      애빌린의 역설
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/abilene-paradox">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      Abilene Paradox
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/%EA%B0%9C%EB%B0%9C-%EB%AC%B8%ED%99%94">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      개발 문화
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/%EC%9D%98%EC%82%AC%EA%B2%B0%EC%A0%95">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      의사결정
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/%ED%8C%80-%EB%A6%AC%EB%94%A9">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      팀 리딩
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/%ED%9A%8C%EA%B3%A0">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      회고
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      아키텍처
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h2 id="들어가며">들어가며</h2>
+<p>회고 자리에서 이런 말을 들어본 적이 있을 것이다.</p>
+<blockquote>
+<p>&ldquo;솔직히 저는 처음부터 이거 좀 무리라고 생각했어요.&rdquo;
+&ldquo;어? 저도요.&rdquo;
+&ldquo;…저도 그랬는데.&rdquo;</p>
+</blockquote>
+<p>그런데 그 결정을 내린 회의에서는 아무도 반대하지 않았다. 오히려 다들 고개를 끄덕였다. 결과적으로 <strong>아무도 원하지 않았던 결정을, 모두가 동의한 채로</strong> 실행한 셈이다.</p>
+<p>조직행동론에서는 이 현상을 <strong>애빌린의 역설(Abilene Paradox)</strong> 이라고 부른다. 이 글에서는 개념을 짧게 정리하고, 개발 조직에서 실제로 자주 마주치는 사례들과 이를 막기 위한 구조적인 장치를 정리해 본다.</p>
+<hr>
+<h2 id="1-애빌린의-역설이란">1. 애빌린의 역설이란</h2>
+<h3 id="원래-이야기">원래 이야기</h3>
+<p>경영학자 제리 B. 하비(Jerry B. Harvey)가 1974년 논문 <em>&ldquo;The Abilene Paradox: The Management of Agreement&rdquo;</em> 에서 소개한 일화다.</p>
+<p>텍사스의 작은 마을 콜먼(Coleman). 40도를 넘나드는 7월 오후, 하비와 아내, 장인 장모가 현관에서 선풍기를 쬐며 도미노 게임을 하고 있었다. 그때 장인이 말한다.</p>
+<blockquote>
+<p>&ldquo;애빌린에 가서 저녁이나 먹을까?&rdquo;</p>
+</blockquote>
+<p>애빌린은 약 85km(53마일) 떨어진 도시다. 에어컨도 없는 낡은 차로 흙먼지 길을 달려야 한다.</p>
+<ul>
+<li>아내: &ldquo;좋은 생각이네요. 전 가고 싶어요. 당신은요?&rdquo;</li>
+<li>하비: &ldquo;좋지. 장모님만 괜찮으시면.&rdquo;</li>
+<li>장모: &ldquo;당연히 가야지. 애빌린 안 간 지 오래됐잖아.&rdquo;</li>
+</ul>
+<p>그렇게 왕복 4시간을 달려 맛없는 식당에서 밥을 먹고 녹초가 되어 돌아왔다. 그리고 누군가 &ldquo;참 좋은 여행이었네요&quot;라고 말하자, 서로의 진심이 터져 나온다.</p>
+<ul>
+<li>장모: &ldquo;사실 난 집에 있고 싶었어. 다들 가고 싶어 하길래 따라간 거지.&rdquo;</li>
+<li>하비: &ldquo;나도 가고 싶지 않았어요. 다른 사람들 기분 맞추려고 그런 거예요.&rdquo;</li>
+<li>아내: &ldquo;전 당신들 좋으라고 간 거예요.&rdquo;</li>
+<li>장인: &ldquo;난 다들 심심해 보여서 그냥 한번 해본 말이었는데…&rdquo;</li>
+</ul>
+<p><strong>네 명 중 아무도 원하지 않았던 여행을, 네 명 모두가 동의해서 떠난 것이다.</strong></p>
+<h3 id="핵심-정의">핵심 정의</h3>
+<blockquote>
+<p>집단의 구성원 개개인은 모두 A를 원하지 않지만, <strong>다른 사람들이 A를 원한다고 잘못 믿기 때문에</strong> 집단 전체가 A를 선택하는 현상.</p>
+</blockquote>
+<p>하비가 강조한 포인트는 <strong>&ldquo;조직은 갈등보다 동의를 관리하는 데 더 서툴다&rdquo;</strong> 는 것이다. 갈등은 눈에 보여서 다루기라도 하지만, 거짓 동의는 겉으로 보기엔 아무 문제가 없다.</p>
+<h3 id="집단사고groupthink와-무엇이-다른가">집단사고(Groupthink)와 무엇이 다른가</h3>
+<p>비슷해 보이지만 결정적으로 다르다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>구분</th>
+          <th>집단사고 (Groupthink)</th>
+          <th>애빌린의 역설</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>구성원의 실제 생각</td>
+          <td>집단의 결론을 <strong>진심으로 믿게 됨</strong></td>
+          <td>속으로는 <strong>모두 반대</strong></td>
+      </tr>
+      <tr>
+          <td>원인</td>
+          <td>응집력, 동조 압력으로 비판적 사고가 마비</td>
+          <td>다른 사람의 의견에 대한 <strong>오해 + 침묵</strong></td>
+      </tr>
+      <tr>
+          <td>사후 반응</td>
+          <td>&ldquo;우리가 틀릴 줄은 몰랐다&rdquo;</td>
+          <td>&ldquo;사실 나도 처음부터 반대였어&rdquo;</td>
+      </tr>
+      <tr>
+          <td>해법의 방향</td>
+          <td>외부 관점, 비판적 검토 도입</td>
+          <td><strong>이미 존재하는 반대 의견을 드러내기</strong></td>
+      </tr>
+  </tbody>
+</table>
+<p>집단사고는 &ldquo;생각이 잘못된&rdquo; 문제이고, 애빌린의 역설은 &ldquo;생각은 맞는데 <strong>말을 안 한</strong>&rdquo; 문제다. 그래서 해법도 다르다. 애빌린의 역설은 새로운 지식이 필요한 게 아니라, <strong>이미 팀 안에 있는 정답을 꺼내는 장치</strong>가 필요하다.</p>
+<hr>
+<h2 id="2-개발-조직의-애빌린-사례">2. 개발 조직의 애빌린 사례</h2>
+<p>아래 사례들은 업계에서 흔히 반복되는 패턴을 재구성한 것이다. 읽다 보면 한두 개쯤은 &ldquo;어, 이거 우리 팀인데&rdquo; 싶을 것이다.</p>
+<h3 id="사례-1-아무도-원하지-않았던-msa-전환">사례 1. 아무도 원하지 않았던 MSA 전환</h3>
+<p><strong>상황</strong>
+트래픽은 하루 수만 건 수준, 백엔드 개발자 5명인 스타트업. 잘 돌아가는 Spring Boot 모놀리스가 있다. 신임 CTO가 킥오프 미팅에서 이렇게 말한다.</p>
+<blockquote>
+<p>&ldquo;요즘은 다들 MSA로 가던데, 우리도 장기적으로 고민해 봐야 하지 않을까요?&rdquo;</p>
+</blockquote>
+<p><strong>각자의 속마음</strong></p>
+<ul>
+<li><strong>CTO</strong>: &ldquo;그냥 화두 던진 거였는데. 팀이 원하면 하는 거고, 아니면 말고.&rdquo;</li>
+<li><strong>시니어 A</strong>: &ldquo;5명이서 서비스 10개 운영? 미친 짓이다. 근데 CTO가 하자는데 반대하면 낡은 사람처럼 보이겠지.&rdquo;</li>
+<li><strong>시니어 B</strong>: &ldquo;A가 가만히 있네. A가 찬성하면 기술적으로 검토는 된 거겠지.&rdquo;</li>
+<li><strong>주니어들</strong>: &ldquo;시니어분들이 다 찬성하시니까… 이력서에 MSA 한 줄 들어가면 좋긴 하고.&rdquo;</li>
+</ul>
+<p><strong>결과</strong>
+6개월 뒤, 서비스는 8개로 쪼개졌다. 분산 트랜잭션은 Saga 패턴으로 반쯤 구현됐고, 로컬 개발 환경을 띄우려면 docker-compose에 컨테이너 14개가 필요하다. 장애가 나면 어느 서비스 로그부터 봐야 할지 모른다. 기능 개발 속도는 체감상 절반이 됐다.</p>
+<p>회고에서 CTO가 묻는다. &ldquo;우리 MSA 하길 잘한 거 맞죠?&rdquo; — 그리고 침묵. 그 침묵이 그날 처음으로 깨졌다.</p>
+<p><strong>애빌린 포인트</strong>: CTO의 &ldquo;고민해 봐야 하지 않을까요?&ldquo;는 <strong>제안</strong>이었는데, 팀은 그것을 <strong>지시</strong>로 해석했다. 그리고 각자 &ldquo;다른 사람은 찬성한다&quot;고 추측했다.</p>
+<h3 id="사례-2-모두가-불가능하다고-생각한-스프린트-일정">사례 2. 모두가 불가능하다고 생각한 스프린트 일정</h3>
+<p><strong>상황</strong>
+분기 로드맵 회의. PM이 화면에 일정을 띄운다.</p>
+<blockquote>
+<p>&ldquo;결제 개편을 6주 안에 끝내면 마케팅 캠페인과 맞출 수 있어요. 가능할까요?&rdquo;</p>
+</blockquote>
+<p>5초간의 정적. 아무도 손을 들지 않는다. PM은 &ldquo;다들 괜찮으신 거죠?&ldquo;라며 다음 안건으로 넘어간다.</p>
+<p><strong>각자의 속마음</strong></p>
+<ul>
+<li><strong>PM</strong>: &ldquo;개발팀이 조용하네. 가능하다는 뜻이겠지. 사실 나도 빡빡하다고 생각했는데.&rdquo;</li>
+<li><strong>백엔드 리드</strong>: &ldquo;PG사 연동 테스트만 2주는 걸린다. 근데 프론트가 아무 말 안 하네, 프론트 쪽은 여유가 있나 보다.&rdquo;</li>
+<li><strong>프론트 리드</strong>: &ldquo;디자인도 안 나왔는데 6주? 근데 백엔드가 가만있으니 API는 금방 나오나 보지.&rdquo;</li>
+<li><strong>QA</strong>: &ldquo;또 QA 기간이 3일이네… 말해봤자 소용없겠지.&rdquo;</li>
+</ul>
+<p><strong>결과</strong>
+4주차부터 야근이 시작되고, 6주차에 &ldquo;조금만 더&quot;가 반복되다가 결국 10주 만에 배포. 마케팅 캠페인은 이미 지나갔다. 그리고 회고에서 모두가 말한다. &ldquo;사실 처음부터 6주는 안 된다고 봤어요.&rdquo;</p>
+<p><strong>애빌린 포인트</strong>: <strong>침묵을 동의로 해석</strong>한 것이 출발점이다. &ldquo;이견 있으신 분?&ldquo;이라는 질문은 이견을 가진 사람에게 <strong>혼자 손을 드는 비용</strong>을 지불하게 만든다.</p>
+<h3 id="사례-3-lgtm의-연쇄--아무도-제대로-보지-않은-코드-리뷰">사례 3. LGTM의 연쇄 — 아무도 제대로 보지 않은 코드 리뷰</h3>
+<p><strong>상황</strong>
+대형 리팩터링 PR. 변경 파일 87개, +3,200 / -2,800 라인. 리뷰어 3명이 지정되었다.</p>
+<p><strong>각자의 속마음</strong></p>
+<ul>
+<li><strong>리뷰어 1</strong>: &ldquo;이 정도 규모면 리뷰어 2가 꼼꼼히 보겠지. 내가 아는 부분만 보자.&rdquo; → <em>LGTM</em></li>
+<li><strong>리뷰어 2</strong>: &ldquo;리뷰어 1이 벌써 승인했네. 저 사람 꼼꼼한데, 큰 문제는 없나 보다.&rdquo; → <em>LGTM</em></li>
+<li><strong>리뷰어 3</strong>: &ldquo;두 명이나 승인했는데 내가 지금 질문하면 머지 막는 사람 되겠다.&rdquo; → <em>LGTM</em></li>
+<li><strong>작성자</strong>: &ldquo;솔직히 이 PR은 쪼개야 했는데… 다들 승인해 주니 괜찮은가 보다.&rdquo;</li>
+</ul>
+<p><strong>결과</strong>
+배포 후 3일 만에 동시성 버그로 정산 데이터가 꼬였다. 사후 분석에서 문제의 코드는 리뷰어 3이 &ldquo;어, 이거 락 안 잡아도 되나?&rdquo; 하고 잠깐 의아해했던 바로 그 부분이었다.</p>
+<p><strong>애빌린 포인트</strong>: 이것은 방관자 효과와도 겹치지만, 핵심은 <strong>작성자를 포함한 4명 모두가 이 PR이 위험하다고 느꼈음에도</strong> 서로의 승인을 &ldquo;남들은 괜찮다고 판단했다&quot;는 신호로 읽었다는 점이다.</p>
+<h3 id="사례-4-레거시-시스템-전면-재작성">사례 4. 레거시 시스템 전면 재작성</h3>
+<p><strong>상황</strong>
+10년 된 사내 정산 시스템. 경영진 보고 자리에서 개발본부장이 말한다.</p>
+<blockquote>
+<p>&ldquo;이번 기회에 신규 스택으로 전면 재구축하는 건 어떻습니까?&rdquo;</p>
+</blockquote>
+<p><strong>각자의 속마음</strong></p>
+<ul>
+<li><strong>개발본부장</strong>: &ldquo;실무진이 레거시 때문에 힘들다고 하니까 선물처럼 제안한 건데.&rdquo;</li>
+<li><strong>실무 팀장</strong>: &ldquo;점진적 스트랭글러 패턴으로 가면 되는데… 근데 본부장님이 위에 보고까지 하셨으니.&rdquo;</li>
+<li><strong>실무자들</strong>: &ldquo;재작성? 기존 비즈니스 룰 문서도 없는데? 근데 팀장님이 받으셨네.&rdquo;</li>
+<li><strong>현업(재무팀)</strong>: &ldquo;지금 시스템도 잘 쓰고 있는데. 근데 IT에서 필요하다니까.&rdquo;</li>
+</ul>
+<p><strong>결과</strong>
+2년짜리 프로젝트가 되었고, 그 사이 신규 기능은 구 시스템과 신 시스템에 <strong>이중으로</strong> 개발됐다. 신 시스템 오픈 직후, 레거시에 숨어 있던 예외 처리 수십 개가 누락된 것이 드러났다.</p>
+<p><strong>애빌린 포인트</strong>: 상위자는 하위자를 위한다고 생각했고, 하위자는 상위자를 따른다고 생각했다. <strong>&ldquo;누군가를 위해서&quot;라는 선의가 서로 엇갈린 전형적인 애빌린 구조</strong>다.</p>
+<h3 id="사례-5-쿠버네티스-그리고-아무도-원하지-않은-플랫폼-엔지니어링">사례 5. 쿠버네티스, 그리고 아무도 원하지 않은 플랫폼 엔지니어링</h3>
+<p><strong>상황</strong>
+EC2 몇 대와 간단한 배포 스크립트로 운영 중인 서비스. 인프라 담당자가 &ldquo;쿠버네티스 공부 겸 도입 검토해 보면 어떨까요&quot;라고 운을 띄웠고, 다들 &ldquo;좋네요&quot;라고 했다.</p>
+<p><strong>결과</strong>
+인프라 담당자는 사실 &ldquo;다들 쿠버네티스를 원하는 분위기라서&rdquo; 먼저 꺼낸 말이었다. 개발자들은 &ldquo;인프라 담당자가 원하니까&rdquo; 찬성했다. 도입 이후 Helm 차트, Ingress 설정, 노드 업그레이드가 주간 업무의 상당 부분을 차지하게 되었고, 정작 그 담당자가 퇴사하자 아무도 클러스터를 제대로 다루지 못했다.</p>
+<p><strong>애빌린 포인트</strong>: <strong>&ldquo;요즘 다들 하잖아&quot;라는 업계 분위기</strong>가 팀 내부의 침묵과 결합하면, 아무도 원하지 않는 기술 도입이 일어난다. 기술 선택에서 애빌린은 대개 &ldquo;이력서 주도 개발(Resume-Driven Development)&ldquo;과 손을 잡고 온다.</p>
+<hr>
+<h2 id="3-왜-개발-조직은-애빌린에-특히-취약한가">3. 왜 개발 조직은 애빌린에 특히 취약한가</h2>
+<p>개발 조직에는 애빌린을 부추기는 고유한 요인들이 있다.</p>
+<p><strong>① 기술적 무지를 드러내는 공포</strong>
+&ldquo;그거 왜 필요한지 잘 모르겠는데요&quot;라는 말은 &ldquo;제가 그 기술을 잘 몰라서요&quot;로 들릴까 두렵다. 특히 시니어일수록 이 공포가 크다.</p>
+<p><strong>② 트렌드 압박</strong>
+MSA, 쿠버네티스, 이벤트 소싱, 그리고 요즘은 &ldquo;AI 에이전트 도입&rdquo;. 업계 컨퍼런스와 기술 블로그가 만들어낸 &ldquo;남들은 다 한다&quot;는 인식이 반대 의견을 구식으로 보이게 만든다.</p>
+<p><strong>③ 회의 구조 자체의 문제</strong></p>
+<ul>
+<li>상급자가 먼저 의견을 말하는 회의</li>
+<li>&ldquo;이견 있으신 분?&rdquo; → 침묵 → 합의 처리</li>
+<li>화상 회의에서 카메라 끈 다수의 침묵</li>
+</ul>
+<p><strong>④ 비용이 나중에 청구된다</strong>
+잘못된 아키텍처 결정의 비용은 6개월~2년 뒤에 청구된다. 그때가 되면 결정 당시의 맥락은 잊히고, &ldquo;그땐 다들 동의했잖아&quot;만 남는다.</p>
+<p><strong>⑤ 반대가 &lsquo;블로커&rsquo;로 낙인찍히는 문화</strong>
+&ldquo;그건 안 됩니다&quot;라고 말하는 개발자는 협조적이지 않은 사람, 일정을 막는 사람이 되기 쉽다. 특히 PM·사업 조직과 협업할 때 이 압박이 커진다.</p>
+<hr>
+<h2 id="4-우리-팀이-애빌린으로-가는-중이라는-신호">4. 우리 팀이 애빌린으로 가는 중이라는 신호</h2>
+<p>다음 중 여러 개가 해당한다면 의심해 볼 만하다.</p>
+<ul>
+<li><input disabled="" type="checkbox"> 회의에서는 조용한데, 회의 끝나고 슬랙 DM이나 흡연실·탕비실에서 진짜 이야기가 나온다</li>
+<li><input disabled="" type="checkbox"> 결정 이후 실행 단계에서 아무도 주도적으로 움직이지 않는다</li>
+<li><input disabled="" type="checkbox"> &ldquo;누가 이거 하자고 했죠?&ldquo;라는 질문에 아무도 명확히 답하지 못한다</li>
+<li><input disabled="" type="checkbox"> 회고에서 &ldquo;사실 저도 처음부터…&ldquo;라는 말이 반복된다</li>
+<li><input disabled="" type="checkbox"> 결정의 근거를 물으면 &ldquo;다들 좋다고 해서&quot;가 나온다</li>
+<li><input disabled="" type="checkbox"> 리더가 제안하면 거의 항상 통과된다</li>
+<li><input disabled="" type="checkbox"> 기술 문서에 &ldquo;검토했으나 채택하지 않은 대안&rdquo; 섹션이 비어 있다</li>
+</ul>
+<hr>
+<h2 id="5-애빌린에서-탈출하는-실천법">5. 애빌린에서 탈출하는 실천법</h2>
+<p>핵심은 개인의 용기에 기대지 않는 것이다. &ldquo;반대 의견 있으면 편하게 말하세요&quot;는 해법이 아니다. <strong>반대 의견을 말하는 비용을 구조적으로 낮춰야</strong> 한다.</p>
+<h3 id="51-리더는-마지막에-말한다">5.1 리더는 마지막에 말한다</h3>
+<p>리더의 의견은 그 자체로 앵커가 된다. 기술 결정 회의에서 리더(CTO, 테크 리드, 팀장)는 <strong>모든 구성원의 의견을 먼저 듣고 마지막에</strong> 자기 생각을 말한다.</p>
+<p>그리고 제안과 지시를 명확히 구분한다.</p>
+<blockquote>
+<p>❌ &ldquo;MSA도 고민해 봐야 하지 않을까요?&rdquo;
+✅ &ldquo;MSA에 대해 저는 아직 확신이 없어요. 반대 근거를 먼저 듣고 싶습니다. 이건 결정 사항이 아니라 검토 요청입니다.&rdquo;</p>
+</blockquote>
+<h3 id="52-동시-공개-투표-fist-of-five--플래닝-포커-방식">5.2 동시 공개 투표 (Fist of Five / 플래닝 포커 방식)</h3>
+<p>플래닝 포커가 효과적인 이유는 추정 정확도 때문만이 아니다. <strong>모두가 동시에 카드를 공개하기 때문</strong>이다. 이 방식을 일정·기술 결정에도 그대로 쓸 수 있다.</p>
+<p><strong>Fist of Five</strong></p>
+<ul>
+<li>5: 적극 찬성, 내가 주도하겠다</li>
+<li>4: 찬성</li>
+<li>3: 괜찮다, 따르겠다</li>
+<li>2: 우려가 있다, 이야기하고 싶다</li>
+<li>1: 반대, 다른 대안이 필요하다</li>
+</ul>
+<p><strong>2 이하가 한 명이라도 있으면 그 사람의 이야기를 먼저 듣는다.</strong> 화상 회의라면 슬랙 투표나 익명 폼을 써서 &ldquo;동시에&rdquo; 제출하게 하면 된다.</p>
+<h3 id="53-침묵을-동의로-처리하지-않는다">5.3 침묵을 동의로 처리하지 않는다</h3>
+<p>&ldquo;이견 있으신 분?&rdquo; 대신 <strong>모두에게 명시적으로 묻는다.</strong></p>
+<blockquote>
+<p>&ldquo;백엔드 관점에서 6주 일정에 대한 확신도를 1~10으로 말해주세요. 프론트, QA도 각각 부탁드립니다.&rdquo;</p>
+</blockquote>
+<p>숫자로 답하게 하면 &ldquo;아니요&quot;라고 말하지 않고도 우려를 표현할 수 있다. 3점이 나왔다면 그 자체로 대화가 시작된다.</p>
+<h3 id="54-프리모템pre-mortem">5.4 프리모템(Pre-mortem)</h3>
+<p>게리 클라인(Gary Klein)이 제안한 기법이다. 결정 직후, 실행 전에 이렇게 묻는다.</p>
+<blockquote>
+<p>&ldquo;1년 뒤, 이 MSA 전환은 완전히 실패했습니다. 왜 실패했을까요? 각자 5분간 이유를 적어주세요.&rdquo;</p>
+</blockquote>
+<p>&ldquo;실패할 것 같아요&quot;라고 말하는 것은 어렵지만, &ldquo;실패했다고 가정했을 때 원인&quot;을 적는 것은 쉽다. <strong>반대를 &lsquo;과제&rsquo;로 바꿔주기 때문</strong>이다. 애빌린 상황이라면 이 단계에서 거의 모든 사람이 비슷한 원인을 적는 것을 볼 수 있다.</p>
+<h3 id="55-지정-반대자-devils-advocate-로테이션">5.5 지정 반대자 (Devil&rsquo;s Advocate) 로테이션</h3>
+<p>아키텍처 리뷰나 기술 선정 회의마다 <strong>반대 역할을 맡을 사람을 돌아가며 지정</strong>한다. 이 사람의 역할은 &ldquo;이 결정이 틀린 이유&quot;를 최대한 찾는 것이다.</p>
+<p>역할로 부여된 반대는 개인의 반대가 아니기 때문에 사회적 비용이 없다. 그리고 실제로는 진짜 우려를 가진 사람이 그 역할을 빌려 속마음을 꺼내는 경우가 많다.</p>
+<h3 id="56-adr에-기각된-대안과-반대-의견을-남긴다">5.6 ADR에 &lsquo;기각된 대안&rsquo;과 &lsquo;반대 의견&rsquo;을 남긴다</h3>
+<p>Architecture Decision Record를 쓴다면, 다음 섹션을 필수로 둔다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">## Status
+</span></span></span><span class="line"><span class="cl">Accepted
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## Context
+</span></span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## Decision
+</span></span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## Considered Alternatives
+</span></span></span><span class="line"><span class="cl"><span class="k">-</span> 모놀리스 유지 + 모듈 경계 강화 (Modular Monolith)
+</span></span><span class="line"><span class="cl">  <span class="k">-</span> 기각 사유: ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## Dissenting Opinions
+</span></span></span><span class="line"><span class="cl"><span class="k">-</span> <span class="ni">@alice:</span> 현재 팀 규모(5명)로는 운영 부담이 과도하다고 판단. 
+</span></span><span class="line"><span class="cl">  12개월 뒤 배포 빈도와 장애 MTTR로 재평가 요청.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## Review Date
+</span></span></span><span class="line"><span class="cl">2027-04-22
+</span></span></code></pre></div><p><strong>반대 의견이 기록되는 문화</strong>에서는 반대가 &ldquo;방해&quot;가 아니라 &ldquo;기여&quot;가 된다. 그리고 재평가 날짜를 박아두면, 결정이 틀렸을 때 되돌릴 명분이 생긴다.</p>
+<h3 id="57-disagree-and-commit--단-순서가-중요하다">5.7 Disagree and Commit — 단, 순서가 중요하다</h3>
+<p>아마존 리더십 원칙으로 유명한 &ldquo;반대하되 일단 결정되면 헌신하라&rdquo;. 많은 조직이 이 원칙을 도입하지만 종종 <strong>&ldquo;Commit&quot;만 남고 &ldquo;Disagree&quot;가 빠진다.</strong></p>
+<p>애빌린을 막으려면 순서가 지켜져야 한다.</p>
+<ol>
+<li><strong>Disagree</strong>: 반대 의견을 공식적으로 말할 기회가 실제로 주어진다</li>
+<li><strong>Record</strong>: 그 반대가 기록된다</li>
+<li><strong>Decide</strong>: 결정권자가 반대를 듣고 결정한다</li>
+<li><strong>Commit</strong>: 그 뒤에 헌신한다</li>
+</ol>
+<p>1~3단계 없이 4단계만 요구하면, 그건 Disagree and Commit이 아니라 그냥 애빌린행 버스 탑승이다.</p>
+<h3 id="58-pr은-작게-리뷰는-질문으로">5.8 PR은 작게, 리뷰는 질문으로</h3>
+<p>코드 리뷰의 애빌린은 PR 크기와 직결된다.</p>
+<ul>
+<li>PR 크기 상한을 정한다 (예: 400 라인 내외)</li>
+<li>큰 변경은 설계 리뷰를 먼저 하고, 구현 PR은 쪼갠다</li>
+<li>리뷰어마다 <strong>담당 영역을 명시적으로 지정</strong>한다 (&ldquo;동시성은 @bob, API 계약은 @carol&rdquo;)</li>
+<li>&ldquo;LGTM&quot;만 달린 승인을 지양하고, 확인한 범위를 적는다</li>
+</ul>
+<blockquote>
+<p>✅ &ldquo;트랜잭션 경계와 락 처리 확인했습니다. 프론트 연동부는 보지 않았어요.&rdquo;</p>
+</blockquote>
+<p>이렇게 쓰면 <strong>&ldquo;남들이 봤겠지&quot;라는 가정이 문서상으로 깨진다.</strong></p>
+<h3 id="59-심리적-안전감은-결과가-아니라-반응으로-만들어진다">5.9 심리적 안전감은 결과가 아니라 반응으로 만들어진다</h3>
+<p>구글의 Project Aristotle이 팀 성과의 핵심 요인으로 꼽은 것이 심리적 안전감이다. 그런데 심리적 안전감은 &ldquo;편하게 말하세요&quot;라는 선언으로 생기지 않는다. <strong>누군가 반대 의견을 냈을 때 리더가 보이는 반응</strong>으로 만들어진다.</p>
+<ul>
+<li>반대 의견을 낸 사람에게 감사를 표현한다</li>
+<li>반대 의견 때문에 결정이 바뀌었다면 그것을 공개적으로 언급한다</li>
+<li>반대했던 결정이 실패했을 때 &ldquo;거 봐라&quot;가 나오지 않게 한다</li>
+<li>반대했던 결정이 성공했을 때도 반대자를 깎아내리지 않는다</li>
+</ul>
+<hr>
+<h2 id="6-마치며--이거-정말-우리가-원하는-건가요">6. 마치며 — &ldquo;이거, 정말 우리가 원하는 건가요?&rdquo;</h2>
+<p>애빌린의 역설에서 가장 무서운 점은 <strong>악당이 없다</strong>는 것이다. CTO도, PM도, 시니어도, 주니어도 모두 선의로 행동했다. 팀을 배려했고, 분위기를 깨고 싶지 않았고, 다른 사람의 판단을 존중했다. 그 선의들이 모여 아무도 원하지 않는 곳으로 팀을 데려간다.</p>
+<p>그래서 애빌린을 막는 가장 강력한 한 문장은 의외로 단순하다.</p>
+<blockquote>
+<p><strong>&ldquo;잠깐만요, 이거 정말 우리 모두가 원하는 건가요? 저는 솔직히 확신이 없어서요.&rdquo;</strong></p>
+</blockquote>
+<p>이 말을 처음 꺼내는 사람이 되는 건 어렵다. 하지만 경험상, 그 말을 꺼냈을 때 돌아오는 반응은 대부분 비슷하다.</p>
+<blockquote>
+<p>&ldquo;어… 사실 저도요.&rdquo;</p>
+</blockquote>
+<p>다음 기술 결정 회의에서 모두가 고개를 끄덕이고 있다면, 한 번쯤 의심해 보자. 지금 우리 팀이 탄 차가 애빌린으로 가고 있는 건 아닌지.</p>
+<hr>
+<h3 id="참고">참고</h3>
+<ul>
+<li>Jerry B. Harvey, <em>&ldquo;The Abilene Paradox: The Management of Agreement&rdquo;</em>, Organizational Dynamics, 1974</li>
+<li>Jerry B. Harvey, <em>The Abilene Paradox and Other Meditations on Management</em>, 1988</li>
+<li>Gary Klein, <em>&ldquo;Performing a Project Premortem&rdquo;</em>, Harvard Business Review, 2007</li>
+<li>Amy C. Edmondson, <em>The Fearless Organization</em> (두려움 없는 조직), 2018</li>
+<li>Michael Nygard, <em>&ldquo;Documenting Architecture Decisions&rdquo;</em> (ADR), 2011</li>
+</ul>
+</article>
+              </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-nav">
+        <div class="pagination-button next-post">
+          
+        </div>
+        
+        <div class="pagination-button previous-post">
+          
+          <a class="pagination-link link-reverse" href="https://pink-spider.github.io/post/about_opensource_license/">오픈소스 라이센스 정리: MIT, Apache, GPL, 그리고 그 사이의 모든 것&nbsp;</a><div> »</div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://pink-spider.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://pink-spider.github.io/css/gitalk.css'>
+<script src='https://pink-spider.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    accessToken: '',
+    repo: 'pink-spider.github.io',
+    owner: 'pink-spider',
+    admin: ['pink-spider'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light"
+  >
+    <ul
+      class="list-style-none d-flex flex-wrap col-12 flex-justify-center mb-2 mb-lg-0"
+    >
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+</div>
+
+</body>
+
+<script type="application/javascript" src="https://pink-spider.github.io/js/github-style.js"></script>
+
+<script src="https://pink-spider.github.io/js/mark.es6.min.js"></script>
+
+
+<script type="text/javascript">
+
+  const host = window.location.host;
+  const keyword = localStorage.getItem('keyword');
+  localStorage.removeItem('keyword');
+
+  if (keyword) {
+    const markInstance = new Mark(document.body);
+    markInstance.unmark({
+      done: function() {
+        markInstance.mark(keyword);
+      }
+    });
+  }
+
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-bg-primary');
+  const mutedColor = getComputedStyle(document.documentElement).getPropertyValue('--color-fg-muted');
+  const hoverColor = '#216EEB';
+
+  let originalStyle;
+  let svgOriginalStyle;
+  let titleOriginalStyle;
+
+  const onMouseOver = (node) => {
+    originalStyle = Object.assign({}, node.style);
+    node.style.backgroundColor = hoverColor;
+
+    const child = node.querySelector('.js-jump');
+    child.classList.remove('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    if (title && primaryColor === ' #fff') {
+      titleOriginalStyle = title.style;
+      title.style.color = '#fff';
+    }
+
+    const svg = node.querySelector('.octicon');
+    if (svg) {
+      svgOriginalStyle = svg.style;
+      svg.style.color = '#fff';
+    }
+  }
+
+  const onMouseLeave = (node) => {
+    node.style = originalStyle;
+    const child = node.querySelector('.js-jump');
+    child.classList.add('d-on-nav-focus');
+
+    const title = node.querySelector('.title');
+    title.style = titleOriginalStyle;
+
+    const svg = node.querySelector('.octicon');
+    svg.style = svgOriginalStyle;
+  }
+
+  const createSearchItem = (title, link, index) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="${index}">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="${link}" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Repository" aria-label="Repository" role="img" height="16" viewBox="0 0 16 16"
+              version="1.1" width="16" data-view-component="true"
+              class="octicon octicon-repo js-jump-to-octicon-repo  flex-shrink-0">
+              <path fill-rule="evenodd"
+                d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
+              </path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${title}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Jump to
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const createGoogleSearchItem = (keyword) => {
+    return `
+    <li class="color-bg-primary search-item d-flex flex-justify-start flex-items-center p-0 f5 navigation-item js-navigation-item js-jump-to-scoped-search"
+        role="option" aria-selected="false" tabindex="0">
+        <a onmouseover="onMouseOver(this)" onmouseleave="onMouseLeave(this)"
+          class="no-underline d-flex flex-auto flex-items-center jump-to-suggestions-path js-jump-to-suggestion-path js-navigation-open p-2"
+          href="https://www.google.com/search?q=${keyword}" target="_blank" data-item-type="scoped_search">
+          <div class="jump-to-octicon js-jump-to-octicon flex-shrink-0 mr-2 text-center ">
+            <svg title="Search" aria-label="Search" role="img" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-search js-jump-to-octicon-search flex-shrink-0">
+                <path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path>
+            </svg>
+          </div>    
+
+          <div
+            class="title jump-to-suggestion-name js-jump-to-suggestion-name flex-auto overflow-hidden text-left no-wrap css-truncate css-truncate-target">
+            ${keyword}
+          </div>
+
+          <div aria-hidden="true" style="color: var(--color-fg-muted);"
+            class="color-bg-primary js-jump border rounded-2 flex-shrink-0 color-bg-subtle px-1 ml-1 f6 d-on-nav-focus js-jump-to-badge-jump">
+            Google search
+            <span class="d-inline-block ml-1 v-align-middle">↵</span>
+          </div>
+        </a>
+      </li>
+    `
+  }
+
+  const stripHtml = (html) => {
+    let tmp = document.createElement('div');
+    tmp.innerHTML = html;
+
+    
+    const styles = tmp.getElementsByTagName('style');
+    while(styles[0]) {
+      styles[0].parentNode.removeChild(styles[0]);
+    }
+
+    
+    const scripts = tmp.getElementsByTagName('script');
+    while(scripts[0]) {
+      scripts[0].parentNode.removeChild(scripts[0]);
+    }
+    
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  const inputDom = document.querySelector(".Header-search-input");
+  const resultDom = document.getElementById('jump-to-results');
+  let debounceTimer;
+  let parser;
+  let xmlDoc;
+
+  const search = (_keyword) => {
+
+    resultDom.innerHTML = '';
+
+    const keyword = _keyword;
+
+    if (!keyword) return;
+
+    const progressDom = document.getElementById('search-progress');
+    if (progressDom && progressDom.classList.contains('d-none')) {
+      progressDom.classList.remove('d-none');
+    }
+
+    localStorage.setItem('keyword', keyword);
+    fetch(`${host.indexOf('localhost') > -1 ? 'http://' : 'https://'}${host}/index.xml`).then(resp => resp.text()).then(async (res) => {
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(res, 'text/xml');
+      const linkResult = xmlDoc.getElementsByTagName('link');
+      const titleResult = xmlDoc.getElementsByTagName('title');
+      const arr = [];
+
+      const matched = [];
+      await (async function searchLink() {
+        for (let i = 0; i < linkResult.length; i++) {
+          await fetch(linkResult[i].textContent).then(resp => resp.text().then(res => {
+            const pureText = stripHtml(res);
+            if (pureText.indexOf(keyword) >= 0) {
+              matched.push(i);
+            }
+          }))
+        }
+      })();
+
+      const googleSearchItem = createGoogleSearchItem(keyword);
+      const node= document.createRange().createContextualFragment(googleSearchItem);
+      resultDom.appendChild(node);
+
+      matched.map((itemIndex, index) => {
+        const r = createSearchItem(titleResult[itemIndex].textContent, linkResult[itemIndex].textContent, index + 1);
+        const node = document.createRange().createContextualFragment(r);
+        resultDom.appendChild(node);
+      });
+
+      if (progressDom && !progressDom.classList.contains('d-none')) {
+        progressDom.classList.add('d-none');
+      }
+    });
+  }
+
+  const debounce = (callback, time) => {
+    window.clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(callback, time);
+  };
+
+  ['focus', 'input'].forEach(event => {
+    inputDom.addEventListener(event, (e) => {
+      debounce(() => search(e.target.value), 500);
+    }, false);
+  });
+
+  inputDom.addEventListener('blur', () => {
+    setTimeout(() => {
+      resultDom.innerHTML = '';
+    }, 100);
+  });
+
+</script>
+
+
+
+
+
+
+</html>

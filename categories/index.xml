@@ -6,8 +6,15 @@
     <description>Recent content in Categories on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 16 Oct 2026 11:55:59 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 13:17:32 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Engineering Culture</title>
+      <link>https://pink-spider.github.io/categories/engineering-culture/</link>
+      <pubDate>Thu, 22 Oct 2026 13:14:00 +0900</pubDate>
+      <guid>https://pink-spider.github.io/categories/engineering-culture/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Dev</title>
       <link>https://pink-spider.github.io/categories/dev/</link>

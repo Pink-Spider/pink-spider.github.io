@@ -6,8 +6,15 @@
     <description>Recent content on Pink Spider</description>
     <generator>Hugo</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 16 Oct 2026 11:55:59 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 13:17:32 +0900</lastBuildDate>
     <atom:link href="https://pink-spider.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>아무도 원하지 않았던 MSA 전환 — 개발 조직의 애빌린의 역설</title>
+      <link>https://pink-spider.github.io/post/abilene-paradox-in-dev-org/</link>
+      <pubDate>Thu, 22 Oct 2026 13:14:00 +0900</pubDate>
+      <guid>https://pink-spider.github.io/post/abilene-paradox-in-dev-org/</guid>
+      <description>&lt;h2 id=&#34;들어가며&#34;&gt;들어가며&lt;/h2&gt;&#xA;&lt;p&gt;회고 자리에서 이런 말을 들어본 적이 있을 것이다.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&amp;ldquo;솔직히 저는 처음부터 이거 좀 무리라고 생각했어요.&amp;rdquo;&#xA;&amp;ldquo;어? 저도요.&amp;rdquo;&#xA;&amp;ldquo;…저도 그랬는데.&amp;rdquo;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;그런데 그 결정을 내린 회의에서는 아무도 반대하지 않았다. 오히려 다들 고개를 끄덕였다. 결과적으로 &lt;strong&gt;아무도 원하지 않았던 결정을, 모두가 동의한 채로&lt;/strong&gt; 실행한 셈이다.&lt;/p&gt;&#xA;&lt;p&gt;조직행동론에서는 이 현상을 &lt;strong&gt;애빌린의 역설(Abilene Paradox)&lt;/strong&gt; 이라고 부른다. 이 글에서는 개념을 짧게 정리하고, 개발 조직에서 실제로 자주 마주치는 사례들과 이를 막기 위한 구조적인 장치를 정리해 본다.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-애빌린의-역설이란&#34;&gt;1. 애빌린의 역설이란&lt;/h2&gt;&#xA;&lt;h3 id=&#34;원래-이야기&#34;&gt;원래 이야기&lt;/h3&gt;&#xA;&lt;p&gt;경영학자 제리 B. 하비(Jerry B. Harvey)가 1974년 논문 &lt;em&gt;&amp;ldquo;The Abilene Paradox: The Management of Agreement&amp;rdquo;&lt;/em&gt; 에서 소개한 일화다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>오픈소스 라이센스 정리: MIT, Apache, GPL, 그리고 그 사이의 모든 것</title>
       <link>https://pink-spider.github.io/post/about_opensource_license/</link>
